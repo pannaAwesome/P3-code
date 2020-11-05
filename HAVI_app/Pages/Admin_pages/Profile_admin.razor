@@ -1,1 +1,32 @@
-﻿@page "/profile_admin"
+﻿@layout HAVI_app.Shared.Admin_layout.Profile_admin
+
+@page "/profile_admin"
+
+<style>
+    body {
+        background-color: #a54e8b;
+    }
+</style>
+
+<div class="card" style="width: 1100px; height: 500px; ">
+    <div class="card-body">
+        <img src="/images/HAVI-logoTransp.png" alt="HAVI Logo" style="width: 150px; height: 60px;">
+        <br><br><br><br>
+        <h3 class="card-title">Profile:</h3>
+        <p class="card-text1">Username:<input type="text" class="username-text" id="username" name="username" value="admin@havi.com" readonly="readonly"><br></p>
+        <p class="card-text2">Password:<a href="#" onClick="MyWindow=window.open('/profile_admin','MyWindow','width=600,height=300'); return false;">Change password</a></p>
+
+
+        <div class="buttons">
+            <div>
+                <a class="button-cancel" href="/overview_admin">Cancel</a>
+                <a class="button-save" href="/overview_admin">Save</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@code {
+
+}

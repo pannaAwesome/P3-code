@@ -1,7 +1,53 @@
 ﻿@page "/country_view"
+@layout HAVI_app.Shared.Admin_layout.Overview
 
-<h3>Country_view</h3>
+<div class="row">
+    <div class="col-3"><h3>Country overview</h3></div>
+    <div class="col-7"></div>
+    <div class="col-2">
+        <a class="button-options-overview export-button" href="/create_country">Create new country</a>
+    </div>
+</div>
+<br />
 
+<div class="row">
+    <div class="col-12">
+        <table class="table table-hover">
+
+
+            <thead>
+                <tr style="color:#A54E8B">
+                    <th scope="col">Country</th>
+                    <th scope="col">Code </th>
+                    <th scope="col">Admin </th>
+                </tr>
+            </thead>
+
+
+            <tbody>
+
+                <tr>
+                    <td>Denmark</td>
+                    <td>DK</td>
+                    <td>DKadmin</td>
+                </tr>
+
+                <tr>
+                    <td>Sweden</td>
+                    <td>SE</td>
+                    <td>SEadmin</td>
+                </tr>
+
+                <tr>
+                    <td>Norway</td>
+                    <td>NO</td>
+                    <td>NOadmin</td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
 @code {
 
 }

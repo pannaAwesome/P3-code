@@ -1,1 +1,62 @@
-﻿@page "/overview_admin"
+﻿@layout HAVI_app.Shared.Admin_layout.Overview
+
+@page "/overview_admin"
+<div class="row">
+    <div class="col-3"><h3>Welcome DKAdmin</h3></div>
+    <div class="col-7"></div>
+    <div class="col-2">
+        <a class="button-options-overview export-button">Export orders</a>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-12">
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+
+                    <th scope="col">Product name</th>
+                    <th scope="col">Supplier name </th>
+                    <th scope="col">Vailed for customer </th>
+                    <th scope="col">Buyer name </th>
+                    <th scope="col">State </th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <tr>
+                    <th><NavLink class="nav-link" href="/show_article">French fries</NavLink></th>
+                    <td><NavLink class="nav-link" href="/show_article">Placeholder supplier</NavLink></td>
+                    <td><NavLink class="nav-link" href="/show_article">Mc Donalds</NavLink></td>
+                    <td><NavLink class="nav-link" href="/show_article">Winnie</NavLink></td>
+                    <td>
+                        <div class="robot-state state">Robot ready</div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th><NavLink class="nav-link" href="/show_article">Buns</NavLink></th>
+                    <td><NavLink class="nav-link" href="/show_article">Placeholder supplier</NavLink></td>
+                    <td><NavLink class="nav-link" href="/show_article">Mc Donalds</NavLink></td>
+                    <td><NavLink class="nav-link" href="/show_article">Winnie</NavLink></td>
+                    <td>
+                        <div class="robot-state state">Robot ready</div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th><NavLink class="nav-link" href="/show_article">Salad</NavLink></th>
+                    <td><NavLink class="nav-link" href="/show_article">Placeholder supplier</NavLink></td>
+                    <td><NavLink class="nav-link" href="/show_article">Mc Donalds</NavLink></td>
+                    <td><NavLink class="nav-link" href="/show_article">Winnie</NavLink></td>
+                    <td>
+                        <div class="robot-state state">Robot ready</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>

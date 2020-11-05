@@ -1,1 +1,63 @@
 ﻿@page "/user_view"
+@layout HAVI_app.Shared.Admin_layout.Overview
+
+
+<h3>Overview of users in the system:</h3>
+<br />
+<div class="row">
+    <div class="col-2">
+        <input type="text" placeholder="Search..">
+    </div>
+    <div class="col-2">
+        <a class="button-options-overview create-buyer" href="/create_buyer">Create buyer</a>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-12">
+        <table class="table table-hover">
+
+
+            <thead>
+                <tr style="color:#A54E8B">
+                    <th scope="col">Username</th>
+                    <th scope="col">Country </th>
+                    <th scope="col">Type </th>
+                </tr>
+            </thead>
+
+
+            <tbody>
+
+                <tr>
+                    <td>Winnie@havi.com</td>
+                    <td>Dankmark</td>
+                    <td>
+                        <div class="buyer-type state">Buyer</div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>DKAdmin</td>
+                    <td>Denmark</td>
+                    <td>
+                        <div class="admin-type state">Admin</div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Monsters Inc.</td>
+                    <td>Sweden</td>
+                    <td>
+                        <div class="supplier-type state">Supplier</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@code {
+
+}

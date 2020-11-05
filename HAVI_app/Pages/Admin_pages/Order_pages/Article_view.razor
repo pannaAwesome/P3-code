@@ -1,1 +1,107 @@
 ﻿@page "/article_view"
+@layout HAVI_app.Shared.Admin_layout.Overview
+
+<h3>Overview of orders in the system:</h3>
+<br />
+<div class="row">
+    <div class="col-md-2">
+        <input type="text" placeholder="Search..">
+    </div>
+    <div class="col-md-10">
+        <a class="button-options-overview transfer-order">Transfer order</a>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-12">
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">
+                        <input type="checkbox" id="all_checked" name="all_checked" value="all_checked">
+                    </th>
+                    <th scope="col">Product name</th>
+                    <th scope="col">Supplier name </th>
+                    <th scope="col">Vailed for customer </th>
+                    <th scope="col">Buyer name </th>
+                    <th scope="col">State </th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <tr>
+                    <th scope="col">
+                        <input type="checkbox" id="checked" name="checked" value="checked">
+                    </th>
+                    <td><NavLink class="nav-link" href="/show_article">French fries</NavLink></td>
+                    <td><NavLink class="nav-link" href="/show_article">Placeholder supplier</NavLink></td>
+                    <td><NavLink class="nav-link" href="/show_article">Mc Donalds</NavLink></td>
+                    <td><NavLink class="nav-link" href="/show_article">Winnie</NavLink></td>
+                    <td>
+                        <div class="created-state state">Created</div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th scope="col">
+                        <input type="checkbox" id="checked" name="checked" value="checked">
+                    </th>
+                    <td><NavLink class="nav-link" href="/show_article">Buns</NavLink></td>
+                    <td><NavLink class="nav-link" href="/show_article">Placeholder supplier</NavLink></td>
+                    <td><NavLink class="nav-link" href="/show_article">Mc Donalds</NavLink></td>
+                    <td><NavLink class="nav-link" href="/show_article">Winnie</NavLink></td>
+                    <td>
+                        <div class="error-state state">Error</div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th scope="col">
+                        <input type="checkbox" id="checked" name="checked" value="checked">
+                    </th>
+                    <td><NavLink class="nav-link" href="/show_article">Salad</NavLink></td>
+                    <td><NavLink class="nav-link" href="/show_article">Placeholder supplier</NavLink></td>
+                    <td><NavLink class="nav-link" href="/show_article">Mc Donalds</NavLink></td>
+                    <td><NavLink class="nav-link" href="/show_article">Winnie</NavLink></td>
+                    <td>
+                        <div class="robot-state state">Robot ready</div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th scope="col">
+                        <input type="checkbox" id="checked" name="checked" value="checked">
+                    </th>
+                    <td><NavLink class="nav-link" href="/show_article">Patties</NavLink></td>
+                    <td><NavLink class="nav-link" href="/show_article">Placeholder supplier</NavLink></td>
+                    <td><NavLink class="nav-link" href="/show_article">Mc Donalds</NavLink></td>
+                    <td><NavLink class="nav-link" href="/show_article">Winnie</NavLink></td>
+                    <td>
+                        <div class="completed-state state">Completed</div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th scope="col">
+                        <input type="checkbox" id="checked" name="checked" value="checked">
+                    </th>
+                    <td><NavLink class="nav-link" href="/show_article">Nuggets</NavLink></td>
+                    <td><NavLink class="nav-link" href="/show_article">Placeholder supplier</NavLink></td>
+                    <td><NavLink class="nav-link" href="/show_article">Mc Donalds</NavLink></td>
+                    <td><NavLink class="nav-link" href="/show_article">Winnie</NavLink></td>
+                    <td>
+                        <div class="submitted-state state">Submitted</div>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+@code {
+
+}
