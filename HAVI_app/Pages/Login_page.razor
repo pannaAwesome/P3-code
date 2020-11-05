@@ -1,0 +1,102 @@
+﻿@layout HAVI_app.Shared.Login_layout.Login_layout
+@page "/"
+
+
+<div class="row align-content-center header">
+<div class="col-12" id="login-form">
+    <div class="row">
+        <HAVI_app.Shared.Shared_layout.Logo_image/>
+    </div>
+    <div class="row login-header">
+        <div class="col-12">
+            <h4>What type of user are you?</h4>
+        </div>
+    </div>
+    <div class="row d-flex justify-content-center" id="user-type-buttons">
+            <div class="col-3 d-flex justify-content-center">
+                <button class="btn btn-user-type user-@StateAdmin" @onclick="PickedAdmin">Admin</button>
+            </div>
+            <div class="col-3 d-flex justify-content-center">
+                <button class="btn btn-user-type user-@StateBuyer" @onclick="PickedBuyer">Purchaser</button>
+            </div>
+            <div class="col-3 d-flex justify-content-center">
+                <button class="btn btn-user-type user-@StateSupplier" @onclick="PickedSupplier">Supplier</button>
+            </div>
+    </div>
+    <div class="row align-content-center">
+        @if (LoginType == "admin")
+        {
+            <HAVI_app.Shared.Login_layout.Admin_login_layout />
+        }
+        else if (LoginType == "buyer")
+        {
+            <HAVI_app.Shared.Login_layout.Buyer_login_layout />
+        }
+        else if (LoginType == "supplier")
+        {
+            <HAVI_app.Shared.Login_layout.Supplier_login_layout />
+        }
+        else
+        {
+            <HAVI_app.Shared.Login_layout.Supplier_signup_layout />
+        }
+    </div>
+    <div class="row d-flex justify-content-center">
+        <div class="col-8 text-center">
+            @if (LoginType == "supplier")
+            {
+                <p class="text-center">Don't have an account, create one <a @onclick="NewSupplier" href="#">here!</a></p>
+
+            }
+            else if (LoginType == "signup")
+            {
+                <p class="text-center">Already have an account, login <a @onclick="PickedSupplier" href="#">here!</a></p>
+            }
+            else
+            {
+                <p></p>
+            }
+        </div>
+    </div>
+</div>
+</div>
+
+@code{
+    private string LoginType = "admin";
+    private string StateAdmin = "active";
+    private string StateBuyer = "inactive";
+    private string StateSupplier = "inactive";
+
+
+    public void PickedAdmin()
+    {
+        LoginType = "admin";
+
+        StateAdmin = "active";
+        StateBuyer = "inactive";
+        StateSupplier = "inactive";
+    }
+
+    public void PickedBuyer()
+    {
+        LoginType = "buyer";
+
+        StateAdmin = "inactive";
+        StateBuyer = "active";
+        StateSupplier = "inactive";
+    }
+
+    public void PickedSupplier()
+    {
+        LoginType = "supplier";
+
+        StateAdmin = "inactive";
+        StateBuyer = "inactive";
+        StateSupplier = "active";
+    }
+
+    public void NewSupplier()
+    {
+        LoginType = "signup";
+    }
+}

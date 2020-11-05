@@ -1,0 +1,144 @@
+﻿
+/*######################################################################################################################*/
+/* Questionmark and tooltip for help text */
+
+.questionmark {
+    text-align: center;
+    border-radius: 20px;
+    color: #fdfdfd;
+    background-color: #686766;
+    font-weight: 700;
+    position: relative;
+    height: 24px;
+    width: 24px;
+    padding: 1px;
+}
+
+.questionmark:hover {
+    background-color: #385072;
+}
+
+.questionmark:hover .tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
+
+.questionmark .tooltip {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    position: absolute;
+    width: 240px;
+    height: 100px;
+    top: -42px;
+    left: 40px;
+    visibility: hidden;
+    background: #555;
+    border-radius: 5px;
+    padding: 5px;
+    text-align: center;
+}
+
+.questionmark .tooltip::after {
+    content: " ";
+    position: absolute;
+    top: 50%;
+    right: 100%; /* To the right of the tooltip */
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent #555 transparent transparent;
+}
+
+/*######################################################################################################################*/
+/* Users profile menu layout */
+
+.profile-header {
+    padding-top: 10px;
+    color: #ff883c;
+    text-align: right;
+}
+
+.profile-menu {
+    padding-top: 10px;
+    position: relative;
+    display: inline-block;
+}
+
+.profile-menu-header {
+    width: 30px;
+    height: 30px;
+    background-color: none;
+    background-image: url("../images/profile-user.png");
+    background-size: 30px 30px;
+    border: none;
+}
+
+.profile-menu-header:hover {
+    background-image: url("../images/profile-user-dark.png");
+}
+
+.profile-menu-header:focus{
+    border:none;
+}
+
+.profile-menu-header:active {
+    border: none;
+}
+
+
+.profile-menu-content {
+    display: none;
+    position: absolute;
+    background-color: #f2f2f2;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.profile-menu-content a {
+    border: thin solid #ff883c;
+    color: #ff883c;
+}
+
+    .profile-menu-content a:hover {
+        color: #fff;
+        background-color: #ff883c;
+    }
+
+.profile-menu-header + .profile-menu-content:active, .profile-menu-header:focus + .profile-menu-content {
+    display: block;
+}
+
+/*######################################################################################################################*/
+/* Article information state layout */
+
+.state {
+    display: block;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    color: white;
+    border-radius: 15px;
+    width: 120px;
+    text-align: center;
+}
+
+.submitted-state {
+    background: #5ece57;
+}
+
+.completed-state {
+    background: #00b2be;
+}
+
+.robot-state {
+    background: #ff883c;
+}
+
+.error-state {
+    background: #de577b;
+}
+
+.created-state {
+    background: #a54e8b;
+}

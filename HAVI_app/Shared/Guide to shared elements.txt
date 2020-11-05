@@ -1,0 +1,46 @@
+﻿Examples of using the different shared elements:
+
+***********************************************************************************************************************
+Inserting af profile menu:
+    This element is 5 columns wide.
+
+@inject NavigationManager NavigationManager
+
+<HAVI_app.Shared.Shared_layout.Profile_menu Username="Insert the username" OnProfileClickCallback="@NavigateToProfilePage"/>
+
+@code {
+    void NavigateToProfilePage()
+    {
+        NavigationManager.NavigateTo("Insert the name of the profile page you wanna naviagte to", true);
+    }
+}
+
+***********************************************************************************************************************
+Inserting af questionmark with its helper text (tooltip):
+
+<HAVI_app.Shared.Shared_layout.Questionmark>
+    Write your help text here!
+</HAVI_app.Shared.Shared_layout.Questionmark>
+
+***********************************************************************************************************************
+Inserting af colorful background:
+
+    Purple:
+    <HAVI_app.Shared.Shared_layout.Backgrounds.Purple_background/>
+    
+    Green:
+    <HAVI_app.Shared.Shared_layout.Backgrounds.Green_background/>
+    
+    Blue:
+    <HAVI_app.Shared.Shared_layout.Backgrounds.Blue_background/>
+    
+***********************************************************************************************************************
+Inserting a footer:
+
+<HAVI_app.Shared.Shared_layout.Footer/>
+    
+***********************************************************************************************************************
+Inserting the logo at the top of the page:
+    This element is 2 columns wide.
+
+<HAVI_app.Shared.Shared_layout.Logo_image/>

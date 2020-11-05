@@ -1,0 +1,85 @@
+﻿/*###################################################################################################################*/
+/* Farver til brug i dette projekt */
+/*
+    De bruges ved at skrive følgende:
+    var(navnet på farven)
+*/
+:root {
+    --blue: #006cb6;
+    --dark-blue: #385072;
+    --green: #5ece57;
+    --dark-green: #26a570;
+    --purple: #a54e8b;
+    --dark-purple: #723861;
+    --cyan: #00b2be;
+    --dark-cyan: #008e98;
+    --orange: #ff883c;
+    --dark-orange: #CC6C30;
+    --yellow: #e6b10e;
+    --red: #de577b;
+    --dark-gray: #686766;
+    --gray: #a5a5a7;
+    --black: #000;
+    --background-white: #fdfdfd;
+    --tab-white: #f2f2f2;
+}
+/*###################################################################################################################*/
+
+
+#login-form {
+    top: 30px;
+    padding: 40px;
+    background: var(--background-white);
+    box-shadow: 2px 2px;
+    border-radius: 15px;
+    border: solid var(--black) thin;
+    margin-bottom: 30px;
+}
+
+.login-header{
+    margin-top: 20px;
+}
+
+.user-login {
+    border-top: solid var(--purple);
+    padding-top: 30px;
+}
+
+.user-login-header {
+    text-align: center;
+    font-weight: 400;
+}
+
+.btn-user-type {
+    width: 100px;
+    padding: 8px;
+}
+
+.user-inactive {
+    background-color: var(--cyan);
+    color: white;
+}
+
+    .user-inactive:hover {
+        background-color: var(--dark-blue);
+        color: white;
+    }
+
+.user-active {
+    background-color: var(--purple);
+    color: white;
+}
+
+    .user-active:hover {
+        background-color: var(--dark-purple);
+        color: white;
+    }
+
+#user-type-buttons {
+    padding: 15px;
+}
+
+.signup-login-supplier {
+    background-color: #5ece57;
+    color: white;
+}

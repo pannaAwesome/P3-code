@@ -1,0 +1,26 @@
+﻿/*###################################################################################################################*/
+/* Farver til brug i dette projekt */
+/*
+    De bruges ved at skrive følgende:
+    var(navnet på farven)
+*/
+:root {
+    --blue: #006cb6;
+    --dark-blue: #385072;
+    --green: #5ece57;
+    --dark-green: #26a570;
+    --purple: #a54e8b;
+    --dark-purple: #723861;
+    --cyan: #00b2be;
+    --dark-cyan: #008e98;
+    --orange: #ff883c;
+    --dark-orange: #CC6C30;
+    --yellow: #e6b10e;
+    --red: #de577b;
+    --dark-gray: #686766;
+    --gray: #a5a5a7;
+    --black: #000;
+    --background-white: #fdfdfd;
+    --tab-white: #f2f2f2;
+}
+/*###################################################################################################################*/

@@ -1,0 +1,31 @@
+﻿@inject NavigationManager NavigationManager
+
+<div class="col-5 align-content-right">
+    <div class="row">
+        <div class="col-9 profile-header">
+            Logged in as: @Username
+        </div>
+        <div class="col-3 align-content-left">
+            <div class="profile-menu">
+                <button class="btn profile-menu-header"></button>
+                <div class="profile-menu-content">
+                    <a href="#" class="dropdown-item" @onclick="OnProfileClickCallback">Profile</a>
+                    <a href="#" class="dropdown-item" @onclick="LogoutSupplier">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code{
+    [Parameter]
+    public string Username { get; set; }
+
+    [Parameter]
+    public EventCallback<MouseEventArgs> OnProfileClickCallback { get; set; }
+
+    private void LogoutSupplier()
+    {
+        NavigationManager.NavigateTo("/", true);
+    }
+}

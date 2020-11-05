@@ -6,7 +6,8 @@
 
   <ItemGroup>
     <Folder Include="Data\" />
-    <Folder Include="Shared\" />
+    <Folder Include="Shared\Admin_layout\" />
+    <Folder Include="Shared\Purchaser_layout\" />
   </ItemGroup>
 
 </Project>

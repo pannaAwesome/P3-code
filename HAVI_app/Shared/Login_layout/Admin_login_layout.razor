@@ -1,0 +1,46 @@
+﻿@inject NavigationManager NavigationManager
+
+<div class="col-12 user-login">
+    <div class="row justify-content-center">
+        <div class="col-12 user-login-header">
+            <h5>Sign in as admin:</h5>
+        </div>
+    </div>
+    <form>
+        <div class="row justify-content-center">
+            <div class="col-7">
+                <table class="table table-borderless">
+                    <tr class="form-group">
+                        <td>
+                            <label>Username:</label>
+                        </td>
+                        <td>
+                            <input class="form-control" type="text" name="admin_username" />
+                        </td>
+                    </tr>
+                    <tr class="form-group">
+                        <td>
+                            <label>Password:</label>
+                        </td>
+                        <td>
+                            <input class="form-control" type="password" name="admin_password" />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-5"></div>
+            <div class="col-2 justify-content-center">
+                <input class="btn green-button" type="submit" name="Submit" value="Sign in" @onclick="SignInAsAdmin"/>
+            </div>
+        </div>
+    </form>
+</div>
+
+@code {
+    private void SignInAsAdmin()
+    {
+        NavigationManager.NavigateTo("/overview_admin", true);
+    }
+}

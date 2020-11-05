@@ -1,0 +1,132 @@
+﻿@inject NavigationManager NavigationManager
+
+<div class="col-12 user-login">
+    <div class="row justify-content-center">
+        <div class="col-12 user-login-header">
+            <h5>Create new supplier user:</h5>
+        </div>
+    </div>
+    <form>
+        <div class="row justify-content-center">
+            <div class="col-10">
+                <table class="table table-borderless">
+                    <tr class="form-group">
+                        <td>
+                            <label>Creation code from HAVI:</label>
+                        </td>
+                        <td>
+                            <input class="form-control" type="number" name="creation_code" required />
+                        </td>
+                    </tr>
+                    <tr class="form-group">
+                        <td>
+                            <label>Email:</label>
+                        </td>
+                        <td>
+                            <input class="form-control" type="email" name="email_username" required />
+                        </td>
+                    </tr>
+                    <tr class="form-group">
+                        <td>
+                            <label>Company name:</label>
+                        </td>
+                        <td>
+                            <input class="form-control" type="text" name="company_name" required />
+                        </td>
+                    </tr>
+                    <tr class="form-group">
+                        <td>
+                            <label>Company location:</label>
+                        </td>
+                        <td>
+                            <input class="form-control" type="text" name="company_location" required />
+                        </td>
+                    </tr>
+                    <tr class="form-group">
+                        <td>
+                            <label>Pallet exchange:</label>
+                        </td>
+                        <td>
+                            <div class="row form-group">
+                                <div class="col-1"></div>
+                                <div class="col-4">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="radio" name="pallet_exchange" value="Yes" required />
+                                        Yes
+                                    </label>
+                                </div>
+                                <div class="col-4">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="radio" name="pallet_exchange" value="No" required />
+                                        No
+                                    </label>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <HAVI_app.Shared.Shared_layout.Questionmark>
+                                Whether you would like to exchange pallets with HAVI upon delivering the article
+                            </HAVI_app.Shared.Shared_layout.Questionmark>
+                        </td>
+                    </tr>
+                    <tr class="form-group">
+                        <td>
+                            <label>Freight responsibility:</label>
+                        </td>
+                        <td>
+                            <div class="row">
+                                <div class="col-1"></div>
+                                <div class="col-4">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="radio" name="freight_responsibility" value="CIP" required />
+                                        CIP
+                                    </label>
+                                </div>
+                                <div class="col-4">
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" type="radio" name="freight_responsibility" value="EXW" required />
+                                        EXW
+                                    </label>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <HAVI_app.Shared.Shared_layout.Questionmark>
+                                With CIP you pay for the freight and insurance during transit. With EXW you are only required to ready the article for pick up
+                            </HAVI_app.Shared.Shared_layout.Questionmark>
+                        </td>
+                    </tr>
+                    <tr class="form-group">
+                        <td>
+                            <label>Password:</label>
+                        </td>
+                        <td>
+                            <input class="form-control" type="password" name="password" required />
+                        </td>
+                    </tr>
+                    <tr class="form-group">
+                        <td>
+                            <label>Confirm password:</label>
+                        </td>
+                        <td>
+                            <input class="form-control" type="password" name="confirm_password" required />
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-5"></div>
+            <div class="col-2 justify-content-center">
+                <input class="btn green-button" type="submit" name="Submit" value="Sign up" @onclick="CreateNewSupplier"/>
+            </div>
+        </div>
+    </form>
+</div>
+
+@code {
+    private void CreateNewSupplier()
+    {
+        NavigationManager.NavigateTo("/overview_supplier", true);
+    }
+}
