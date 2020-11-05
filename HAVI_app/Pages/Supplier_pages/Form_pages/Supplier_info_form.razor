@@ -1,1 +1,170 @@
-﻿@page "/supplier_info_form"
+﻿@layout HAVI_app.Shared.Supplier_layout.Form_header
+@page "/supplier_info_form"
+
+<div class="col-12 container">
+    <h1>Supplier information:</h1>
+    <p>Fill out information about your own company.</p>
+
+    <div class="justify-content-center row">
+        <div class="col-12">
+            <form>
+                <table class="table">
+
+                    <tr>
+                        <td>
+                            <label for="company_name" class="required">Company name:</label>
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" id="c_name" required>
+                        </td>
+                        <td>
+                            <HAVI_app.Shared.Shared_layout.Questionmark>
+                                Enter the name of your company
+                            </HAVI_app.Shared.Shared_layout.Questionmark>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <label for="company_location" class="required">Company location:</label>
+                        </td>
+                        <td>
+                            <div class="dropdown">
+                                <button type="button" class="btn btn-primary dropdown-toggle">
+                                    Pick something
+                                </button>
+                                <div class="dropdown-content dropdown-menu-lg-right">
+                                    <button class="dropdown-item" type="button">Denmark</button>
+                                    <button class="dropdown-item" type="button">Sweden</button>
+                                    <button class="dropdown-item" type="button">China</button>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <HAVI_app.Shared.Shared_layout.Questionmark>
+                                Enter the homeland of where your company reside
+                            </HAVI_app.Shared.Shared_layout.Questionmark>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <label for="email" class="required">Email:</label>
+                        </td>
+                        <td>
+                            <input type="text" class="form-control" id="email">
+                        </td>
+                        <td>
+                            <HAVI_app.Shared.Shared_layout.Questionmark>
+                                Enter the email of the person in the company that HAVI may contact
+                            </HAVI_app.Shared.Shared_layout.Questionmark>
+                            
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <label for="pallet_exchange" class="required">Pallet exchange</label>
+                        </td>
+                        <td>
+                            <input type="radio" name="pallet_exchange" id="yes" value="yes">
+                            <label for="yes">Yes</label>
+                            &nbsp;
+                            <input type="radio" id="no" name="pallet_exchange">
+                            <label for="no">No</label>
+                        </td>
+                        <td>
+
+                            <HAVI_app.Shared.Shared_layout.Questionmark>
+                                Whether you would like to exchange pallets with HAVI upon delivering the article
+                            </HAVI_app.Shared.Shared_layout.Questionmark>
+                            
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <label for="fright_responsibility" class="required">Fright responsibility</label>
+                        </td>
+                        <td>
+                            <input type="radio" name="fright_responsibility" id="CIP" value="CIP">
+                            <label for="CIP">CIP</label>
+                            &nbsp;
+                            <input type="radio" id="EXW" name="fright_responsibility">
+                            <label for="EXW">EXW</label>
+                        </td>
+                        <td>
+                            <HAVI_app.Shared.Shared_layout.Questionmark>
+                                With CIP you pay for the freight and insurance during transit.
+                                With EXW you are only required to ready the article for pick up.
+                            </HAVI_app.Shared.Shared_layout.Questionmark>
+
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <label for="special_info" class="required">Special information regarding the article or cooperation?</label>
+                            <input type="text" class="form-control form-control-lg" id="special_info">
+                        </td>
+                        <td>
+                            <HAVI_app.Shared.Shared_layout.Questionmark>
+                                If the article needs to be treated with special care or is delivered under special circumstances please note these.
+                            </HAVI_app.Shared.Shared_layout.Questionmark>
+
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <label for="transport" class="required">Are you in charge of booking transport?</label>
+                        </td>
+
+                        <td>
+                            <input type="radio" name="transport" id="yes" value="yes">
+                            <label for="yes">Yes</label>
+                            &nbsp;
+                            <input type="radio" id="no" name="transport">
+                            <label for="no">No</label>
+                        </td>
+                        <td>
+                            <HAVI_app.Shared.Shared_layout.Questionmark>
+                                If your company is the one in charge of transport, pick yes.
+                            </HAVI_app.Shared.Shared_layout.Questionmark>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <label for="dangerous" class="required">Is the article classified as dangerous good (ADR)?</label>
+                        </td>
+
+                        <td>
+                            <input type="radio" name="dangerous" id="yes" value="yes">
+                            <label for="yes">Yes</label>
+                            &nbsp;
+                            <input type="radio" id="no" name="dangerous">
+                            <label for="no">No</label>
+                        </td>
+                        <td>
+                            <HAVI_app.Shared.Shared_layout.Questionmark>
+                                You can check whether the article is classified as dangerours good on the following link: https://www.tnt.com/express/en_dk/site/how-to/find-dangerous-goods.html
+                            </HAVI_app.Shared.Shared_layout.Questionmark>
+                        </td>
+                    </tr>
+
+                </table>
+                <div class="row justify-content-center">
+                    <div class="text-right col-6">
+                        <NavLink class="nav-link" href="/overview_supplier"><button class="btn cancel-button">Back</button></NavLink>
+                    </div>
+                    <div class="text-left col-6">
+                        <NavLink class="nav-link" href="/information_article"><button class="btn green-button">Next</button></NavLink>
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>

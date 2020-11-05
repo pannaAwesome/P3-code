@@ -1,1 +1,117 @@
-﻿@page "/measurment_info_form"
+﻿@layout HAVI_app.Shared.Supplier_layout.Form_header
+@page "/measurment_info_form"
+
+
+    <div class="col-12">
+        <h1>Measurement information:</h1>
+        <p>Fill out information regarding your package measurements</p>
+
+        <div class="justify-content-center row">
+            <div class="col-12">
+                <form>
+                    <table class="table">
+
+                        <tr>
+                            <td>
+                                <label for="length" class="required">Length pr. salesunit:</label>
+                            </td>
+                            <td>
+                                <input type="number" class="form-control" id="Length" required>
+                            </td>
+                            <td>
+                                <label for="length">Cm</label>
+                            </td>
+                            <td>
+                                <HAVI_app.Shared.Shared_layout.Questionmark>
+                                    The length of your salesunit written with numbers.
+                                </HAVI_app.Shared.Shared_layout.Questionmark>
+                           
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <label for="width" class="required">Width pr. salesunit:</label>
+                            </td>
+                            <td>
+                                <input type="number" class="form-control" id="width" required>
+                            </td>
+                            <td>
+                                <label for="width">Cm</label>
+                            </td>
+                            <td>
+                                <HAVI_app.Shared.Shared_layout.Questionmark>
+                                    The width of your salesunit written with numbers.
+                                </HAVI_app.Shared.Shared_layout.Questionmark>
+                            
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <label for="height" class="required">Height pr. salesunit:</label>
+                            </td>
+                            <td>
+                                <input type="number" class="form-control" id="height" required>
+                            </td>
+                            <td>
+                                <label for="height">Cm</label>
+                            </td>
+                            <td>
+                                <HAVI_app.Shared.Shared_layout.Questionmark>
+                                    The height of your salesunit written with numbers.
+                                </HAVI_app.Shared.Shared_layout.Questionmark>
+                                
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <label for="net_weight" class="required">Net weight pr. salesunit:</label>
+                            </td>
+                            <td>
+                                <input type="number" class="form-control" id="net_weight" required>
+                            </td>
+                            <td>
+                                <label for="net_weight">Kg</label>
+                            </td>
+                            <td>
+                                <HAVI_app.Shared.Shared_layout.Questionmark>
+                                    The weight without the packaging of the salesunit.
+                                </HAVI_app.Shared.Shared_layout.Questionmark>
+                            
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <label for="gross_weight" class="required">Gross weight pr. salesunit:</label>
+                            </td>
+                            <td>
+                                <input type="number" class="form-control" id="gross_weight" required>
+                            </td>
+                            <td>
+                                <label for="gross_weight">Kg</label>
+                            </td>
+                            <td>
+                                <HAVI_app.Shared.Shared_layout.Questionmark>
+                                    The weight with the packaging of the salesunit.
+                                </HAVI_app.Shared.Shared_layout.Questionmark>
+                             
+                            </td>
+                        </tr>
+
+                    </table>
+                    <div class="row justify-content-center">
+                        <div class="text-right col-6">
+                            <NavLink class="nav-link" href="/information_article"><button class="btn cancel-button">Back</button></NavLink>
+                        </div>
+                        <div class="text-left col-6">
+                            <NavLink class="nav-link" href="/information_shipment"><button class="btn green-button">Next</button></NavLink>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>

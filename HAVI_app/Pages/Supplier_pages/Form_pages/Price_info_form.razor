@@ -1,1 +1,87 @@
-﻿@page "/price_info_form"
+﻿@layout HAVI_app.Shared.Supplier_layout.Form_header
+@page "/price_info_form"
+
+<div class="col-12">
+    <h1>Price information:</h1>
+    <p>Fill out information regarding the article price:</p>
+
+    <div class="justify-content-center row">
+        <div class="col-12">
+            <form>
+                <table class="table">
+
+                    <tr>
+                        <td>
+                            <label for="set_currency" class="required">Set currency:</label>
+                        </td>
+                        <td>
+                            <div class="dropdown">
+                                <button type="button" class="btn btn-primary dropdown-toggle">
+                                    Pick something
+                                </button>
+                                <div class="dropdown-content dropdown-menu-lg-right">
+                                    <button class="dropdown-item" type="button">ADP</button>
+                                    <button class="dropdown-item" type="button">DKK</button>
+                                    <button class="dropdown-item" type="button">USD</button>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <HAVI_app.Shared.Shared_layout.Questionmark>
+                                Choose your favored currency.
+                            </HAVI_app.Shared.Shared_layout.Questionmark>
+                      
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <label for="purchase_price" class="required">Purchase price:</label>
+                        </td>
+                        <td>
+                            <input type="number" class="form-control" id="purchase_price" required>
+                        </td>
+                        <td>
+                            <HAVI_app.Shared.Shared_layout.Questionmark>
+                                Insert the price for the article you and HAVI has agreed upon
+                            </HAVI_app.Shared.Shared_layout.Questionmark>
+                         
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <label for="other_cost" class="required">Other cost regarding article?</label>
+                        </td>
+
+                        <td>
+                            <input type="radio" name="organic" id="yes" value="yes">
+                            <label for="yes">Yes</label>
+                            &nbsp;
+                            <input type="radio" id="no" name="organic">
+                            <label for="no">No</label>
+                        </td>
+                        <td>
+                            <HAVI_app.Shared.Shared_layout.Questionmark>
+                                If theres any other information about the article regarding price, pick yes.
+                            </HAVI_app.Shared.Shared_layout.Questionmark>
+                        
+                        </td>
+                    </tr>
+
+
+                </table>
+
+                <div class="row justify-content-center">
+                    <div class="text-right col-6">
+                        <NavLink class="nav-link" href="/information_shipment"><button class="btn cancel-button">Back</button></NavLink>
+                    </div>
+                    <div class="text-left col-6">
+                        <NavLink class="nav-link" href="/information_confirm"><button class="btn green-button">Next</button></NavLink>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

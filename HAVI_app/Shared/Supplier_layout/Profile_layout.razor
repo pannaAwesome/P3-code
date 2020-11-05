@@ -1,21 +1,17 @@
 ﻿@inherits LayoutComponentBase
-
-<div class="purple-background ">
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-light justify-content-between">
-            <a class="navbar-brand" href="#">
-                <img alt="HAVI logo" src="./images/HAVI-logo.png" width="230" />
-            </a>
-            <div class="text-right">
-                <p>
-                    Article informations can be changed during fill out
-                </p>
+<div class="col-12 purple-background">
+    <div class="row justify-content-between">
+        <div class="col-12 container vertical-center">
+            <div class="row justify-content-center">
+                <div class="white-box col-8 align-middle">
+                    <header>
+                        <HAVI_app.Shared.Shared_layout.Logo_image/>
+                    </header>
+                    <div class="container">
+                        @Body
+                    </div>
+                </div>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        @Body
+        </div>
     </div>
-
 </div>
-<havi_app.Shared.Shared_layout.Footer/>
