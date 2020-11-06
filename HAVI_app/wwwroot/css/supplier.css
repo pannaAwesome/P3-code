@@ -1,4 +1,30 @@
-﻿
+﻿/*###################################################################################################################*/
+/* Farver til brug i dette projekt */
+/*
+    De bruges ved at skrive følgende:
+    var(navnet på farven)
+*/
+:root {
+    --blue: #006cb6;
+    --dark-blue: #385072;
+    --green: #5ece57;
+    --dark-green: #26a570;
+    --purple: #a54e8b;
+    --dark-purple: #723861;
+    --cyan: #00b2be;
+    --dark-cyan: #008e98;
+    --orange: #ff883c;
+    --dark-orange: #CC6C30;
+    --yellow: #e6b10e;
+    --red: #de577b;
+    --dark-gray: #686766;
+    --gray: #a5a5a7;
+    --black: #000;
+    --background-white: #fdfdfd;
+    --tab-white: #f2f2f2;
+}
+/*###################################################################################################################*/
+
 .space_navbar {
     padding-top: 10px;
     padding-bottom: 10px;
@@ -63,3 +89,65 @@
     .close-password:hover {
         color: #686766;
     }
+
+/*#################################################################################################*/
+/* Layout til form headeren */
+
+.form-header-item {
+    display: inline-block;
+    width: 150px;
+    height: 70px;
+    padding-left: 40px;
+    padding-right: 10px;
+    position: relative;
+}
+
+.form-header-item p {
+    display: inline;
+    vertical-align: middle;
+    position: absolute;
+}
+
+.form-header-number {
+    font-size: 30px;
+}
+
+.form-header-text {
+    left: 60px;
+    vertical-align: middle;
+
+}
+
+.form-header-middle:after, .form-header-end:after{
+    top: 0;
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-left: 35px solid var(--background-white);
+    border-top: 35px solid transparent;
+    border-bottom: 35px solid transparent;
+}
+
+.form-header-start::before, .form-header-middle::before {
+    content: '';
+    position: absolute;
+    right: -7px;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    z-index: 100;
+    border-top: 35px solid transparent;
+    border-bottom: 35px solid transparent;
+}
+
+.form-header-active::before {
+    border-left: 35px solid var(--purple);
+}
+
+.form-header-active{
+    background-color: var(--purple);
+    color: white;
+}
