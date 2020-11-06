@@ -25,33 +25,34 @@
 }
 /*###################################################################################################################*/
 
-.space_navbar {
-    padding-top: 10px;
-    padding-bottom: 10px;
+.heading-profile {
+    padding-top: 30px;
+    padding-bottom: 20px;
 }
 
-.space-heading {
-    padding-bottom: 25px;
-}
 
 
 .white-box {
-    background-color: #fdfdfd;
-    border-color: black;
-    border-radius: 50px;
-    border-style: solid;
-    padding-bottom: 60px;
-    color: #385072;
+    top: 10px;
+    bottom: 10px;
+    background-color: var(--background-white);
+    box-shadow: 2px 2px;
+    border-radius: 15px;
+    border: solid var(--black) thin;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    padding: 50px;
 }
 
+
 .white-box-submit {
-    background-color: #fdfdfd;
+    background-color: var(--background-white);
     border-color: black;
     border-radius: 50px;
     border-style: solid;
     height: 500px;
     padding-bottom: 60px;
-    color: #385072;
+    
 }
 
 .submit-header-text {
@@ -59,15 +60,10 @@
     padding-bottom: 50px;
 }
 
-.table-font {
-    color: #385072;
-}
 
-.buttons {
-    position: absolute;
-    left: 30%;
-    right: 30%;
-    top: 97%
+
+.button-size {
+    padding: 6px 20px;
 }
 
 
