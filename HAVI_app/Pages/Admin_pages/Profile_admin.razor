@@ -14,7 +14,39 @@
         <br><br><br><br>
         <h3 class="card-title">Profile:</h3>
         <p class="card-text1">Username:<input type="text" class="username-text" id="username" name="username" value="admin@havi.com" readonly="readonly"><br></p>
-        <p class="card-text2">Password:<a href="#" onClick="MyWindow=window.open('/profile_admin','MyWindow','width=600,height=300'); return false;">Change password</a></p>
+        <p class="card-text2"> Password:
+            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
+                Change password
+            </button>
+        </p>
+
+        
+        <div class="modal" id="myModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    
+                    <div class="modal-header">
+                        <h4 class="modal-title">Change password</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    
+                    <div class="modal-body">
+                        Current password: <input type="text" /> <br />
+                        New password: <input type="text" /> <br />
+                        Confirm password: <input type="text" /> <br />
+                    </div>
+
+                    
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" data-dismiss="modal">Confirm</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
 
 
         <div class="buttons">
