@@ -30,6 +30,10 @@
     padding-bottom: 20px;
 }
 
+.heading-overview {
+    margin-bottom: 10px;
+    margin-bottom: 50px; 
+}
 
 
 .white-box {
@@ -85,6 +89,30 @@
     .close-password:hover {
         color: #686766;
     }
+
+
+/*#################################################################################################*/
+/* Layout til overview */
+
+.dark-green-button {
+    background: var(--dark-green);
+    color: var(--background-white);
+}
+
+    .dark-green-button:hover {
+        background: var(--dark-blue);
+        color: var(--background-white);
+    }
+.plus-sign-for-button {
+    color: var(--green);
+    font-size: 20px;
+}
+
+.body-layout {
+    margin-top: 30px;
+    margin-top: 30px;
+}
+
 
 /*#################################################################################################*/
 /* Layout til form headeren */
@@ -143,7 +171,7 @@
     border-left: 35px solid var(--purple);
 }
 
-.form-header-active{
+.form-header-active {
     background-color: var(--purple);
     color: white;
 }

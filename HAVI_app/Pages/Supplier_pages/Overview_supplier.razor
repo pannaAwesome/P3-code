@@ -2,30 +2,37 @@
 @inject NavigationManager NavigationManager
 @page "/overview_supplier"
 
-<div class="container">
     <div class="col-12">
         <div class="row">
-            <div class="col-10">
-                <h1>Welcome Hello and co.</h1>
+            <div class="col-5">
+                <h2>Welcome Hello and co.</h2>
             </div>
-            <div class="col-2">
-                <button>Add article</button>
+            <div class="col-2"></div>
+            <div class="col-5 text-right">
+                <button class="btn dark-green-button">
+                Add article
+                    <span class="plus-sign-for-button">&#9663</span>
+                </button>
             </div>
         </div>
     </div>
-
-    <div class="row">
+    
+    <div class="row body-layout">
         <div class="col-12">
-
-
             <table class="table table-hover">
-                <thead class="table-header-blue">
+                <thead class="blue-tabel-header">
                     <tr>
                         <th>
                             <input type="checkbox" name="product_element" />
                         </th>
 
-                        <th>Article number</th>
+                        <th>
+                            Article number
+                            <span>
+                                <div class="up-table-arrow ">&#9663</div>
+                                <div class="down-table-arrow ">&#9663</div>
+                            </span>
+                        </th>
                         <th>Article name </th>
                         <th>Vailed for customer </th>
                         <th>HAVI employee </th>
@@ -58,7 +65,7 @@
             </table>
         </div>
     </div>
-</div>
+
 
 @code{
     private void RowWasHit()
