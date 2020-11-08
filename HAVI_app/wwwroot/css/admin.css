@@ -25,36 +25,33 @@
 }
 /*###################################################################################################################*/
 .button-overview {
-    background-color: #5ECE57;
-    border: 1px solid green;
+    background-color: var(--blue);
+    border: 1px var(--dark-blue);
     color: white;
-    padding: 24px 32px;
+    padding: 20px 30px;
     text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
+    font-size: 14px;
     float: left;
 }
+    .button-overview:hover {
+        background-color: var(--dark-purple);
+        color: white;
+    }
 
 .button-options-overview {
+    background-color: var(--orange);
+    border: 1px var(--dark-orange);
     border-radius: 5px;
-    border: 1px solid;
     padding: 6px 12px;
+    text-align: center;
+    font-size: 14px;
     color: white;
-    width: 180px;
+    float: right;
 }
-
-.export-button {
-    background-color: #FF883C;
-}
-
-.transfer-order {
-    background-color: #FF883C;
-}
-
-.create-buyer {
-    background-color: #FF883C;
-}
+    .button-options-overview:hover {
+        background-color: var(--dark-orange);
+        color: white;
+    }
 
 .buttons {
     height: 50px;
@@ -125,4 +122,8 @@
     text-align: center;
     font-weight: bolder;
     left: -70px;
+}
+
+.gap-overview {
+    margin-top: 100px;
 }
