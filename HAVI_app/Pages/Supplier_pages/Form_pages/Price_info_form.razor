@@ -1,4 +1,7 @@
-﻿@page "/price_info_form"
+﻿@layout HAVI_app.Shared.Supplier_layout.Form_layout
+@page "/price_info_form"
+
+<HAVI_app.Shared.Supplier_layout.Form_header SupplierState="filled" ArticleState="filled" MeasurementState="filled" ShipmentState="filled" PriceState="active" />
 
 <div class="col-12">
     <h1>Price information:</h1>
@@ -29,7 +32,7 @@
                             <HAVI_app.Shared.Shared_layout.Questionmark>
                                 Choose your favored currency.
                             </HAVI_app.Shared.Shared_layout.Questionmark>
-                      
+
                         </td>
                     </tr>
 
@@ -44,7 +47,7 @@
                             <HAVI_app.Shared.Shared_layout.Questionmark>
                                 Insert the price for the article you and HAVI has agreed upon
                             </HAVI_app.Shared.Shared_layout.Questionmark>
-                         
+
                         </td>
                     </tr>
 
@@ -64,7 +67,7 @@
                             <HAVI_app.Shared.Shared_layout.Questionmark>
                                 If theres any other information about the article regarding price, pick yes.
                             </HAVI_app.Shared.Shared_layout.Questionmark>
-                        
+
                         </td>
                     </tr>
 
@@ -76,7 +79,7 @@
                         <NavLink class="nav-link" href="/shipment_info_form"><button class="btn cancel-button">Back</button></NavLink>
                     </div>
                     <div class="text-left col-6">
-                        <NavLink class="nav-link" href="/confirm_details_form"><button class="btn green-button">Next</button></NavLink>
+                        <NavLink class="nav-link" href="/confirm_details"><button class="btn green-button">Next</button></NavLink>
                     </div>
                 </div>
 
