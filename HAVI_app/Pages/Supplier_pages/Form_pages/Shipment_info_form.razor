@@ -1,4 +1,7 @@
-﻿@page "/shipment_info_form"
+﻿@layout HAVI_app.Shared.Supplier_layout.Form_layout
+@page "/shipment_info_form"
+
+<HAVI_app.Shared.Supplier_layout.Form_header SupplierState="filled" ArticleState="filled" MeasurementState="filled" ShipmentState="active" />
 
 <div class="col-12">
     <h1>Shipment information:</h1>
@@ -20,7 +23,7 @@
                             <HAVI_app.Shared.Shared_layout.Questionmark>
                                 Enter the amount of carton units one pallet can have.
                             </HAVI_app.Shared.Shared_layout.Questionmark>
-                            
+
                         </td>
                     </tr>
 
@@ -35,7 +38,7 @@
                             <HAVI_app.Shared.Shared_layout.Questionmark>
                                 Enter the amount of carton units pr. layer.
                             </HAVI_app.Shared.Shared_layout.Questionmark>
-            
+
                         </td>
                     </tr>
 
@@ -59,7 +62,7 @@
                             <HAVI_app.Shared.Shared_layout.Questionmark>
                                 Select where the article was manufactured.
                             </HAVI_app.Shared.Shared_layout.Questionmark>
-             
+
                         </td>
                     </tr>
 
@@ -83,7 +86,7 @@
                             <HAVI_app.Shared.Shared_layout.Questionmark>
                                 Select where the product is shipped from.
                             </HAVI_app.Shared.Shared_layout.Questionmark>
-            
+
                         </td>
                     </tr>
 
@@ -99,7 +102,7 @@
                                 If you do not know what this is, click here:
                                 https://skat.dk/skat.aspx?oid=2247456
                             </HAVI_app.Shared.Shared_layout.Questionmark>
-                            
+
                         </td>
                     </tr>
 
@@ -171,7 +174,7 @@
                             <HAVI_app.Shared.Shared_layout.Questionmark>
                                 ?
                             </HAVI_app.Shared.Shared_layout.Questionmark>
-                            
+
                         </td>
                     </tr>
                 </table>

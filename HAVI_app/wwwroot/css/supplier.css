@@ -117,61 +117,100 @@
 /*#################################################################################################*/
 /* Layout til form headeren */
 
-.form-header-item {
-    display: inline-block;
-    width: 150px;
-    height: 70px;
-    padding-left: 40px;
-    padding-right: 10px;
-    position: relative;
+.form-layout {
+    padding: 40px;
+    background: var(--background-white);
 }
 
-.form-header-item p {
-    display: inline;
-    vertical-align: middle;
-    position: absolute;
-}
-
-.form-header-number {
-    font-size: 30px;
-}
-
-.form-header-text {
-    left: 60px;
-    vertical-align: middle;
-
-}
-
-.form-header-middle:after, .form-header-end:after{
-    top: 0;
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 0;
-    height: 0;
-    border-left: 35px solid var(--background-white);
-    border-top: 35px solid transparent;
-    border-bottom: 35px solid transparent;
-}
-
-.form-header-start::before, .form-header-middle::before {
-    content: '';
-    position: absolute;
-    right: -7px;
-    bottom: 0;
-    width: 0;
-    height: 0;
+.form-header {
+    background-color: var(--background-white);
     z-index: 100;
-    border-top: 35px solid transparent;
-    border-bottom: 35px solid transparent;
+    height: 250px;
 }
 
-.form-header-active::before {
-    border-left: 35px solid var(--purple);
+.progressbar-box {
+    margin-top: 60px;
 }
 
-.form-header-active {
-    background-color: var(--purple);
-    color: white;
+.progressbar {
+    counter-reset: step;
 }
+
+    .progressbar li {
+        list-style-type: none;
+        width: 15%;
+        float: left;
+        font-size: small;
+        position: relative;
+        text-align: center;
+        text-transform: uppercase;
+        color: var(--gray);
+    }
+
+        .progressbar li:before {
+            width: 30px;
+            height: 30px;
+            content: counter(step);
+            counter-increment: step;
+            line-height: 24px;
+            border: 3px solid var(--gray);
+            display: block;
+            text-align: center;
+            margin: 0 auto 10px auto;
+            border-radius: 50%;
+            background-color: var(--gray);
+            color: white;
+        }
+
+        .progressbar li:after {
+            width: 100%;
+            height: 4px;
+            content: '';
+            position: absolute;
+            background-color: var(--gray);
+            top: 15px;
+            left: -50%;
+            z-index: -1;
+        }
+
+        .progressbar li:first-child:after {
+            content: none;
+        }
+
+        .progressbar li.active {
+            color: var(--purple);
+            font-weight: bolder;
+        }
+
+            .progressbar li.active:before {
+                border-color: var(--purple);
+                background: var(--purple);
+                color: white;
+            }
+            
+        .progressbar li.filled {
+            color: var(--green);
+        }
+
+        .progressbar li.filled:hover {
+            color: var(--dark-green);
+            cursor: pointer;
+        }
+
+            .progressbar li.filled:before {
+                border-color: var(--green);
+                background: var(--green);
+                color: white;
+                font-weight: bold;
+                content: "✔";
+            }
+
+            .progressbar li.filled:hover:before {
+                border-color: var(--dark-green);
+                background: var(--dark-green);
+                cursor: pointer;
+            }
+
+            .progressbar li.filled + li:after {
+                background-color: var(--green);
+            }
