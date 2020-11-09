@@ -41,10 +41,6 @@
 .button-options-overview {
     background-color: var(--orange);
     border: 1px var(--dark-orange);
-    border-radius: 5px;
-    padding: 6px 12px;
-    text-align: center;
-    font-size: 14px;
     color: white;
     float: right;
 }
@@ -53,26 +49,16 @@
         color: white;
     }
 
-.buttons {
-    height: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.delete-button {
+    background-color: var(--red);
+    border: 1px var(--black);
+    color: white;
 }
+    .delete-button:hover {
+        background-color: var(--dark-purple);
+        color: white;
+    }
 
-.button-save {
-    background-color: #5ECE57;
-    border: none;
-    color: #FFFFFF;
-    padding: 10px 40px;
-}
-
-.button-cancel {
-    background-color: lightgray;
-    border: none;
-    color: gray;
-    padding: 10px 35px;
-}
 
 .card {
     margin: 0 auto;
@@ -98,7 +84,7 @@
     position: relative;
     text-align: center;
     font-weight: bolder;
-    left: -70px;
+    left: -87px;
 }
 
 .username-text {
