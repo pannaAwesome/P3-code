@@ -87,7 +87,14 @@
                         <select class="form-control" id="haviRecipent">
                             @for (int i = 0; i < 5; i++)
                             {
-                                <option>@i</option>
+                                if (i == 1)
+                                {
+                                    <option disabled selected>-- select an option --</option>
+                                }
+                                else
+                                {
+                                    <option>@i</option>
+                                }
                             }
                         </select>
                     </div>
