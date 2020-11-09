@@ -17,7 +17,13 @@
                             <label for="set_currency" class="required">Set currency:</label>
                         </td>
                         <td>
-                            <div class="dropdown">
+                            <select class="form-control" name="set_currency">
+                                <option disabled selected>-- select an option --</option>
+                                <option>ADP</option>
+                                <option>DKK</option>
+                                <option>USD</option>
+                            </select>
+                            <!--<div class="dropdown">
                                 <button type="button" class="btn btn-primary dropdown-toggle">
                                     Pick something
                                 </button>
@@ -26,12 +32,12 @@
                                     <button class="dropdown-item" type="button">DKK</button>
                                     <button class="dropdown-item" type="button">USD</button>
                                 </div>
-                            </div>
+                            </div>-->
                         </td>
                         <td>
-                            <HAVI_app.Shared.Shared_layout.Questionmark>
+                            <HAVI_app.Shared.Shared_layout.Questionmark_top>
                                 Choose your favored currency.
-                            </HAVI_app.Shared.Shared_layout.Questionmark>
+                            </HAVI_app.Shared.Shared_layout.Questionmark_top>
 
                         </td>
                     </tr>
@@ -44,9 +50,9 @@
                             <input type="number" class="form-control" id="purchase_price" required>
                         </td>
                         <td>
-                            <HAVI_app.Shared.Shared_layout.Questionmark>
+                            <HAVI_app.Shared.Shared_layout.Questionmark_top>
                                 Insert the price for the article you and HAVI has agreed upon
-                            </HAVI_app.Shared.Shared_layout.Questionmark>
+                            </HAVI_app.Shared.Shared_layout.Questionmark_top>
 
                         </td>
                     </tr>
@@ -64,9 +70,9 @@
                             <label for="no">No</label>
                         </td>
                         <td>
-                            <HAVI_app.Shared.Shared_layout.Questionmark>
+                            <HAVI_app.Shared.Shared_layout.Questionmark_top>
                                 If theres any other information about the article regarding price, pick yes.
-                            </HAVI_app.Shared.Shared_layout.Questionmark>
+                            </HAVI_app.Shared.Shared_layout.Questionmark_top>
 
                         </td>
                     </tr>

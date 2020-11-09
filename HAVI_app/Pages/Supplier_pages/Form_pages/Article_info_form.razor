@@ -20,9 +20,9 @@
                             <input type="text" class="form-control" id="a_name" required>
                         </td>
                         <td>
-                            <HAVI_app.Shared.Shared_layout.Questionmark>
+                            <HAVI_app.Shared.Shared_layout.Questionmark_top>
                                 Enter the name of the article.
-                            </HAVI_app.Shared.Shared_layout.Questionmark>
+                            </HAVI_app.Shared.Shared_layout.Questionmark_top>
 
                         </td>
                     </tr>
@@ -32,7 +32,13 @@
                             <label for="sales_unit" class="required">Salesunit:</label>
                         </td>
                         <td>
-                            <div class="dropdown">
+                            <select class="form-control" name="salesunit">
+                                <option disabled selected>-- select an option --</option>
+                                <option>Ark // 225</option>
+                                <option>Bag in box // 204</option>
+                                <option>Bakke // 374</option>
+                            </select>
+                            <!--<div class="dropdown">
                                 <button type="button" class="btn btn-primary dropdown-toggle">
                                     Pick something
                                 </button>
@@ -41,12 +47,12 @@
                                     <button class="dropdown-item" type="button">Bag in box // 204</button>
                                     <button class="dropdown-item" type="button">Bakke // 374</button>
                                 </div>
-                            </div>
+                            </div>-->
                         </td>
                         <td>
-                            <HAVI_app.Shared.Shared_layout.Questionmark>
+                            <HAVI_app.Shared.Shared_layout.Questionmark_top>
                                 Enter the unit in which the article is delivered.
-                            </HAVI_app.Shared.Shared_layout.Questionmark>
+                            </HAVI_app.Shared.Shared_layout.Questionmark_top>
 
                         </td>
                     </tr>
@@ -59,9 +65,9 @@
                             <input type="number" class="form-control" id="salesunit_quantity" required>
                         </td>
                         <td>
-                            <HAVI_app.Shared.Shared_layout.Questionmark>
+                            <HAVI_app.Shared.Shared_layout.Questionmark_top>
                                 Enter how many articles are delivered pr. unit.
-                            </HAVI_app.Shared.Shared_layout.Questionmark>
+                            </HAVI_app.Shared.Shared_layout.Questionmark_top>
 
                         </td>
                     </tr>
@@ -74,9 +80,9 @@
                             <input type="number" class="form-control" id="article_number_name" required>
                         </td>
                         <td>
-                            <HAVI_app.Shared.Shared_layout.Questionmark>
+                            <HAVI_app.Shared.Shared_layout.Questionmark_top>
                                 Enter your own reference number.
-                            </HAVI_app.Shared.Shared_layout.Questionmark>
+                            </HAVI_app.Shared.Shared_layout.Questionmark_top>
 
                         </td>
                     </tr>
@@ -89,9 +95,9 @@
                             <input type="number" class="form-control" id="GTIN" required>
                         </td>
                         <td>
-                            <HAVI_app.Shared.Shared_layout.Questionmark>
+                            <HAVI_app.Shared.Shared_layout.Questionmark_top>
                                 Enter 14 characters, if less than 14, place 0´s infront.
-                            </HAVI_app.Shared.Shared_layout.Questionmark>
+                            </HAVI_app.Shared.Shared_layout.Questionmark_top>
 
                         </td>
                     </tr>
@@ -104,12 +110,12 @@
                             <input type="number" class="form-control" id="Shelflife" required>
                         </td>
                         <td>
-                            <label for="Shelflife">Days</label>
+                            <label class="center-for-units" for="Shelflife">Days</label>
                         </td>
                         <td>
-                            <HAVI_app.Shared.Shared_layout.Questionmark>
+                            <HAVI_app.Shared.Shared_layout.Questionmark_top>
                                 Enter expiration time for the article in days.
-                            </HAVI_app.Shared.Shared_layout.Questionmark>
+                            </HAVI_app.Shared.Shared_layout.Questionmark_top>
 
                         </td>
                     </tr>
@@ -122,12 +128,12 @@
                             <input type="number" class="form-control" id="Min_shelflife" required>
                         </td>
                         <td>
-                            <label for="Min_shelflife">Days</label>
+                            <label class="center-for-units" for="Min_shelflife">Days</label>
                         </td>
                         <td>
-                            <HAVI_app.Shared.Shared_layout.Questionmark>
+                            <HAVI_app.Shared.Shared_layout.Questionmark_top>
                                 Enter the least amount of days that HAVI should have the article.
-                            </HAVI_app.Shared.Shared_layout.Questionmark>
+                            </HAVI_app.Shared.Shared_layout.Questionmark_top>
 
                         </td>
                     </tr>
@@ -145,9 +151,9 @@
                             <label for="no">No</label>
                         </td>
                         <td>
-                            <HAVI_app.Shared.Shared_layout.Questionmark>
+                            <HAVI_app.Shared.Shared_layout.Questionmark_top>
                                 Enter whether the article is organic or not.
-                            </HAVI_app.Shared.Shared_layout.Questionmark>
+                            </HAVI_app.Shared.Shared_layout.Questionmark_top>
 
                         </td>
                     </tr>

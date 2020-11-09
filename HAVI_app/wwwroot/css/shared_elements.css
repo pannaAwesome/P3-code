@@ -23,13 +23,15 @@
     background-color: #385072;
 }
 
-.questionmark:hover .tooltip {
+/* Tooltip to the right of the questionmark */
+
+.questionmark:hover .tooltip-right {
     visibility: visible;
     opacity: 1;
 }
 
 
-.questionmark .tooltip {
+.questionmark .tooltip-right {
     display: flex;
     justify-content: center;
     align-content: center;
@@ -44,9 +46,11 @@
     border-radius: 5px;
     padding: 5px;
     text-align: center;
+    font-weight: normal;
+    font-size: smaller;
 }
  
-.questionmark .tooltip::after {
+.questionmark .tooltip-right::after {
     content: " ";
     position: absolute;
     top: 50%;
@@ -55,6 +59,47 @@
     border-style: solid;
     border-color: transparent #555 transparent transparent;
 }
+
+/* Tooltip above the questionmark */
+
+
+.questionmark:hover .tooltip-top {
+    visibility: visible;
+    opacity: 1;
+}
+
+
+.questionmark .tooltip-top {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    position: absolute;
+    width: 288px;
+    height: 110px;
+    bottom: 150%;
+    left: 50%;
+    margin-left: -1135%;
+    visibility: hidden;
+    background: #555;
+    border-radius: 5px;
+    padding: 5px;
+    text-align: center;
+    font-weight: normal;
+    font-size: smaller;
+}
+
+    .questionmark .tooltip-top::after {
+        content: " ";
+        position: absolute;
+        top: 100%;
+        left: 98%;
+        margin-left: -5%;
+        border-width: 5px;
+        border-style: solid;
+        border-color: #555 transparent transparent transparent;
+    }
+
 
 /*######################################################################################################################*/
 /* Users profile menu layout */
