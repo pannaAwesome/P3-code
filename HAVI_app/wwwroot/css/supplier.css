@@ -217,3 +217,18 @@
                 background-color: var(--green);
             }
 
+
+/*#################################################################################################*/
+/* Show/Hide radio button */
+
+#transit {
+    display: none;
+}
+
+input#show:checked ~ #transit {
+    display: block;
+}
+
+input#hide:checked ~ #transit {
+    display: none;
+}
