@@ -112,6 +112,9 @@
     margin-top: 30px;
 }
 
+#modal-addArticle {
+    background-color: #E5E5E7;
+}
 
 /*#################################################################################################*/
 /* Layout til form headeren */
@@ -213,3 +216,4 @@
             .progressbar li.filled + li:after {
                 background-color: var(--green);
             }
+

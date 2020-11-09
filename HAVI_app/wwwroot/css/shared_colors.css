@@ -86,10 +86,17 @@ td, tr {
         color: var(--green);
     }
 
+/*
+<th >
+    <div class="filter-table" >
+        <div class="down-table-arrow " > &#9650</div >
+        <div class="up-table-arrow " > &#9650</div >
+    </div >
+</th >
+    */
 
 /*######################################################################################################################*/
 /* Colored buttons layout */
-
 .green-button {
     background: var(--green);
     color: var(--background-white);
