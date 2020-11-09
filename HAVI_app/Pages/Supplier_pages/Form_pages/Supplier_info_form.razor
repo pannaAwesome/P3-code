@@ -2,14 +2,16 @@
 @page "/supplier_info_form"
 
 <HAVI_app.Shared.Supplier_layout.Form_header SupplierState="active" />
-<div class="row form-content">
-<div class="col-12">
-    <h1>Supplier information:</h1>
-    <p>Fill out information about your own company.</p>
+<div class="row justify-content-center">
+    <div class="col-10">
+        <h1>Supplier information:</h1>
+        <p class="form-header-supplier">Fill out information about your own company.</p>
+    </div>
 </div>
-</div>
-<div class="justify-content-center row">
-    <div class="col-12">
+
+
+<div class="row justify-content-center ">
+    <div class="col-8">
         <form>
             <table class="table">
                 <tr>
@@ -111,7 +113,7 @@
                 </tr>
 
                 <tr>
-                    <td>
+                    <td colspan="2">
                         <label for="special_info" class="required">Special information regarding the article or cooperation?</label>
                         <textarea class="form-control" name="special_info"></textarea>
                     </td>
@@ -165,10 +167,10 @@
             </table>
             <div class="row justify-content-center">
                 <div class="text-right col-6">
-                    <NavLink class="nav-link" href="/overview_supplier"><button class="btn cancel-button">Back</button></NavLink>
+                    <NavLink class="nav-link" href="/overview_supplier"><button class="btn cancel-button button-size">Back</button></NavLink>
                 </div>
                 <div class="text-left col-6">
-                    <NavLink class="nav-link" href="/article_info_form"><button class="btn green-button">Next</button></NavLink>
+                    <NavLink class="nav-link" href="/article_info_form"><button class="btn green-button button-size">Next</button></NavLink>
                 </div>
             </div>
 
