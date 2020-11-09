@@ -1,1 +1,79 @@
-﻿@page "/overview_supplier"
+﻿@layout HAVI_app.Shared.Supplier_layout.Overview_layout
+@inject NavigationManager NavigationManager
+@page "/overview_supplier"
+
+    <div class="col-12">
+        <div class="row">
+            <div class="col-5">
+                <h2>Welcome Hello and co.</h2>
+            </div>
+            <div class="col-2"></div>
+            <div class="col-5 text-right">
+                <button class="btn dark-green-button">
+                Add article
+                    <span class="plus-sign-for-button">&#9663</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row body-layout">
+        <div class="col-12">
+            <table class="table table-hover">
+                <thead class="blue-tabel-header">
+                    <tr>
+                        <th>
+                            <input type="checkbox" name="product_element" />
+                        </th>
+
+                        <th>
+                            Article number
+                        </th>
+                        <th>
+                            <div class="filter-table">
+                                <div class="up-table-arrow ">&#9663</div>
+                                <div class="down-table-arrow ">&#9663</div>
+                            </div>
+                        </th>
+                        <th>Article name </th>
+                        <th>Vailed for customer </th>
+                        <th>HAVI employee </th>
+                        <th>Date created </th>
+                        <th>State </th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @for (int i = 0; i < 5; i++)
+                    {
+
+                        <tr>
+                            <td>
+                                <input type="checkbox" name="product_element" />
+                            </td>
+                            <td @onclick="RowWasHit">1</td>
+                            <td @onclick="RowWasHit">2</td>
+                            <td @onclick="RowWasHit">3</td>
+                            <td @onclick="RowWasHit">4</td>
+                            <td @onclick="RowWasHit">5</td>
+                            <td @onclick="RowWasHit">
+                                <div class="created-state state">Created</div>
+                            </td>
+                        </tr>
+
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+@code{
+    private void RowWasHit()
+    {
+        NavigationManager.NavigateTo("/supplier_info_form", true);
+    }
+}
+
+<havi_app.Shared.Shared_layout.Footer />
