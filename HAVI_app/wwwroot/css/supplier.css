@@ -219,16 +219,8 @@
 
 
 /*#################################################################################################*/
-/* Show/Hide radio button */
+/* Layout til form headeren */
 
-#transit {
-    display: none;
-}
-
-input#show:checked ~ #transit {
-    display: block;
-}
-
-input#hide:checked ~ #transit {
-    display: none;
+.form-header-supplier {
+    margin: 30px 0;
 }
