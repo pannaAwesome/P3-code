@@ -3,12 +3,15 @@
 
 <HAVI_app.Shared.Supplier_layout.Form_header SupplierState="filled" ArticleState="filled" MeasurementState="active" />
 
-<div class="col-12">
-    <h1>Measurement information:</h1>
-    <p>Fill out information regarding your package measurements</p>
+    <div class="row justify-content-center">
+        <div class="col-10">
+            <h3>Measurement information:</h3>
+            <p class="form-header-supplier">Fill out information regarding your package measurements</p>
+        </div>
+    </div>
 
     <div class="justify-content-center row">
-        <div class="col-12">
+        <div class="col-9">
             <form>
                 <table class="table">
 
@@ -20,7 +23,7 @@
                             <input type="number" class="form-control" id="Length" required>
                         </td>
                         <td>
-                            <label class="center-for-units" for="length">Cm</label>
+                            <label class="center-for-units" for="length">cm</label>
                         </td>
                         <td>
                             <HAVI_app.Shared.Shared_layout.Questionmark_top>
@@ -38,7 +41,7 @@
                             <input type="number" class="form-control" id="width" required>
                         </td>
                         <td>
-                            <label class="center-for-units" for="width">Cm</label>
+                            <label class="center-for-units" for="width">cm</label>
                         </td>
                         <td>
                             <HAVI_app.Shared.Shared_layout.Questionmark_top>
@@ -56,7 +59,7 @@
                             <input type="number" class="form-control" id="height" required>
                         </td>
                         <td>
-                            <label class="center-for-units" for="height">Cm</label>
+                            <label class="center-for-units" for="height">cm</label>
                         </td>
                         <td>
                             <HAVI_app.Shared.Shared_layout.Questionmark_top>
@@ -74,7 +77,7 @@
                             <input type="number" class="form-control" id="net_weight" required>
                         </td>
                         <td>
-                            <label class="center-for-units" for="net_weight">Kg</label>
+                            <label class="center-for-units" for="net_weight">kg</label>
                         </td>
                         <td>
                             <HAVI_app.Shared.Shared_layout.Questionmark_top>
@@ -92,7 +95,7 @@
                             <input type="number" class="form-control" id="gross_weight" required>
                         </td>
                         <td>
-                            <label class="center-for-units" for="gross_weight">Kg</label>
+                            <label class="center-for-units" for="gross_weight">kg</label>
                         </td>
                         <td>
                             <HAVI_app.Shared.Shared_layout.Questionmark_top>
@@ -105,14 +108,13 @@
                 </table>
                 <div class="row justify-content-center">
                     <div class="text-right col-6">
-                        <NavLink class="nav-link" href="/article_info_form"><button class="btn cancel-button">Back</button></NavLink>
+                        <NavLink class="nav-link" href="/article_info_form"><button class="btn cancel-button button-size">Back</button></NavLink>
                     </div>
                     <div class="text-left col-6">
-                        <NavLink class="nav-link" href="/shipment_info_form"><button class="btn green-button">Next</button></NavLink>
+                        <NavLink class="nav-link" href="/shipment_info_form"><button class="btn green-button button-size">Next</button></NavLink>
                     </div>
                 </div>
             </form>
         </div>
     </div>
 
-</div>

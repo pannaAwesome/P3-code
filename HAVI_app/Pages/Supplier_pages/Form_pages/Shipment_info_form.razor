@@ -2,13 +2,15 @@
 @page "/shipment_info_form"
 
 <HAVI_app.Shared.Supplier_layout.Form_header SupplierState="filled" ArticleState="filled" MeasurementState="filled" ShipmentState="active" />
-
-<div class="col-12">
-    <h1>Shipment information:</h1>
-    <p>Fill out information regarding the shipment of the article</p>
+<div class="row justify-content-center">
+    <div class="col-10">
+        <h3>Shipment information:</h3>
+        <p class="form-header-supplier">Fill out information regarding the shipment of the article</p>
+    </div>
+</div>
 
     <div class="justify-content-center row">
-        <div class="col-12">
+        <div class="col-9">
             <form>
                 <table class="table">
 
@@ -16,7 +18,7 @@
                         <td>
                             <label for="carton_pr_pallet" class="required">Cartons pr. pallet:</label>
                         </td>
-                        <td>
+                        <td colspan="5">
                             <input type="number" class="form-control" id="carton_pr_pallet" required>
                         </td>
                         <td>
@@ -31,7 +33,7 @@
                         <td>
                             <label for="carton_pr_layer" class="required">Cartons pr. layer:</label>
                         </td>
-                        <td>
+                        <td colspan="5">
                             <input type="number" class="form-control" id="carton_pr_layer" required>
                         </td>
                         <td>
@@ -46,23 +48,13 @@
                         <td>
                             <label for="country_origin" class="required">Country of origin:</label>
                         </td>
-                        <td>
+                        <td colspan="5">
                             <select class="form-control" name="county_origin">
                                 <option disabled selected>-- select an option --</option>
                                 <option>Denmark</option>
                                 <option>Sweden</option>
                                 <option>China</option>
                             </select>
-                            <!--<div class="dropdown">
-                                <button type="button" class="btn btn-primary dropdown-toggle">
-                                    Pick something
-                                </button>
-                                <div class="dropdown-content dropdown-menu-lg-right">
-                                    <button class="dropdown-item" type="button">France // FR // 001</button>
-                                    <button class="dropdown-item" type="button">Denmark // DK // 008</button>
-                                    <button class="dropdown-item" type="button">Sweden // SE // 030</button>
-                                </div>
-                            </div>-->
                         </td>
                         <td>
                             <HAVI_app.Shared.Shared_layout.Questionmark_top>
@@ -76,23 +68,13 @@
                         <td>
                             <label for="imported_from" class="required">Imported from:</label>
                         </td>
-                        <td>
+                        <td colspan="5">
                             <select class="form-control" name="imported_from">
                                 <option disabled selected>-- select an option --</option>
                                 <option>Denmark</option>
                                 <option>Sweden</option>
                                 <option>China</option>
                             </select>
-                            <!--<div class="dropdown">
-                                <button type="button" class="btn btn-primary dropdown-toggle">
-                                    Pick something
-                                </button>
-                                <div class="dropdown-content dropdown-menu-lg-right">
-                                    <button class="dropdown-item" type="button">France</button>
-                                    <button class="dropdown-item" type="button">Denmark</button>
-                                    <button class="dropdown-item" type="button">Sweden</button>
-                                </div>
-                            </div>-->
                         </td>
                         <td>
                             <HAVI_app.Shared.Shared_layout.Questionmark_top>
@@ -106,7 +88,7 @@
                         <td>
                             <label for="toll_tarrif_no" class="required">Toll-tarrif no:</label>
                         </td>
-                        <td>
+                        <td colspan="5">
                             <input type="number" class="form-control" id="toll_tarrif_no" required>
                         </td>
                         <td>
@@ -122,7 +104,7 @@
                         <td>
                             <label for="minimum_order_quantity" class="required">Minimum order quantity:</label>
                         </td>
-                        <td>
+                        <td colspan="5">
                             <input type="number" class="form-control" id="minimum_order_quantity" required>
                         </td>
                         <td>
@@ -132,9 +114,6 @@
 
                         </td>
                     </tr>
-                </table>
-
-                <table class="table">
 
                     <tr>
                         <td>
@@ -189,18 +168,16 @@
 
                         </td>
                     </tr>
-                </table>
 
-                <table class="table">
                     <tr>
                         <td>
                             <label for="lead_time" class="required">Lead-time:</label>
                         </td>
-                        <td>
+                        <td colspan="4">
                             <input type="number" class="form-control" id="lead_time" required>
                         </td>
                         <td>
-                            <label class="center-for-units" for="lead_time">Days</label>
+                            <label class="center-for-units" for="lead_time">days</label>
                         </td>
                         <td>
                             <HAVI_app.Shared.Shared_layout.Questionmark_top>
@@ -213,13 +190,12 @@
 
                 <div class="row justify-content-center">
                     <div class="text-right col-6">
-                        <NavLink class="nav-link" href="/measurement_info_form"><button class="btn cancel-button">Back</button></NavLink>
+                        <NavLink class="nav-link" href="/measurement_info_form"><button class="btn cancel-button button-size">Back</button></NavLink>
                     </div>
                     <div class="text-left col-6">
-                        <NavLink class="nav-link" href="/price_info_form"><button class="btn green-button">Next</button></NavLink>
+                        <NavLink class="nav-link" href="/price_info_form"><button class="btn green-button button-size">Next</button></NavLink>
                     </div>
                 </div>
             </form>
         </div>
     </div>
-</div>

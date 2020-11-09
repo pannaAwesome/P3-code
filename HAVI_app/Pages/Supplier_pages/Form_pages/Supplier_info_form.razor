@@ -4,14 +4,14 @@
 <HAVI_app.Shared.Supplier_layout.Form_header SupplierState="active" />
 <div class="row justify-content-center">
     <div class="col-10">
-        <h1>Supplier information:</h1>
+        <h3>Supplier information:</h3>
         <p class="form-header-supplier">Fill out information about your own company.</p>
     </div>
 </div>
 
 
 <div class="row justify-content-center ">
-    <div class="col-8">
+    <div class="col-9">
         <form>
             <table class="table">
                 <tr>
@@ -20,6 +20,9 @@
                     </td>
                     <td>
                         <input type="text" class="form-control" name="company_name" required>
+                    </td>
+                    <td>
+                        <div></div>
                     </td>
                     <td>
                         <HAVI_app.Shared.Shared_layout.Questionmark_top>
@@ -41,6 +44,9 @@
                         </select>
                     </td>
                     <td>
+                        <div></div>
+                    </td>
+                    <td>
                         <HAVI_app.Shared.Shared_layout.Questionmark_top>
                             Enter the homeland of where your company reside
                         </HAVI_app.Shared.Shared_layout.Questionmark_top>
@@ -55,6 +61,9 @@
                         <input type="text" class="form-control" name="email">
                     </td>
                     <td>
+                        <div></div>
+                    </td>
+                    <td>
                         <HAVI_app.Shared.Shared_layout.Questionmark_top>
                             Enter the email of the person in the company that HAVI may contact
                         </HAVI_app.Shared.Shared_layout.Questionmark_top>
@@ -67,18 +76,22 @@
                         <label for="pallet_exchange" class="required">Pallet exchange</label>
                     </td>
                     <td>
-                        <input type="radio" name="pallet_exchange" id="yes" value="yes">
-                        <label for="yes">Yes</label>
-                        &nbsp;
-                        <input type="radio" id="no" name="pallet_exchange">
-                        <label for="no">No</label>
+                        <div class="text-center">
+                            <input type="radio" name="pallet_exchange" id="yes" value="yes">
+                            <label for="yes">Yes</label>
+                            &nbsp;
+                            <input type="radio" id="no" name="pallet_exchange">
+                            <label for="no">No</label>
+                        </div>
+
                     </td>
                     <td>
-
+                        <div></div>
+                    </td>
+                    <td>
                         <HAVI_app.Shared.Shared_layout.Questionmark_top>
                             Whether you would like to exchange pallets with HAVI upon delivering the article
                         </HAVI_app.Shared.Shared_layout.Questionmark_top>
-
                     </td>
                 </tr>
 
@@ -87,11 +100,16 @@
                         <label for="freight_responsibility" class="required">Freight responsibility</label>
                     </td>
                     <td>
-                        <input type="radio" name="freight_responsibility" id="CIP" value="CIP">
-                        <label for="CIP">CIP</label>
-                        &nbsp;
-                        <input type="radio" id="EXW" name="freight_responsibility">
-                        <label for="EXW">EXW</label>
+                        <div class="text-center">
+                            <input type="radio" name="freight_responsibility" id="CIP" value="CIP">
+                            <label for="CIP">CIP</label>
+                            &nbsp;
+                            <input type="radio" id="EXW" name="freight_responsibility">
+                            <label for="EXW">EXW</label>
+                        </div>
+                    </td>
+                    <td>
+                        <div></div>
                     </td>
                     <td>
                         <HAVI_app.Shared.Shared_layout.Questionmark_top>
@@ -108,6 +126,9 @@
                         <textarea class="form-control" name="special_info"></textarea>
                     </td>
                     <td>
+                        <div></div>
+                    </td>
+                    <td>
                         <HAVI_app.Shared.Shared_layout.Questionmark_right>
                             If the article needs to be treated with special care or is delivered under special circumstances please note these.
                         </HAVI_app.Shared.Shared_layout.Questionmark_right>
@@ -121,11 +142,16 @@
                     </td>
 
                     <td>
-                        <input type="radio" name="transport" id="yes" value="yes" data-toggle="collapse" data-target="#hideTransit:not(.show)" aria-expanded="false" aria-controls="hideTransit">
-                        <label for="yes">Yes</label>
-                        &nbsp;
-                        <input type="radio" id="no" value="no" name="transport" data-toggle="collapse" data-target="#hideTransit.show" aria-expanded="false" aria-controls="hideTransit">
-                        <label for="no">No</label>
+                        <div class="text-center">
+                            <input type="radio" name="transport" id="yes" value="yes" data-toggle="collapse" data-target="#hideTransit:not(.show)" aria-expanded="false" aria-controls="hideTransit">
+                            <label for="yes">Yes</label>
+                            &nbsp;
+                            <input type="radio" id="no" value="no" name="transport" data-toggle="collapse" data-target="#hideTransit.show" aria-expanded="false" aria-controls="hideTransit">
+                            <label for="no">No</label>
+                        </div>
+                    </td>
+                    <td>
+                        <div></div>
                     </td>
                     <td>
                         <HAVI_app.Shared.Shared_layout.Questionmark_top>
@@ -140,9 +166,11 @@
                     </td>
                     <td>
                         <p>
-                            <input type="text" class="form-control needsSecondLabel" id="class" required>
-                            <label for="class" class="labels">days</label>
+                            <input type="text" class="form-control" id="class" required>
                         </p>
+                    </td>
+                    <td>
+                        <label for="class" class="labels">days</label>
                     </td>
                     <td>
                         <HAVI_app.Shared.Shared_layout.Questionmark_top>
@@ -155,13 +183,17 @@
                     <td>
                         <label for="dangerous" class="required">Is the article classified as dangerous good (ADR)?</label>
                     </td>
-
                     <td>
-                        <input type="radio" name="dangerous" id="yes" value="yes" data-toggle="collapse" data-target="#hideDanger:not(.show)" aria-expanded="false" aria-controls="hideDanger">
-                        <label for="yes">Yes</label>
-                        &nbsp;
-                        <input type="radio" id="no" value="no" name="dangerous" data-toggle="collapse" data-target="#hideDanger.show" aria-expanded="false" aria-controls="hideDanger" />
-                        <label for="no">No</label>
+                        <div class="text-center">
+                            <input type="radio" name="dangerous" id="yes" value="yes" data-toggle="collapse" data-target="#hideDanger:not(.show)" aria-expanded="false" aria-controls="hideDanger">
+                            <label for="yes">Yes</label>
+                            &nbsp;
+                            <input type="radio" id="no" value="no" name="dangerous" data-toggle="collapse" data-target="#hideDanger.show" aria-expanded="false" aria-controls="hideDanger" />
+                            <label for="no">No</label>
+                        </div>
+                    </td>
+                    <td>
+                        <div></div>
                     </td>
                     <td>
                         <HAVI_app.Shared.Shared_layout.Questionmark_top>
@@ -179,6 +211,9 @@
                         <input type="text" class="form-control" id="class" required>
                     </td>
                     <td>
+                        <div></div>
+                    </td>
+                    <td>
                         <HAVI_app.Shared.Shared_layout.Questionmark_top>
                             The class must be written in numbers
                         </HAVI_app.Shared.Shared_layout.Questionmark_top>
@@ -191,6 +226,9 @@
                     </td>
                     <td>
                         <input type="text" class="form-control" id="classificationCode" required>
+                    </td>
+                    <td>
+                        <div></div>
                     </td>
                     <td>
                         <HAVI_app.Shared.Shared_layout.Questionmark_top>

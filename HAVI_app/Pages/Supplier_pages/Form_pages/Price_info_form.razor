@@ -3,12 +3,16 @@
 
 <HAVI_app.Shared.Supplier_layout.Form_header SupplierState="filled" ArticleState="filled" MeasurementState="filled" ShipmentState="filled" PriceState="active" />
 
-<div class="col-12">
-    <h1>Price information:</h1>
-    <p>Fill out information regarding the article price:</p>
+<div class="row justify-content-center">
+    <div class="col-10">
+        <h3>Price information:</h3>
+        <p class="form-header-supplier">Fill out information regarding the article price:</p>
+    </div>
+</div>
+
 
     <div class="justify-content-center row">
-        <div class="col-12">
+        <div class="col-9">
             <form>
                 <table class="table">
 
@@ -16,23 +20,13 @@
                         <td>
                             <label for="set_currency" class="required">Set currency:</label>
                         </td>
-                        <td>
+                        <td colspan="4">
                             <select class="form-control" name="set_currency">
                                 <option disabled selected>-- select an option --</option>
                                 <option>ADP</option>
                                 <option>DKK</option>
                                 <option>USD</option>
                             </select>
-                            <!--<div class="dropdown">
-                                <button type="button" class="btn btn-primary dropdown-toggle">
-                                    Pick something
-                                </button>
-                                <div class="dropdown-content dropdown-menu-lg-right">
-                                    <button class="dropdown-item" type="button">ADP</button>
-                                    <button class="dropdown-item" type="button">DKK</button>
-                                    <button class="dropdown-item" type="button">USD</button>
-                                </div>
-                            </div>-->
                         </td>
                         <td>
                             <HAVI_app.Shared.Shared_layout.Questionmark_top>
@@ -46,7 +40,7 @@
                         <td>
                             <label for="purchase_price" class="required">Purchase price:</label>
                         </td>
-                        <td>
+                        <td colspan="4">
                             <input type="number" class="form-control" id="purchase_price" required>
                         </td>
                         <td>
@@ -62,12 +56,14 @@
                             <label for="other_cost" class="required">Other cost regarding article?</label>
                         </td>
 
-                        <td>
-                            <input type="radio" name="organic" id="yes" value="yes">
-                            <label for="yes">Yes</label>
-                            &nbsp;
-                            <input type="radio" id="no" name="organic">
-                            <label for="no">No</label>
+                        <td colspan="4">
+                            <div class="text-center">
+                                <input type="radio" name="organic" id="yes" value="yes" data-toggle="collapse" data-target="#hideOrganic:not(.show)" aria-expanded="false" aria-controls="hideOrganic">
+                                <label for="yes">Yes</label>
+                                &nbsp;
+                                <input type="radio" name="organic" id="no" value="no" data-toggle="collapse" data-target="#hideOrganic.show" aria-expanded="false" aria-controls="hideOrganic">
+                                <label for="no">No</label>
+                            </div>
                         </td>
                         <td>
                             <HAVI_app.Shared.Shared_layout.Questionmark_top>
@@ -77,19 +73,53 @@
                         </td>
                     </tr>
 
+                    <tr class="collapse" id="hideOrganic">
+                        <td>
+                            <label for="select-afgift">Inform cost type:</label>
+                        </td>
+
+                        <td>
+                            <select class="form-control" name="select-afgift">
+                                <option disabled selected>-- select an option --</option>
+                                <option>Chokoladeafgift</option>
+                                <option>Milijøafgift</option>
+                                <option>En anden afgift</option>
+                            </select>
+                        </td>
+
+                        <td colspan="2">
+                            <label for="amountInDKK">Total amount in DKK</label>
+                        </td>
+                        <td>
+                            <input type="number" class="form-control" id="amountInDKK" required>
+                        </td>
+                        <td>
+                            Here are two buttons
+                        </td>
+                    </tr>
+                    <tr class="collapse" id="hideOrganic">
+                        <td colspan="3"></td>
+                        <td colspan="2">
+                            <label for="totalAmount">Total amount in DKK</label>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="6">
+                        </td>
+                    </tr>
 
                 </table>
 
                 <div class="row justify-content-center">
                     <div class="text-right col-6">
-                        <NavLink class="nav-link" href="/shipment_info_form"><button class="btn cancel-button">Back</button></NavLink>
+                        <NavLink class="nav-link" href="/shipment_info_form"><button class="btn cancel-button button-size">Back</button></NavLink>
                     </div>
                     <div class="text-left col-6">
-                        <NavLink class="nav-link" href="/confirm_details"><button class="btn green-button">Next</button></NavLink>
+                        <NavLink class="nav-link" href="/confirm_details"><button class="btn green-button button-size">Next</button></NavLink>
                     </div>
                 </div>
-
             </form>
         </div>
     </div>
-</div>

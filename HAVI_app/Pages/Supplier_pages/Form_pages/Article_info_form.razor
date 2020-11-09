@@ -3,12 +3,16 @@
 
 <HAVI_app.Shared.Supplier_layout.Form_header SupplierState="filled" ArticleState="active" />
 
-<div class="col-12">
-    <h1>Article information:</h1>
-    <p>Fill out information regarding the article:</p>
 
-    <div class="justify-content-center row">
-        <div class="col-12">
+    <div class="row justify-content-center">
+        <div class="col-10">
+            <h3>Article information:</h3>
+            <p class="form-header-supplier">Fill out information regarding the article:</p>
+        </div>
+    </div>
+
+    <div class="row justify-content-center ">
+        <div class="col-9">
             <form>
                 <table class="table">
 
@@ -18,6 +22,9 @@
                         </td>
                         <td>
                             <input type="text" class="form-control" id="a_name" required>
+                        </td>
+                        <td>
+                            <div></div>
                         </td>
                         <td>
                             <HAVI_app.Shared.Shared_layout.Questionmark_top>
@@ -38,16 +45,9 @@
                                 <option>Bag in box // 204</option>
                                 <option>Bakke // 374</option>
                             </select>
-                            <!--<div class="dropdown">
-                                <button type="button" class="btn btn-primary dropdown-toggle">
-                                    Pick something
-                                </button>
-                                <div class="dropdown-content dropdown-menu-lg-right">
-                                    <button class="dropdown-item" type="button">Ark // 225</button>
-                                    <button class="dropdown-item" type="button">Bag in box // 204</button>
-                                    <button class="dropdown-item" type="button">Bakke // 374</button>
-                                </div>
-                            </div>-->
+                        </td>
+                        <td>
+                            <div></div>
                         </td>
                         <td>
                             <HAVI_app.Shared.Shared_layout.Questionmark_top>
@@ -65,10 +65,12 @@
                             <input type="number" class="form-control" id="salesunit_quantity" required>
                         </td>
                         <td>
+                            <div></div>
+                        </td>
+                        <td>
                             <HAVI_app.Shared.Shared_layout.Questionmark_top>
                                 Enter how many articles are delivered pr. unit.
                             </HAVI_app.Shared.Shared_layout.Questionmark_top>
-
                         </td>
                     </tr>
 
@@ -78,6 +80,9 @@
                         </td>
                         <td>
                             <input type="number" class="form-control" id="article_number_name" required>
+                        </td>
+                        <td>
+                            <div></div>
                         </td>
                         <td>
                             <HAVI_app.Shared.Shared_layout.Questionmark_top>
@@ -95,6 +100,9 @@
                             <input type="number" class="form-control" id="GTIN" required>
                         </td>
                         <td>
+                            <div></div>
+                        </td>
+                        <td>
                             <HAVI_app.Shared.Shared_layout.Questionmark_top>
                                 Enter 14 characters, if less than 14, place 0´s infront.
                             </HAVI_app.Shared.Shared_layout.Questionmark_top>
@@ -110,7 +118,7 @@
                             <input type="number" class="form-control" id="Shelflife" required>
                         </td>
                         <td>
-                            <label class="center-for-units" for="Shelflife">Days</label>
+                            <label class="center-for-units" for="Shelflife">days</label>
                         </td>
                         <td>
                             <HAVI_app.Shared.Shared_layout.Questionmark_top>
@@ -128,7 +136,7 @@
                             <input type="number" class="form-control" id="Min_shelflife" required>
                         </td>
                         <td>
-                            <label class="center-for-units" for="Min_shelflife">Days</label>
+                            <label class="center-for-units" for="Min_shelflife">days</label>
                         </td>
                         <td>
                             <HAVI_app.Shared.Shared_layout.Questionmark_top>
@@ -144,11 +152,16 @@
                         </td>
 
                         <td>
-                            <input type="radio" name="organic" id="yes" value="yes">
-                            <label for="yes">Yes</label>
-                            &nbsp;
-                            <input type="radio" id="no" name="organic">
-                            <label for="no">No</label>
+                            <div class="text-center">
+                                <input type="radio" name="organic" id="yes" value="yes">
+                                <label for="yes">Yes</label>
+                                &nbsp;
+                                <input type="radio" id="no" name="organic">
+                                <label for="no">No</label>
+                            </div>
+                        </td>
+                        <td>
+                            <div></div>
                         </td>
                         <td>
                             <HAVI_app.Shared.Shared_layout.Questionmark_top>
@@ -162,13 +175,12 @@
                 </table>
                 <div class="row justify-content-center">
                     <div class="text-right col-6">
-                        <NavLink class="nav-link" href="/supplier_info_form"><button class="btn cancel-button">Back</button></NavLink>
+                        <NavLink class="nav-link" href="/supplier_info_form"><button class="btn cancel-button button-size">Back</button></NavLink>
                     </div>
                     <div class="text-left col-6">
-                        <NavLink class="nav-link" href="/measurement_info_form"><button class="btn green-button">Next</button></NavLink>
+                        <NavLink class="nav-link" href="/measurement_info_form"><button class="btn green-button button-size">Next</button></NavLink>
                     </div>
                 </div>
             </form>
         </div>
     </div>
-</div>
