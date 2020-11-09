@@ -1,4 +1,6 @@
 ﻿@page "/create_country"
+@inject NavigationManager NavigationManager
+
 
 
 <div class="card" style="width: 1100px; height: 900px">
@@ -76,37 +78,42 @@
                 </tr>
             </table>
 
-            <div
-            <div class="modal" id="myModal">
-                <div class="modal-dialog">
-                    <div class="modal-content">
+            <div>
+                <div class="modal" id="myModal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
 
-                        
-                        <div class="modal-header">
-                            <h4 class="modal-title">New country created!</h4>
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                            <div class="modal-header">
+                                <h4 class="modal-title">New country created!</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+
+
+                            <div class="modal-body">
+                                Country: "country" <br />
+                                Country-code: 056 <br />
+                                Customer: "McDonalds" <br />
+                            </div>
+
+
+                            <div class="modal-footer">
+                                <button class="btn button-save" data-dismiss="modal" @onclick="ReturnToOverview">Return to overview</button>
+                            </div>
+
                         </div>
-
-                        
-                        <div class="modal-body">
-                            Country: "country" <br />
-                            Country-code: 056 <br />
-                            Customer: "McDonalds" <br />
-                        </div>
-
-                        
-                        <div class="modal-footer">
-                            <NavLink class="nav-link button-save" href="country_view">
-                                <span class="oi oi-home" aria-hidden="true"></span> Return to overview
-                            </NavLink>
-                        </div>
-
                     </div>
                 </div>
             </div>
-        </div>
 
         </div>
 
     </div>
 </div>
+
+@code{
+    private void ReturnToOverview()
+    {
+        NavigationManager.NavigateTo("/country_view", true);
+    }
+}
