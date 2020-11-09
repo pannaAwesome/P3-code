@@ -21,7 +21,7 @@
 
 <div class="row body-layout">
     <div class="col-12">
-        <table class="table table-hover">
+        <table class="table table-hover table-bordered">
             <thead class="blue-tabel-header">
                 <tr>
                     <th>
@@ -87,7 +87,7 @@
                         <select class="form-control" id="haviRecipent">
                             @for (int i = 0; i < 5; i++)
                             {
-                                if (i == 1)
+                                if (i == 0)
                                 {
                                     <option disabled selected>-- select an option --</option>
                                 }
@@ -118,4 +118,6 @@
 }
 
 <havi_app.Shared.Shared_layout.Footer />
+
+
 

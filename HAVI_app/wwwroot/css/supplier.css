@@ -219,8 +219,23 @@
 
 
 /*#################################################################################################*/
-/* Layout til form headeren */
+/* Layout til form */
 
 .form-header-supplier {
     margin: 30px 0;
+}
+
+.labels {
+    text-align: left;
+    clear: both;
+    float: right;
+}
+
+label {
+    height: calc(1.5em + 0.75rem + 2px);
+}
+
+.needsSecondLabel {
+    display: inline;
+    width: auto;
 }

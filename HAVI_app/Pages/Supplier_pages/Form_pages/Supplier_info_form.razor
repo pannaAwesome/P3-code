@@ -121,15 +121,32 @@
                     </td>
 
                     <td>
-                        <input type="radio" name="transport" id="yes" value="yes">
+                        <input type="radio" name="transport" id="yes" value="yes" data-toggle="collapse" data-target="#hideTransit:not(.show)" aria-expanded="false" aria-controls="hideTransit">
                         <label for="yes">Yes</label>
                         &nbsp;
-                        <input type="radio" id="no" name="transport">
+                        <input type="radio" id="no" value="no" name="transport" data-toggle="collapse" data-target="#hideTransit.show" aria-expanded="false" aria-controls="hideTransit">
                         <label for="no">No</label>
                     </td>
                     <td>
                         <HAVI_app.Shared.Shared_layout.Questionmark_top>
                             If your company is the one in charge of transport, pick yes.
+                        </HAVI_app.Shared.Shared_layout.Questionmark_top>
+                    </td>
+                </tr>
+
+                <tr class="collapse" id="hideTransit">
+                    <td>
+                        <label for="class">Transit Time:</label>
+                    </td>
+                    <td>
+                        <p>
+                            <input type="text" class="form-control needsSecondLabel" id="class" required>
+                            <label for="class" class="labels">days</label>
+                        </p>
+                    </td>
+                    <td>
+                        <HAVI_app.Shared.Shared_layout.Questionmark_top>
+                            The amount of days from the article is ordered till the order is ready to be shipped to HAVI.
                         </HAVI_app.Shared.Shared_layout.Questionmark_top>
                     </td>
                 </tr>
@@ -140,16 +157,44 @@
                     </td>
 
                     <td>
-                        <input type="radio" name="dangerous" id="yes" value="yes">
+                        <input type="radio" name="dangerous" id="yes" value="yes" data-toggle="collapse" data-target="#hideDanger:not(.show)" aria-expanded="false" aria-controls="hideDanger">
                         <label for="yes">Yes</label>
                         &nbsp;
-                        <input type="radio" id="no" name="dangerous">
+                        <input type="radio" id="no" value="no" name="dangerous" data-toggle="collapse" data-target="#hideDanger.show" aria-expanded="false" aria-controls="hideDanger" />
                         <label for="no">No</label>
                     </td>
                     <td>
                         <HAVI_app.Shared.Shared_layout.Questionmark_top>
                             You can check whether the article is classified as dangerous good on the following link: https://www.tnt.com/express/en_dk/si
                             te/how-to/find-dangerous-goods.html
+                        </HAVI_app.Shared.Shared_layout.Questionmark_top>
+                    </td>
+                </tr>
+
+                <tr class="collapse" id="hideDanger">
+                    <td>
+                        <label for="class"> Class </label>
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" id="class" required>
+                    </td>
+                    <td>
+                        <HAVI_app.Shared.Shared_layout.Questionmark_top>
+                            The class must be written in numbers
+                        </HAVI_app.Shared.Shared_layout.Questionmark_top>
+                    </td>
+                </tr>
+
+                <tr class="collapse" id="hideDanger">
+                    <td>
+                        <label for="classificationCode">Classification code</label>
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" id="classificationCode" required>
+                    </td>
+                    <td>
+                        <HAVI_app.Shared.Shared_layout.Questionmark_top>
+                            Enter whole number
                         </HAVI_app.Shared.Shared_layout.Questionmark_top>
                     </td>
                 </tr>
