@@ -48,9 +48,9 @@
     padding: 50px;
 }
 
-.center-for-units {
+/*.center-for-units {
     padding-top: 5px;
-}
+}*/
 
 .white-box-submit {
     background-color: var(--background-white);
@@ -225,3 +225,37 @@
     margin: 30px 0 40px;
 }
 
+input[type="number"]:disabled {
+    background-color: var(--white);
+    text-align: right;
+    border: none;
+    height: auto;
+}
+
+input[type="text"]:disabled {
+    background-color: var(--white);
+    text-align: right;
+    border: none;
+    height: auto;
+}
+
+input[type="select"]:disabled {
+    background-color: var(--white);
+    /*    text-align: right;*/
+    border: none;
+    height: auto;
+}
+
+label {
+    display: inline-block;
+    height: calc(1.5em + 0.75rem + 2px);
+    padding: 0.375rem 0.75rem;
+}
+
+.information-headings {
+    padding-top: 50px;
+}
+
+.first-heading {
+    margin: 0 10px 20px 10px;
+}
