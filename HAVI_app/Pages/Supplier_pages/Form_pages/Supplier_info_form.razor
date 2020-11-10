@@ -1,4 +1,5 @@
 ﻿@layout HAVI_app.Shared.Supplier_layout.Form_layout
+@inject Microsoft.AspNetCore.Components.NavigationManager NavigationManager
 @page "/supplier_info_form"
 
 <HAVI_app.Shared.Supplier_layout.Form_header SupplierState="active" />
@@ -10,7 +11,7 @@
 </div>
 <div class="row justify-content-center ">
     <div class="col-9">
-        <form>
+        <form method="post">
             <table class="table">
                 <tr>
                     <td>
@@ -56,7 +57,7 @@
                         <label for="email" class="required">Email:</label>
                     </td>
                     <td>
-                        <input type="text" class="form-control" name="email" required  value="@Email">
+                        <input type="text" class="form-control" name="email" required value="@Email">
                     </td>
                     <td>
                         <div></div>
@@ -241,7 +242,7 @@
                     <NavLink class="nav-link" href="/overview_supplier"><button class="btn cancel-button button-size">Back</button></NavLink>
                 </div>
                 <div class="text-left col-6">
-                    <NavLink class="nav-link" href="/article_info_form"><button class="btn green-button button-size">Next</button></NavLink>
+                    <input type="submit" class="btn green-button button-size" value="Next" @onclick="OnPost" />
                 </div>
             </div>
 
@@ -285,18 +286,31 @@
     [Parameter]
     public int ClassificationCode { get; set; }
 
-    @*public int SupplierInformation
+    public class Test
     {
-        this.CompanyName = companyName,
-        this.CompanyLocation = companyLocation,
-        this.Email = email,
-        this.Palletexchange = palletExchange,
-        this.FreightResponsibility = FreightResponsibility, 
-        this.SpecialInformation = specialInformation,
-        this.BookingTransport = bookingTransport,
-        this.TransitTime = transitTime,
-        this.ADR = adr,
-        this.ClassInfo = classInfo,
-        this.ClassificationCode = classificationCode
-    };*@
+        public int kat = 3;
+        public int hund = 2;
+        public int and = 2;
+    }
+
+
+    public void OnPost()
+    {
+        Test test = new Test();
+        @*{
+            CompanyName,
+            CompanyLocation,
+            Email,
+            PalletExchange,
+            FreightResponsibility,
+            SpecialInformation,
+            BookingTransport,
+            TransitTime,
+            Adr,
+            ClassInfo,
+            ClassificationCode
+        };*@
+
+        NavigationManager.NavigateTo($"/confirm_details/{test}");
+    }
 }
