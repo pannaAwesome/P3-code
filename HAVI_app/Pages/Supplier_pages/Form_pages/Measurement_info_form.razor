@@ -21,7 +21,7 @@
                         <label for="length" class="required">Length pr. salesunit:</label>
                     </td>
                     <td>
-                        <input type="number" class="form-control" id="Length" required @lengthPrSalesunit>
+                        <input type="number" class="form-control" id="Length" required value="@LengthPrSalesunit">
                     </td>
                     <td>
                         <label class="center-for-units" for="length">cm</label>
@@ -120,6 +120,7 @@
 </div>
 
 @code {
+
     [Parameter]
     public double LengthPrSalesunit { get; set; }
 
