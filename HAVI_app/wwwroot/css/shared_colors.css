@@ -85,6 +85,17 @@
     background: var(--red);
     color: var(--background-white);
 }
+
+.red-button {
+    background-color: var(--red);
+    color: white;
+}
+
+.red-button:hover {
+    background-color: darkred;
+    color: white;
+}
+
 /*######################################################################################################################*/
 /* CSS dropdown button*/
 
