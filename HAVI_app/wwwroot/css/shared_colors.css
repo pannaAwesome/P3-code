@@ -41,7 +41,7 @@
 
 .blue-tabel-header {
     background: var(--blue);
-    color: var(--background-white);
+    color: white;
 }
 
 .purple-table-header {
@@ -49,7 +49,7 @@
     color: var(--background-white);
 }
 
-th, td, tr {
+.tabel-row {
     color: var(--dark-blue);
 }
 
