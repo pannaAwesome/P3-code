@@ -38,7 +38,7 @@
                             <label for="width" class="required">Width pr. salesunit:</label>
                         </td>
                         <td>
-                            <input type="number" class="form-control" id="width" required @widthPrSalesunit >
+                            <input type="number" class="form-control" id="width" required value="@WidthPrSalesunit" >
                         </td>
                         <td>
                             <label class="center-for-units" for="width">cm</label>
@@ -56,7 +56,7 @@
                             <label for="height" class="required">Height pr. salesunit:</label>
                         </td>
                         <td>
-                            <input type="number" class="form-control" id="height" required @heightPrSalesunit>
+                            <input type="number" class="form-control" id="height" required value="@HeightPrSalesunit">
                         </td>
                         <td>
                             <label class="center-for-units" for="height">cm</label>
@@ -74,7 +74,7 @@
                             <label for="net_weight" class="required">Net weight pr. salesunit:</label>
                         </td>
                         <td>
-                            <input type="number" class="form-control" id="net_weight" required @netWeightPrSalesunit>
+                            <input type="number" class="form-control" id="net_weight" required value="@NetWeightPrSalesunit">
                         </td>
                         <td>
                             <label class="center-for-units" for="net_weight">kg</label>
@@ -92,7 +92,7 @@
                             <label for="gross_weight" class="required">Gross weight pr. salesunit:</label>
                         </td>
                         <td>
-                            <input type="number" class="form-control" id="gross_weight" required @grossWeightPrSalesunit>
+                            <input type="number" class="form-control" id="gross_weight" required value="@GrossWeightPrSalesunit">
                         </td>
                         <td>
                             <label class="center-for-units" for="gross_weight">kg</label>
@@ -119,9 +119,18 @@
     </div>
 
 @code {
-    public double lengthPrSalesunit = 0.0;
-    public double widthPrSalesunit = 0.0;
-    public double heightPrSalesunit = 0.0;
-    public double netWeightPrSalesunit = 0.0;
-    public double grossWeightPrSalesunit = 0.0;
+    [Parameter]
+    public double LengthPrSalesunit { get; set; }
+
+    [Parameter]
+    public double WidthPrSalesunit { get; set; }
+
+    [Parameter]
+    public double HeightPrSalesunit { get; set; }
+
+    [Parameter]
+    public double NetWeightPrSalesunit { get; set; }
+
+    [Parameter]
+    public double GrossWeightPrSalesunit { get; set; }
 }
