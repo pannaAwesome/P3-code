@@ -186,12 +186,27 @@
     </div>
 
 @code{
-    public string articlName = "";
-    public string salesUnit = "";
-    public int articlePrSalesUnit = 0;
-    public string SupplierArticleNumber = "";
-    public int gtinNumber = "";
-    public int shelflife = 0;
-    public int shelflifeAtHavi = 0;
-    public string organicLife = "";
+    [Parameter]
+    public string ArticleName { get; set; }
+
+    [Parameter]
+    public string SalesUnit { get; set; }
+
+    [Parameter]
+    public int ArticlePrSalesUnit { get; set; }
+
+    [Parameter]
+    public string SupplierArticleNumber { get; set; }
+
+    [Parameter]
+    public int GtinNumber { get; set; }
+
+    [Parameter]
+    public int Shelflife { get; set; }
+
+    [Parameter]
+    public int ShelflifeAtHavi { get; set; }
+
+    [Parameter]
+    public string OrganicLife { get; set; }
 }
