@@ -128,6 +128,25 @@
 
 .country-buttons {
     position:relative;
-    left: 400px;
+    /*left: 400px;*/
     top: 50px;
+}
+
+
+/*#########################################Article_view##########################################################################*/
+
+.background-tabs{
+    background-color: lightgray;
+}
+
+.navtabs-background {
+    background-color: var(--gray);
+    padding: 18px 55px;
+}
+
+.nav-text {
+    color: var(--black);
+    font-size: large;
+    text-align: center;
+    
 }
