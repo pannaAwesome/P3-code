@@ -1,4 +1,5 @@
 ﻿@layout HAVI_app.Shared.Supplier_layout.Form_layout
+@inject Microsoft.AspNetCore.Components.NavigationManager NavigationManager
 @page "/price_info_form"
 
 <HAVI_app.Shared.Supplier_layout.Form_header SupplierState="filled" ArticleState="filled" MeasurementState="filled" ShipmentState="filled" PriceState="active" />
@@ -114,10 +115,10 @@
 
             <div class="row justify-content-center">
                 <div class="text-right col-6">
-                    <NavLink class="nav-link" href="/shipment_info_form"><button class="btn cancel-button button-size">Back</button></NavLink>
+                    <input type="submit" class="btn cancel-button button-size" value="Back" @onclick="OnPostBack" />
                 </div>
                 <div class="text-left col-6">
-                    <NavLink class="nav-link" href="/confirm_details"><button class="btn green-button button-size">Next</button></NavLink>
+                    <input type="submit" class="btn green-button button-size" value="Next" @onclick="OnPostForward" />
                 </div>
             </div>
         </form>
@@ -139,4 +140,16 @@
 
     [Parameter]
     public int TotalAmount { get; set; }
+}
+
+@code{
+    public void OnPostForward()
+    {
+        NavigationManager.NavigateTo($"/confirm_details", true);
+    }
+
+    public void OnPostBack()
+    {
+        NavigationManager.NavigateTo($"/shipment_info_form", true);
+    }
 }

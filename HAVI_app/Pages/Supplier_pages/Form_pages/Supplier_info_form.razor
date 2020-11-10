@@ -241,10 +241,10 @@
             </table>
             <div class="row justify-content-center">
                 <div class="text-right col-6">
-                    <NavLink class="nav-link" href="/overview_supplier"><button class="btn cancel-button button-size">Back</button></NavLink>
+                    <input type="submit" class="btn cancel-button button-size" value="Back" @onclick="OnPostBack" />
                 </div>
                 <div class="text-left col-6">
-                    <input type="submit" class="btn green-button button-size" value="Next" @onclick="OnPost"/>
+                    <input type="submit" class="btn green-button button-size" value="Next" @onclick="OnPostForward" />
                 </div>
             </div>
 
@@ -255,65 +255,70 @@
 
 
 @code {
-        [Parameter]
-        public string CompanyName { get; set; }
+    [Parameter]
+    public string CompanyName { get; set; }
 
-        [Parameter]
-        public string CompanyLocation { get; set; }
+    [Parameter]
+    public string CompanyLocation { get; set; }
 
-        [Parameter]
-        public string Email { get; set; }
+    [Parameter]
+    public string Email { get; set; }
 
-        [Parameter]
-        public string PalletExchange { get; set; }
+    [Parameter]
+    public string PalletExchange { get; set; }
 
-        [Parameter]
-        public string FreightResponsibility { get; set; }
+    [Parameter]
+    public string FreightResponsibility { get; set; }
 
-        [Parameter]
-        public string SpecialInformation { get; set; }
+    [Parameter]
+    public string SpecialInformation { get; set; }
 
-        [Parameter]
-        public string BookingTransport { get; set; }
+    [Parameter]
+    public string BookingTransport { get; set; }
 
-        [Parameter]
-        public string TransitTime { get; set; }
+    [Parameter]
+    public string TransitTime { get; set; }
 
-        [Parameter]
-        public string Adr { get; set; }
+    [Parameter]
+    public string Adr { get; set; }
 
-        [Parameter]
-        public int ClassInfo { get; set; }
+    [Parameter]
+    public int ClassInfo { get; set; }
 
-        [Parameter]
-        public int ClassificationCode { get; set; }
+    [Parameter]
+    public int ClassificationCode { get; set; }
 
-        @*public class Test
+    @*public class Test
         {
             public int kat = 3;
             public int hund = 2;
             public int and = 2;
         }*@
-    }
+}
 
 @code{
-    public void OnPost()
+    public void OnPostForward()
     {
-    @*Test test = new Test();
-        {
-            CompanyName,
-            CompanyLocation,
-            Email,
-            PalletExchange,
-            FreightResponsibility,
-            SpecialInformation,
-            BookingTransport,
-            TransitTime,
-            Adr,
-            ClassInfo,
-            ClassificationCode
-        };*@
+        @*Test test = new Test();
+            {
+                CompanyName,
+                CompanyLocation,
+                Email,
+                PalletExchange,
+                FreightResponsibility,
+                SpecialInformation,
+                BookingTransport,
+                TransitTime,
+                Adr,
+                ClassInfo,
+                ClassificationCode
+            };*@
 
-    NavigationManager.NavigateTo($"/confirm_details", true);
-}
+        NavigationManager.NavigateTo($"/article_info_form", true);
+    }
+
+    public void OnPostBack()
+    {
+        NavigationManager.NavigateTo($"/overview_supplier", true);
+    }
 }
