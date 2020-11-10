@@ -11,7 +11,7 @@
 </div>
 <div class="row justify-content-center ">
     <div class="col-9">
-        <form method="post">
+        <form>
             <table class="table">
                 <tr>
                     <td>
@@ -242,7 +242,7 @@
                     <NavLink class="nav-link" href="/overview_supplier"><button class="btn cancel-button button-size">Back</button></NavLink>
                 </div>
                 <div class="text-left col-6">
-                    <input type="submit" class="btn green-button button-size" value="Next" @onclick="OnPost" />
+                    <input type="submit" class="btn green-button button-size" value="Next" @onclick="OnPost"/>
                 </div>
             </div>
 
@@ -253,51 +253,52 @@
 
 
 @code {
-    [Parameter]
-    public string CompanyName { get; set; }
+        [Parameter]
+        public string CompanyName { get; set; }
 
-    [Parameter]
-    public string CompanyLocation { get; set; }
+        [Parameter]
+        public string CompanyLocation { get; set; }
 
-    [Parameter]
-    public string Email { get; set; }
+        [Parameter]
+        public string Email { get; set; }
 
-    [Parameter]
-    public string PalletExchange { get; set; }
+        [Parameter]
+        public string PalletExchange { get; set; }
 
-    [Parameter]
-    public string FreightResponsibility { get; set; }
+        [Parameter]
+        public string FreightResponsibility { get; set; }
 
-    [Parameter]
-    public string SpecialInformation { get; set; }
+        [Parameter]
+        public string SpecialInformation { get; set; }
 
-    [Parameter]
-    public string BookingTransport { get; set; }
+        [Parameter]
+        public string BookingTransport { get; set; }
 
-    [Parameter]
-    public string TransitTime { get; set; }
+        [Parameter]
+        public string TransitTime { get; set; }
 
-    [Parameter]
-    public string Adr { get; set; }
+        [Parameter]
+        public string Adr { get; set; }
 
-    [Parameter]
-    public int ClassInfo { get; set; }
+        [Parameter]
+        public int ClassInfo { get; set; }
 
-    [Parameter]
-    public int ClassificationCode { get; set; }
+        [Parameter]
+        public int ClassificationCode { get; set; }
 
-    public class Test
-    {
-        public int kat = 3;
-        public int hund = 2;
-        public int and = 2;
+        @*public class Test
+        {
+            public int kat = 3;
+            public int hund = 2;
+            public int and = 2;
+        }*@
     }
 
-
+@code{
     public void OnPost()
     {
-        Test test = new Test();
-        @*{
+    @*Test test = new Test();
+        {
             CompanyName,
             CompanyLocation,
             Email,
@@ -311,6 +312,6 @@
             ClassificationCode
         };*@
 
-        NavigationManager.NavigateTo($"/confirm_details/{test}");
-    }
+    NavigationManager.NavigateTo($"/confirm_details", true);
+}
 }

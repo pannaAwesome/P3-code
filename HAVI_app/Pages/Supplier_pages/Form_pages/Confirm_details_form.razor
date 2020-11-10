@@ -1,5 +1,5 @@
 ﻿@layout HAVI_app.Shared.Supplier_layout.Form_layout
-@page "/confirm_details/{values}"
+@page "/confirm_details"
 
 <HAVI_app.Shared.Supplier_layout.Form_header SupplierState="filled" ArticleState="filled" MeasurementState="filled" ShipmentState="filled" PriceState="filled" ConfirmState="active" />
 
@@ -20,7 +20,7 @@
                             <label for="company_name" class="required">Company name:</label>
                         </td>
                         <td>
-                            <input type="text" value="@test.hund" />
+                            <input type="text" value="" />
                         </td>
                     </tr>
 
@@ -254,12 +254,12 @@
     </div>
 </div>
 
-@code
-{
+@*@code
+{*@
     @*[Parameter]
     public string values { get; set; }*@
 
-[Parameter]
+@*[Parameter]
 public Test values { get; set; }
 
 public class Test
@@ -276,4 +276,4 @@ protected override void OnParametersSet()
     //the param will be set now
     test = values; 
 }
-    }
+ }*@
