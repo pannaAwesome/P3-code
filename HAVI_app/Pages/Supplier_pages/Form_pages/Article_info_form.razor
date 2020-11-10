@@ -21,7 +21,7 @@
                             <label for="article_name" class="required">Article name:</label>
                         </td>
                         <td>
-                            <input type="text" class="form-control" id="a_name" required>
+                            <input type="text" class="form-control" id="a_name" required @articleName>
                         </td>
                         <td>
                             <div></div>
@@ -36,7 +36,7 @@
 
                     <tr>
                         <td>
-                            <label for="sales_unit" class="required">Salesunit:</label>
+                            <label for="sales_unit" class="required">Salesunit @salesUnit:</label>
                         </td>
                         <td>
                             <select class="form-control" name="salesunit">
@@ -62,14 +62,14 @@
                             <label for="article_pr_salesunit" class="required">Article pr. salesunit:</label>
                         </td>
                         <td>
-                            <input type="number" class="form-control" id="salesunit_quantity" required>
+                            <input type="number" class="form-control" id="salesunit_quantity" @articlePrSalesUnit required>
                         </td>
                         <td>
                             <div></div>
                         </td>
                         <td>
                             <HAVI_app.Shared.Shared_layout.Questionmark_top>
-                                Enter how many articles are delivered pr. unit.
+                                Enter how many articles are delivered pr. unit. Must be a whole number.
                             </HAVI_app.Shared.Shared_layout.Questionmark_top>
                         </td>
                     </tr>
@@ -79,7 +79,7 @@
                             <label for="supplier_article_nn" class="required">Supplier article number/name:</label>
                         </td>
                         <td>
-                            <input type="number" class="form-control" id="article_number_name" required>
+                            <input type="number" class="form-control" id="article_number_name" required @supplierArticleNumber>
                         </td>
                         <td>
                             <div></div>
@@ -97,7 +97,7 @@
                             <label for="GTIN" class="required">GTIN number:</label>
                         </td>
                         <td>
-                            <input type="number" class="form-control" id="GTIN" required>
+                            <input type="number" class="form-control" id="GTIN" required @gtinNumber>
                         </td>
                         <td>
                             <div></div>
@@ -112,10 +112,10 @@
 
                     <tr>
                         <td>
-                            <label for="Shelflife" class="required">Shelife:</label>
+                            <label for="Shelflife" class="required">Shellife:</label>
                         </td>
                         <td>
-                            <input type="number" class="form-control" id="Shelflife" required>
+                            <input type="number" class="form-control" id="Shelflife" required @shelflife>
                         </td>
                         <td>
                             <label class="center-for-units" for="Shelflife">days</label>
@@ -133,7 +133,7 @@
                             <label for="Min_shelflife" class="required">Min. Shelflife at HAVI:</label>
                         </td>
                         <td>
-                            <input type="number" class="form-control" id="Min_shelflife" required>
+                            <input type="number" class="form-control" id="Min_shelflife" required @shelflifeAtHavi>
                         </td>
                         <td>
                             <label class="center-for-units" for="Min_shelflife">days</label>
@@ -148,7 +148,7 @@
 
                     <tr>
                         <td>
-                            <label for="Organic_article" class="required">Organic article?</label>
+                            <label for="Organic_article" class="required @organicLife">Organic article?</label>
                         </td>
 
                         <td>
@@ -184,3 +184,17 @@
             </form>
         </div>
     </div>
+
+@code{
+    public string articlName = "";
+    public string salesUnit = "";
+    public int articlePrSalesUnit = 0;
+    public string SupplierArticleNumber = "";
+    public int gtinNumber = "";
+    public int shelflife = 0;
+    public int shelflifeAtHavi = 0;
+    public string organicLife = "";
+    
+
+
+}
