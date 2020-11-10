@@ -150,3 +150,10 @@
     text-align: center;
     
 }
+
+.error-table {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    top: 50px;
+}
