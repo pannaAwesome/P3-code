@@ -17,7 +17,7 @@
                         <label for="company_name" class="required">Company name:</label>
                     </td>
                     <td>
-                        <input type="text" class="form-control" name="company_name" required value="@companyName">
+                        <input type="text" class="form-control" name="company_name" required value="@CompanyName">
                     </td>
                     <td>
                         <div></div>
@@ -34,7 +34,7 @@
                         <label for="company_location" class="required">Company location:</label>
                     </td>
                     <td>
-                        <select class="form-control" name="company_location" required value="@companyLocation">
+                        <select class="form-control" name="company_location" required value="@CompanyLocation">
                             <option disabled selected>-- select an option --</option>
                             <option>Denmark</option>
                             <option>Sweden</option>
@@ -56,7 +56,7 @@
                         <label for="email" class="required">Email:</label>
                     </td>
                     <td>
-                        <input type="text" class="form-control" name="email" required  value="@email">
+                        <input type="text" class="form-control" name="email" required  value="@Email">
                     </td>
                     <td>
                         <div></div>
@@ -71,7 +71,7 @@
 
                 <tr>
                     <td>
-                        <label for="pallet_exchange" class="required" value="@palletExchange">Pallet exchange</label>
+                        <label for="pallet_exchange" class="required" value="@PalletExchange">Pallet exchange</label>
                     </td>
                     <td>
                         <div class="text-center">
@@ -95,7 +95,7 @@
 
                 <tr>
                     <td>
-                        <label for="freight_responsibility" class="required" value="freightResponseibility">Freight responsibility</label>
+                        <label for="freight_responsibility" class="required" value="@FreightResponsibility">Freight responsibility</label>
                     </td>
                     <td>
                         <div class="text-center">
@@ -121,7 +121,7 @@
                 <tr>
                     <td colspan="2">
                         <label for="special_info" class="required">Special information regarding the article or cooperation?</label>
-                        <textarea class="form-control" name="special_info" required value="@specialInformation"></textarea>
+                        <textarea class="form-control" name="special_info" required value="@SpecialInformation"></textarea>
                     </td>
                     <td>
                         <div></div>
@@ -136,7 +136,7 @@
 
                 <tr>
                     <td>
-                        <label for="transport" class="required" value="@bookingTransport">Are you in charge of booking transport?</label>
+                        <label for="transport" class="required" value="@BookingTransport">Are you in charge of booking transport?</label>
                     </td>
 
                     <td>
@@ -164,7 +164,7 @@
                     </td>
                     <td>
                         <p>
-                            <input type="text" class="form-control" id="class" value="@transitTime" required>
+                            <input type="text" class="form-control" id="class" value="@TransitTime" required>
                         </p>
                     </td>
                     <td>
@@ -179,7 +179,7 @@
 
                 <tr>
                     <td>
-                        <label for="dangerous" class="required" value="@ADR">Is the article classified as dangerous good (ADR)?</label>
+                        <label for="dangerous" class="required" value="@Adr">Is the article classified as dangerous good (ADR)?</label>
                     </td>
                     <td>
                         <div class="text-center">
@@ -206,7 +206,7 @@
                         <label for="class"> Class </label>
                     </td>
                     <td>
-                        <input type="text" class="form-control" id="class" value="@classInfo" required>
+                        <input type="text" class="form-control" id="class" value="@ClassInfo" required>
                     </td>
                     <td>
                         <div></div>
@@ -223,7 +223,7 @@
                         <label for="classificationCode">Classification code</label>
                     </td>
                     <td>
-                        <input type="text" class="form-control" id="classificationCode" value="@classificationCode" required>
+                        <input type="text" class="form-control" id="classificationCode" value="@ClassificationCode" required>
                     </td>
                     <td>
                         <div></div>
@@ -252,23 +252,51 @@
 
 
 @code {
-    public string companyName = "";
+    [Parameter]
+    public string CompanyName { get; set; }
 
-    public string companyLocation = "";
+    [Parameter]
+    public string CompanyLocation { get; set; }
 
-    public string email = "";
+    [Parameter]
+    public string Email { get; set; }
 
-    public string palletExchange = "";
+    [Parameter]
+    public string PalletExchange { get; set; }
 
-    public string specialInformation = "";
+    [Parameter]
+    public string FreightResponsibility { get; set; }
 
-    public string bookingTransport = "";
+    [Parameter]
+    public string SpecialInformation { get; set; }
 
-    public string transitTime = "";
+    [Parameter]
+    public string BookingTransport { get; set; }
 
-    public string ADR = "";
+    [Parameter]
+    public string TransitTime { get; set; }
 
-    public int classInfo = 0;
+    [Parameter]
+    public string Adr { get; set; }
 
-    public int classificationCode = 0;
+    [Parameter]
+    public int ClassInfo { get; set; }
+
+    [Parameter]
+    public int ClassificationCode { get; set; }
+
+    @*public int SupplierInformation
+    {
+        this.CompanyName = companyName,
+        this.CompanyLocation = companyLocation,
+        this.Email = email,
+        this.Palletexchange = palletExchange,
+        this.FreightResponsibility = FreightResponsibility, 
+        this.SpecialInformation = specialInformation,
+        this.BookingTransport = bookingTransport,
+        this.TransitTime = transitTime,
+        this.ADR = adr,
+        this.ClassInfo = classInfo,
+        this.ClassificationCode = classificationCode
+    };*@
 }
