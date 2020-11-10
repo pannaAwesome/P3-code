@@ -143,7 +143,7 @@
 
 .country-buttons {
     position:relative;
-    /*left: 400px;*/
+    left: 400px;
     top: 50px;
 }
 
@@ -171,4 +171,8 @@
     margin-left: auto;
     margin-right: auto;
     top: 50px;
+}
+
+.description {
+    resize: none;
 }

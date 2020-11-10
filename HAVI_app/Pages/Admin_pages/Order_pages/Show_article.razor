@@ -740,22 +740,36 @@
         </div>
     </div>
     <div class="tab-pane fade" id="Error-just" role="tabpanel" aria-labelledby="Error-tab-just">
-        <p>
-            <h2>Describe the error:</h2>
+        <h2>Describe the error:</h2>
 
             <table class="error-table">
                 <thead></thead>
                 <thead></thead>
                 <tr>
-                    <td>Found in field: </td>
+                    <td><b>Found in field: </b></td>
                     <td><input type="text" /></td>
                 </tr>
-                <tr><td></td></tr>
                 <tr>
-                    <td>Description: </td>
-                    <td><textarea name="description" cols="20" rows="4">Describe the error...</textarea></td>
+                    <td><b>Description: </b></td>
+                    <td><textarea class="description" name="description" cols="25" rows="4" placeholder="Describe the error..."></textarea></td>
+                </tr>
+                <tr>
+                    <td><b>Found by: </b></td>
+                    <td><input type="text" /></td>
+                </tr>
+                <tr>
+                    <td>
+                        <NavLink class="nav-link button-save" href="overview_admin">
+                            <button class="btn green-button" aria-hidden="true">Return to overview</button>
+                        </NavLink>
+                    </td>
+                    <td>
+                        <NavLink class="nav-link button-save" href="overview_admin">
+                            <button class="btn green-button" aria-hidden="true">Report error</button>
+                        </NavLink>
+                    </td>
                 </tr>
             </table>
-        </p>
+           <br /><br /><br />
     </div>
 </div>
