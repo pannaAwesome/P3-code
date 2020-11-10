@@ -1,1 +1,49 @@
 ﻿@page "/overview_admin"
+@using BlazorTable
+
+
+<Table TableItem="SupplierInfo" Items="supplierdata" ColumnReorder="true">
+    <Column TableItem="SupplierInfo" Title="Article no." Field="@(x => x.ArticleNumber)" Sortable="true" />
+    <Column TableItem="SupplierInfo" Title="Article name" Field="@(x => x.ArticleName)" Sortable="true" />
+    <Column TableItem="SupplierInfo" Title="Vailed for customer" Field="@(x => x.VailedForCustomer)" Sortable="true" />
+    <Column TableItem="SupplierInfo" Title="HAVI employee" Field="@(x => x.HAVIEmployee)" Sortable="true" />
+    <Column TableItem="SupplierInfo" Title="Date created" Field="@(x => x.DateCreated)" Sortable="true" />
+    <Column TableItem="SupplierInfo" Title="State" Field="@(x => x.State)" Sortable="true">
+        <Template>
+            <div class="@context.State-state state">Created</div>
+        </Template>
+    </Column>
+</Table>
+
+@code{
+
+    private SupplierInfo[] supplierdata;
+
+    protected override void OnInitialized()
+    {
+        supplierdata = new SupplierInfo[]{
+            new SupplierInfo(37483, "French fries", "McDonalds", "winnie@havi.com", new DateTime(2020, 11, 10), "Created"),
+            new SupplierInfo(64563, "Strawberry", "Sticks N Sushi", "anders@havi.com", new DateTime(2020, 11, 10), "Submitted")
+            };
+    }
+
+    public class SupplierInfo
+    {
+        public SupplierInfo(int articlenumber, string articlename, string vailedforcustomer, string haviemployee, DateTime datecreated, string state)
+        {
+            ArticleNumber = articlenumber;
+            ArticleName = articlename;
+            VailedForCustomer = vailedforcustomer;
+            HAVIEmployee = haviemployee;
+            DateCreated = datecreated;
+            State = state;
+        }
+
+        public int ArticleNumber { get; set; }
+        public string ArticleName { get; set; }
+        public string VailedForCustomer { get; set; }
+        public string HAVIEmployee { get; set; }
+        public DateTime DateCreated { get; set; }
+        public string State { get; set; }
+    }
+}
