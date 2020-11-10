@@ -1,0 +1,80 @@
+﻿@page "/Havi_pick_storage"
+
+<div class="row form-content">
+    <div class="col-12">
+        <HAVI_app.Shared.Shared_layout.Logo_image />
+        <h1>Pick storage:</h1>
+    </div>
+</div>
+<div class="justify-content-center row">
+    <div class="col-12">
+        <form>
+            <table class="table">
+                <tr>
+                    <td>
+                        <label for="primary_dc" class="required">Primary DC ILOS Code:</label>
+                    </td>
+                    <td>
+                        <select class="form-control" name="primary_dc">
+                            <option disabled selected>-- select an option --</option>
+                            <option>400</option>
+                            <option>500</option>
+                            <option>600</option>
+                        </select>
+                        <!--<div class="dropdown">
+                <button type="button" class="btn btn-primary dropdown-toggle">
+                    Pick something
+                </button>
+                <div class="dropdown-content dropdown-menu-lg-right">
+                    <button class="dropdown-item" type="button">400</button>
+                    <button class="dropdown-item" type="button">500</button>
+                    <button class="dropdown-item" type="button">600</button>
+                </div>
+            </div>-->
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="sap_plant1" class="required">SAP Plant: 0640 // 400 </label>
+                    </td>
+                    <td>
+                        <input type="radio" name="sap_plant1" id="yes" value="yes">
+                        <label for="yes">Yes</label>
+                        &nbsp;
+                        <input type="radio" id="no" name="sap_plant1">
+                        <label for="no">No</label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="sap_plant2" class="required">SAP Plant: 0650 // 500 </label>
+                    </td>
+                    <td>
+                        <input type="radio" name="sap_plant2" id="yes" value="yes">
+                        <label for="yes">Yes</label>
+                        &nbsp;
+                        <input type="radio" id="no" name="sap_plant2">
+                        <label for="no">No</label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="sap_plant3" class="required">SAP Plant: 0660 // 600 </label>
+                    </td>
+                    <td>
+                        <input type="radio" name="sap_plant3" id="yes" value="yes">
+                        <label for="yes">Yes</label>
+                        &nbsp;
+                        <input type="radio" id="no" name="sap_plant3">
+                        <label for="no">No</label>
+                    </td>
+                </tr>
+
+            </table>
+        </form>
+    </div>
+</div>
+
