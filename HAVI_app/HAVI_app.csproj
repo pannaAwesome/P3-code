@@ -1,8 +1,15 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Shared\Shared_layout\LayoutTables\**" />
+    <Content Remove="Shared\Shared_layout\LayoutTables\**" />
+    <EmbeddedResource Remove="Shared\Shared_layout\LayoutTables\**" />
+    <None Remove="Shared\Shared_layout\LayoutTables\**" />
+  </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Data\" />
