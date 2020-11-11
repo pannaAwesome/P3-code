@@ -24,3 +24,15 @@
     --tab-white: #f2f2f2;
 }
 /*###################################################################################################################*/
+
+.buyer-type {
+    background-color: var(--purple);
+}
+
+.admin-type {
+    background-color: var(--cyan);
+}
+
+.supplier-type {
+    background-color: var(--green);
+}
