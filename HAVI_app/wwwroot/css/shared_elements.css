@@ -198,20 +198,33 @@
 
 
 /*#########################################################################################################################################*/
-/* Trashcan button */
+/* Trashcan button and select field */
 
 .trash-button {
     background-color: #de577b;
     background-image: url("../images/trash-can-closed.svg");
     width: inherit;
-    height: 40px;
+    height: 30px;
     background-position: center;
     background-repeat: no-repeat;
-    background-size: 25px;
+    background-size: 15px;
 }
 
     .trash-button:hover {
         background-color: #b14562;
         background-image: url("../images/trash-can-open.svg");
-        background-size: 30px;
+        background-size: 20px;
     }
+
+.row-selection {
+    font-size: small;
+    color: #a5a5a7;
+}
+
+.hide-trash {
+    display: none;
+}
+
+.show-trash {
+    display: block;
+}
