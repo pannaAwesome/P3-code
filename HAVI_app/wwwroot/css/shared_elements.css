@@ -184,7 +184,7 @@
     background: #00b2be;
 }
 
-.robot-state {
+.ready-state {
     background: #ff883c;
 }
 
@@ -195,3 +195,23 @@
 .created-state {
     background: #a54e8b;
 }
+
+
+/*#########################################################################################################################################*/
+/* Trashcan button */
+
+.trash-button {
+    background-color: #de577b;
+    background-image: url("../images/trash-can-closed.svg");
+    width: inherit;
+    height: 40px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 25px;
+}
+
+    .trash-button:hover {
+        background-color: #b14562;
+        background-image: url("../images/trash-can-open.svg");
+        background-size: 30px;
+    }

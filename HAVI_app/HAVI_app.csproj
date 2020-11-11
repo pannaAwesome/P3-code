@@ -1,14 +1,25 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Shared\Shared_layout\LayoutTables\**" />
+    <Content Remove="Shared\Shared_layout\LayoutTables\**" />
+    <EmbeddedResource Remove="Shared\Shared_layout\LayoutTables\**" />
+    <None Remove="Shared\Shared_layout\LayoutTables\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Data\" />
     <Folder Include="Shared\Admin_layout\" />
     <Folder Include="Shared\Purchaser_layout\" />
     <Folder Include="wwwroot\images\Form_header_arrows\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BlazorTable" Version="1.13.1" />
   </ItemGroup>
 
 </Project>

@@ -1937,7 +1937,7 @@ pre {
 }
 
 .table-hover tbody tr:hover {
-    color: var(--dark-blue);
+    color: white;
     background-color: var(--gray);
 }
 
