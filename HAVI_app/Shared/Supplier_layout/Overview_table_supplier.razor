@@ -1,0 +1,118 @@
+﻿@using BlazorTable 
+@inject NavigationManager NavigationManager
+
+
+<div class="row">
+    <div class="col-6">
+        Options:
+    </div>
+</div>
+<div class="row">
+    <div class="col-2">
+        <select class="form-control" @onchange="@((x) => selectionType = (SelectionType)Enum.Parse(typeof(SelectionType), x.Value.ToString()))">
+            <option value="@SelectionType.None">@SelectionType.None</option>
+            <option value="@SelectionType.Multiple">@SelectionType.Multiple</option>
+        </select>
+    </div>
+    <div class="col-1">
+        <button class="btn trash-button" data-target="deleting-rows"></button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <Table TableItem="SupplierInfo" Items="supplierdata" ColumnReorder="true" TableHeadClass="blue-tabel-header" TableRowClass="@(x => x.RowClass)" RowClickAction="RowClicked" SelectionType="selectionType" SelectedItems="selectedItems" ShowSearchBar="true">
+            <Column TableItem="SupplierInfo" Title="Article no." Field="@(x => x.ArticleNumber)" Sortable="true" />
+            <Column TableItem="SupplierInfo" Title="Article name" Field="@(x => x.ArticleName)" Sortable="true" />
+            <Column TableItem="SupplierInfo" Title="Vailed for customer" Field="@(x => x.VailedForCustomer)" Sortable="true" Filterable="true" />
+            <Column TableItem="SupplierInfo" Title="HAVI employee" Field="@(x => x.HAVIEmployee)" Sortable="true" />
+            <Column TableItem="SupplierInfo" Title="Date created" Field="@(x => x.DateCreated)" Sortable="true">
+                <Template>
+                    @context.DateCreated.ToShortDateString()
+                </Template>
+            </Column>
+            <Column TableItem="SupplierInfo" Title="State" Field="@(x => x.State)" Sortable="true" Class="text-center" DefaultSortColumn="true" Width="100px" Filterable="true">
+                <Template>
+                    <div class="@context.State.ToLower()-state state">@context.State</div>
+                </Template>
+            </Column>
+            <EmptyDataTemplate>
+                <div class="text-center">
+                    You have not created any article informations yet!
+                </div>
+            </EmptyDataTemplate>
+        </Table>
+    </div>
+</div>
+
+<div class="modal fade" id="deleting-rows" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Deleting rows</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete the selected rows?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn cancel-button" data-dismiss="modal">Close</button>
+                <button type="button" class="btn discard-button">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code{
+    private SupplierInfo[] supplierdata;
+
+    private SelectionType selectionType;
+
+    private List<SupplierInfo> selectedItems = new List<SupplierInfo>();
+
+    private SupplierInfo selected;
+
+    protected override void OnInitialized()
+    {
+        supplierdata = new SupplierInfo[]{
+            new SupplierInfo(37483, "French fries", "McDonalds", "winnie@havi.com", new DateTime(2020, 11, 10), "Created"),
+            new SupplierInfo(64563, "Strawberry", "Sticks N Sushi", "anders@havi.com", new DateTime(2020, 11, 10), "Submitted")
+            };
+    }
+
+    private void RowClicked(SupplierInfo data)
+    {
+        if (selectionType == SelectionType.None)
+        {
+            NavigationManager.NavigateTo("/supplier_info_form");
+        }
+        else
+        {
+            selected = data;
+            StateHasChanged();
+        }
+    }
+
+    public class SupplierInfo
+    {
+        public SupplierInfo(int articlenumber, string articlename, string vailedforcustomer, string haviemployee, DateTime datecreated, string state)
+        {
+            ArticleNumber = articlenumber;
+            ArticleName = articlename;
+            VailedForCustomer = vailedforcustomer;
+            HAVIEmployee = haviemployee;
+            DateCreated = datecreated;
+            State = state;
+        }
+
+        public int ArticleNumber { get; set; }
+        public string ArticleName { get; set; }
+        public string VailedForCustomer { get; set; }
+        public string HAVIEmployee { get; set; }
+        public DateTime DateCreated { get; set; }
+        public string State { get; set; }
+
+        public string RowClass => "table tabel-row";
+    }
+}
