@@ -1,38 +1,45 @@
 ﻿@page "/create_purchaser1"
 @layout HAVI_app.Shared.Admin_layout.Profile_admin
 
+<HAVI_app.Shared.Shared_layout.Backgrounds.Green_background />
+
 <div class="card" style="width: 1100px; height: 500px; ">
     <div class="card-body">
         <HAVI_app.Shared.Shared_layout.Logo_image/>
-        <br><br><br>
-        <h3 class="card-title">Create buyer:</h3>
+        <br><br>
+        <h3 class="card-title">Create purchaser:</h3>
+        <br />
 
-        <div class="drop-down">
-            <label for="cars">Select country administrator: </label>
-            <select name="cars" id="cars">
-                <option value="volvo">DK</option>
-                <option value="saab">SE</option>
-                <option value="mercedes">NO</option>
-            </select>
-        </div>
-        <p class="card-text1">User type:<input type="text" class="username-text" id="username" name="username" value="Buyer" readonly="readonly"><br></p>
-        <p class="card-text2">Enter username:<input type="text" class="username-text1" id="username" name="username"><br></p>
-
-        <div class="generate-pass">
-            <button type="button">Generate password</button>
-            <input type="text" class="text" id="username-text1" name="username" readonly="readonly"><br>
-        </div>
-
-
-        <br>
-
-        <div class="buttons">
-            <div>
-                <a class="button-cancel" href="/user_view">Cancel</a>
-                <a class="button-save" href="#">Save</a>
+        <div class="row justify-content-center">
+            <div class="text-right col-4">
+                <p style="font-weight: bolder">Enter username:</p>
+            </div>
+            <div class="text-left col-5">
+                <input type="text" style="font-weight: bolder" id="username" name="username">
             </div>
         </div>
-
+        <br />
+        <div class="row justify-content-center">
+            <div class="text-right col-4">
+                <button class="btn discard-button">Generate password</button>
+            </div>
+            <div class="text-left col-5">
+                <input type="text" id="username-text1" name="username" readonly="readonly"><br>
+            </div>
+        </div>
+        <br /> <br />
+        <div class="row justify-content-center">
+            <div class="text-right col-6">
+                <NavLink class="nav-link" href="overview_admin">
+                    <button class="btn cancel-button">Cancel</button>
+                </NavLink>
+            </div>
+            <div class="text-left col-6">
+                <NavLink class="nav-link" href="#">
+                    <button class="btn green-button">Save</button>
+                </NavLink>
+            </div>
+        </div>
     </div>
 </div>
 

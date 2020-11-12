@@ -38,13 +38,24 @@
         color: white;
     }
 
+.button-overview-logout {
+    background-color: var(--yellow);
+    border: 1px var(--dark-blue);
+    color: white;
+    padding: 20px 30px;
+    text-align: center;
+    font-size: 14px;
+    float: left;
+}
+
+    .button-overview-logout:hover {
+        background-color: var(--red);
+        color: white;
+    }
+
 .button-options-overview {
     background-color: var(--orange);
     border: 1px var(--dark-orange);
-    border-radius: 5px;
-    padding: 6px 12px;
-    text-align: center;
-    font-size: 14px;
     color: white;
     float: right;
 }
@@ -53,26 +64,16 @@
         color: white;
     }
 
-.buttons {
-    height: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.delete-button {
+    background-color: var(--red);
+    border: 1px var(--black);
+    color: white;
 }
+    .delete-button:hover {
+        background-color: var(--dark-purple);
+        color: white;
+    }
 
-.button-save {
-    background-color: #5ECE57;
-    border: none;
-    color: #FFFFFF;
-    padding: 10px 40px;
-}
-
-.button-cancel {
-    background-color: lightgray;
-    border: none;
-    color: gray;
-    padding: 10px 35px;
-}
 
 .card {
     margin: 0 auto;
@@ -98,7 +99,7 @@
     position: relative;
     text-align: center;
     font-weight: bolder;
-    left: -70px;
+    left: -87px;
 }
 
 .username-text {
@@ -117,15 +118,63 @@
     left: -50px;
 }
 
-.generate-pass {
-    position: relative;
-    text-align: center;
-    font-weight: bolder;
-    left: -70px;
-}
-
 .gap-overview {
     margin-top: 100px;
+}
+
+/*#########################################Country stuff##########################################################################*/
+
+
+#create-country {
+    position:relative;
+    float: left;
+    margin-left: 150px;
+    top: 50px;
+    font-weight: bold;
+}
+
+.info-country {
+    position: relative;
+    top: 125px;
+    width: 100%;
+    font-size: 18px;
+    right: 50px
+}
+
+.country-buttons {
+    position:relative;
+    left: 400px;
+    top: 50px;
+}
+
+
+/*#########################################Article_view##########################################################################*/
+
+.background-tabs{
+    background-color: lightgray;
+}
+
+.navtabs-background {
+    background-color: var(--gray);
+    padding: 18px 55px;
+}
+
+.nav-text {
+    color: var(--black);
+    font-size: large;
+    text-align: center;
+    
+}
+
+.error-table {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    top: 50px;
+}
+
+.description {
+    resize: none;
 }
 
 .buyer-type {

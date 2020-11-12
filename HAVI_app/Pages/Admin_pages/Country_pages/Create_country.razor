@@ -1,2 +1,119 @@
 ﻿@page "/create_country"
+@inject NavigationManager NavigationManager
 
+<HAVI_app.Shared.Shared_layout.Backgrounds.Green_background />
+
+<div class="card" style="width: 1100px; height: 900px">
+    <div class="card-body">
+        <div>
+            <HAVI_app.Shared.Shared_layout.Logo_image />
+            <h3 id="create-country">Create country:</h3>
+        </div>
+
+        <div class="info-country">
+            <table>
+                <tr>
+                    <td>Choose country: </td>
+                    <td> <form><input type="text" name="country" /></form> </td>
+                </tr>
+                <tr>
+                    <td>Choose country-code: </td>
+                    <td> <form><input type="text" name="country-code" /></form> </td>
+                </tr>
+                <tr>
+                    <td>Choose customers: </td>
+                    <td> <form><input type="text" name="customers" /></form> </td>
+                </tr>
+                <tr>
+                    <td>Vailed for customer: </td>
+                    <td> <form><input type="text" name="vailed-for" /></form> </td>
+                </tr>
+                <tr>
+                    <td>Company code: </td>
+                    <td> <form><input type="text" name="company-code" /></form> </td>
+                </tr>
+                <tr>
+                    <td>Supplier delivery unit: </td>
+                    <td> <form><input type="text" name="supp-deliv-unit" /></form> </td>
+                </tr>
+                <tr>
+                    <td>ILOS orderpickgroup: </td>
+                    <td> <form><input type="text" name="ilos-opg" /></form> </td>
+                </tr>
+                <tr>
+                    <td>ILOS category/account: </td>
+                    <td> <form><input type="text" name="ilos-ca" /></form> </td>
+                </tr>
+                <tr>
+                    <td>VAT/TAX code: </td>
+                    <td> <form><input type="text" name="vattax" /></form> </td>
+                </tr>
+                <tr>
+                    <td>Primary DC ILOS code: </td>
+                    <td> <form><input type="text" name="dcilos" /></form> </td>
+                </tr>
+                <tr>
+                    <td>GRIN: </td>
+                    <td> <form><input type="text" name="grin" /></form> </td>
+                </tr>
+                <tr>
+                    <td>BOS: </td>
+                    <td> <form><input type="text" name="bos" /></form> </td>
+                </tr>
+                <tr>
+                    <td>Register shelflife: </td>
+                    <td> <form><input type="text" name="shelflife" /></form> </td>
+                </tr>
+
+            </table>
+
+            <table class="country-buttons">
+                <tr>
+                    <td>
+                        <NavLink class="nav-link button-save" href="country_view">
+                            <button class="btn green-button" aria-hidden="true">Return to overview</button>
+                        </NavLink>
+                    </td>
+                    <td> <button type="button" class="btn green-button" data-toggle="modal" data-target="#myModal">Create</button></td>
+                </tr>
+            </table>
+
+            <div>
+                <div class="modal" id="myModal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+
+
+                            <div class="modal-header">
+                                <h4 class="modal-title">New country created!</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+
+
+                            <div class="modal-body">
+                                Country: "country" <br />
+                                Country-code: 056 <br />
+                                Customer: "McDonalds" <br />
+                            </div>
+
+
+                            <div class="modal-footer">
+                                <button class="btn green-button" data-dismiss="modal" @onclick="ReturnToOverview">Return to overview</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+@code{
+    private void ReturnToOverview()
+    {
+        NavigationManager.NavigateTo("/country_view", true);
+    }
+}

@@ -2,22 +2,18 @@
 
 @page "/profile_admin"
 
-<style>
-    body {
-        background-color: #a54e8b;
-    }
-</style>
+<HAVI_app.Shared.Shared_layout.Backgrounds.Purple_background />
 
 <div class="card" style="width: 1100px; height: 500px; ">
     <div class="card-body">
         <HAVI_app.Shared.Shared_layout.Logo_image />
         <br><br><br><br>
         <h3 class="card-title">Profile:</h3>
-        <p class="card-text1">Username:<input type="text" class="username-text" id="username" name="username" value="admin@havi.com" readonly="readonly"><br></p>
-        <p class="card-text2"> Password:
-            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">
-                Change password
-            </button>
+        <p class="card-text1">Username:
+            <input type="text" class="username-text" id="username" name="username" value="admin@havi.com" readonly="readonly"></p>
+        <br>
+        <p class="card-text2">Password:
+            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal">Change password</button>
         </p>
 
         
@@ -33,9 +29,32 @@
 
                     
                     <div class="modal-body">
-                        Current password: <input type="text" /> <br />
-                        New password: <input type="text" /> <br />
-                        Confirm password: <input type="text" /> <br />
+                        <div class="row">
+                            <div class="col-6">
+                                Current password:
+                            </div>
+                            <div class="col-4">
+                                <input type="text" />
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-6">
+                                New password:
+                            </div>
+                            <div class="col-4">
+                                <input type="text" />
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-6">
+                                Confirm password:
+                            </div>
+                            <div class="col-4">
+                                <input type="text" />
+                            </div>
+                        </div>
                     </div>
 
                     
@@ -46,17 +65,21 @@
 
                 </div>
             </div>
-        </div>
-
-
-        <div class="buttons">
-            <div>
-                <a class="button-cancel" href="/overview_admin">Cancel</a>
-                <a class="button-save" href="/overview_admin">Save</a>
+        </div>            
+        <br />
+            <div class="row justify-content-center">
+                <div class="text-right col-6">
+                    <NavLink class="nav-link" href="overview_admin">
+                        <button class="btn cancel-button">Cancel</button>
+                    </NavLink>
+                </div>
+                <div class="text-left col-6">
+                    <NavLink class="nav-link" href="overview_admin">
+                        <button class="btn green-button">Save</button> 
+                    </NavLink>
+                </div>
             </div>
         </div>
-
-    </div>
 </div>
 
 @code {
