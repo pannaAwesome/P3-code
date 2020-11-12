@@ -1,4 +1,9 @@
-﻿
+﻿/*######################################################################################################################*/
+/* Header logo */
+.logo {
+    max-width: 300px;
+}
+
 /*######################################################################################################################*/
 /* Questionmark and tooltip for help text */
 
@@ -14,17 +19,20 @@
     padding: 1px;
 }
 
+
+/* Tooltip to the right of the questionmark */
+
 .questionmark:hover {
     background-color: #385072;
 }
 
-.questionmark:hover .tooltip {
+.questionmark:hover .tooltip-right {
     visibility: visible;
     opacity: 1;
 }
 
 
-.questionmark .tooltip {
+.questionmark .tooltip-right {
     display: flex;
     justify-content: center;
     align-content: center;
@@ -39,17 +47,61 @@
     border-radius: 5px;
     padding: 5px;
     text-align: center;
+    font-weight: normal;
+    font-size: smaller;
 }
- 
-.questionmark .tooltip::after {
-    content: " ";
+
+    .questionmark .tooltip-right::after {
+        content: " ";
+        position: absolute;
+        top: 50%;
+        right: 100%;
+        border-width: 5px;
+        border-style: solid;
+        border-color: transparent #555 transparent transparent;
+    }
+
+/* Tooltip above the questionmark */
+
+
+.questionmark:hover .tooltip-top {
+    visibility: visible;
+    opacity: 1;
+}
+
+
+.questionmark .tooltip-top {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
     position: absolute;
-    top: 50%;
-    right: 100%; /* To the right of the tooltip */
-    border-width: 5px;
-    border-style: solid;
-    border-color: transparent #555 transparent transparent;
+    width: 288px;
+    height: 110px;
+    bottom: 150%;
+    left: 50%;
+    margin-left: -1135%;
+    visibility: hidden;
+    background: #555;
+    border-radius: 5px;
+    padding: 5px;
+    text-align: center;
+    font-weight: normal;
+    font-size: smaller;
 }
+
+    .questionmark .tooltip-top::after {
+        content: " ";
+        position: absolute;
+        top: 100%;
+        left: 98%;
+        margin-left: -5%;
+        border-width: 5px;
+        border-style: solid;
+        border-color: #555 transparent transparent transparent;
+    }
+
+
 
 /*######################################################################################################################*/
 /* Users profile menu layout */
@@ -64,6 +116,7 @@
     padding-top: 10px;
     position: relative;
     display: inline-block;
+    cursor: pointer;
 }
 
 .profile-menu-header {
@@ -131,7 +184,7 @@
     background: #00b2be;
 }
 
-.robot-state {
+.ready-state {
     background: #ff883c;
 }
 
@@ -141,4 +194,37 @@
 
 .created-state {
     background: #a54e8b;
+}
+
+
+/*#########################################################################################################################################*/
+/* Trashcan button and select field */
+
+.trash-button {
+    background-color: #de577b;
+    background-image: url("../images/trash-can-closed.svg");
+    width: inherit;
+    height: 30px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 15px;
+}
+
+    .trash-button:hover {
+        background-color: #b14562;
+        background-image: url("../images/trash-can-open.svg");
+        background-size: 20px;
+    }
+
+.row-selection {
+    font-size: small;
+    color: #a5a5a7;
+}
+
+.hide-trash {
+    display: none;
+}
+
+.show-trash {
+    display: block;
 }

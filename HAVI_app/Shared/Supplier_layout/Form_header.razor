@@ -1,0 +1,115 @@
+﻿@inject NavigationManager NavigationManager
+
+<div class="row">
+    <div class="col-12 form-header">
+        <div class="row form-logo-header">
+            <HAVI_app.Shared.Shared_layout.Logo_image />
+            <div class="col-9 text-right">
+                <button class="btn discard-button form-header-button" data-toggle="modal" data-target="#discard-changes-modal">Discard changes</button>
+            </div>
+        </div>
+        <div class="row progressbar-box justify-content-center">
+            <div class="col-12">
+                <ul class="progressbar">
+                    <li class="@SupplierState" @onclick="@(() => ChangeToAnotherForm("supplier_form"))">Supplier info</li>
+                    <li class="@ArticleState" @onclick="@(() => ChangeToAnotherForm("article_form"))">Article info</li>
+                    <li class="@MeasurementState" @onclick="@(() => ChangeToAnotherForm("measurement_form"))">Measurements</li>
+                    <li class="@ShipmentState" @onclick="@(() => ChangeToAnotherForm("shipment_form"))">Shipment info</li>
+                    <li class="@PriceState" @onclick="@(() => ChangeToAnotherForm("price_form"))">Price info</li>
+                    <li class="@ConfirmState" @onclick="@(() => ChangeToAnotherForm("confirm_form"))">Confirm details</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="discard-changes-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Discard changes</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to discard all your changes and return to the overview?
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <button type="button" class="btn cancel-button" data-dismiss="modal">Close</button>
+                <button type="button" class="btn red-button" @onclick="DiscardChanges">Discard changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public string SupplierState { get; set; }
+
+    [Parameter]
+    public string ArticleState { get; set; }
+
+    [Parameter]
+    public string MeasurementState { get; set; }
+
+    [Parameter]
+    public string ShipmentState { get; set; }
+
+    [Parameter]
+    public string PriceState { get; set; }
+
+    [Parameter]
+    public string ConfirmState { get; set; }
+
+    private void DiscardChanges()
+    {
+        NavigationManager.NavigateTo("/overview_supplier", true);
+    }
+
+    private void ChangeToAnotherForm(string FormName)
+    {
+        switch (FormName)
+        {
+            case "supplier_form":
+                if(SupplierState == "filled")
+                {
+                    NavigationManager.NavigateTo("/supplier_info_form", true);
+                }
+                break;
+            case "article_form":
+                if (ArticleState == "filled")
+                {
+                    NavigationManager.NavigateTo("/article_info_form", true);
+                }
+                break;
+            case "measurement_form":
+                if (MeasurementState == "filled")
+                {
+                    NavigationManager.NavigateTo("/measurement_info_form", true);
+                }
+                break;
+            case "shipment_form":
+                if (ShipmentState == "filled")
+                {
+                    NavigationManager.NavigateTo("/shipment_info_form", true);
+                }
+                break;
+            case "price_form":
+                if (PriceState == "filled")
+                {
+                    NavigationManager.NavigateTo("/price_info_form", true);
+                }
+                break;
+            case "confirm_form":
+                if (ConfirmState == "filled")
+                {
+                    NavigationManager.NavigateTo("/confirm_details", true);
+                }
+                break;
+            default:
+                break;
+
+        }
+    }
+}

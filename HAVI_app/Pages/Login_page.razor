@@ -45,12 +45,12 @@
         <div class="col-8 text-center">
             @if (LoginType == "supplier")
             {
-                <p class="text-center">Don't have an account, create one <a @onclick="NewSupplier" href="#">here!</a></p>
+                <p class="text-center">Don't have an account, <a @onclick="NewSupplier" href="#">Sign up</a></p>
 
             }
             else if (LoginType == "signup")
             {
-                <p class="text-center">Already have an account, login <a @onclick="PickedSupplier" href="#">here!</a></p>
+                <p class="text-center">Already have an account, <a @onclick="PickedSupplier" href="#">Log in</a></p>
             }
             else
             {

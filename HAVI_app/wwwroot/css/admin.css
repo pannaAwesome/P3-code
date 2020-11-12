@@ -127,3 +127,15 @@
 .gap-overview {
     margin-top: 100px;
 }
+
+.buyer-type {
+    background-color: var(--purple);
+}
+
+.admin-type {
+    background-color: var(--cyan);
+}
+
+.supplier-type {
+    background-color: var(--green);
+}
