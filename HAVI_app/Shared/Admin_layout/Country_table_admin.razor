@@ -5,13 +5,13 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Deleting user</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Deleting country</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                Are you sure you want to delete the user?
+                Are you sure you want to delete the entire country?
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn cancel-button" data-dismiss="modal">Close</button>
@@ -20,19 +20,21 @@
         </div>
     </div>
 </div>
+
 <div class="row">
     <div class="col-12">
         <Table TableItem="SupplierInfo" Items="supplierdata" ColumnReorder="true" TableHeadClass="purple-table-header" TableRowClass="@(x => x.RowClass)" ShowSearchBar="true">
-            <Column TableItem="SupplierInfo" Title="User" Field="@(x => x.PurchaserEmail)" />
-            <Column TableItem="SupplierInfo" Title="Country" Field="@(x => x.Country)" />
-            <Column TableItem="SupplierInfo" Title="Type" Field="@(x => x.Type)" Class="text-center" Width="100px" DefaultSortColumn="true">
+            <Column TableItem="SupplierInfo" Title="Country" Field="@(x => x.Country)" DefaultSortColumn="true"/>
+            <Column TableItem="SupplierInfo" Title="Country code" Field="@(x => x.Countrycode)" />
+            <Column TableItem="SupplierInfo" Title="Admin" Field="@(x => x.Admin)" />
+            <Column TableItem="SupplierInfo" Title="" Field="@(x => x.Country)">
                 <Template>
-                    <div class="@context.Type.ToLower()-type state">@context.Type</div>
+                    <button class="btn green-button" @onclick="@((x) => EditCountry(context.Country))">Edit</button>
                 </Template>
             </Column>
             <Column TableItem="SupplierInfo" Title="">
                 <Template>
-                    <div class="btn delete-button" data-toggle="modal" data-target="#deleting-rows">Delete</div>
+                    <button class="btn delete-button" data-toggle="modal" data-target="#deleting-rows">Delete</button>
                 </Template>
             </Column>
             <EmptyDataTemplate>
@@ -58,37 +60,30 @@
     protected override void OnInitialized()
     {
         supplierdata = new SupplierInfo[]{
-            new SupplierInfo("winnie@havi.com", "Denmark", "Buyer"),
-            new SupplierInfo("winnie@havi.com", "Denmark", "Supplier")
+            new SupplierInfo("Denmark", "DK", "DKAdmin"),
+            new SupplierInfo("Sweden", "SE", "SEAdmin"),
+            new SupplierInfo("Norway", "NO", "NOAdmin")
             };
     }
 
 
-    private void RowClicked(SupplierInfo data)
+    private void EditCountry(string country)
     {
-        if (selectionType == SelectionType.None)
-        {
-            //Set page to go to
-        }
-        else
-        {
-            selected = data;
-            StateHasChanged();
-        }
+        NavigationManager.NavigateTo("/edit_country", true);
     }
 
     public class SupplierInfo
     {
-        public SupplierInfo(string purchaseremail, string country, string type)
+        public SupplierInfo(string country, string countrycode, string admin)
         {
             Country = country;
-            Type = type;
-            PurchaserEmail = purchaseremail;
+            Countrycode = countrycode;
+            Admin = admin;
         }
 
-        public string PurchaserEmail { get; set; }
+        public string Countrycode { get; set; }
         public string Country { get; set; }
-        public string Type { get; set; }
+        public string Admin { get; set; }
 
         public string RowClass => "table tabel-row";
     }

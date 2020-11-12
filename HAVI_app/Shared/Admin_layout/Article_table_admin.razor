@@ -1,32 +1,50 @@
 ﻿@using BlazorTable
 @inject NavigationManager NavigationManager
 
-
+<div class="modal fade" id="deleting-rows" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Deleting rows</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete the selected rows?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn cancel-button" data-dismiss="modal">Close</button>
+                <button type="button" class="btn discard-button">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="row">
     <div class="col-6">
         Options:
     </div>
 </div>
 <div class="row">
-    <div class="col-2">
-        <select class="form-control" @onchange="@((x) => selectionType = (SelectionType)Enum.Parse(typeof(SelectionType), x.Value.ToString()))">
-            <option value="@SelectionType.None">@SelectionType.None</option>
-            <option value="@SelectionType.Multiple">@SelectionType.Multiple</option>
+    <div class="col-3">
+        <select class="form-control row-selection" @onchange="@((x) => SelectionChanged(x.Value.ToString()))">
+            <option value="@SelectionType.None">Select no rows</option>
+            <option value="@SelectionType.Multiple">Select multiple rows</option>
         </select>
     </div>
     <div class="col-1">
-        <button class="btn trash-button" data-target="deleting-rows"></button>
+        <button class="btn trash-button @hideornot" data-toggle="modal" data-target="#deleting-rows"></button>
     </div>
 </div>
 <div class="row">
     
     <div class="col-12">
-        <Table TableItem="SupplierInfo" Items="supplierdata" ColumnReorder="true" TableHeadClass="blue-table-header" TableRowClass="@(x => x.RowClass)">
+        <Table TableItem="SupplierInfo" Items="supplierdata" ColumnReorder="true" TableClass="table table-hover" TableHeadClass="blue-tabel-header" TableRowClass="@(x => x.RowClass)" RowClickAction="RowClicked" ShowSearchBar="true">
             <Column TableItem="SupplierInfo" Title="Article name" Field="@(x => x.ArticleName)" />
             <Column TableItem="SupplierInfo" Title="Supplier name" Field="@(x => x.SupplierName)" />
             <Column TableItem="SupplierInfo" Title="Vailed for customer" Field="@(x => x.VailedForCustomer)" />
             <Column TableItem="SupplierInfo" Title="Buyer email" Field="@(x => x.BuyerEmail)" />
-            <Column TableItem="SupplierInfo" Title="State" Field="@(x => x.State)" Class="text-center" Width="100px">
+            <Column TableItem="SupplierInfo" Title="State" Field="@(x => x.State)" Class="text-center" Width="100px" DefaultSortColumn="true">
                 <Template>
                     <div class="@context.State.ToLower()-state state">@context.State</div>
                 </Template>
@@ -49,6 +67,8 @@
 
     private SupplierInfo selected;
 
+    private string hideornot = "hide-trash";
+
     protected override void OnInitialized()
     {
         supplierdata = new SupplierInfo[]{
@@ -60,11 +80,26 @@
             };
     }
 
+    private void SelectionChanged(string selectvalue)
+    {
+        selectionType = (SelectionType)Enum.Parse(typeof(SelectionType), selectvalue);
+
+        if (selectionType == SelectionType.Multiple)
+        {
+            hideornot = "show-trash";
+        }
+        else
+        {
+            hideornot = "hide-trash";
+        }
+
+    }
+
     private void RowClicked(SupplierInfo data)
     {
         if (selectionType == SelectionType.None)
         {
-            //Set page to go to
+            NavigationManager.NavigateTo("show_article", true);
         }
         else
         {

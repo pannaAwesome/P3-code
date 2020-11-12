@@ -1,14 +1,12 @@
 ﻿@page "/user_view"
 @layout HAVI_app.Shared.Admin_layout.Overview
 
-<div class="row">
-    <div class="col-10">
+<div class="row overview-admin-header">
+    <div class="col-9">
         <h3>Overview of users in the system:</h3>
     </div>
-    <div class="col-2">
-        <NavLink class="nav-link" href="/create_purchaser1">
+    <div class="col-3">
             <button class="btn button-options-overview"  data-toggle="modal" data-target="#create-purchaser">Create purchaser</button>
-        </NavLink>
     </div>
 </div>
 <br />
@@ -35,6 +33,8 @@
                         <label for="purchaser">Email:</label>
                         <input class="form-control" type="email" name="purchaser"/>
                     </form>
+                    <p class="text-center">Password for new purchaser is "1234"</p>
+                    
                 </div>
 
 

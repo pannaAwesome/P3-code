@@ -64,11 +64,11 @@
 
 .delete-button {
     background-color: var(--red);
-    border: 1px var(--black);
+    padding: 5px 10px;
     color: white;
 }
     .delete-button:hover {
-        background-color: var(--dark-purple);
+        background-color: #b14562;
         color: white;
     }
 
@@ -176,11 +176,11 @@
 }
 
 .buyer-type {
-    background-color: var(--purple);
+    background-color: var(--cyan);
 }
 
 .admin-type {
-    background-color: var(--cyan);
+    background-color: var(--red);
 }
 
 .supplier-type {

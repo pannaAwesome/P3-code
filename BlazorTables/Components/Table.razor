@@ -44,7 +44,7 @@
                                     {<span aria-hidden="true"><img class="table-arrows" src="_content/BlazorTable/images/sort-desc.png" /></span> }
                                     else
                                     { <span aria-hidden="true"><img class="table-arrows" src="_content/BlazorTable/images/sort-asc.png" /></span>}
-                                }else
+                                }else if(column.Title != "") 
                                 { <span aria-hidden="true"><img class="table-arrows" src="_content/BlazorTable/images/dont_sort.png" /></span>}
 
                                 @if (column.Filterable)
