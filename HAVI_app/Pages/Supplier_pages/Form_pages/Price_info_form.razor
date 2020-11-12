@@ -13,7 +13,7 @@
 
 
 <div class="justify-content-center row">
-    <div class="col-9">
+    <div class="col-12 d-flex justify-content-center">
         <form>
             <table class="table">
 
@@ -22,10 +22,9 @@
                         <label for="set_currency" class="required">Set currency:</label>
                     </td>
                     <td colspan="4">
-                        <select class="form-control" name="set_currency" @onchange="@((x) => CurrencySelected(x.Value.ToString()))">
-                            <option disabled selected>-- select an option --</option>
-                            <option>ADP</option>
+                        <select class="form-control" name="set_currency" required @onchange="@((x) => CurrencySelected(x.Value.ToString()))">
                             <option>DKK</option>
+                            <option>ADP</option>
                             <option>USD</option>
                         </select>
                     </td>
@@ -42,7 +41,7 @@
                         <label for="purchase_price" class="required">Purchase price:</label>
                     </td>
                     <td colspan="4">
-                        <input type="number" class="form-control" id="purchase_price" required>
+                        <input type="number" class="form-control" name="purchase_price" required>
                     </td>
                     <td>
                         <HAVI_app.Shared.Shared_layout.Questionmark_top>
@@ -54,15 +53,15 @@
 
                 <tr>
                     <td>
-                        <label for="other_cost" class="required" value="@CostRegardingArticle">Other cost regarding article?</label>
+                        <label for="other_cost" class="required" value="@CostRegardingArticle">Other cost regarding the article?</label>
                     </td>
 
                     <td colspan="4">
                         <div class="text-center">
-                            <input type="radio" name="organic" id="yes" value="yes" @onchange="@((x) => AddOtherCost(x.Value.ToString()))">
+                            <input type="radio" name="organic" value="yes" @onchange="@((x) => AddOtherCost(x.Value.ToString()))">
                             <label for="yes">Yes</label>
                             &nbsp;
-                            <input type="radio" name="organic" id="no" value="no">
+                            <input type="radio" name="organic" value="no">
                             <label for="no">No</label>
                         </div>
                     </td>
@@ -76,51 +75,51 @@
             </table>
             @if (OtherCost == "yes")
             {
-        <table>
-            @for (int i = 1; i <= NumberOfOtherCosts; i++)
-            {
-
-            <tr>
-                <td>
-                    <label for="afgift-@NumberOfOtherCosts">Inform cost type:</label>
-                </td>
-
-                <td>
-                    <select class="form-control" name="afgift-@NumberOfOtherCosts">
-                        <option disabled selected>-- select an option --</option>
-                        <option>Chokoladeafgift</option>
-                        <option>Miljøafgift</option>
-                        <option>En anden afgift</option>
-                    </select>
-                </td>
-                <td>
-                    <label for="amount-@NumberOfOtherCosts">Amount in @Currency:</label>
-                </td>
-                <td>
-                    <input type="number" class="form-control" id="amountInDKK" name="otherCosts" required @oninput="@((x) => Sum(x.Value.ToString()))">
-                </td>
-                @if (i == NumberOfOtherCosts)
-                {
-                    <td @onclick="AddExtraCosts"> &#10133; </td>
-                    @if (NumberOfOtherCosts != 1)
+                <table>
+                    @for (int i = 1; i <= NumberOfOtherCosts; i++)
                     {
-                    <td @onclick="RemoveExtraCosts"> &#10134;</td>
+
+                        <tr>
+                            <td>
+                                <label for="afgift-@NumberOfOtherCosts">Inform cost type:</label>
+                            </td>
+
+                            <td>
+                                <select class="form-control" name="afgift-@NumberOfOtherCosts" required>
+                                    <option disabled selected>-- select an option --</option>
+                                    <option>Chokoladeafgift</option>
+                                    <option>Miljøafgift</option>
+                                    <option>En anden afgift</option>
+                                </select>
+                            </td>
+                            <td>
+                                <label for="amount-@NumberOfOtherCosts">Amount in @Currency:</label>
+                            </td>
+                            <td>
+                                <input type="number" class="form-control" name="amount-@NumberOfOtherCosts" required @onblur="Sum">
+                            </td>
+                            @if (i == NumberOfOtherCosts)
+                            {
+                                <td @onclick="AddExtraCosts"> &#10133; </td>
+                                @if (NumberOfOtherCosts != 1)
+                                {
+                                    <td @onclick="RemoveExtraCosts"> &#10134;</td>
+                                }
+                            }
+                        </tr>
+
                     }
-                }
-            </tr>
 
-            }
-
-            <tr>
-                <td colspan="2"></td>
-                <td colspan="1">
-                    <label for="totalAmount">Total amount in @Currency</label>
-                </td>
-                <td>
-                    @TotalAmount
-                </td>
-            </tr>
-        </table>
+                    <tr>
+                        <td colspan="1"></td>
+                        <td colspan="2" class="text-right">
+                            <label class="text-right" for="totalAmount">Total amount in @Currency</label>
+                        </td>
+                        <td>
+                            <label>@TotalAmount</label>
+                        </td>
+                    </tr>
+                </table>
             }
             <div class="row justify-content-center">
                 <div class="text-right col-6">
@@ -199,7 +198,7 @@
         }
     }
 
-    private void Sum(string amount)
+    private void Sum()
     {
     }
 }

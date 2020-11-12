@@ -11,16 +11,16 @@
 </div>
 
 <div class="justify-content-center row">
-    <div class="col-9">
+    <div class="col-12 d-flex justify-content-center">
         <form>
             <table class="table">
 
                 <tr>
                     <td>
-                        <label for="carton_pr_pallet" class="required">Cartons pr. pallet:</label>
+                        <label for="carton_pr_pallet" class="required">Cartons per pallet:</label>
                     </td>
-                    <td colspan="5">
-                        <input type="number" class="form-control" id="carton_pr_pallet" required value="@CartonPrPallet">
+                    <td colspan="6">
+                        <input type="number" class="form-control" name="carton_pr_pallet" required>
                     </td>
                     <td>
                         <HAVI_app.Shared.Shared_layout.Questionmark_top>
@@ -32,14 +32,14 @@
 
                 <tr>
                     <td>
-                        <label for="carton_pr_layer" class="required">Cartons pr. layer:</label>
+                        <label for="carton_pr_layer" class="required">Cartons per layer:</label>
                     </td>
-                    <td colspan="5">
-                        <input type="number" class="form-control" id="carton_pr_layer" required value="@CartonPrLayer">
+                    <td colspan="6">
+                        <input type="number" class="form-control" name="carton_pr_layer" required>
                     </td>
                     <td>
                         <HAVI_app.Shared.Shared_layout.Questionmark_top>
-                            Enter the amount of cartons pr. layer
+                            Enter the amount of cartons per layer
                         </HAVI_app.Shared.Shared_layout.Questionmark_top>
 
                     </td>
@@ -49,8 +49,8 @@
                     <td>
                         <label for="country_origin" class="required">Country of origin:</label>
                     </td>
-                    <td colspan="5">
-                        <select class="form-control" name="county_origin" value="@CountryOfOrigin">
+                    <td colspan="6">
+                        <select class="form-control" name="county_origin">
                             <option disabled selected>-- select an option --</option>
                             <option>Denmark</option>
                             <option>Sweden</option>
@@ -69,8 +69,8 @@
                     <td>
                         <label for="imported_from" class="required">Imported from:</label>
                     </td>
-                    <td colspan="5">
-                        <select class="form-control" name="imported_from" value="@ImportedFrom">
+                    <td colspan="6">
+                        <select class="form-control" name="imported_from">
                             <option disabled selected>-- select an option --</option>
                             <option>Denmark</option>
                             <option>Sweden</option>
@@ -89,8 +89,8 @@
                     <td>
                         <label for="toll_tarrif_no" class="required">Toll-tarrif no.:</label>
                     </td>
-                    <td colspan="5">
-                        <input type="number" class="form-control" id="toll_tarrif_no" required value="@TollTarrifNo">
+                    <td colspan="6">
+                        <input type="number" class="form-control" name="toll_tarrif_no" required>
                     </td>
                     <td>
                         <HAVI_app.Shared.Shared_layout.Questionmark_top>
@@ -105,8 +105,8 @@
                     <td>
                         <label for="minimum_order_quantity" class="required">Minimum order quantity:</label>
                     </td>
-                    <td colspan="5">
-                        <input type="number" class="form-control" id="minimum_order_quantity" required value="@MinimumOrderQuantity">
+                    <td colspan="6">
+                        <input type="number" class="form-control" name="minimum_order_quantity" required>
                     </td>
                     <td>
                         <HAVI_app.Shared.Shared_layout.Questionmark_top>
@@ -124,7 +124,7 @@
                         <label class="center-for-units" for="min">Min:</label>
                     </td>
                     <td>
-                        <input type="text" class="form-control" id="min" required value="@MinTempratureDuringTransportation">
+                        <input type="text" class="form-control" name="min" required>
                     </td>
                     <td>
                         <label class="center-for-units" for="degrees">&#8451;</label>
@@ -133,7 +133,7 @@
                         <label class="center-for-units" for="max">Max:</label>
                     </td>
                     <td>
-                        <input type="text" class="form-control" id="max" required value="@MaxTempratureDuringTransportation">
+                        <input type="text" class="form-control" name="max" required>
                     </td>
                     <td>
                         <label class="center-for-units" for="degrees">&#8451;</label>
@@ -154,7 +154,7 @@
                         <label class="center-for-units" for="min">Min:</label>
                     </td>
                     <td>
-                        <input type="text" class="form-control" id="min" required value="@MinTemeperatureStorage">
+                        <input type="text" class="form-control" name="min" required>
                     </td>
                     <td>
                         <label class="center-for-units" for="degrees">&#8451;</label>
@@ -163,14 +163,14 @@
                         <label class="center-for-units" for="max">Max:</label>
                     </td>
                     <td>
-                        <input type="text" class="form-control" id="max" required value="@MaxTemeperatureStorage">
+                        <input type="text" class="form-control" name="max" required>
                     </td>
                     <td>
                         <label class="center-for-units" for="degrees">&#8451;</label>
                     </td>
                     <td>
                         <HAVI_app.Shared.Shared_layout.Questionmark_top>
-                            ?
+                            At what temperature should the article be stored
                         </HAVI_app.Shared.Shared_layout.Questionmark_top>
 
                     </td>
@@ -178,10 +178,10 @@
 
                 <tr>
                     <td>
-                        <label for="lead_time" class="required">Lead-time:</label>
+                        <label for="lead_time" class="required">Lead time:</label>
                     </td>
-                    <td colspan="4">
-                        <input type="number" class="form-control" id="lead_time" required value="@LeadTime">
+                    <td colspan="5">
+                        <input type="number" class="form-control" name="lead_time" required>
                     </td>
                     <td>
                         <label class="center-for-units" for="lead_time">days</label>
