@@ -21,7 +21,7 @@
 
   
   <ItemGroup>
-    <ProjectReference Include="..\BlazorTable\src\BlazorTable\BlazorTable.csproj" />
+    <ProjectReference Include="..\BlazorTable\BlazorTable.csproj" />
   </ItemGroup>
 
 </Project>
