@@ -116,9 +116,15 @@
     background-color: #E5E5E7;
 }
 
+#overview-supplier-header {
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: solid thin var(--purple);
+}
+
+
 /*#################################################################################################*/
 /* Layout til form headeren */
-
 .form-layout {
     padding: 40px;
     background: var(--background-white);

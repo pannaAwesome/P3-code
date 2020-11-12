@@ -3,7 +3,7 @@
 @page "/overview_supplier"
 
 <div class="col-12">
-    <div class="row">
+    <div class="row" id="overview-supplier-header">
         <div class="col-5">
             <h2>Welcome Hello and co.</h2>
         </div>
@@ -38,7 +38,14 @@
                         <select class="form-control" id="selectCustomer">
                             @for (int i = 0; i < 5; i++)
                             {
-                                <option>@i</option>
+                                if (i == 0)
+                                {
+                                    <option disabled selected>-- select an option --</option>
+                                }
+                                else
+                                {
+                                    <option>@i</option>
+                                }
                             }
                         </select>
                     </div>
