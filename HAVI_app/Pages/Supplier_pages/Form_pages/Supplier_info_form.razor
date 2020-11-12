@@ -1,1 +1,373 @@
-﻿@page "/supplier_info_form"
+﻿@layout HAVI_app.Shared.Supplier_layout.Form_layout
+@inject Microsoft.AspNetCore.Components.NavigationManager NavigationManager
+@page "/supplier_info_form"
+
+<HAVI_app.Shared.Supplier_layout.Form_header SupplierState="active" />
+<div class="row justify-content-center">
+    <div class="col-10">
+        <h3>Supplier information:</h3>
+        <p class="form-header-supplier">Fill out information about your own company.</p>
+    </div>
+</div>
+<div class="row justify-content-center ">
+    <div class="col-9">
+        <form>
+
+
+            <table class="table">
+                <tr>
+                    <td>
+                        <label for="company_name" class="required">Company name:</label>
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" name="company_name" required value="@CompanyName">
+                    </td>
+                    <td>
+                        <div></div>
+                    </td>
+                    <td>
+                        <HAVI_app.Shared.Shared_layout.Questionmark_top>
+                            Enter the name of your company
+                        </HAVI_app.Shared.Shared_layout.Questionmark_top>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="company_location" class="required">Company location:</label>
+                    </td>
+                    <td>
+                        <select class="form-control" name="company_location" required value="@CompanyLocation">
+                            <option disabled selected>-- select an option --</option>
+                            <option>France // FR // 001</option>
+                            <option>Luxembourg // LU // 002</option>
+                            <option>Netherlands// NL // 003</option>
+                            <option>Germany // DE // 004</option>
+                            <option>Italy // IT // 005</option>
+                            <option>United Kingdoms // GB // 006</option>
+                            <option>Ireland // IE // 007</option>
+                            <option>Denmark // DK // 008</option>
+                            <option>Greece // GR // 009</option>
+                            <option>Portugal // PT // 010</option>
+                            <option>Spain // ES // 011</option>
+                            <option>Belgium // BE // 019</option>
+                            <option>Canary Islands // ES // 021</option>
+                            <option>Iceland // IS // 024</option>
+                            <option>Faroe Islands // FO // 025</option>
+                            <option>Norway // NO // 028</option>
+                            <option>Sweden // SE // 030</option>
+                            <option>Finland // FI // 032</option>
+                            <option>Austria // AT // 038</option>
+                            <option>Switzerland // CH // 039</option>
+                            <option>Andorra // AD // 043</option>
+                            <option>Gibraltar // GI // 044</option>
+                            <option>Vatican City // VA // 045</option>
+                            <option>Malta // MT // 046</option>
+                            <option>Turkey // TR // 052</option>
+                            <option>Estonia // EE // 053</option>
+                            <option>Latvia // LV // 054</option>
+                            <option>Lithuania // LT // 055</option>
+                            <option>Polen // PL // 060</option>
+                            <option>Czecg Republic // CZ // 061</option>
+                            <option>Slovakia // SK // 063</option>
+                            <option>Hungary // HU // 064</option>
+                            <option>Romania // RO // 066</option>
+                            <option>Bulgaria // BG // 068</option>
+                            <option>Ukraine // UA // 072</option>
+                            <option>Belarus // BY // 073</option>
+                            <option>Russia // RU // 075</option>
+                            <option>Serbia // RS // 090</option>
+                            <option>Slovenia // SI // 091</option>
+                            <option>Croatia // HR // 092</option>
+                            <option>Macedonian // MK // 096</option>
+                            <option>Marocco // MA // 204</option>
+                            <option>Egypt // EG // 220</option>
+                            <option>Tanzania // TZ // 352</option>
+                            <option>USA // US // 400</option>
+                            <option>Canada // CA // 404</option>
+                            <option>Greenland // GL // 075</option>
+                            <option>Russia // RU // 075</option>
+                            <option>Russia // RU // 075</option>
+                            <option>Russia // RU // 075</option>
+
+
+                        </select>
+                    </td>
+                    <td>
+                        <div></div>
+                    </td>
+                    <td>
+                        <HAVI_app.Shared.Shared_layout.Questionmark_top>
+                            Enter the country of where your company resides
+                        </HAVI_app.Shared.Shared_layout.Questionmark_top>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="email" class="required">Email:</label>
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" name="email" required value="@Email">
+                    </td>
+                    <td>
+                        <div></div>
+                    </td>
+                    <td>
+                        <HAVI_app.Shared.Shared_layout.Questionmark_top>
+                            Enter the email of the person in the company that HAVI may contact
+                        </HAVI_app.Shared.Shared_layout.Questionmark_top>
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="pallet_exchange" class="required" value="@PalletExchange">Pallet exchange</label>
+                    </td>
+                    <td>
+                        <div class="text-center">
+                            <input type="radio" name="pallet_exchange" id="yes" value="yes">
+                            <label for="yes">Yes</label>
+                            &nbsp;
+                            <input type="radio" id="no" name="pallet_exchange">
+                            <label for="no">No</label>
+                        </div>
+
+                    </td>
+                    <td>
+                        <div></div>
+                    </td>
+                    <td>
+                        <HAVI_app.Shared.Shared_layout.Questionmark_top>
+                            Whether you would like to exchange pallets with HAVI upon delivering the article
+                        </HAVI_app.Shared.Shared_layout.Questionmark_top>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="freight_responsibility" class="required" value="@FreightResponsibility">Freight responsibility</label>
+                    </td>
+                    <td>
+                        <div class="text-center">
+                            <input type="radio" name="freight_responsibility" id="CIP" value="CIP">
+                            <label for="CIP">CIP</label>
+                            &nbsp;
+                            <input type="radio" id="EXW" name="freight_responsibility">
+                            <label for="EXW">EXW</label>
+                        </div>
+                    </td>
+                    <td>
+                        <div></div>
+                    </td>
+                    <td>
+                        <HAVI_app.Shared.Shared_layout.Questionmark_top>
+                            With CIP you pay for the freight and insurance during transit.
+                            With EXW you are only required to ready the article for pick up.
+                        </HAVI_app.Shared.Shared_layout.Questionmark_top>
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2">
+                        <label for="special_info" class="required">Special information regarding the article or cooperation?</label>
+                        <textarea class="form-control" name="special_info" required value="@SpecialInformation"></textarea>
+                    </td>
+                    <td>
+                        <div></div>
+                    </td>
+                    <td>
+                        <HAVI_app.Shared.Shared_layout.Questionmark_top>
+                            If the article needs to be treated with special care or is delivered under special circumstances please note these.
+                        </HAVI_app.Shared.Shared_layout.Questionmark_top>
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="transport" class="required" value="@BookingTransport">Are you in charge of booking transport?</label>
+                    </td>
+
+                    <td>
+                        <div class="text-center">
+                            <input type="radio" name="transport" id="yes" value="yes" data-toggle="collapse" data-target="#hideTransit:not(.show)" aria-expanded="false" aria-controls="hideTransit">
+                            <label for="yes">Yes</label>
+                            &nbsp;
+                            <input type="radio" id="no" value="no" name="transport" data-toggle="collapse" data-target="#hideTransit.show" aria-expanded="false" aria-controls="hideTransit">
+                            <label for="no">No</label>
+                        </div>
+                    </td>
+                    <td>
+                        <div></div>
+                    </td>
+                    <td>
+                        <HAVI_app.Shared.Shared_layout.Questionmark_top>
+                            If your company is the one in charge of transport, pick yes.
+                        </HAVI_app.Shared.Shared_layout.Questionmark_top>
+                    </td>
+                </tr>
+
+                <tr class="collapse" id="hideTransit">
+                    <td>
+                        <label for="class">Transit Time:</label>
+                    </td>
+                    <td>
+                        <p>
+                            <input type="text" class="form-control" id="class" value="@TransitTime" required>
+                        </p>
+                    </td>
+                    <td>
+                        <label for="class" class="labels">days</label>
+                    </td>
+                    <td>
+                        <HAVI_app.Shared.Shared_layout.Questionmark_top>
+                            The amount of days from the article is ordered till the order is ready to be shipped to HAVI.
+                        </HAVI_app.Shared.Shared_layout.Questionmark_top>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="dangerous" class="required" value="@Adr">Is the article classified as dangerous good (ADR)?</label>
+                    </td>
+                    <td>
+                        <div class="text-center">
+                            <input type="radio" name="dangerous" id="yes" value="yes" data-toggle="collapse" data-target="#hideDanger:not(.show)" aria-expanded="false" aria-controls="hideDanger">
+                            <label for="yes">Yes</label>
+                            &nbsp;
+                            <input type="radio" id="no" value="no" name="dangerous" data-toggle="collapse" data-target="#hideDanger.show" aria-expanded="false" aria-controls="hideDanger" />
+                            <label for="no">No</label>
+                        </div>
+                    </td>
+                    <td>
+                        <div></div>
+                    </td>
+                    <td>
+                        <HAVI_app.Shared.Shared_layout.Questionmark_top>
+                            You can check whether the article is classified as dangerous goods on the following link: https://www.tnt.com/express/en_dk/si
+                            te/how-to/find-dangerous-goods.html
+                        </HAVI_app.Shared.Shared_layout.Questionmark_top>
+                    </td>
+                </tr>
+
+                <tr class="collapse" id="hideDanger">
+                    <td>
+                        <label for="class"> Class </label>
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" id="class" value="@ClassInfo" required>
+                    </td>
+                    <td>
+                        <div></div>
+                    </td>
+                    <td>
+                        <HAVI_app.Shared.Shared_layout.Questionmark_top>
+                            The class must be written in numbers
+                        </HAVI_app.Shared.Shared_layout.Questionmark_top>
+                    </td>
+                </tr>
+
+                <tr class="collapse" id="hideDanger">
+                    <td>
+                        <label for="classificationCode">Classification code</label>
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" id="classificationCode" value="@ClassificationCode" required>
+                    </td>
+                    <td>
+                        <div></div>
+                    </td>
+                    <td>
+                        <HAVI_app.Shared.Shared_layout.Questionmark_top>
+                            Enter a whole number
+                        </HAVI_app.Shared.Shared_layout.Questionmark_top>
+                    </td>
+                </tr>
+
+            </table>
+            <div class="row justify-content-center">
+                <div class="text-right col-6">
+                    <input type="submit" class="btn cancel-button button-size" value="Back" @onclick="OnPostBack" />
+                </div>
+                <div class="text-left col-6">
+                    <input type="submit" class="btn green-button button-size" value="Next" @onclick="OnPostForward" />
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+
+@code {
+    [Parameter]
+    public string CompanyName { get; set; }
+
+    [Parameter]
+    public string CompanyLocation { get; set; }
+
+    [Parameter]
+    public string Email { get; set; }
+
+    [Parameter]
+    public string PalletExchange { get; set; }
+
+    [Parameter]
+    public string FreightResponsibility { get; set; }
+
+    [Parameter]
+    public string SpecialInformation { get; set; }
+
+    [Parameter]
+    public string BookingTransport { get; set; }
+
+    [Parameter]
+    public string TransitTime { get; set; }
+
+    [Parameter]
+    public string Adr { get; set; }
+
+    [Parameter]
+    public int ClassInfo { get; set; }
+
+    [Parameter]
+    public int ClassificationCode { get; set; }
+
+    @*public class Test
+        {
+            public int kat = 3;
+            public int hund = 2;
+            public int and = 2;
+        }*@
+}
+
+@code{
+    public void OnPostForward()
+    {
+        @*Test test = new Test();
+            {
+                CompanyName,
+                CompanyLocation,
+                Email,
+                PalletExchange,
+                FreightResponsibility,
+                SpecialInformation,
+                BookingTransport,
+                TransitTime,
+                Adr,
+                ClassInfo,
+                ClassificationCode
+            };*@
+
+        NavigationManager.NavigateTo($"/article_info_form", true);
+    }
+
+    public void OnPostBack()
+    {
+        NavigationManager.NavigateTo($"/overview_supplier", true);
+    }
+}

@@ -18,9 +18,10 @@ Inserting af profile menu:
 ***********************************************************************************************************************
 Inserting af questionmark with its helper text (tooltip):
 
-<HAVI_app.Shared.Shared_layout.Questionmark>
+For the tooltip on the right side of the questionmark
+<HAVI_app.Shared.Shared_layout.Questionmark_right>
     Write your help text here!
-</HAVI_app.Shared.Shared_layout.Questionmark>
+</HAVI_app.Shared.Shared_layout.Questionmark_right>
 
 ***********************************************************************************************************************
 Inserting af colorful background:

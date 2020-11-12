@@ -1,1 +1,209 @@
-﻿@page "/profile_supplier"
+﻿@inject NavigationManager NavigationManager
+@page "/profile_supplier"
+
+@layout HAVI_app.Shared.Supplier_layout.Profile_layout
+
+<div class="row align-content-center">
+    <div class="col-1"></div>
+    <div class="col-10 white-box header">
+        <div class="row">
+            <HAVI_app.Shared.Shared_layout.Logo_image />
+        </div>
+        <div class="row heading-profile">
+            <div class="col-12">
+                <h4>Profile</h4>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-10">
+                <form>
+                    <table class="table table-font">
+                        <tr>
+                            <td>
+                                <label for="email" class="required">Email:</label>
+                            </td>
+                            <td>
+                                <input type="email" class="form-control" id="email" value="supplier@@mail.com" required>
+                            </td>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <label for="password" class="required">Password:</label>
+                            </td>
+                            <td class="text-right">
+                                <a href="#" data-toggle="modal" data-target="#changePassword">Change password</a>
+                            </td>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <label for="company_name" class="required">Company Name:</label>
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" id="company_name" value="Company Name" required>
+                            </td>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <label for="company_location" class="required">Company's Location:</label>
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" id="company_location" value="Company location" required>
+                            </td>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <label for="pallet_exchange" class="required">Pallet exchange</label>
+                            </td>
+                            <td>
+                                <div class="row justify-content-center">
+                                    <div class="col-12">
+                                        <div class="row">
+                                            <div class="col-2"></div>
+                                            <div class="col-4">
+                                                <input type="radio" name="pallet_exchange" id="yes" value="yes" checked required>
+                                                <label for="yes">Yes</label>
+                                            </div>
+                                            <div class="col-4">
+                                                <input type="radio" id="no" name="pallet_exchange" required>
+                                                <label for="no">No</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <HAVI_app.Shared.Shared_layout.Questionmark_right>
+                                    Whether you would like to exchange pallets with HAVI upon delivering the article
+                                </HAVI_app.Shared.Shared_layout.Questionmark_right>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <label for="freight_responsibility" class="required">Freight Responsibility</label>
+                            </td>
+                            <td>
+                                <div class="row justify-content-center">
+                                    <div class="col-12">
+                                        <div class="row">
+                                            <div class="col-2"></div>
+                                            <div class="col-4">
+                                                <input type="radio" name="freight_responsibility" id="cip" value="yes" checked required>
+                                                <label for="cip">CIP</label>
+                                            </div>
+                                            <div class="col-4">
+                                                <input type="radio" id="exw" name="freight_responsibility" required>
+                                                <label for="exw">EXW</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <HAVI_app.Shared.Shared_layout.Questionmark_right>
+                                    With CIP you pay for the freight and insurance during transit. With EXW you are only required to ready the article for pick up
+                                </HAVI_app.Shared.Shared_layout.Questionmark_right>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div></div>
+                            </td>
+                            <td>
+                                <div></div>
+                            </td>
+                            <td>
+                                <div></div>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="row">
+                        <div class="text-right col-6">
+                            <input type="submit" class="btn cancel-button button-size" value="Back" @onclick="BackToSupplierOverview">
+                        </div>
+                        <div class="text-left col-6">
+                            <input type="submit" class="btn green-button button-size" value="Save" @onclick="BackToSupplierOverview">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Form for changing your password. Only appears when link is toggeled -->
+<div class=" modal fade" id="changePassword" tabindex="-1" role="dialog" aria-labelledby="changePassword" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="">
+                                        <button type="button" class="close close-password" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form>
+                                            <table class="table-font table col-12">
+                                                <tr>
+                                                    <td class="">
+                                                        <label for="current-password" class="required">Current Password:</label>
+                                                    </td>
+                                                    <td class="">
+                                                        <input type="password" class="form-control" id="current-password" required>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        <label for="new-password" class="required">New Password:</label>
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-control" id="new-password" required>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        <label for="confirm-new-password" class="required">Current Password:</label>
+                                                    </td>
+                                                    <td>
+                                                        <input type="text" class="form-control" id="confirm-new-password" required>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                </tr>
+
+                                            </table>
+                                        </form>
+                                        <div class="row justify-content-center">
+                                            <button type="button" class="save-password btn button-size" data-dismiss="modal">Save</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+@code {
+    private void BackToSupplierOverview()
+    {
+    NavigationManager.NavigateTo("/overview_supplier", true);
+    }
+}

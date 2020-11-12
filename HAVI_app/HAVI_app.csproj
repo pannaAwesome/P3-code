@@ -11,12 +11,17 @@
     <None Remove="Shared\Shared_layout\LayoutTables\**" />
   </ItemGroup>
 
+  
   <ItemGroup>
     <Folder Include="Data\" />
+    <Folder Include="Shared\Admin_layout\" />
+    <Folder Include="Shared\Purchaser_layout\" />
+    <Folder Include="wwwroot\images\Form_header_arrows\" />
   </ItemGroup>
 
+  
   <ItemGroup>
-    <PackageReference Include="BlazorTable" Version="1.13.1" />
+    <ProjectReference Include="..\BlazorTable\src\BlazorTable\BlazorTable.csproj" />
   </ItemGroup>
 
 </Project>
