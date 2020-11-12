@@ -1,82 +1,49 @@
 ﻿@page "/user_view"
 @layout HAVI_app.Shared.Admin_layout.Overview
 
-
-<h3>Overview of users in the system:</h3>
-<br />
 <div class="row">
-    <div class="col-2">
-        <input type="text" placeholder="Search..">
-    </div>
     <div class="col-10">
+        <h3>Overview of users in the system:</h3>
+    </div>
+    <div class="col-2">
         <NavLink class="nav-link" href="/create_purchaser1">
-            <button class="btn button-options-overview">Create purchaser</button>
+            <button class="btn button-options-overview"  data-toggle="modal" data-target="#create-purchaser">Create purchaser</button>
         </NavLink>
     </div>
 </div>
 <br />
 <div class="row">
     <div class="col-12">
-        <table class="table table-hover">
-
-            <thead>
-                <tr>
-                    <th scope="col">Username</th>
-                    <th scope="col">Country </th>
-                    <th scope="col">Type </th>
-                    <th scope="col">Option</th>
-                </tr>
-            </thead>
-
-            <tbody>
-
-                <tr>
-                    <td>Winnie@havi.com</td>
-                    <td>Denmark</td>
-                    <td>Purchaser</td>
-                    <td><button class="btn delete-button" data-toggle="modal" data-target="#MyModal">Delete</button></td>
-
-                    <div class="modal fade" id="MyModal" tabindex="-1" role="dialog" aria-labelledby="MyModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Are you sure you want to delete this user?</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    By deleting this user, all user specific information will be permanently deleted. This process is irreversible.
-                                </div>
-                                <div class="modal-footer">
-                                    <button class="btn delete-button" data-dismiss="modal">Yes, delete this user</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </tr>
-
-                <tr>
-                    <td>DKAdmin</td>
-                    <td>Denmark</td>
-                    <td>Admin</td>
-                    <td><button class="btn delete-button">Delete</button></td>
-
-                </tr>
-
-                <tr>
-                    <td>Monsters Inc.</td>
-                    <td>Sweden</td>
-                    <td>Supplier</td>
-                    <td><button class="btn delete-button">Delete</button></td>
-
-                </tr>
-
-            </tbody>
-        </table>
+       <HAVI_app.Shared.Admin_layout.User_table_admin/>
     </div>
 </div>
 
-@code {
+<div>
+    <div class="modal" id="create-purchaser">
+        <div class="modal-dialog">
+            <div class="modal-content">
 
-}
+
+                <div class="modal-header">
+                    <h4 class="modal-title">Create new purchaser</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+
+                <div class="modal-body">
+                    <form>
+                        <label for="purchaser">Email:</label>
+                        <input class="form-control" type="email" name="purchaser"/>
+                    </form>
+                </div>
+
+
+                <div class="modal-footer">
+                    <button class="btn cancel-button" data-dismiss="modal">Cancel</button>
+                    <button class="btn green-button" data-dismiss="modal">Transfer order</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

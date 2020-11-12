@@ -1,43 +1,37 @@
 ﻿@inherits LayoutComponentBase
-<div class="row">
-    <div class="col-6">
-        <HAVI_app.Shared.Shared_layout.Logo_image/>
+
+    <div class="container">
+        <div class="row">
+            <HAVI_app.Shared.Shared_layout.Logo_image />
+            <div class="col-1"></div>
+            <div class="col-8">
+                <NavLink class="nav-link button-overview-logout" href="/">
+                    Logout
+                </NavLink>
+                <NavLink class="nav-link button-overview" href="profile_admin">
+                    Profile
+                </NavLink>
+                <NavLink class="nav-link button-overview" href="country_view">
+                    Countries
+                </NavLink>
+                <NavLink class="nav-link button-overview" href="user_view">
+                    Users
+                </NavLink>
+                <NavLink class="nav-link button-overview" href="article_view">
+                    Article info
+                </NavLink>
+                <NavLink class="nav-link button-overview" href="overview_admin">
+                    Home
+                </NavLink>
+
+            </div>
+
+        </div>
+        <div class="gap-overview">
+
+        </div>
     </div>
 
-    <div class="col-6">
-
-        <NavLink class="nav-link button-overview" href="overview_admin">
-            <span class="oi oi-home" aria-hidden="true"></span> Home
-        </NavLink>
-
-        <NavLink class="nav-link button-overview" href="article_view">
-            <span class="oi oi-home" aria-hidden="true"></span> Orders
-        </NavLink>
-
-        <NavLink class="nav-link button-overview" href="user_view">
-            <span class="oi oi-home" aria-hidden="true"></span> Users
-        </NavLink>
-
-        <NavLink class="nav-link button-overview" href="country_view">
-            <span class="oi oi-home" aria-hidden="true"></span> Countries
-        </NavLink>
-
-        <NavLink class="nav-link button-overview" href="profile_admin">
-            <span class="oi oi-home" aria-hidden="true"></span> Profile
-        </NavLink>
-
-        <NavLink class="nav-link button-overview-logout" href="/">
-            <span class="oi oi-home" aria-hidden="true"></span> Logout
-        </NavLink>
-
+    <div class="container">
+        @Body
     </div>
-
-</div>
-<div class="gap-overview">
-
-</div>
-
-
-<div class="container">
-    @Body
-</div>

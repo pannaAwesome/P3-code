@@ -24,33 +24,31 @@
     --tab-white: #f2f2f2;
 }
 /*###################################################################################################################*/
-.button-overview {
+.button-overview, .button-overview-logout {
     background-color: var(--blue);
-    border: 1px var(--dark-blue);
     color: white;
-    padding: 20px 30px;
     text-align: center;
-    font-size: 14px;
-    float: left;
+    text-decoration: none;
+    display: inline-block;
+    float: right;
+    padding: 15px;
 }
     .button-overview:hover {
-        background-color: var(--dark-purple);
+        background-color: var(--dark-blue);
         color: white;
+        text-decoration: none;
     }
 
 .button-overview-logout {
-    background-color: var(--yellow);
-    border: 1px var(--dark-blue);
+    background-color: var(--red);
     color: white;
-    padding: 20px 30px;
     text-align: center;
-    font-size: 14px;
-    float: left;
 }
 
     .button-overview-logout:hover {
-        background-color: var(--red);
+        background-color: #b14562;
         color: white;
+        text-decoration: none;
     }
 
 .button-options-overview {
@@ -187,4 +185,11 @@
 
 .supplier-type {
     background-color: var(--green);
+}
+
+
+.overview-admin-header {
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: solid thin var(--blue);
 }

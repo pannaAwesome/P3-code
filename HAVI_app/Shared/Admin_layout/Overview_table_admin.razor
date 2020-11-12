@@ -6,11 +6,11 @@
 <div class="row">
     <div class="col-12">
         <Table TableItem="SupplierInfo" Items="supplierdata" ColumnReorder="true" TableHeadClass="purple-table-header" TableRowClass="@(x => x.RowClass)">
-            <Column TableItem="SupplierInfo" Title="Article name" Field="@(x => x.ArticleName)"  />
-            <Column TableItem="SupplierInfo" Title="Supplier name" Field="@(x => x.SupplierName)" />
-            <Column TableItem="SupplierInfo" Title="Vailed for customer" Field="@(x => x.VailedForCustomer)" />
-            <Column TableItem="SupplierInfo" Title="Buyer email" Field="@(x => x.BuyerEmail)" />
-            <Column TableItem="SupplierInfo" Title="State" Field="@(x => x.State)" Class="text-center" Width="100px">
+            <Column TableItem="SupplierInfo" Title="Article name" Field="@(x => x.ArticleName)"  Sortable="true"/>
+            <Column TableItem="SupplierInfo" Title="Supplier name" Field="@(x => x.SupplierName)"  Sortable="true" />
+            <Column TableItem="SupplierInfo" Title="Vailed for customer" Field="@(x => x.VailedForCustomer)"  Sortable="true" />
+            <Column TableItem="SupplierInfo" Title="Purchaser email" Field="@(x => x.PurchaserEmail)"  Sortable="true" />
+            <Column TableItem="SupplierInfo" Title="State" Field="@(x => x.State)" Class="text-center" Width="100px"  Sortable="true">
                 <Template>
                     <div class="@context.State.ToLower()-state state">@context.State</div>
                 </Template>
@@ -41,29 +41,21 @@
             };
     }
 
-    private void RowClicked(SupplierInfo data)
-    {
-        if (selectionType == SelectionType.None)
-        {
-            //Insert thing to do
-        }
-    }
-
     public class SupplierInfo
     {
-        public SupplierInfo(string articlename, string vailedforcustomer, string buyeremail, string suppliername, string state)
+        public SupplierInfo(string articlename, string vailedforcustomer, string purchaseremail, string suppliername, string state)
         {
             ArticleName = articlename;
             VailedForCustomer = vailedforcustomer;
             State = state;
             SupplierName = suppliername;
-            BuyerEmail = buyeremail;
+            PurchaserEmail = purchaseremail;
         }
 
         public string ArticleName { get; set; }
         public string VailedForCustomer { get; set; }
         public string SupplierName { get; set; }
-        public string BuyerEmail { get; set; }
+        public string PurchaserEmail { get; set; }
         public string State { get; set; }
 
         public string RowClass => "table tabel-row";
