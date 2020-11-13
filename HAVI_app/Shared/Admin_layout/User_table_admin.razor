@@ -15,7 +15,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn cancel-button" data-dismiss="modal">Close</button>
-                <button type="button" class="btn discard-button">Delete</button>
+                <button type="button" class="btn red-button">Delete</button>
             </div>
         </div>
     </div>
@@ -23,9 +23,9 @@
 <div class="row">
     <div class="col-12">
         <Table TableItem="SupplierInfo" Items="supplierdata" ColumnReorder="true" TableHeadClass="purple-table-header" TableRowClass="@(x => x.RowClass)" ShowSearchBar="true">
-            <Column TableItem="SupplierInfo" Title="User" Field="@(x => x.PurchaserEmail)" />
-            <Column TableItem="SupplierInfo" Title="Country" Field="@(x => x.Country)" />
-            <Column TableItem="SupplierInfo" Title="Type" Field="@(x => x.Type)" Class="text-center" Width="100px" DefaultSortColumn="true">
+            <Column TableItem="SupplierInfo" Title="User" Field="@(x => x.PurchaserEmail)" Sortable="true" />
+            <Column TableItem="SupplierInfo" Title="Country" Field="@(x => x.Country)" Sortable="true" />
+            <Column TableItem="SupplierInfo" Title="Type" Field="@(x => x.Type)" Class="text-center" Width="100px" DefaultSortColumn="true" Sortable="true">
                 <Template>
                     <div class="@context.Type.ToLower()-type state">@context.Type</div>
                 </Template>
@@ -58,7 +58,7 @@
     protected override void OnInitialized()
     {
         supplierdata = new SupplierInfo[]{
-            new SupplierInfo("winnie@havi.com", "Denmark", "Buyer"),
+            new SupplierInfo("winnie@havi.com", "Denmark", "Purchaser"),
             new SupplierInfo("winnie@havi.com", "Denmark", "Supplier")
             };
     }

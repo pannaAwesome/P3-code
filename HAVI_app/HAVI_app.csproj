@@ -15,6 +15,7 @@
   <ItemGroup>
     <Folder Include="Data\" />
     <Folder Include="Shared\Purchaser_layout\" />
+    <Folder Include="Shared\Shared_layout\HAVI_tabpages\NewFolder\" />
     <Folder Include="wwwroot\images\Form_header_arrows\" />
   </ItemGroup>
 

@@ -140,16 +140,19 @@
 }
 
 .country-buttons {
-    position:relative;
-    left: 400px;
-    top: 50px;
+    margin-top: 60px;
+}
+
+.create-row {
+    margin-top: 30px;
+    margin-bottom:10px;
 }
 
 
 /*#########################################Article_view##########################################################################*/
 
 .background-tabs{
-    background-color: lightgray;
+    background-color: var(--tab-white);
 }
 
 .navtabs-background {
@@ -175,7 +178,7 @@
     resize: none;
 }
 
-.buyer-type {
+.purchaser-type {
     background-color: var(--cyan);
 }
 

@@ -11,8 +11,8 @@
            aria-selected="false"><small class="nav-text">Supplier info</small></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link navtabs-background" id="Error-tab-just" data-toggle="tab" href="#Error-just" role="tab" aria-controls="Error-just"
-           aria-selected="false"><small class="nav-text">Report Error</small></a>
+        <a class="nav-link navtabs-background error-tab" id="Error-tab-just" data-toggle="tab" href="#Error-just" role="tab" aria-controls="Error-just"
+           aria-selected="false"><small class="nav-text error-tab">Report Error</small></a>
     </li>
 </ul>
 <div class="tab-content background-tabs" id="myTabContentJust">
@@ -740,36 +740,6 @@
         </div>
     </div>
     <div class="tab-pane fade" id="Error-just" role="tabpanel" aria-labelledby="Error-tab-just">
-        <h2>Describe the error:</h2>
-
-            <table class="error-table">
-                <thead></thead>
-                <thead></thead>
-                <tr>
-                    <td><b>Found in field: </b></td>
-                    <td><input type="text" /></td>
-                </tr>
-                <tr>
-                    <td><b>Description: </b></td>
-                    <td><textarea class="description" name="description" cols="25" rows="4" placeholder="Describe the error..."></textarea></td>
-                </tr>
-                <tr>
-                    <td><b>Found by: </b></td>
-                    <td><input type="text" /></td>
-                </tr>
-                <tr>
-                    <td>
-                        <NavLink class="nav-link button-save" href="overview_admin">
-                            <button class="btn green-button" aria-hidden="true">Return to overview</button>
-                        </NavLink>
-                    </td>
-                    <td>
-                        <NavLink class="nav-link button-save" href="overview_admin">
-                            <button class="btn green-button" aria-hidden="true">Report error</button>
-                        </NavLink>
-                    </td>
-                </tr>
-            </table>
-           <br /><br /><br />
+        <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Report_new_error/>
     </div>
 </div>

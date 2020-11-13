@@ -1,240 +1,244 @@
 ﻿@page "/create_country"
 @inject NavigationManager NavigationManager
 
-<HAVI_app.Shared.Shared_layout.Backgrounds.Green_background />
+<HAVI_app.Shared.Shared_layout.Backgrounds.Blue_background />
 <div class="container">
     <div class="row">
         <div class="col-12 form-layout">
-            <div>
+            <div class="row">
+                <div class="col-9"></div>
                 <HAVI_app.Shared.Shared_layout.Logo_image />
-                <h3>Create country:</h3>
             </div>
-                <form>
-                    <table>
-                        <tr>
-                            <td ><label for="country">Country:</label></td>
-                            <td > <input type="text" name="country" /> </td>
-                        </tr>
-                        <tr>
-                            <td ><label for="country-code">Country code:</label> </td>
-                            <td > <input type="text" name="country-code" /></td>
-                        </tr>
-                        <tr>
-                            <td colspan="4">Customers (vailed for customer field): </td>
-                        </tr>
-                        @for (int i = 1; i <= NumberOfCustomers; i++)
-                        {
+            <div class="row create-row justify-content-center">
+                <div class="col-10">
+                    <h3>Create country:</h3>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-10 d-flex align-content-center">
+                    <form>
+                        <table class="table">
+                            <tr>
+                                <td colspan="4"><h5>Country information: </h5></td>
+                            </tr>
+                            <tr>
+                                <td><label for="country">Country:</label></td>
+                                <td> <input type="text" name="country" /> </td>
+                            </tr>
+                            <tr>
+                                <td><label for="country-code">Country code:</label> </td>
+                                <td> <input type="text" name="country-code" /></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4"><h5>Customers: </h5></td>
+                            </tr>
+                            @for (int i = 1; i <= NumberOfCustomers; i++)
+                            {
+
+                                <tr>
+                                    <td>
+                                        <label for="customer-@i">Input customer name:</label>
+                                    </td>
+
+                                    <td>
+                                        <input type="text" name="customer-@i" />
+                                    </td>
+                                    @if (i == NumberOfCustomers)
+                                    {
+                                        <td @onclick="AddCustomer"> &#10133; </td>
+                                        @if (NumberOfCustomers != 1)
+                                        {
+                                            <td @onclick="RemoveCustomer"> &#10134;</td>
+                                        }
+                                    }
+                                </tr>
+                            }
+                            <tr>
+                                <td colspan="4"><h5>Company codes: </h5></td>
+                            </tr>
+                            @for (int i = 1; i <= NumberOfCodes; i++)
+                            {
+
+                                <tr>
+                                    <td>
+                                        <label for="code-@i">Input company code:</label>
+                                    </td>
+
+                                    <td>
+                                        <input type="text" name="code-@i" />
+                                    </td>
+                                    @if (i == NumberOfCodes)
+                                    {
+                                        <td @onclick="AddCode"> &#10133; </td>
+                                        @if (NumberOfCodes != 1)
+                                        {
+                                            <td @onclick="RemoveCode"> &#10134;</td>
+                                        }
+                                    }
+                                </tr>
+                            }
 
                             <tr>
-                                <td >
-                                    <label for="customer-@i">Input customer name and code:</label>
-                                </td>
-
-                                <td >
-                                    <input type="text" name="customer-@i" />
-                                </td>
-                                @if (i == NumberOfCustomers)
-                                {
-                                    <td  @onclick="AddCustomer"> &#10133; </td>
-                                    @if (NumberOfCustomers != 1)
-                                    {
-                                        <td  @onclick="RemoveCustomer"> &#10134;</td>
-                                    }
-                                }
+                                <td colspan="4"><h5>Supplier delivery units: </h5></td>
                             </tr>
-                        }
-                        <tr>
-                            <td colspan="4">Company codes: </td>
-                        </tr>
-                        @for (int i = 1; i <= NumberOfCodes; i++)
-                        {
+                            @for (int i = 1; i <= NumberOfUnits; i++)
+                            {
 
+                                <tr>
+                                    <td>
+                                        <label for="unit-@i">Input supplier delivery unit:</label>
+                                    </td>
+
+                                    <td>
+                                        <input type="text" name="unit-@i" />
+                                    </td>
+                                    @if (i == NumberOfUnits)
+                                    {
+                                        <td @onclick="AddUnit"> &#10133; </td>
+                                        @if (NumberOfUnits != 1)
+                                        {
+                                            <td @onclick="RemoveUnit"> &#10134;</td>
+                                        }
+                                    }
+                                </tr>
+                            }
                             <tr>
-                                <td >
-                                    <label for="code-@i">Input company code:</label>
-                                </td>
-
-                                <td >
-                                    <input type="text" name="code-@i" />
-                                </td>
-                                @if (i == NumberOfCodes)
-                                {
-                                    <td  @onclick="AddCode"> &#10133; </td>
-                                    @if (NumberOfCodes != 1)
-                                    {
-                                        <td  @onclick="RemoveCode"> &#10134;</td>
-                                    }
-                                }
+                                <td colspan="4"><h5>ILOS orderpickgroups: </h5></td>
                             </tr>
-                        }
+                            @for (int i = 1; i <= NumberOfOrders; i++)
+                            {
 
-                        <tr>
-                            <td colspan="4">Supplier delivery units: </td>
-                        </tr>
-                        @for (int i = 1; i <= NumberOfUnits; i++)
-                        {
+                                <tr>
+                                    <td>
+                                        <label for="order-@i">Input orderpickgroup:</label>
+                                    </td>
 
+                                    <td>
+                                        <input type="text" name="order-@i" />
+                                    </td>
+                                    @if (i == NumberOfOrders)
+                                    {
+                                        <td @onclick="AddOrder"> &#10133; </td>
+                                        @if (NumberOfOrders != 1)
+                                        {
+                                            <td @onclick="RemoveOrder"> &#10134;</td>
+                                        }
+                                    }
+                                </tr>
+                            }
                             <tr>
-                                <td >
-                                    <label for="unit-@i">Input supplier delivery unit:</label>
-                                </td>
-
-                                <td >
-                                    <input type="text" name="unit-@i" />
-                                </td>
-                                @if (i == NumberOfUnits)
-                                {
-                                    <td  @onclick="AddUnit"> &#10133; </td>
-                                    @if (NumberOfUnits != 1)
-                                    {
-                                        <td  @onclick="RemoveUnit"> &#10134;</td>
-                                    }
-                                }
+                                <td colspan="4"><h5>ILOS categories/accounts: </h5></td>
                             </tr>
-                        }
-                        <tr>
-                            <td colspan="4">ILOS orderpickgroups: </td>
-                        </tr>
-                        @for (int i = 1; i <= NumberOfOrders; i++)
-                        {
+                            @for (int i = 1; i <= NumberOfCat; i++)
+                            {
 
+                                <tr>
+                                    <td>
+                                        <label for="cat-@i">Input category or account:</label>
+                                    </td>
+
+                                    <td>
+                                        <input type="text" name="cat-@i" />
+                                    </td>
+                                    @if (i == NumberOfCat)
+                                    {
+                                        <td @onclick="AddCat"> &#10133; </td>
+                                        @if (NumberOfCat != 1)
+                                        {
+                                            <td @onclick="RemoveCat"> &#10134;</td>
+                                        }
+                                    }
+                                </tr>
+                            }
                             <tr>
-                                <td >
-                                    <label for="order-@i">Input orderpickgroup:</label>
-                                </td>
-
-                                <td >
-                                    <input type="text" name="order-@i" />
-                                </td>
-                                @if (i == NumberOfOrders)
-                                {
-                                    <td  @onclick="AddOrder"> &#10133; </td>
-                                    @if (NumberOfOrders != 1)
-                                    {
-                                        <td  @onclick="RemoveOrder"> &#10134;</td>
-                                    }
-                                }
+                                <td colspan="4"><h5>VAT/TAX codes: </h5></td>
                             </tr>
-                        }
-                        <tr>
-                            <td colspan="4">ILOS categories/accounts: </td>
-                        </tr>
-                        @for (int i = 1; i <= NumberOfCat; i++)
-                        {
+                            @for (int i = 1; i <= NumberOfTAX; i++)
+                            {
 
+                                <tr class="border-bottom">
+                                    <td>
+                                        <label for="tax-@i">Input VAT or TAX code:</label>
+                                    </td>
+
+                                    <td>
+                                        <input type="text" name="tax-@i" />
+                                    </td>
+                                    @if (i == NumberOfTAX)
+                                    {
+                                        <td @onclick="AddTAX"> &#10133; </td>
+                                        @if (NumberOfTAX != 1)
+                                        {
+                                            <td @onclick="RemoveTAX"> &#10134;</td>
+                                        }
+                                    }
+                                </tr>
+                            }
+                        </table>
+                        <table>
                             <tr>
-                                <td >
-                                    <label for="cat-@i">Input category or account:</label>
-                                </td>
-
-                                <td >
-                                    <input type="text" name="cat-@i" />
-                                </td>
-                                @if (i == NumberOfCat)
-                                {
-                                    <td  @onclick="AddCat"> &#10133; </td>
-                                    @if (NumberOfCat != 1)
-                                    {
-                                        <td  @onclick="RemoveCat"> &#10134;</td>
-                                    }
-                                }
+                                <td colspan="4"><h5>Primary DC ILOS codes: </h5></td>
                             </tr>
-                        }
-                        <tr>
-                            <td colspan="4">VAT/TAX codes: </td>
-                        </tr>
-                        @for (int i = 1; i <= NumberOfTAX; i++)
-                        {
+                            @for (int i = 1; i <= NumberOfPrim; i++)
+                            {
 
-                            <tr>
-                                <td >
-                                    <label for="tax-@i">Input VAT or TAX code:</label>
-                                </td>
+                                <tr>
+                                    <td>
+                                        <label for="prim-dc-@i">Input ILOS code:</label>
+                                    </td>
 
-                                <td >
-                                    <input type="text" name="tax-@i" />
-                                </td>
-                                @if (i == NumberOfTAX)
-                                {
-                                    <td  @onclick="AddTAX"> &#10133; </td>
-                                    @if (NumberOfTAX != 1)
+                                    <td>
+                                        <input type="text" name="prim-dc-@i" />
+                                    </td>
+                                    <td>
+                                        <label for="prim-sap-@i">SAP Plant for code:</label>
+                                    </td>
+
+                                    <td>
+                                        <input type="text" name="prim-sap-@i" />
+                                    </td>
+                                    @if (i == NumberOfPrim)
                                     {
-                                        <td  @onclick="RemoveTAX"> &#10134;</td>
+                                        <td @onclick="AddPrim"> &#10133; </td>
+                                        @if (NumberOfPrim != 1)
+                                        {
+                                            <td @onclick="RemovePrim"> &#10134;</td>
+                                        }
                                     }
-                                }
-                            </tr>
-                        }
-                        <tr>
-                            <td colspan="4">Primary DC ILOS codes: </td>
-                        </tr>
-                        @for (int i = 1; i <= NumberOfPrim; i++)
-                        {
-
-                            <tr>
-                                <td >
-                                    <label for="prim-dc-@i">Input DC ILOS code:</label>
-                                </td>
-
-                                <td >
-                                    <input type="text" name="prim-dc-@i" />
-                                </td>
-                                <td >
-                                    <label for="prim-sap-@i">Input SAP Plant for code:</label>
-                                </td>
-
-                                <td >
-                                    <input type="text" name="prim-sap-@i" />
-                                </td>
-                                @if (i == NumberOfPrim)
-                                {
-                                    <td  @onclick="AddPrim"> &#10133; </td>
-                                    @if (NumberOfPrim != 1)
-                                    {
-                                        <td  @onclick="RemovePrim"> &#10134;</td>
-                                    }
-                                }
-                            </tr>
-                        }
-                    </table>
-
-                    <table class="country-buttons">
-                        <tr>
-                            <td>
-                                <NavLink class="nav-link button-save" href="country_view">
-                                    <button class="btn green-button" aria-hidden="true">Return to overview</button>
-                                </NavLink>
-                            </td>
-                            <td> <input type="submit" value="Create" class="btn green-button" data-toggle="modal" data-target="#myModal" /></td>
-                        </tr>
-                    </table>
-                </form>
+                                </tr>
+                            }
+                        </table>
+                    </form>
+                        
+                </div>
+            </div>
+            <div class="row country-buttons">
+                <div class="col-6 text-right"> <button class="btn cancel-button" @onclick="ReturnToOverview">Return to overview</button></div>
+                <div class="col-6 text-left"><button class="btn green-button" data-toggle="modal" data-target="#country-created">Create</button></div>
+            </div>
         </div>
     </div>
 </div>
-<div class="modal" id="myModal">
+<div class="modal fade" id="country-created" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-
-
             <div class="modal-header">
-                <h4 class="modal-title">New country created!</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h5 class="modal-title" id="exampleModalLabel">New country created!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-
-
             <div class="modal-body">
                 Country: Denmark <br />
                 Country-code: DK <br />
             </div>
-
-
-            <div class="modal-footer">
-                <button class="btn green-button" data-dismiss="modal" @onclick="ReturnToOverview">Return to overview</button>
+            <div class="modal-footer d-flex justify-content-center">
+                <button type="button" class="btn cancel-button" @onclick="ReturnToOverview">Return to overview</button>
             </div>
-
         </div>
     </div>
 </div>
+
 @code{
     private void ReturnToOverview()
     {

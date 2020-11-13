@@ -81,11 +81,11 @@
 
                         <tr>
                             <td>
-                                <label for="afgift-@NumberOfOtherCosts">Inform cost type:</label>
+                                <label for="afgift-@i">Inform cost type:</label>
                             </td>
 
                             <td>
-                                <select class="form-control" name="afgift-@NumberOfOtherCosts" required>
+                                <select class="form-control" name="afgift-@i" required>
                                     <option disabled selected>-- select an option --</option>
                                     <option>Chokoladeafgift</option>
                                     <option>Miljøafgift</option>
@@ -93,10 +93,10 @@
                                 </select>
                             </td>
                             <td>
-                                <label for="amount-@NumberOfOtherCosts">Amount in @Currency:</label>
+                                <label for="amount-@i">Amount in @Currency:</label>
                             </td>
                             <td>
-                                <input type="number" class="form-control" name="amount-@NumberOfOtherCosts" required @onblur="Sum">
+                                <input type="number" class="form-control" name="amount-@i" required @onblur="Sum">
                             </td>
                             @if (i == NumberOfOtherCosts)
                             {

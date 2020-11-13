@@ -40,11 +40,11 @@
     
     <div class="col-12">
         <Table TableItem="SupplierInfo" Items="supplierdata" ColumnReorder="true" TableClass="table table-hover" TableHeadClass="blue-tabel-header" TableRowClass="@(x => x.RowClass)" RowClickAction="RowClicked" ShowSearchBar="true">
-            <Column TableItem="SupplierInfo" Title="Article name" Field="@(x => x.ArticleName)" />
-            <Column TableItem="SupplierInfo" Title="Supplier name" Field="@(x => x.SupplierName)" />
-            <Column TableItem="SupplierInfo" Title="Vailed for customer" Field="@(x => x.VailedForCustomer)" />
-            <Column TableItem="SupplierInfo" Title="Buyer email" Field="@(x => x.BuyerEmail)" />
-            <Column TableItem="SupplierInfo" Title="State" Field="@(x => x.State)" Class="text-center" Width="100px" DefaultSortColumn="true">
+            <Column TableItem="SupplierInfo" Title="Article name" Field="@(x => x.ArticleName)" Sortable="true"/>
+            <Column TableItem="SupplierInfo" Title="Supplier name" Field="@(x => x.SupplierName)" Sortable="true" />
+            <Column TableItem="SupplierInfo" Title="Vailed for customer" Field="@(x => x.VailedForCustomer)" Sortable="true" />
+            <Column TableItem="SupplierInfo" Title="Buyer email" Field="@(x => x.BuyerEmail)" Sortable="true" />
+            <Column TableItem="SupplierInfo" Title="State" Field="@(x => x.State)" Class="text-center" Width="100px" DefaultSortColumn="true" Sortable="true" >
                 <Template>
                     <div class="@context.State.ToLower()-state state">@context.State</div>
                 </Template>

@@ -15,7 +15,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn cancel-button" data-dismiss="modal">Close</button>
-                <button type="button" class="btn discard-button">Delete</button>
+                <button type="button" class="btn red-button">Delete</button>
             </div>
         </div>
     </div>
@@ -24,9 +24,9 @@
 <div class="row">
     <div class="col-12">
         <Table TableItem="SupplierInfo" Items="supplierdata" ColumnReorder="true" TableHeadClass="purple-table-header" TableRowClass="@(x => x.RowClass)" ShowSearchBar="true">
-            <Column TableItem="SupplierInfo" Title="Country" Field="@(x => x.Country)" DefaultSortColumn="true"/>
-            <Column TableItem="SupplierInfo" Title="Country code" Field="@(x => x.Countrycode)" />
-            <Column TableItem="SupplierInfo" Title="Admin" Field="@(x => x.Admin)" />
+            <Column TableItem="SupplierInfo" Title="Country" Field="@(x => x.Country)" DefaultSortColumn="true" Sortable="true"/>
+            <Column TableItem="SupplierInfo" Title="Country code" Field="@(x => x.Countrycode)" Sortable="true" />
+            <Column TableItem="SupplierInfo" Title="Admin" Field="@(x => x.Admin)" Sortable="true" />
             <Column TableItem="SupplierInfo" Title="" Field="@(x => x.Country)">
                 <Template>
                     <button class="btn green-button" @onclick="@((x) => EditCountry(context.Country))">Edit</button>
