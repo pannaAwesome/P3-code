@@ -15,7 +15,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn cancel-button" data-dismiss="modal">Close</button>
-                <button type="button" class="btn discard-button">Delete</button>
+                <button type="button" class="btn red-button">Delete</button>
             </div>
         </div>
     </div>
@@ -39,11 +39,11 @@
 <div class="row">
     
     <div class="col-12">
-        <Table TableItem="SupplierInfo" Items="supplierdata" ColumnReorder="true" TableClass="table table-hover" TableHeadClass="blue-tabel-header" TableRowClass="@(x => x.RowClass)" RowClickAction="RowClicked" ShowSearchBar="true">
+        <Table TableItem="SupplierInfo" Items="supplierdata" ColumnReorder="true" TableClass="table table-hover" TableHeadClass="blue-tabel-header" TableRowClass="@(x => x.RowClass)" RowClickAction="RowClicked" ShowSearchBar="true" SelectionType="selectionType" SelectedItems="selectedItems">
             <Column TableItem="SupplierInfo" Title="Article name" Field="@(x => x.ArticleName)" Sortable="true"/>
             <Column TableItem="SupplierInfo" Title="Supplier name" Field="@(x => x.SupplierName)" Sortable="true" />
             <Column TableItem="SupplierInfo" Title="Vailed for customer" Field="@(x => x.VailedForCustomer)" Sortable="true" />
-            <Column TableItem="SupplierInfo" Title="Buyer email" Field="@(x => x.BuyerEmail)" Sortable="true" />
+            <Column TableItem="SupplierInfo" Title="Purchaser email" Field="@(x => x.BuyerEmail)" Sortable="true" />
             <Column TableItem="SupplierInfo" Title="State" Field="@(x => x.State)" Class="text-center" Width="100px" DefaultSortColumn="true" Sortable="true" >
                 <Template>
                     <div class="@context.State.ToLower()-state state">@context.State</div>

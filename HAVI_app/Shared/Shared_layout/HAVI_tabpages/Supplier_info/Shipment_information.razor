@@ -1,0 +1,156 @@
+﻿<div class="col-6 havi-info-box">
+
+    <div class="row justify-content-right">
+        <div class="col-11">
+            <h4> Shipment Information:</h4>
+        </div>
+        <div class="col-1">
+            @if (EditingFields)
+            {
+                <div class="save-button" @onclick="Saving"></div>
+            }
+            else
+            {
+                <div class="edit-button" @onclick="Editing"></div>
+            }
+
+        </div>
+    </div>    
+    <table class="table table-borderless">
+        <tr>
+            <td colspan="3">
+                <label for="carton_pr_pallet">Cartons per pallet:</label>
+            </td>
+            <td colspan="3">
+                <input type="number" class="form-control" id="carton_pr_pallet" value="1" disabled>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="3">
+                <label for="carton_pr_layer">Cartons per layer:</label>
+            </td>
+            <td colspan="3">
+                <input type="number" class="form-control" value="1" disabled>
+            </td>
+        </tr>
+
+
+        <tr>
+            <td colspan="3">
+                <label for="country_origin">Country of origin:</label>
+            </td>
+            <td colspan="3">
+                <input type="text" class="form-control" value="Denmark" disabled>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="3">
+                <label for="imported_from">Imported from:</label>
+            </td>
+            <td colspan="3">
+                <input type="text" class="form-control" value="Denmark" disabled>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="3">
+                <label for="toll_tarrif_no">Toll-tarrif no:</label>
+            </td>
+            <td colspan="3">
+                <input type="number" class="form-control" id="toll_tarrif_no" value="2" disabled>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="3">
+                <label for="minimum_order_quantity">Minimum order quantity:</label>
+            </td>
+            <td colspan="3">
+                <input type="number" class="form-control" id="minimum_order_quantity" value="10" disabled>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="6">
+                    <label for="temprature_during_transportation">Temperature during transportation:</label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                    <label class="center-for-units" for="min">Min:</label>
+            </td>
+            <td>
+                    <input type="number" class="form-control" id="min" value="2" disabled>
+            </td>
+            <td>
+                    <label class="center-for-units" for="degrees">&#8451;</label>
+            </td>
+            <td>
+                    <label class="center-for-units" for="max">Max:</label>
+            </td>
+            <td>
+                    <input type="number" class="form-control" id="max" value="4" disabled>
+            </td>
+            <td>
+                    <label class="center-for-units" for="degrees">&#8451;</label>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="6">
+                <label for="temprature_storage">Storage temperature requirements:</label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                    <label class="center-for-units" for="min">Min:</label>
+            </td>
+            <td>
+                    <input type="number" class="form-control" id="min" value="5" disabled>
+            </td>
+            <td>
+                    <label class="center-for-units" for="degrees">&#8451;</label>
+            </td>
+            <td>
+                    <label class="center-for-units" for="max">Max:</label>
+            </td>
+            <td>
+                    <input type="number" class="form-control" id="max" value="2" disabled>
+            </td>
+            <td>
+                    <label class="center-for-units" for="degrees">&#8451;</label>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="2">
+                <label for="lead_time">Lead time:</label>
+            </td>
+            <td colspan="2">
+                <input type="number" class="form-control" id="lead_time" value="5" disabled>
+            </td>
+            <td colspan="2">
+                <div class="text-right">
+                    <label class="center-for-units" for="lead_time">days</label>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+
+@code {
+
+    private bool EditingFields = false;
+
+    private void Editing()
+    {
+        EditingFields = true;
+    }
+
+    private void Saving()
+    {
+        EditingFields = false;
+    }
+}

@@ -1,0 +1,94 @@
+﻿<div class="col-6 havi-info-box">
+<div class="row justify-content-right">
+    <div class="col-11">
+        <h4> Measurements:</h4>
+    </div>
+    <div class="col-1">
+        @if (EditingFields)
+        {
+            <div class="save-button" @onclick="Saving"></div>
+        }
+        else
+        {
+            <div class="edit-button" @onclick="Editing"></div>
+        }
+
+    </div>
+</div>
+<table class="table table-borderless">
+    <tr>
+        <td>
+            <label for="length">Length per salesunit:</label>
+        </td>
+        <td>
+            <input type="number" class="form-control" id="Length" value="3" disabled>
+        </td>
+        <td>
+            <label class="center-for-units" for="length">cm</label>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <label for="width">Width per salesunit:</label>
+        </td>
+        <td>
+            <input type="number" class="form-control" id="width" value="12" disabled>
+        </td>
+        <td>
+            <label class="center-for-units" for="width">cm</label>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <label for="height">Height per salesunit:</label>
+        </td>
+        <td>
+            <input type="number" class="form-control" id="height" value="10" disabled>
+        </td>
+        <td>
+            <label class="center-for-units" for="height">cm</label>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <label for="net_weight">Net weight per salesunit:</label>
+        </td>
+        <td>
+            <input type="number" class="form-control" id="net_weight" value="12" disabled>
+        </td>
+        <td>
+            <label class="center-for-units" for="net_weight">kg</label>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <label for="gross_weight">Gross weight per salesunit:</label>
+        </td>
+        <td>
+            <input type="number" class="form-control" id="gross_weight" value="113" disabled>
+        </td>
+        <td>
+            <label class="center-for-units" for="gross_weight">kg</label>
+        </td>
+    </tr>
+</table>
+</div>
+
+@code {
+
+private bool EditingFields = false;
+
+private void Editing()
+{
+    EditingFields = true;
+}
+
+private void Saving()
+{
+    EditingFields = false;
+}
+}
