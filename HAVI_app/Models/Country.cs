@@ -12,9 +12,9 @@ namespace HAVI_app.Models
         public string CountryName { get; set; }
         public string CountryCode { get; set; }
 
-        public ICollection<Purchaser> Purchasers { get; set; }
-        public ICollection<Article> Articles { get; set; }
+        public virtual ICollection<Purchaser> Purchasers { get; set; }
+        public virtual ICollection<Article> Articles { get; set; }
 
-        public Profile Profiles { get; set; }
+        public virtual Profile Profiles { get; set; }
     }
 }

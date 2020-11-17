@@ -11,7 +11,7 @@ namespace HAVI_app.Models
         public string Orderpickgroup { get; set; }
         public int CountryID { get; set; }
 
-        public Country Countries { get; set; }
+        public virtual Country Countries { get; set; }
 
     }
 }

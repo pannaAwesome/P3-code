@@ -43,14 +43,14 @@ namespace HAVI_app.Models
         //Pick Storage
         public string PrimaryDC_ILOSCode { get; set; }
 
-        public ICollection<SAPPlant> SAPPlants { get; set; }
+        public virtual ICollection<SAPPlant> SAPPlants { get; set; }
 
         //Bundles
-        public ICollection<Bundles> BundleInformation { get; set; }
+        public virtual ICollection<Bundles> BundleInformation { get; set; }
 
         //QIP
-        public ICollection<QIP> QIPInformation { get; set; }
+        public virtual ICollection<QIP> QIPInformation { get; set; }
 
-        public InternalArticleInformation InternalArticleInformations { get; set; }
+        public virtual InternalArticleInformation InternalArticleInformations { get; set; }
     }
 }
