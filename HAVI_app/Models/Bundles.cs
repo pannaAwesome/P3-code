@@ -12,6 +12,6 @@ namespace HAVI_app.Models
         public string ArticleBundle { get; set; }
         public int ArticleBundleQuantity { get; set; }
 
-        public InternalArticleInformation InternalArticleInformations { get; set; }
+        public virtual InternalArticleInformation InternalArticleInformations { get; set; }
     }
 }

@@ -19,6 +19,6 @@ namespace HAVI_app.Models
         public string QIPFrequencyType { get; set; }
         public string QIPFrequency { get; set; }
 
-        public InternalArticleInformation InternalArticleInformations { get; set; }
+        public virtual InternalArticleInformation InternalArticleInformations { get; set; }
     }
 }

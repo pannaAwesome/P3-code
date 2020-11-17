@@ -11,8 +11,8 @@ namespace HAVI_app.Models
         public int ProfileID { get; set; }
         public int CountryID { get; set; }
 
-        public ICollection<Article> Articles { get; set; } 
-        public Country Countries { get; set; }
-        public Profile Profiles { get; set; }
+        public virtual ICollection<Article> Articles { get; set; } 
+        public virtual Country Countries { get; set; }
+        public virtual Profile Profiles { get; set; }
     }
 }

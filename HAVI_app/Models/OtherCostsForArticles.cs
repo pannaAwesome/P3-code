@@ -12,6 +12,6 @@ namespace HAVI_app.Models
         public string InformCostType { get; set; }
         public float Amount { get; set; }
 
-        public ArticleInformation ArticleInformations { get; set; }
+        public virtual ArticleInformation ArticleInformations { get; set; }
     }
 }
