@@ -11,7 +11,7 @@ namespace HAVI_app.Models
         public string PrimaryCode { get; set; }
         public string SAPPlant { get; set; }
         public int CountryID { get; set; }
-        public virtual Country Countries { get; set; }
+        public virtual Country Country { get; set; }
 
     }
 }
