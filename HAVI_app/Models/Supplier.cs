@@ -14,7 +14,7 @@ namespace HAVI_app.Models
         public bool PalletExchange { get; set; }
         public string FreightResponsibility { get; set; }
 
-        public ICollection<Article> Articles { get; set; }
-        public Profile Profiles { get; set; }
+        public virtual ICollection<Article> Articles { get; set; }
+        public virtual Profile Profiles { get; set; }
     }
 }

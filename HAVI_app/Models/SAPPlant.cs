@@ -12,6 +12,6 @@ namespace HAVI_app.Models
         public string SAPPlantName { get; set; }
         public bool SAPPlantValue { get; set; }
 
-        public InternalArticleInformation InternalArticleInformations { get; set; }
+        public virtual InternalArticleInformation InternalArticleInformations { get; set; }
     }
 }
