@@ -1,12 +1,3 @@
 {
-  "dependencies": {
-    "secrets1": {
-      "type": "secrets.user"
-    },
-    "mssql1": {
-      "type": "mssql.local",
-      "connectionId": "HAVI_database_connection",
-      "secretStore": "LocalSecretsFile"
-    }
-  }
+  "dependencies": {}
 }
