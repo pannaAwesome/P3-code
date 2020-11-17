@@ -1,8 +1,10 @@
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore;
+using HAVI_app.Data;
 
 namespace HAVI_app
 {
@@ -21,6 +23,10 @@ namespace HAVI_app
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
+
+            services.AddDbContext<ArticleContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("ArticleContext")));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

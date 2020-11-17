@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 
 namespace HAVI_app.Models
 {
-    public class Bundles
+    public class Bundle
     {
         public int ID { get; set; }
         public int InternalArticleInformationID { get; set; }
         public string ArticleBundle { get; set; }
         public int ArticleBundleQuantity { get; set; }
 
-        public virtual InternalArticleInformation InternalArticleInformations { get; set; }
+        public virtual InternalArticleInformation InternalArticleInformation { get; set; }
     }
 }

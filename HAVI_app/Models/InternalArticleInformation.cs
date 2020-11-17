@@ -8,14 +8,13 @@ namespace HAVI_app.Models
     public class InternalArticleInformation
     {
         public int ID { get; set; }
-        public int InternalArticleInformationID { get; set; }
         //HAVI Internal Information
         public int CompanyCode { get; set; }
         public int SupplierID_ILOS { get; set; }
         public bool SupplierDeliveryUnit { get; set; }
         public int RemainSelfStoreValue { get; set; }
         public string ILOSOrderPickGroup { get; set; }
-        public string ILOSTempGroups { get; set; }
+        public string ILOSSortGroup { get; set; }
         public int NewILOSArticleNumber { get; set; }
         public int ReferenceILOSNumber { get; set; }
         public int ReferenceSAPMaterialNumber { get; set; }
@@ -43,14 +42,12 @@ namespace HAVI_app.Models
         //Pick Storage
         public string PrimaryDC_ILOSCode { get; set; }
 
-        public virtual ICollection<SAPPlant> SAPPlants { get; set; }
+        public virtual ICollection<SAPPlant> SAPPlant { get; set; }
 
         //Bundles
-        public virtual ICollection<Bundles> BundleInformation { get; set; }
+        public virtual ICollection<Bundle> Bundles { get; set; }
 
         //QIP
-        public virtual ICollection<QIP> QIPInformation { get; set; }
-
-        public virtual InternalArticleInformation InternalArticleInformations { get; set; }
+        public virtual ICollection<QIP> QIP { get; set; }
     }
 }

@@ -8,7 +8,6 @@ namespace HAVI_app.Models
     public class ArticleInformation
     {
         public int ID { get; set; }
-        public int ArticleID { get; set; }
         public string CompanyName { get; set; }
         public string CompanyLocation { get; set; }
         public string Email { get; set; }
@@ -47,8 +46,6 @@ namespace HAVI_app.Models
         public string SetCurrency { get; set; }
         public float PurchasePrice { get; set; }
         public bool OtherCosts { get; set; }
-
-        public Article Articles { get; set; }
-        public ICollection<OtherCostsForArticles> OtherCostForArticle { get; set; }
+        public virtual ICollection<OtherCostsForArticle> OtherCostForArticle { get; set; }
     }
 }

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace HAVI_app.Models
 {
-    public class OtherCostsForArticles
+    public class OtherCostsForArticle
     {
         public int ID { get; set; }
         public int ArticleInformationID { get; set; }

@@ -1,0 +1,116 @@
+﻿@page
+@model HAVI_app.Pages.Contexts.IndexModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Article[0].VailedForCustomer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Article[0].DateCreated)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Article[0].ArticleInformationCompleted)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Article[0].InternalArticleInformationCompleted)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Article[0].ArticleState)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Article[0].ErrorReported)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Article[0].ErrorMessage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Article[0].ErrorOwner)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Article[0].Purchaser)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Article[0].Country)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Article[0].Supplier)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Article[0].ArticleInformation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Article[0].InternalArticleInformation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Article) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.VailedForCustomer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateCreated)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArticleInformationCompleted)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InternalArticleInformationCompleted)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArticleState)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ErrorReported)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ErrorMessage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ErrorOwner)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Purchaser.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Country.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Supplier.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ArticleInformation.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InternalArticleInformation.ID)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</body>
+</html>

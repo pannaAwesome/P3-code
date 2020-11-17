@@ -5,9 +5,12 @@ using System.Threading.Tasks;
 
 namespace HAVI_app.Models
 {
-    public class ArticleBundles
+    public class ILOSCategory
     {
         public int ID { get; set; }
-        public string Bundle { get; set; }
+        public string Category { get; set; }
+        public int CountryID { get; set; }
+
+        public virtual Country Country { get; set; }
     }
 }

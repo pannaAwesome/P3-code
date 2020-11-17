@@ -23,11 +23,11 @@ namespace HAVI_app.Models
         public string ErrorMessage { get; set; }
         public string ErrorOwner { get; set; }
 
-        public virtual Purchaser Purchasers { get; set; }
-        public virtual Country Countries { get; set; }
-        public virtual Supplier Suppliers { get; set; }
-        public virtual ArticleInformation ArticleInformations {get; set;}
-        public virtual InternalArticleInformation InternalArticleInformations { get; set; }
+        public virtual Purchaser Purchaser { get; set; }
+        public virtual Country Country { get; set; }
+        public virtual Supplier Supplier { get; set; }
+        public virtual ArticleInformation ArticleInformation { get; set; }
+        public virtual InternalArticleInformation InternalArticleInformation { get; set; }
 
     }
 }
