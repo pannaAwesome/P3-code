@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace HAVI_app.Models
 {
-    public class InformCostType
+    public class VailedForCustomer
     {
         public int ID { get; set; }
-        public string CostType { get; set; }
+        public string Customer { get; set; }
         public string CountryCode { get; set; }
     }
 }

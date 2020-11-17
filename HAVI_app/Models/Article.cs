@@ -13,7 +13,8 @@ namespace HAVI_app.Models
         public int AdminID { get; set; }
         public int SupplierID { get; set; }
         public int ArticleInformationID { get; set; }
-        public int InternalArticleInformationID { get; set; }   
+        public int InternalArticleInformationID { get; set; }
+        public string VailedForCustomer { get; set; }
         public DateTime DateCreated { get; set; }
         public bool ArticleInformationCompleted { get; set; }
         public bool InternalArticleInformationCompleted { get; set; }
