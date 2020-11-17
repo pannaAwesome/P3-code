@@ -10,7 +10,8 @@ namespace HAVI_app.Models
         public int ID { get; set; }
         public string PrimaryCode { get; set; }
         public string SAPPlant { get; set; }
-        public string CountryCode { get; set; }
+        public int CountryID { get; set; }
+        public Country Countries { get; set; }
 
     }
 }

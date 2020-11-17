@@ -7,6 +7,8 @@ namespace HAVI_app.Models
 {
     public class InternalArticleInformation
     {
+        public int ID { get; set; }
+        public int InternalArticleInformationID { get; set; }
         //HAVI Internal Information
         public int CompanyCode { get; set; }
         public int SupplierID_ILOS { get; set; }
@@ -40,24 +42,15 @@ namespace HAVI_app.Models
 
         //Pick Storage
         public string PrimaryDC_ILOSCode { get; set; }
-        public bool SAPPlant_0640 { get; set; }
-        public bool SAPPlant_0650 { get; set; }
-        public bool SAPPlant_0660 { get; set; }
+
+        public ICollection<SAPPlant> SAPPlants { get; set; }
 
         //Bundles
-        public string ArticleBundle { get; set; }
-        public int ArticleBundleQuantity { get; set; }
+        public ICollection<Bundles> BundleInformation { get; set; }
 
         //QIP
-        public string QIPNumberAndName { get; set; }
-        public string QIPDescription { get; set; }
-        public string QIPAnswerOption { get; set; }
-        public string QIPSetAnswer { get; set; }
-        public string QIPOKValue { get; set; }
-        public string QIPLowBoundary { get; set; }
-        public string QIPHighBoundary { get; set; }
-        public string QIPFrequencyType { get; set; }
-        public string QIPFrequency { get; set; }
+        public ICollection<QIP> QIPInformation { get; set; }
 
+        public InternalArticleInformation InternalArticleInformations { get; set; }
     }
 }

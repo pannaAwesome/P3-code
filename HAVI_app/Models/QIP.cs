@@ -18,5 +18,7 @@ namespace HAVI_app.Models
         public string QIPHighBoundary { get; set; }
         public string QIPFrequencyType { get; set; }
         public string QIPFrequency { get; set; }
+
+        public InternalArticleInformation InternalArticleInformations { get; set; }
     }
 }

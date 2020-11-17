@@ -9,6 +9,9 @@ namespace HAVI_app.Models
     {
         public int ID { get; set; }
         public string CostType { get; set; }
-        public string CountryCode { get; set; }
+        public int CountryID { get; set; }
+
+        public Country Countries { get; set; }
+
     }
 }

@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 
 namespace HAVI_app.Models
 {
-    public class Bundles
+    public class SAPPlant
     {
         public int ID { get; set; }
         public int InternalArticleInformationID { get; set; }
-        public string ArticleBundle { get; set; }
-        public int ArticleBundleQuantity { get; set; }
+        public string SAPPlantName { get; set; }
+        public bool SAPPlantValue { get; set; }
 
         public InternalArticleInformation InternalArticleInformations { get; set; }
     }

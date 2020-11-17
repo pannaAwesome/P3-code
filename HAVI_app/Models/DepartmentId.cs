@@ -5,13 +5,9 @@ using System.Threading.Tasks;
 
 namespace HAVI_app.Models
 {
-    public class VatTaxCode
+    public class DepartmentId
     {
         public int ID { get; set; }
-        public string Code { get; set; }
-        public int CountryID { get; set; }
-
-        public Country Countries { get; set; }
-
+        public string Department { get; set; }
     }
 }

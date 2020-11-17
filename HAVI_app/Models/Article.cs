@@ -10,7 +10,7 @@ namespace HAVI_app.Models
     {
         public int ID { get; set; }
         public int PurchaserID { get; set; }
-        public int AdminID { get; set; }
+        public int CountryID { get; set; }
         public int SupplierID { get; set; }
         public int ArticleInformationID { get; set; }
         public int InternalArticleInformationID { get; set; }
@@ -22,5 +22,12 @@ namespace HAVI_app.Models
         public bool ErrorReported { get; set; }
         public string ErrorMessage { get; set; }
         public string ErrorOwner { get; set; }
+
+        public Purchaser Purchasers { get; set; }
+        public Country Countries { get; set; }
+        public Supplier Suppliers { get; set; }
+        public ArticleInformation ArticleInformations {get; set;}
+        public InternalArticleInformation InternalArticleInformations { get; set; }
+
     }
 }

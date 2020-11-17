@@ -48,6 +48,7 @@ namespace HAVI_app.Models
         public float PurchasePrice { get; set; }
         public bool OtherCosts { get; set; }
 
+        public Article Articles { get; set; }
         public ICollection<OtherCostsForArticles> OtherCostForArticle { get; set; }
     }
 }
