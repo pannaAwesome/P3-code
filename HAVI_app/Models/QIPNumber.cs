@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
+#nullable disable
 
 namespace HAVI_app.Models
 {
-    public class QIPNumber
+    public partial class Qipnumber
     {
-        public int ID { get; set; }
-        public string QipNumberName { get; set; }
-        public string QipDescription { get; set; }
+        public int Id { get; set; }
+        public string QipnumberName { get; set; }
+        public string Qipdesribtion { get; set; }
         public string AnswerOptions { get; set; }
     }
 }

@@ -1,20 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
+#nullable disable
 
 namespace HAVI_app.Models
 {
-    public class Supplier
+    public partial class Supplier
     {
-        public int ID { get; set; }
-        public int ProfileID { get; set; }
+        public Supplier()
+        {
+            Articles = new HashSet<Article>();
+        }
+
+        public int Id { get; set; }
+        public int? ProfileId { get; set; }
         public string CompanyName { get; set; }
         public string CompanyLocation { get; set; }
-        public bool PalletExchange { get; set; }
+        public int? PalletExchange { get; set; }
         public string FreightResponsibility { get; set; }
 
-        public virtual ICollection<Article> Article { get; set; }
-        public virtual Profile Profile { get; set; }
+        public virtual ICollection<Article> Articles { get; set; }
     }
 }

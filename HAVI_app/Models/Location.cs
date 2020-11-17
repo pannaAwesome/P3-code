@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
+#nullable disable
 
 namespace HAVI_app.Models
 {
-    public class Location
+    public partial class Location
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string Country { get; set; }
     }
 }

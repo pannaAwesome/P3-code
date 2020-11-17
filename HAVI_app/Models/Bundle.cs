@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
+#nullable disable
 
 namespace HAVI_app.Models
 {
-    public class Bundle
+    public partial class Bundle
     {
-        public int ID { get; set; }
-        public int InternalArticleInformationID { get; set; }
+        public int Id { get; set; }
+        public int? InternalArticleInformation { get; set; }
         public string ArticleBundle { get; set; }
-        public int ArticleBundleQuantity { get; set; }
-
-        public virtual InternalArticleInformation InternalArticleInformation { get; set; }
+        public int? ArticleBundleQuantity { get; set; }
     }
 }

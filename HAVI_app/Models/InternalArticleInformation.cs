@@ -1,53 +1,47 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
+#nullable disable
 
 namespace HAVI_app.Models
 {
-    public class InternalArticleInformation
+    public partial class InternalArticleInformation
     {
-        public int ID { get; set; }
-        //HAVI Internal Information
-        public int CompanyCode { get; set; }
-        public int SupplierID_ILOS { get; set; }
-        public bool SupplierDeliveryUnit { get; set; }
-        public int RemainSelfStoreValue { get; set; }
-        public string ILOSOrderPickGroup { get; set; }
-        public string ILOSSortGroup { get; set; }
-        public int NewILOSArticleNumber { get; set; }
-        public int ReferenceILOSNumber { get; set; }
-        public int ReferenceSAPMaterialNumber { get; set; }
-        public string ILOSCategory { get; set; }
-        public string VAT_TAXCode { get; set; }
-        public string DeparmentID { get; set; }
-        public string InnerpackingILOS { get; set; }
+        public InternalArticleInformation()
+        {
+            Articles = new HashSet<Article>();
+        }
+
+        public int Id { get; set; }
+        public int? SupplierIdIlos { get; set; }
+        public int? CompanyCode { get; set; }
+        public int? SupplierDeliveryUnit { get; set; }
+        public int? RemainShelfStore { get; set; }
+        public string IlosorderPickGroup { get; set; }
+        public string IlossortGroup { get; set; }
+        public int? NewIlosarticleNumber { get; set; }
+        public int? ReferenceIlosnumber { get; set; }
+        public int? ReferenceSapmaterial { get; set; }
+        public string Iloscategory { get; set; }
+        public string VatTaxcode { get; set; }
+        public string DepartmentId { get; set; }
+        public string InnerPackingIlos { get; set; }
         public string TextPurchaseNumber { get; set; }
-        public bool RegisterSelfLife { get; set; }
+        public int? RegisterShelfLife { get; set; }
         public string ClassificationCode { get; set; }
         public string PackagingGroup { get; set; }
+        public int? EanSap { get; set; }
+        public int? GrinSap { get; set; }
+        public int? BosSap { get; set; }
+        public int? Eannumber { get; set; }
+        public int? Grinnumber { get; set; }
+        public int? Bosnumber { get; set; }
+        public int? Gtinnumber { get; set; }
+        public int? Lrinnumber { get; set; }
+        public int? Sprnnumber { get; set; }
+        public int? Carlanumber { get; set; }
+        public int? PrimaryDcIloscode { get; set; }
 
-        //Alias
-        public bool EAN_SAP { get; set; }
-        public bool GRIN_SAP { get; set; }
-        public bool BOS_SAP { get; set; }
-        public int EAN_Number { get; set; }
-        public int GRIN_Number { get; set; }
-        public int BOS_Number { get; set; }
-        public int GTIN_Number { get; set; }
-        public int LRIN_Number { get; set; }
-        public int SPRN_Number { get; set; }
-        public int CARLA_Number { get; set; }
-
-        //Pick Storage
-        public string PrimaryDC_ILOSCode { get; set; }
-
-        public virtual ICollection<SAPPlant> SAPPlant { get; set; }
-
-        //Bundles
-        public virtual ICollection<Bundle> Bundles { get; set; }
-
-        //QIP
-        public virtual ICollection<QIP> QIP { get; set; }
+        public virtual ICollection<Article> Articles { get; set; }
     }
 }

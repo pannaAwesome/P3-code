@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
+#nullable disable
 
 namespace HAVI_app.Models
 {
-    public class PrimaryDCILOSCode
+    public partial class PrimaryDciloscode
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string PrimaryCode { get; set; }
-        public string SAPPlant { get; set; }
-        public int CountryID { get; set; }
-        public virtual Country Country { get; set; }
+        public string Sapplant { get; set; }
+        public int? CountryId { get; set; }
 
+        public virtual Country Country { get; set; }
     }
 }

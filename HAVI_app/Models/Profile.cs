@@ -1,16 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
+#nullable disable
 
 namespace HAVI_app.Models
 {
-    public enum UserType { Admin, Purchaser, Supplier };
-    public class Profile
+    public partial class Profile
     {
-        public int ID { get; set; }
+        public Profile()
+        {
+            Purchasers = new HashSet<Purchaser>();
+        }
+
+        public int Id { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
-        public UserType Usertype { get; set; }
+        public int? Usertype { get; set; }
+
+        public virtual ICollection<Purchaser> Purchasers { get; set; }
     }
 }
