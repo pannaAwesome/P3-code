@@ -12,6 +12,7 @@
         </div>
     </div>
 }
+
 @if (PageIndex == 1)
 {
     <div class="row">
@@ -23,6 +24,7 @@
         </div>
     </div>
 }
+
 @if (PageIndex == 2)
 {
     <div class="row">
@@ -98,6 +100,7 @@
             PageIndex = 4;
         }
     }
+
     private void PageDown()
     {
         PageIndex--;
@@ -106,8 +109,10 @@
             PageIndex = 0;
         }
     }
+
     private void ReturnToOverview()
     {
+        //This only reroutes back to the admins article_view and needs to be updated to handle the purchaser
         NavigationManager.NavigateTo("/article_view", true);
     }
 }
