@@ -1,9 +1,10 @@
 ﻿@page "/country_view"
 @layout HAVI_app.Shared.Admin_layout.Overview
+@inject NavigationManager NavigationManager
 
 <div class="row overview-admin-header">
     <div class="col-8">
-        <h3>Countries:</h3>
+        <h3>Editing Denmark:</h3>
     </div>
     <div class="col-4">
         <NavLink class="nav-link" href="/create_country">
@@ -12,8 +13,303 @@
     </div>
 </div>
 
-    <div class="row">
-        <div class="col-12">
-            <HAVI_app.Shared.Admin_layout.Country_table_admin/>
+<div class="row">
+    <div class="col-12 form-layout">
+        <div class="row">
+            <div class="col-9"></div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-10 d-flex align-content-center">
+                <form>
+                    <table class="table">
+                        <tr>
+                            <td colspan="4"><h5>Country information: </h5></td>
+                        </tr>
+                        <tr>
+                            <td><label for="country">Country:</label></td>
+                            <td> <input type="text" name="country" value="Denmark" /> </td>
+                        </tr>
+                        <tr>
+                            <td><label for="country-code">Country code:</label> </td>
+                            <td> <input type="text" name="country-code" value="DK" /></td>
+                        </tr>
+                        <tr>
+                            <td colspan="4"><h5>Customers: </h5></td>
+                        </tr>
+                        @for (int i = 1; i <= NumberOfCustomers; i++)
+                        {
+
+                            <tr>
+                                <td>
+                                    <label for="customer-@i">Customer name:</label>
+                                </td>
+
+                                <td>
+                                    <input type="text" name="customer-@i" />
+                                </td>
+                                @if (i == NumberOfCustomers)
+                                {
+                                    <td @onclick="AddCustomer"> &#10133; </td>
+
+                                }
+                                <td @onclick="@(x => RemoveCustomer(i))"> &#10134;</td>
+                            </tr>
+                        }
+                        <tr>
+                            <td colspan="4"><h5>Company codes: </h5></td>
+                        </tr>
+                        @for (int i = 1; i <= NumberOfCodes; i++)
+                        {
+
+                            <tr>
+                                <td>
+                                    <label for="code-@i">Company code:</label>
+                                </td>
+
+                                <td>
+                                    <input type="text" name="code-@i" />
+                                </td>
+                                @if (i == NumberOfCodes)
+                                {
+                                    <td @onclick="AddCode"> &#10133; </td>
+                                }
+                                <td @onclick="@(x => RemoveCode(i))"> &#10134;</td>
+
+                            </tr>
+                        }
+
+                        <tr>
+                            <td colspan="4"><h5>Supplier delivery units: </h5></td>
+                        </tr>
+                        @for (int i = 1; i <= NumberOfUnits; i++)
+                        {
+
+                            <tr>
+                                <td>
+                                    <label for="unit-@i">Supplier delivery unit:</label>
+                                </td>
+
+                                <td>
+                                    <input type="text" name="unit-@i" />
+                                </td>
+                                @if (i == NumberOfUnits)
+                                {
+                                    <td @onclick="AddUnit"> &#10133; </td>
+                                }
+                                <td @onclick="@(x => RemoveUnit(i))"> &#10134;</td>
+
+                            </tr>
+                        }
+                        <tr>
+                            <td colspan="4"><h5>ILOS orderpickgroups: </h5></td>
+                        </tr>
+                        @for (int i = 1; i <= NumberOfOrders; i++)
+                        {
+
+                            <tr>
+                                <td>
+                                    <label for="order-@i">Orderpickgroup:</label>
+                                </td>
+
+                                <td>
+                                    <input type="text" name="order-@i" />
+                                </td>
+                                @if (i == NumberOfOrders)
+                                {
+                                    <td @onclick="AddOrder"> &#10133; </td>
+                                }
+                                <td @onclick="@(x => RemoveOrder(i))"> &#10134;</td>
+
+                            </tr>
+                        }
+                        <tr>
+                            <td colspan="4"><h5>ILOS categories/accounts: </h5></td>
+                        </tr>
+                        @for (int i = 1; i <= NumberOfCat; i++)
+                        {
+
+                            <tr>
+                                <td>
+                                    <label for="cat-@i">Input category or account:</label>
+                                </td>
+
+                                <td>
+                                    <input type="text" name="cat-@i" />
+                                </td>
+                                @if (i == NumberOfCat)
+                                {
+                                    <td @onclick="AddCat"> &#10133; </td>
+
+                                }
+
+                                <td @onclick="@(x => RemoveCat(i))"> &#10134;</td>
+                            </tr>
+                        }
+                        <tr>
+                            <td colspan="4"><h5>VAT/TAX codes: </h5></td>
+                        </tr>
+                        @for (int i = 1; i <= NumberOfTAX; i++)
+                        {
+
+                            <tr class="border-bottom">
+                                <td>
+                                    <label for="tax-@i">Input VAT or TAX code:</label>
+                                </td>
+
+                                <td>
+                                    <input type="text" name="tax-@i" />
+                                </td>
+                                @if (i == NumberOfTAX)
+                                {
+                                    <td @onclick="AddTAX"> &#10133; </td>
+                                }
+                                <td @onclick="@(x => RemoveTAX(i))"> &#10134;</td>
+
+                            </tr>
+                        }
+                    </table>
+                    <table>
+                        <tr>
+                            <td colspan="4"><h5>Primary DC ILOS codes: </h5></td>
+                        </tr>
+                        @for (int i = 1; i <= NumberOfPrim; i++)
+                        {
+
+                            <tr>
+                                <td>
+                                    <label for="prim-dc-@i">Input ILOS code:</label>
+                                </td>
+
+                                <td>
+                                    <input type="text" name="prim-dc-@i" />
+                                </td>
+                                <td>
+                                    <label for="prim-sap-@i">SAP Plant for code:</label>
+                                </td>
+
+                                <td>
+                                    <input type="text" name="prim-sap-@i" />
+                                </td>
+                                @if (i == NumberOfPrim)
+                                {
+                                    <td @onclick="AddPrim"> &#10133; </td>
+                                }
+                                <td @onclick="@(x => RemovePrim(i))"> &#10134;</td>
+                            </tr>
+                        }
+                    </table>
+                </form>
+
+            </div>
+        </div>
+        <div class="row country-buttons">
+            <div class="col-12 text-center"><button class="btn green-button" data-toggle="modal" data-target="#country-created">Save changes</button></div>
         </div>
     </div>
+</div>
+
+<div class="modal fade" id="country-created" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Saved changes!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Country: Denmark <br />
+                Country-code: DK <br />
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <button type="button" class="btn cancel-button" @onclick="ReturnToOverview">Return to overview</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+    @code{
+        private void ReturnToOverview()
+        {
+            NavigationManager.NavigateTo("/country_view", true);
+        }
+
+        private int NumberOfCustomers = 3;
+
+        private void AddCustomer()
+        {
+            NumberOfCustomers++;
+        }
+
+        private void RemoveCustomer(int toremove)
+        {
+
+        }
+
+        private int NumberOfCodes = 3;
+
+        private void AddCode()
+        {
+            NumberOfCodes++;
+        }
+
+        private void RemoveCode(int toremove)
+        {
+        }
+
+        private int NumberOfUnits = 3;
+
+        private void AddUnit()
+        {
+            NumberOfUnits++;
+        }
+
+        private void RemoveUnit(int toremove)
+        {
+        }
+
+        private int NumberOfOrders = 3;
+
+        private void AddOrder()
+        {
+            NumberOfOrders++;
+        }
+
+        private void RemoveOrder(int toremove)
+        {
+        }
+
+        private int NumberOfPrim = 3;
+
+        private void AddPrim()
+        {
+            NumberOfPrim++;
+        }
+
+        private void RemovePrim(int toremove)
+        {
+        }
+
+        private int NumberOfTAX = 3;
+
+        private void AddTAX()
+        {
+            NumberOfTAX++;
+        }
+
+        private void RemoveTAX(int toremove)
+        {
+        }
+
+        private int NumberOfCat = 3;
+
+        private void AddCat()
+        {
+            NumberOfCat++;
+        }
+
+        private void RemoveCat(int toremove)
+        {
+        }
+    }
