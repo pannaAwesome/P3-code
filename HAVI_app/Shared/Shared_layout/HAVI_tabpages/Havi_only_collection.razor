@@ -24,7 +24,7 @@
     </div>
 }
 @if (PageIndex == 2)
-{ 
+{
     <div class="row">
         <div class="col-6">
             <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Havi_only.Pick_storage />
@@ -36,13 +36,53 @@
     </div>
 }
 
-<button class="btn green-button" @onclick="PageCount">Next</button>
+@if (PageIndex == 3)
+{
+    <div class="row">
+        <div class="col-6">
+            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Havi_only.Bundle_info />
+        </div>
+        <div class="col-6">
+            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Supplier_information />
+            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Article_information />
+        </div>
+    </div>
+}
+
+@if (PageIndex == 4)
+{
+    <div class="row">
+        <div class="col-6">
+            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Havi_only.QIP_info />
+        </div>
+        <div class="col-6">
+            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Supplier_information />
+            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Article_information />
+        </div>
+    </div>
+}
+
+<button class="btn green-button" @onclick="PageUp">Next</button>
+<button class="btn green-button" @onclick="PageDown">Back</button>
+
 
 @code{
     private int PageIndex = 0;
 
-    void PageCount()
+    private void PageUp()
     {
         PageIndex++;
+        if(PageIndex > 4)
+        {
+            PageIndex = 4;
+        }
+    }
+    private void PageDown()
+    {
+        PageIndex--;
+        if(PageIndex < 0)
+        {
+            PageIndex = 0;
+        }
     }
 }
