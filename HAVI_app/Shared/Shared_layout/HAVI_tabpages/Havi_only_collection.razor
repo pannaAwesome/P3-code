@@ -1,57 +1,48 @@
-﻿<div class="@Internal_info row">
-    <div class="col-6">
-        <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Havi_only.Internal_info />
+﻿@if (PageIndex == 0)
+{
+    <div class="row">
+        <div class="col-6">
+            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Havi_only.Internal_info />
+        </div>
+        <div class="col-6">
+            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Supplier_information />
+            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Article_information />
+        </div>
     </div>
-    <div class="col-6">
-        <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Supplier_information />
-        <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Article_information />
-    </div>
-</div>
-<div class="@Alias row">
-    <div class="col-6">
-        <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Havi_only.Internal_info />
-    </div>
-    <div class="col-6">
-        <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Supplier_information />
-        <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Article_information />
-    </div>
-</div>
-<div class="@Pick_storage row">
-    <div class="col-6">
-        <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Havi_only.Internal_info />
-    </div>
-    <div class="col-6">
-        <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Supplier_information />
-        <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Article_information />
-    </div>
-</div>
+}
+@if (PageIndex == 1)
+{
+    <div class="row">
+        <div class="col-6">
+            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Havi_only.Alias_info />
+        </div>
+        <div class="col-6">
 
-<button class="btn green-button" @onclick="@RemovePanel">Next</button>
+            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Supplier_information />
+            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Article_information />
+        </div>
+    </div>
+}
+@if (PageIndex == 2)
+{ 
+    <div class="row">
+        <div class="col-6">
+            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Havi_only.Pick_storage />
+        </div>
+        <div class="col-6">
+            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Supplier_information />
+            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Article_information />
+        </div>
+    </div>
+}
+
+<button class="btn green-button" @onclick="PageCount">Next</button>
 
 @code{
-    string Internal_info { get; set; }
-    string Alias { get; set; }
-    string Pick_storage { get; set; }
+    private int PageIndex = 0;
 
-    protected void PanelDisplay()
+    void PageCount()
     {
-        Internal_info = "Havi-only-none";
-        Alias = "Havi-only-none";
-        Pick_storage = "Havi-only-none";
-    }
-
-    private void RemovePanel()
-    {
-        int PageIndex = 0;
-        if (PageIndex == 0)
-        {
-            Internal_info = "Havi-only-display";
-
-        }
-        if(PageIndex == 1)
-        {
-            Alias = "Havi-only-display";
-        }
         PageIndex++;
     }
 }
