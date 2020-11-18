@@ -10,13 +10,14 @@ namespace HAVI_app.Models
         public ArticleInformation()
         {
             Articles = new HashSet<Article>();
+            OtherCostsForArticles = new HashSet<OtherCostsForArticle>();
         }
 
         public int Id { get; set; }
         public string CompanyName { get; set; }
         public string CompanyLocation { get; set; }
         public string Email { get; set; }
-        public int? PalletExchange { get; set; }
+        public int PalletExchange { get; set; }
         public string FreightResponsibility { get; set; }
         public string SpecialInformation { get; set; }
         public int? TransportBooking { get; set; }
@@ -42,7 +43,7 @@ namespace HAVI_app.Models
         public string CountryOfOrigin { get; set; }
         public string ImportedFrom { get; set; }
         public string TollTarifNumber { get; set; }
-        public int? MinimumOrderCountry { get; set; }
+        public int? MinimumOrderQuantity { get; set; }
         public double? TemperatureTransportationMin { get; set; }
         public double? TemperatureTransportationMax { get; set; }
         public double? TemperatureStorageMin { get; set; }
@@ -53,5 +54,6 @@ namespace HAVI_app.Models
         public int? OtherCosts { get; set; }
 
         public virtual ICollection<Article> Articles { get; set; }
+        public virtual ICollection<OtherCostsForArticle> OtherCostsForArticles { get; set; }
     }
 }

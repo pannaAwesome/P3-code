@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
+using HAVI_app.Models;
 
 namespace HAVI_app
 {
@@ -23,7 +24,8 @@ namespace HAVI_app
             services.AddRazorPages();
             services.AddServerSideBlazor();
 
-
+            services.AddDbContext<masterContext>(options => options.UseSqlServer(Configuration.GetConnectionString("masterContext")));
+            //services.AddDatabaseDeveloperPageExceptionFilter();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -9,7 +9,7 @@ namespace HAVI_app.Models
     {
         public int Id { get; set; }
         public string QipnumberName { get; set; }
-        public string Qipdesribtion { get; set; }
+        public string Qipdescription { get; set; }
         public string AnswerOptions { get; set; }
     }
 }

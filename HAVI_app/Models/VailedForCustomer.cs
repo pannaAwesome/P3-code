@@ -9,7 +9,7 @@ namespace HAVI_app.Models
     {
         public int Id { get; set; }
         public string Customer { get; set; }
-        public int? CountryId { get; set; }
+        public int CountryId { get; set; }
 
         public virtual Country Country { get; set; }
     }
