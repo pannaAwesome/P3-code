@@ -17,8 +17,6 @@
             <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Havi_only.Alias_info />
         </div>
         <div class="col-6">
-
-            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Supplier_information />
             <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Article_information />
         </div>
     </div>
@@ -30,8 +28,6 @@
             <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Havi_only.Pick_storage />
         </div>
         <div class="col-6">
-            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Supplier_information />
-            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Article_information />
         </div>
     </div>
 }
@@ -43,7 +39,6 @@
             <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Havi_only.Bundle_info />
         </div>
         <div class="col-6">
-            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Supplier_information />
             <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Article_information />
         </div>
     </div>
@@ -51,19 +46,25 @@
 
 @if (PageIndex == 4)
 {
+<div class="row">
+    <div class="col-6">
+        <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Article_information />
+    </div>
+    <div class="col-6">
+        <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Shipment_information />
+    </div>
+</div>
     <div class="row">
-        <div class="col-6">
-            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Havi_only.QIP_info />
-        </div>
-        <div class="col-6">
-            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Supplier_information />
-            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Article_information />
-        </div>
+        <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Havi_only.QIP_info />
     </div>
 }
 
-<button class="btn green-button" @onclick="PageUp">Next</button>
-<button class="btn green-button" @onclick="PageDown">Back</button>
+<br /><br />
+
+<div class="row justify-content-center">
+    <div class="col-6 text-right"><button class="btn cancel-button" @onclick="PageDown">Back</button></div>
+    <div class="col-6 text-left"><button class="btn green-button" @onclick="PageUp">Next</button></div>
+</div>
 
 
 @code{
