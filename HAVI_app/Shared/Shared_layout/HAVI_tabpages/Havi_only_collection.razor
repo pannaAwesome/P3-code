@@ -1,4 +1,4 @@
-﻿<div class="@Internal_info row">
+﻿<div style="@Internal_info row">
     <div class="col-6">
         <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Havi_only.Internal_info />
     </div>
@@ -7,7 +7,7 @@
         <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Article_information />
     </div>
 </div>
-<div class="@Alias row">
+<div style="@Alias row">
     <div class="col-6">
         <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Havi_only.Internal_info />
     </div>
@@ -16,7 +16,7 @@
         <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Article_information />
     </div>
 </div>
-<div class="@Pick_storage row">
+<div style="@Pick_storage row">
     <div class="col-6">
         <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Havi_only.Internal_info />
     </div>
@@ -35,23 +35,12 @@
 
     protected void PanelDisplay()
     {
-        Internal_info = "Havi-only-none";
-        Alias = "Havi-only-none";
-        Pick_storage = "Havi-only-none";
+        
     }
 
     private void RemovePanel()
     {
-        int PageIndex = 0;
-        if (PageIndex == 0)
-        {
-            Internal_info = "Havi-only-display";
-
-        }
-        if(PageIndex == 1)
-        {
-            Alias = "Havi-only-display";
-        }
-        PageIndex++;
+        Internal_info = "display: none";
+        Alias = "display: inline";
     }
 }
