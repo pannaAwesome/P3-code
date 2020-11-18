@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
+#nullable disable
 
 namespace HAVI_app.Models
 {
-    public class SAPPlant
+    public partial class Sapplant
     {
-        public int ID { get; set; }
-        public int InternalArticleInformationID { get; set; }
-        public string SAPPlantName { get; set; }
-        public bool SAPPlantValue { get; set; }
-
-        public virtual InternalArticleInformation InternalArticleInformation { get; set; }
+        public int Id { get; set; }
+        public int? InternalArticleInformationId { get; set; }
+        public string SapplantName { get; set; }
+        public int? SapplantValue { get; set; }
     }
 }

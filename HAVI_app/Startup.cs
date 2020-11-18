@@ -4,7 +4,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
-using HAVI_app.Data;
 
 namespace HAVI_app
 {
@@ -24,8 +23,6 @@ namespace HAVI_app
             services.AddRazorPages();
             services.AddServerSideBlazor();
 
-            services.AddDbContext<ArticleContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("ArticleContext")));
 
         }
 
