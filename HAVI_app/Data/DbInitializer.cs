@@ -15,10 +15,6 @@ namespace HAVI_app.Data
                 return;
             }
             
-            var profiles = new Profile[]
-            {
-
-            }
         }
     }
 }
