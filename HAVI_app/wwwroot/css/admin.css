@@ -196,3 +196,11 @@
     padding-bottom: 10px;
     border-bottom: solid thin var(--blue);
 }
+
+.Havi-only-display {
+    display: inline;
+}
+
+.Havi-only-none {
+    display: none;
+}
