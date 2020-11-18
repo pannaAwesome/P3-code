@@ -1,3 +1,4 @@
+using HAVI_app.Data;
 using HAVI_app.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,10 +24,10 @@ namespace HAVI_app
                 var services = scope.ServiceProvider;
                 try
                 {
-                    var context = services.GetRequiredService<masterContext>();
+                    var context = services.GetRequiredService<HAVIdatabaseContext>();
                     
                     context.Database.EnsureCreated();
-                    Console.WriteLine("Database created!");
+                    DbInitializer.Initialize(context);
                 }
                 catch(Exception ex)
                 {

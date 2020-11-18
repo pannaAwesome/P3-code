@@ -5,7 +5,6 @@ using System.Collections.Generic;
 
 namespace HAVI_app.Models
 {
-    public enum UserType { Admin, Purchaser, Supplier };
     public partial class Profile
     {
         public Profile()

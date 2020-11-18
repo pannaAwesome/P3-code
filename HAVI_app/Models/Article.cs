@@ -5,10 +5,6 @@ using System.Collections.Generic;
 
 namespace HAVI_app.Models
 {
-    public enum ArticleStates { Created, Submitted, RobotReady, Error, Completed };
-    public enum ErrorReported { None, Reported };
-    public enum InformationCompleted { Unfinished, Finished };
-    public enum RadioButton { No, Yes };
     public partial class Article
     {
         public int Id { get; set; }

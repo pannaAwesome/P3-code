@@ -6,13 +6,13 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace HAVI_app.Models
 {
-    public partial class masterContext : DbContext
+    public partial class HAVIdatabaseContext : DbContext
     {
-        public masterContext()
+        public HAVIdatabaseContext()
         {
         }
 
-        public masterContext(DbContextOptions<masterContext> options)
+        public HAVIdatabaseContext(DbContextOptions<HAVIdatabaseContext> options)
             : base(options)
         {
         }
@@ -49,7 +49,7 @@ namespace HAVI_app.Models
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=.\\SQLExpress;Database=master;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=.\\SQLExpress;Database=HAVIdatabase;Trusted_Connection=True;");
             }
         }
 
@@ -59,7 +59,7 @@ namespace HAVI_app.Models
             {
                 entity.ToTable("Article");
 
-                entity.HasIndex(e => e.Id, "UQ__Article__3214EC2680EFA9B3")
+                entity.HasIndex(e => e.Id, "UQ__Article__3214EC26473E7B8A")
                     .IsUnique();
 
                 entity.Property(e => e.Id)
@@ -90,31 +90,31 @@ namespace HAVI_app.Models
                     .WithMany(p => p.Articles)
                     .HasForeignKey(d => d.ArticleInformationId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Article__Article__0777106D");
+                    .HasConstraintName("FK__Article__Article__34C8D9D1");
 
                 entity.HasOne(d => d.Country)
                     .WithMany(p => p.Articles)
                     .HasForeignKey(d => d.CountryId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Article__Country__0682EC34");
+                    .HasConstraintName("FK__Article__Country__35BCFE0A");
 
                 entity.HasOne(d => d.InternalArticleInformation)
                     .WithMany(p => p.Articles)
                     .HasForeignKey(d => d.InternalArticleInformationId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Article__Interna__095F58DF");
+                    .HasConstraintName("FK__Article__Interna__36B12243");
 
                 entity.HasOne(d => d.Purchaser)
                     .WithMany(p => p.Articles)
                     .HasForeignKey(d => d.PurchaserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Article__Purchas__086B34A6");
+                    .HasConstraintName("FK__Article__Purchas__37A5467C");
 
                 entity.HasOne(d => d.Supplier)
                     .WithMany(p => p.Articles)
                     .HasForeignKey(d => d.SupplierId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Article__Supplie__0A537D18");
+                    .HasConstraintName("FK__Article__Supplie__38996AB5");
             });
 
             modelBuilder.Entity<ArticleBundle>(entity =>
@@ -185,7 +185,7 @@ namespace HAVI_app.Models
                     .WithMany(p => p.Bundles)
                     .HasForeignKey(d => d.InternalArticleInformationId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Bundle__Internal__1D66518C");
+                    .HasConstraintName("FK__Bundle__Internal__3D5E1FD2");
             });
 
             modelBuilder.Entity<Country>(entity =>
@@ -208,7 +208,7 @@ namespace HAVI_app.Models
                     .WithMany(p => p.Countries)
                     .HasForeignKey(d => d.ProfileId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Country__Profile__6DB73E6A");
+                    .HasConstraintName("FK__Country__Profile__267ABA7A");
             });
 
             modelBuilder.Entity<DeparmentId>(entity =>
@@ -243,7 +243,7 @@ namespace HAVI_app.Models
                     .WithMany(p => p.Iloscategories)
                     .HasForeignKey(d => d.CountryId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__ILOSCateg__Count__2042BE37");
+                    .HasConstraintName("FK__ILOSCateg__Count__440B1D61");
             });
 
             modelBuilder.Entity<Ilosorderpickgroup>(entity =>
@@ -260,7 +260,7 @@ namespace HAVI_app.Models
                     .WithMany(p => p.Ilosorderpickgroups)
                     .HasForeignKey(d => d.CountryId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__ILOSOrder__Count__0F183235");
+                    .HasConstraintName("FK__ILOSOrder__Count__46E78A0C");
             });
 
             modelBuilder.Entity<IlossortGroup>(entity =>
@@ -286,7 +286,7 @@ namespace HAVI_app.Models
                     .WithMany(p => p.InformCostTypes)
                     .HasForeignKey(d => d.CountryId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__InformCos__Count__14D10B8B");
+                    .HasConstraintName("FK__InformCos__Count__4BAC3F29");
             });
 
             modelBuilder.Entity<InternalArticleInformation>(entity =>
@@ -385,7 +385,7 @@ namespace HAVI_app.Models
                     .WithMany(p => p.OtherCostsForArticles)
                     .HasForeignKey(d => d.ArticleInformationId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__OtherCost__Artic__2BB470E3");
+                    .HasConstraintName("FK__OtherCost__Artic__5070F446");
             });
 
             modelBuilder.Entity<PrimaryDciloscode>(entity =>
@@ -406,7 +406,7 @@ namespace HAVI_app.Models
                     .WithMany(p => p.PrimaryDciloscodes)
                     .HasForeignKey(d => d.CountryId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__PrimaryDC__Count__25FB978D");
+                    .HasConstraintName("FK__PrimaryDC__Count__534D60F1");
             });
 
             modelBuilder.Entity<Profile>(entity =>
@@ -438,13 +438,13 @@ namespace HAVI_app.Models
                     .WithMany(p => p.Purchasers)
                     .HasForeignKey(d => d.CountryId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Purchaser__Count__7187CF4E");
+                    .HasConstraintName("FK__Purchaser__Count__29572725");
 
                 entity.HasOne(d => d.Profile)
                     .WithMany(p => p.Purchasers)
                     .HasForeignKey(d => d.ProfileId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Purchaser__Profi__7093AB15");
+                    .HasConstraintName("FK__Purchaser__Profi__2A4B4B5E");
             });
 
             modelBuilder.Entity<Qip>(entity =>
@@ -495,7 +495,7 @@ namespace HAVI_app.Models
                     .WithMany(p => p.Qips)
                     .HasForeignKey(d => d.InternalArticleInformationId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__QIP__InternalArt__231F2AE2");
+                    .HasConstraintName("FK__QIP__InternalArt__5629CD9C");
             });
 
             modelBuilder.Entity<Qipnumber>(entity =>
@@ -542,7 +542,7 @@ namespace HAVI_app.Models
                     .WithMany(p => p.Sapplants)
                     .HasForeignKey(d => d.InternalArticleInformationId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__SAPPlant__Intern__11F49EE0");
+                    .HasConstraintName("FK__SAPPlant__Intern__5CD6CB2B");
             });
 
             modelBuilder.Entity<SetCurrency>(entity =>
@@ -580,7 +580,7 @@ namespace HAVI_app.Models
                     .WithMany(p => p.Suppliers)
                     .HasForeignKey(d => d.ProfileId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__Supplier__Profil__6ADAD1BF");
+                    .HasConstraintName("FK__Supplier__Profil__2D27B809");
             });
 
             modelBuilder.Entity<SupplierDeliveryUnit>(entity =>
@@ -597,7 +597,7 @@ namespace HAVI_app.Models
                     .WithMany(p => p.SupplierDeliveryUnits)
                     .HasForeignKey(d => d.CountryId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__SupplierD__Count__17AD7836");
+                    .HasConstraintName("FK__SupplierD__Count__619B8048");
             });
 
             modelBuilder.Entity<VailedForCustomer>(entity =>
@@ -614,7 +614,7 @@ namespace HAVI_app.Models
                     .WithMany(p => p.VailedForCustomers)
                     .HasForeignKey(d => d.CountryId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__VailedFor__Count__28D80438");
+                    .HasConstraintName("FK__VailedFor__Count__6477ECF3");
             });
 
             modelBuilder.Entity<VatTaxCode>(entity =>
@@ -631,7 +631,7 @@ namespace HAVI_app.Models
                     .WithMany(p => p.VatTaxCodes)
                     .HasForeignKey(d => d.CountryId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__VatTaxCod__Count__1A89E4E1");
+                    .HasConstraintName("FK__VatTaxCod__Count__6754599E");
             });
 
             OnModelCreatingPartial(modelBuilder);
