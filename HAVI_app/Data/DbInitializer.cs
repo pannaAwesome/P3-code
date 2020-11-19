@@ -229,7 +229,7 @@ namespace HAVI_app.Data
 
             List<PackagingGroup> packagingGroups = new List<PackagingGroup>();
 
-            using (TextFieldParser parser = new TextFieldParser(@"./Data/Packaging.csv"))
+            using (TextFieldParser parser = new TextFieldParser(@"./Data/Packing.csv"))
             {
                 {
                     parser.TextFieldType = FieldType.Delimited;
@@ -258,7 +258,7 @@ namespace HAVI_app.Data
                     string[] fields = parser.ReadFields();
                     foreach (string field in fields)
                     {
-                        departments.Add(new DepartmentId { Department = field);
+                        departments.Add(new DepartmentId { Department = field });
                     }
                 }
             }
@@ -269,7 +269,7 @@ namespace HAVI_app.Data
 
             List<PrimaryDciloscode> ilosCode = new List<PrimaryDciloscode>();
 
-            using (TextFieldParser parser = new TextFieldParser(@"./Data/PrimaryDCILOscode.csv"))
+            using (TextFieldParser parser = new TextFieldParser(@"./Data/PrimaryDCILOScode.csv"))
             {
                 parser.TextFieldType = FieldType.Delimited;
                 parser.SetDelimiters(";");
@@ -283,7 +283,21 @@ namespace HAVI_app.Data
             context.PrimaryDciloscodes.AddRange(ilosCode);
             context.SaveChanges();
 
+            List<Qipnumber> qipnumbers = new List<Qipnumber>();
 
+            using (TextFieldParser parser = new TextFieldParser(@"./Data/QIP.csv"))
+            {
+                parser.TextFieldType = FieldType.Delimited;
+                parser.SetDelimiters(";");
+                while (!parser.EndOfData)
+                {
+                    string[] fields = parser.ReadFields();
+                    qipnumbers.Add(new Qipnumber { QipnumberName = fields[0], Qipdescription = fields[1], AnswerOptions=fields[2], SetAnswer=Int32.Parse(fields[3]), OKValue= Int32.Parse(fields[4]), LowBoundary= Int32.Parse(fields[5]), HighBoundary= Int32.Parse(fields[6]), FrequencyType= Int32.Parse(fields[7]), Frequency= Int32.Parse(fields[8])});
+                }
+            }
+
+            context.Qipnumbers.AddRange(qipnumbers);
+            context.SaveChanges();
 
 
             Console.WriteLine("Database created!");
