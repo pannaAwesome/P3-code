@@ -18,7 +18,9 @@ namespace HAVI_app.Data
 
             var profiles = new Profile[]
             {
-                new Profile{Username="DKAdmin", Password="1234", Usertype=0}
+                new Profile{Username="DKAdmin", Password="1234", Usertype=0},
+                new Profile{Username="Purchaser", Password="1234", Usertype=1},
+                new Profile{Username="Supplier", Password="1234", Usertype=2}
             };
 
             context.Profiles.AddRange(profiles);
@@ -30,6 +32,22 @@ namespace HAVI_app.Data
             };
 
             context.Countries.AddRange(countries);
+            context.SaveChanges();
+
+            var purchasers = new Purchaser[]
+            {
+                new Purchaser{ CountryId=1, ProfileId=2}
+            };
+
+            context.Purchasers.AddRange(purchasers);
+            context.SaveChanges();
+
+            var suppliers = new Supplier[]
+            {
+                new Supplier{ ProfileId=3, CompanyLocation="Denmark", CompanyName="Hello and co.", FreightResponsibility="EXP", PalletExchange=1 }
+            };
+
+            context.Suppliers.AddRange(suppliers);
             context.SaveChanges();
 
             List<VailedForCustomer> customers = new List<VailedForCustomer>();
