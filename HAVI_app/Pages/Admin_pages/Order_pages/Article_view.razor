@@ -1,1 +1,54 @@
 ﻿@page "/article_view"
+@layout HAVI_app.Shared.Admin_layout.Overview
+
+<div class="row overview-admin-header">
+    <div class="col-10">
+        <h3>Article Info:</h3>
+    </div>
+    <div class="col-md-2">
+        <button class="btn button-options-overview" data-toggle="modal" data-target="#myModal">Transfer order</button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <HAVI_app.Shared.Admin_layout.Article_table_admin/>
+    </div>
+</div>
+<div>
+    <div class="modal" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+
+                <div class="modal-header">
+                    <h4 class="modal-title">Transfer order</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+
+                <div class="modal-body">
+                    <form>
+                        <label for="purchaser">Select purchaser:</label>
+                        <select class="form-control" name="purchaser" id="purchaser">
+                            <option value="winnie">Winnie</option>
+                            <option value="anders">Anders</option>
+                            <option value="nikolaj">Nikolaj</option>
+                            <option value="esbjerg">Esbjerg</option>
+                        </select>
+                    </form>
+                </div>
+
+
+                <div class="modal-footer">
+                    <button class="btn cancel-button" data-dismiss="modal">Cancel</button>
+                    <button class="btn green-button" data-dismiss="modal">Transfer order</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+
+}

@@ -1,174 +1,225 @@
 ﻿@layout HAVI_app.Shared.Supplier_layout.Form_layout
+@inject Microsoft.AspNetCore.Components.NavigationManager NavigationManager
 @page "/article_info_form"
 
 <HAVI_app.Shared.Supplier_layout.Form_header SupplierState="filled" ArticleState="active" />
 
-<div class="col-12">
-    <h1>Article information:</h1>
-    <p>Fill out information regarding the article:</p>
 
-    <div class="justify-content-center row">
-        <div class="col-12">
-            <form>
-                <table class="table">
-
-                    <tr>
-                        <td>
-                            <label for="article_name" class="required">Article name:</label>
-                        </td>
-                        <td>
-                            <input type="text" class="form-control" id="a_name" required>
-                        </td>
-                        <td>
-                            <HAVI_app.Shared.Shared_layout.Questionmark_top>
-                                Enter the name of the article.
-                            </HAVI_app.Shared.Shared_layout.Questionmark_top>
-
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <label for="sales_unit" class="required">Salesunit:</label>
-                        </td>
-                        <td>
-                            <select class="form-control" name="salesunit">
-                                <option disabled selected>-- select an option --</option>
-                                <option>Ark // 225</option>
-                                <option>Bag in box // 204</option>
-                                <option>Bakke // 374</option>
-                            </select>
-                            <!--<div class="dropdown">
-                                <button type="button" class="btn btn-primary dropdown-toggle">
-                                    Pick something
-                                </button>
-                                <div class="dropdown-content dropdown-menu-lg-right">
-                                    <button class="dropdown-item" type="button">Ark // 225</button>
-                                    <button class="dropdown-item" type="button">Bag in box // 204</button>
-                                    <button class="dropdown-item" type="button">Bakke // 374</button>
-                                </div>
-                            </div>-->
-                        </td>
-                        <td>
-                            <HAVI_app.Shared.Shared_layout.Questionmark_top>
-                                Enter the unit in which the article is delivered.
-                            </HAVI_app.Shared.Shared_layout.Questionmark_top>
-
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <label for="article_pr_salesunit" class="required">Article pr. salesunit:</label>
-                        </td>
-                        <td>
-                            <input type="number" class="form-control" id="salesunit_quantity" required>
-                        </td>
-                        <td>
-                            <HAVI_app.Shared.Shared_layout.Questionmark_top>
-                                Enter how many articles are delivered pr. unit.
-                            </HAVI_app.Shared.Shared_layout.Questionmark_top>
-
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <label for="supplier_article_nn" class="required">Supplier article number/name:</label>
-                        </td>
-                        <td>
-                            <input type="number" class="form-control" id="article_number_name" required>
-                        </td>
-                        <td>
-                            <HAVI_app.Shared.Shared_layout.Questionmark_top>
-                                Enter your own reference number.
-                            </HAVI_app.Shared.Shared_layout.Questionmark_top>
-
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <label for="GTIN" class="required">GTIN number:</label>
-                        </td>
-                        <td>
-                            <input type="number" class="form-control" id="GTIN" required>
-                        </td>
-                        <td>
-                            <HAVI_app.Shared.Shared_layout.Questionmark_top>
-                                Enter 14 characters, if less than 14, place 0´s infront.
-                            </HAVI_app.Shared.Shared_layout.Questionmark_top>
-
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <label for="Shelflife" class="required">Shelife:</label>
-                        </td>
-                        <td>
-                            <input type="number" class="form-control" id="Shelflife" required>
-                        </td>
-                        <td>
-                            <label class="center-for-units" for="Shelflife">Days</label>
-                        </td>
-                        <td>
-                            <HAVI_app.Shared.Shared_layout.Questionmark_top>
-                                Enter expiration time for the article in days.
-                            </HAVI_app.Shared.Shared_layout.Questionmark_top>
-
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <label for="Min_shelflife" class="required">Min. Shelflife at HAVI:</label>
-                        </td>
-                        <td>
-                            <input type="number" class="form-control" id="Min_shelflife" required>
-                        </td>
-                        <td>
-                            <label class="center-for-units" for="Min_shelflife">Days</label>
-                        </td>
-                        <td>
-                            <HAVI_app.Shared.Shared_layout.Questionmark_top>
-                                Enter the least amount of days that HAVI should have the article.
-                            </HAVI_app.Shared.Shared_layout.Questionmark_top>
-
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <label for="Organic_article" class="required">Organic article?</label>
-                        </td>
-
-                        <td>
-                            <input type="radio" name="organic" id="yes" value="yes">
-                            <label for="yes">Yes</label>
-                            &nbsp;
-                            <input type="radio" id="no" name="organic">
-                            <label for="no">No</label>
-                        </td>
-                        <td>
-                            <HAVI_app.Shared.Shared_layout.Questionmark_top>
-                                Enter whether the article is organic or not.
-                            </HAVI_app.Shared.Shared_layout.Questionmark_top>
-
-                        </td>
-                    </tr>
-
-
-                </table>
-                <div class="row justify-content-center">
-                    <div class="text-right col-6">
-                        <NavLink class="nav-link" href="/supplier_info_form"><button class="btn cancel-button">Back</button></NavLink>
-                    </div>
-                    <div class="text-left col-6">
-                        <NavLink class="nav-link" href="/measurement_info_form"><button class="btn green-button">Next</button></NavLink>
-                    </div>
-                </div>
-            </form>
-        </div>
+<div class="row justify-content-center">
+    <div class="col-10">
+        <h3>Article information:</h3>
+        <p class="form-header-supplier">Fill out information regarding the article:</p>
     </div>
 </div>
+
+<div class="row justify-content-center ">
+    <div class="col-12 d-flex justify-content-center">
+        <form>
+            <table class="table">
+
+                <tr>
+                    <td>
+                        <label for="article_name" class="required">Article name:</label>
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" name="article_name" required>
+                    </td>
+                    <td>
+                        <div></div>
+                    </td>
+                    <td>
+                        <HAVI_app.Shared.Shared_layout.Questionmark_top>
+                            Enter the name of the article
+                        </HAVI_app.Shared.Shared_layout.Questionmark_top>
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="salesunit" class="required">Salesunit:</label>
+                    </td>
+                    <td>
+                        <select class="form-control" name="salesunit" required>
+                            <option disabled selected>-- select an option --</option>
+                            <option>Ark // 225</option>
+                            <option>Bag in box // 204</option>
+                            <option>Bakke // 374</option>
+                        </select>
+                    </td>
+                    <td>
+                        <div></div>
+                    </td>
+                    <td>
+                        <HAVI_app.Shared.Shared_layout.Questionmark_top>
+                            Enter the unit in which the article is delivered
+                        </HAVI_app.Shared.Shared_layout.Questionmark_top>
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="article_pr_salesunit" class="required">Articles per salesunit:</label>
+                    </td>
+                    <td>
+                        <input type="number" class="form-control" name="article_pr_salesunit" required>
+                    </td>
+                    <td>
+                        <div></div>
+                    </td>
+                    <td>
+                        <HAVI_app.Shared.Shared_layout.Questionmark_top>
+                            Enter how many articles are delivered per salesunit
+                        </HAVI_app.Shared.Shared_layout.Questionmark_top>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="supplier_article_nn" class="required">Supplier article number/name:</label>
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" name="supplier_article_nn" required>
+                    </td>
+                    <td>
+                        <div></div>
+                    </td>
+                    <td>
+                        <HAVI_app.Shared.Shared_layout.Questionmark_top>
+                            Enter your own reference number or name for the article
+                        </HAVI_app.Shared.Shared_layout.Questionmark_top>
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="GTIN" class="required">GTIN number:</label>
+                    </td>
+                    <td>
+                        <input type="number" class="form-control" name="GTIN" required max="99999999999999" min="00000000000000">
+                    </td>
+                    <td>
+                        <div></div>
+                    </td>
+                    <td>
+                        <HAVI_app.Shared.Shared_layout.Questionmark_top>
+                            Enter 14 digits, if you have less than 14 digits then place 0's infront
+                        </HAVI_app.Shared.Shared_layout.Questionmark_top>
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="Shelflife" class="required">Shelflife:</label>
+                    </td>
+                    <td>
+                        <input type="number" class="form-control" name="Shelflife" required>
+                    </td>
+                    <td>
+                        <label class="center-for-units" for="Shelflife">days</label>
+                    </td>
+                    <td>
+                        <HAVI_app.Shared.Shared_layout.Questionmark_top>
+                            Enter expiration time for the article in days
+                        </HAVI_app.Shared.Shared_layout.Questionmark_top>
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="Min_shelflife" class="required">Min. shelflife at HAVI:</label>
+                    </td>
+                    <td>
+                        <input type="number" class="form-control" name="Min_shelflife" required>
+                    </td>
+                    <td>
+                        <label class="center-for-units" for="Min_shelflife">days</label>
+                    </td>
+                    <td>
+                        <HAVI_app.Shared.Shared_layout.Questionmark_top>
+                            Enter the least amount of days that HAVI should have the article
+                        </HAVI_app.Shared.Shared_layout.Questionmark_top>
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="Organic_article" class="required">Organic article?</label>
+                    </td>
+
+                    <td>
+                        <div class="text-center">
+                            <input type="radio" name="organic" value="yes">
+                            <label for="yes">Yes</label>
+                            &nbsp;
+                            <input type="radio" value="no" name="organic">
+                            <label for="no">No</label>
+                        </div>
+                    </td>
+                    <td>
+                        <div></div>
+                    </td>
+                    <td>
+                        <HAVI_app.Shared.Shared_layout.Questionmark_top>
+                            Enter whether the article is organic or not
+                        </HAVI_app.Shared.Shared_layout.Questionmark_top>
+
+                    </td>
+                </tr>
+
+
+            </table>
+            <div class="row justify-content-center">
+                <div class="text-right col-6">
+                    <input type="submit" class="btn cancel-button button-size" value="Back" @onclick="OnPostBack" />
+                </div>
+                <div class="text-left col-6">
+                    <input type="submit" class="btn green-button button-size" value="Next" @onclick="OnPostForward" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@code{
+    [Parameter]
+    public string ArticleName { get; set; }
+
+    [Parameter]
+    public string SalesUnit { get; set; }
+
+    [Parameter]
+    public int ArticlePrSalesUnit { get; set; }
+
+    [Parameter]
+    public string SupplierArticleNumber { get; set; }
+
+    [Parameter]
+    public int GtinNumber { get; set; }
+
+    [Parameter]
+    public int Shelflife { get; set; }
+
+    [Parameter]
+    public int ShelflifeAtHavi { get; set; }
+
+    [Parameter]
+    public string OrganicLife { get; set; }
+}
+
+@code{
+    public void OnPostForward()
+    {
+        NavigationManager.NavigateTo($"/measurement_info_form", true);
+    }
+
+    public void OnPostBack()
+    {
+        NavigationManager.NavigateTo($"/supplier_info_form", true);
+    }
+}

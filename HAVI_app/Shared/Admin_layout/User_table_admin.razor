@@ -1,0 +1,95 @@
+﻿@using BlazorTable
+@inject NavigationManager NavigationManager
+
+<div class="modal fade" id="deleting-rows" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Deleting user</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete the user?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn cancel-button" data-dismiss="modal">Close</button>
+                <button type="button" class="btn red-button">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <Table TableItem="SupplierInfo" Items="supplierdata" ColumnReorder="true" TableHeadClass="purple-table-header" TableRowClass="@(x => x.RowClass)" ShowSearchBar="true">
+            <Column TableItem="SupplierInfo" Title="User" Field="@(x => x.PurchaserEmail)" Sortable="true" />
+            <Column TableItem="SupplierInfo" Title="Country" Field="@(x => x.Country)" Sortable="true" />
+            <Column TableItem="SupplierInfo" Title="Type" Field="@(x => x.Type)" Class="text-center" Width="100px" DefaultSortColumn="true" Sortable="true">
+                <Template>
+                    <div class="@context.Type.ToLower()-type state">@context.Type</div>
+                </Template>
+            </Column>
+            <Column TableItem="SupplierInfo" Title="">
+                <Template>
+                    <div class="btn delete-button" data-toggle="modal" data-target="#deleting-rows">Delete</div>
+                </Template>
+            </Column>
+            <EmptyDataTemplate>
+                <div class="text-center">
+                    There are no new article informations!
+                </div>
+            </EmptyDataTemplate>
+        </Table>
+    </div>
+</div>
+
+@code{
+    private SupplierInfo[] supplierdata;
+
+    private SelectionType selectionType;
+
+    private List<SupplierInfo> selectedItems = new List<SupplierInfo>();
+
+    private SupplierInfo selected;
+
+    private string hideornot = "hide-trash";
+
+    protected override void OnInitialized()
+    {
+        supplierdata = new SupplierInfo[]{
+            new SupplierInfo("winnie@havi.com", "Denmark", "Purchaser"),
+            new SupplierInfo("winnie@havi.com", "Denmark", "Supplier")
+            };
+    }
+
+
+    private void RowClicked(SupplierInfo data)
+    {
+        if (selectionType == SelectionType.None)
+        {
+            //Set page to go to
+        }
+        else
+        {
+            selected = data;
+            StateHasChanged();
+        }
+    }
+
+    public class SupplierInfo
+    {
+        public SupplierInfo(string purchaseremail, string country, string type)
+        {
+            Country = country;
+            Type = type;
+            PurchaserEmail = purchaseremail;
+        }
+
+        public string PurchaserEmail { get; set; }
+        public string Country { get; set; }
+        public string Type { get; set; }
+
+        public string RowClass => "table tabel-row";
+    }
+}

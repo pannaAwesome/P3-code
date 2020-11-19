@@ -24,3 +24,183 @@
     --tab-white: #f2f2f2;
 }
 /*###################################################################################################################*/
+.button-overview, .button-overview-logout {
+    background-color: var(--blue);
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    float: right;
+    padding: 15px;
+}
+    .button-overview:hover {
+        background-color: var(--dark-blue);
+        color: white;
+        text-decoration: none;
+    }
+
+.button-overview-logout {
+    background-color: var(--red);
+    color: white;
+    text-align: center;
+}
+
+    .button-overview-logout:hover {
+        background-color: #b14562;
+        color: white;
+        text-decoration: none;
+    }
+
+.button-options-overview {
+    background-color: var(--orange);
+    border: 1px var(--dark-orange);
+    color: white;
+    float: right;
+}
+    .button-options-overview:hover {
+        background-color: var(--dark-orange);
+        color: white;
+    }
+
+.delete-button {
+    background-color: var(--red);
+    padding: 5px 10px;
+    color: white;
+}
+    .delete-button:hover {
+        background-color: #b14562;
+        color: white;
+    }
+
+
+.card {
+    margin: 0 auto;
+    float: none;
+    margin-bottom: 10px;
+    margin-top: 50px;
+}
+
+.card-title {
+    position: relative;
+    left: 190px;
+    font-weight: bolder;
+}
+
+.card-text1 {
+    position: relative;
+    text-align: center;
+    font-weight: bolder;
+    left: -50px;
+}
+
+.card-text2 {
+    position: relative;
+    text-align: center;
+    font-weight: bolder;
+    left: -87px;
+}
+
+.username-text {
+    background-color: lightgray;
+    right: 50px;
+}
+
+.username-text1 {
+    right: 50px;
+}
+
+.drop-down {
+    position: relative;
+    text-align: center;
+    font-weight: bolder;
+    left: -50px;
+}
+
+.gap-overview {
+    margin-top: 100px;
+}
+
+/*#########################################Country stuff##########################################################################*/
+
+
+#create-country {
+    position:relative;
+    float: left;
+    margin-left: 150px;
+    top: 50px;
+    font-weight: bold;
+}
+
+.info-country {
+    position: relative;
+    top: 125px;
+    width: 100%;
+    font-size: 18px;
+    right: 50px
+}
+
+.country-buttons {
+    margin-top: 60px;
+}
+
+.create-row {
+    margin-top: 30px;
+    margin-bottom:10px;
+}
+
+
+/*#########################################Article_view##########################################################################*/
+
+.background-tabs{
+    background-color: var(--tab-white);
+}
+
+.navtabs-background {
+    background-color: var(--gray);
+    padding: 18px 55px;
+}
+
+.nav-text {
+    color: var(--black);
+    font-size: large;
+    text-align: center;
+    
+}
+
+.error-table {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    top: 50px;
+}
+
+.description {
+    resize: none;
+}
+
+.purchaser-type {
+    background-color: var(--cyan);
+}
+
+.admin-type {
+    background-color: var(--red);
+}
+
+.supplier-type {
+    background-color: var(--green);
+}
+
+
+.overview-admin-header {
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: solid thin var(--blue);
+}
+
+.Havi-only-display {
+    display: inline;
+}
+
+.Havi-only-none {
+    display: none;
+}

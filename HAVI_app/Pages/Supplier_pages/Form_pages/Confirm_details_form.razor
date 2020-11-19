@@ -1,58 +1,707 @@
 ﻿@layout HAVI_app.Shared.Supplier_layout.Form_layout
+@inject Microsoft.AspNetCore.Components.NavigationManager NavigationManager
 @page "/confirm_details"
 
 <HAVI_app.Shared.Supplier_layout.Form_header SupplierState="filled" ArticleState="filled" MeasurementState="filled" ShipmentState="filled" PriceState="filled" ConfirmState="active" />
 
-<div class="col-12">
-    <h1>Confirm information:</h1>
-    <p>Please confirm your details regarding the article</p>
-
-    <div class="justify-content-center row">
-        <div class="col-6">
-            <form>
-
-                <hr />
-                <h3>Supplier information:</h3>
-
-                <table class="table">
-                </table>
-
-                <hr />
-                <h3>Article information</h3>
-
-                <table class="table">
-                </table>
-
-                <hr />
-                <h3>Measurement information</h3>
-
-                <table class="table">
-                </table>
-
-                <hr />
-                <h3>Shipment information</h3>
-
-                <table class="table">
-                </table>
-
-                <hr />
-                <h3>Price information information</h3>
-
-                <table class="table">
-                </table>
-                <hr />
-
-                <div class="row justify-content-center">
-                    <div class="text-right col-6">
-                        <NavLink class="nav-link" href="/price_info_form"><button class="btn cancel-button">Back</button></NavLink>
-                    </div>
-                    <div class="text-left col-6">
-                        <NavLink class="nav-link" href="/submission_accepted"><button class="btn green-button">Submit</button></NavLink>
-                    </div>
-                </div>
-
-            </form>
-        </div>
+<div class="row justify-content-center">
+    <div class="col-10">
+        <h3>Confirm information:</h3>
+        <p class="form-header-supplier">Please confirm your details regarding the article</p>
     </div>
-
 </div>
+
+<div class="row justify-content-center ">
+    <div class="col-12 d-flex justify-content-center">
+        @*<fieldset disabled="disabled">*@
+        <form>
+            <table class="table">
+
+                <!-- ############## Supplier Information ############## -->
+                <tr>
+                    <td colspan="7">
+                        <div class="row justify-content-right">
+                            <div class="col-9">
+                                <h4 class="information-headings"> Supplier Information:</h4>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <label for="company_name">Company name:</label>
+                    </td>
+                    <td colspan="3">
+                        <input type="text" class="form-control" name="company_name" value="Hello & Co." disabled>
+                    </td>
+                    <td>
+                        <div></div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="3">
+                        <label for="company_location">Company location:</label>
+                    </td>
+                    <td colspan="3">
+                        <input type="text" class="form-control" name="company_location" value="Denmark" disabled>
+                    </td>
+                    <td>
+                        <div></div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2">
+                        <label for="email">Email:</label>
+                    </td>
+                    <td colspan="4">
+                        <input type="text" class="form-control" name="email" value="HelloCompany@@mail.com" disabled>
+                    </td>
+                    <td>
+                        <div></div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="pallet_exchange" value="">Pallet exchange</label>
+                    </td>
+                    <td colspan="5">
+                        <div class="text-center">
+                            <input type="radio" name="pallet_exchange" id="yes" value="yes" checked="checked" disabled>
+                            <label for="yes">Yes</label>
+                            &nbsp;
+                            <input type="radio" id="no" name="pallet_exchange" disabled>
+                            <label for="no">No</label>
+                        </div>
+                    </td>
+                    <td>
+                        <div></div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="freight_responsibility" value="">Freight responsibility</label>
+                    </td>
+                    <td colspan="5">
+                        <div class="text-center">
+                            <input type="radio" name="freight_responsibility" id="CIP" value="CIP" checked="checked" disabled>
+                            <label for="CIP">CIP</label>
+                            &nbsp;
+                            <input type="radio" id="EXW" name="freight_responsibility" disabled>
+                            <label for="EXW">EXW</label>
+                        </div>
+                    </td>
+                    <td>
+                        <div></div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="6">
+                        <label for="special_info">Special information regarding the article or cooperation?</label>
+                        <textarea class="form-control" name="special_info" value="" disabled>Absolutely none</textarea>
+                    </td>
+                    <td>
+                        <div></div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="transport" value="">Are you in charge of booking transport?</label>
+                    </td>
+
+                    <td colspan="5">
+                        <div class="text-center">
+                            <input type="radio" name="transport" value="yes" checked disabled>
+                            <label for="yes">Yes</label>
+                            &nbsp;
+                            <input type="radio" value="no" name="transport" disabled>
+                            <label for="no">No</label>
+                        </div>
+                    </td>
+                    <td>
+                        <div></div>
+                    </td>
+                </tr>
+                @if (BookingTransport == "yes")
+                {
+                    <tr>
+                        <td>
+                            <label for="class">Transit time:</label>
+                        </td>
+                        <td colspan="5">
+                            <input type="number" class="form-control" id="class" value="10" disabled>
+                        </td>
+                        <td>
+                            <label for="class" class="labels">days</label>
+                        </td>
+                    </tr>
+                }
+
+                <tr>
+                    <td>
+                        <label for="dangerous" value="">Is the article classified as dangerous goods (ADR)?</label>
+                    </td>
+                    <td colspan="5">
+                        <div class="text-center">
+                            <input type="radio" name="dangerous" value="yes" checked disabled>
+                            <label for="yes">Yes</label>
+                            &nbsp;
+                            <input type="radio" value="no" name="dangerous" disabled />
+                            <label for="no">No</label>
+                        </div>
+                    </td>
+                    <td>
+                        <div></div>
+                    </td>
+                </tr>
+                @if (DangerousGoods == "yes")
+                {
+                    <tr>
+                        <td>
+                            <label for="class">Class:</label>
+                        </td>
+                        <td colspan="5">
+                            <input type="text" class="form-control" id="class" value="" disabled>
+                        </td>
+                        <td>
+                            <div></div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="3">
+                            <label for="classificationCode">Classification code:</label>
+                        </td>
+                        <td colspan="3">
+                            <input type="number" class="form-control" id="classificationCode" value="1293871293" disabled>
+                        </td>
+                        <td>
+                            <div></div>
+                        </td>
+                    </tr>
+                }
+
+
+                <!-- ############## Article Information ############## -->
+
+                <tr>
+                    <td colspan="7">
+                        <div class="row justify-content-right">
+                            <div class="col-9">
+                                <h4 class="information-headings"> Article information:</h4>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2">
+                        <label for="article_name">Article name:</label>
+                    </td>
+                    <td colspan="4">
+                        <input type="text" class="form-control" id="a_name" value="Peanuts" disabled>
+                    </td>
+                    <td>
+                        <div></div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2">
+                        <label for="sales_unit">Salesunit:</label>
+                    </td>
+                    <td colspan="4">
+                        <input type="text" class="form-control" id="sales_unit" value="Bakke // 374" disabled>
+                    </td>
+                    <td>
+                        <div></div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="3">
+                        <label for="article_pr_salesunit">Article per salesunit:</label>
+                    </td>
+                    <td colspan="3">
+                        <input type="number" class="form-control" id="salesunit_quantity" value="123" disabled>
+                    </td>
+                    <td>
+                        <div></div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2">
+                        <label for="supplier_article_nn">Supplier article number/name:</label>
+                    </td>
+                    <td colspan="4">
+                        <input type="number" class="form-control" id="article_number_name" value="12312442123" disabled>
+                    </td>
+                    <td>
+                        <div></div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2">
+                        <label for="GTIN">GTIN number:</label>
+                    </td>
+                    <td colspan="4">
+                        <input type="number" class="form-control" id="GTIN" value="12312312412312" disabled>
+                    </td>
+                    <td>
+                        <div></div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="4">
+                        <label for="Shelflife">Shelflife:</label>
+                    </td>
+                    <td colspan="2">
+                        <input type="number" class="form-control" id="Shelflife" value="2" disabled>
+                    </td>
+                    <td>
+                        <label class="center-for-units" for="Shelflife">days</label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="4">
+                        <label for="Min_shelflife">Min. shelflife at HAVI:</label>
+                    </td>
+                    <td colspan="2">
+                        <input type="number" class="form-control" id="Min_shelflife" value="12" disabled>
+                    </td>
+                    <td>
+                        <label class="center-for-units" for="Min_shelflife">days</label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="organic_article" value="">Organic article?</label>
+                    </td>
+
+                    <td colspan="5">
+                        <div class="text-center">
+                            <input type="radio" name="organic" id="yes" value="yes" disabled>
+                            <label for="yes">Yes</label>
+                            &nbsp;
+                            <input type="radio" id="no" name="organic" checked="checked" disabled>
+                            <label for="no">No</label>
+                        </div>
+                    </td>
+                    <td>
+                        <div></div>
+                    </td>
+                </tr>
+
+                <!-- ############## Measurement Information ############## -->
+                <tr>
+                    <td colspan="7">
+                        <div class="row justify-content-right">
+                            <div class="col-9">
+                                <h4 class="information-headings"> Measurement information:</h4>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <label for="length">Length per salesunit:</label>
+                    </td>
+                    <td colspan="3">
+                        <input type="number" class="form-control" id="Length" value="3" disabled>
+                    </td>
+                    <td>
+                        <label class="center-for-units" for="length">cm</label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="3">
+                        <label for="width">Width per salesunit:</label>
+                    </td>
+                    <td colspan="3">
+                        <input type="number" class="form-control" id="width" value="12" disabled>
+                    </td>
+                    <td>
+                        <label class="center-for-units" for="width">cm</label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="3">
+                        <label for="height">Height per salesunit:</label>
+                    </td>
+                    <td colspan="3">
+                        <input type="number" class="form-control" id="height" value="10" disabled>
+                    </td>
+                    <td>
+                        <label class="center-for-units" for="height">cm</label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="3">
+                        <label for="net_weight">Net weight per salesunit:</label>
+                    </td>
+                    <td colspan="3">
+                        <input type="number" class="form-control" id="net_weight" value="12" disabled>
+                    </td>
+                    <td>
+                        <label class="center-for-units" for="net_weight">kg</label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="3">
+                        <label for="gross_weight">Gross weight per salesunit:</label>
+                    </td>
+                    <td colspan="3">
+                        <input type="number" class="form-control" id="gross_weight" value="113" disabled>
+                    </td>
+                    <td>
+                        <label class="center-for-units" for="gross_weight">kg</label>
+                    </td>
+                </tr>
+
+
+                <!-- ############## Shipment Information: ############## -->
+
+
+                <tr>
+                    <td colspan="7">
+                        <div class="row justify-content-right">
+                            <div class="col-9">
+                                <h4 class="information-headings"> Shipment information:</h4>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="carton_pr_pallet">Cartons per pallet:</label>
+                    </td>
+                    <td colspan="5">
+                        <input type="number" class="form-control" id="carton_pr_pallet" value="1" disabled>
+                    </td>
+                    <td>
+                        <div></div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="carton_pr_layer">Cartons per layer:</label>
+                    </td>
+                    <td colspan="5">
+                        <input type="number" class="form-control" value="1" disabled>
+                    </td>
+                    <td>
+                        <div></div>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td>
+                        <label for="country_origin">Country of origin:</label>
+                    </td>
+                    <td colspan="5">
+                        <input type="text" class="form-control" value="Denmark" disabled>
+                    </td>
+                    <td>
+                        <div></div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="imported_from">Imported from:</label>
+                    </td>
+                    <td colspan="5">
+                        <input type="text" class="form-control" value="Denmark" disabled>
+                    </td>
+                    <td>
+                        <div></div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="toll_tarrif_no">Toll-tarrif no:</label>
+                    </td>
+                    <td colspan="5">
+                        <input type="number" class="form-control" id="toll_tarrif_no" value="2" disabled>
+                    </td>
+                    <td>
+                        <div></div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="minimum_order_quantity">Minimum order quantity:</label>
+                    </td>
+                    <td colspan="5">
+                        <input type="number" class="form-control" id="minimum_order_quantity" value="10" disabled>
+                    </td>
+                    <td>
+                        <div></div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <div class="text-left">
+                            <label for="temprature_during_transportation">Temperature during transportation:</label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="text-left">
+                            <label class="center-for-units" for="min">Min:</label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="text-left">
+                            <input type="number" class="form-control" id="min" value="2" disabled>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="text-left">
+                            <label class="center-for-units" for="degrees">&#8451;</label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="text-left">
+                            <label class="center-for-units" for="max">Max:</label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="text-left">
+                            <input type="number" class="form-control" id="max" value="4" disabled>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="text-left">
+                            <label class="center-for-units" for="degrees">&#8451;</label>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="temprature_storage">Storage temperature requirements:</label>
+                    </td>
+                    <td>
+                        <div class="text-left">
+                            <label class="center-for-units" for="min">Min:</label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="text-left">
+                            <input type="number" class="form-control" id="min" value="5" disabled>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="text-left">
+                            <label class="center-for-units" for="degrees">&#8451;</label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="text-left">
+                            <label class="center-for-units" for="max">Max:</label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="text-left">
+                            <input type="number" class="form-control" id="max" value="2" disabled>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="text-left">
+                            <label class="center-for-units" for="degrees">&#8451;</label>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="lead_time">Lead time:</label>
+                    </td>
+                    <td colspan="5">
+                        <input type="number" class="form-control" id="lead_time" value="5" disabled>
+                    </td>
+                    <td>
+                        <div class="text-right">
+                            <label class="center-for-units" for="lead_time">days</label>
+                        </div>
+                    </td>
+                </tr>
+
+
+                <!-- ############## Price Information: ############## -->
+
+                <tr>
+                    <td colspan="7">
+                        <div class="row justify-content-right">
+                            <div class="col-9">
+                                <h4 class="information-headings"> Price information:</h4>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="set_currency">Set currency:</label>
+                    </td>
+                    <td colspan="5">
+                        <input type="text" class="form-control" id="purchase_price" value="DKK" disabled>
+                    </td>
+                    <td>
+                        <div></div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="purchase_price">Purchase price:</label>
+                    </td>
+                    <td colspan="5">
+                        <input type="number" class="form-control" id="purchase_price" value="100" disabled>
+                    </td>
+                    <td>
+                        <div></div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="other_cost" value="">Other cost regarding the article?</label>
+                    </td>
+                    <td colspan="5">
+                        <div class="text-center">
+                            <input type="radio" name="organic" id="yes" value="yes" data-toggle="collapse" data-target="#hideOrganic:not(.show)" aria-expanded="false" aria-controls="hideOrganic" checked="checked" disabled>
+                            <label for="yes">Yes</label>
+                            &nbsp;
+                            <input type="radio" name="organic" id="no" value="no" data-toggle="collapse" data-target="#hideOrganic.show" aria-expanded="false" aria-controls="hideOrganic" disabled>
+                            <label for="no">No</label>
+                        </div>
+                    </td>
+                    <td>
+                        <div></div>
+                    </td>
+                </tr>
+                @if (OtherCost == "yes")
+                {
+                        @for (int i = 1; i <= NumberOfOtherCosts; i++)
+                        {
+
+                            <tr>
+                                <td>
+                                    <label for="afgift-@i">Inform cost type:</label>
+                                </td>
+
+                                <td colspan="2">
+                                    <select class="form-control" name="afgift-@i" required>
+                                        <option disabled selected>-- select an option --</option>
+                                        <option>Chokoladeafgift</option>
+                                        <option>Miljøafgift</option>
+                                        <option>En anden afgift</option>
+                                    </select>
+                                </td>
+                                <td colspan="2">
+                                    <label for="amount-@i">Amount in @Currency:</label>
+                                </td>
+                                <td colspan="2">
+                                    <input type="number" class="form-control" name="amount-@i">
+                                </td>
+                            </tr>
+
+                        }
+
+                        <tr>
+                            <td colspan="3"></td>
+                            <td colspan="2" class="text-right">
+                                <label class="text-right" for="totalAmount">Total amount in @Currency</label>
+                            </td>
+                            <td>
+                                <label>150</label>
+                            </td>
+                        </tr>
+                }
+            </table>
+
+
+            <div class="row justify-content-center">
+                <div class="text-right col-6">
+                    <input type="submit" class="btn cancel-button button-size" value="Back" @onclick="GoBack" />
+                </div>
+                <div class="text-left col-6">
+                    <input type="submit" class="btn green-button button-size" value="Submit" @onclick="Submit" />
+                </div>
+            </div>
+        </form>
+        @*</fieldset>*@
+    </div>
+</div>
+
+@code
+{
+    public void Submit()
+    {
+    NavigationManager.NavigateTo($"/submission_accepted", true);
+    }
+
+    public void GoBack()
+    {
+    NavigationManager.NavigateTo($"/price_info_form", true);
+    }
+
+}
+
+@code {
+    private string BookingTransport = "yes";
+
+    private string DangerousGoods = "yes";
+
+    private string OtherCost = "yes";
+
+    private string Currency = "DKK";
+
+    private int NumberOfOtherCosts = 1;
+}
+
+
+@*@code
+    {*@
+@*[Parameter]
+    public string values { get; set; }*@
+
+@*[Parameter]
+    public Test values { get; set; }
+
+    public class Test
+    {
+        public int kat { get; set; }
+        public int hund { get; set; }
+        public int and { get; set; }
+    }
+
+    public Test test;
+
+    protected override void OnParametersSet()
+    {
+        //the param will be set now
+        test = values;
+    }
+     }*@

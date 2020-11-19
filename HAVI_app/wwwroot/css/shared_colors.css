@@ -57,37 +57,50 @@ td, tr {
     color: var(--dark-blue);
 }
 
+.table-arrows {
+    height: 20px;
+}
+
+
+/*######################################################################################################################*/
+/* Up and down keys for table */
+
 .filter-table {
-    position: absolute;
+    position: relative;
+    height: 10px;
+    width: 40px;
+    bottom: 25px;
+    text-align: center;
 }
 
 .up-table-arrow {
-    transform: rotate(-180deg);
     -webkit-transform: rotate(-180deg);
-    text-align: center;
-    color: #fdfdfd;
-    font-weight: 700;
-    position: relative;
-    height: 24px;
-    width: 24px;
-    padding: 1px;
-    font-size:x-large;
+    color: var(--dark-grey);
 }
 
 .down-table-arrow {
-    text-align: center;
-    color: #fdfdfd;
-    font-weight: 700;
-    position: relative;
-    height: 20px;
-    width: 20px;
-    padding: 1px;
-    font-size: x-large;
+    color: var(--dark-grey);
 }
+
+    .up-table-arrow:hover {
+        color: var(--green);
+    }
+
+    .down-table-arrow:hover {
+        color: var(--green);
+    }
+
+/*
+<th >
+    <div class="filter-table" >
+        <div class="down-table-arrow " > &#9650</div >
+        <div class="up-table-arrow " > &#9650</div >
+    </div >
+</th >
+    */
 
 /*######################################################################################################################*/
 /* Colored buttons layout */
-
 .green-button {
     background: var(--green);
     color: var(--background-white);
@@ -127,6 +140,12 @@ td, tr {
     background-color: darkred;
     color: white;
 }
+
+.button-size {
+    padding: 6px 20px;
+    min-width: 100px;
+}
+
 /*######################################################################################################################*/
 /* CSS dropdown button*/
 

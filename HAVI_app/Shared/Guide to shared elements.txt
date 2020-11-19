@@ -34,7 +34,10 @@ Inserting af colorful background:
     
     Blue:
     <HAVI_app.Shared.Shared_layout.Backgrounds.Blue_background/>
-    
+
+    Gray:
+    <HAVI_app.Shared.Shared_layout.Backgrounds.Gray_background/>
+
 ***********************************************************************************************************************
 Inserting a footer:
 

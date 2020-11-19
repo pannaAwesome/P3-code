@@ -2,78 +2,89 @@
 @inject NavigationManager NavigationManager
 @page "/overview_supplier"
 
-    <div class="col-12">
-        <div class="row">
-            <div class="col-5">
-                <h2>Welcome Hello and co.</h2>
-            </div>
-            <div class="col-2"></div>
-            <div class="col-5 text-right">
+<div class="col-12">
+    <div class="row" id="overview-supplier-header">
+        <div class="col-5">
+            <h2>Welcome Hello and co.</h2>
+        </div>
+        <div class="col-2"></div>
+        <div class="col-5 text-right">
+            <a href="#" data-toggle="modal" data-target="#addArticle">
                 <button class="btn dark-green-button">
-                Add article
-                    <span class="plus-sign-for-button">&#9663</span>
+                    Add article
+                    <span class="plus-sign-for-button">&#10010</span>
+                </button>
+            </a>
+        </div>
+    </div>
+</div>
+
+<HAVI_app.Shared.Supplier_layout.Overview_table_supplier/>
+
+<!-- Form adding an article. Only appears when link is toggeled -->
+<div class="modal fade" id="addArticle" tabindex="-1" role="dialog" aria-labelledby="addArticle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" id="modal-addArticle">
+            <div class="">
+                <button type="button" class="close close-password" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
                 </button>
             </div>
+            <div class="modal-body">
+                <h4>Add article</h4>
+                <form>
+                    <div class="form-group">
+                        <label for="selectCustomer">Vailed For Customer</label>
+                        <select class="form-control" id="selectCustomer">
+                            @for (int i = 0; i < 5; i++)
+                            {
+                                if (i == 0)
+                                {
+                                    <option disabled selected>-- select an option --</option>
+                                }
+                                else
+                                {
+                                    <option>@i</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="haviRecipent">HAVI recipient</label>
+                        <select class="form-control" id="haviRecipent">
+                            @for (int i = 0; i < 5; i++)
+                            {
+                                if (i == 0)
+                                {
+                                    <option disabled selected>-- select an option --</option>
+                                }
+                                else
+                                {
+                                    <option>@i</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </form>
+                <div class="row justify-content-center">
+                    <button type="button" class="save-password btn button-size" data-dismiss="modal" @onclick="NewArticleAdded">Create</button>
+                </div>
+            </div>
         </div>
     </div>
-    
-    <div class="row body-layout">
-        <div class="col-12">
-            <table class="table table-hover">
-                <thead class="blue-tabel-header">
-                    <tr>
-                        <th>
-                            <input type="checkbox" name="product_element" />
-                        </th>
+</div>
 
-                        <th>
-                            Article number
-                        </th>
-                        <th>
-                            <div class="filter-table">
-                                <div class="up-table-arrow ">&#9663</div>
-                                <div class="down-table-arrow ">&#9663</div>
-                            </div>
-                        </th>
-                        <th>Article name </th>
-                        <th>Vailed for customer </th>
-                        <th>HAVI employee </th>
-                        <th>Date created </th>
-                        <th>State </th>
-                    </tr>
-                </thead>
 
-                <tbody>
-                    @for (int i = 0; i < 5; i++)
-                    {
-
-                        <tr>
-                            <td>
-                                <input type="checkbox" name="product_element" />
-                            </td>
-                            <td @onclick="RowWasHit">1</td>
-                            <td @onclick="RowWasHit">2</td>
-                            <td @onclick="RowWasHit">3</td>
-                            <td @onclick="RowWasHit">4</td>
-                            <td @onclick="RowWasHit">5</td>
-                            <td @onclick="RowWasHit">
-                                <div class="created-state state">Created</div>
-                            </td>
-                        </tr>
-
-                    }
-
-                </tbody>
-            </table>
-        </div>
-    </div>
 
 
 @code{
-    private void RowWasHit()
+    private void NewArticleAdded()
     {
         NavigationManager.NavigateTo("/supplier_info_form", true);
     }
 }
 
 <havi_app.Shared.Shared_layout.Footer />
+
+
+
