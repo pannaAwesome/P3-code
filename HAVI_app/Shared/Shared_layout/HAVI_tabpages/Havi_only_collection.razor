@@ -90,6 +90,9 @@
 
 
 @code{
+    [Parameter]
+    public string Username { get; set; }
+
     private int PageIndex = 0;
 
     private void PageUp()
@@ -112,7 +115,10 @@
 
     private void ReturnToOverview()
     {
-        //This only reroutes back to the admins article_view and needs to be updated to handle the purchaser
-        NavigationManager.NavigateTo("/article_view", true);
+        if(Username == "purchaser@info.com")
+        {
+            NavigationManager.NavigateTo("/overview_purchaser", true);
+        }
+        else NavigationManager.NavigateTo("/article_view", true);
     }
 }

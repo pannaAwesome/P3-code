@@ -16,7 +16,6 @@
   <ItemGroup>
     <Folder Include="Shared\Admin_layout\" />
     <Folder Include="Data\" />
-    <Folder Include="Shared\Purchaser_layout\" />
     <Folder Include="wwwroot\images\Form_header_arrows\" />
   </ItemGroup>
 
