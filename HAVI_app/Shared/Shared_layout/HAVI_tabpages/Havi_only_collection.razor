@@ -1,0 +1,118 @@
+﻿@inject NavigationManager NavigationManager
+
+@if (PageIndex == 0)
+{
+    <div class="row">
+        <div class="col-6">
+            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Havi_only.Internal_info />
+        </div>
+        <div class="col-6">
+            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Supplier_information />
+            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Article_information />
+        </div>
+    </div>
+}
+
+@if (PageIndex == 1)
+{
+    <div class="row">
+        <div class="col-6">
+            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Havi_only.Alias_info />
+        </div>
+        <div class="col-6">
+            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Article_information />
+        </div>
+    </div>
+}
+
+@if (PageIndex == 2)
+{
+    <div class="row">
+        <div class="col-6">
+            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Havi_only.Pick_storage />
+        </div>
+        <div class="col-6">
+        </div>
+    </div>
+}
+
+@if (PageIndex == 3)
+{
+    <div class="row">
+        <div class="col-6">
+            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Havi_only.Bundle_info />
+        </div>
+        <div class="col-6">
+            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Article_information />
+        </div>
+    </div>
+}
+
+@if (PageIndex == 4)
+{
+    <div class="row">
+        <div class="col-6">
+            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Article_information />
+        </div>
+        <div class="col-6">
+            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Shipment_information />
+        </div>
+    </div>
+    <div class="row">
+        <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Havi_only.QIP_info />
+    </div>
+}
+
+<br />
+<br />
+
+<div class="row justify-content-center">
+    @if (PageIndex == 0)
+    {
+        <div class="col-6 text-center"><button class="btn green-button" @onclick="PageUp">Next</button></div>
+    }
+
+    @if (PageIndex > 0)
+    {
+        <div class="col-6 text-right"><button class="btn cancel-button" @onclick="PageDown">Back</button></div>
+    }
+
+    @if (PageIndex < 4 && PageIndex != 0)
+    {
+        <div class="col-6 text-left"><button class="btn green-button" @onclick="PageUp">Next</button></div>
+    }
+
+    @if (PageIndex == 4)
+    {
+        <div class="col-6 text-left"><button class="btn green-button" @onclick="ReturnToOverview">Save</button></div>
+    }
+</div>
+
+
+@code{
+    private int PageIndex = 0;
+
+    private void PageUp()
+    {
+        PageIndex++;
+        if (PageIndex > 4)
+        {
+            PageIndex = 4;
+        }
+    }
+
+    private void PageDown()
+    {
+        PageIndex--;
+        if (PageIndex < 0)
+        {
+            PageIndex = 0;
+        }
+    }
+
+    private void ReturnToOverview()
+    {
+        //This only reroutes back to the admins article_view and needs to be updated to handle the purchaser
+        NavigationManager.NavigateTo("/article_view", true);
+    }
+}

@@ -1,0 +1,166 @@
+﻿<div class="col-12 havi-info-box">
+<div class="row justify-content-right">
+    <div class="col-11">
+        <h4> Supplier Information:</h4>
+    </div>
+    <div class="col-1">
+        @if (EditingFields)
+        {
+            <div class="save-button" @onclick="Saving"></div>
+        }
+        else
+        {
+            <div class="edit-button" @onclick="Editing"></div>
+        }
+
+    </div>
+</div>
+<table class="table table-borderless">
+    <tr>
+        <td>
+            <label for="company_name">Company name:</label>
+        </td>
+        <td colspan="2">
+            <input type="text" class="form-control" name="company_name" value="Hello & Co." disabled>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <label for="company_location">Company location:</label>
+        </td>
+        <td colspan="2">
+            <input type="text" class="form-control" name="company_location" value="Denmark" disabled>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <label for="email">Email:</label>
+        </td>
+        <td colspan="2">
+            <input type="text" class="form-control" name="email" value="HelloCompany@@mail.com" disabled>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <label for="pallet_exchange" value="">Pallet exchange</label>
+        </td>
+        <td colspan="2">
+            <div class="text-center">
+                <input type="radio" name="pallet_exchange" id="yes" value="yes" checked="checked" disabled>
+                <label for="yes">Yes</label>
+                &nbsp;
+                <input type="radio" id="no" name="pallet_exchange" disabled>
+                <label for="no">No</label>
+            </div>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <label for="freight_responsibility" value="">Freight responsibility</label>
+        </td>
+        <td colspan="2">
+            <div class="text-center">
+                <input type="radio" name="freight_responsibility" id="CIP" value="CIP" checked="checked" disabled>
+                <label for="CIP">CIP</label>
+                &nbsp;
+                <input type="radio" id="EXW" name="freight_responsibility" disabled>
+                <label for="EXW">EXW</label>
+            </div>
+        </td>
+    </tr>
+
+    <tr>
+        <td colspan="3">
+            <label for="special_info">Special information regarding the article or cooperation?</label>
+            <textarea class="form-control" name="special_info" value="" disabled>Absolutely none</textarea>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <label for="transport" value="">Are you in charge of booking transport?</label>
+        </td>
+
+        <td colspan="2">
+            <div class="text-center">
+                <input type="radio" name="transport" value="yes" checked disabled>
+                <label for="yes">Yes</label>
+                &nbsp;
+                <input type="radio" value="no" name="transport" disabled>
+                <label for="no">No</label>
+            </div>
+        </td>
+    </tr>
+    @if (BookingTransport == "yes")
+    {
+        <tr>
+            <td>
+                <label for="class">Transit time:</label>
+            </td>
+            <td>
+                <input type="number" class="form-control" id="class" value="10" disabled>
+            </td>
+            <td>
+                <label for="class" class="labels">days</label>
+            </td>
+        </tr>
+    }
+
+    <tr>
+        <td>
+            <label for="dangerous" value="">Is the article classified as dangerous goods (ADR)?</label>
+        </td>
+        <td colspan="2">
+            <div class="text-center">
+                <input type="radio" name="dangerous" value="yes" checked disabled>
+                <label for="yes">Yes</label>
+                &nbsp;
+                <input type="radio" value="no" name="dangerous" disabled />
+                <label for="no">No</label>
+            </div>
+        </td>
+    </tr>
+    @if (DangerousGoods == "yes")
+    {
+        <tr>
+            <td>
+                <label for="class">Class:</label>
+            </td>
+            <td colspan="2">
+                <input type="text" class="form-control" id="class" value="" disabled>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <label for="classificationCode">Classification code:</label>
+            </td>
+            <td colspan="2">
+                <input type="number" class="form-control" id="classificationCode" value="1293871293" disabled>
+            </td>
+        </tr>
+    }
+</table>
+</div>
+
+@code {
+    private string BookingTransport = "yes";
+
+    private string DangerousGoods = "yes";
+
+    private bool EditingFields = false;
+
+    private void Editing()
+    {
+        EditingFields = true;
+    }
+
+    private void Saving()
+    {
+        EditingFields = false;
+    }
+}

@@ -26,7 +26,6 @@
         Selection:
     </div>
 </div>
-<!--@((x) => selectionType = (SelectionType)Enum.Parse(typeof(SelectionType), x.Value.ToString()))-->
 <div class="row">
     <div class="col-3">
         <select class="form-control row-selection" @onchange="@((x) => SelectionChanged(x.Value.ToString()))">
@@ -40,7 +39,7 @@
 </div>
 <div class="row">
     <div class="col-12">
-        <Table TableItem="SupplierInfo" Items="supplierdata" ColumnReorder="true" TableHeadClass="blue-tabel-header" TableRowClass="@(x => x.RowClass)" RowClickAction="RowClicked" SelectionType="selectionType" SelectedItems="selectedItems" ShowSearchBar="true">
+        <Table TableItem="SupplierInfo" Items="supplierdata" ColumnReorder="true" TableHeadClass="blue-tabel-header" TableClass="table table-hover" TableRowClass="@(x => x.RowClass)" RowClickAction="RowClicked" SelectionType="selectionType" SelectedItems="selectedItems" ShowSearchBar="true">
             <Column TableItem="SupplierInfo" Title="Article no." Field="@(x => x.ArticleNumber)" Sortable="true" />
             <Column TableItem="SupplierInfo" Title="Article name" Field="@(x => x.ArticleName)" Sortable="true" />
             <Column TableItem="SupplierInfo" Title="Vailed for customer" Field="@(x => x.VailedForCustomer)" Sortable="true" />

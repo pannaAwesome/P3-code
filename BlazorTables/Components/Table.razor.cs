@@ -19,7 +19,7 @@ namespace BlazorTable
         /// Table CSS Class (Defaults to Bootstrap 4)
         /// </summary>
         [Parameter]
-        public string TableClass { get; set; } = "table table-hover";
+        public string TableClass { get; set; } = "table";
 
         /// <summary>
         /// Table Head Class (Defaults to Bootstrap 4)

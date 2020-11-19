@@ -1,3 +1,15 @@
-﻿@page "/overview_admin"
+﻿@layout HAVI_app.Shared.Admin_layout.Overview
 
-<HAVI_app.Shared.Admin_layout.Overview_table_admin/>
+@page "/overview_admin"
+
+<div class="row overview-admin-header">
+    <div class="col-10"><h3>Welcome DKAdmin</h3></div>
+    <div class="col-2">
+        <button class="btn button-options-overview">Export orders</button>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <HAVI_app.Shared.Admin_layout.Overview_table_admin/>
+    </div>
+</div>

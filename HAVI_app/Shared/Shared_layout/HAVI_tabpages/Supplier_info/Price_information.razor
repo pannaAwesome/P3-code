@@ -1,0 +1,114 @@
+﻿<div class="col-12 havi-info-box">
+    <div class="row justify-content-right">
+        <div class="col-11">
+            <h4> Price Information:</h4>
+        </div>
+        <div class="col-1">
+            @if (EditingFields)
+            {
+                <div class="save-button" @onclick="Saving"></div>
+            }
+            else
+            {
+                <div class="edit-button" @onclick="Editing"></div>
+            }
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <table class="table table-borderless">
+                <tr>
+                    <td>
+                        <label for="set_currency">Set currency:</label>
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" id="purchase_price" value="DKK" disabled>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="purchase_price">Purchase price:</label>
+                    </td>
+                    <td>
+                        <input type="number" class="form-control" id="purchase_price" value="100" disabled>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="other_cost" value="">Other cost regarding the article?</label>
+                    </td>
+                    <td>
+                        <div class="text-center">
+                            <input type="radio" name="organic" id="yes" value="yes" data-toggle="collapse" data-target="#hideOrganic:not(.show)" aria-expanded="false" aria-controls="hideOrganic" checked="checked" disabled>
+                            <label for="yes">Yes</label>
+                            &nbsp;
+                            <input type="radio" name="organic" id="no" value="no" data-toggle="collapse" data-target="#hideOrganic.show" aria-expanded="false" aria-controls="hideOrganic" disabled>
+                            <label for="no">No</label>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-6">
+            <table>
+                @if (OtherCost == "yes")
+                {
+                    @for (int i = 1; i <= NumberOfOtherCosts; i++)
+                    {
+
+                        <tr>
+                            <td>
+                                <label for="afgift-@i">Inform cost type:</label>
+                            </td>
+
+                            <td>
+                                <input type="text" class="form-control" value="chokoladeafgift" name="afgift-@i" disabled>
+                            </td>
+                            <td>
+                                <label for="amount-@i">Amount in @Currency:</label>
+                            </td>
+                            <td>
+                                <input type="number" class="form-control" value="150" name="amount-@i" disabled>
+                            </td>
+                        </tr>
+
+                    }
+
+                    <tr>
+                        <td colspan="1"></td>
+                        <td colspan="2" class="text-right">
+                            <label class="text-right" for="totalAmount">Total amount in @Currency</label>
+                        </td>
+                        <td colspan="1">
+                            <label>150</label>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+</div>
+
+@code {
+
+    private string OtherCost = "yes";
+
+    private string Currency = "DKK";
+
+    private int NumberOfOtherCosts = 1;
+
+    private bool EditingFields = false;
+
+    private void Editing()
+    {
+        EditingFields = true;
+    }
+
+    private void Saving()
+    {
+        EditingFields = false;
+    }
+}
