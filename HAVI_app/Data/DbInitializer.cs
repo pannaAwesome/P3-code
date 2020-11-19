@@ -163,10 +163,11 @@ namespace HAVI_app.Data
                         }
                     }
                 }
-
-                context.Iloscategories.AddRange(categories);
-                context.SaveChanges();
             }
+            context.Iloscategories.AddRange(categories);
+            context.SaveChanges();
+
+
             Console.WriteLine("Database created!");
         }
     }
