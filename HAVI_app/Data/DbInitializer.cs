@@ -167,6 +167,124 @@ namespace HAVI_app.Data
             context.Iloscategories.AddRange(categories);
             context.SaveChanges();
 
+            List<SetCurrency> currencies = new List<SetCurrency>();
+
+            using (TextFieldParser parser = new TextFieldParser(@"./Data/Currency.csv"))
+            {
+                {
+                    parser.TextFieldType = FieldType.Delimited;
+                    parser.SetDelimiters(";");
+                    while (!parser.EndOfData)
+                    {
+                        string[] fields = parser.ReadFields();
+                        foreach (string field in fields)
+                        {
+                            currencies.Add(new SetCurrency { CurrencyName = field });
+                        }
+                    }
+                }
+            }
+            context.SetCurrencies.AddRange(currencies);
+            context.SaveChanges();
+
+            List<InformCostType> duties = new List<InformCostType>();
+
+            using (TextFieldParser parser = new TextFieldParser(@"./Data/Duties.csv"))
+            {
+                {
+                    parser.TextFieldType = FieldType.Delimited;
+                    parser.SetDelimiters(";");
+                    while (!parser.EndOfData)
+                    {
+                        string[] fields = parser.ReadFields();
+                        foreach (string field in fields)
+                        {
+                            duties.Add(new InformCostType { CostType = field, CountryId = 1 });
+                        }
+                    }
+                }
+            }
+            context.InformCostTypes.AddRange(duties);
+            context.SaveChanges();
+
+            List<FreightResponsibility> freights = new List<FreightResponsibility>();
+
+            using (TextFieldParser parser = new TextFieldParser(@"./Data/Freight.csv"))
+            {
+                {
+                    parser.TextFieldType = FieldType.Delimited;
+                    parser.SetDelimiters(";");
+                    while (!parser.EndOfData)
+                    {
+                        string[] fields = parser.ReadFields();
+                        foreach (string field in fields)
+                        {
+                            freights.Add(new FreightResponsibility { Responsibility = field });
+                        }
+                    }
+                }
+            }
+            context.FreightResponsibilities.AddRange(freights);
+            context.SaveChanges();
+
+            List<PackagingGroup> packagingGroups = new List<PackagingGroup>();
+
+            using (TextFieldParser parser = new TextFieldParser(@"./Data/Packaging.csv"))
+            {
+                {
+                    parser.TextFieldType = FieldType.Delimited;
+                    parser.SetDelimiters(";");
+                    while (!parser.EndOfData)
+                    {
+                        string[] fields = parser.ReadFields();
+                        foreach (string field in fields)
+                        {
+                            packagingGroups.Add(new PackagingGroup { Group = field });
+                        }
+                    }
+                }
+            }
+            context.PackagingGroups.AddRange(packagingGroups);
+            context.SaveChanges();
+
+            List<DepartmentId> departments = new List<DepartmentId>();
+
+            using (TextFieldParser parser = new TextFieldParser(@"./Data/DepartmentID.csv"))
+            {
+                parser.TextFieldType = FieldType.Delimited;
+                parser.SetDelimiters(";");
+                while (!parser.EndOfData)
+                {
+                    string[] fields = parser.ReadFields();
+                    foreach (string field in fields)
+                    {
+                        departments.Add(new DepartmentId { Department = field);
+                    }
+                }
+            }
+
+            context.DeparmentIds.AddRange(departments);
+            context.SaveChanges();
+
+
+            List<PrimaryDciloscode> ilosCode = new List<PrimaryDciloscode>();
+
+            using (TextFieldParser parser = new TextFieldParser(@"./Data/PrimaryDCILOscode.csv"))
+            {
+                parser.TextFieldType = FieldType.Delimited;
+                parser.SetDelimiters(";");
+                while (!parser.EndOfData)
+                {
+                    string[] fields = parser.ReadFields();
+                    ilosCode.Add(new PrimaryDciloscode { PrimaryCode = fields[0], Sapplant = fields[1], CountryId = 1 });
+                }
+            }
+
+            context.PrimaryDciloscodes.AddRange(ilosCode);
+            context.SaveChanges();
+
+
+
 
             Console.WriteLine("Database created!");
         }

@@ -22,7 +22,8 @@ namespace HAVI_app.Models
         public virtual DbSet<ArticleInformation> ArticleInformations { get; set; }
         public virtual DbSet<Bundle> Bundles { get; set; }
         public virtual DbSet<Country> Countries { get; set; }
-        public virtual DbSet<DeparmentId> DeparmentIds { get; set; }
+        public virtual DbSet<DepartmentId> DeparmentIds { get; set; }
+        public virtual DbSet<PackagingGroup> PackagingGroups { get; set; }
         public virtual DbSet<FreightResponsibility> FreightResponsibilities { get; set; }
         public virtual DbSet<Iloscategory> Iloscategories { get; set; }
         public virtual DbSet<Ilosorderpickgroup> Ilosorderpickgroups { get; set; }
@@ -215,13 +216,22 @@ namespace HAVI_app.Models
                     .HasConstraintName("FK__Country__Profile__267ABA7A");
             });
 
-            modelBuilder.Entity<DeparmentId>(entity =>
+            modelBuilder.Entity<DepartmentId>(entity =>
             {
-                entity.ToTable("DeparmentId");
+                entity.ToTable("DepartmentId");
 
                 entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.Department).HasColumnType("text");
+            });
+
+            modelBuilder.Entity<PackagingGroup>(entity =>
+            {
+                entity.ToTable("PackagingGroup");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.Group).HasColumnType("text");
             });
 
             modelBuilder.Entity<FreightResponsibility>(entity =>
@@ -509,6 +519,12 @@ namespace HAVI_app.Models
                 entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.AnswerOptions).HasColumnType("text");
+                entity.Property(e => e.SetAnswer).HasColumnName("SetAnswer");
+                entity.Property(e => e.OKValue).HasColumnName("OKValue");
+                entity.Property(e => e.LowBoundary).HasColumnName("LowBoundary");
+                entity.Property(e => e.HighBoundary).HasColumnName("HighBoundary");
+                entity.Property(e => e.FrequencyType).HasColumnName("FrequencyType");
+                entity.Property(e => e.Frequency).HasColumnName("Frequency");
 
                 entity.Property(e => e.Qipdescription)
                     .HasColumnType("text")

@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-
-#nullable disable
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace HAVI_app.Models
 {
-    public partial class DeparmentId
+    public class PackagingGroup
     {
         public int Id { get; set; }
-        public string Department { get; set; }
+        public string Group { get; set; }
     }
 }
