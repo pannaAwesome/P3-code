@@ -34,7 +34,7 @@ namespace HAVI_app.Data
 
             List<VailedForCustomer> customers = new List<VailedForCustomer>();
 
-            using(TextFieldParser parser = new TextFieldParser(@"./Data/Kunder.csv"))
+            using(TextFieldParser parser = new TextFieldParser(@"./Data/Customer.csv"))
             {
                 parser.TextFieldType = FieldType.Delimited;
                 parser.SetDelimiters(";");
@@ -50,7 +50,125 @@ namespace HAVI_app.Data
 
             context.VailedForCustomers.AddRange(customers);
             context.SaveChanges();
+
+            List<Location> locations = new List<Location>();
+
+            using (TextFieldParser parser = new TextFieldParser(@"./Data/Countries.csv"))
+            {
+                parser.TextFieldType = FieldType.Delimited;
+                parser.SetDelimiters(";");
+                while (!parser.EndOfData)
+                {
+                    string[] fields = parser.ReadFields();
+                    foreach (string field in fields)
+                    {
+                        locations.Add(new Location { Country = field });
+                    }
+                }
+            }
+
+            context.Locations.AddRange(locations);
+            context.SaveChanges();
+
+            List<SalesUnit> salesunits = new List<SalesUnit>();
+
+            using (TextFieldParser parser = new TextFieldParser(@"./Data/Salesunits.csv"))
+            {
+                parser.TextFieldType = FieldType.Delimited;
+                parser.SetDelimiters(";");
+                while (!parser.EndOfData)
+                {
+                    string[] fields = parser.ReadFields();
+                    foreach (string field in fields)
+                    {
+                        salesunits.Add(new SalesUnit { Unit = field });
+                    }
+                }
+            }
+
+            context.SalesUnits.AddRange(salesunits);
+            context.SaveChanges();
+
+            List<Ilosorderpickgroup> orderpickgroup = new List<Ilosorderpickgroup>();
+
+            using (TextFieldParser parser = new TextFieldParser(@"./Data/ILOSOrderpickgroup.csv"))
+            {
+                parser.TextFieldType = FieldType.Delimited;
+                parser.SetDelimiters(";");
+                while (!parser.EndOfData)
+                {
+                    string[] fields = parser.ReadFields();
+                    foreach (string field in fields)
+                    {
+                        orderpickgroup.Add(new Ilosorderpickgroup { Orderpickgroup = field, CountryId = 1 });
+                    }
+                }
+            }
+
+            context.Ilosorderpickgroups.AddRange(orderpickgroup);
+            context.SaveChanges();
+
+            List<VatTaxCode> vatTaxCodes = new List<VatTaxCode>();
+
+            using (TextFieldParser parser = new TextFieldParser(@"./Data/TAXCode.csv"))
+            {
+                parser.TextFieldType = FieldType.Delimited;
+                parser.SetDelimiters(";");
+                while (!parser.EndOfData)
+                {
+                    string[] fields = parser.ReadFields();
+                    foreach (string field in fields)
+                    {
+                        vatTaxCodes.Add(new VatTaxCode { Code = field, CountryId = 1 });
+                    }
+                }
+            }
+
+            context.VatTaxCodes.AddRange(vatTaxCodes);
+            context.SaveChanges();
+
+
+            List<IlossortGroup> sortGroup = new List<IlossortGroup>();
+
+            using (TextFieldParser parser = new TextFieldParser(@"./Data/ILOSTemp.csv"))
+            {
+                parser.TextFieldType = FieldType.Delimited;
+                parser.SetDelimiters(";");
+                while (!parser.EndOfData)
+                {
+                    string[] fields = parser.ReadFields();
+                    foreach (string field in fields)
+                    {
+                        sortGroup.Add(new IlossortGroup { SortGroup = field });
+                    }
+                }
+            }
+
+            context.IlossortGroups.AddRange(sortGroup);
+            context.SaveChanges();
+
+            List<Iloscategory> categories = new List<Iloscategory>();
+
+            using (TextFieldParser parser = new TextFieldParser(@"./Data/ILOSAcc.csv"))
+            {
+                {
+                    parser.TextFieldType = FieldType.Delimited;
+                    parser.SetDelimiters(";");
+                    while (!parser.EndOfData)
+                    {
+                        string[] fields = parser.ReadFields();
+                        foreach (string field in fields)
+                        {
+                            categories.Add(new Iloscategory { Category = field, CountryId = 1 });
+                        }
+                    }
+                }
+
+                context.Iloscategories.AddRange(categories);
+                context.SaveChanges();
+            }
             Console.WriteLine("Database created!");
         }
     }
+
 }
