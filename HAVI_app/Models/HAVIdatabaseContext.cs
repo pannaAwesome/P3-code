@@ -202,6 +202,10 @@ namespace HAVI_app.Models
                     .IsRequired()
                     .HasColumnType("text");
 
+                entity.Property(e => e.CreationCode)
+                    .IsRequired()
+                    .HasColumnType("text");
+
                 entity.Property(e => e.ProfileId).HasColumnName("ProfileID");
 
                 entity.HasOne(d => d.Profile)

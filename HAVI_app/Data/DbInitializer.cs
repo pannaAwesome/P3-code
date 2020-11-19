@@ -26,7 +26,7 @@ namespace HAVI_app.Data
 
             var countries = new Country[]
             {
-                new Country{ProfileId=1, CountryName="Denmark", CountryCode="DK"}
+                new Country{ProfileId=1, CountryName="Denmark", CountryCode="DK", CreationCode="12345"}
             };
 
             context.Countries.AddRange(countries);
