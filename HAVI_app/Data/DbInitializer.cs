@@ -130,7 +130,7 @@ namespace HAVI_app.Data
 
             List<IlossortGroup> sortGroup = new List<IlossortGroup>();
 
-            using (TextFieldParser parser = new TextFieldParser(@"./Data/ILOSTemp.csv"))
+            using (TextFieldParser parser = new TextFieldParser(@"./Data/ILOSSortGroup.csv"))
             {
                 parser.TextFieldType = FieldType.Delimited;
                 parser.SetDelimiters(";");
@@ -149,7 +149,7 @@ namespace HAVI_app.Data
 
             List<Iloscategory> categories = new List<Iloscategory>();
 
-            using (TextFieldParser parser = new TextFieldParser(@"./Data/ILOSAcc.csv"))
+            using (TextFieldParser parser = new TextFieldParser(@"./Data/ILOSCategory.csv"))
             {
                 {
                     parser.TextFieldType = FieldType.Delimited;
