@@ -410,7 +410,9 @@ namespace HAVI_app.Models
 
                 entity.Property(e => e.CountryId).HasColumnName("CountryID");
 
-                entity.Property(e => e.PrimaryCode).HasColumnType("text");
+                entity.Property(e => e.PrimaryCode)
+                    .HasColumnType("text")
+                    .HasColumnName("PrimaryCode");
 
                 entity.Property(e => e.Sapplant)
                     .HasColumnType("text")
