@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HAVI_app", "HAVI_app.csproj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorTable", "..\BlazorTables\BlazorTable.csproj", "{FB235F22-2F7C-4EBD-B5A1-C7590A2E3333}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{F7E7C62E-F3AA-4C95-A8CB-A1CBAF96341E}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{FB235F22-2F7C-4EBD-B5A1-C7590A2E3333}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FB235F22-2F7C-4EBD-B5A1-C7590A2E3333}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FB235F22-2F7C-4EBD-B5A1-C7590A2E3333}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F7E7C62E-F3AA-4C95-A8CB-A1CBAF96341E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F7E7C62E-F3AA-4C95-A8CB-A1CBAF96341E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F7E7C62E-F3AA-4C95-A8CB-A1CBAF96341E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F7E7C62E-F3AA-4C95-A8CB-A1CBAF96341E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
