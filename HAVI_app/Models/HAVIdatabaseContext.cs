@@ -22,6 +22,7 @@ namespace HAVI_app.Models
         public virtual DbSet<ArticleInformation> ArticleInformations { get; set; }
         public virtual DbSet<Bundle> Bundles { get; set; }
         public virtual DbSet<Country> Countries { get; set; }
+        public virtual DbSet<CreationCode> CreationCodes { get; set; }
         public virtual DbSet<DepartmentId> DeparmentIds { get; set; }
         public virtual DbSet<PackagingGroup> PackagingGroups { get; set; }
         public virtual DbSet<FreightResponsibility> FreightResponsibilities { get; set; }
@@ -203,10 +204,6 @@ namespace HAVI_app.Models
                     .IsRequired()
                     .HasColumnType("text");
 
-                entity.Property(e => e.CreationCode)
-                    .IsRequired()
-                    .HasColumnType("text");
-
                 entity.Property(e => e.ProfileId).HasColumnName("ProfileID");
 
                 entity.HasOne(d => d.Profile)
@@ -214,6 +211,17 @@ namespace HAVI_app.Models
                     .HasForeignKey(d => d.ProfileId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__Country__Profile__267ABA7A");
+            });
+
+            modelBuilder.Entity<CreationCode>(entity =>
+            {
+                entity.ToTable("CreationCode");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.Code).HasColumnType("text");
+
+                entity.Property(e => e.Active).HasColumnName("Active");
             });
 
             modelBuilder.Entity<DepartmentId>(entity =>
