@@ -14,7 +14,7 @@ namespace HAVI_app
         {
             var host = CreateHostBuilder(args).Build();
             CreateDBIfNotExists(host);
-            host.Run();            
+            host.Run();
         }
 
         private static void CreateDBIfNotExists(IHost host)
