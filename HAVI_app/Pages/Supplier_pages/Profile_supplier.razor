@@ -1,5 +1,5 @@
 ﻿@inject NavigationManager NavigationManager
-@page "/profile_supplier"
+@page "/profile_supplier/{supplierId:int}"
 
 @layout HAVI_app.Shared.Supplier_layout.Profile_layout
 
@@ -204,6 +204,10 @@
 @code {
     private void BackToSupplierOverview()
     {
-    NavigationManager.NavigateTo("/overview_supplier", true);
+        NavigationManager.NavigateTo("/overview_supplier", true);
     }
+
+    [Parameter]
+    public int supplierId { get; set; }
+
 }
