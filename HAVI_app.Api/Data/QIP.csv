@@ -1,0 +1,45 @@
+﻿1000//*** Temperature ***;xxx;>9;0;1;1;1;1;1
+1001//Temperature freeze 1;ReceivedTemperature 1;->>>99,9;0;1;1;1;1;1
+1002//Temperature freeze 2;ReceivedTemperature 2;->>>99,9;0;1;1;1;1;1
+1003//Temperature cooling 1;ReceivedTemperature;->>>99,9;0;1;1;1;1;1
+1004//Temperaturecheck cola;Temperature above 2 degrees celsius;Yes,No;1;0;0;0;1;1
+1005//Temperature freeze 3;ReceivedTemperature 3;->>>99,9;0;1;1;1;1;1
+2000//*** Product ***;*;>9;0;1;1;1;1;1
+2002//Colour meat;Is the meat darkred?;Yes,No;1;0;0;0;1;1
+2003//Combining;Do the articles stick together?;Yes,No;1;0;0;0;1;1
+2004//Ice crystals;Are there many ice crystals?;Yes,No;1;0;0;0;1;1
+2005//Loose nuggets;Are there any loose nuggets in the package?;Yes,No;1;0;0;0;1;1
+2006//Breading;Does the breading fall of the product?;Yes,No;1;0;0;0;1;1
+2007//Broken patties;Are there any broken patties?;Yes,No;1;0;0;0;1;1
+2008//Uneven edges;Are there uneven edges(nails)?;Yes,No;1;0;0;0;1;1
+2009//Frosting;Is the frosting missing or uneven?;Yes,No;1;0;0;0;1;1
+2010//Leaking bags;Are the bags leaking?;Yes,No;1;0;0;0;1;1
+2011//Whole waffels;Are there broken or squashed waffles?;Yes,No;1;0;0;0;1;1
+2012//Stained cheese;Are there any white spots on the cheese?;Yes,No;1;0;0;0;1;1
+2013//Unformed cheese;Are there any misshaped slices?;Yes,No;1;0;0;0;1;1
+2014//Greased cheese slices;Are the slices greased or slimy?;Yes,No;1;0;0;0;1;1
+2015//Baked potatoes;Do the potatoes have any sprouts?;Yes,No;1;0;0;0;1;1
+3000//*** Packaging ***;*;>9;0;1;1;1;1;1
+3001//Marking prod/shelflife;Is carton marked with an exporation/production date?;Yes,No;1;0;0;0;1;1
+3002//Damaged bags;Are there any open or damaged bags?;Yes,No;1;0;0;0;1;1
+3003//Damaged basket;Are there any damaged baskets?;Yes,No;1;0;0;0;1;1
+3004//Saucecontainer;Are any of the containers leaking or squashed?;Yes,No;1;0;0;0;1;1
+3005//Damaged cartons; Are there any damaged cartons?;Yes,No;1;0;0;0;1;1
+3006//Leaking tube;Are any of the tubes leaking, squashed or damaged?;Yes,No;1;0;0;0;1;1
+3007//Loose lid;Are any of the lids loose?;Yes,No;1;0;0;0;1;1
+3008//Leaks;Are there any leaks in the packaging?;Yes,No;1;0;0;0;1;1
+3009//Dateagreement;Is the date marked equally on the inside and outside of the packaging?;Yes,No;1;0;0;0;1;1
+3010//Leaking buckets;Are there any leaking buckets?;Yes,No;1;0;0;0;1;1
+3011//Eco marking;Is the Eco marking and DK-Ø number present?;Yes,No;1;0;0;0;1;1
+3012//Inner packaging;Is the product assembelt in bags?;Yes,No;1;0;0;0;1;1
+3013//Control of bottles;Are there mold in the bottles?;Yes,No;1;0;0;0;1;1
+3014//Controlguidance;Send a message to PU at arrival?;Yes,No;1;0;0;0;1;1
+3015//Cartonmarking S22;Is the carton marked with S22, it must be!;Yes,No;1;0;0;0;1;1
+3016//Cartonmarking S26;Is the carton marked with S26, it must be!;Yes,No;1;0;0;0;1;1
+4000//Are there popsicle sticks on the bottom;Are there popsicle sticks in the buttom?;Yes;1;0;0;0;1;1
+4001//Width of the bread;Is the width of the bread over 7cm?;Yes,No;1;0;0;0;1;1
+5000//Correct of coverage of truck;Is sealing of truck correct cf. the transport policy?;Yes,No;1;0;0;0;1;1
+5001//Truck condition;Is the car clean, odorless, free of glass, and pests etc.?;Yes,No;1;0;0;0;1;1
+5002//Correct sealing of product;Correct sealing of pallet/box cf. the transportprotocol;Yes,No;1;0;0;0;1;1
+6000//Health identificationsmark;Is the krt mark marked with a health and identification mark?;Yes,No;1;0;0;0;1;1
+9999//Dummy;Dummy;*;0;1;1;1;1;1

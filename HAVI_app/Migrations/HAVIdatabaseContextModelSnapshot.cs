@@ -277,10 +277,6 @@ namespace HAVI_app.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("CreationCode")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<int>("ProfileId")
                         .HasColumnType("int")
                         .HasColumnName("ProfileID");
@@ -290,6 +286,26 @@ namespace HAVI_app.Migrations
                     b.HasIndex("ProfileId");
 
                     b.ToTable("Country");
+                });
+
+            modelBuilder.Entity("HAVI_app.Models.CreationCode", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("ID")
+                        .UseIdentityColumn();
+
+                    b.Property<int>("Active")
+                        .HasColumnType("int")
+                        .HasColumnName("Active");
+
+                    b.Property<string>("Code")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CreationCode");
                 });
 
             modelBuilder.Entity("HAVI_app.Models.DepartmentId", b =>

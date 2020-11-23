@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HAVI_app.Migrations
 {
-    public partial class Initialize : Migration
+    public partial class initialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -68,6 +68,20 @@ namespace HAVI_app.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ArticleInformation", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CreationCode",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Code = table.Column<string>(type: "text", nullable: true),
+                    Active = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CreationCode", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -339,8 +353,7 @@ namespace HAVI_app.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ProfileID = table.Column<int>(type: "int", nullable: false),
                     CountryName = table.Column<string>(type: "text", nullable: false),
-                    CountryCode = table.Column<string>(type: "text", nullable: false),
-                    CreationCode = table.Column<string>(type: "text", nullable: false)
+                    CountryCode = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -714,6 +727,9 @@ namespace HAVI_app.Migrations
 
             migrationBuilder.DropTable(
                 name: "Bundle");
+
+            migrationBuilder.DropTable(
+                name: "CreationCode");
 
             migrationBuilder.DropTable(
                 name: "DepartmentId");

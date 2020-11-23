@@ -25,7 +25,7 @@ namespace HAVI_app
             services.AddServerSideBlazor();
 
             services.AddDbContext<HAVIdatabaseContext>(options => options.UseSqlServer(Configuration.GetConnectionString("HAVIdatabaseContext")));
-            //services.AddDatabaseDeveloperPageExceptionFilter();
+            services.AddDatabaseDeveloperPageExceptionFilter();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
