@@ -10,7 +10,7 @@ namespace HAVI_appTests
         public void LettersOnlyTest()
         {
             var letters = new Validation();
-            Assert.IsTrue(letters.LettersOnly("Hej"));
+            Assert.IsTrue(letters.LettersOnly("McDonalds"));
         }
 
         [TestMethod]

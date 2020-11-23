@@ -47,6 +47,7 @@ namespace HAVI_app.Classes
         {
             List<char> GTIN = new List<char>();
             string ValidatedGTIN = "";
+
             if(input.Length < 14)
             {
                 foreach(char num in input)
@@ -62,6 +63,7 @@ namespace HAVI_app.Classes
                 }
                 ValidatedGTIN = string.Join("",GTIN);
             }
+
             return ValidatedGTIN;
         }
     }
