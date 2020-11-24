@@ -13,7 +13,7 @@
     </div>
     <div class="row justify-content-center ">
         <div class="col-12 d-flex justify-content-center">
-            <form>
+            <form action="#">
 
 
                 <table class="table">
@@ -111,15 +111,7 @@
                         </td>
                         <td>
 
-                            @if (!EmailValidated)
-                            {
-                                <input type="text" class="form-control has-error" name="email" @bind="Email" required>
-                            }
-                            else
-                            {
-                                <input type="text" class="form-control" name="email" @bind="Email" required>
-                            }
-
+                            <input type="text" class="form-control @EmailValidated" name="email" @bind="Email" @onfocus="RemoveEmailDanger"required>
                         </td>
                         <td>
                             <div></div>
@@ -226,7 +218,7 @@
                             <label for="transittime" class="required">Transit time:</label>
                         </td>
                         <td>
-                            <input type="text" class="form-control" name="transittime" @bind="TransitTime" required>
+                            <input type="number" class="form-control @TransitValidated" name="transittime" @bind="TransitTime" @onfocus="RemoveTransitDanger">
                         </td>
                         <td>days</td>
                         <td>
@@ -265,7 +257,7 @@
                             <label for="class" class="required">Class:</label>
                         </td>
                         <td>
-                            <input type="number" class="form-control" name="class" @bind="ClassInfo" required>
+                            <input type="text" class="form-control @ClassInfoValidated" name="class" @bind="ClassInfo" @onfocus="RemoveClassInfoDanger">
                         </td>
                         <td>
                             <div></div>
@@ -282,7 +274,7 @@
                             <label for="classificationCode" class="required">Classification code:</label>
                         </td>
                         <td>
-                            <input type="text" class="form-control" name="classificationcode" @bind="ClassificationCode" required>
+                            <input type="text" class="form-control" name="classificationcode">
                         </td>
                         <td>
                             <div></div>
@@ -297,10 +289,9 @@
                 </table>
                 <div class="row justify-content-center">
                     <div class="text-right col-6">
-                        <input type="submit" class="btn cancel-button button-size" value="Back" @onclick="OnPostBack" />
                     </div>
                     <div class="text-left col-6">
-                        <input type="submit" class="btn green-button button-size" value="Next" @onclick="ValidationSupllierForm" />
+                        <input type="submit" class="btn green-button button-size" value="Next" @onclick="ValidationSupplierForm" />
                     </div>
                 </div>
 
@@ -311,73 +302,72 @@
 
 
     @code {
-        [Parameter]
         public string CompanyName { get; set; }
 
-        [Parameter]
         public string CompanyLocation { get; set; }
 
-        [Parameter]
         public string Email { get; set; }
 
-        [Parameter]
         public string PalletExchange { get; set; }
 
-        [Parameter]
         public string FreightResponsibility { get; set; }
 
-        [Parameter]
         public string SpecialInformation { get; set; }
 
-        [Parameter]
         public string BookingTransport { get; set; }
 
-        [Parameter]
         public string TransitTime { get; set; }
 
-        [Parameter]
         public string Adr { get; set; }
 
-        [Parameter]
-        public int ClassInfo { get; set; }
+        public string ClassInfo { get; set; }
 
-        [Parameter]
         public int ClassificationCode { get; set; }
 
-        public bool EmailValidated = true;
+        public string EmailValidated;
 
-    public void ValidationSupllierForm()
+        public string TransitValidated;
+
+        public string ClassInfoValidated;
+
+        public void ValidationSupplierForm()
         {
             if (IsEmailValid(Email) &&
             NumbersOnly(TransitTime) &&
-            NumbersOnly(ClassInfo.ToString()) &&
-            NumbersOnly(ClassificationCode.ToString()))
+            NumbersOnly(ClassInfo.ToString()))
             {
                 NavigationManager.NavigateTo("/article_info_form", true);
             }
 
-            else if (!IsEmailValid(Email))
+            if (!IsEmailValid(Email))
             {
-                EmailValidated = false;
-            }
-            else
-            {
-                //NavigationManager.NavigateTo("/overview_supplier", true);
+                EmailValidated = "btn-danger";
             }
 
+            if (!NumbersOnly(TransitTime))
+            {
+                TransitValidated = "btn-danger";
+            }
+
+            if (!NumbersOnly(ClassInfo))
+            {
+                ClassInfoValidated = "btn-danger";
+            }
         }
-    }
 
-    @code{
-
-
-        public void OnPostForward()
+        public void RemoveEmailDanger()
         {
-            //NavigationManager.NavigateTo($"/article_info_form");
+            EmailValidated = "";
         }
 
-        public void OnPostBack()
+
+        public void RemoveTransitDanger()
         {
-            NavigationManager.NavigateTo($"/overview_supplier", true);
+            TransitValidated = "";
+        }
+
+        public void RemoveClassInfoDanger()
+        {
+            ClassInfoValidated = "";
         }
     }
