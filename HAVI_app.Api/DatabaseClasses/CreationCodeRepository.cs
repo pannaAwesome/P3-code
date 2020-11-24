@@ -23,14 +23,16 @@ namespace HAVI_app.Api.DatabaseClasses
             return result.Entity;
         }
 
-        public async void DeleteCreationCodeAsync(int codeId)
+        public async Task<CreationCode> DeleteCreationCodeAsync(int codeId)
         {
             var result = await _context.CreationCodes.FirstOrDefaultAsync(s => s.Id == codeId);
             if (result != null)
             {
                 _context.CreationCodes.Remove(result);
                 await _context.SaveChangesAsync();
+                return result;
             }
+            return null;
         }
 
         public async Task<CreationCode> GetCreationCode(int codeId)

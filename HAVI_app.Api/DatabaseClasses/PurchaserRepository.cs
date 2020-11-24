@@ -23,14 +23,16 @@ namespace HAVI_app.Api.DatabaseClasses
             return result.Entity;
         }
 
-        public async void DeletePurchaserAsync(int purchaserId)
+        public async Task<Purchaser> DeletePurchaserAsync(int purchaserId)
         {
             var result = await _context.Purchasers.FirstOrDefaultAsync(s => s.Id == purchaserId);
             if (result != null)
             {
                 _context.Purchasers.Remove(result);
                 await _context.SaveChangesAsync();
+                return result;
             }
+            return null;
         }
 
         public async Task<Purchaser> GetPurchaser(int purchaserId)

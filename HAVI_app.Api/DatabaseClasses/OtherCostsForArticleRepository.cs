@@ -23,14 +23,16 @@ namespace HAVI_app.Api.DatabaseClasses
             return result.Entity;
         }
 
-        public async void DeleteOtherCostsForArticleAsync(int otherCostId)
+        public async Task<OtherCostsForArticle> DeleteOtherCostsForArticleAsync(int otherCostId)
         {
             var result = await _context.OtherCostsForArticles.FirstOrDefaultAsync(s => s.Id == otherCostId);
             if (result != null)
             {
                 _context.OtherCostsForArticles.Remove(result);
                 await _context.SaveChangesAsync();
+                return result;
             }
+            return null;
         }
 
         public async Task<OtherCostsForArticle> GetOtherCostsForArticle(int otherCostId)

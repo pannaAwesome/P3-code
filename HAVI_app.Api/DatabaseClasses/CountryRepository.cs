@@ -23,14 +23,16 @@ namespace HAVI_app.Api.DatabaseClasses
             return result.Entity;
         }
 
-        public async void DeleteCountryAsync(int countryId)
+        public async Task<Country> DeleteCountryAsync(int countryId)
         {
             var result = await _context.Countries.FirstOrDefaultAsync(s => s.Id == countryId);
             if (result != null)
             {
                 _context.Countries.Remove(result);
                 await _context.SaveChangesAsync();
+                return result;
             }
+            return null;
         }
 
         public async Task<Country> GetCountry(int countryId)

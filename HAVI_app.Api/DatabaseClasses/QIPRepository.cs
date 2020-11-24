@@ -23,14 +23,16 @@ namespace HAVI_app.Api.DatabaseClasses
             return result.Entity;
         }
 
-        public async void DeleteQIPAsync(int qipId)
+        public async Task<Qip> DeleteQIPAsync(int qipId)
         {
             var result = await _context.Qips.FirstOrDefaultAsync(s => s.Id == qipId);
             if (result != null)
             {
                 _context.Qips.Remove(result);
                 await _context.SaveChangesAsync();
+                return result;
             }
+            return null;
         }
 
         public async Task<Qip> GetQIP(int qipId)

@@ -23,14 +23,16 @@ namespace HAVI_app.Api.DatabaseClasses
             return result.Entity;
         }
 
-        public async void DeleteILOSCategoryAsync(int categoryId)
+        public async Task<Iloscategory> DeleteILOSCategoryAsync(int categoryId)
         {
             var result = await _context.Iloscategories.FirstOrDefaultAsync(s => s.Id == categoryId);
             if (result != null)
             {
                 _context.Iloscategories.Remove(result);
                 await _context.SaveChangesAsync();
+                return result;
             }
+            return null;
         }
 
         public async Task<IEnumerable<Iloscategory>> GetILOSCategories()

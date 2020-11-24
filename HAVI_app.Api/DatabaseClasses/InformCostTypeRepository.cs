@@ -23,14 +23,16 @@ namespace HAVI_app.Api.DatabaseClasses
             return result.Entity;
         }
 
-        public async void DeleteInformCostTypeAsync(int costTypeId)
+        public async Task<InformCostType> DeleteInformCostTypeAsync(int costTypeId)
         {
             var result = await _context.InformCostTypes.FirstOrDefaultAsync(s => s.Id == costTypeId);
             if (result != null)
             {
                 _context.InformCostTypes.Remove(result);
                 await _context.SaveChangesAsync();
+                return result;
             }
+            return null;
         }
 
         public async Task<IEnumerable<InformCostType>> GetInformCostTypes()

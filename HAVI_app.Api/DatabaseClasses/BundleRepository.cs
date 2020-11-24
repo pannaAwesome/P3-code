@@ -23,14 +23,16 @@ namespace HAVI_app.Api.DatabaseClasses
             return result.Entity;
         }
 
-        public async void DeleteBundleAsync(int bundleId)
+        public async Task<Bundle> DeleteBundleAsync(int bundleId)
         {
             var result = await _context.Bundles.FirstOrDefaultAsync(s => s.Id == bundleId);
             if (result != null)
             {
                 _context.Bundles.Remove(result);
                 await _context.SaveChangesAsync();
+                return result;
             }
+            return null;
         }
 
         public async Task<Bundle> GetBundle(int bundleId)

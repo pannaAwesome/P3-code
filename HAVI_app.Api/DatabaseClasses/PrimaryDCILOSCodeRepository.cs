@@ -23,14 +23,16 @@ namespace HAVI_app.Api.DatabaseClasses
             return result.Entity;
         }
 
-        public async void DeletePrimaryDCILOSCodeAsync(int ilosCodeId)
+        public async Task<PrimaryDciloscode> DeletePrimaryDCILOSCodeAsync(int ilosCodeId)
         {
             var result = await _context.PrimaryDciloscodes.FirstOrDefaultAsync(s => s.Id == ilosCodeId);
             if (result != null)
             {
                 _context.PrimaryDciloscodes.Remove(result);
                 await _context.SaveChangesAsync();
+                return result;
             }
+            return null;
         }
 
         public async Task<IEnumerable<PrimaryDciloscode>> GetPrimaryDCILOSCodes()
