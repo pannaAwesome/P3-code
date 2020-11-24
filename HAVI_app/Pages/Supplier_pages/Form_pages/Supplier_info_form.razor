@@ -1,7 +1,8 @@
 ﻿@layout HAVI_app.Shared.Supplier_layout.Form_layout
 @inject Microsoft.AspNetCore.Components.NavigationManager NavigationManager
 @page "/supplier_info_form"
-@inject HAVI_app.Classes.Validation Validation
+@inherits HAVI_app.Classes.Validation
+
 
     <HAVI_app.Shared.Supplier_layout.Form_header SupplierState="active" />
     <div class="row justify-content-center">
@@ -21,7 +22,7 @@
                             <label for="company_name" class="required">Company name:</label>
                         </td>
                         <td>
-                            <input type="text" class="form-control" name="company_name" required>
+                            <input type="text" class="form-control" name="company_name" @bind="CompanyName" required>
                         </td>
                         <td>
                             <div></div>
@@ -109,7 +110,7 @@
                             <label for="email" class="required">Email:</label>
                         </td>
                         <td>
-                            <input type="text" class="form-control" name="email" @bind="@Email" @on required>
+                            <input type="text" class="form-control" name="email" @bind="Email" required>
                         </td>
                         <td>
                             <div></div>
@@ -216,7 +217,7 @@
                             <label for="transittime" class="required">Transit time:</label>
                         </td>
                         <td>
-                            <input type="text" class="form-control" name="transittime" @bind="@TransitTime" required>
+                            <input type="text" class="form-control" name="transittime" @bind="TransitTime" required>
                         </td>
                         <td>days</td>
                         <td>
@@ -255,7 +256,7 @@
                             <label for="class" class="required">Class:</label>
                         </td>
                         <td>
-                            <input type="number" class="form-control" name="class" @bind="ClassInfo" required>
+                            <input type="number" class="form-control" name="class" @bin="ClassInfo" required>
                         </td>
                         <td>
                             <div></div>
@@ -287,10 +288,10 @@
                 </table>
                 <div class="row justify-content-center">
                     <div class="text-right col-6">
-                        <input type="submit" class="btn cancel-button button-size" value="Back" @onclick="ValidationSupllierForm" />
+                        <input type="submit" class="btn cancel-button button-size" value="Back" @onclick="OnPostBack" />
                     </div>
                     <div class="text-left col-6">
-                        <input type="submit" class="btn green-button button-size" value="Next" @onclick="OnPostForward" />
+                        <input type="submit" class="btn green-button button-size" value="Next" @onclick="ValidationSupllierForm" />
                     </div>
                 </div>
 
@@ -341,20 +342,18 @@
                 public int and = 2;
             }*@
 
-
     public void ValidationSupllierForm()
     {
-        if (Validation.IsEmailValid(Email) &&
-            Validation.NumbersOnly(TransitTime) &&
-            Validation.NumbersOnly(ClassInfo.ToString()) &&
-            Validation.NumbersOnly(ClassificationCode.ToString()))
+        if (IsEmailValid(Email) &&
+        NumbersOnly(TransitTime) &&
+        NumbersOnly(ClassInfo.ToString()) &&
+        NumbersOnly(ClassificationCode.ToString()))
         {
-            NavigationManager.NavigateTo("/article_info_form");
+            NavigationManager.NavigateTo("/article_info_form", true);
         }
         else
         {
-            NavigationManager.NavigateTo("/overview_supplier");
-
+            NavigationManager.NavigateTo("/overview_supplier", true);
         }
 
     }
@@ -370,6 +369,6 @@
 
         public void OnPostBack()
         {
-            NavigationManager.NavigateTo($"/overview_supplier");
+            NavigationManager.NavigateTo($"/overview_supplier", true);
         }
     }

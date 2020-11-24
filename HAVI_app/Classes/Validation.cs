@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Components;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -6,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HAVI_app.Classes
 {
-    public class Validation
+    public class Validation : ComponentBase
     {
         public bool LettersOnly(string input)
         {
