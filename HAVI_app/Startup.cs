@@ -5,7 +5,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using HAVI_app.Models;
-using HAVI_app.Services;
+using HAVI_app.Services.Classes;
+using HAVI_app.Services.Interfaces;
 using System.Net.Http;
 
 namespace HAVI_app

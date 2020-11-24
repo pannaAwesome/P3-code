@@ -39,7 +39,9 @@ namespace HAVI_app.Api.DatabaseClasses
 
         public async Task<Supplier> GetSupplier(int supplierId)
         {
-            return await _context.Suppliers.FirstOrDefaultAsync(s => s.Id == supplierId);
+            return await _context.Suppliers
+                //.Include(e => e.Profile)
+                .FirstOrDefaultAsync(s => s.Id == supplierId);
         }
 
         public async Task<IEnumerable<Supplier>> GetSuppliers()

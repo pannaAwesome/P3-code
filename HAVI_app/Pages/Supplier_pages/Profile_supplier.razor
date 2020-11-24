@@ -4,6 +4,14 @@
 
 @layout HAVI_app.Shared.Supplier_layout.Profile_layout
 
+@if (Supplier == null || Supplier.Profile == null)
+{
+    <div class="spinner"></div>
+}
+else
+{
+
+
 <div class="row align-content-center">
     <div class="col-1"></div>
     <div class="col-10 white-box header">
@@ -24,7 +32,7 @@
                                 <label for="email">Email:</label>
                             </td>
                             <td>
-                                <input type="email" class="form-control" name="email" value="" required>
+                                <input type="email" class="form-control" name="email" value="@Supplier.Profile.Username" required>
                             </td>
                             <td>
                                 <div></div>
@@ -201,7 +209,7 @@
                                 </div>
                             </div>
                         </div>
-
+}
 @code {
     private void BackToSupplierOverview()
     {

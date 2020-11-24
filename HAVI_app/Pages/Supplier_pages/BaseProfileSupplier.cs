@@ -3,6 +3,8 @@ using HAVI_app.Services;
 using Microsoft.AspNetCore.Components;
 using System.Net.Http;
 using System.Threading.Tasks;
+using HAVI_app.Services.Interfaces;
+using HAVI_app.Services.Classes;
 
 namespace HAVI_app.Pages.Supplier_pages
 {
