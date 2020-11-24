@@ -12,37 +12,48 @@ namespace HAVI_app.Classes
     {
         public bool LettersOnly(string input)
         {
-            foreach (char letters in input)
+            if(input != null)
             {
-                if (!char.IsLetter(letters))
-                    return false;
+                foreach (char letters in input)
+                {
+                    if (!char.IsLetter(letters))
+                        return false;
+                }
+                return true;
             }
-            return true;
+            return false;
         }
 
         public bool NumbersOnly(string input)
         {
-            foreach (char digit in input)
-            {
-                if (!char.IsDigit(digit))
-                    return false;
+            if(input != null){
+
+                foreach (char digit in input)
+                {
+                    if (!char.IsDigit(digit))
+                        return false;
+                }
+                return true;
             }
-            return true;
+            return false;
         }
 
         public bool IsEmailValid(string input)
         {
             string pattern = @"^(?!\.)(""([^""\r\\]|\\[""\r\\])*""|" + @"([-a-z0-9!#$%&'*+/=?^_`{|}~]|(?<!\.)\.)*)(?<!\.)" + @"@[a-z0-9][\w\.-]*[a-z0-9]\.[a-z][a-z\.]*[a-z]$";
 
-            //check first string
-            if (Regex.IsMatch(input, pattern))
+            if(input != null)
             {
-                return true;
+                if (Regex.IsMatch(input, pattern))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
 
         public string GTINValidation(string input)
