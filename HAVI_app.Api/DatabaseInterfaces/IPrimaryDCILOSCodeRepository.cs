@@ -8,9 +8,9 @@ namespace HAVI_app.Api.DatabaseInterfaces
 {
     public interface IPrimaryDCILOSCodeRepository
     {
-        Task<IEnumerable<PrimaryDciloscode>> GetPrimaryDCILOScodes();
-        Task<PrimaryDciloscode> AddPrimaryDCILOScode(PrimaryDciloscode primaryDciloscode);
-        Task<PrimaryDciloscode> UpdatePrimaryDCILOScode(PrimaryDciloscode primaryDciloscode);
-        void DeletePrimaryDciloscodeAsync(int primaryDciloscodeId);
+        Task<IEnumerable<PrimaryDciloscode>> GetPrimaryDCILOSCodes();
+        Task<PrimaryDciloscode> AddPrimaryDCILOSCode(PrimaryDciloscode primaryDciloscode);
+        Task<PrimaryDciloscode> UpdatePrimaryDCILOSCode(PrimaryDciloscode primaryDciloscode);
+        void DeletePrimaryDCILOSCodeAsync(int primaryDciloscodeId);
     }
 }

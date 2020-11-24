@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace HAVI_app.Api.DatabaseClasses
 {
-    public class ILOSOrderpickroupRepository : IILOSOrderpickgroupRepository
+    public class ILOSOrderpickgroupRepository : IILOSOrderpickgroupRepository
     {
         private readonly HAVIdatabaseContext _context;
-        public ILOSOrderpickroupRepository(HAVIdatabaseContext context)
+        public ILOSOrderpickgroupRepository(HAVIdatabaseContext context)
         {
             _context = context;
         }
@@ -33,7 +33,7 @@ namespace HAVI_app.Api.DatabaseClasses
             }
         }
 
-        public async Task<IEnumerable<Ilosorderpickgroup>> GetILOSOrderpickgroup()
+        public async Task<IEnumerable<Ilosorderpickgroup>> GetILOSOrderpickgroups()
         {
             return await _context.Ilosorderpickgroups.ToListAsync();
         }

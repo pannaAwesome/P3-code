@@ -15,7 +15,7 @@ namespace HAVI_app.Api.DatabaseClasses
         {
             _context = context;
         }
-        public async Task<IEnumerable<PackagingGroup>> GetFreightResponsibility()
+        public async Task<IEnumerable<PackagingGroup>> GetPackagingGroups()
         {
             return await _context.PackagingGroups.ToListAsync();
         }

@@ -33,7 +33,7 @@ namespace HAVI_app.Api.DatabaseClasses
             }
         }
 
-        public async Task<IEnumerable<PrimaryDciloscode>> GetPrimaryDCILOSCode()
+        public async Task<IEnumerable<PrimaryDciloscode>> GetPrimaryDCILOSCodes()
         {
             return await _context.PrimaryDciloscodes.ToListAsync();
         }

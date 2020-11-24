@@ -15,7 +15,7 @@ namespace HAVI_app.Api.DatabaseClasses
         {
             _context = context;
         }
-        public async Task<IEnumerable<SetCurrency>> GetFreightResponsibility()
+        public async Task<IEnumerable<SetCurrency>> GetSetCurrencies()
         {
             return await _context.SetCurrencies.ToListAsync();
         }

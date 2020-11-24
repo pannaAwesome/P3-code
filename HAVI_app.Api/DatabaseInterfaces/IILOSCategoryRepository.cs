@@ -8,9 +8,9 @@ namespace HAVI_app.Api.DatabaseInterfaces
 {
     public interface IILOSCategoryRepository
     {
-        Task<IEnumerable<Iloscategory>> GetIloscategories();
-        Task<Iloscategory> AddIloscategory(Iloscategory iloscategory);
-        Task<Iloscategory> UpdateIloscategory(Iloscategory iloscategory);
-        void DeleteIloscategoryAsync(int iloscategoryId);
+        Task<IEnumerable<Iloscategory>> GetILOSCategories();
+        Task<Iloscategory> AddILOSCategory(Iloscategory iloscategory);
+        Task<Iloscategory> UpdateILOSCategory(Iloscategory iloscategory);
+        void DeleteILOSCategoryAsync(int iloscategoryId);
     }
 }
