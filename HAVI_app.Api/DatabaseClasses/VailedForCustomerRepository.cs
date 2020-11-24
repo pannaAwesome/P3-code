@@ -33,7 +33,7 @@ namespace HAVI_app.Api.DatabaseClasses
             }
         }
 
-        public async Task<IEnumerable<VailedForCustomer>> GetVailedForCustomer()
+        public async Task<IEnumerable<VailedForCustomer>> GetVailedForCustomers()
         {
             return await _context.VailedForCustomers.ToListAsync();
         }
