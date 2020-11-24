@@ -65,5 +65,55 @@ namespace HAVI_app.Api.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database.");
             }
         }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<Supplier>> UpdateSupplier(int id, Supplier supplier)
+        {
+            try
+            {
+                if (id != supplier.Id)
+                {
+                    return BadRequest();
+                }
+
+                var supplierToUpdate = await _supplierRepository.GetSupplier(id);
+
+                if (supplierToUpdate == null)
+                {
+                    return NotFound($"Supplier with id = {id} not found");
+                }
+
+                return await _supplierRepository.UpdateSupplier(supplier);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database.");
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Supplier>> DeleteSupplier(int id)
+        {
+            try
+            {
+                if (id != supplier.Id)
+                {
+                    return BadRequest();
+                }
+
+                var supplierToUpdate = await _supplierRepository.GetSupplier(id);
+
+                if (supplierToUpdate == null)
+                {
+                    return NotFound($"Supplier with id = {id} not found");
+                }
+
+                return await _supplierRepository.UpdateSupplier(supplier);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database.");
+            }
+        }
     }
 }

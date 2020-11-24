@@ -11,6 +11,6 @@ namespace HAVI_app.Api.DatabaseInterfaces
         Task<IEnumerable<Ilosorderpickgroup>> GetILOSOrderpickgroups();
         Task<Ilosorderpickgroup> AddILOSOrderpickgroup(Ilosorderpickgroup ilosorderpickgroup);
         Task<Ilosorderpickgroup> UpdateILOSOrderpickgroup(Ilosorderpickgroup ilosorderpickgroup);
-        void DeleteILOSOrderpickgroupAsync(int ilosorderpickgroupId);
+        Task<Ilosorderpickgroup> DeleteILOSOrderpickgroupAsync(int ilosorderpickgroupId);
     }
 }

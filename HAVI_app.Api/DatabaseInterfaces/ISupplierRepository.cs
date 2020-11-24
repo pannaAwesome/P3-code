@@ -12,6 +12,6 @@ namespace HAVI_app.Api.DatabaseInterfaces
         Task<Supplier> GetSupplier(int supplierId);
         Task<Supplier> AddSupplier(Supplier supplier);
         Task<Supplier> UpdateSupplier(Supplier supplier);
-        void DeleteSupplierAsync(int supplierId);
+        Task<Supplier> DeleteSupplierAsync(int supplierId);
     }
 }

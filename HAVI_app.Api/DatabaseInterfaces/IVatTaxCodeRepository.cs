@@ -11,6 +11,6 @@ namespace HAVI_app.Api.DatabaseInterfaces
         Task<IEnumerable<VatTaxCode>> GetVatTaxCodes();
         Task<VatTaxCode> AddVatTaxCode(VatTaxCode vatTaxCode);
         Task<VatTaxCode> UpdateVatTaxCode(VatTaxCode vatTaxCode);
-        void DeleteVatTaxCodeAsync(int vatTaxCodeId);
+        Task<VatTaxCode> DeleteVatTaxCodeAsync(int vatTaxCodeId);
     }
 }

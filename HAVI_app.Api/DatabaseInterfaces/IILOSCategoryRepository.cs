@@ -11,6 +11,6 @@ namespace HAVI_app.Api.DatabaseInterfaces
         Task<IEnumerable<Iloscategory>> GetILOSCategories();
         Task<Iloscategory> AddILOSCategory(Iloscategory iloscategory);
         Task<Iloscategory> UpdateILOSCategory(Iloscategory iloscategory);
-        void DeleteILOSCategoryAsync(int iloscategoryId);
+        Task<Iloscategory> DeleteILOSCategoryAsync(int iloscategoryId);
     }
 }

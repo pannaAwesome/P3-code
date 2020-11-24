@@ -11,6 +11,6 @@ namespace HAVI_app.Api.DatabaseInterfaces
         Task<IEnumerable<VailedForCustomer>> GetVailedForCustomers();
         Task<VailedForCustomer> AddVailedForCustomer(VailedForCustomer vailedForCustomer);
         Task<VailedForCustomer> UpdateVailedForCustomer(VailedForCustomer vailedForCustomer);
-        void DeleteVailedForCustomerAsync(int vailedForCustomerId);
+        Task<VailedForCustomer> DeleteVailedForCustomerAsync(int vailedForCustomerId);
     }
 }

@@ -24,14 +24,18 @@ namespace HAVI_app.Api.DatabaseClasses
             return result.Entity;
         }
 
-        public async void DeleteSAPPlantAsync(int SAPPlantId)
+        public async Task<Sapplant> void DeleteSAPPlantAsync(int SAPPlantId)
         {
             var result = await _context.Sapplants.FirstOrDefaultAsync(s => s.Id == SAPPlantId);
             if (result != null)
             {
                 _context.Sapplants.Remove(result);
                 await _context.SaveChangesAsync();
+
+                return result;
             }
+
+            return null;
         }
 
         public async Task<Sapplant> GetSAPPlant(int SAPPlantId)

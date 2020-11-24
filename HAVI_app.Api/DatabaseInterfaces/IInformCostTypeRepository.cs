@@ -11,6 +11,6 @@ namespace HAVI_app.Api.DatabaseInterfaces
         Task<IEnumerable<InformCostType>> GetInformCostTypes();
         Task<InformCostType> AddInformCostType(InformCostType informCostType);
         Task<InformCostType> UpdateInformCostType(InformCostType informCostType);
-        void DeleteInformCostTypeAsync(int informCostTypeId);
+        Task<InformCostType> DeleteInformCostTypeAsync(int informCostTypeId);
     }
 }

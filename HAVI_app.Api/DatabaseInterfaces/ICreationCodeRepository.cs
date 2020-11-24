@@ -12,6 +12,6 @@ namespace HAVI_app.Api.DatabaseInterfaces
         Task<CreationCode> GetCreationCode(int creationCodeId);
         Task<CreationCode> AddCreationCode(CreationCode creationCode);
         Task<CreationCode> UpdateCreationCode(CreationCode creationCode);
-        void DeleteCreationCodeAsync(int creationCodeId);
+        Task<CreationCode> DeleteCreationCodeAsync(int creationCodeId);
     }
 }

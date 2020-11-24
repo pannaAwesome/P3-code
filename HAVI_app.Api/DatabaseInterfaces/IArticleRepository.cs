@@ -12,6 +12,6 @@ namespace HAVI_app.Api.DatabaseInterfaces
         Task<Article> GetArticle(int articleId);
         Task<Article> AddArticle(Article article);
         Task<Article> UpdateArticle(Article article);
-        void DeleteArticleAsync(int articleId);
+        Task<Article> DeleteArticleAsync(int articleId);
     }
 }

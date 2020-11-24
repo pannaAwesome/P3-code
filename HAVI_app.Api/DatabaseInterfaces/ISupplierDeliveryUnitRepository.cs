@@ -11,6 +11,6 @@ namespace HAVI_app.Api.DatabaseInterfaces
         Task<IEnumerable<SupplierDeliveryUnit>> GetSupplierDeliveryUnits();
         Task<SupplierDeliveryUnit> AddSupplierDeliveryUnit(SupplierDeliveryUnit supplierDeliveryUnit);
         Task<SupplierDeliveryUnit> UpdateSupplierDeliveryUnit(SupplierDeliveryUnit supplierDeliveryUnit);
-        void DeleteSupplierDeliveryUnitAsync(int supplierDeliveryUnitId);
+        Task<SupplierDeliveryUnit> DeleteSupplierDeliveryUnitAsync(int supplierDeliveryUnitId);
     }
 }

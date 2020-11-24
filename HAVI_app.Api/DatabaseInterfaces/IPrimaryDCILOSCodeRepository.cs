@@ -11,6 +11,6 @@ namespace HAVI_app.Api.DatabaseInterfaces
         Task<IEnumerable<PrimaryDciloscode>> GetPrimaryDCILOSCodes();
         Task<PrimaryDciloscode> AddPrimaryDCILOSCode(PrimaryDciloscode primaryDciloscode);
         Task<PrimaryDciloscode> UpdatePrimaryDCILOSCode(PrimaryDciloscode primaryDciloscode);
-        void DeletePrimaryDCILOSCodeAsync(int primaryDciloscodeId);
+        Task<PrimaryDciloscode> DeletePrimaryDCILOSCodeAsync(int primaryDciloscodeId);
     }
 }

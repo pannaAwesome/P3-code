@@ -23,14 +23,18 @@ namespace HAVI_app.Api.DatabaseClasses
             return result.Entity;
         }
 
-        public async void DeleteVailedForCustomerAsync(int customerId)
+        public async Task<VailedForCustomer> DeleteVailedForCustomerAsync(int customerId)
         {
             var result = await _context.VailedForCustomers.FirstOrDefaultAsync(s => s.Id == customerId);
             if (result != null)
             {
                 _context.VailedForCustomers.Remove(result);
                 await _context.SaveChangesAsync();
+
+                return result;
             }
+
+            return null;
         }
 
         public async Task<IEnumerable<VailedForCustomer>> GetVailedForCustomers()

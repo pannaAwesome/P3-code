@@ -12,6 +12,6 @@ namespace HAVI_app.Api.DatabaseInterfaces
         Task<OtherCostsForArticle> GetOtherCostsForArticle(int otherCostsForArticleId);
         Task<OtherCostsForArticle> AddOtherCostsForArticle(OtherCostsForArticle otherCostsForArticle);
         Task<OtherCostsForArticle> UpdateOtherCostsForArticle(OtherCostsForArticle otherCostsForArticle);
-        void DeleteOtherCostsForArticleAsync(int otherCostsForArticleId);
+        Task<OtherCostsForArticle> DeleteOtherCostsForArticleAsync(int otherCostsForArticleId);
     }
 }

@@ -12,6 +12,6 @@ namespace HAVI_app.Api.DatabaseInterfaces
         Task<Qip> GetQIP(int QIPId);
         Task<Qip> AddQIP(Qip QIP);
         Task<Qip> UpdateQIP(Qip QIP);
-        void DeleteQIPAsync(int QIPId);
+        Task<Qip> DeleteQIPAsync(int QIPId);
     }
 }

@@ -12,6 +12,6 @@ namespace HAVI_app.Api.DatabaseInterfaces
         Task<Sapplant> GetSAPPlant(int SAPPlantId);
         Task<Sapplant> AddSAPPlant(Sapplant SAPPlant);
         Task<Sapplant> UpdateSAPPlant(Sapplant SAPPlant);
-        void DeleteSAPPlantAsync(int SAPPlantId);
+        Task<Sapplant> DeleteSAPPlantAsync(int SAPPlantId);
     }
 }

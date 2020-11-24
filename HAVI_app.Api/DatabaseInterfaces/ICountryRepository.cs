@@ -12,6 +12,6 @@ namespace HAVI_app.Api.DatabaseInterfaces
         Task<Country> GetCountry(int countryId);
         Task<Country> AddCountry(Country country);
         Task<Country> UpdateCountry(Country country);
-        void DeleteCountryAsync(int countryId);
+        Task<Country> DeleteCountryAsync(int countryId);
     }
 }

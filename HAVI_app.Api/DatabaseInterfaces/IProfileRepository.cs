@@ -12,6 +12,6 @@ namespace HAVI_app.Api.DatabaseInterfaces
         Task<Profile> GetProfile(int profileId);
         Task<Profile> AddProfile(Profile profile);
         Task<Profile> UpdateProfile(Profile profile);
-        void DeleteProfileAsync(int profileId);
+        Task<Profile> DeleteProfileAsync(int profileId);
     }
 }

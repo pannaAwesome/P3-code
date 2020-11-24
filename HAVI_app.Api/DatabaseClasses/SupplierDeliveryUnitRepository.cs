@@ -23,14 +23,18 @@ namespace HAVI_app.Api.DatabaseClasses
             return result.Entity;
         }
 
-        public async void DeleteSupplierDeliveryUnitAsync(int deliveryUnitId)
+        public async Task<SupplierDeliveryUnit> DeleteSupplierDeliveryUnitAsync(int deliveryUnitId)
         {
             var result = await _context.SupplierDeliveryUnits.FirstOrDefaultAsync(s => s.Id == deliveryUnitId);
             if (result != null)
             {
                 _context.SupplierDeliveryUnits.Remove(result);
                 await _context.SaveChangesAsync();
+
+                return result;
             }
+
+            return null;
         }
 
         public async Task<IEnumerable<SupplierDeliveryUnit>> GetSupplierDeliveryUnits()

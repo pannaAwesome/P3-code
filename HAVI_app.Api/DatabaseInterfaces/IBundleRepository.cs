@@ -12,6 +12,6 @@ namespace HAVI_app.Api.DatabaseInterfaces
         Task<Bundle> GetBundle(int bundleId);
         Task<Bundle> AddBundle(Bundle bundle);
         Task<Bundle> UpdateBundle(Bundle bundle);
-        void DeleteBundleAsync(int bundleId);
+        Task<Bundle> DeleteBundleAsync(int bundleId);
     }
 }
