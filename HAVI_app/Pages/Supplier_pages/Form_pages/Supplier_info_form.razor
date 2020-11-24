@@ -13,7 +13,7 @@
     </div>
     <div class="row justify-content-center ">
         <div class="col-12 d-flex justify-content-center">
-            <form>
+            <form action="#">
 
 
                 <table class="table">
@@ -291,7 +291,7 @@
                     <div class="text-right col-6">
                     </div>
                     <div class="text-left col-6">
-                        <input type="button" class="btn green-button button-size" value="Next" @onclick="ValidationSupplierForm" />
+                        <input type="submit" class="btn green-button button-size" value="Next" @onclick="ValidationSupplierForm" />
                     </div>
                 </div>
 
@@ -369,19 +369,5 @@
         public void RemoveClassInfoDanger()
         {
             ClassInfoValidated = "";
-        }
-    }
-
-    @code{
-
-
-        public void OnPostForward()
-        {
-            //NavigationManager.NavigateTo($"/article_info_form");
-        }
-
-        public void OnPostBack()
-        {
-            NavigationManager.NavigateTo($"/overview_supplier", true);
         }
     }
