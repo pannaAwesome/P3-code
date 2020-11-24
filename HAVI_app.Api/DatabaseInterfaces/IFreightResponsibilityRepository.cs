@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HAVI_app.Api.DatabaseInterfaces
 {
-    interface IFreightResponsibilityRepository
+    public interface IFreightResponsibilityRepository
     {
         Task<IEnumerable<FreightResponsibility>> GetFreightResponsibilities();
     }

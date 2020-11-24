@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HAVI_app.Api.DatabaseInterfaces
 {
-    interface IArticleBundleRepository
+    public interface IArticleBundleRepository
     {
         Task<IEnumerable<ArticleBundle>> GetArticleBundles();
     }

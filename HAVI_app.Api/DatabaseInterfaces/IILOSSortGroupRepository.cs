@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HAVI_app.Api.DatabaseInterfaces
 {
-    interface IILOSSortGroupRepository
+    public interface IILOSSortGroupRepository
     {
         Task<IEnumerable<IlossortGroup>> GetILOSSortGroups();
     }

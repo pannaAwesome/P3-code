@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HAVI_app.Api.DatabaseInterfaces
 {
-    interface IPackagingGroupRepository
+    public interface IPackagingGroupRepository
     {
         Task<IEnumerable<PackagingGroup>> GetPackagingGroups();
     }

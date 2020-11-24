@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HAVI_app.Api.DatabaseInterfaces
 {
-    interface ILocationRepository
+    public interface ILocationRepository
     {
         Task<IEnumerable<Location>> GetLocations();
     }
