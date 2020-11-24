@@ -24,6 +24,19 @@ namespace HAVI_app.Classes
             return false;
         }
 
+        public bool DecimalOnly(string input)
+        {
+            decimal number;
+            if (Decimal.TryParse(input, out number))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public bool NumbersOnly(string input)
         {
             if(input != null){
