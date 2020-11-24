@@ -110,7 +110,16 @@
                             <label for="email" class="required">Email:</label>
                         </td>
                         <td>
-                            <input type="text" class="form-control" name="email" @bind="Email" required>
+
+                            @if (!EmailValidated)
+                            {
+                                <input type="text" class="form-control has-error" name="email" @bind="Email" required>
+                            }
+                            else
+                            {
+                                <input type="text" class="form-control" name="email" @bind="Email" required>
+                            }
+
                         </td>
                         <td>
                             <div></div>
@@ -175,7 +184,7 @@
                     <tr>
                         <td colspan="2">
                             <label for="special_info">Special information regarding the article or cooperation?</label>
-                            <textarea class="form-control" name="special_info"></textarea>
+                            <textarea class="form-control" name="special_info" @bind="SpecialInformation"></textarea>
                         </td>
                         <td>
                             <div></div>
@@ -256,7 +265,7 @@
                             <label for="class" class="required">Class:</label>
                         </td>
                         <td>
-                            <input type="number" class="form-control" name="class" @bin="ClassInfo" required>
+                            <input type="number" class="form-control" name="class" @bind="ClassInfo" required>
                         </td>
                         <td>
                             <div></div>
@@ -335,28 +344,28 @@
         [Parameter]
         public int ClassificationCode { get; set; }
 
-        @*public class Test
-            {
-                public int kat = 3;
-                public int hund = 2;
-                public int and = 2;
-            }*@
+        public bool EmailValidated = true;
 
     public void ValidationSupllierForm()
-    {
-        if (IsEmailValid(Email) &&
-        NumbersOnly(TransitTime) &&
-        NumbersOnly(ClassInfo.ToString()) &&
-        NumbersOnly(ClassificationCode.ToString()))
         {
-            NavigationManager.NavigateTo("/article_info_form", true);
-        }
-        else
-        {
-            NavigationManager.NavigateTo("/overview_supplier", true);
-        }
+            if (IsEmailValid(Email) &&
+            NumbersOnly(TransitTime) &&
+            NumbersOnly(ClassInfo.ToString()) &&
+            NumbersOnly(ClassificationCode.ToString()))
+            {
+                NavigationManager.NavigateTo("/article_info_form", true);
+            }
 
-    }
+            else if (!IsEmailValid(Email))
+            {
+                EmailValidated = false;
+            }
+            else
+            {
+                //NavigationManager.NavigateTo("/overview_supplier", true);
+            }
+
+        }
     }
 
     @code{
