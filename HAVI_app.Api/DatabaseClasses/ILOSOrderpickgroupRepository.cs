@@ -23,14 +23,16 @@ namespace HAVI_app.Api.DatabaseClasses
             return result.Entity;
         }
 
-        public async void DeleteILOSOrderpickgroupAsync(int orderGroupId)
+        public async Task<Ilosorderpickgroup> DeleteILOSOrderpickgroupAsync(int orderGroupId)
         {
             var result = await _context.Ilosorderpickgroups.FirstOrDefaultAsync(s => s.Id == orderGroupId);
             if (result != null)
             {
                 _context.Ilosorderpickgroups.Remove(result);
                 await _context.SaveChangesAsync();
+                return result;
             }
+            return null;
         }
 
         public async Task<IEnumerable<Ilosorderpickgroup>> GetILOSOrderpickgroups()

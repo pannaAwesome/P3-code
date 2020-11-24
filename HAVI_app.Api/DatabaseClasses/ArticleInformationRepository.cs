@@ -23,14 +23,16 @@ namespace HAVI_app.Api.DatabaseClasses
             return result.Entity;
         }
 
-        public async void DeleteArticleInformationAsync(int articleInformationId)
+        public async Task<ArticleInformation> DeleteArticleInformationAsync(int articleInformationId)
         {
             var result = await _context.ArticleInformations.FirstOrDefaultAsync(s => s.Id == articleInformationId);
             if (result != null)
             {
                 _context.ArticleInformations.Remove(result);
                 await _context.SaveChangesAsync();
+                return result;
             }
+            return null;
         }
 
         public async Task<ArticleInformation> GetArticleInformation(int articleInformationId)

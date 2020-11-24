@@ -23,14 +23,16 @@ namespace HAVI_app.Api.DatabaseClasses
             return result.Entity;
         }
 
-        public async void DeleteProfileAsync(int profileId)
+        public async Task<Profile> DeleteProfileAsync(int profileId)
         {
             var result = await _context.Profiles.FirstOrDefaultAsync(s => s.Id == profileId);
             if (result != null)
             {
                 _context.Profiles.Remove(result);
                 await _context.SaveChangesAsync();
+                return result;
             }
+            return null;
         }
 
         public async Task<Profile> GetProfile(int profileId)
