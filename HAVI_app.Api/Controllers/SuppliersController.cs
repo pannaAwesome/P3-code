@@ -96,19 +96,14 @@ namespace HAVI_app.Api.Controllers
         {
             try
             {
-                if (id != supplier.Id)
-                {
-                    return BadRequest();
-                }
+                var supplierToDelete = await _supplierRepository.GetSupplier(id);
 
-                var supplierToUpdate = await _supplierRepository.GetSupplier(id);
-
-                if (supplierToUpdate == null)
+                if (supplierToDelete == null)
                 {
                     return NotFound($"Supplier with id = {id} not found");
                 }
 
-                return await _supplierRepository.UpdateSupplier(supplier);
+                return await _supplierRepository.DeleteSupplierAsync(id);
             }
             catch (Exception)
             {

@@ -23,14 +23,18 @@ namespace HAVI_app.Api.DatabaseClasses
             return result.Entity;
         }
 
-        public async void DeleteVatTaxCodeAsync(int codeId)
+        public async Task<VatTaxCode> DeleteVatTaxCodeAsync(int codeId)
         {
             var result = await _context.VatTaxCodes.FirstOrDefaultAsync(s => s.Id == codeId);
             if (result != null)
             {
                 _context.VatTaxCodes.Remove(result);
                 await _context.SaveChangesAsync();
+
+                return result;
             }
+
+            return null;
         }
 
         public async Task<IEnumerable<VatTaxCode>> GetVatTaxCodes()
