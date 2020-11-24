@@ -13,7 +13,7 @@
     </div>
     <div class="row justify-content-center ">
         <div class="col-12 d-flex justify-content-center">
-            <form action="#">
+            <form action="/supplier_info_form" method="post">
 
 
                 <table class="table">
@@ -130,7 +130,7 @@
                         </td>
                         <td>
                             <div class="text-center">
-                                <input type="radio" name="pallet_exchange" value="yes">
+                                <input type="radio" name="pallet_exchange" value="yes" required>
                                 <label for="yes">Yes</label>
                                 &nbsp;
                                 <input type="radio" value="no" name="pallet_exchange">
@@ -154,7 +154,7 @@
                         </td>
                         <td>
                             <div class="text-center">
-                                <input type="radio" name="freight_responsibility" value="CIP">
+                                <input type="radio" name="freight_responsibility" value="CIP" required>
                                 <label for="CIP">CIP</label>
                                 &nbsp;
                                 <input type="radio" value="EXW" name="freight_responsibility">
@@ -196,7 +196,7 @@
 
                         <td>
                             <div class="text-center">
-                                <input type="radio" name="transport" value="yes" data-toggle="collapse" data-target="#hideTransit:not(.show)" aria-expanded="false" aria-controls="hideTransit">
+                                <input type="radio" name="transport" value="yes" data-toggle="collapse" data-target="#hideTransit:not(.show)" aria-expanded="false" aria-controls="hideTransit" required>
                                 <label for="yes">Yes</label>
                                 &nbsp;
                                 <input type="radio" value="no" name="transport" data-toggle="collapse" data-target="#hideTransit.show" aria-expanded="false" aria-controls="hideTransit">
@@ -234,7 +234,7 @@
                         </td>
                         <td>
                             <div class="text-center">
-                                <input type="radio" name="dangerous" value="yes" data-toggle="collapse" data-target="#hideDanger:not(.show)" aria-expanded="false" aria-controls="hideDanger">
+                                <input type="radio" name="dangerous" value="yes" data-toggle="collapse" data-target="#hideDanger:not(.show)" aria-expanded="false" aria-controls="hideDanger" required>
                                 <label for="yes">Yes</label>
                                 &nbsp;
                                 <input type="radio" value="no" name="dangerous" data-toggle="collapse" data-target="#hideDanger.show" aria-expanded="false" aria-controls="hideDanger" />
@@ -291,7 +291,7 @@
                     <div class="text-right col-6">
                     </div>
                     <div class="text-left col-6">
-                        <input type="button" class="btn green-button button-size" value="Next" @onclick="ValidationSupplierForm" />
+                        <input type="submit" class="btn green-button button-size" value="Next" @onclick="ValidationSupplierForm" />
                     </div>
                 </div>
 
