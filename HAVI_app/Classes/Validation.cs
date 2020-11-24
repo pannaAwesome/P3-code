@@ -27,14 +27,18 @@ namespace HAVI_app.Classes
         public bool DecimalOnly(string input)
         {
             decimal number;
-            if (Decimal.TryParse(input, out number))
+            if(input != null)
             {
-                return true;
+                if (Decimal.TryParse(input, out number))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
-            else
-            {
-                return false;
-            }
+            return false;
         }
 
         public bool NumbersOnly(string input)
