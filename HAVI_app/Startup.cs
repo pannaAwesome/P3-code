@@ -5,6 +5,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using HAVI_app.Models;
+using HAVI_app.Services;
+using System.Net.Http;
 
 namespace HAVI_app
 {
@@ -23,9 +25,13 @@ namespace HAVI_app
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-
             services.AddDbContext<HAVIdatabaseContext>(options => options.UseSqlServer(Configuration.GetConnectionString("HAVIdatabaseContext")));
             services.AddDatabaseDeveloperPageExceptionFilter();
+
+            services.AddHttpClient<ISupplierService, SupplierService>(client =>
+            {
+                client.BaseAddress = new System.Uri("https://localhost:44394");
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

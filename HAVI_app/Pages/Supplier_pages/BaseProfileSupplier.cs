@@ -1,20 +1,19 @@
 ﻿using HAVI_app.Models;
-using HAVI_app.Services.Classes;
-using HAVI_app.Services.Interfaces;
+using HAVI_app.Services;
 using Microsoft.AspNetCore.Components;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace HAVI_app.Pages.Supplier_pages
 {
-    public class BaseProfile_supplier : ComponentBase
+    public class BaseProfileSupplier : ComponentBase
     {
         [Parameter]
         public int supplierId { get; set; }
+
         [Inject]
         public ISupplierService SupplierService { get; set; }
+
         public Supplier Supplier { get; set; } = new Supplier();
         public string PalletExchangeYes { get; set; }
         public string PalletExchangeNo { get; set; }

@@ -1,4 +1,5 @@
 ﻿using HAVI_app.Models;
+using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,12 +9,11 @@ using System.Threading.Tasks;
 
 
 
-namespace HAVI_app.Services.Classes
+namespace HAVI_app.Services
 {
-    public class SupplierService : ISupplierService
+    public class SupplierService : ComponentBase, ISupplierService
     {
         private readonly HttpClient httpClient;
-
         public SupplierService(HttpClient httpClient)
         {
             this.httpClient = httpClient;
