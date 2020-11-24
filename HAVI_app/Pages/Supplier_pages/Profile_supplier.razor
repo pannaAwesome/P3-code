@@ -4,7 +4,7 @@
 
 @layout HAVI_app.Shared.Supplier_layout.Profile_layout
 
-@if (Supplier == null || Supplier.Profile == null)
+@if (Supplier == null)
 {
     <div class="spinner"></div>
 }
@@ -32,7 +32,7 @@ else
                                 <label for="email">Email:</label>
                             </td>
                             <td>
-                                <input type="email" class="form-control" name="email" value="@Supplier.Profile.Username" required>
+                                <input type="email" class="form-control" name="email" value="Helo" required>
                             </td>
                             <td>
                                 <div></div>

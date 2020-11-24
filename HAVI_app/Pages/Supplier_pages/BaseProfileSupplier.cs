@@ -3,7 +3,6 @@ using HAVI_app.Services;
 using Microsoft.AspNetCore.Components;
 using System.Net.Http;
 using System.Threading.Tasks;
-using HAVI_app.Services.Interfaces;
 using HAVI_app.Services.Classes;
 
 namespace HAVI_app.Pages.Supplier_pages
@@ -14,7 +13,7 @@ namespace HAVI_app.Pages.Supplier_pages
         public int supplierId { get; set; }
 
         [Inject]
-        public ISupplierService SupplierService { get; set; }
+        public SupplierService SupplierService { get; set; }
 
         public Supplier Supplier { get; set; } = new Supplier();
         public string PalletExchangeYes { get; set; }

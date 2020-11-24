@@ -6,11 +6,10 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
-using HAVI_app.Services.Interfaces;
 
 namespace HAVI_app.Services.Classes
 {
-    public class SupplierService : ComponentBase, ISupplierService
+    public class SupplierService 
     {
         private readonly HttpClient httpClient;
         public SupplierService(HttpClient httpClient)

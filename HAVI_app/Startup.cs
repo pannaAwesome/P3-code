@@ -6,7 +6,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using HAVI_app.Models;
 using HAVI_app.Services.Classes;
-using HAVI_app.Services.Interfaces;
 using System.Net.Http;
 
 namespace HAVI_app
@@ -29,7 +28,7 @@ namespace HAVI_app
             services.AddDbContext<HAVIdatabaseContext>(options => options.UseSqlServer(Configuration.GetConnectionString("HAVIdatabaseContext")));
             services.AddDatabaseDeveloperPageExceptionFilter();
 
-            services.AddHttpClient<ISupplierService, SupplierService>(client =>
+            services.AddHttpClient<SupplierService>(client =>
             {
                 client.BaseAddress = new System.Uri("https://localhost:44394");
             });

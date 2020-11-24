@@ -19,11 +19,13 @@ namespace HAVI_app.Api.Controllers
             _supplierRepository = supplierRepository;
         }
 
-        //[HttpGet]
-        //public async Task<ActionResult> GetSuppliers()
-        //{
-
-        //}
+        [HttpGet]
+        public async Task<IEnumerable<Supplier>> GetSuppliers()
+        {
+            var result = await _supplierRepository.GetSuppliers();
+                
+            return result;
+        }
 
         [HttpGet("{id:int}")]
         public async Task<ActionResult<Supplier>> GetSupplier(int id)
