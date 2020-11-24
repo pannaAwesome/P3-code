@@ -24,7 +24,7 @@
                         <label for="article_name" class="required">Article name:</label>
                     </td>
                     <td>
-                        <input type="text" class="form-control" name="article_name" @bind="ArticleName" required>
+                        <input type="text" class="form-control @ArticleNameValidated" name="article_name" @bind="ArticleName" required>
                     </td>
                     <td>
                         <div></div>
@@ -65,7 +65,7 @@
                         <label for="article_pr_salesunit" class="required">Articles per salesunit:</label>
                     </td>
                     <td>
-                        <input type="number" class="form-control" name="article_pr_salesunit" @bind="ArticlePerSalesUnit" required>
+                        <input type="number" class="form-control @ArticlePerSalesunitValidated" name="article_pr_salesunit" @bind="ArticlePerSalesunit" required>
                     </td>
                     <td>
                         <div></div>
@@ -82,7 +82,7 @@
                         <label for="supplier_article_nn" class="required">Supplier article number/name:</label>
                     </td>
                     <td>
-                        <input type="text" class="form-control" name="supplier_article_nn" @bind="SupplierArticleNumber" required>
+                        <input type="text" class="form-control @SupplierArticleNumberValidated" name="supplier_article_nn" @bind="SupplierArticleNumber" required>
                     </td>
                     <td>
                         <div></div>
@@ -118,7 +118,7 @@
                         <label for="Shelflife" class="required">Shelflife:</label>
                     </td>
                     <td>
-                        <input type="number" class="form-control" name="Shelflife" @bind="Shelflife" required>
+                        <input type="number" class="form-control @ShelflifeValidated" name="Shelflife" @bind="Shelflife" required>
                     </td>
                     <td>
                         <label class="center-for-units" for="Shelflife">days</label>
@@ -136,7 +136,7 @@
                         <label for="Min_shelflife" class="required">Min. shelflife at HAVI:</label>
                     </td>
                     <td>
-                        <input type="number" class="form-control" name="Min_shelflife" @bind="ShelflifeAtHavi" required>
+                        <input type="number" class="form-control @ShelflifeAtHaviValidated" name="Min_shelflife" @bind="ShelflifeAtHavi" required>
                     </td>
                     <td>
                         <label class="center-for-units" for="Min_shelflife">days</label>
@@ -196,7 +196,7 @@
     public string SalesUnit { get; set; }
 
     [Parameter]
-    public string ArticlePerSalesUnit { get; set; }
+    public string ArticlePerSalesunit { get; set; }
 
     [Parameter]
     public string SupplierArticleNumber { get; set; }
@@ -213,25 +213,59 @@
     [Parameter]
     public string OrganicLife { get; set; }
 
+    public string ArticleNameValidated;
+
+    public string ArticlePerSalesunitValidated;
+
+    public string SupplierArticleNumberValidated;
+
+    public string ShelflifeValidated;
+
+    public string ShelflifeAtHaviValidated;
+
     public void ValidationArticleInfoForm()
     {
 
         if (LettersOnly(ArticleName) &&
-            NumbersOnly(ArticlePerSalesUnit) &&
+            NumbersOnly(ArticlePerSalesunit) &&
             NumbersOnly(SupplierArticleNumber) &&
             NumbersOnly(Shelflife) &&
             NumbersOnly(ShelflifeAtHavi))
-            {
-                NavigationManager.NavigateTo("/measurement_info_form", true);
-            }
+        {
+            NavigationManager.NavigateTo("/measurement_info_form", true);
+        }
+
+        if (!LettersOnly(ArticleName))
+        {
+            ArticleNameValidated = "btn-danger";
+        }
+
+        if (!NumbersOnly(ArticlePerSalesunit))
+        {
+            ArticlePerSalesunitValidated = "btn-danger";
+        }
+
+        if (!NumbersOnly(SupplierArticleNumberValidated))
+        {
+            ArticlePerSalesunitValidated = "btn-danger";
+        }
+
+        if (!NumbersOnly(ShelflifeValidated))
+        {
+            ShelflifeValidated = "btn-danger";
+        }
+
+        if (!NumbersOnly(ShelflifeAtHaviValidated))
+        {
+            ShelflifeAtHaviValidated = "btn-danger";
+        }
+
+
+
 
     }
 
 @code{
-
-
-
-
 
     public void OnPostForward()
     {
