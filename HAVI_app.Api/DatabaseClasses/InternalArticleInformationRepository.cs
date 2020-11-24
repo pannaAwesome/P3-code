@@ -38,7 +38,7 @@ namespace HAVI_app.Api.DatabaseClasses
             return await _context.InternalArticleInformations.FirstOrDefaultAsync(s => s.Id == internalArticleId);
         }
 
-        public async Task<IEnumerable<InternalArticleInformation>> GetInternalArticalInformations()
+        public async Task<IEnumerable<InternalArticleInformation>> GetInternalArticleInformations()
         {
             return await _context.InternalArticleInformations.ToListAsync();
         }

@@ -11,7 +11,6 @@ namespace HAVI_app.Api.DatabaseInterfaces
         Task<IEnumerable<Purchaser>> GetPurchasers();
         Task<Purchaser> GetPurchaser(int purchaserId);
         Task<Purchaser> AddPurchaser(Purchaser purchaser);
-        Task<Purchaser> UpdatePurchaser(Purchaser purchaser);
         void DeletePurchaserAsync(int purchaserId);
     }
 }

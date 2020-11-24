@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HAVI_app.Api.DatabaseClasses
 {
-    public class SAPPlantRepository
+    public class SAPPlantRepository : ISAPPlantRepository
     {
         private readonly HAVIdatabaseContext _context;
         public SAPPlantRepository(HAVIdatabaseContext context)
@@ -16,7 +16,7 @@ namespace HAVI_app.Api.DatabaseClasses
             _context = context;
         }
 
-        public async Task<Sapplant> AddSupplier(Sapplant SAPPlant)
+        public async Task<Sapplant> AddSAPPlant(Sapplant SAPPlant)
         {
             var result = await _context.Sapplants.AddAsync(SAPPlant);
             await _context.SaveChangesAsync();
@@ -24,7 +24,7 @@ namespace HAVI_app.Api.DatabaseClasses
             return result.Entity;
         }
 
-        public async void DeleteSupplierAsync(int SAPPlantId)
+        public async void DeleteSAPPlantAsync(int SAPPlantId)
         {
             var result = await _context.Sapplants.FirstOrDefaultAsync(s => s.Id == SAPPlantId);
             if (result != null)
@@ -34,17 +34,17 @@ namespace HAVI_app.Api.DatabaseClasses
             }
         }
 
-        public async Task<Sapplant> GetSupplier(int SAPPlantId)
+        public async Task<Sapplant> GetSAPPlant(int SAPPlantId)
         {
             return await _context.Sapplants.FirstOrDefaultAsync(s => s.Id == SAPPlantId);
         }
 
-        public async Task<IEnumerable<Sapplant>> GetSapplants()
+        public async Task<IEnumerable<Sapplant>> GetSAPPlants()
         {
             return await _context.Sapplants.ToListAsync();
         }
 
-        public async Task<Sapplant> UpdateSupplier(Sapplant SAPPlant)
+        public async Task<Sapplant> UpdateSAPPlant(Sapplant SAPPlant)
         {
             var result = await _context.Sapplants.FirstOrDefaultAsync(s => s.Id == SAPPlant.Id);
             if (result != null)

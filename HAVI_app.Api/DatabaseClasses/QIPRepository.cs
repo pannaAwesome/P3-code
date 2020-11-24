@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HAVI_app.Api.DatabaseClasses
 {
-    public class QIPRepository : ISupplierRepository
+    public class QIPRepository : IQIPRepository
     {
         private readonly HAVIdatabaseContext _context;
         public QIPRepository(HAVIdatabaseContext context)

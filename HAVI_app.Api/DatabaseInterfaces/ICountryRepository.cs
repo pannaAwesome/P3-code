@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace HAVI_app.Api.DatabaseInterfaces
 {
-    pubic interface ICountryRepository
+    public interface ICountryRepository
     {
         Task<IEnumerable<Country>> GetCountries();
         Task<Country> GetCountry(int countryId);
