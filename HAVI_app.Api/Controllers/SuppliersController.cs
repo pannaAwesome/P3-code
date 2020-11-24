@@ -45,5 +45,25 @@ namespace HAVI_app.Api.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database.");
             }
         }
+
+        [HttpPost]
+        public async Task<ActionResult<Supplier>> CreateSupplier(Supplier supplier)
+        {
+            try
+            {
+                if (supplier == null)
+                {
+                    return BadRequest();
+                }
+
+                var createdSupplier = await _supplierRepository.AddSupplier(supplier);
+
+                return CreatedAtAction(nameof(GetSupplier), new { id = createdSupplier.Id }, createdSupplier);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database.");
+            }
+        }
     }
 }
