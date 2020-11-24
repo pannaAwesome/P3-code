@@ -291,7 +291,7 @@
                     <div class="text-right col-6">
                     </div>
                     <div class="text-left col-6">
-                        <input type="submit" class="btn green-button button-size" value="Next" @onclick="ValidationSupplierForm" />
+                        <input type="button" class="btn green-button button-size" value="Next" @onclick="ValidationSupplierForm" />
                     </div>
                 </div>
 
@@ -334,7 +334,7 @@
         {
             if (IsEmailValid(Email) &&
             NumbersOnly(TransitTime) &&
-            NumbersOnly(ClassInfo.ToString()))
+            NumbersOnly(ClassInfo))
             {
                 NavigationManager.NavigateTo("/article_info_form", true);
             }

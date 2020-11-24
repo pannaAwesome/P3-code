@@ -21,6 +21,13 @@ namespace HAVI_appTests
         }
 
         [TestMethod]
+        public void OnlyDecimalTest()
+        {
+            var numbers = new Validation();
+            Assert.IsTrue(numbers.DecimalOnly("11.323"));
+        }
+
+        [TestMethod]
         public void IsEmailValidTest()
         {
             var email = new Validation();
