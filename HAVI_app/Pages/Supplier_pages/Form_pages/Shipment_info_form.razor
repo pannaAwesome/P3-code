@@ -1,6 +1,7 @@
 ﻿@layout HAVI_app.Shared.Supplier_layout.Form_layout
 @inject Microsoft.AspNetCore.Components.NavigationManager NavigationManager
 @page "/shipment_info_form"
+@inherits HAVI_app.Classes.Validation
 
 <HAVI_app.Shared.Supplier_layout.Form_header SupplierState="filled" ArticleState="filled" MeasurementState="filled" ShipmentState="active" />
 <div class="row justify-content-center">
@@ -20,7 +21,7 @@
                         <label for="carton_pr_pallet" class="required">Cartons per pallet:</label>
                     </td>
                     <td colspan="6">
-                        <input type="number" class="form-control" name="carton_pr_pallet" required>
+                        <input type="number" class="form-control @CartonPrPalletValidated " name="carton_pr_pallet" @bind="CartonPrPallet" required>
                     </td>
                     <td>
                         <HAVI_app.Shared.Shared_layout.Questionmark_top>
@@ -35,7 +36,7 @@
                         <label for="carton_pr_layer" class="required">Cartons per layer:</label>
                     </td>
                     <td colspan="6">
-                        <input type="number" class="form-control" name="carton_pr_layer" required>
+                        <input type="number" class="form-control" name="carton_pr_layer" @bind="CartonPrLayer" required>
                     </td>
                     <td>
                         <HAVI_app.Shared.Shared_layout.Questionmark_top>
@@ -90,7 +91,7 @@
                         <label for="toll_tarrif_no" class="required">Toll-tarrif no.:</label>
                     </td>
                     <td colspan="6">
-                        <input type="number" class="form-control" name="toll_tarrif_no" required>
+                        <input type="number" class="form-control" name="toll_tarrif_no" @bind="TollTarrifNo" required>
                     </td>
                     <td>
                         <HAVI_app.Shared.Shared_layout.Questionmark_top>
@@ -106,7 +107,7 @@
                         <label for="minimum_order_quantity" class="required">Minimum order quantity:</label>
                     </td>
                     <td colspan="6">
-                        <input type="number" class="form-control" name="minimum_order_quantity" required>
+                        <input type="number" class="form-control" name="minimum_order_quantity" @bind="MinimumOrderQuantity" required>
                     </td>
                     <td>
                         <HAVI_app.Shared.Shared_layout.Questionmark_top>
@@ -181,7 +182,7 @@
                         <label for="lead_time" class="required">Lead time:</label>
                     </td>
                     <td colspan="5">
-                        <input type="number" class="form-control" name="lead_time" required>
+                        <input type="number" class="form-control" name="lead_time" @bind="LeadTime" required>
                     </td>
                     <td>
                         <label class="center-for-units" for="lead_time">days</label>
@@ -208,42 +209,86 @@
 </div>
 
 @code {
-    [Parameter]
-    public int CartonPrPallet { get; set; }
 
-    [Parameter]
-    public int CartonPrLayer { get; set; }
+    public string CartonPrPallet { get; set; }
 
-    [Parameter]
+    public string CartonPrLayer { get; set; }
+
     public string CountryOfOrigin { get; set; }
 
-    [Parameter]
     public string ImportedFrom { get; set; }
 
-    [Parameter]
     public int TollTarrifNo { get; set; }
 
-    [Parameter]
-    public int MinimumOrderQuantity { get; set; }
+    public string MinimumOrderQuantity { get; set; }
 
-    [Parameter]
-    public double MinTempratureDuringTransportation { get; set; }
+    public string MinTempratureDuringTransportation { get; set; }
 
-    [Parameter]
-    public double MaxTempratureDuringTransportation { get; set; }
+    public string MaxTempratureDuringTransportation { get; set; }
 
-    [Parameter]
-    public double MinTemeperatureStorage { get; set; }
+    public string MinTemeperatureStorage { get; set; }
 
-    [Parameter]
-    public double MaxTemeperatureStorage { get; set; }
+    public string MaxTemeperatureStorage { get; set; }
 
-    [Parameter]
-    public double LeadTime { get; set; }
+    public string LeadTime { get; set; }
+
+    public string CartonPrPalletValidated;
+
+    public string CartonPrLayerValidated;
+
+    public string CountryOfOriginValidated;
+
+    public string ImportedFromValidated;
+
+    public string TollTarrifNoVAlidated;
+
+    public string MinimumOrderQuantityValidated;
+
+    public string MinTempratureDuringTransportationValidated;
+
+    public string MaxTempratureDuringTransportationValidated;
+
+    public string MinTemeperatureStorageValdiated;
+
+    public string MaxTemeperatureStorageValidated;
+
+    public string LeadTimeValidated;
+
+    public void ValidationShipmentInfo()
+    {
+
+
+        if (!NumbersOnly(CartonPrPallet))
+        {
+            CartonPrPalletValidated = "btn-danger";
+        }
+        if (!NumbersOnly(CartonPrLayer))
+        {
+            CartonPrLayerValidated = "btn-danger";
+        }
+        if (!NumbersOnly(CountryOfOrigin))
+        {
+            CountryOfOriginValidated = "btn-danger";
+        }
+        if (!NumbersOnly(ImportedFrom))
+        {
+
+        }
+        if (!NumbersOnly(MinimumOrderQuantity))
+        {
+
+        }
+        if (!NumbersOnly(MinTempratureDuringTransportation))
+        {
+
+        }
+    }
+
+
 }
 
 @code{
-    public void OnPostForward()
+public void OnPostForward()
     {
         NavigationManager.NavigateTo($"/price_info_form", true);
     }
