@@ -20,11 +20,21 @@ namespace HAVI_app.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<Supplier>> GetSuppliers()
+        public async Task<ActionResult> GetSuppliers()
         {
-            var result = await _supplierRepository.GetSuppliers();
-                
-            return result;
+            try
+            {
+                var result = await _supplierRepository.GetSuppliers();
+                if(result == null)
+                {
+                    return NotFound();
+                }
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database.");
+            }
         }
 
         [HttpGet("{id:int}")]

@@ -21,9 +21,24 @@ namespace HAVI_app.Services.Classes
             return await httpClient.GetFromJsonAsync<Supplier>($"/api/suppliers/{id}");   
         }
 
-        public async  Task<IEnumerable<Supplier>> GetSuppliers()
+        public async Task<IEnumerable<Supplier>> GetSuppliers()
         {
-            throw new NotImplementedException();
+            return await httpClient.GetFromJsonAsync<Supplier[]>("/api/suppliers");
         }
+        /*
+        public async Task<Supplier> CreateSupplier(Supplier supplier)
+        {
+            return await httpClient.PostAsJsonAsync("/api/suppliers", supplier);
+        }
+
+        public async Task<Supplier> UpdateSupplier(int id, Supplier supplier)
+        {
+            return await httpClient.PutAsJsonAsync($"/api/suppliers/{id}", supplier);
+        }
+
+        public async Task<Supplier> DeleteSupplier(int id)
+        {
+            return await httpClient.DeleteAsync($"/api/suppliers/{id}");
+        }*/
     }
 }

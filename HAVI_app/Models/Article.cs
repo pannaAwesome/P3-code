@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 #nullable disable
 
@@ -8,7 +9,9 @@ namespace HAVI_app.Models
     public partial class Article
     {
         public int Id { get; set; }
+        [ForeignKey("Purchaser")]
         public int PurchaserId { get; set; }
+        [ForeignKey("Supplier")]
         public int SupplierId { get; set; }
         public int CountryId { get; set; }
         public int ArticleInformationId { get; set; }
