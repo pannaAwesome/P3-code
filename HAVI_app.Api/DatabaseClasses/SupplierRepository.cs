@@ -17,10 +17,11 @@ namespace HAVI_app.Api.DatabaseClasses
         }
         public async Task<Supplier> AddSupplier(Supplier supplier)
         {
-            var result = await _context.Suppliers.AddAsync(supplier);
+            await _context.Suppliers.AddAsync(supplier);
             await _context.SaveChangesAsync();
 
-            return result.Entity;
+            var result = await _context.Suppliers.Include(s => s.Profile).FirstOrDefaultAsync(s => s.Id == supplier.Id);
+            return result;
         }
 
         public async Task<Supplier> DeleteSupplierAsync(int supplierId)

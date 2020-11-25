@@ -23,12 +23,22 @@ namespace HAVI_app.Services.Classes
 
         public async Task<IEnumerable<Supplier>> GetSuppliers()
         {
-            return await httpClient.GetFromJsonAsync<IEnumerable<Supplier>>("/api/suppliers");
+            return await httpClient.GetFromJsonAsync<Supplier[]>("/api/suppliers");
+        }
+        /*
+        public async Task<Supplier> CreateSupplier(Supplier supplier)
+        {
+            return await httpClient.PostAsJsonAsync("/api/suppliers", supplier);
         }
 
-        public async Task<Supplier> UpdateSupplier(int id)
+        public async Task<Supplier> UpdateSupplier(int id, Supplier supplier)
         {
-            return await httpClient.GetFromJsonAsync<Supplier>($"/api/suppliers/{id}");
+            return await httpClient.PutAsJsonAsync($"/api/suppliers/{id}", supplier);
         }
+
+        public async Task<Supplier> DeleteSupplier(int id)
+        {
+            return await httpClient.DeleteAsync($"/api/suppliers/{id}");
+        }*/
     }
 }
