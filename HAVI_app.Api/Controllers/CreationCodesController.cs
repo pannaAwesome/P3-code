@@ -11,10 +11,10 @@ namespace HAVI_app.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CreationCodesController : ControllerBase
+    public class CreationCodes : ControllerBase
     {
         private readonly ICreationCodeRepository _creationCodeRepository;
-        public CreationCodesController(ICreationCodeRepository creationCodeRepository)
+        public CreationCodes(ICreationCodeRepository creationCodeRepository)
         {
             _creationCodeRepository = creationCodeRepository;
         }

@@ -59,16 +59,16 @@ namespace HAVI_app.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Iloscategory>> CreateILOSCategory(Iloscategory ILOSCategoryr)
+        public async Task<ActionResult<Iloscategory>> CreateILOSCategory(Iloscategory ILOSCategory)
         {
             try
             {
-                if (ILOSCategoryr == null)
+                if (ILOSCategory == null)
                 {
                     return BadRequest();
                 }
 
-                var createdILOSCategory = await _ILOSCategoryRepository.AddILOSCategory(ILOSCategoryr);
+                var createdILOSCategory = await _ILOSCategoryRepository.AddILOSCategory(ILOSCategory);
 
                 return CreatedAtAction(nameof(GetILOSCategory), new { id = createdILOSCategory.Id }, createdILOSCategory);
             }
@@ -79,23 +79,23 @@ namespace HAVI_app.Api.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<Iloscategory>> UpdateILOSCategory(int id, Iloscategory ILOSCategoryr)
+        public async Task<ActionResult<Iloscategory>> UpdateILOSCategory(int id, Iloscategory ILOSCategory)
         {
             try
             {
-                if (id != ILOSCategoryr.Id)
+                if (id != ILOSCategory.Id)
                 {
                     return BadRequest();
                 }
 
-                var ILOSCategoryrToUpdate = await _ILOSCategoryRepository.GetILOSCategory(id);
+                var ILOSCategoryToUpdate = await _ILOSCategoryRepository.GetILOSCategory(id);
 
-                if (ILOSCategoryrToUpdate == null)
+                if (ILOSCategoryToUpdate == null)
                 {
                     return NotFound($"ILOSCategory with id = {id} not found");
                 }
 
-                return await _ILOSCategoryRepository.UpdateILOSCategory(ILOSCategoryr);
+                return await _ILOSCategoryRepository.UpdateILOSCategory(ILOSCategory);
             }
             catch (Exception)
             {
@@ -108,9 +108,9 @@ namespace HAVI_app.Api.Controllers
         {
             try
             {
-                var ILOSCategoryrToDelete = await _ILOSCategoryRepository.GetILOSCategory(id);
+                var ILOSCategoryToDelete = await _ILOSCategoryRepository.GetILOSCategory(id);
 
-                if (ILOSCategoryrToDelete == null)
+                if (ILOSCategoryToDelete == null)
                 {
                     return NotFound($"ILOSCategory with id = {id} not found");
                 }
