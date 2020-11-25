@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 #nullable disable
 
@@ -53,7 +54,9 @@ namespace HAVI_app.Models
         public double? PurchasePrice { get; set; }
         public int? OtherCosts { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<Article> Articles { get; set; }
+        [JsonIgnore]
         public virtual ICollection<OtherCostsForArticle> OtherCostsForArticles { get; set; }
     }
 }

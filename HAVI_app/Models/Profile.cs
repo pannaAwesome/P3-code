@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 #nullable disable
 
@@ -19,8 +20,11 @@ namespace HAVI_app.Models
         public string Password { get; set; }
         public int Usertype { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<Country> Countries { get; set; }
+        [JsonIgnore]
         public virtual ICollection<Purchaser> Purchasers { get; set; }
+        [JsonIgnore]
         public virtual ICollection<Supplier> Suppliers { get; set; }
     }
 }

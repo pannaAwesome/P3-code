@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Components;
 using System.Net.Http;
 using System.Threading.Tasks;
 using HAVI_app.Services.Classes;
+using System;
 
 namespace HAVI_app.Pages.Supplier_pages
 {
@@ -16,14 +17,11 @@ namespace HAVI_app.Pages.Supplier_pages
         public SupplierService SupplierService { get; set; }
 
         public Supplier Supplier { get; set; } = new Supplier();
-        public string PalletExchangeYes { get; set; }
-        public string PalletExchangeNo { get; set; }
 
         protected async override Task OnInitializedAsync()
         {
             Supplier = await SupplierService.GetSupplier(supplierId);
-            PalletExchangeYes = Supplier.PalletExchange == 1 ? "checked" : "";
-            PalletExchangeNo = Supplier.PalletExchange == 1 ? "" : "checked";
+            Console.WriteLine("hello " + Supplier.Profile.Username);
         }
 
     }

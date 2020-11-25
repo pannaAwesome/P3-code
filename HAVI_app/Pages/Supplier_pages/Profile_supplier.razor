@@ -4,14 +4,13 @@
 
 @layout HAVI_app.Shared.Supplier_layout.Profile_layout
 
-@if (Supplier == null)
-{
-    <div class="spinner"></div>
-}
-else
-{
-
-
+@if(Supplier == null || Supplier.Profile == null){
+<div class="spinner">
+    <div class="bounce1"></div>
+    <div class="bounce2"></div>
+    <div class="bounce3"></div>
+</div>
+}else{
 <div class="row align-content-center">
     <div class="col-1"></div>
     <div class="col-10 white-box header">
@@ -32,7 +31,7 @@ else
                                 <label for="email">Email:</label>
                             </td>
                             <td>
-                                <input type="email" class="form-control" name="email" value="Helo" required>
+                                <input type="email" class="form-control" name="email" value="@Supplier.Profile.Username" required>
                             </td>
                             <td>
                                 <div></div>
@@ -84,14 +83,25 @@ else
                                     <div class="col-12">
                                         <div class="row">
                                             <div class="col-2"></div>
+                                            @if(Supplier.PalletExchange == 1){
                                             <div class="col-4">
-                                                <input type="radio" name="pallet_exchange" value="yes" @PalletExchangeYes required>
+                                                <input type="radio" name="pallet_exchange" value="1" checked required>
                                                 <label for="yes">Yes</label>
                                             </div>
                                             <div class="col-4">
-                                                <input type="radio" name="pallet_exchange" value="no" @PalletExchangeNo required>
+                                                <input type="radio" name="pallet_exchange" value="0" required>
                                                 <label for="no">No</label>
                                             </div>
+                                            }else{
+                                            <div class="col-4">
+                                                <input type="radio" name="pallet_exchange" value="1" required>
+                                                <label for="yes">Yes</label>
+                                            </div>
+                                            <div class="col-4">
+                                                <input type="radio" name="pallet_exchange" value="0" checked required>
+                                                <label for="no">No</label>
+                                            </div>
+                                            }
                                         </div>
                                     </div>
                                 </div>
@@ -109,19 +119,10 @@ else
                             </td>
                             <td>
                                 <div class="row justify-content-center">
-                                    <div class="col-12">
-                                        <div class="row">
-                                            <div class="col-2"></div>
-                                            <div class="col-4">
-                                                <input type="radio" name="freight_responsibility" value="CIP" checked required>
-                                                <label for="cip">CIP</label>
-                                            </div>
-                                            <div class="col-4">
-                                                <input type="radio" name="freight_responsibility" value="EXW" required>
-                                                <label for="exw">EXW</label>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <select class="form-control" name="salesunit" value="@Supplier.FreightResponsibility" required>
+                                        <option>EXW</option>
+                                        <option>CIP</option>
+                                    </select>
                                 </div>
                             </td>
                             <td>

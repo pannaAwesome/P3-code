@@ -63,10 +63,9 @@ namespace HAVI_app.Data
             var suppliers = new Supplier[]
             {
                 new Supplier{ProfileId = profiles.Single(p => p.Username == "Supplier").Id,
-                             //Profile = profiles.Single(p => p.Username == "Supplier"),
                              CompanyLocation="Denmark",
                              CompanyName="Hello and co.",
-                             FreightResponsibility="EXP",
+                             FreightResponsibility="EXW",
                              PalletExchange=1,
                              Articles = new List<Article>()
                             }
@@ -89,8 +88,7 @@ namespace HAVI_app.Data
                         customers.Add(new VailedForCustomer
                         {
                             Customer = field,
-                            CountryId = countries.Single(c => c.CountryCode == "DK").Id,
-                            Country = countries.Single(c => c.CountryCode == "DK")
+                            CountryId = countries.Single(c => c.CountryCode == "DK").Id
                         });
                     }
                 }
@@ -151,8 +149,7 @@ namespace HAVI_app.Data
                         orderpickgroup.Add(new Ilosorderpickgroup
                         {
                             Orderpickgroup = field,
-                            CountryId = countries.Single(c => c.CountryCode == "DK").Id,
-                            Country = countries.Single(c => c.CountryCode == "DK")
+                            CountryId = countries.Single(c => c.CountryCode == "DK").Id
                         });
                     }
                 }
@@ -175,8 +172,7 @@ namespace HAVI_app.Data
                         vatTaxCodes.Add(new VatTaxCode
                         {
                             Code = field,
-                            CountryId = countries.Single(c => c.CountryCode == "DK").Id,
-                            Country = countries.Single(c => c.CountryCode == "DK")
+                            CountryId = countries.Single(c => c.CountryCode == "DK").Id
                         });
                     }
                 }
@@ -220,8 +216,7 @@ namespace HAVI_app.Data
                             categories.Add(new Iloscategory
                             {
                                 Category = field,
-                                CountryId = countries.Single(c => c.CountryCode == "DK").Id,
-                                Country = countries.Single(c => c.CountryCode == "DK")
+                                CountryId = countries.Single(c => c.CountryCode == "DK").Id
                             });
                         }
                     }
@@ -265,8 +260,7 @@ namespace HAVI_app.Data
                             duties.Add(new InformCostType
                             {
                                 CostType = field,
-                                CountryId = countries.Single(c => c.CountryCode == "DK").Id,
-                                Country = countries.Single(c => c.CountryCode == "DK")
+                                CountryId = countries.Single(c => c.CountryCode == "DK").Id
                             });
                         }
                     }
@@ -348,8 +342,7 @@ namespace HAVI_app.Data
                     {
                         PrimaryCode = fields[0],
                         Sapplant = fields[1],
-                        CountryId = countries.Single(c => c.CountryCode == "DK").Id,
-                        Country = countries.Single(c => c.CountryCode == "DK")
+                        CountryId = countries.Single(c => c.CountryCode == "DK").Id
                     });
                 }
             }

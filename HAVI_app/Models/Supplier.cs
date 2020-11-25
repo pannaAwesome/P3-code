@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 #nullable disable
 
@@ -22,6 +23,7 @@ namespace HAVI_app.Models
         public string FreightResponsibility { get; set; }
 
         public virtual Profile Profile { get; set; }
+        [JsonIgnore]
         public virtual ICollection<Article> Articles { get; set; }
     }
 }
