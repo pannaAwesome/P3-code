@@ -302,6 +302,8 @@
 
 
     @code {
+        public HAVI_app.Models.ArticleInformation Article { get; set; }
+
         public string CompanyName { get; set; }
 
         public string CompanyLocation { get; set; }
@@ -336,7 +338,7 @@
             NumbersOnly(TransitTime) &&
             NumbersOnly(ClassInfo))
             {
-                NavigationManager.NavigateTo("/article_info_form", true);
+                NavigationManager.NavigateTo($"/article_info_form/{Article}", true);
             }
 
             if (!IsEmailValid(Email))
