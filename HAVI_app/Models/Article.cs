@@ -13,8 +13,11 @@ namespace HAVI_app.Models
         public int PurchaserId { get; set; }
         [ForeignKey("Supplier")]
         public int SupplierId { get; set; }
+        [ForeignKey("Country")]
         public int CountryId { get; set; }
+        [ForeignKey("ArticleInformation")]
         public int ArticleInformationId { get; set; }
+        [ForeignKey("InternalArticleInformation")]
         public int InternalArticleInformationId { get; set; }
         public string VailedForCustomer { get; set; }
         public DateTime DateCreated { get; set; }
