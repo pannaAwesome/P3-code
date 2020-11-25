@@ -21,7 +21,7 @@
                         <label for="carton_pr_pallet" class="required">Cartons per pallet:</label>
                     </td>
                     <td colspan="6">
-                        <input type="number" class="form-control @CartonPrPalletValidated " name="carton_pr_pallet" @bind="CartonPrPallet" required>
+                        <input type="number" class="form-control" name="carton_pr_pallet" required>
                     </td>
                     <td>
                         <HAVI_app.Shared.Shared_layout.Questionmark_top>
@@ -36,7 +36,7 @@
                         <label for="carton_pr_layer" class="required">Cartons per layer:</label>
                     </td>
                     <td colspan="6">
-                        <input type="number" class="form-control" name="carton_pr_layer" @bind="CartonPrLayer" required>
+                        <input type="number" class="form-control"  name="carton_pr_layer" required>
                     </td>
                     <td>
                         <HAVI_app.Shared.Shared_layout.Questionmark_top>
@@ -48,7 +48,7 @@
 
                 <tr>
                     <td>
-                        <label for="country_origin" class="required">Country of origin:</label>
+                        <label for="country_origin" class="required" >Country of origin:</label>
                     </td>
                     <td colspan="6">
                         <select class="form-control" name="county_origin">
@@ -68,7 +68,7 @@
 
                 <tr>
                     <td>
-                        <label for="imported_from" class="required">Imported from:</label>
+                        <label for="imported_from" class="required ">Imported from:</label>
                     </td>
                     <td colspan="6">
                         <select class="form-control" name="imported_from">
@@ -91,7 +91,7 @@
                         <label for="toll_tarrif_no" class="required">Toll-tarrif no.:</label>
                     </td>
                     <td colspan="6">
-                        <input type="number" class="form-control" name="toll_tarrif_no" @bind="TollTarrifNo" required>
+                        <input type="number" class="form-control" name="toll_tarrif_no" required>
                     </td>
                     <td>
                         <HAVI_app.Shared.Shared_layout.Questionmark_top>
@@ -107,7 +107,7 @@
                         <label for="minimum_order_quantity" class="required">Minimum order quantity:</label>
                     </td>
                     <td colspan="6">
-                        <input type="number" class="form-control" name="minimum_order_quantity" @bind="MinimumOrderQuantity" required>
+                        <input type="number" class="form-control" name="minimum_order_quantity" required>
                     </td>
                     <td>
                         <HAVI_app.Shared.Shared_layout.Questionmark_top>
@@ -182,7 +182,7 @@
                         <label for="lead_time" class="required">Lead time:</label>
                     </td>
                     <td colspan="5">
-                        <input type="number" class="form-control" name="lead_time" @bind="LeadTime" required>
+                        <input type="number" class="form-control" name="lead_time" required>
                     </td>
                     <td>
                         <label class="center-for-units" for="lead_time">days</label>
@@ -210,7 +210,7 @@
 
 @code {
 
-    public string CartonPrPallet { get; set; }
+ /* public string CartonPrPallet { get; set; }
 
     public string CartonPrLayer { get; set; }
 
@@ -226,9 +226,9 @@
 
     public string MaxTempratureDuringTransportation { get; set; }
 
-    public string MinTemeperatureStorage { get; set; }
+    public string MinTemperatureStorage { get; set; }
 
-    public string MaxTemeperatureStorage { get; set; }
+    public string MaxTemperatureStorage { get; set; }
 
     public string LeadTime { get; set; }
 
@@ -240,7 +240,7 @@
 
     public string ImportedFromValidated;
 
-    public string TollTarrifNoVAlidated;
+    public string TollTarrifNoValidated;
 
     public string MinimumOrderQuantityValidated;
 
@@ -248,9 +248,9 @@
 
     public string MaxTempratureDuringTransportationValidated;
 
-    public string MinTemeperatureStorageValdiated;
+    public string MinTemperatureStorageValdiated;
 
-    public string MaxTemeperatureStorageValidated;
+    public string MaxTemperatureStorageValidated;
 
     public string LeadTimeValidated;
 
@@ -272,19 +272,31 @@
         }
         if (!NumbersOnly(ImportedFrom))
         {
-
+            ImportedFromValidated = "btn-damger";
         }
         if (!NumbersOnly(MinimumOrderQuantity))
         {
-
+            MinimumOrderQuantityValidated = "btn-danger";
         }
         if (!NumbersOnly(MinTempratureDuringTransportation))
         {
-
+            MinTempratureDuringTransportationValidated = "btn-danger";
         }
+        if (!NumbersOnly(MaxTempratureDuringTransportation))
+        {
+            MaxTempratureDuringTransportationValidated = "btn-danger";
+        }
+        if (!NumbersOnly(MinTemperatureStorage))
+        {
+            MinTemperatureStorageValdiated = "btn-danger";
+        }
+        if (!NumbersOnly(LeadTime))
+        {
+            LeadTimeValidated = "btn-danger";
+        }
+*/
     }
-
-
+ 
 }
 
 @code{
