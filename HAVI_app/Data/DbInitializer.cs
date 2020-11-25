@@ -18,9 +18,9 @@ namespace HAVI_app.Data
 
             var profiles = new Profile[]
             {
-                new Profile{Username="DKAdmin", Password="1234", Usertype=0},
-                new Profile{Username="Purchaser", Password="1234", Usertype=1},
-                new Profile{Username="Supplier", Password="1234", Usertype=2}
+                new Profile{Username="DKAdmin", Password="1234", Usertype=0, Countries = new List<Country>(), Purchasers = new List<Purchaser>(), Suppliers = new List<Supplier>()},
+                new Profile{Username="Purchaser", Password="1234", Usertype=1, Countries = new List<Country>(), Purchasers = new List<Purchaser>(), Suppliers = new List<Supplier>()},
+                new Profile{Username="Supplier", Password="1234", Usertype=2, Countries = new List<Country>(), Purchasers = new List<Purchaser>(), Suppliers = new List<Supplier>()}
             };
 
             context.Profiles.AddRange(profiles);
@@ -28,7 +28,20 @@ namespace HAVI_app.Data
 
             var countries = new Country[]
             {
-                new Country{ProfileId=1, CountryName="Denmark", CountryCode="DK"}
+                new Country{CountryName="Denmark",
+                            CountryCode="DK",
+                            ProfileId = profiles.Single(p => p.Username == "DKAdmin").Id,
+                            Profile = profiles.Single(p => p.Username == "DKAdmin"),
+                            PrimaryDciloscodes = new List<PrimaryDciloscode>(),
+                            Purchasers = new List<Purchaser>(),
+                            SupplierDeliveryUnits = new List<SupplierDeliveryUnit>(),
+                            Articles = new List<Article>(),
+                            VailedForCustomers = new List<VailedForCustomer>(),
+                            VatTaxCodes = new List<VatTaxCode>(),
+                            Iloscategories = new List<Iloscategory>(),
+                            Ilosorderpickgroups = new List<Ilosorderpickgroup>(),
+                            InformCostTypes = new List<InformCostType>()
+                            }
             };
 
             context.Countries.AddRange(countries);
@@ -36,7 +49,12 @@ namespace HAVI_app.Data
 
             var purchasers = new Purchaser[]
             {
-                new Purchaser{ CountryId=1, ProfileId=2}
+                new Purchaser{CountryId = countries.Single(c => c.CountryCode == "DK").Id,
+                              Country = countries.Single(c => c.CountryCode == "DK"),
+                              ProfileId = profiles.Single(p => p.Username == "Purchaser").Id,
+                              Profile = profiles.Single(p => p.Username == "Purchaser"),
+                              Articles = new List<Article>()
+                              }
             };
 
             context.Purchasers.AddRange(purchasers);
@@ -44,7 +62,14 @@ namespace HAVI_app.Data
 
             var suppliers = new Supplier[]
             {
-                new Supplier{ ProfileId=3, CompanyLocation="Denmark", CompanyName="Hello and co.", FreightResponsibility="EXP", PalletExchange=1 }
+                new Supplier{ProfileId = profiles.Single(p => p.Username == "Supplier").Id,
+                             //Profile = profiles.Single(p => p.Username == "Supplier"),
+                             CompanyLocation="Denmark",
+                             CompanyName="Hello and co.",
+                             FreightResponsibility="EXP",
+                             PalletExchange=1,
+                             Articles = new List<Article>()
+                            }
             };
 
             context.Suppliers.AddRange(suppliers);
@@ -52,16 +77,21 @@ namespace HAVI_app.Data
 
             List<VailedForCustomer> customers = new List<VailedForCustomer>();
 
-            using(TextFieldParser parser = new TextFieldParser(@"./Data/Customer.csv"))
+            using (TextFieldParser parser = new TextFieldParser(@"./Data/Customer.csv"))
             {
                 parser.TextFieldType = FieldType.Delimited;
                 parser.SetDelimiters(";");
                 while (!parser.EndOfData)
                 {
                     string[] fields = parser.ReadFields();
-                    foreach(string field in fields)
+                    foreach (string field in fields)
                     {
-                        customers.Add(new VailedForCustomer {Customer = field, CountryId = 1});
+                        customers.Add(new VailedForCustomer
+                        {
+                            Customer = field,
+                            CountryId = countries.Single(c => c.CountryCode == "DK").Id,
+                            Country = countries.Single(c => c.CountryCode == "DK")
+                        });
                     }
                 }
             }
@@ -118,7 +148,12 @@ namespace HAVI_app.Data
                     string[] fields = parser.ReadFields();
                     foreach (string field in fields)
                     {
-                        orderpickgroup.Add(new Ilosorderpickgroup { Orderpickgroup = field, CountryId = 1 });
+                        orderpickgroup.Add(new Ilosorderpickgroup
+                        {
+                            Orderpickgroup = field,
+                            CountryId = countries.Single(c => c.CountryCode == "DK").Id,
+                            Country = countries.Single(c => c.CountryCode == "DK")
+                        });
                     }
                 }
             }
@@ -137,7 +172,12 @@ namespace HAVI_app.Data
                     string[] fields = parser.ReadFields();
                     foreach (string field in fields)
                     {
-                        vatTaxCodes.Add(new VatTaxCode { Code = field, CountryId = 1 });
+                        vatTaxCodes.Add(new VatTaxCode
+                        {
+                            Code = field,
+                            CountryId = countries.Single(c => c.CountryCode == "DK").Id,
+                            Country = countries.Single(c => c.CountryCode == "DK")
+                        });
                     }
                 }
             }
@@ -177,7 +217,12 @@ namespace HAVI_app.Data
                         string[] fields = parser.ReadFields();
                         foreach (string field in fields)
                         {
-                            categories.Add(new Iloscategory { Category = field, CountryId = 1 });
+                            categories.Add(new Iloscategory
+                            {
+                                Category = field,
+                                CountryId = countries.Single(c => c.CountryCode == "DK").Id,
+                                Country = countries.Single(c => c.CountryCode == "DK")
+                            });
                         }
                     }
                 }
@@ -217,7 +262,12 @@ namespace HAVI_app.Data
                         string[] fields = parser.ReadFields();
                         foreach (string field in fields)
                         {
-                            duties.Add(new InformCostType { CostType = field, CountryId = 1 });
+                            duties.Add(new InformCostType
+                            {
+                                CostType = field,
+                                CountryId = countries.Single(c => c.CountryCode == "DK").Id,
+                                Country = countries.Single(c => c.CountryCode == "DK")
+                            });
                         }
                     }
                 }
@@ -294,7 +344,13 @@ namespace HAVI_app.Data
                 while (!parser.EndOfData)
                 {
                     string[] fields = parser.ReadFields();
-                    ilosCode.Add(new PrimaryDciloscode { PrimaryCode = fields[0], Sapplant = fields[1], CountryId = 1 });
+                    ilosCode.Add(new PrimaryDciloscode
+                    {
+                        PrimaryCode = fields[0],
+                        Sapplant = fields[1],
+                        CountryId = countries.Single(c => c.CountryCode == "DK").Id,
+                        Country = countries.Single(c => c.CountryCode == "DK")
+                    });
                 }
             }
 
@@ -310,7 +366,7 @@ namespace HAVI_app.Data
                 while (!parser.EndOfData)
                 {
                     string[] fields = parser.ReadFields();
-                    qipnumbers.Add(new Qipnumber { QipnumberName = fields[0], Qipdescription = fields[1], AnswerOptions=fields[2], SetAnswer=Int32.Parse(fields[3]), OKValue= Int32.Parse(fields[4]), LowBoundary= Int32.Parse(fields[5]), HighBoundary= Int32.Parse(fields[6]), FrequencyType= Int32.Parse(fields[7]), Frequency= Int32.Parse(fields[8])});
+                    qipnumbers.Add(new Qipnumber { QipnumberName = fields[0], Qipdescription = fields[1], AnswerOptions = fields[2], SetAnswer = Int32.Parse(fields[3]), OKValue = Int32.Parse(fields[4]), LowBoundary = Int32.Parse(fields[5]), HighBoundary = Int32.Parse(fields[6]), FrequencyType = Int32.Parse(fields[7]), Frequency = Int32.Parse(fields[8]) });
                 }
             }
 

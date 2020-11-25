@@ -40,9 +40,9 @@ namespace HAVI_app.Api.DatabaseClasses
             return await _context.Iloscategories.ToListAsync();
         }
 
-        public async Task<Iloscategory> GetILOSCategory(int categoryId)
+        public async Task<Iloscategory> GetILOSCategory(int id)
         {
-            return await _context.Iloscategories.FirstOrDefaultAsync(s => s.Id = categoryId);
+            return await _context.Iloscategories.FirstOrDefaultAsync(s => s.Id == id);
         }
 
         public async Task<Iloscategory> UpdateILOSCategory(Iloscategory category)

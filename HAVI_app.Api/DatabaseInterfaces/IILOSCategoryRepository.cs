@@ -13,5 +13,6 @@ namespace HAVI_app.Api.DatabaseInterfaces
         Task<Iloscategory> AddILOSCategory(Iloscategory iloscategory);
         Task<Iloscategory> UpdateILOSCategory(Iloscategory iloscategory);
         Task<Iloscategory> DeleteILOSCategoryAsync(int iloscategoryId);
+        Task<Iloscategory> GetILOSCategory(int id);
     }
 }
