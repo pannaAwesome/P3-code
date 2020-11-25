@@ -8,6 +8,7 @@ namespace HAVI_app.Api.DatabaseInterfaces
 {
     public interface IVailedForCustomerRepository
     {
+        Task<VailedForCustomer> GetVailedForCustomer(int customerId);
         Task<IEnumerable<VailedForCustomer>> GetVailedForCustomers();
         Task<VailedForCustomer> AddVailedForCustomer(VailedForCustomer vailedForCustomer);
         Task<VailedForCustomer> UpdateVailedForCustomer(VailedForCustomer vailedForCustomer);
