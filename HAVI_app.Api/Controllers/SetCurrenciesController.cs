@@ -7,25 +7,24 @@ using System.Threading.Tasks;
 using HAVI_app.Api.DatabaseInterfaces;
 using HAVI_app.Models;
 
-
 namespace HAVI_app.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SalesUnitController : ControllerBase
+    public class SetCurrenciesController : ControllerBase
     {
-        private readonly ISalesUnitRepository _salesUnitRepository;
-        public SalesUnitController(ISalesUnitRepository salesUnitRepository)
+        private readonly ISetCurrencyRepository _setCurrencyRepository;
+        public SetCurrenciesController(ISetCurrencyRepository setCurrencyRepository)
         {
-            _salesUnitRepository = salesUnitRepository;
+            _setCurrencyRepository = setCurrencyRepository;
         }
 
         [HttpGet]
-        public async Task<ActionResult> GetSalesUnits()
+        public async Task<ActionResult> GetSetCurrencies()
         {
             try
             {
-                var result = await _salesUnitRepository.GetSalesUnits();
+                var result = await _setCurrencyRepository.GetSetCurrencies();
                 if (result == null)
                 {
                     return NotFound();
@@ -37,6 +36,5 @@ namespace HAVI_app.Api.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database.");
             }
         }
-
     }
 }

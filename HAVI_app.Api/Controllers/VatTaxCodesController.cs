@@ -11,10 +11,10 @@ namespace HAVI_app.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class VatTaxCodeController : ControllerBase
+    public class VatTaxCodesController : ControllerBase
     {
         private readonly IVatTaxCodeRepository _vatTaxCodeRepository;
-        public VatTaxCodeController(IVatTaxCodeRepository vatTaxCodeRepository)
+        public VatTaxCodesController(IVatTaxCodeRepository vatTaxCodeRepository)
         {
             _vatTaxCodeRepository = vatTaxCodeRepository;
         }

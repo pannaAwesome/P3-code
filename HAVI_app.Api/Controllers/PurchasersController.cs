@@ -11,10 +11,10 @@ namespace HAVI_app.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PurchaserController : ControllerBase
+    public class PurchasersController : ControllerBase
     {
         private readonly IPurchaserRepository _purchaserRepository;
-        public PurchaserController(IPurchaserRepository purchaserRepository)
+        public PurchasersController(IPurchaserRepository purchaserRepository)
         {
             _purchaserRepository = purchaserRepository;
         }

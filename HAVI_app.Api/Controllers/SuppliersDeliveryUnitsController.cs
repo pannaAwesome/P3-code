@@ -11,10 +11,10 @@ namespace HAVI_app.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SuppliersDeliveryUnitController : ControllerBase
+    public class SuppliersDeliveryUnitsController : ControllerBase
     {
         private readonly ISupplierDeliveryUnitRepository _supplierDeliveryUnitRepository;
-        public SuppliersDeliveryUnitController(ISupplierDeliveryUnitRepository supplierDiliveryUnitRepository)
+        public SuppliersDeliveryUnitsController(ISupplierDeliveryUnitRepository supplierDiliveryUnitRepository)
         {
             _supplierDeliveryUnitRepository = supplierDiliveryUnitRepository;
         }

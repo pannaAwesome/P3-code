@@ -11,20 +11,60 @@ namespace HAVI_app.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProfileController : ControllerBase
+    public class SAPPlantsController : ControllerBase
     {
-        private readonly IProfileRepository _profileRepository;
-        public ProfileController(IProfileRepository profileRepository)
+        private readonly ISAPPlantRepository _sapPlantRepository;
+        public SAPPlantsController(ISAPPlantRepository sapPlantRepository)
         {
-            _profileRepository = profileRepository;
+            _sapPlantRepository = sapPlantRepository;
         }
 
-        [HttpGet("{id:int}")]
-        public async Task<ActionResult<Profile>> GetProfile(int id)
+        [HttpPost]
+        public async Task<ActionResult<Sapplant>> CreateSAPPlant(Sapplant SAPPlant)
         {
             try
             {
-                var result = await _profileRepository.GetProfile(id);
+                if (SAPPlant == null)
+                {
+                    return BadRequest();
+                }
+
+                var createdSAPPlant = await _sapPlantRepository.AddSAPPlant(SAPPlant);
+
+                return CreatedAtAction(nameof(GetSAPPlant), new { id = createdSAPPlant.Id }, createdSAPPlant);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database.");
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<Sapplant>> DeleteSAPPlantAsync(int id)
+        {
+            try
+            {
+                var supplierToDelete = await _sapPlantRepository.DeleteSAPPlantAsync(id);
+
+                if (supplierToDelete == null)
+                {
+                    return NotFound($"Supplier with id = {id} not found");
+                }
+
+                return await _sapPlantRepository.DeleteSAPPlantAsync(id);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database.");
+            }
+        }
+
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult<Sapplant>> GetSAPPlant(int id)
+        {
+            try
+            {
+                var result = await _sapPlantRepository.GetSAPPlant(id);
                 if (result == null)
                 {
                     return NotFound();
@@ -41,11 +81,11 @@ namespace HAVI_app.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> GetProfiles()
+        public async Task<ActionResult> GetSAPPlants()
         {
             try
             {
-                var result = await _profileRepository.GetProfiles();
+                var result = await _sapPlantRepository.GetSAPPlants();
                 if (result == null)
                 {
                     return NotFound();
@@ -58,64 +98,24 @@ namespace HAVI_app.Api.Controllers
             }
         }
 
-        [HttpPost]
-        public async Task<ActionResult<Profile>> CreateProfile(Profile profile)
-        {
-            try
-            {
-                if (profile == null)
-                {
-                    return BadRequest();
-                }
-
-                var createdSupplier = await _profileRepository.AddProfile(profile);
-
-                return CreatedAtAction(nameof(GetProfile), new { id = createdSupplier.Id }, createdSupplier);
-            }
-            catch (Exception)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database.");
-            }
-        }
-
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Profile>> DeleteSupplier(int id)
-        {
-            try
-            {
-                var supplierToDelete = await _profileRepository.GetProfile(id);
-
-                if (supplierToDelete == null)
-                {
-                    return NotFound($"Supplier with id = {id} not found");
-                }
-
-                return await _profileRepository.DeleteProfileAsync(id);
-            }
-            catch (Exception)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database.");
-            }
-        }
-
         [HttpPut("{id}")]
-        public async Task<ActionResult<Profile>> UpdateProfile(int id, Profile profile)
+        public async Task<ActionResult<Sapplant>> UpdateSAPPlant(int id, Sapplant SAPPlant)
         {
             try
             {
-                if (id != profile.Id)
+                if (id != SAPPlant.Id)
                 {
                     return BadRequest();
                 }
 
-                var supplierToUpdate = await _profileRepository.GetProfile(id);
+                var supplierToUpdate = await _sapPlantRepository.GetSAPPlant(id);
 
                 if (supplierToUpdate == null)
                 {
                     return NotFound($"Supplier with id = {id} not found");
                 }
 
-                return await _profileRepository.UpdateProfile(profile);
+                return await _sapPlantRepository.UpdateSAPPlant(SAPPlant);
             }
             catch (Exception)
             {
