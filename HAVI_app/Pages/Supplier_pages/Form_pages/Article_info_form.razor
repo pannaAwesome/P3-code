@@ -2,8 +2,6 @@
 @inject Microsoft.AspNetCore.Components.NavigationManager NavigationManager
 @page "/article_info_form/{Article}"
 @inherits HAVI_app.Classes.Validation
-@inject HAVI_app.Models.ArticleInformation ArticleInformation
-
 
 <HAVI_app.Shared.Supplier_layout.Form_header SupplierState="filled" ArticleState="active" />
 
@@ -25,7 +23,7 @@
                         <label for="article_name" class="required">Article name:</label>
                     </td>
                     <td>
-                        <input type="text" class="form-control @ArticleNameValidated" name="article_name" @bind="ArticleName" required>
+                        <input type="text" class="form-control @ArticleNameValidated" name="article_name" @bind="ArticleName" required> @ArticleName
                     </td>
                     <td>
                         <div></div>
@@ -66,7 +64,7 @@
                         <label for="article_pr_salesunit" class="required">Articles per salesunit:</label>
                     </td>
                     <td>
-                        <input type="number" class="form-control @ArticlePerSalesunitValidated" name="article_pr_salesunit" @bind="ArticlePerSalesunit" required>
+                        <input type="number" class="form-control @ArticlePerSalesunitValidated" name="article_pr_salesunit" @bind="ArticlePerSalesunit" required> @ArticlePerSalesunit
                     </td>
                     <td>
                         <div></div>
@@ -83,7 +81,7 @@
                         <label for="supplier_article_nn" class="required">Supplier article number/name:</label>
                     </td>
                     <td>
-                        <input type="text" class="form-control @SupplierArticleNumberValidated" name="supplier_article_nn" @bind="SupplierArticleNumber" required>
+                        <input type="text" class="form-control @SupplierArticleNumberValidated" name="supplier_article_nn" @bind="SupplierArticleNumber" required> @SupplierArticleNumber
                     </td>
                     <td>
                         <div></div>
@@ -101,7 +99,7 @@
                         <label for="GTIN" class="required">GTIN number:</label>
                     </td>
                     <td>
-                        <input type="number" class="form-control" name="GTIN" @bind="GtinNumber" required max="99999999999999" min="00000000000000">
+                        <input type="number" class="form-control" name="GTIN" @bind="GtinNumber" required max="14"> @GtinNumber
                     </td>
                     <td>
                         <div></div>
@@ -119,7 +117,7 @@
                         <label for="Shelflife" class="required">Shelflife:</label>
                     </td>
                     <td>
-                        <input type="number" class="form-control @ShelflifeValidated" name="Shelflife" @bind="Shelflife" required>
+                        <input type="number" class="form-control @ShelflifeValidated" name="Shelflife" @bind="Shelflife" required> @Shelflife
                     </td>
                     <td>
                         <label class="center-for-units" for="Shelflife">days</label>
@@ -137,7 +135,7 @@
                         <label for="Min_shelflife" class="required">Min. shelflife at HAVI:</label>
                     </td>
                     <td>
-                        <input type="number" class="form-control @ShelflifeAtHaviValidated" name="Min_shelflife" @bind="ShelflifeAtHavi" required>
+                        <input type="number" class="form-control @ShelflifeAtHaviValidated" name="Min_shelflife" @bind="ShelflifeAtHavi" required> @ShelflifeAtHavi
                     </td>
                     <td>
                         <label class="center-for-units" for="Min_shelflife">days</label>
@@ -190,81 +188,100 @@
 </div>
 
 @code{
-            
-            [Parameter]
-            public HAVI_app.Models.ArticleInformation Article { get; set; }
+    [Parameter]
+    public HAVI_app.Models.ArticleInformation Article
+    {
+        get
+        {
+            return _Article;
+        }
 
-            [Parameter]
-            public string ArticleName { get; set; }
+        set
+        {
+            ArticleName = ArticleName;
+            SalesUnit = SalesUnit;
+            ArticlePerSalesunit = ArticlePerSalesunit;
+            SupplierArticleNumber = SupplierArticleNumber;
+        }
+    }
 
-            [Parameter]
-            public string SalesUnit { get; set; }
+    [Parameter]
+    public string ArticleName { get; set; }
 
-            [Parameter]
-            public string ArticlePerSalesunit { get; set; }
+    [Parameter]
+    public string SalesUnit { get; set; }
 
-            [Parameter]
-            public string SupplierArticleNumber { get; set; }
+    [Parameter]
+    public string ArticlePerSalesunit { get; set; }
 
-            [Parameter]
-            public string GtinNumber { get; set; }
+    [Parameter]
+    public string SupplierArticleNumber { get; set; }
 
-            [Parameter]
-            public string Shelflife { get; set; }
+    [Parameter]
+    public string GtinNumber { get; set; }
 
-            [Parameter]
-            public string ShelflifeAtHavi { get; set; }
+    [Parameter]
+    public string Shelflife { get; set; }
 
-            [Parameter]
-            public string OrganicLife { get; set; }
+    [Parameter]
+    public string ShelflifeAtHavi { get; set; }
 
-            public string ArticleNameValidated;
+    [Parameter]
+    public string OrganicLife { get; set; }
 
-            public string ArticlePerSalesunitValidated;
+    public HAVI_app.Models.ArticleInformation _Article;
 
-            public string SupplierArticleNumberValidated;
+    public string ArticleNameValidated;
 
-            public string ShelflifeValidated;
+    public string ArticlePerSalesunitValidated;
 
-            public string ShelflifeAtHaviValidated;
+    public string SupplierArticleNumberValidated;
 
-            public void ValidationArticleInfoForm()
-            {
+    public string ShelflifeValidated;
 
-                if (LettersOnly(ArticleName) &&
-                    NumbersOnly(ArticlePerSalesunit) &&
-                    NumbersOnly(SupplierArticleNumber) &&
-                    NumbersOnly(Shelflife) &&
-                    NumbersOnly(ShelflifeAtHavi))
-                {
-                    NavigationManager.NavigateTo("/measurement_info_form", true);
-                }
+    public string ShelflifeAtHaviValidated;
 
-                if (!LettersOnly(ArticleName))
-                {
-                    ArticleNameValidated = "btn-danger";
-                }
+    public void ValidationArticleInfoForm()
+    {
 
-                if (!NumbersOnly(ArticlePerSalesunit))
-                {
-                    ArticlePerSalesunitValidated = "btn-danger";
-                }
+        if (LettersOnly(ArticleName) &&
+            NumbersOnly(ArticlePerSalesunit) &&
+            NumbersOnly(SupplierArticleNumber) &&
+            NumbersOnly(Shelflife) &&
+            NumbersOnly(ShelflifeAtHavi))
+        {
+            NavigationManager.NavigateTo($"/measurement_info_form/{Article}", true);
+        }
 
-                if (!NumbersOnly(SupplierArticleNumberValidated))
-                {
-                    ArticlePerSalesunitValidated = "btn-danger";
-                }
+        if (!LettersOnly(ArticleName))
+        {
+            ArticleNameValidated = "btn-danger";
+        }
 
-                if (!NumbersOnly(ShelflifeValidated))
-                {
-                    ShelflifeValidated = "btn-danger";
-                }
+        if (!NumbersOnly(ArticlePerSalesunit))
+        {
+            ArticlePerSalesunitValidated = "btn-danger";
+        }
 
-                if (!NumbersOnly(ShelflifeAtHaviValidated))
-                {
-                    ShelflifeAtHaviValidated = "btn-danger";
-                }
-            }
+        if (!NumbersOnly(SupplierArticleNumberValidated))
+        {
+            ArticlePerSalesunitValidated = "btn-danger";
+        }
+
+        if (!NumbersOnly(ShelflifeValidated))
+        {
+            ShelflifeValidated = "btn-danger";
+        }
+
+        if (!NumbersOnly(ShelflifeAtHaviValidated))
+        {
+            ShelflifeAtHaviValidated = "btn-danger";
+        }
+
+
+
+
+    }
 
 @code{
 
