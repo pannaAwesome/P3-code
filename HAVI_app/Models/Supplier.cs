@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 #nullable disable
 
@@ -13,6 +14,7 @@ namespace HAVI_app.Models
         }
 
         public int Id { get; set; }
+        [ForeignKey("Profile")]
         public int ProfileId { get; set; }
         public string CompanyName { get; set; }
         public string CompanyLocation { get; set; }

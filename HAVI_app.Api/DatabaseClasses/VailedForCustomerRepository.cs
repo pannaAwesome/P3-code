@@ -15,6 +15,13 @@ namespace HAVI_app.Api.DatabaseClasses
         {
             _context = context;
         }
+
+        public async Task<VailedForCustomer> GetVailedForCustomer(int customerId) 
+        {
+            return await _context.VailedForCustomers
+            .FirstOrDefaultAsync(s => s.Id == customerId);
+        }
+
         public async Task<VailedForCustomer> AddVailedForCustomer(VailedForCustomer customer)
         {
             var result = await _context.VailedForCustomers.AddAsync(customer);
