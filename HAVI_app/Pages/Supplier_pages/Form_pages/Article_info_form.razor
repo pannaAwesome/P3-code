@@ -188,46 +188,46 @@
 </div>
 
 @code{
-    [Parameter]
-    public HAVI_app.Models.ArticleInformation Article
+        [Parameter]
+        public HAVI_app.Models.ArticleInformation Article
     {
-        get
+            get
         {
-            return _Article;
+                return _Article;
+            }
+
+            set
+        {
+                ArticleName = ArticleName;
+                SalesUnit = SalesUnit;
+                ArticlePerSalesunit = ArticlePerSalesunit;
+                SupplierArticleNumber = SupplierArticleNumber;
+            }
         }
 
-        set
-        {
-            ArticleName = ArticleName;
-            SalesUnit = SalesUnit;
-            ArticlePerSalesunit = ArticlePerSalesunit;
-            SupplierArticleNumber = SupplierArticleNumber;
-        }
-    }
+        [Parameter]
+        public string ArticleName { get; set; }
 
-    [Parameter]
-    public string ArticleName { get; set; }
+        [Parameter]
+        public string SalesUnit { get; set; }
 
-    [Parameter]
-    public string SalesUnit { get; set; }
+        [Parameter]
+        public string ArticlePerSalesunit { get; set; }
 
-    [Parameter]
-    public string ArticlePerSalesunit { get; set; }
+        [Parameter]
+        public string SupplierArticleNumber { get; set; }
 
-    [Parameter]
-    public string SupplierArticleNumber { get; set; }
+        [Parameter]
+        public string GtinNumber { get; set; }
 
-    [Parameter]
-    public string GtinNumber { get; set; }
+        [Parameter]
+        public string Shelflife { get; set; }
 
-    [Parameter]
-    public string Shelflife { get; set; }
+        [Parameter]
+        public string ShelflifeAtHavi { get; set; }
 
-    [Parameter]
-    public string ShelflifeAtHavi { get; set; }
-
-    [Parameter]
-    public string OrganicLife { get; set; }
+        [Parameter]
+        public string OrganicLife { get; set; }
 
     public HAVI_app.Models.ArticleInformation _Article;
 
@@ -244,11 +244,11 @@
     public void ValidationArticleInfoForm()
     {
 
-        if (LettersOnly(ArticleName) &&
-            NumbersOnly(ArticlePerSalesunit) &&
+        if (LettersOnly(ArticleName)
+                /*NumbersOnly(ArticlePerSalesunit) &&
             NumbersOnly(SupplierArticleNumber) &&
             NumbersOnly(Shelflife) &&
-            NumbersOnly(ShelflifeAtHavi))
+            NumbersOnly(ShelflifeAtHavi)*/)
         {
             NavigationManager.NavigateTo($"/measurement_info_form/{Article}", true);
         }
@@ -257,7 +257,7 @@
         {
             ArticleNameValidated = "btn-danger";
         }
-
+        /*
         if (!NumbersOnly(ArticlePerSalesunit))
         {
             ArticlePerSalesunitValidated = "btn-danger";
@@ -276,7 +276,7 @@
         if (!NumbersOnly(ShelflifeAtHaviValidated))
         {
             ShelflifeAtHaviValidated = "btn-danger";
-        }
+        }*/
 
 
 
@@ -295,5 +295,5 @@
         NavigationManager.NavigateTo($"/supplier_info_form", true);
     }
 }
+    }
 
-}
