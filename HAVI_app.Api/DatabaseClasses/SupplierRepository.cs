@@ -17,11 +17,9 @@ namespace HAVI_app.Api.DatabaseClasses
         }
         public async Task<Supplier> AddSupplier(Supplier supplier)
         {
-            await _context.Suppliers.AddAsync(supplier);
+            var result = await _context.Suppliers.AddAsync(supplier);
             await _context.SaveChangesAsync();
-
-            var result = await _context.Suppliers.Include(s => s.Profile).FirstOrDefaultAsync(s => s.Id == supplier.Id);
-            return result;
+            return result.Entity;
         }
 
         public async Task<Supplier> DeleteSupplierAsync(int supplierId)
@@ -41,7 +39,7 @@ namespace HAVI_app.Api.DatabaseClasses
         public async Task<Supplier> GetSupplier(int supplierId)
         {
             return await _context.Suppliers
-                //.Include(e => e.Profile)
+                .Include(e => e.Profile)
                 .FirstOrDefaultAsync(s => s.Id == supplierId);
         }
 
