@@ -11,7 +11,7 @@ namespace HAVI_app.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CreationCodesController : ControllerBase
+    public class CreationCodes : ControllerBase
     {
         private readonly ICreationCodeRepository _creationCodeRepository;
         public CreationCodes(ICreationCodeRepository creationCodeRepository)
