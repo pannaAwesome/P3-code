@@ -14,7 +14,7 @@ namespace HAVI_app.Api.Controllers
     public class ILOSCategoriesController : ControllerBase
     {
         private readonly IILOSCategoryRepository _ILOSCategoryRepository;
-        public ILOSCategoriesController(ÍIloscategory ILOSCategoryRepository)
+        public ILOSCategoriesController(IILOSCategoryRepository ILOSCategoryRepository)
         {
             _ILOSCategoryRepository = ILOSCategoryRepository;
         }
@@ -24,7 +24,7 @@ namespace HAVI_app.Api.Controllers
         {
             try
             {
-                var result = await _ILOSCategoryrRepository.GetILOSCategories();
+                var result = await _ILOSCategoryRepository.GetILOSCategories();
                 if (result == null)
                 {
                     return NotFound();
@@ -42,7 +42,7 @@ namespace HAVI_app.Api.Controllers
         {
             try
             {
-                var result = await _ILOSCategoryrRepository.GetILOSCategory(id);
+                var result = await _ILOSCategoryRepository.GetILOSCategory(id);
                 if (result == null)
                 {
                     return NotFound();
@@ -68,7 +68,7 @@ namespace HAVI_app.Api.Controllers
                     return BadRequest();
                 }
 
-                var createdILOSCategory = await _ILOSCategoryrRepository.AddILOSCategory(ILOSCategoryr);
+                var createdILOSCategory = await _ILOSCategoryRepository.AddILOSCategory(ILOSCategoryr);
 
                 return CreatedAtAction(nameof(GetILOSCategory), new { id = createdILOSCategory.Id }, createdILOSCategory);
             }
@@ -88,14 +88,14 @@ namespace HAVI_app.Api.Controllers
                     return BadRequest();
                 }
 
-                var ILOSCategoryrToUpdate = await _ILOSCategoryrRepository.GetILOSCategory(id);
+                var ILOSCategoryrToUpdate = await _ILOSCategoryRepository.GetILOSCategory(id);
 
                 if (ILOSCategoryrToUpdate == null)
                 {
                     return NotFound($"ILOSCategory with id = {id} not found");
                 }
 
-                return await _ILOSCategoryrRepository.UpdateILOSCategory(ILOSCategoryr);
+                return await _ILOSCategoryRepository.UpdateILOSCategory(ILOSCategoryr);
             }
             catch (Exception)
             {
@@ -108,14 +108,14 @@ namespace HAVI_app.Api.Controllers
         {
             try
             {
-                var ILOSCategoryrToDelete = await _ILOSCategoryrRepository.GetILOSCategory(id);
+                var ILOSCategoryrToDelete = await _ILOSCategoryRepository.GetILOSCategory(id);
 
                 if (ILOSCategoryrToDelete == null)
                 {
                     return NotFound($"ILOSCategory with id = {id} not found");
                 }
 
-                return await _ILOSCategoryrRepository.DeleteILOSCategoryAsync(id);
+                return await _ILOSCategoryRepository.DeleteILOSCategoryAsync(id);
             }
             catch (Exception)
             {

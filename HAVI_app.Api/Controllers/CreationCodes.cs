@@ -14,7 +14,7 @@ namespace HAVI_app.Api.Controllers
     public class CreationCodes : ControllerBase
     {
         private readonly ICreationCodeRepository _creationCodeRepository;
-        public CreationCodesController(ICreationCodeRepository creationCodeRepository)
+        public CreationCodes(ICreationCodeRepository creationCodeRepository)
         {
             _creationCodeRepository = creationCodeRepository;
         }
