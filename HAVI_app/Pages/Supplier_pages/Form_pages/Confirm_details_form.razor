@@ -1,6 +1,7 @@
 ﻿@layout HAVI_app.Shared.Supplier_layout.Form_layout
 @inject Microsoft.AspNetCore.Components.NavigationManager NavigationManager
-@page "/confirm_details"
+@page "/confirm_details/{Article}"
+@inject HAVI_app.Models.ArticleInformation ArticleInformation 
 
 <HAVI_app.Shared.Supplier_layout.Form_header SupplierState="filled" ArticleState="filled" MeasurementState="filled" ShipmentState="filled" PriceState="filled" ConfirmState="active" />
 
@@ -204,7 +205,7 @@
                         <label for="article_name">Article name:</label>
                     </td>
                     <td colspan="4">
-                        <input type="text" class="form-control" id="a_name" value="Peanuts" disabled>
+                        <input type="text" class="form-control" id="a_name" value="@ArticleInformation.ArticleName" disabled>
                     </td>
                     <td>
                         <div></div>
@@ -659,17 +660,20 @@
 {
     public void Submit()
     {
-    NavigationManager.NavigateTo($"/submission_accepted", true);
+        NavigationManager.NavigateTo($"/submission_accepted", true);
     }
 
     public void GoBack()
     {
-    NavigationManager.NavigateTo($"/price_info_form", true);
+        NavigationManager.NavigateTo($"/price_info_form", true);
     }
 
 }
 
 @code {
+    [Parameter]
+    public HAVI_app.Models.ArticleInformation Article { get; set; }
+
     private string BookingTransport = "yes";
 
     private string DangerousGoods = "yes";
