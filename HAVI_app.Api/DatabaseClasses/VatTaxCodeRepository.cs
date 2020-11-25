@@ -37,6 +37,11 @@ namespace HAVI_app.Api.DatabaseClasses
             return null;
         }
 
+        public async Task<VatTaxCode> GetVatTaxCode(int VatTaxId)
+        {
+            return await _context.VatTaxCodes.FirstOrDefaultAsync(s => s.Id == VatTaxId);
+        }
+
         public async Task<IEnumerable<VatTaxCode>> GetVatTaxCodes()
         {
             return await _context.VatTaxCodes.ToListAsync();
