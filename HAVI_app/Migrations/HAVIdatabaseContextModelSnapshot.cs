@@ -22,8 +22,10 @@ namespace HAVI_app.Migrations
             modelBuilder.Entity("HAVI_app.Models.Article", b =>
                 {
                     b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("ID");
+                        .HasColumnName("ID")
+                        .UseIdentityColumn();
 
                     b.Property<int>("ArticleInformationCompleted")
                         .HasColumnType("int");
@@ -72,11 +74,13 @@ namespace HAVI_app.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ArticleInformationId");
+                    b.HasIndex("ArticleInformationId")
+                        .IsUnique();
 
                     b.HasIndex("CountryId");
 
-                    b.HasIndex("InternalArticleInformationId");
+                    b.HasIndex("InternalArticleInformationId")
+                        .IsUnique();
 
                     b.HasIndex("PurchaserId");
 
@@ -100,6 +104,9 @@ namespace HAVI_app.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex(new[] { "Id" }, "UQ__ArticleBundle__25112020")
+                        .IsUnique();
 
                     b.ToTable("ArticleBundle");
                 });
@@ -233,6 +240,9 @@ namespace HAVI_app.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex(new[] { "Id" }, "UQ__ArticleInformation__25112020")
+                        .IsUnique();
+
                     b.ToTable("ArticleInformation");
                 });
 
@@ -257,6 +267,9 @@ namespace HAVI_app.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("InternalArticleInformationId");
+
+                    b.HasIndex(new[] { "Id" }, "UQ__Bundle__25112020")
+                        .IsUnique();
 
                     b.ToTable("Bundle");
                 });
@@ -283,7 +296,11 @@ namespace HAVI_app.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProfileId");
+                    b.HasIndex("ProfileId")
+                        .IsUnique();
+
+                    b.HasIndex(new[] { "Id" }, "UQ__Country__25112020")
+                        .IsUnique();
 
                     b.ToTable("Country");
                 });
@@ -301,9 +318,13 @@ namespace HAVI_app.Migrations
                         .HasColumnName("Active");
 
                     b.Property<string>("Code")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex(new[] { "Id" }, "UQ__CreationCode__25112020")
+                        .IsUnique();
 
                     b.ToTable("CreationCode");
                 });
@@ -321,6 +342,9 @@ namespace HAVI_app.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex(new[] { "Id" }, "UQ__DepartmentId__3214EC26473E7B8A")
+                        .IsUnique();
+
                     b.ToTable("DepartmentId");
                 });
 
@@ -336,6 +360,9 @@ namespace HAVI_app.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex(new[] { "Id" }, "UQ__Freight__3214EC26473E7B8A")
+                        .IsUnique();
 
                     b.ToTable("FreightResponsibility");
                 });
@@ -359,6 +386,9 @@ namespace HAVI_app.Migrations
 
                     b.HasIndex("CountryId");
 
+                    b.HasIndex(new[] { "Id" }, "UQ__Category__3214EC26473E7B8A")
+                        .IsUnique();
+
                     b.ToTable("ILOSCategory");
                 });
 
@@ -381,6 +411,9 @@ namespace HAVI_app.Migrations
 
                     b.HasIndex("CountryId");
 
+                    b.HasIndex(new[] { "Id" }, "UQ__Orderpickgroup__3214EC26473E7B8A")
+                        .IsUnique();
+
                     b.ToTable("ILOSOrderpickgroup");
                 });
 
@@ -396,6 +429,9 @@ namespace HAVI_app.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex(new[] { "Id" }, "UQ__Sortgroup__3214EC26473E7B8A")
+                        .IsUnique();
 
                     b.ToTable("ILOSSortGroup");
                 });
@@ -418,6 +454,9 @@ namespace HAVI_app.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CountryId");
+
+                    b.HasIndex(new[] { "Id" }, "UQ__InformCostType__3214EC26473E7B8A")
+                        .IsUnique();
 
                     b.ToTable("InformCostType");
                 });
@@ -547,6 +586,9 @@ namespace HAVI_app.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex(new[] { "Id" }, "UQ__Internal__3214EC26473E7B8A")
+                        .IsUnique();
+
                     b.ToTable("InternalArticleInformation");
                 });
 
@@ -562,6 +604,9 @@ namespace HAVI_app.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex(new[] { "Id" }, "UQ__Location__3214EC26473E7B8A")
+                        .IsUnique();
 
                     b.ToTable("Location");
                 });
@@ -588,6 +633,9 @@ namespace HAVI_app.Migrations
 
                     b.HasIndex("ArticleInformationId");
 
+                    b.HasIndex(new[] { "Id" }, "UQ__OtherCosts__3214EC26473E7B8A")
+                        .IsUnique();
+
                     b.ToTable("OtherCostsForArticle");
                 });
 
@@ -603,6 +651,9 @@ namespace HAVI_app.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex(new[] { "Id" }, "UQ__PackagingGroup__25112020")
+                        .IsUnique();
 
                     b.ToTable("PackagingGroup");
                 });
@@ -631,16 +682,17 @@ namespace HAVI_app.Migrations
 
                     b.HasIndex("CountryId");
 
+                    b.HasIndex(new[] { "Id" }, "UQ__PrimaryCode__3214EC26473E7B8A")
+                        .IsUnique();
+
                     b.ToTable("PrimaryDCILOSCode");
                 });
 
             modelBuilder.Entity("HAVI_app.Models.Profile", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasColumnName("ID")
-                        .UseIdentityColumn();
+                        .HasColumnName("ID");
 
                     b.Property<string>("Password")
                         .IsRequired()
@@ -654,6 +706,9 @@ namespace HAVI_app.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex(new[] { "Id" }, "UQ__Profile__3214EC26473E7B8A")
+                        .IsUnique();
 
                     b.ToTable("Profile");
                 });
@@ -678,7 +733,8 @@ namespace HAVI_app.Migrations
 
                     b.HasIndex("CountryId");
 
-                    b.HasIndex("ProfileId");
+                    b.HasIndex(new[] { "Id" }, "UQ__Purchaser__3214EC26473E7B8A")
+                        .IsUnique();
 
                     b.ToTable("Purchaser");
                 });
@@ -735,6 +791,9 @@ namespace HAVI_app.Migrations
 
                     b.HasIndex("InternalArticleInformationId");
 
+                    b.HasIndex(new[] { "Id" }, "UQ__QIP__3214EC26473E7B8A")
+                        .IsUnique();
+
                     b.ToTable("QIP");
                 });
 
@@ -783,6 +842,9 @@ namespace HAVI_app.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex(new[] { "Id" }, "UQ__QIPNumber__3214EC26473E7B8A")
+                        .IsUnique();
+
                     b.ToTable("QIPNumber");
                 });
 
@@ -798,6 +860,9 @@ namespace HAVI_app.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex(new[] { "Id" }, "UQ__SalesUnit__3214EC26473E7B8A")
+                        .IsUnique();
 
                     b.ToTable("SalesUnit");
                 });
@@ -826,6 +891,9 @@ namespace HAVI_app.Migrations
 
                     b.HasIndex("InternalArticleInformationId");
 
+                    b.HasIndex(new[] { "Id" }, "UQ__SapPlant__3214EC26473E7B8A")
+                        .IsUnique();
+
                     b.ToTable("SAPPlant");
                 });
 
@@ -842,6 +910,9 @@ namespace HAVI_app.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex(new[] { "Id" }, "UQ__Currency__3214EC26473E7B8A")
+                        .IsUnique();
 
                     b.ToTable("SetCurrency");
                 });
@@ -875,7 +946,8 @@ namespace HAVI_app.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProfileId");
+                    b.HasIndex(new[] { "Id" }, "UQ__Supplier__3214EC26473E7B8A")
+                        .IsUnique();
 
                     b.ToTable("Supplier");
                 });
@@ -899,6 +971,9 @@ namespace HAVI_app.Migrations
 
                     b.HasIndex("CountryId");
 
+                    b.HasIndex(new[] { "Id" }, "UQ__DeliveryUnit__3214EC26473E7B8A")
+                        .IsUnique();
+
                     b.ToTable("SupplierDeliveryUnit");
                 });
 
@@ -920,6 +995,9 @@ namespace HAVI_app.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CountryId");
+
+                    b.HasIndex(new[] { "Id" }, "UQ__Customer__3214EC26473E7B8A")
+                        .IsUnique();
 
                     b.ToTable("VailedForCustomer");
                 });
@@ -943,27 +1021,33 @@ namespace HAVI_app.Migrations
 
                     b.HasIndex("CountryId");
 
+                    b.HasIndex(new[] { "Id" }, "UQ__VatTaxCode__3214EC26473E7B8A")
+                        .IsUnique();
+
                     b.ToTable("VatTaxCode");
                 });
 
             modelBuilder.Entity("HAVI_app.Models.Article", b =>
                 {
                     b.HasOne("HAVI_app.Models.ArticleInformation", "ArticleInformation")
-                        .WithMany("Articles")
-                        .HasForeignKey("ArticleInformationId")
+                        .WithOne("Article")
+                        .HasForeignKey("HAVI_app.Models.Article", "ArticleInformationId")
                         .HasConstraintName("FK__Article__Article__34C8D9D1")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("HAVI_app.Models.Country", "Country")
                         .WithMany("Articles")
                         .HasForeignKey("CountryId")
                         .HasConstraintName("FK__Article__Country__35BCFE0A")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("HAVI_app.Models.InternalArticleInformation", "InternalArticleInformation")
-                        .WithMany("Articles")
-                        .HasForeignKey("InternalArticleInformationId")
+                        .WithOne("Article")
+                        .HasForeignKey("HAVI_app.Models.Article", "InternalArticleInformationId")
                         .HasConstraintName("FK__Article__Interna__36B12243")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("HAVI_app.Models.Purchaser", "Purchaser")
@@ -995,6 +1079,7 @@ namespace HAVI_app.Migrations
                         .WithMany("Bundles")
                         .HasForeignKey("InternalArticleInformationId")
                         .HasConstraintName("FK__Bundle__Internal__3D5E1FD2")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("InternalArticleInformation");
@@ -1003,9 +1088,10 @@ namespace HAVI_app.Migrations
             modelBuilder.Entity("HAVI_app.Models.Country", b =>
                 {
                     b.HasOne("HAVI_app.Models.Profile", "Profile")
-                        .WithMany("Countries")
-                        .HasForeignKey("ProfileId")
+                        .WithOne("Country")
+                        .HasForeignKey("HAVI_app.Models.Country", "ProfileId")
                         .HasConstraintName("FK__Country__Profile__267ABA7A")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Profile");
@@ -1017,6 +1103,7 @@ namespace HAVI_app.Migrations
                         .WithMany("Iloscategories")
                         .HasForeignKey("CountryId")
                         .HasConstraintName("FK__ILOSCateg__Count__440B1D61")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Country");
@@ -1028,6 +1115,7 @@ namespace HAVI_app.Migrations
                         .WithMany("Ilosorderpickgroups")
                         .HasForeignKey("CountryId")
                         .HasConstraintName("FK__ILOSOrder__Count__46E78A0C")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Country");
@@ -1039,6 +1127,7 @@ namespace HAVI_app.Migrations
                         .WithMany("InformCostTypes")
                         .HasForeignKey("CountryId")
                         .HasConstraintName("FK__InformCos__Count__4BAC3F29")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Country");
@@ -1050,6 +1139,7 @@ namespace HAVI_app.Migrations
                         .WithMany("OtherCostsForArticles")
                         .HasForeignKey("ArticleInformationId")
                         .HasConstraintName("FK__OtherCost__Artic__5070F446")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("ArticleInformation");
@@ -1061,9 +1151,31 @@ namespace HAVI_app.Migrations
                         .WithMany("PrimaryDciloscodes")
                         .HasForeignKey("CountryId")
                         .HasConstraintName("FK__PrimaryDC__Count__534D60F1")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Country");
+                });
+
+            modelBuilder.Entity("HAVI_app.Models.Profile", b =>
+                {
+                    b.HasOne("HAVI_app.Models.Purchaser", "Purchaser")
+                        .WithOne("Profile")
+                        .HasForeignKey("HAVI_app.Models.Profile", "Id")
+                        .HasConstraintName("FK__Purchaser__Profi__2A4B4B5E")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("HAVI_app.Models.Supplier", "Supplier")
+                        .WithOne("Profile")
+                        .HasForeignKey("HAVI_app.Models.Profile", "Id")
+                        .HasConstraintName("FK__Supplier__Profil__2D27B809")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Purchaser");
+
+                    b.Navigation("Supplier");
                 });
 
             modelBuilder.Entity("HAVI_app.Models.Purchaser", b =>
@@ -1072,17 +1184,10 @@ namespace HAVI_app.Migrations
                         .WithMany("Purchasers")
                         .HasForeignKey("CountryId")
                         .HasConstraintName("FK__Purchaser__Count__29572725")
-                        .IsRequired();
-
-                    b.HasOne("HAVI_app.Models.Profile", "Profile")
-                        .WithMany("Purchasers")
-                        .HasForeignKey("ProfileId")
-                        .HasConstraintName("FK__Purchaser__Profi__2A4B4B5E")
+                        .OnDelete(DeleteBehavior.ClientCascade)
                         .IsRequired();
 
                     b.Navigation("Country");
-
-                    b.Navigation("Profile");
                 });
 
             modelBuilder.Entity("HAVI_app.Models.Qip", b =>
@@ -1091,6 +1196,7 @@ namespace HAVI_app.Migrations
                         .WithMany("Qips")
                         .HasForeignKey("InternalArticleInformationId")
                         .HasConstraintName("FK__QIP__InternalArt__5629CD9C")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("InternalArticleInformation");
@@ -1102,20 +1208,10 @@ namespace HAVI_app.Migrations
                         .WithMany("Sapplants")
                         .HasForeignKey("InternalArticleInformationId")
                         .HasConstraintName("FK__SAPPlant__Intern__5CD6CB2B")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("InternalArticleInformation");
-                });
-
-            modelBuilder.Entity("HAVI_app.Models.Supplier", b =>
-                {
-                    b.HasOne("HAVI_app.Models.Profile", "Profile")
-                        .WithMany("Suppliers")
-                        .HasForeignKey("ProfileId")
-                        .HasConstraintName("FK__Supplier__Profil__2D27B809")
-                        .IsRequired();
-
-                    b.Navigation("Profile");
                 });
 
             modelBuilder.Entity("HAVI_app.Models.SupplierDeliveryUnit", b =>
@@ -1124,6 +1220,7 @@ namespace HAVI_app.Migrations
                         .WithMany("SupplierDeliveryUnits")
                         .HasForeignKey("CountryId")
                         .HasConstraintName("FK__SupplierD__Count__619B8048")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Country");
@@ -1135,6 +1232,7 @@ namespace HAVI_app.Migrations
                         .WithMany("VailedForCustomers")
                         .HasForeignKey("CountryId")
                         .HasConstraintName("FK__VailedFor__Count__6477ECF3")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Country");
@@ -1146,6 +1244,7 @@ namespace HAVI_app.Migrations
                         .WithMany("VatTaxCodes")
                         .HasForeignKey("CountryId")
                         .HasConstraintName("FK__VatTaxCod__Count__6754599E")
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Country");
@@ -1153,7 +1252,7 @@ namespace HAVI_app.Migrations
 
             modelBuilder.Entity("HAVI_app.Models.ArticleInformation", b =>
                 {
-                    b.Navigation("Articles");
+                    b.Navigation("Article");
 
                     b.Navigation("OtherCostsForArticles");
                 });
@@ -1181,7 +1280,7 @@ namespace HAVI_app.Migrations
 
             modelBuilder.Entity("HAVI_app.Models.InternalArticleInformation", b =>
                 {
-                    b.Navigation("Articles");
+                    b.Navigation("Article");
 
                     b.Navigation("Bundles");
 
@@ -1192,21 +1291,21 @@ namespace HAVI_app.Migrations
 
             modelBuilder.Entity("HAVI_app.Models.Profile", b =>
                 {
-                    b.Navigation("Countries");
-
-                    b.Navigation("Purchasers");
-
-                    b.Navigation("Suppliers");
+                    b.Navigation("Country");
                 });
 
             modelBuilder.Entity("HAVI_app.Models.Purchaser", b =>
                 {
                     b.Navigation("Articles");
+
+                    b.Navigation("Profile");
                 });
 
             modelBuilder.Entity("HAVI_app.Models.Supplier", b =>
                 {
                     b.Navigation("Articles");
+
+                    b.Navigation("Profile");
                 });
 #pragma warning restore 612, 618
         }

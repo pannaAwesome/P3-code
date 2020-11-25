@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HAVI_app.Migrations
 {
-    public partial class initialCreate : Migration
+    public partial class _25112020_Migration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -76,7 +76,7 @@ namespace HAVI_app.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Code = table.Column<string>(type: "text", nullable: true),
+                    Code = table.Column<string>(type: "text", nullable: false),
                     Active = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -193,21 +193,6 @@ namespace HAVI_app.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Profile",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Username = table.Column<string>(type: "text", nullable: false),
-                    Password = table.Column<string>(type: "text", nullable: false),
-                    Usertype = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Profile", x => x.ID);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "QIPNumber",
                 columns: table => new
                 {
@@ -255,6 +240,23 @@ namespace HAVI_app.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Supplier",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProfileID = table.Column<int>(type: "int", nullable: false),
+                    CompanyName = table.Column<string>(type: "text", nullable: false),
+                    CompanyLocation = table.Column<string>(type: "text", nullable: false),
+                    PalletExchange = table.Column<int>(type: "int", nullable: false),
+                    FreightResponsibility = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Supplier", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "OtherCostsForArticle",
                 columns: table => new
                 {
@@ -272,7 +274,7 @@ namespace HAVI_app.Migrations
                         column: x => x.ArticleInformationID,
                         principalTable: "ArticleInformation",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -293,7 +295,7 @@ namespace HAVI_app.Migrations
                         column: x => x.InternalArticleInformationID,
                         principalTable: "InternalArticleInformation",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -321,7 +323,7 @@ namespace HAVI_app.Migrations
                         column: x => x.InternalArticleInformationID,
                         principalTable: "InternalArticleInformation",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -342,225 +344,15 @@ namespace HAVI_app.Migrations
                         column: x => x.InternalArticleInformationID,
                         principalTable: "InternalArticleInformation",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Country",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ProfileID = table.Column<int>(type: "int", nullable: false),
-                    CountryName = table.Column<string>(type: "text", nullable: false),
-                    CountryCode = table.Column<string>(type: "text", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Country", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK__Country__Profile__267ABA7A",
-                        column: x => x.ProfileID,
-                        principalTable: "Profile",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Supplier",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ProfileID = table.Column<int>(type: "int", nullable: false),
-                    CompanyName = table.Column<string>(type: "text", nullable: false),
-                    CompanyLocation = table.Column<string>(type: "text", nullable: false),
-                    PalletExchange = table.Column<int>(type: "int", nullable: false),
-                    FreightResponsibility = table.Column<string>(type: "text", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Supplier", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK__Supplier__Profil__2D27B809",
-                        column: x => x.ProfileID,
-                        principalTable: "Profile",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ILOSCategory",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Category = table.Column<string>(type: "text", nullable: true),
-                    CountryID = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ILOSCategory", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK__ILOSCateg__Count__440B1D61",
-                        column: x => x.CountryID,
-                        principalTable: "Country",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ILOSOrderpickgroup",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Orderpickgroup = table.Column<string>(type: "text", nullable: true),
-                    CountryID = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ILOSOrderpickgroup", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK__ILOSOrder__Count__46E78A0C",
-                        column: x => x.CountryID,
-                        principalTable: "Country",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "InformCostType",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CostType = table.Column<string>(type: "text", nullable: true),
-                    CountryID = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_InformCostType", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK__InformCos__Count__4BAC3F29",
-                        column: x => x.CountryID,
-                        principalTable: "Country",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "PrimaryDCILOSCode",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    PrimaryCode = table.Column<string>(type: "text", nullable: true),
-                    SAPPlant = table.Column<string>(type: "text", nullable: true),
-                    CountryID = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PrimaryDCILOSCode", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK__PrimaryDC__Count__534D60F1",
-                        column: x => x.CountryID,
-                        principalTable: "Country",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Purchaser",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ProfileID = table.Column<int>(type: "int", nullable: false),
-                    CountryID = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Purchaser", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK__Purchaser__Count__29572725",
-                        column: x => x.CountryID,
-                        principalTable: "Country",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK__Purchaser__Profi__2A4B4B5E",
-                        column: x => x.ProfileID,
-                        principalTable: "Profile",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "SupplierDeliveryUnit",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Unit = table.Column<string>(type: "text", nullable: true),
-                    CountryID = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_SupplierDeliveryUnit", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK__SupplierD__Count__619B8048",
-                        column: x => x.CountryID,
-                        principalTable: "Country",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "VailedForCustomer",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Customer = table.Column<string>(type: "text", nullable: true),
-                    CountryID = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_VailedForCustomer", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK__VailedFor__Count__6477ECF3",
-                        column: x => x.CountryID,
-                        principalTable: "Country",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "VatTaxCode",
-                columns: table => new
-                {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Code = table.Column<string>(type: "text", nullable: true),
-                    CountryID = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_VatTaxCode", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK__VatTaxCod__Count__6754599E",
-                        column: x => x.CountryID,
-                        principalTable: "Country",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Article",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false),
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     PurchaserID = table.Column<int>(type: "int", nullable: false),
                     SupplierID = table.Column<int>(type: "int", nullable: false),
                     CountryID = table.Column<int>(type: "int", nullable: false),
@@ -583,25 +375,13 @@ namespace HAVI_app.Migrations
                         column: x => x.ArticleInformationID,
                         principalTable: "ArticleInformation",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK__Article__Country__35BCFE0A",
-                        column: x => x.CountryID,
-                        principalTable: "Country",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK__Article__Interna__36B12243",
                         column: x => x.InternalArticleInformationID,
                         principalTable: "InternalArticleInformation",
                         principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK__Article__Purchas__37A5467C",
-                        column: x => x.PurchaserID,
-                        principalTable: "Purchaser",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK__Article__Supplie__38996AB5",
                         column: x => x.SupplierID,
@@ -610,10 +390,189 @@ namespace HAVI_app.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "ILOSCategory",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Category = table.Column<string>(type: "text", nullable: true),
+                    CountryID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ILOSCategory", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ILOSOrderpickgroup",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Orderpickgroup = table.Column<string>(type: "text", nullable: true),
+                    CountryID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ILOSOrderpickgroup", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "InformCostType",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CostType = table.Column<string>(type: "text", nullable: true),
+                    CountryID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_InformCostType", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PrimaryDCILOSCode",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PrimaryCode = table.Column<string>(type: "text", nullable: true),
+                    SAPPlant = table.Column<string>(type: "text", nullable: true),
+                    CountryID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PrimaryDCILOSCode", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Purchaser",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProfileID = table.Column<int>(type: "int", nullable: false),
+                    CountryID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Purchaser", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Profile",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false),
+                    Username = table.Column<string>(type: "text", nullable: false),
+                    Password = table.Column<string>(type: "text", nullable: false),
+                    Usertype = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Profile", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK__Purchaser__Profi__2A4B4B5E",
+                        column: x => x.ID,
+                        principalTable: "Purchaser",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK__Supplier__Profil__2D27B809",
+                        column: x => x.ID,
+                        principalTable: "Supplier",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Country",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProfileID = table.Column<int>(type: "int", nullable: false),
+                    CountryName = table.Column<string>(type: "text", nullable: false),
+                    CountryCode = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Country", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK__Country__Profile__267ABA7A",
+                        column: x => x.ProfileID,
+                        principalTable: "Profile",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SupplierDeliveryUnit",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Unit = table.Column<string>(type: "text", nullable: true),
+                    CountryID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SupplierDeliveryUnit", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK__SupplierD__Count__619B8048",
+                        column: x => x.CountryID,
+                        principalTable: "Country",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "VailedForCustomer",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Customer = table.Column<string>(type: "text", nullable: true),
+                    CountryID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_VailedForCustomer", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK__VailedFor__Count__6477ECF3",
+                        column: x => x.CountryID,
+                        principalTable: "Country",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "VatTaxCode",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Code = table.Column<string>(type: "text", nullable: true),
+                    CountryID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_VatTaxCode", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK__VatTaxCod__Count__6754599E",
+                        column: x => x.CountryID,
+                        principalTable: "Country",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Article_ArticleInformationID",
                 table: "Article",
-                column: "ArticleInformationID");
+                column: "ArticleInformationID",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Article_CountryID",
@@ -623,7 +582,8 @@ namespace HAVI_app.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Article_InternalArticleInformationID",
                 table: "Article",
-                column: "InternalArticleInformationID");
+                column: "InternalArticleInformationID",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Article_PurchaserID",
@@ -642,14 +602,57 @@ namespace HAVI_app.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "UQ__ArticleBundle__25112020",
+                table: "ArticleBundle",
+                column: "ID",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "UQ__ArticleInformation__25112020",
+                table: "ArticleInformation",
+                column: "ID",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Bundle_InternalArticleInformationID",
                 table: "Bundle",
                 column: "InternalArticleInformationID");
 
             migrationBuilder.CreateIndex(
+                name: "UQ__Bundle__25112020",
+                table: "Bundle",
+                column: "ID",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Country_ProfileID",
                 table: "Country",
-                column: "ProfileID");
+                column: "ProfileID",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "UQ__Country__25112020",
+                table: "Country",
+                column: "ID",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "UQ__CreationCode__25112020",
+                table: "CreationCode",
+                column: "ID",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "UQ__DepartmentId__3214EC26473E7B8A",
+                table: "DepartmentId",
+                column: "ID",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "UQ__Freight__3214EC26473E7B8A",
+                table: "FreightResponsibility",
+                column: "ID",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_ILOSCategory_CountryID",
@@ -657,9 +660,27 @@ namespace HAVI_app.Migrations
                 column: "CountryID");
 
             migrationBuilder.CreateIndex(
+                name: "UQ__Category__3214EC26473E7B8A",
+                table: "ILOSCategory",
+                column: "ID",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_ILOSOrderpickgroup_CountryID",
                 table: "ILOSOrderpickgroup",
                 column: "CountryID");
+
+            migrationBuilder.CreateIndex(
+                name: "UQ__Orderpickgroup__3214EC26473E7B8A",
+                table: "ILOSOrderpickgroup",
+                column: "ID",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "UQ__Sortgroup__3214EC26473E7B8A",
+                table: "ILOSSortGroup",
+                column: "ID",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_InformCostType_CountryID",
@@ -667,9 +688,39 @@ namespace HAVI_app.Migrations
                 column: "CountryID");
 
             migrationBuilder.CreateIndex(
+                name: "UQ__InformCostType__3214EC26473E7B8A",
+                table: "InformCostType",
+                column: "ID",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "UQ__Internal__3214EC26473E7B8A",
+                table: "InternalArticleInformation",
+                column: "ID",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "UQ__Location__3214EC26473E7B8A",
+                table: "Location",
+                column: "ID",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_OtherCostsForArticle_ArticleInformationID",
                 table: "OtherCostsForArticle",
                 column: "ArticleInformationID");
+
+            migrationBuilder.CreateIndex(
+                name: "UQ__OtherCosts__3214EC26473E7B8A",
+                table: "OtherCostsForArticle",
+                column: "ID",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "UQ__PackagingGroup__25112020",
+                table: "PackagingGroup",
+                column: "ID",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_PrimaryDCILOSCode_CountryID",
@@ -677,14 +728,27 @@ namespace HAVI_app.Migrations
                 column: "CountryID");
 
             migrationBuilder.CreateIndex(
+                name: "UQ__PrimaryCode__3214EC26473E7B8A",
+                table: "PrimaryDCILOSCode",
+                column: "ID",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "UQ__Profile__3214EC26473E7B8A",
+                table: "Profile",
+                column: "ID",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Purchaser_CountryID",
                 table: "Purchaser",
                 column: "CountryID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Purchaser_ProfileID",
+                name: "UQ__Purchaser__3214EC26473E7B8A",
                 table: "Purchaser",
-                column: "ProfileID");
+                column: "ID",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_QIP_InternalArticleInformationID",
@@ -692,14 +756,45 @@ namespace HAVI_app.Migrations
                 column: "InternalArticleInformationID");
 
             migrationBuilder.CreateIndex(
+                name: "UQ__QIP__3214EC26473E7B8A",
+                table: "QIP",
+                column: "ID",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "UQ__QIPNumber__3214EC26473E7B8A",
+                table: "QIPNumber",
+                column: "ID",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "UQ__SalesUnit__3214EC26473E7B8A",
+                table: "SalesUnit",
+                column: "ID",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_SAPPlant_InternalArticleInformationID",
                 table: "SAPPlant",
                 column: "InternalArticleInformationID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Supplier_ProfileID",
+                name: "UQ__SapPlant__3214EC26473E7B8A",
+                table: "SAPPlant",
+                column: "ID",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "UQ__Currency__3214EC26473E7B8A",
+                table: "SetCurrency",
+                column: "ID",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "UQ__Supplier__3214EC26473E7B8A",
                 table: "Supplier",
-                column: "ProfileID");
+                column: "ID",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_SupplierDeliveryUnit_CountryID",
@@ -707,18 +802,96 @@ namespace HAVI_app.Migrations
                 column: "CountryID");
 
             migrationBuilder.CreateIndex(
+                name: "UQ__DeliveryUnit__3214EC26473E7B8A",
+                table: "SupplierDeliveryUnit",
+                column: "ID",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_VailedForCustomer_CountryID",
                 table: "VailedForCustomer",
                 column: "CountryID");
 
             migrationBuilder.CreateIndex(
+                name: "UQ__Customer__3214EC26473E7B8A",
+                table: "VailedForCustomer",
+                column: "ID",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_VatTaxCode_CountryID",
                 table: "VatTaxCode",
                 column: "CountryID");
+
+            migrationBuilder.CreateIndex(
+                name: "UQ__VatTaxCode__3214EC26473E7B8A",
+                table: "VatTaxCode",
+                column: "ID",
+                unique: true);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK__Article__Country__35BCFE0A",
+                table: "Article",
+                column: "CountryID",
+                principalTable: "Country",
+                principalColumn: "ID",
+                onDelete: ReferentialAction.Cascade);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK__Article__Purchas__37A5467C",
+                table: "Article",
+                column: "PurchaserID",
+                principalTable: "Purchaser",
+                principalColumn: "ID",
+                onDelete: ReferentialAction.Restrict);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK__ILOSCateg__Count__440B1D61",
+                table: "ILOSCategory",
+                column: "CountryID",
+                principalTable: "Country",
+                principalColumn: "ID",
+                onDelete: ReferentialAction.Cascade);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK__ILOSOrder__Count__46E78A0C",
+                table: "ILOSOrderpickgroup",
+                column: "CountryID",
+                principalTable: "Country",
+                principalColumn: "ID",
+                onDelete: ReferentialAction.Cascade);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK__InformCos__Count__4BAC3F29",
+                table: "InformCostType",
+                column: "CountryID",
+                principalTable: "Country",
+                principalColumn: "ID",
+                onDelete: ReferentialAction.Cascade);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK__PrimaryDC__Count__534D60F1",
+                table: "PrimaryDCILOSCode",
+                column: "CountryID",
+                principalTable: "Country",
+                principalColumn: "ID",
+                onDelete: ReferentialAction.Cascade);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK__Purchaser__Count__29572725",
+                table: "Purchaser",
+                column: "CountryID",
+                principalTable: "Country",
+                principalColumn: "ID",
+                onDelete: ReferentialAction.Restrict);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK__Purchaser__Count__29572725",
+                table: "Purchaser");
+
             migrationBuilder.DropTable(
                 name: "Article");
 
@@ -786,12 +959,6 @@ namespace HAVI_app.Migrations
                 name: "VatTaxCode");
 
             migrationBuilder.DropTable(
-                name: "Purchaser");
-
-            migrationBuilder.DropTable(
-                name: "Supplier");
-
-            migrationBuilder.DropTable(
                 name: "ArticleInformation");
 
             migrationBuilder.DropTable(
@@ -802,6 +969,12 @@ namespace HAVI_app.Migrations
 
             migrationBuilder.DropTable(
                 name: "Profile");
+
+            migrationBuilder.DropTable(
+                name: "Purchaser");
+
+            migrationBuilder.DropTable(
+                name: "Supplier");
         }
     }
 }

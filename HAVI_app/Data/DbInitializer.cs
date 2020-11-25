@@ -18,9 +18,9 @@ namespace HAVI_app.Data
 
             var profiles = new Profile[]
             {
-                new Profile{Username="DKAdmin", Password="1234", Usertype=0, Countries = new List<Country>(), Purchasers = new List<Purchaser>(), Suppliers = new List<Supplier>()},
-                new Profile{Username="Purchaser", Password="1234", Usertype=1, Countries = new List<Country>(), Purchasers = new List<Purchaser>(), Suppliers = new List<Supplier>()},
-                new Profile{Username="Supplier", Password="1234", Usertype=2, Countries = new List<Country>(), Purchasers = new List<Purchaser>(), Suppliers = new List<Supplier>()}
+                new Profile{Username="DKAdmin", Password="1234", Usertype=0},
+                new Profile{Username="Purchaser", Password="1234", Usertype=1},
+                new Profile{Username="Supplier", Password="1234", Usertype=2}
             };
 
             context.Profiles.AddRange(profiles);
