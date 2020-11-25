@@ -39,7 +39,7 @@
                             <label for="company_location" class="required">Company location:</label>
                         </td>
                         <td>
-                            <select class="form-control" name="company_location" required>
+                            <select class="form-control" name="company_location" @bind="CompanyLocation" required>
                                 <option disabled selected>-- select an option --</option>
                                 <option>France // FR // 001</option>
                                 <option>Luxembourg // LU // 002</option>
@@ -130,10 +130,10 @@
                         </td>
                         <td>
                             <div class="text-center">
-                                <input type="radio" name="pallet_exchange" value="yes" required>
+                                <input type="radio" name="pallet_exchange" value="yes" asp-for="PalletExchange" required>
                                 <label for="yes">Yes</label>
                                 &nbsp;
-                                <input type="radio" value="no" name="pallet_exchange">
+                                <input type="radio" value="no" name="pallet_exchange" asp-for="PalletExchange">
                                 <label for="no">No</label>
                             </div>
 
@@ -154,10 +154,10 @@
                         </td>
                         <td>
                             <div class="text-center">
-                                <input type="radio" name="freight_responsibility" value="CIP" required>
+                                <input type="radio" name="freight_responsibility" value="CIP" asp-for="FreightResponsibility" required>
                                 <label for="CIP">CIP</label>
                                 &nbsp;
-                                <input type="radio" value="EXW" name="freight_responsibility">
+                                <input type="radio" value="EXW" name="freight_responsibility" asp-for="FreightResponsibility">
                                 <label for="EXW">EXW</label>
                             </div>
                         </td>
@@ -196,10 +196,10 @@
 
                         <td>
                             <div class="text-center">
-                                <input type="radio" name="transport" value="yes" data-toggle="collapse" data-target="#hideTransit:not(.show)" aria-expanded="false" aria-controls="hideTransit" required>
+                                <input type="radio" name="transport" value="yes" data-toggle="collapse" data-target="#hideTransit:not(.show)" aria-expanded="false" aria-controls="hideTransit" asp-for="BookingTransport" required>
                                 <label for="yes">Yes</label>
                                 &nbsp;
-                                <input type="radio" value="no" name="transport" data-toggle="collapse" data-target="#hideTransit.show" aria-expanded="false" aria-controls="hideTransit">
+                                <input type="radio" value="no" name="transport" data-toggle="collapse" data-target="#hideTransit.show" aria-expanded="false" aria-controls="hideTransit" asp-for="BookingTransport">
                                 <label for="no">No</label>
                             </div>
                         </td>
@@ -234,10 +234,10 @@
                         </td>
                         <td>
                             <div class="text-center">
-                                <input type="radio" name="dangerous" value="yes" data-toggle="collapse" data-target="#hideDanger:not(.show)" aria-expanded="false" aria-controls="hideDanger" required>
+                                <input type="radio" name="dangerous" value="yes" data-toggle="collapse" data-target="#hideDanger:not(.show)" aria-expanded="false" aria-controls="hideDanger" asp-for="Adr" required>
                                 <label for="yes">Yes</label>
                                 &nbsp;
-                                <input type="radio" value="no" name="dangerous" data-toggle="collapse" data-target="#hideDanger.show" aria-expanded="false" aria-controls="hideDanger" />
+                                <input type="radio" value="no" name="dangerous" data-toggle="collapse" data-target="#hideDanger.show" aria-expanded="false" aria-controls="hideDanger" asp-for="Adr"/>
                                 <label for="no">No</label>
                             </div>
                         </td>
@@ -274,7 +274,7 @@
                             <label for="classificationCode" class="required">Classification code:</label>
                         </td>
                         <td>
-                            <input type="text" class="form-control" name="classificationcode">
+                            <input type="text" class="form-control" name="classificationcode" @bind="ClassificationCode">
                         </td>
                         <td>
                             <div></div>
@@ -325,6 +325,8 @@
         public string ClassInfo { get; set; }
 
         public int ClassificationCode { get; set; }
+
+        //
 
         public string EmailValidated;
 
