@@ -32,6 +32,30 @@ namespace HAVI_app
             {
                 client.BaseAddress = new System.Uri("https://localhost:44394");
             });
+            services.AddHttpClient<PurchaserService>(client =>
+            {
+                client.BaseAddress = new System.Uri("https://localhost:44394");
+            });
+            services.AddHttpClient<ProfileService>(client =>
+            {
+                client.BaseAddress = new System.Uri("https://localhost:44394");
+            });
+            services.AddHttpClient<CountryService>(client =>
+            {
+                client.BaseAddress = new System.Uri("https://localhost:44394");
+            });
+            services.AddHttpClient<ArticleBundleService>(client =>
+            {
+                client.BaseAddress = new System.Uri("https://localhost:44394");
+            });
+            services.AddHttpClient<ArticleInformationService>(client =>
+            {
+                client.BaseAddress = new System.Uri("https://localhost:44394");
+            });
+            services.AddHttpClient<ArticleService>(client =>
+            {
+                client.BaseAddress = new System.Uri("https://localhost:44394");
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
