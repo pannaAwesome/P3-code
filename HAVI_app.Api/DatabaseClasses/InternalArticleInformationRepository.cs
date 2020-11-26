@@ -96,6 +96,37 @@ namespace HAVI_app.Api.DatabaseClasses
                 resultInternalArticleInformation.TransitTimeForHavi = internalArticle.TransitTimeForHavi;
                 resultInternalArticleInformation.VatTaxcode = internalArticle.VatTaxcode;
                 await _context.SaveChangesAsync();
+
+                foreach(Sapplant plant in resultInternalArticleInformation.Sapplants)
+                {
+                    var resultPlant = await _context.Sapplants.FirstOrDefaultAsync(s => s.Id == plant.Id);
+                    resultPlant.SapplantName = plant.SapplantName;
+                    resultPlant.SapplantValue = plant.SapplantValue;
+                    await _context.SaveChangesAsync();
+                }
+
+                foreach(Qip qip in resultInternalArticleInformation.Qips)
+                {
+                    var resultQIP = await _context.Qips.FirstOrDefaultAsync(q => q.Id == qip.Id);
+                    resultQIP.QipanswerOptions = qip.QipanswerOptions;
+                    resultQIP.Qipdescription = qip.Qipdescription;
+                    resultQIP.Qipfrequency = qip.Qipfrequency;
+                    resultQIP.QipfrequencyType = qip.QipfrequencyType;
+                    resultQIP.QiphighBoundary = qip.QiphighBoundary;
+                    resultQIP.QiplowBoundary = qip.QiplowBoundary;
+                    resultQIP.QipnameNumber = qip.QipnameNumber;
+                    resultQIP.Qipokvalue = qip.Qipokvalue;
+                    resultQIP.QipsetAnswer = qip.QipsetAnswer;
+                    await _context.SaveChangesAsync();
+                }
+
+                foreach (Bundle bundle in resultInternalArticleInformation.Bundles)
+                {
+                    var resultBundle = await _context.Bundles.FirstOrDefaultAsync(b => b.Id == bundle.Id);
+                    resultBundle.ArticleBundle = bundle.ArticleBundle;
+                    resultBundle.ArticleBundleQuantity = bundle.ArticleBundleQuantity;
+                    await _context.SaveChangesAsync();
+                }
                 return resultInternalArticleInformation;
             }
 

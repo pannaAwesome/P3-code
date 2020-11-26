@@ -31,12 +31,22 @@ namespace HAVI_app.Api.DatabaseClasses
 
         public async Task<Article> DeleteArticleAsync(int articleId)
         {
-            var result = await _context.Articles.FirstOrDefaultAsync(s => s.Id == articleId);
-            if (result != null)
+            var article = await _context.Articles.FirstOrDefaultAsync(s => s.Id == articleId);
+            var internalInfo = await _context.InternalArticleInformations.FirstOrDefaultAsync(i => i.Id == article.InternalArticleInformationId);
+            var articleInfo = await _context.ArticleInformations.FirstOrDefaultAsync(a => a.Id == article.ArticleInformationId);
+
+            if (article != null && internalInfo != null && articleInfo != null)
             {
-                _context.Articles.Remove(result);
+                _context.Articles.Remove(article);
                 await _context.SaveChangesAsync();
-                return result;
+
+                _context.ArticleInformations.Remove(articleInfo);
+                await _context.SaveChangesAsync();
+
+                _context.InternalArticleInformations.Remove(internalInfo);
+                await _context.SaveChangesAsync();
+
+                return article;
             }
             return null;
         }
