@@ -37,12 +37,18 @@ namespace HAVI_app.Api.DatabaseClasses
 
         public async Task<Article> GetArticle(int articleId)
         {
-            return await _context.Articles.FirstOrDefaultAsync(s => s.Id == articleId);
+            return await _context.Articles.Include(a => a.Purchaser)
+                                          .Include(a => a.InternalArticleInformation)
+                                          .Include(a => a.ArticleInformation)
+                                          .FirstOrDefaultAsync(s => s.Id == articleId);
         }
 
         public async Task<IEnumerable<Article>> GetArticles()
         {
-            return await _context.Articles.ToListAsync();
+            return await _context.Articles.Include(a => a.Purchaser)
+                                          .Include(a => a.InternalArticleInformation)
+                                          .Include(a => a.ArticleInformation)
+                                          .ToListAsync();
         }
 
         public async Task<Article> UpdateArticle(Article article)
