@@ -2,6 +2,7 @@
 @inject Microsoft.AspNetCore.Components.NavigationManager NavigationManager
 @page "/shipment_info_form"
 @inherits HAVI_app.Classes.Validation
+@inject Models.ArticleInformation Article
 
 <HAVI_app.Shared.Supplier_layout.Form_header SupplierState="filled" ArticleState="filled" MeasurementState="filled" ShipmentState="active" />
 <div class="row justify-content-center">
@@ -21,7 +22,7 @@
                         <label for="carton_pr_pallet" class="required">Cartons per pallet:</label>
                     </td>
                     <td colspan="6">
-                        <input type="number" class="form-control" name="carton_pr_pallet" required>
+                        <input type="number" class="form-control" name="carton_pr_pallet" @bind="Article.CartonsPerPallet" required>
                     </td>
                     <td>
                         <HAVI_app.Shared.Shared_layout.Questionmark_top>
@@ -36,7 +37,7 @@
                         <label for="carton_pr_layer" class="required">Cartons per layer:</label>
                     </td>
                     <td colspan="6">
-                        <input type="number" class="form-control"  name="carton_pr_layer" required>
+                        <input type="number" class="form-control" name="carton_pr_layer" @bind="Article.CartonsPerLayer" required>
                     </td>
                     <td>
                         <HAVI_app.Shared.Shared_layout.Questionmark_top>
@@ -48,7 +49,7 @@
 
                 <tr>
                     <td>
-                        <label for="country_origin" class="required" >Country of origin:</label>
+                        <label for="country_origin" class="required">Country of origin:</label>
                     </td>
                     <td colspan="6">
                         <select class="form-control" name="county_origin">
@@ -91,7 +92,7 @@
                         <label for="toll_tarrif_no" class="required">Toll-tarrif no.:</label>
                     </td>
                     <td colspan="6">
-                        <input type="number" class="form-control" name="toll_tarrif_no" required>
+                        <input type="number" class="form-control" name="toll_tarrif_no" @bind="Article.TollTarifNumber" required>
                     </td>
                     <td>
                         <HAVI_app.Shared.Shared_layout.Questionmark_top>
@@ -107,7 +108,7 @@
                         <label for="minimum_order_quantity" class="required">Minimum order quantity:</label>
                     </td>
                     <td colspan="6">
-                        <input type="number" class="form-control" name="minimum_order_quantity" required>
+                        <input type="number" class="form-control" name="minimum_order_quantity" @bind="Article.MinimumOrderQuantity" required>
                     </td>
                     <td>
                         <HAVI_app.Shared.Shared_layout.Questionmark_top>
@@ -182,7 +183,7 @@
                         <label for="lead_time" class="required">Lead time:</label>
                     </td>
                     <td colspan="5">
-                        <input type="number" class="form-control" name="lead_time" required>
+                        <input type="number" class="form-control" name="lead_time" @bind="Article.LeadTime" required>
                     </td>
                     <td>
                         <label class="center-for-units" for="lead_time">days</label>
@@ -209,10 +210,8 @@
 </div>
 
 @code {
-    [Parameter]
-    public HAVI_app.Models.ArticleInformation Article { get; set; }
 
- /* public string CartonPrPallet { get; set; }
+    public string CartonPrPallet { get; set; }
 
     public string CartonPrLayer { get; set; }
 
@@ -234,75 +233,75 @@
 
     public string LeadTime { get; set; }
 
-    public string CartonPrPalletValidated;
+    /*  public string CartonPrPalletValidated;
 
-    public string CartonPrLayerValidated;
+      public string CartonPrLayerValidated;
 
-    public string CountryOfOriginValidated;
+      public string CountryOfOriginValidated;
 
-    public string ImportedFromValidated;
+      public string ImportedFromValidated;
 
-    public string TollTarrifNoValidated;
+      public string TollTarrifNoValidated;
 
-    public string MinimumOrderQuantityValidated;
+      public string MinimumOrderQuantityValidated;
 
-    public string MinTempratureDuringTransportationValidated;
+      public string MinTempratureDuringTransportationValidated;
 
-    public string MaxTempratureDuringTransportationValidated;
+      public string MaxTempratureDuringTransportationValidated;
 
-    public string MinTemperatureStorageValdiated;
+      public string MinTemperatureStorageValdiated;
 
-    public string MaxTemperatureStorageValidated;
+      public string MaxTemperatureStorageValidated;
 
-    public string LeadTimeValidated;
+      public string LeadTimeValidated;
 
-    /*public void ValidationShipmentInfo()
-    {
-        
+      /*public void ValidationShipmentInfo()
+      {
 
-        if (!NumbersOnly(CartonPrPallet))
-        {
-            CartonPrPalletValidated = "btn-danger";
-        }
-        if (!NumbersOnly(CartonPrLayer))
-        {
-            CartonPrLayerValidated = "btn-danger";
-        }
-        if (!NumbersOnly(CountryOfOrigin))
-        {
-            CountryOfOriginValidated = "btn-danger";
-        }
-        if (!NumbersOnly(ImportedFrom))
-        {
-            ImportedFromValidated = "btn-damger";
-        }
-        if (!NumbersOnly(MinimumOrderQuantity))
-        {
-            MinimumOrderQuantityValidated = "btn-danger";
-        }
-        if (!NumbersOnly(MinTempratureDuringTransportation))
-        {
-            MinTempratureDuringTransportationValidated = "btn-danger";
-        }
-        if (!NumbersOnly(MaxTempratureDuringTransportation))
-        {
-            MaxTempratureDuringTransportationValidated = "btn-danger";
-        }
-        if (!NumbersOnly(MinTemperatureStorage))
-        {
-            MinTemperatureStorageValdiated = "btn-danger";
-        }
-        if (!NumbersOnly(LeadTime))
-        {
-            LeadTimeValidated = "btn-danger";
-        }
-*/
-    }
- 
+
+          if (!NumbersOnly(CartonPrPallet))
+          {
+              CartonPrPalletValidated = "btn-danger";
+          }
+          if (!NumbersOnly(CartonPrLayer))
+          {
+              CartonPrLayerValidated = "btn-danger";
+          }
+          if (!NumbersOnly(CountryOfOrigin))
+          {
+              CountryOfOriginValidated = "btn-danger";
+          }
+          if (!NumbersOnly(ImportedFrom))
+          {
+              ImportedFromValidated = "btn-damger";
+          }
+          if (!NumbersOnly(MinimumOrderQuantity))
+          {
+              MinimumOrderQuantityValidated = "btn-danger";
+          }
+          if (!NumbersOnly(MinTempratureDuringTransportation))
+          {
+              MinTempratureDuringTransportationValidated = "btn-danger";
+          }
+          if (!NumbersOnly(MaxTempratureDuringTransportation))
+          {
+              MaxTempratureDuringTransportationValidated = "btn-danger";
+          }
+          if (!NumbersOnly(MinTemperatureStorage))
+          {
+              MinTemperatureStorageValdiated = "btn-danger";
+          }
+          if (!NumbersOnly(LeadTime))
+          {
+              LeadTimeValidated = "btn-danger";
+          }
+  */
+}
+
 }
 
 @code{
-public void OnPostForward()
+    public void OnPostForward()
     {
         NavigationManager.NavigateTo($"/price_info_form/{Article}", true);
     }
