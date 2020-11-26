@@ -17,6 +17,10 @@ namespace HAVI_app.Api.DatabaseClasses
         }
         public async Task<Country> AddCountry(Country country)
         {
+            var profile = await _context.Profiles.AddAsync(country.Profile);
+            await _context.SaveChangesAsync();
+
+            country.ProfileId = _context.Profiles.FirstOrDefault(p => p.Username == country.Profile.Username).Id;
             var result = await _context.Countries.AddAsync(country);
             await _context.SaveChangesAsync();
 
@@ -25,13 +29,30 @@ namespace HAVI_app.Api.DatabaseClasses
 
         public async Task<Country> DeleteCountryAsync(int countryId)
         {
-            var result = await _context.Countries.FirstOrDefaultAsync(s => s.Id == countryId);
+            var result = await _context.Countries.Include(s => s.Profile)
+                                                 .FirstOrDefaultAsync(s => s.Id == countryId);
             if (result != null)
             {
                 _context.Countries.Remove(result);
                 await _context.SaveChangesAsync();
                 return result;
             }
+            return null;
+        }
+
+        public async Task<Supplier> DeleteSupplierAsync(int supplierId)
+        {
+            var result = await _context.Suppliers
+                                       .Include(s => s.Profile)
+                                       .FirstOrDefaultAsync(s => s.Id == supplierId);
+            if (result != null)
+            {
+                _context.Suppliers.Remove(result);
+                await _context.SaveChangesAsync();
+
+                return result;
+            }
+
             return null;
         }
 
