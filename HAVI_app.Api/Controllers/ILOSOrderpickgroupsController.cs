@@ -37,6 +37,27 @@ namespace HAVI_app.Api.Controllers
             }
         }
 
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult<Ilosorderpickgroup>> GetILOSOrderpickgroup(int id)
+        {
+            try
+            {
+                var result = await _orderpickgroup.GetILOSOrderpickgroup(id);
+                if (result == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    return result;
+                }
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database.");
+            }
+        }
+
         [HttpPost]
         public async Task<ActionResult<Ilosorderpickgroup>> CreateILOSOrderpickgroup(Ilosorderpickgroup orderpickgroup)
         {
@@ -49,7 +70,7 @@ namespace HAVI_app.Api.Controllers
 
                 var createdILOSOrderpickgroup = await _orderpickgroup.AddILOSOrderpickgroup(orderpickgroup);
 
-                return CreatedAtAction(nameof(CreateILOSOrderpickgroup), new { id = createdILOSOrderpickgroup.Id }, createdILOSOrderpickgroup);
+                return CreatedAtAction(nameof(GetILOSOrderpickgroup), new { id = createdILOSOrderpickgroup.Id }, createdILOSOrderpickgroup);
             }
             catch (Exception)
             {

@@ -37,6 +37,27 @@ namespace HAVI_app.Api.Controllers
             }
         }
 
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult<Iloscategory>> GetILOSCategory(int id)
+        {
+            try
+            {
+                var result = await _categoryRepository.GetILOSCategory(id);
+                if (result == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    return result;
+                }
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database.");
+            }
+        }
+
         [HttpPost]
         public async Task<ActionResult<Iloscategory>> CreateILOSCategory(Iloscategory category)
         {
@@ -49,7 +70,7 @@ namespace HAVI_app.Api.Controllers
 
                 var createdILOSCategory = await _categoryRepository.AddILOSCategory(category);
 
-                return CreatedAtAction(nameof(CreateILOSCategory), new { id = createdILOSCategory.Id }, createdILOSCategory);
+                return CreatedAtAction(nameof(GetILOSCategory), new { id = createdILOSCategory.Id }, createdILOSCategory);
             }
             catch (Exception)
             {
