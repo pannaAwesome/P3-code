@@ -57,15 +57,18 @@ namespace HAVI_app.Api.DatabaseClasses
 
         public async Task<Supplier> UpdateSupplier(Supplier supplier)
         {
-            var result = await _context.Suppliers.FirstOrDefaultAsync(s => s.Id == supplier.Id);
-            if (result != null)
+            var resultSupplier = await _context.Suppliers.FirstOrDefaultAsync(s => s.Id == supplier.Id);
+            var resultProfile = await _context.Profiles.FirstOrDefaultAsync(p => p.Id == resultSupplier.ProfileId);
+            if (resultSupplier != null && resultProfile != null)
             {
-                result.CompanyName = supplier.CompanyName;
-                result.CompanyLocation = supplier.CompanyLocation;
-                result.PalletExchange = supplier.PalletExchange;
-                result.FreightResponsibility = supplier.FreightResponsibility;
+                resultProfile.Username = supplier.Profile.Username;
+                resultProfile.Password = supplier.Profile.Password;
+                resultSupplier.CompanyName = supplier.CompanyName;
+                resultSupplier.CompanyLocation = supplier.CompanyLocation;
+                resultSupplier.PalletExchange = supplier.PalletExchange;
+                resultSupplier.FreightResponsibility = supplier.FreightResponsibility;
                 await _context.SaveChangesAsync();
-                return result;
+                return resultSupplier;
             }
 
             return null;
