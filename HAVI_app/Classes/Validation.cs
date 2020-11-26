@@ -41,13 +41,13 @@ namespace HAVI_app.Classes
             return false;
         }
 
-        public bool NumbersLettersDashOnly(string input)
+        public bool NumbersOnly(string input)
         {
             if(input != null){
 
                 foreach (char digit in input)
                 {
-                    if (!char.IsLetterOrDigit(digit) && digit != '-')
+                    if (!char.IsDigit(digit))
                         return false;
                 }
                 return true;

@@ -14,10 +14,10 @@ namespace HAVI_appTests
         }
 
         [TestMethod]
-        public void NumbersLettersDashOnlyTest()
+        public void NumbersOnlyTest()
         {
             var numbers = new Validation();
-            Assert.IsTrue(numbers.NumbersLettersDashOnly("123-12s"));
+            Assert.IsTrue(numbers.NumbersOnly("123"));
         }
 
         [TestMethod]

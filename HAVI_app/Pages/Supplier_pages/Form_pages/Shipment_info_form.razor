@@ -209,8 +209,6 @@
 </div>
 
 @code {
-    [Parameter]
-    public HAVI_app.Models.ArticleInformation Article { get; set; }
 
  /* public string CartonPrPallet { get; set; }
 
@@ -256,9 +254,9 @@
 
     public string LeadTimeValidated;
 
-    /*public void ValidationShipmentInfo()
+    public void ValidationShipmentInfo()
     {
-        
+
 
         if (!NumbersOnly(CartonPrPallet))
         {
@@ -304,7 +302,7 @@
 @code{
 public void OnPostForward()
     {
-        NavigationManager.NavigateTo($"/price_info_form/{Article}", true);
+        NavigationManager.NavigateTo($"/price_info_form", true);
     }
 
     public void OnPostBack()

@@ -135,9 +135,6 @@
 
 @code {
     [Parameter]
-    public HAVI_app.Models.ArticleInformation Article { get; set; }
-
-    [Parameter]
     public string SetCurrency { get; set; }
 
     [Parameter]
@@ -155,7 +152,7 @@
 @code{
     public void OnPostForward()
     {
-        NavigationManager.NavigateTo($"/confirm_details/{Article}", true);
+        NavigationManager.NavigateTo($"/confirm_details", true);
     }
 
     public void OnPostBack()
