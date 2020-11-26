@@ -23,26 +23,14 @@ namespace HAVI_app.Api.DatabaseClasses
             return result.Entity;
         }
 
-        public async Task<ArticleInformation> DeleteArticleInformationAsync(int articleInformationId)
-        {
-            var result = await _context.ArticleInformations.FirstOrDefaultAsync(s => s.Id == articleInformationId);
-            if (result != null)
-            {
-                _context.ArticleInformations.Remove(result);
-                await _context.SaveChangesAsync();
-                return result;
-            }
-            return null;
-        }
-
         public async Task<ArticleInformation> GetArticleInformation(int articleInformationId)
         {
-            return await _context.ArticleInformations.FirstOrDefaultAsync(s => s.Id == articleInformationId);
+            return await _context.ArticleInformations.Include(a => a.OtherCostsForArticles).FirstOrDefaultAsync(s => s.Id == articleInformationId);
         }
 
         public async Task<IEnumerable<ArticleInformation>> GetArticleInformations()
         {
-            return await _context.ArticleInformations.ToListAsync();
+            return await _context.ArticleInformations.Include(a => a.OtherCostsForArticles).ToListAsync();
         }
 
         public async Task<ArticleInformation> UpdateArticleInformation(ArticleInformation articleInformation)

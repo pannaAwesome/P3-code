@@ -102,25 +102,5 @@ namespace HAVI_app.Api.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database.");
             }
         }
-
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<ArticleInformation>> DeleteArticleInformation(int id)
-        {
-            try
-            {
-                var articleInformationToDelete = await _articleInformationRepository.GetArticleInformation(id);
-
-                if (articleInformationToDelete == null)
-                {
-                    return NotFound($"ArticleInformation with id = {id} not found");
-                }
-
-                return await _articleInformationRepository.DeleteArticleInformationAsync(id);
-            }
-            catch (Exception)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database.");
-            }
-        }
     }
 }
