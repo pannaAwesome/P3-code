@@ -17,6 +17,7 @@
     <Folder Include="Shared\Admin_layout\" />
     <Folder Include="Data\" />
     <Folder Include="wwwroot\images\Form_header_arrows\" />
+    <Folder Include="AppServices\" />
   </ItemGroup>
 
   

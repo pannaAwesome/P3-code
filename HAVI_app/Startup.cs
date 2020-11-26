@@ -23,6 +23,7 @@ namespace HAVI_app
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
+            services.AddSingleton<AppServices.AppData>();
 
             services.AddDbContext<HAVIdatabaseContext>(options => options.UseSqlServer(Configuration.GetConnectionString("HAVIdatabaseContext")));
             //services.AddDatabaseDeveloperPageExceptionFilter();
