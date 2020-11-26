@@ -58,46 +58,6 @@ namespace HAVI_app.Api.Controllers
             }
         }
 
-        [HttpPost]
-        public async Task<ActionResult<Profile>> CreateProfile(Profile profile)
-        {
-            try
-            {
-                if (profile == null)
-                {
-                    return BadRequest();
-                }
-
-                var createdSupplier = await _profileRepository.AddProfile(profile);
-
-                return CreatedAtAction(nameof(GetProfile), new { id = createdSupplier.Id }, createdSupplier);
-            }
-            catch (Exception)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database.");
-            }
-        }
-
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Profile>> DeleteSupplier(int id)
-        {
-            try
-            {
-                var supplierToDelete = await _profileRepository.GetProfile(id);
-
-                if (supplierToDelete == null)
-                {
-                    return NotFound($"Supplier with id = {id} not found");
-                }
-
-                return await _profileRepository.DeleteProfileAsync(id);
-            }
-            catch (Exception)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database.");
-            }
-        }
-
         [HttpPut("{id}")]
         public async Task<ActionResult<Profile>> UpdateProfile(int id, Profile profile)
         {
