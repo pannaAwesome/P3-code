@@ -1,7 +1,9 @@
 ﻿@layout HAVI_app.Shared.Supplier_layout.Form_layout
 @inject Microsoft.AspNetCore.Components.NavigationManager NavigationManager
-@page "/article_info_form/{Article}"
+@page "/article_info_form"
 @inherits HAVI_app.Classes.Validation
+@inject Models.ArticleInformation Article
+
 
 <HAVI_app.Shared.Supplier_layout.Form_header SupplierState="filled" ArticleState="active" />
 
@@ -13,14 +15,14 @@
     </div>
 </div>
 
-<div class="row justify-content-center ">
+<div class="row justify-content-center">
     <div class="col-12 d-flex justify-content-center">
         <form>
             <table class="table">
 
                 <tr>
                     <td>
-                        <label for="article_name" class="required">Article name:</label>
+                        <label for="article_name" class="required">Article name: @Article.CompanyName</label>
                     </td>
                     <td>
                         <input type="text" class="form-control @ArticleNameValidated" name="article_name" @bind="ArticleName" required> @ArticleName
@@ -188,46 +190,30 @@
 </div>
 
 @code{
-        [Parameter]
-        public HAVI_app.Models.ArticleInformation Article
-    {
-            get
-        {
-                return _Article;
-            }
 
-            set
-        {
-                ArticleName = ArticleName;
-                SalesUnit = SalesUnit;
-                ArticlePerSalesunit = ArticlePerSalesunit;
-                SupplierArticleNumber = SupplierArticleNumber;
-            }
-        }
+    [Parameter]
+    public string ArticleName { get; set; }
 
-        [Parameter]
-        public string ArticleName { get; set; }
+    [Parameter]
+    public string SalesUnit { get; set; }
 
-        [Parameter]
-        public string SalesUnit { get; set; }
+    [Parameter]
+    public string ArticlePerSalesunit { get; set; }
 
-        [Parameter]
-        public string ArticlePerSalesunit { get; set; }
+    [Parameter]
+    public string SupplierArticleNumber { get; set; }
 
-        [Parameter]
-        public string SupplierArticleNumber { get; set; }
+    [Parameter]
+    public string GtinNumber { get; set; }
 
-        [Parameter]
-        public string GtinNumber { get; set; }
+    [Parameter]
+    public string Shelflife { get; set; }
 
-        [Parameter]
-        public string Shelflife { get; set; }
+    [Parameter]
+    public string ShelflifeAtHavi { get; set; }
 
-        [Parameter]
-        public string ShelflifeAtHavi { get; set; }
-
-        [Parameter]
-        public string OrganicLife { get; set; }
+    [Parameter]
+    public string OrganicLife { get; set; }
 
     public HAVI_app.Models.ArticleInformation _Article;
 
@@ -245,12 +231,12 @@
     {
 
         if (LettersOnly(ArticleName)
-                /*NumbersOnly(ArticlePerSalesunit) &&
-            NumbersOnly(SupplierArticleNumber) &&
-            NumbersOnly(Shelflife) &&
-            NumbersOnly(ShelflifeAtHavi)*/)
+/*NumbersOnly(ArticlePerSalesunit) &&
+NumbersOnly(SupplierArticleNumber) &&
+NumbersOnly(Shelflife) &&
+NumbersOnly(ShelflifeAtHavi)*/)
         {
-            NavigationManager.NavigateTo($"/measurement_info_form/{Article}", true);
+            NavigationManager.NavigateTo($"/measurement_info_form", true);
         }
 
         if (!LettersOnly(ArticleName))
@@ -283,17 +269,17 @@
 
     }
 
-@code{
+    @code{
 
-    public void OnPostForward()
-    {
-        // NavigationManager.NavigateTo($"/measurement_info_form", true);
-    }
+        public void OnPostForward()
+        {
+            // NavigationManager.NavigateTo($"/measurement_info_form", true);
+        }
 
-    public void OnPostBack()
-    {
-        NavigationManager.NavigateTo($"/supplier_info_form", true);
+        public void OnPostBack()
+        {
+            NavigationManager.NavigateTo($"/supplier_info_form", true);
+        }
     }
 }
-    }
 
