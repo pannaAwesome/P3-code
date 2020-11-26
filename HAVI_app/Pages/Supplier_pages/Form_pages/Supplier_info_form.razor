@@ -2,6 +2,7 @@
 @inject Microsoft.AspNetCore.Components.NavigationManager NavigationManager
 @page "/supplier_info_form"
 @inherits HAVI_app.Classes.Validation
+@using HAVI_app.Models
 
 
     <HAVI_app.Shared.Supplier_layout.Form_header SupplierState="active" />
@@ -13,7 +14,7 @@
     </div>
     <div class="row justify-content-center ">
         <div class="col-12 d-flex justify-content-center">
-            <form action="/supplier_info_form" method="post">
+            <form>
 
 
                 <table class="table">
@@ -39,7 +40,7 @@
                             <label for="company_location" class="required">Company location:</label>
                         </td>
                         <td>
-                            <select class="form-control" name="company_location" required>
+                            <select class="form-control" name="company_location" @bind="CompanyLocation" required>
                                 <option disabled selected>-- select an option --</option>
                                 <option>France // FR // 001</option>
                                 <option>Luxembourg // LU // 002</option>
@@ -130,10 +131,10 @@
                         </td>
                         <td>
                             <div class="text-center">
-                                <input type="radio" name="pallet_exchange" value="yes" required>
+                                <input type="radio" name="pallet_exchange" value="1" asp-for="PalletExchange" required>
                                 <label for="yes">Yes</label>
                                 &nbsp;
-                                <input type="radio" value="no" name="pallet_exchange">
+                                <input type="radio" value="0" name="pallet_exchange" asp-for="PalletExchange">
                                 <label for="no">No</label>
                             </div>
 
@@ -154,10 +155,10 @@
                         </td>
                         <td>
                             <div class="text-center">
-                                <input type="radio" name="freight_responsibility" value="CIP" required>
+                                <input type="radio" name="freight_responsibility" value="CIP" asp-for="FreightResponsibility" required>
                                 <label for="CIP">CIP</label>
                                 &nbsp;
-                                <input type="radio" value="EXW" name="freight_responsibility">
+                                <input type="radio" value="EXW" name="freight_responsibility" asp-for="FreightResponsibility">
                                 <label for="EXW">EXW</label>
                             </div>
                         </td>
@@ -196,10 +197,10 @@
 
                         <td>
                             <div class="text-center">
-                                <input type="radio" name="transport" value="yes" data-toggle="collapse" data-target="#hideTransit:not(.show)" aria-expanded="false" aria-controls="hideTransit" required>
+                                <input type="radio" name="transport" value="1" data-toggle="collapse" data-target="#hideTransit:not(.show)" aria-expanded="false" aria-controls="hideTransit" asp-for="BookingTransport" required>
                                 <label for="yes">Yes</label>
                                 &nbsp;
-                                <input type="radio" value="no" name="transport" data-toggle="collapse" data-target="#hideTransit.show" aria-expanded="false" aria-controls="hideTransit">
+                                <input type="radio" value="0" name="transport" data-toggle="collapse" data-target="#hideTransit.show" aria-expanded="false" aria-controls="hideTransit" asp-for="BookingTransport">
                                 <label for="no">No</label>
                             </div>
                         </td>
@@ -218,7 +219,7 @@
                             <label for="transittime" class="required">Transit time:</label>
                         </td>
                         <td>
-                            <input type="number" class="form-control @TransitValidated" name="transittime" @bind="TransitTime" @onfocus="RemoveTransitDanger">
+                            <input type="number" class="form-control" name="transittime" @bind="TransitTime">
                         </td>
                         <td>days</td>
                         <td>
@@ -234,10 +235,10 @@
                         </td>
                         <td>
                             <div class="text-center">
-                                <input type="radio" name="dangerous" value="yes" data-toggle="collapse" data-target="#hideDanger:not(.show)" aria-expanded="false" aria-controls="hideDanger" required>
+                                <input type="radio" name="dangerous" value="0" data-toggle="collapse" data-target="#hideDanger:not(.show)" aria-expanded="false" aria-controls="hideDanger" asp-for="Adr" required>
                                 <label for="yes">Yes</label>
                                 &nbsp;
-                                <input type="radio" value="no" name="dangerous" data-toggle="collapse" data-target="#hideDanger.show" aria-expanded="false" aria-controls="hideDanger" />
+                                <input type="radio" value="1" name="dangerous" data-toggle="collapse" data-target="#hideDanger.show" aria-expanded="false" aria-controls="hideDanger" asp-for="BookingTransport"/>
                                 <label for="no">No</label>
                             </div>
                         </td>
@@ -257,7 +258,7 @@
                             <label for="class" class="required">Class:</label>
                         </td>
                         <td>
-                            <input type="text" class="form-control @ClassInfoValidated" name="class" @bind="ClassInfo" @onfocus="RemoveClassInfoDanger">
+                            <input type="text" class="form-control" name="class" @bind="ClassInfo">
                         </td>
                         <td>
                             <div></div>
@@ -274,7 +275,7 @@
                             <label for="classificationCode" class="required">Classification code:</label>
                         </td>
                         <td>
-                            <input type="text" class="form-control" name="classificationcode">
+                            <input type="text" class="form-control" name="classificationcode" @bind="ClassificationCode">
                         </td>
                         <td>
                             <div></div>
@@ -291,7 +292,7 @@
                     <div class="text-right col-6">
                     </div>
                     <div class="text-left col-6">
-                        <input type="submit" class="btn green-button button-size" value="Next" @onclick="ValidationSupplierForm" />
+                        <input type="button" class="btn green-button button-size" value="Next" @onclick="ValidationSupplierForm" />
                     </div>
                 </div>
 
@@ -302,7 +303,7 @@
 
 
     @code {
-        public HAVI_app.Models.ArticleInformation Article { get; set; }
+        public ArticleInformation Article = new ArticleInformation();
 
         public string CompanyName { get; set; }
 
@@ -310,34 +311,42 @@
 
         public string Email { get; set; }
 
-        public string PalletExchange { get; set; }
+        public int PalletExchange { get; set; }
 
         public string FreightResponsibility { get; set; }
 
         public string SpecialInformation { get; set; }
 
-        public string BookingTransport { get; set; }
+        public int BookingTransport { get; set; }
 
-        public string TransitTime { get; set; }
+        public int TransitTime { get; set; }
 
-        public string Adr { get; set; }
+        public int Adr { get; set; }
 
         public string ClassInfo { get; set; }
 
-        public int ClassificationCode { get; set; }
+        public string ClassificationCode { get; set; }
+
+        //
 
         public string EmailValidated;
 
-        public string TransitValidated;
-
-        public string ClassInfoValidated;
-
         public void ValidationSupplierForm()
         {
-            if (IsEmailValid(Email) &&
-            NumbersOnly(TransitTime) &&
-            NumbersOnly(ClassInfo))
+            if (IsEmailValid(Email))
             {
+                Article.CompanyName = CompanyName;
+                Article.CompanyLocation = CompanyLocation;
+                Article.Email = Email;
+                Article.PalletExchange = PalletExchange;
+                Article.FreightResponsibility = FreightResponsibility;
+                Article.SpecialInformation = SpecialInformation;
+                Article.TransportBooking = BookingTransport;
+                Article.TransitTime = TransitTime;
+                Article.DangerousGoods = Adr;
+                Article.Class = ClassInfo;
+                Article.ClassificationCode = ClassificationCode;
+
                 NavigationManager.NavigateTo($"/article_info_form/{Article}", true);
             }
 
@@ -345,31 +354,10 @@
             {
                 EmailValidated = "btn-danger";
             }
-
-            if (!NumbersOnly(TransitTime))
-            {
-                TransitValidated = "btn-danger";
-            }
-
-            if (!NumbersOnly(ClassInfo))
-            {
-                ClassInfoValidated = "btn-danger";
-            }
         }
 
         public void RemoveEmailDanger()
         {
             EmailValidated = "";
-        }
-
-
-        public void RemoveTransitDanger()
-        {
-            TransitValidated = "";
-        }
-
-        public void RemoveClassInfoDanger()
-        {
-            ClassInfoValidated = "";
         }
     }
