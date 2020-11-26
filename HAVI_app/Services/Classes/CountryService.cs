@@ -28,19 +28,19 @@ namespace HAVI_app.Services.Classes
             return await httpClient.GetFromJsonAsync<Country[]>("/api/countries");
         }
 
-        public async Task<Country> CreateSupplier(Country country)
+        public async Task<Country> CreateCountry(Country country)
         {
             var result = await httpClient.PostAsJsonAsync("/api/countries", country);
             return await result.Content.ReadAsAsync<Country>();
         }
 
-        public async Task<Country> UpdateSupplier(int id, Country country)
+        public async Task<Country> UpdateCountry(int id, Country country)
         {
             var result = await httpClient.PutAsJsonAsync($"/api/countries/{id}", country);
             return await result.Content.ReadAsAsync<Country>();
         }
 
-        public async Task<Country> DeleteSupplier(int id)
+        public async Task<Country> DeleteCountry(int id)
         {
             var result = await httpClient.DeleteAsync($"/api/countries/{id}");
             return await result.Content.ReadAsAsync<Country>();
