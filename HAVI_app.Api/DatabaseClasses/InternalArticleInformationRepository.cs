@@ -37,52 +37,66 @@ namespace HAVI_app.Api.DatabaseClasses
 
         public async Task<InternalArticleInformation> GetInternalArticleInformation(int internalArticleId)
         {
-            return await _context.InternalArticleInformations.FirstOrDefaultAsync(s => s.Id == internalArticleId);
+            return await _context.InternalArticleInformations
+                                        .Include(i => i.Sapplants)
+                                        .Include(i => i.Bundles)
+                                        .Include(i => i.Qips)
+                                        .FirstOrDefaultAsync(s => s.Id == internalArticleId);
         }
 
         public async Task<IEnumerable<InternalArticleInformation>> GetInternalArticleInformations()
         {
-            return await _context.InternalArticleInformations.ToListAsync();
+            return await _context.InternalArticleInformations
+                                        .Include(i => i.Sapplants)
+                                        .Include(i => i.Bundles)
+                                        .Include(i => i.Qips)
+                                        .ToListAsync();
         }
 
         public async Task<InternalArticleInformation> UpdateInternalArticleInformation(InternalArticleInformation internalArticle)
         {
-            var result = await _context.InternalArticleInformations.FirstOrDefaultAsync(s => s.Id == internalArticle.Id);
-            if (result != null)
+            var resultInternalArticleInformation = await _context.InternalArticleInformations
+                                                        .Include(s => s.Sapplants)
+                                                        .Include(q => q.Qips)
+                                                        .Include(b => b.Bundles)
+                                                        .FirstOrDefaultAsync(s => s.Id == internalArticle.Id);
+            
+
+            if (resultInternalArticleInformation != null)
             {
-                result.Bosnumber = internalArticle.Bosnumber;
-                result.Carlanumber = internalArticle.Carlanumber;
-                result.ClassificationCode = internalArticle.ClassificationCode;
-                result.CompanyCode = internalArticle.CompanyCode;
-                result.CurrencyRate = internalArticle.CurrencyRate;
-                result.DepartmentId = internalArticle.DepartmentId;
-                result.Eannumber = internalArticle.Eannumber;
-                result.Grinnumber = internalArticle.Grinnumber;
-                result.Gtinnumber = internalArticle.Gtinnumber;
-                result.Iloscategory = internalArticle.Iloscategory;
-                result.IlosorderPickGroup = internalArticle.IlosorderPickGroup;
-                result.IlossortGroup = internalArticle.IlossortGroup;
-                result.InnerPackingIlos = internalArticle.InnerPackingIlos;
-                result.InsertBosSap = internalArticle.InsertBosSap;
-                result.InsertEanSap = internalArticle.InsertEanSap;
-                result.InsertGrinSap = internalArticle.InsertGrinSap;
-                result.Lrinnumber = internalArticle.Lrinnumber;
-                result.NewIlosarticleNumber = internalArticle.NewIlosarticleNumber;
-                result.PackagingGroup = internalArticle.PackagingGroup;
-                result.PriceInCountryCurrency = internalArticle.PriceInCountryCurrency;
-                result.PrimaryDcIloscode = internalArticle.PrimaryDcIloscode;
-                result.ReferenceIlosnumber = internalArticle.ReferenceIlosnumber;
-                result.ReferenceSapmaterial = internalArticle.ReferenceSapmaterial;
-                result.RegisterShelfLife = internalArticle.RegisterShelfLife;
-                result.RemainShelfStore = internalArticle.RemainShelfStore;
-                result.Sprnnumber = internalArticle.Sprnnumber;
-                result.SupplierDeliveryUnit = internalArticle.SupplierDeliveryUnit;
-                result.SupplierIdIlos = internalArticle.SupplierIdIlos;
-                result.TextPurchaseNumber = internalArticle.TextPurchaseNumber;
-                result.TransitTimeForHavi = internalArticle.TransitTimeForHavi;
-                result.VatTaxcode = internalArticle.VatTaxcode;
+                resultInternalArticleInformation.Bosnumber = internalArticle.Bosnumber;
+                resultInternalArticleInformation.Carlanumber = internalArticle.Carlanumber;
+                resultInternalArticleInformation.ClassificationCode = internalArticle.ClassificationCode;
+                resultInternalArticleInformation.CompanyCode = internalArticle.CompanyCode;
+                resultInternalArticleInformation.CurrencyRate = internalArticle.CurrencyRate;
+                resultInternalArticleInformation.DepartmentId = internalArticle.DepartmentId;
+                resultInternalArticleInformation.Eannumber = internalArticle.Eannumber;
+                resultInternalArticleInformation.Grinnumber = internalArticle.Grinnumber;
+                resultInternalArticleInformation.Gtinnumber = internalArticle.Gtinnumber;
+                resultInternalArticleInformation.Iloscategory = internalArticle.Iloscategory;
+                resultInternalArticleInformation.IlosorderPickGroup = internalArticle.IlosorderPickGroup;
+                resultInternalArticleInformation.IlossortGroup = internalArticle.IlossortGroup;
+                resultInternalArticleInformation.InnerPackingIlos = internalArticle.InnerPackingIlos;
+                resultInternalArticleInformation.InsertBosSap = internalArticle.InsertBosSap;
+                resultInternalArticleInformation.InsertEanSap = internalArticle.InsertEanSap;
+                resultInternalArticleInformation.InsertGrinSap = internalArticle.InsertGrinSap;
+                resultInternalArticleInformation.Lrinnumber = internalArticle.Lrinnumber;
+                resultInternalArticleInformation.NewIlosarticleNumber = internalArticle.NewIlosarticleNumber;
+                resultInternalArticleInformation.PackagingGroup = internalArticle.PackagingGroup;
+                resultInternalArticleInformation.PriceInCountryCurrency = internalArticle.PriceInCountryCurrency;
+                resultInternalArticleInformation.PrimaryDcIloscode = internalArticle.PrimaryDcIloscode;
+                resultInternalArticleInformation.ReferenceIlosnumber = internalArticle.ReferenceIlosnumber;
+                resultInternalArticleInformation.ReferenceSapmaterial = internalArticle.ReferenceSapmaterial;
+                resultInternalArticleInformation.RegisterShelfLife = internalArticle.RegisterShelfLife;
+                resultInternalArticleInformation.RemainShelfStore = internalArticle.RemainShelfStore;
+                resultInternalArticleInformation.Sprnnumber = internalArticle.Sprnnumber;
+                resultInternalArticleInformation.SupplierDeliveryUnit = internalArticle.SupplierDeliveryUnit;
+                resultInternalArticleInformation.SupplierIdIlos = internalArticle.SupplierIdIlos;
+                resultInternalArticleInformation.TextPurchaseNumber = internalArticle.TextPurchaseNumber;
+                resultInternalArticleInformation.TransitTimeForHavi = internalArticle.TransitTimeForHavi;
+                resultInternalArticleInformation.VatTaxcode = internalArticle.VatTaxcode;
                 await _context.SaveChangesAsync();
-                return result;
+                return resultInternalArticleInformation;
             }
 
             return null;

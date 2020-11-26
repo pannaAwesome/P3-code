@@ -19,24 +19,6 @@ namespace HAVI_app.Api.Controllers
             _internalArticleInformationRepository = internalArticleInformationRepository;
         }
 
-        [HttpGet]
-        public async Task<ActionResult> GetInternalArticleInformations()
-        {
-            try
-            {
-                var result = await _internalArticleInformationRepository.GetInternalArticleInformations();
-                if (result == null)
-                {
-                    return NotFound();
-                }
-                return Ok(result);
-            }
-            catch (Exception)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database.");
-            }
-        }
-
         [HttpGet("{id:int}")]
         public async Task<ActionResult<InternalArticleInformation>> GetInternalArticleInformation(int id)
         {
@@ -51,26 +33,6 @@ namespace HAVI_app.Api.Controllers
                 {
                     return result;
                 }
-            }
-            catch (Exception)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database.");
-            }
-        }
-
-        [HttpPost]
-        public async Task<ActionResult<InternalArticleInformation>> CreateInternalArticleInformation(InternalArticleInformation internalArticleInformation)
-        {
-            try
-            {
-                if (internalArticleInformation == null)
-                {
-                    return BadRequest();
-                }
-
-                var createdInternalArticleInformation = await _internalArticleInformationRepository.AddInternalArticleInformation(internalArticleInformation);
-
-                return CreatedAtAction(nameof(GetInternalArticleInformation), new { id = createdInternalArticleInformation.Id }, createdInternalArticleInformation);
             }
             catch (Exception)
             {
@@ -96,26 +58,6 @@ namespace HAVI_app.Api.Controllers
                 }
 
                 return await _internalArticleInformationRepository.UpdateInternalArticleInformation(internalArticleInformation);
-            }
-            catch (Exception)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database.");
-            }
-        }
-
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<InternalArticleInformation>> DeleteInternalArticleInformation(int id)
-        {
-            try
-            {
-                var internalArticleInformationToDelete = await _internalArticleInformationRepository.GetInternalArticleInformation(id);
-
-                if (internalArticleInformationToDelete == null)
-                {
-                    return NotFound($"InternalArticleInformation with id = {id} not found");
-                }
-
-                return await _internalArticleInformationRepository.DeleteInternalArticleInformationAsync(id);
             }
             catch (Exception)
             {
