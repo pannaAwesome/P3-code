@@ -177,7 +177,7 @@
                 <tr>
                     <td colspan="2">
                         <label for="special_info">Special information regarding the article or cooperation?</label>
-                        <textarea class="form-control" name="special_info" @bind="SpecialInformation"></textarea>
+                        <textarea class="form-control" name="special_info" @bind="Article.SpecialInformation"></textarea>
                     </td>
                     <td>
                         <div></div>
@@ -219,7 +219,7 @@
                         <label for="transittime" class="required">Transit time:</label>
                     </td>
                     <td>
-                        <input type="number" class="form-control" name="transittime" @bind="TransitTime">
+                        <input type="number" class="form-control" name="transittime" @bind="Article.TransitTime">
                     </td>
                     <td>days</td>
                     <td>
@@ -258,7 +258,7 @@
                         <label for="class" class="required">Class:</label>
                     </td>
                     <td>
-                        <input type="text" class="form-control" name="class" @bind="ClassInfo">
+                        <input type="text" class="form-control" name="class" @bind="Article.Class">
                     </td>
                     <td>
                         <div></div>
@@ -275,7 +275,7 @@
                         <label for="classificationCode" class="required">Classification code:</label>
                     </td>
                     <td>
-                        <input type="text" class="form-control" name="classificationcode" @bind="ClassificationCode">
+                        <input type="text" class="form-control" name="classificationcode" @bind="Article.ClassificationCode">
                     </td>
                     <td>
                         <div></div>
@@ -303,30 +303,6 @@
 
 
 @code {
-
-    public string CompanyName { get; set; }
-
-    public string CompanyLocation { get; set; }
-
-    public string Email { get; set; }
-
-    public int PalletExchange { get; set; }
-
-    public string FreightResponsibility { get; set; }
-
-    public string SpecialInformation { get; set; }
-
-    public int BookingTransport { get; set; }
-
-    public int TransitTime { get; set; }
-
-    public int Adr { get; set; }
-
-    public string ClassInfo { get; set; }
-
-    public string ClassificationCode { get; set; }
-
-    //
 
     public string EmailValidated;
 
@@ -357,18 +333,18 @@
 
     void RemoveClassDanger()
     {
-        ClassificationCode = "";
+        ClassificationCodeValidated = "";
     }
-        /*
-        Article.CompanyName = CompanyName;
-        Article.CompanyLocation = CompanyLocation;
-        Article.Email = Email;
-        Article.PalletExchange = PalletExchange;
-        Article.FreightResponsibility = FreightResponsibility;
-        Article.SpecialInformation = SpecialInformation;
-        Article.TransportBooking = BookingTransport;
-        Article.TransitTime = TransitTime;
-        Article.DangerousGoods = Adr;
-        Article.Class = ClassInfo;
-        Article.ClassificationCode = ClassificationCode; */
+    /*
+    Article.CompanyName = CompanyName;
+    Article.CompanyLocation = CompanyLocation;
+    Article.Email = Email;
+    Article.PalletExchange = PalletExchange;
+    Article.FreightResponsibility = FreightResponsibility;
+    Article.SpecialInformation = SpecialInformation;
+    Article.TransportBooking = BookingTransport;
+    Article.TransitTime = TransitTime;
+    Article.DangerousGoods = Adr;
+    Article.Class = ClassInfo;
+    Article.ClassificationCode = ClassificationCode; */
 }

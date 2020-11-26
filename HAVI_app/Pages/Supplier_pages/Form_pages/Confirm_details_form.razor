@@ -34,7 +34,7 @@
                         <label for="company_name">Company name:</label>
                     </td>
                     <td colspan="3">
-                        <input type="text" class="form-control" name="company_name" value="Hello & Co." disabled>
+                        <input type="text" class="form-control" name="company_name" value="@Article.CompanyName" disabled>
                     </td>
                     <td>
                         <div></div>
@@ -46,7 +46,7 @@
                         <label for="company_location">Company location:</label>
                     </td>
                     <td colspan="3">
-                        <input type="text" class="form-control" name="company_location" value="Denmark" disabled>
+                        <input type="text" class="form-control" name="company_location" value="@Article.CompanyLocation." disabled>
                     </td>
                     <td>
                         <div></div>
@@ -58,7 +58,7 @@
                         <label for="email">Email:</label>
                     </td>
                     <td colspan="4">
-                        <input type="text" class="form-control" name="email" value="HelloCompany@@mail.com" disabled>
+                        <input type="text" class="form-control" name="email" value="@Article.Email" disabled>
                     </td>
                     <td>
                         <div></div>
@@ -71,10 +71,10 @@
                     </td>
                     <td colspan="5">
                         <div class="text-center">
-                            <input type="radio" name="pallet_exchange" id="yes" value="yes" checked="checked" disabled>
+                            <input type="radio" name="pallet_exchange" checked="@(Article.PalletExchange == 1)" @onchange="@(() => Article.PalletExchange = 1)" disabled>
                             <label for="yes">Yes</label>
                             &nbsp;
-                            <input type="radio" id="no" name="pallet_exchange" disabled>
+                            <input type="radio" name="pallet_exchange" checked="@(Article.PalletExchange == 2)" @onchange="@(() => Article.PalletExchange = 2)" disabled>
                             <label for="no">No</label>
                         </div>
                     </td>
@@ -89,10 +89,10 @@
                     </td>
                     <td colspan="5">
                         <div class="text-center">
-                            <input type="radio" name="freight_responsibility" id="CIP" value="CIP" checked="checked" disabled>
+                            <input type="radio" name="freight_responsibility" checked="@(Article.FreightResponsibility == "CIP")" @onchange="@(() => Article.FreightResponsibility = "CIP")" disabled>
                             <label for="CIP">CIP</label>
                             &nbsp;
-                            <input type="radio" id="EXW" name="freight_responsibility" disabled>
+                            <input type="radio" value="EXW" name="freight_responsibility" checked="@(Article.FreightResponsibility == "EXW")" @onchange="@(() => Article.FreightResponsibility = "EXW")" disabled>
                             <label for="EXW">EXW</label>
                         </div>
                     </td>
@@ -104,7 +104,7 @@
                 <tr>
                     <td colspan="6">
                         <label for="special_info">Special information regarding the article or cooperation?</label>
-                        <textarea class="form-control" name="special_info" value="" disabled>Absolutely none</textarea>
+                        <textarea class="form-control" name="special_info" value="" disabled>@Article.SpecialInformation</textarea>
                     </td>
                     <td>
                         <div></div>
@@ -118,10 +118,10 @@
 
                     <td colspan="5">
                         <div class="text-center">
-                            <input type="radio" name="transport" value="yes" checked disabled>
+                            <input type="radio" name="transport" data-toggle="collapse" data-target="#hideTransit:not(.show)" aria-expanded="false" aria-controls="hideTransit" checked="@(Article.TransportBooking == 1)" @onchange="@(() => Article.TransportBooking = 1)" disabled>
                             <label for="yes">Yes</label>
                             &nbsp;
-                            <input type="radio" value="no" name="transport" disabled>
+                            <input type="radio" name="transport" data-toggle="collapse" data-target="#hideTransit.show" aria-expanded="false" aria-controls="hideTransit" checked="@(Article.TransportBooking == 2)" @onchange="@(() => Article.TransportBooking = 2)" disabled>
                             <label for="no">No</label>
                         </div>
                     </td>
@@ -129,14 +129,14 @@
                         <div></div>
                     </td>
                 </tr>
-                @if (BookingTransport == "yes")
+                @if (Article.TransportBooking == 1)
                 {
                     <tr>
                         <td>
                             <label for="class">Transit time:</label>
                         </td>
                         <td colspan="5">
-                            <input type="number" class="form-control" id="class" value="10" disabled>
+                            <input type="number" class="form-control" id="class" value="@Article.TransitTime" disabled>
                         </td>
                         <td>
                             <label for="class" class="labels">days</label>
@@ -150,10 +150,10 @@
                     </td>
                     <td colspan="5">
                         <div class="text-center">
-                            <input type="radio" name="dangerous" value="yes" checked disabled>
+                            <input type="radio" name="dangerous" data-toggle="collapse" data-target="#hideDanger:not(.show)" aria-expanded="false" aria-controls="hideDanger" checked="@(Article.DangerousGoods == 1)" @onchange="@(() => Article.DangerousGoods = 1)" disabled>
                             <label for="yes">Yes</label>
                             &nbsp;
-                            <input type="radio" value="no" name="dangerous" disabled />
+                            <input type="radio" name="dangerous" data-toggle="collapse" data-target="#hideDanger.show" aria-expanded="false" aria-controls="hideDanger" checked="@(Article.DangerousGoods == 2)" @onchange="@(() => Article.DangerousGoods = 2)" disabled/>
                             <label for="no">No</label>
                         </div>
                     </td>
@@ -161,14 +161,14 @@
                         <div></div>
                     </td>
                 </tr>
-                @if (DangerousGoods == "yes")
+                @if (Article.DangerousGoods == 1)
                 {
                     <tr>
                         <td>
                             <label for="class">Class:</label>
                         </td>
                         <td colspan="5">
-                            <input type="text" class="form-control" id="class" value="" disabled>
+                            <input type="text" class="form-control" id="class" value="@Article.Class" disabled>
                         </td>
                         <td>
                             <div></div>
@@ -180,7 +180,7 @@
                             <label for="classificationCode">Classification code:</label>
                         </td>
                         <td colspan="3">
-                            <input type="number" class="form-control" id="classificationCode" value="1293871293" disabled>
+                            <input type="number" class="form-control" id="classificationCode" value="@Article.ClassificationCode" disabled>
                         </td>
                         <td>
                             <div></div>
