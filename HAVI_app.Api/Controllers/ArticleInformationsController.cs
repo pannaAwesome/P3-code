@@ -19,24 +19,6 @@ namespace HAVI_app.Api.Controllers
             _articleInformationRepository = articleInformationRepository;
         }
 
-        [HttpGet]
-        public async Task<ActionResult> GetArticleInformations()
-        {
-            try
-            {
-                var result = await _articleInformationRepository.GetArticleInformations();
-                if (result == null)
-                {
-                    return NotFound();
-                }
-                return Ok(result);
-            }
-            catch (Exception)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database.");
-            }
-        }
-
         [HttpGet("{id:int}")]
         public async Task<ActionResult<ArticleInformation>> GetArticleInformation(int id)
         {
@@ -51,26 +33,6 @@ namespace HAVI_app.Api.Controllers
                 {
                     return result;
                 }
-            }
-            catch (Exception)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database.");
-            }
-        }
-
-        [HttpPost]
-        public async Task<ActionResult<ArticleInformation>> CreateArticleInformation(ArticleInformation articleInformation)
-        {
-            try
-            {
-                if (articleInformation == null)
-                {
-                    return BadRequest();
-                }
-
-                var createdArticleInformation = await _articleInformationRepository.AddArticleInformation(articleInformation);
-
-                return CreatedAtAction(nameof(GetArticleInformation), new { id = createdArticleInformation.Id }, createdArticleInformation);
             }
             catch (Exception)
             {

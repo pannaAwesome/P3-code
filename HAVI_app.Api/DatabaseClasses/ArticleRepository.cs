@@ -17,6 +17,12 @@ namespace HAVI_app.Api.DatabaseClasses
         }
         public async Task<Article> AddArticle(Article article)
         {
+            await _context.ArticleInformations.AddAsync(article.ArticleInformation);
+            await _context.SaveChangesAsync();
+
+            await _context.InternalArticleInformations.AddAsync(article.InternalArticleInformation);
+            await _context.SaveChangesAsync();
+
             var result = await _context.Articles.AddAsync(article);
             await _context.SaveChangesAsync();
 
@@ -37,7 +43,7 @@ namespace HAVI_app.Api.DatabaseClasses
 
         public async Task<Article> GetArticle(int articleId)
         {
-            return await _context.Articles.Include(a => a.Purchaser)
+            return await _context.Articles.Include(a => a.Purchaser).ThenInclude(p => p.Profile)
                                           .Include(a => a.InternalArticleInformation)
                                           .Include(a => a.ArticleInformation)
                                           .FirstOrDefaultAsync(s => s.Id == articleId);
