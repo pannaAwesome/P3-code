@@ -35,6 +35,13 @@ namespace HAVI_app.Api.DatabaseClasses
             return null;
         }
 
+        public async Task<Ilosorderpickgroup> GetILOSOrderpickgroup(int orderGroupId)
+        {
+           
+                return await _context.Ilosorderpickgroups.FirstOrDefaultAsync(s => s.Id == orderGroupId);
+           
+        }
+
         public async Task<IEnumerable<Ilosorderpickgroup>> GetILOSOrderpickgroups()
         {
             return await _context.Ilosorderpickgroups.ToListAsync();

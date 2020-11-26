@@ -11,20 +11,20 @@ namespace HAVI_app.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ILOSCategoriesController : ControllerBase
+    public class InformCostTypesController : ControllerBase
     {
-        private readonly IILOSCategoryRepository _categoryRepository;
-        public ILOSCategoriesController(IILOSCategoryRepository categoryRepository)
+        private readonly IInformCostTypeRepository _informCostTypeRepository;
+        public InformCostTypesController(IInformCostTypeRepository informCostTypeRepository)
         {
-            _categoryRepository = categoryRepository;
+            _informCostTypeRepository = informCostTypeRepository;
         }
 
         [HttpGet]
-        public async Task<ActionResult> GetILOSCategories()
+        public async Task<ActionResult> GetInformCostTypes()
         {
             try
             {
-                var result = await _categoryRepository.GetILOSCategories();
+                var result = await _informCostTypeRepository.GetInformCostTypes();
                 if (result == null)
                 {
                     return NotFound();
@@ -38,11 +38,11 @@ namespace HAVI_app.Api.Controllers
         }
 
         [HttpGet("{id:int}")]
-        public async Task<ActionResult<Iloscategory>> GetILOSCategory(int id)
+        public async Task<ActionResult<InformCostType>> GetInformCostType(int id)
         {
             try
             {
-                var result = await _categoryRepository.GetILOSCategory(id);
+                var result = await _informCostTypeRepository.GetInformCostType(id);
                 if (result == null)
                 {
                     return NotFound();
@@ -59,18 +59,18 @@ namespace HAVI_app.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Iloscategory>> CreateILOSCategory(Iloscategory category)
+        public async Task<ActionResult<InformCostType>> CreateInformCostType(InformCostType informCostType)
         {
             try
             {
-                if (category == null)
+                if (informCostType == null)
                 {
                     return BadRequest();
                 }
 
-                var createdILOSCategory = await _categoryRepository.AddILOSCategory(category);
+                var createdInformCostType = await _informCostTypeRepository.AddInformCostType(informCostType);
 
-                return CreatedAtAction(nameof(GetILOSCategory), new { id = createdILOSCategory.Id }, createdILOSCategory);
+                return CreatedAtAction(nameof(GetInformCostType), new { id = createdInformCostType.Id }, createdInformCostType);
             }
             catch (Exception)
             {
@@ -79,23 +79,23 @@ namespace HAVI_app.Api.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<Iloscategory>> UpdateILOSCategory(int id, Iloscategory category)
+        public async Task<ActionResult<InformCostType>> UpdateInformCostType(int id, InformCostType informCostType)
         {
             try
             {
-                if (id != category.Id)
+                if (id != informCostType.Id)
                 {
                     return BadRequest();
                 }
 
-                var ILOSCategoryToUpdate = await _categoryRepository.GetILOSCategory(id);
+                var informCostTypeToUpdate = await _informCostTypeRepository.GetInformCostType(id);
 
-                if (ILOSCategoryToUpdate == null)
+                if (informCostTypeToUpdate == null)
                 {
-                    return NotFound($"ILOSCategory with id = {id} not found");
+                    return NotFound($"InformCostType with id = {id} not found");
                 }
 
-                return await _categoryRepository.UpdateILOSCategory(category);
+                return await _informCostTypeRepository.UpdateInformCostType(informCostType);
             }
             catch (Exception)
             {
@@ -104,18 +104,18 @@ namespace HAVI_app.Api.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Iloscategory>> DeleteILOSCategory(int id)
+        public async Task<ActionResult<InformCostType>> DeleteInformCostType(int id)
         {
             try
             {
-                var ILOSCategoryToDelete = await _categoryRepository.GetILOSCategory(id);
+                var informCostTypeToDelete = await _informCostTypeRepository.GetInformCostType(id);
 
-                if (ILOSCategoryToDelete == null)
+                if (informCostTypeToDelete == null)
                 {
-                    return NotFound($"ILOSCategory with id = {id} not found");
+                    return NotFound($"InformCostType with id = {id} not found");
                 }
 
-                return await _categoryRepository.DeleteILOSCategoryAsync(id);
+                return await _informCostTypeRepository.DeleteInformCostTypeAsync(id);
             }
             catch (Exception)
             {

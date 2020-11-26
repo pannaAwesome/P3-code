@@ -8,6 +8,7 @@ namespace HAVI_app.Api.DatabaseInterfaces
 {
     public interface IInformCostTypeRepository
     {
+        Task<InformCostType> GetInformCostType(int id);
         Task<IEnumerable<InformCostType>> GetInformCostTypes();
         Task<InformCostType> AddInformCostType(InformCostType informCostType);
         Task<InformCostType> UpdateInformCostType(InformCostType informCostType);

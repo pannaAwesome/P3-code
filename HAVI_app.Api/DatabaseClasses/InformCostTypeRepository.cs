@@ -35,6 +35,11 @@ namespace HAVI_app.Api.DatabaseClasses
             return null;
         }
 
+        public async Task<InformCostType> GetInformCostType(int id)
+        {
+            return await _context.InformCostTypes.FirstOrDefaultAsync(s => s.Id == id);
+        }
+
         public async Task<IEnumerable<InformCostType>> GetInformCostTypes()
         {
             return await _context.InformCostTypes.ToListAsync();

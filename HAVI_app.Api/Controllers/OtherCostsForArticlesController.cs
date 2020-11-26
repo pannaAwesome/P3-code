@@ -11,20 +11,20 @@ namespace HAVI_app.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ILOSCategoriesController : ControllerBase
+    public class OtherCostsForArticlesController : ControllerBase
     {
-        private readonly IILOSCategoryRepository _categoryRepository;
-        public ILOSCategoriesController(IILOSCategoryRepository categoryRepository)
+        private readonly IOtherCostsForArticleRepository _otherCostsForArticleRepository;
+        public OtherCostsForArticlesController(IOtherCostsForArticleRepository otherCostsForArticleRepository)
         {
-            _categoryRepository = categoryRepository;
+            _otherCostsForArticleRepository = otherCostsForArticleRepository;
         }
 
         [HttpGet]
-        public async Task<ActionResult> GetILOSCategories()
+        public async Task<ActionResult> GetOtherCostsForArticles()
         {
             try
             {
-                var result = await _categoryRepository.GetILOSCategories();
+                var result = await _otherCostsForArticleRepository.GetOtherCostsForArticles();
                 if (result == null)
                 {
                     return NotFound();
@@ -38,11 +38,11 @@ namespace HAVI_app.Api.Controllers
         }
 
         [HttpGet("{id:int}")]
-        public async Task<ActionResult<Iloscategory>> GetILOSCategory(int id)
+        public async Task<ActionResult<OtherCostsForArticle>> GetOtherCostsForArticle(int id)
         {
             try
             {
-                var result = await _categoryRepository.GetILOSCategory(id);
+                var result = await _otherCostsForArticleRepository.GetOtherCostsForArticle(id);
                 if (result == null)
                 {
                     return NotFound();
@@ -59,18 +59,18 @@ namespace HAVI_app.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Iloscategory>> CreateILOSCategory(Iloscategory category)
+        public async Task<ActionResult<OtherCostsForArticle>> CreateOtherCostsForArticle(OtherCostsForArticle otherCostsForArticle)
         {
             try
             {
-                if (category == null)
+                if (otherCostsForArticle == null)
                 {
                     return BadRequest();
                 }
 
-                var createdILOSCategory = await _categoryRepository.AddILOSCategory(category);
+                var createdOtherCostsForArticle = await _otherCostsForArticleRepository.AddOtherCostsForArticle(otherCostsForArticle);
 
-                return CreatedAtAction(nameof(GetILOSCategory), new { id = createdILOSCategory.Id }, createdILOSCategory);
+                return CreatedAtAction(nameof(GetOtherCostsForArticle), new { id = createdOtherCostsForArticle.Id }, createdOtherCostsForArticle);
             }
             catch (Exception)
             {
@@ -79,23 +79,23 @@ namespace HAVI_app.Api.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<Iloscategory>> UpdateILOSCategory(int id, Iloscategory category)
+        public async Task<ActionResult<OtherCostsForArticle>> UpdateOtherCostsForArticle(int id, OtherCostsForArticle otherCostsForArticle)
         {
             try
             {
-                if (id != category.Id)
+                if (id != otherCostsForArticle.Id)
                 {
                     return BadRequest();
                 }
 
-                var ILOSCategoryToUpdate = await _categoryRepository.GetILOSCategory(id);
+                var otherCostsForArticleToUpdate = await _otherCostsForArticleRepository.GetOtherCostsForArticle(id);
 
-                if (ILOSCategoryToUpdate == null)
+                if (otherCostsForArticleToUpdate == null)
                 {
-                    return NotFound($"ILOSCategory with id = {id} not found");
+                    return NotFound($"OtherCostsForArticle with id = {id} not found");
                 }
 
-                return await _categoryRepository.UpdateILOSCategory(category);
+                return await _otherCostsForArticleRepository.UpdateOtherCostsForArticle(otherCostsForArticle);
             }
             catch (Exception)
             {
@@ -104,18 +104,18 @@ namespace HAVI_app.Api.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Iloscategory>> DeleteILOSCategory(int id)
+        public async Task<ActionResult<OtherCostsForArticle>> DeleteOtherCostsForArticle(int id)
         {
             try
             {
-                var ILOSCategoryToDelete = await _categoryRepository.GetILOSCategory(id);
+                var otherCostsForArticleToDelete = await _otherCostsForArticleRepository.GetOtherCostsForArticle(id);
 
-                if (ILOSCategoryToDelete == null)
+                if (otherCostsForArticleToDelete == null)
                 {
-                    return NotFound($"ILOSCategory with id = {id} not found");
+                    return NotFound($"OtherCostsForArticle with id = {id} not found");
                 }
 
-                return await _categoryRepository.DeleteILOSCategoryAsync(id);
+                return await _otherCostsForArticleRepository.DeleteOtherCostsForArticleAsync(id);
             }
             catch (Exception)
             {

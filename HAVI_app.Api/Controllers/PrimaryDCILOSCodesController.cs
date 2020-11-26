@@ -11,20 +11,20 @@ namespace HAVI_app.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ILOSCategoriesController : ControllerBase
+    public class PrimaryDCILOSCodesController : ControllerBase
     {
-        private readonly IILOSCategoryRepository _categoryRepository;
-        public ILOSCategoriesController(IILOSCategoryRepository categoryRepository)
+        private readonly IPrimaryDCILOSCodeRepository _primaryDCILOSCodeRepository;
+        public PrimaryDCILOSCodesController(IPrimaryDCILOSCodeRepository primaryDCILOSCodeRepository)
         {
-            _categoryRepository = categoryRepository;
+            _primaryDCILOSCodeRepository = primaryDCILOSCodeRepository;
         }
 
         [HttpGet]
-        public async Task<ActionResult> GetILOSCategories()
+        public async Task<ActionResult> GetPrimaryDCILOSCodes()
         {
             try
             {
-                var result = await _categoryRepository.GetILOSCategories();
+                var result = await _primaryDCILOSCodeRepository.GetPrimaryDCILOSCodes();
                 if (result == null)
                 {
                     return NotFound();
@@ -38,11 +38,11 @@ namespace HAVI_app.Api.Controllers
         }
 
         [HttpGet("{id:int}")]
-        public async Task<ActionResult<Iloscategory>> GetILOSCategory(int id)
+        public async Task<ActionResult<PrimaryDciloscode>> GetPrimaryDCILOSCode(int id)
         {
             try
             {
-                var result = await _categoryRepository.GetILOSCategory(id);
+                var result = await _primaryDCILOSCodeRepository.GetPrimaryDCILOSCode(id);
                 if (result == null)
                 {
                     return NotFound();
@@ -59,18 +59,18 @@ namespace HAVI_app.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Iloscategory>> CreateILOSCategory(Iloscategory category)
+        public async Task<ActionResult<PrimaryDciloscode>> CreatePrimaryDCILOSCode(PrimaryDciloscode primaryDCILOSCode)
         {
             try
             {
-                if (category == null)
+                if (primaryDCILOSCode == null)
                 {
                     return BadRequest();
                 }
 
-                var createdILOSCategory = await _categoryRepository.AddILOSCategory(category);
+                var createdPrimaryDCILOSCode = await _primaryDCILOSCodeRepository.AddPrimaryDCILOSCode(primaryDCILOSCode);
 
-                return CreatedAtAction(nameof(GetILOSCategory), new { id = createdILOSCategory.Id }, createdILOSCategory);
+                return CreatedAtAction(nameof(GetPrimaryDCILOSCode), new { id = createdPrimaryDCILOSCode.Id }, createdPrimaryDCILOSCode);
             }
             catch (Exception)
             {
@@ -79,23 +79,23 @@ namespace HAVI_app.Api.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<Iloscategory>> UpdateILOSCategory(int id, Iloscategory category)
+        public async Task<ActionResult<PrimaryDciloscode>> UpdatePrimaryDCILOSCode(int id, PrimaryDciloscode primaryDCILOSCode)
         {
             try
             {
-                if (id != category.Id)
+                if (id != primaryDCILOSCode.Id)
                 {
                     return BadRequest();
                 }
 
-                var ILOSCategoryToUpdate = await _categoryRepository.GetILOSCategory(id);
+                var primaryDCILOSCodeToUpdate = await _primaryDCILOSCodeRepository.GetPrimaryDCILOSCode(id);
 
-                if (ILOSCategoryToUpdate == null)
+                if (primaryDCILOSCodeToUpdate == null)
                 {
-                    return NotFound($"ILOSCategory with id = {id} not found");
+                    return NotFound($"PrimaryDciloscode with id = {id} not found");
                 }
 
-                return await _categoryRepository.UpdateILOSCategory(category);
+                return await _primaryDCILOSCodeRepository.UpdatePrimaryDCILOSCode(primaryDCILOSCode);
             }
             catch (Exception)
             {
@@ -104,18 +104,18 @@ namespace HAVI_app.Api.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Iloscategory>> DeleteILOSCategory(int id)
+        public async Task<ActionResult<PrimaryDciloscode>> DeletePrimaryDCILOSCode(int id)
         {
             try
             {
-                var ILOSCategoryToDelete = await _categoryRepository.GetILOSCategory(id);
+                var primaryDCILOSCodeToDelete = await _primaryDCILOSCodeRepository.GetPrimaryDCILOSCode(id);
 
-                if (ILOSCategoryToDelete == null)
+                if (primaryDCILOSCodeToDelete == null)
                 {
-                    return NotFound($"ILOSCategory with id = {id} not found");
+                    return NotFound($"PrimaryDciloscode with id = {id} not found");
                 }
 
-                return await _categoryRepository.DeleteILOSCategoryAsync(id);
+                return await _primaryDCILOSCodeRepository.DeletePrimaryDCILOSCodeAsync(id);
             }
             catch (Exception)
             {

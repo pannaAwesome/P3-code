@@ -8,9 +8,10 @@ namespace HAVI_app.Api.DatabaseInterfaces
 {
     public interface IILOSOrderpickgroupRepository
     {
+        Task<Ilosorderpickgroup> GetILOSOrderpickgroup(int ilosOrderpickgroupId)
         Task<IEnumerable<Ilosorderpickgroup>> GetILOSOrderpickgroups();
-        Task<Ilosorderpickgroup> AddILOSOrderpickgroup(Ilosorderpickgroup ilosorderpickgroup);
-        Task<Ilosorderpickgroup> UpdateILOSOrderpickgroup(Ilosorderpickgroup ilosorderpickgroup);
-        Task<Ilosorderpickgroup> DeleteILOSOrderpickgroupAsync(int ilosorderpickgroupId);
+        Task<Ilosorderpickgroup> AddILOSOrderpickgroup(Ilosorderpickgroup ilosOrderpickgroup);
+        Task<Ilosorderpickgroup> UpdateILOSOrderpickgroup(Ilosorderpickgroup ilosOrderpickgroup);
+        Task<Ilosorderpickgroup> DeleteILOSOrderpickgroupAsync(int ilosOrderpickgroupId);
     }
 }

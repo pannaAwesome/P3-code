@@ -11,20 +11,20 @@ namespace HAVI_app.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ILOSCategoriesController : ControllerBase
+    public class QIPsController : ControllerBase
     {
-        private readonly IILOSCategoryRepository _categoryRepository;
-        public ILOSCategoriesController(IILOSCategoryRepository categoryRepository)
+        private readonly IQIPRepository _qipRepository;
+        public QIPsController(IQIPRepository qipRepository)
         {
-            _categoryRepository = categoryRepository;
+            _qipRepository = qipRepository;
         }
 
         [HttpGet]
-        public async Task<ActionResult> GetILOSCategories()
+        public async Task<ActionResult> GetQIPs()
         {
             try
             {
-                var result = await _categoryRepository.GetILOSCategories();
+                var result = await _qipRepository.GetQIPs();
                 if (result == null)
                 {
                     return NotFound();
@@ -38,11 +38,11 @@ namespace HAVI_app.Api.Controllers
         }
 
         [HttpGet("{id:int}")]
-        public async Task<ActionResult<Iloscategory>> GetILOSCategory(int id)
+        public async Task<ActionResult<Qip>> GetQIP(int id)
         {
             try
             {
-                var result = await _categoryRepository.GetILOSCategory(id);
+                var result = await _qipRepository.GetQIP(id);
                 if (result == null)
                 {
                     return NotFound();
@@ -59,18 +59,18 @@ namespace HAVI_app.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Iloscategory>> CreateILOSCategory(Iloscategory category)
+        public async Task<ActionResult<Qip>> CreateQIP(Qip qip)
         {
             try
             {
-                if (category == null)
+                if (qip == null)
                 {
                     return BadRequest();
                 }
 
-                var createdILOSCategory = await _categoryRepository.AddILOSCategory(category);
+                var createdQIP = await _qipRepository.AddQIP(qip);
 
-                return CreatedAtAction(nameof(GetILOSCategory), new { id = createdILOSCategory.Id }, createdILOSCategory);
+                return CreatedAtAction(nameof(GetQIP), new { id = createdQIP.Id }, createdQIP);
             }
             catch (Exception)
             {
@@ -79,23 +79,23 @@ namespace HAVI_app.Api.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<Iloscategory>> UpdateILOSCategory(int id, Iloscategory category)
+        public async Task<ActionResult<Qip>> UpdateQIP(int id, Qip qip)
         {
             try
             {
-                if (id != category.Id)
+                if (id != qip.Id)
                 {
                     return BadRequest();
                 }
 
-                var ILOSCategoryToUpdate = await _categoryRepository.GetILOSCategory(id);
+                var qipToUpdate = await _qipRepository.GetQIP(id);
 
-                if (ILOSCategoryToUpdate == null)
+                if (qipToUpdate == null)
                 {
-                    return NotFound($"ILOSCategory with id = {id} not found");
+                    return NotFound($"QIP with id = {id} not found");
                 }
 
-                return await _categoryRepository.UpdateILOSCategory(category);
+                return await _qipRepository.UpdateQIP(qip);
             }
             catch (Exception)
             {
@@ -104,18 +104,18 @@ namespace HAVI_app.Api.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Iloscategory>> DeleteILOSCategory(int id)
+        public async Task<ActionResult<Qip>> DeleteQIP(int id)
         {
             try
             {
-                var ILOSCategoryToDelete = await _categoryRepository.GetILOSCategory(id);
+                var qipToDelete = await _qipRepository.GetQIP(id);
 
-                if (ILOSCategoryToDelete == null)
+                if (qipToDelete == null)
                 {
-                    return NotFound($"ILOSCategory with id = {id} not found");
+                    return NotFound($"QIP with id = {id} not found");
                 }
 
-                return await _categoryRepository.DeleteILOSCategoryAsync(id);
+                return await _qipRepository.DeleteQIPAsync(id);
             }
             catch (Exception)
             {
