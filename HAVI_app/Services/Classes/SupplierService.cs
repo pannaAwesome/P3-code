@@ -1,5 +1,6 @@
 ﻿using HAVI_app.Models;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace HAVI_app.Services.Classes
         }
         public async Task<Supplier> GetSupplier(int id)
         {
-            return await httpClient.GetFromJsonAsync<Supplier>($"/api/suppliers/{id}");   
+            return await httpClient.GetFromJsonAsync<Supplier>($"/api/suppliers/{id}"); 
         }
 
         public async Task<IEnumerable<Supplier>> GetSuppliers()
@@ -26,9 +27,14 @@ namespace HAVI_app.Services.Classes
             return await httpClient.GetFromJsonAsync<Supplier[]>("/api/suppliers");
         }
         /*
-        public async Task<Supplier> CreateSupplier(Supplier supplier)
+        public async Task<ActionResult> CreateSupplier(Supplier supplier)
         {
-            return await httpClient.PostAsJsonAsync("/api/suppliers", supplier);
+            var result = await httpClient.PostAsJsonAsync("/api/suppliers", supplier);
+            var addedSupplier = result.Content.ReadAsAsync<Supplier>();
+            if (result.IsSuccessStatusCode)
+            {
+
+            }
         }
 
         public async Task<Supplier> UpdateSupplier(int id, Supplier supplier)
