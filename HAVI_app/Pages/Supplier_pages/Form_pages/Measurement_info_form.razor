@@ -145,15 +145,17 @@
 
     public void ValidationMeasurementForm() 
     {
+        
+        NavigationManager.NavigateTo($"/shipment_info_form", true);
+        
+        /*
         if (Article.LengthPrSalesunit.GetType() == typeof(double))
         {
-            NavigationManager.NavigateTo($"/shipment_info_form", true);
         }
-        if (Article.LengthPrSalesunit.GetType() != typeof(double))
+        if (Article.LengthPrSalesunit.GetType() = typeof(double))
         {
             LengthValidated = "btn-danger";
         }
-        /*
         if (!DecimalOnly(WidthPrSalesunit))
         {
             WidthValidated = "btn-danger";
