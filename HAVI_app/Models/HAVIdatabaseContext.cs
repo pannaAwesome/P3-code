@@ -228,8 +228,8 @@ namespace HAVI_app.Models
 
                 entity.HasOne(d => d.Profile)
                     .WithMany(p => p.Countries)
-                    .HasForeignKey(d => d.ProfileId)
                     .OnDelete(DeleteBehavior.Cascade)
+                    .HasForeignKey(d => d.ProfileId)
                     .HasConstraintName("FK__Country__Profile__267ABA7A");
             });
 

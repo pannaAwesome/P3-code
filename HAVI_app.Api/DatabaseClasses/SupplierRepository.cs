@@ -20,7 +20,7 @@ namespace HAVI_app.Api.DatabaseClasses
             var profile = await _context.Profiles.AddAsync(supplier.Profile);
             await _context.SaveChangesAsync();
 
-            supplier.ProfileId = _context.Profiles.FirstOrDefault(p => p.Username == supplier.Profile.Username).Id;
+            //supplier.ProfileId = _context.Profiles.FirstOrDefault(p => p.Username == supplier.Profile.Username).Id;
             var result = await _context.Suppliers.AddAsync(supplier);
             await _context.SaveChangesAsync();
 
