@@ -54,5 +54,21 @@ namespace HAVI_app.Api.DatabaseClasses
                                  .Include(p => p.Profile)
                                  .ToListAsync();
         }
+
+        public async Task<Purchaser> UpdatePurchaser(Purchaser purchaser)
+        {
+            var resultPurchaser = await _context.Purchasers.FirstOrDefaultAsync(c => c.Id == purchaser.Id);
+            var resultProfile = await _context.Profiles.FirstOrDefaultAsync(p => p.Id == resultPurchaser.ProfileId);
+
+            if (resultPurchaser != null && resultProfile != null)
+            {
+                resultProfile.Username = purchaser.Profile.Username;
+                resultProfile.Password = purchaser.Profile.Password;
+                await _context.SaveChangesAsync();
+                return resultPurchaser;
+            }
+
+            return null;
+        }
     }
 }
