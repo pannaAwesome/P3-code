@@ -28,14 +28,17 @@ namespace HAVI_app.Api.DatabaseClasses
 
         public async Task<Country> DeleteCountryAsync(int countryId)
         {
-            var result = await _context.Countries.Include(s => s.Profile)
-                                                 .FirstOrDefaultAsync(s => s.Id == countryId);
-            if (result != null)
+            var country = await _context.Countries.FirstOrDefaultAsync(c => c.Id == countryId);
+            var profile = await _context.Profiles.FirstOrDefaultAsync(p => p.Id == country.Id);
+            
+            if (country != null && profile != null)
             {
-                _context.Countries.Remove(result);
+                _context.Profiles.Remove(profile);
                 await _context.SaveChangesAsync();
-                return result;
+
+                return country;
             }
+
             return null;
         }
 
