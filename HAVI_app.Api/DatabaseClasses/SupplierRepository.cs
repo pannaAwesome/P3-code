@@ -24,9 +24,8 @@ namespace HAVI_app.Api.DatabaseClasses
 
         public async Task<Supplier> DeleteSupplierAsync(int supplierId)
         {
-            var result = await _context.Suppliers
-                                       .Include(s => s.Profile)
-                                       .FirstOrDefaultAsync(s => s.Id == supplierId);
+            var result = await _context.Suppliers.FirstOrDefaultAsync(s => s.Id == supplierId);
+            
             if (result != null)
             {
                 _context.Suppliers.Remove(result);
@@ -57,7 +56,6 @@ namespace HAVI_app.Api.DatabaseClasses
             var result = await _context.Suppliers.FirstOrDefaultAsync(s => s.Id == supplier.Id);
             if (result != null)
             {
-                result.ProfileId = supplier.ProfileId;
                 result.CompanyName = supplier.CompanyName;
                 result.CompanyLocation = supplier.CompanyLocation;
                 result.PalletExchange = supplier.PalletExchange;
