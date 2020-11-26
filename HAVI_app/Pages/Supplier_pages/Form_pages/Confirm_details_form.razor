@@ -1,7 +1,8 @@
 ﻿@layout HAVI_app.Shared.Supplier_layout.Form_layout
 @inject Microsoft.AspNetCore.Components.NavigationManager NavigationManager
-@page "/confirm_details/{Article}"
-@inject HAVI_app.Models.ArticleInformation ArticleInformation 
+@page "/confirm_details"
+@inject HAVI_app.Models.ArticleInformation ArticleInformation
+@inject Models.ArticleInformation Article
 
 <HAVI_app.Shared.Supplier_layout.Form_header SupplierState="filled" ArticleState="filled" MeasurementState="filled" ShipmentState="filled" PriceState="filled" ConfirmState="active" />
 
@@ -205,7 +206,7 @@
                         <label for="article_name">Article name:</label>
                     </td>
                     <td colspan="4">
-                        <input type="text" class="form-control" id="a_name" value="@ArticleInformation.ArticleName" disabled>
+                        <input type="text" class="form-control" id="a_name" value="@Article.ArticleName" disabled>
                     </td>
                     <td>
                         <div></div>
@@ -217,7 +218,7 @@
                         <label for="sales_unit">Salesunit:</label>
                     </td>
                     <td colspan="4">
-                        <input type="text" class="form-control" id="sales_unit" value="Bakke // 374" disabled>
+                        <input type="text" class="form-control" id="sales_unit" value="@Article.Salesunit" disabled>
                     </td>
                     <td>
                         <div></div>
@@ -229,7 +230,7 @@
                         <label for="article_pr_salesunit">Article per salesunit:</label>
                     </td>
                     <td colspan="3">
-                        <input type="number" class="form-control" id="salesunit_quantity" value="123" disabled>
+                        <input type="number" class="form-control" id="salesunit_quantity" value="@Article.ArticlesPerSalesunit" disabled>
                     </td>
                     <td>
                         <div></div>
@@ -241,7 +242,7 @@
                         <label for="supplier_article_nn">Supplier article number/name:</label>
                     </td>
                     <td colspan="4">
-                        <input type="number" class="form-control" id="article_number_name" value="12312442123" disabled>
+                        <input type="number" class="form-control" id="article_number_name" value="@Article.SupplierArticleNumber" disabled>
                     </td>
                     <td>
                         <div></div>
@@ -253,7 +254,7 @@
                         <label for="GTIN">GTIN number:</label>
                     </td>
                     <td colspan="4">
-                        <input type="number" class="form-control" id="GTIN" value="12312312412312" disabled>
+                        <input type="number" class="form-control" id="GTIN" value="@Article.Gtinnumber" disabled>
                     </td>
                     <td>
                         <div></div>
@@ -265,7 +266,7 @@
                         <label for="Shelflife">Shelflife:</label>
                     </td>
                     <td colspan="2">
-                        <input type="number" class="form-control" id="Shelflife" value="2" disabled>
+                        <input type="number" class="form-control" id="Shelflife" value="@Article.Shelflife" disabled>
                     </td>
                     <td>
                         <label class="center-for-units" for="Shelflife">days</label>
@@ -277,7 +278,7 @@
                         <label for="Min_shelflife">Min. shelflife at HAVI:</label>
                     </td>
                     <td colspan="2">
-                        <input type="number" class="form-control" id="Min_shelflife" value="12" disabled>
+                        <input type="number" class="form-control" id="Min_shelflife" value="@Article.ShelflifeAtHavi" disabled>
                     </td>
                     <td>
                         <label class="center-for-units" for="Min_shelflife">days</label>
@@ -318,7 +319,7 @@
                         <label for="length">Length per salesunit:</label>
                     </td>
                     <td colspan="3">
-                        <input type="number" class="form-control" id="Length" value="3" disabled>
+                        <input type="number" class="form-control" id="Length" value="@Article.LengthPrSalesunit" disabled>
                     </td>
                     <td>
                         <label class="center-for-units" for="length">cm</label>
@@ -330,7 +331,7 @@
                         <label for="width">Width per salesunit:</label>
                     </td>
                     <td colspan="3">
-                        <input type="number" class="form-control" id="width" value="12" disabled>
+                        <input type="number" class="form-control" id="width" value="@Article.WidthPrSalesunit" disabled>
                     </td>
                     <td>
                         <label class="center-for-units" for="width">cm</label>
@@ -342,7 +343,7 @@
                         <label for="height">Height per salesunit:</label>
                     </td>
                     <td colspan="3">
-                        <input type="number" class="form-control" id="height" value="10" disabled>
+                        <input type="number" class="form-control" id="height" value="@Article.HeightPrSalesunit" disabled>
                     </td>
                     <td>
                         <label class="center-for-units" for="height">cm</label>
@@ -354,7 +355,7 @@
                         <label for="net_weight">Net weight per salesunit:</label>
                     </td>
                     <td colspan="3">
-                        <input type="number" class="form-control" id="net_weight" value="12" disabled>
+                        <input type="number" class="form-control" id="net_weight" value="@Article.NetWeightPrSalesunit" disabled>
                     </td>
                     <td>
                         <label class="center-for-units" for="net_weight">kg</label>
@@ -366,7 +367,7 @@
                         <label for="gross_weight">Gross weight per salesunit:</label>
                     </td>
                     <td colspan="3">
-                        <input type="number" class="form-control" id="gross_weight" value="113" disabled>
+                        <input type="number" class="form-control" id="gross_weight" value="@Article.GrossWeightPrSalesunit" disabled>
                     </td>
                     <td>
                         <label class="center-for-units" for="gross_weight">kg</label>
@@ -392,7 +393,7 @@
                         <label for="carton_pr_pallet">Cartons per pallet:</label>
                     </td>
                     <td colspan="5">
-                        <input type="number" class="form-control" id="carton_pr_pallet" value="1" disabled>
+                        <input type="number" class="form-control" id="@Article.CartonsPerPallet" value="1" disabled>
                     </td>
                     <td>
                         <div></div>
@@ -404,7 +405,7 @@
                         <label for="carton_pr_layer">Cartons per layer:</label>
                     </td>
                     <td colspan="5">
-                        <input type="number" class="form-control" value="1" disabled>
+                        <input type="number" class="form-control" value="@Article.CartonsPerLayer" disabled>
                     </td>
                     <td>
                         <div></div>
@@ -417,7 +418,7 @@
                         <label for="country_origin">Country of origin:</label>
                     </td>
                     <td colspan="5">
-                        <input type="text" class="form-control" value="Denmark" disabled>
+                        <input type="text" class="form-control" value="@Article.CountryOfOrigin" disabled>
                     </td>
                     <td>
                         <div></div>
@@ -429,7 +430,7 @@
                         <label for="imported_from">Imported from:</label>
                     </td>
                     <td colspan="5">
-                        <input type="text" class="form-control" value="Denmark" disabled>
+                        <input type="text" class="form-control" value="@Article.ImportedFrom" disabled>
                     </td>
                     <td>
                         <div></div>
@@ -441,7 +442,7 @@
                         <label for="toll_tarrif_no">Toll-tarrif no:</label>
                     </td>
                     <td colspan="5">
-                        <input type="number" class="form-control" id="toll_tarrif_no" value="2" disabled>
+                        <input type="number" class="form-control" id="toll_tarrif_no" value="@Article.TollTarifNumber" disabled>
                     </td>
                     <td>
                         <div></div>
@@ -453,7 +454,7 @@
                         <label for="minimum_order_quantity">Minimum order quantity:</label>
                     </td>
                     <td colspan="5">
-                        <input type="number" class="form-control" id="minimum_order_quantity" value="10" disabled>
+                        <input type="number" class="form-control" id="minimum_order_quantity" value="@Article.MinimumOrderQuantity" disabled>
                     </td>
                     <td>
                         <div></div>
@@ -473,7 +474,7 @@
                     </td>
                     <td>
                         <div class="text-left">
-                            <input type="number" class="form-control" id="min" value="2" disabled>
+                            <input type="number" class="form-control" id="min" value="@Article.TemperatureTransportationMin" disabled>
                         </div>
                     </td>
                     <td>
@@ -488,7 +489,7 @@
                     </td>
                     <td>
                         <div class="text-left">
-                            <input type="number" class="form-control" id="max" value="4" disabled>
+                            <input type="number" class="form-control" id="max" value="@Article.TemperatureTransportationMax" disabled>
                         </div>
                     </td>
                     <td>
@@ -509,7 +510,7 @@
                     </td>
                     <td>
                         <div class="text-left">
-                            <input type="number" class="form-control" id="min" value="5" disabled>
+                            <input type="number" class="form-control" id="min" value="@Article.TemperatureStorageMin" disabled>
                         </div>
                     </td>
                     <td>
@@ -524,7 +525,7 @@
                     </td>
                     <td>
                         <div class="text-left">
-                            <input type="number" class="form-control" id="max" value="2" disabled>
+                            <input type="number" class="form-control" id="max" value="@Article.TemperatureStorageMax" disabled>
                         </div>
                     </td>
                     <td>
@@ -539,7 +540,7 @@
                         <label for="lead_time">Lead time:</label>
                     </td>
                     <td colspan="5">
-                        <input type="number" class="form-control" id="lead_time" value="5" disabled>
+                        <input type="number" class="form-control" id="lead_time" value="@Article.LeadTime" disabled>
                     </td>
                     <td>
                         <div class="text-right">
@@ -566,7 +567,7 @@
                         <label for="set_currency">Set currency:</label>
                     </td>
                     <td colspan="5">
-                        <input type="text" class="form-control" id="purchase_price" value="DKK" disabled>
+                        <input type="text" class="form-control" id="purchase_price" value="@Article.SetCurrency" disabled>
                     </td>
                     <td>
                         <div></div>
@@ -578,7 +579,7 @@
                         <label for="purchase_price">Purchase price:</label>
                     </td>
                     <td colspan="5">
-                        <input type="number" class="form-control" id="purchase_price" value="100" disabled>
+                        <input type="number" class="form-control" id="purchase_price" value="@Article.PurchasePrice" disabled>
                     </td>
                     <td>
                         <div></div>
@@ -671,9 +672,6 @@
 }
 
 @code {
-    [Parameter]
-    public HAVI_app.Models.ArticleInformation Article { get; set; }
-
     private string BookingTransport = "yes";
 
     private string DangerousGoods = "yes";

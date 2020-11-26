@@ -123,8 +123,6 @@
 
 @code {
     [Parameter]
-    public HAVI_app.Models.ArticleInformation Article { get; set; }
-
     public string LengthPrSalesunit { get; set; }
 
     public string WidthPrSalesunit { get; set; }
@@ -145,15 +143,15 @@
 
     public string GrossWeightValidated;
 
-    public void ValidationMeasurementForm()
+    public void ValidationMeasurementForm() 
     {
-        if (DecimalOnly(LengthPrSalesunit) &&
-            DecimalOnly(WidthPrSalesunit) &&
-            DecimalOnly(HeightPrSalesunit) &&
-            DecimalOnly(NetWeightPrSalesunit) &&
-            DecimalOnly(GrossWeightPrSalesunit))
+        if (DoubleOnly(Article.LengthPrSalesunit) &&
+            DecimalOnly(Article.WidthPrSalesunit) &&
+            DecimalOnly(Article.HeightPrSalesunit) &&
+            DecimalOnly(Article.NetWeightPrSalesunit) &&
+            DecimalOnly(Article.GrossWeightPrSalesunit))
         {
-            NavigationManager.NavigateTo($"/shipment_info_form/{Article}", true);
+            NavigationManager.NavigateTo($"/shipment_info_form", true);
         }
         if (!DecimalOnly(LengthPrSalesunit))
         {

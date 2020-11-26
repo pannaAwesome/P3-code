@@ -52,7 +52,7 @@
                         <label for="country_origin" class="required">Country of origin:</label>
                     </td>
                     <td colspan="6">
-                        <select class="form-control" name="county_origin">
+                        <select class="form-control" name="county_origin" @bind="Article.CountryOfOrigin">
                             <option disabled selected>-- select an option --</option>
                             <option>Denmark</option>
                             <option>Sweden</option>
@@ -72,7 +72,7 @@
                         <label for="imported_from" class="required ">Imported from:</label>
                     </td>
                     <td colspan="6">
-                        <select class="form-control" name="imported_from">
+                        <select class="form-control" name="imported_from" @bind="Article.ImportedFrom">
                             <option disabled selected>-- select an option --</option>
                             <option>Denmark</option>
                             <option>Sweden</option>
@@ -126,7 +126,7 @@
                         <label class="center-for-units" for="min">Min:</label>
                     </td>
                     <td>
-                        <input type="text" class="form-control" name="min" required>
+                        <input type="text" class="form-control" name="min" @bind="Article.TemperatureTransportationMin" required>
                     </td>
                     <td>
                         <label class="center-for-units" for="degrees">&#8451;</label>
@@ -135,7 +135,7 @@
                         <label class="center-for-units" for="max">Max:</label>
                     </td>
                     <td>
-                        <input type="text" class="form-control" name="max" required>
+                        <input type="text" class="form-control" name="max" @bind="@Article.TemperatureTransportationMax" required>
                     </td>
                     <td>
                         <label class="center-for-units" for="degrees">&#8451;</label>
@@ -156,7 +156,7 @@
                         <label class="center-for-units" for="min">Min:</label>
                     </td>
                     <td>
-                        <input type="text" class="form-control" name="min" required>
+                        <input type="text" class="form-control" name="min" @bind="Article.TemperatureStorageMin" required>
                     </td>
                     <td>
                         <label class="center-for-units" for="degrees">&#8451;</label>
@@ -165,7 +165,7 @@
                         <label class="center-for-units" for="max">Max:</label>
                     </td>
                     <td>
-                        <input type="text" class="form-control" name="max" required>
+                        <input type="text" class="form-control" name="max" @bind="@Article.TemperatureStorageMax" required>
                     </td>
                     <td>
                         <label class="center-for-units" for="degrees">&#8451;</label>

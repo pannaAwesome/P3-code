@@ -24,12 +24,12 @@ namespace HAVI_app.Classes
             return false;
         }
 
-        public bool DecimalOnly(string input)
+        public bool DoubleOnly(string input)
         {
-            decimal number;
+            double number;
             if(input != null)
             {
-                if (Decimal.TryParse(input, out number))
+                if (Double.TryParse(input, out number))
                 {
                     return true;
                 }

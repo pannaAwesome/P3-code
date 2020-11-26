@@ -23,7 +23,7 @@
                         <label for="set_currency" class="required">Set currency:</label>
                     </td>
                     <td colspan="4">
-                        <select class="form-control" name="set_currency" @bind="Article.SetCurrency" required @onchange="@((x) => CurrencySelected(x.Value.ToString()))">
+                        <select class="form-control" name="set_currency" @bind="Article.SetCurrency" required @oninput="@((x) => CurrencySelected(x.Value.ToString()))">
                             <option>DKK</option>
                             <option>ADP</option>
                             <option>USD</option>
@@ -135,14 +135,15 @@
 </div>
 
 @code {
-    [Parameter]
-    public HAVI_app.Models.ArticleInformation Article { get; set; }
 
     [Parameter]
     public string SetCurrency { get; set; }
 
     [Parameter]
     public int PurchasePrice { get; set; }
+
+    [Parameter]
+    public int AmountInCurrency { get; set; }
 
     [Parameter]
     public string CostRegardingArticle { get; set; }
@@ -156,7 +157,7 @@
 @code{
     public void OnPostForward()
     {
-        NavigationManager.NavigateTo($"/confirm_details/{Article}", true);
+        NavigationManager.NavigateTo($"/confirm_details", true);
     }
 
     public void OnPostBack()
