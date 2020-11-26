@@ -121,6 +121,8 @@
 </div>
 
 @code {
+    [Parameter]
+    public HAVI_app.Models.ArticleInformation Article { get; set; }
 
     public string LengthPrSalesunit { get; set; }
 
@@ -150,7 +152,7 @@
             DecimalOnly(NetWeightPrSalesunit) &&
             DecimalOnly(GrossWeightPrSalesunit))
         {
-            NavigationManager.NavigateTo("/shipment_info_form", true);
+            NavigationManager.NavigateTo($"/shipment_info_form/{Article}", true);
         }
         if (!DecimalOnly(LengthPrSalesunit))
         {
