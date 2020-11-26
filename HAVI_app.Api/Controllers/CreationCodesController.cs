@@ -19,24 +19,6 @@ namespace HAVI_app.Api.Controllers
             _creationCodeRepository = creationCodeRepository;
         }
 
-        [HttpGet]
-        public async Task<ActionResult> GetCreationCodes()
-        {
-            try
-            {
-                var result = await _creationCodeRepository.GetCreationCodes();
-                if(result == null)
-                {
-                    return NotFound();
-                }
-                return Ok(result);
-            }
-            catch (Exception)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database.");
-            }
-        }
-
         [HttpGet("{id:int}")]
         public async Task<ActionResult<CreationCode>> GetCreationCode(int id)
         {
@@ -96,26 +78,6 @@ namespace HAVI_app.Api.Controllers
                 }
 
                 return await _creationCodeRepository.UpdateCreationCode(creationCode);
-            }
-            catch (Exception)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database.");
-            }
-        }
-
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<CreationCode>> DeleteCreationCode(int id)
-        {
-            try
-            {
-                var creationCodeToDelete = await _creationCodeRepository.GetCreationCode(id);
-
-                if (creationCodeToDelete == null)
-                {
-                    return NotFound($"CreationCode with id = {id} not found");
-                }
-
-                return await _creationCodeRepository.DeleteCreationCodeAsync(id);
             }
             catch (Exception)
             {

@@ -25,7 +25,8 @@ namespace HAVI_app.Api.DatabaseClasses
 
         public async Task<ArticleInformation> GetArticleInformation(int articleInformationId)
         {
-            return await _context.ArticleInformations.Include(a => a.OtherCostsForArticles).FirstOrDefaultAsync(s => s.Id == articleInformationId);
+            return await _context.ArticleInformations.Include(a => a.OtherCostsForArticles)
+                                                     .FirstOrDefaultAsync(a => a.Id == articleInformationId);
         }
 
         public async Task<IEnumerable<ArticleInformation>> GetArticleInformations()
@@ -35,7 +36,8 @@ namespace HAVI_app.Api.DatabaseClasses
 
         public async Task<ArticleInformation> UpdateArticleInformation(ArticleInformation articleInformation)
         {
-            var result = await _context.ArticleInformations.FirstOrDefaultAsync(s => s.Id == articleInformation.Id);
+            var result = await _context.ArticleInformations.Include(a => a.OtherCostsForArticles)
+                                                           .FirstOrDefaultAsync(a => a.Id == articleInformation.Id);
             if (result != null)
             {
                 result.CompanyLocation = articleInformation.CompanyLocation;

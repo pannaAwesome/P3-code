@@ -62,6 +62,13 @@ namespace HAVI_app.Api.DatabaseClasses
         {
             return await _context.Countries
                                  .Include(c => c.Profile)
+                                 .Include(c => c.Ilosorderpickgroups)
+                                 .Include(c => c.Iloscategories)
+                                 .Include(c => c.InformCostTypes)
+                                 .Include(c => c.PrimaryDciloscodes)
+                                 .Include(c => c.Purchasers)
+                                 .Include(c => c.VailedForCustomers)
+                                 .Include(c => c.VatTaxCodes)
                                  .FirstOrDefaultAsync(s => s.Id == countryId);
         }
 
@@ -69,6 +76,13 @@ namespace HAVI_app.Api.DatabaseClasses
         {
             return await _context.Countries
                                  .Include(c => c.Profile)
+                                 .Include(c => c.Ilosorderpickgroups)
+                                 .Include(c => c.Iloscategories)
+                                 .Include(c => c.InformCostTypes)
+                                 .Include(c => c.PrimaryDciloscodes)
+                                 .Include(c => c.Purchasers)
+                                 .Include(c => c.VailedForCustomers)
+                                 .Include(c => c.VatTaxCodes)
                                  .ToListAsync();
         }
 

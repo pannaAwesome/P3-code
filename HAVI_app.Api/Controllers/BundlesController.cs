@@ -58,26 +58,6 @@ namespace HAVI_app.Api.Controllers
             }
         }
 
-        [HttpPost]
-        public async Task<ActionResult<Bundle>> CreateBundle(Bundle bundle)
-        {
-            try
-            {
-                if (bundle == null)
-                {
-                    return BadRequest();
-                }
-
-                var createdBundle = await _bundleRepository.AddBundle(bundle);
-
-                return CreatedAtAction(nameof(GetBundle), new { id = createdBundle.Id }, createdBundle);
-            }
-            catch (Exception)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database.");
-            }
-        }
-
         [HttpPut("{id}")]
         public async Task<ActionResult<Bundle>> UpdateBundle(int id, Bundle bundle)
         {
@@ -96,26 +76,6 @@ namespace HAVI_app.Api.Controllers
                 }
 
                 return await _bundleRepository.UpdateBundle(bundle);
-            }
-            catch (Exception)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database.");
-            }
-        }
-
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Bundle>> DeleteBundle(int id)
-        {
-            try
-            {
-                var bundleToDelete = await _bundleRepository.GetBundle(id);
-
-                if (bundleToDelete == null)
-                {
-                    return NotFound($"Bundle with id = {id} not found");
-                }
-
-                return await _bundleRepository.DeleteBundleAsync(id);
             }
             catch (Exception)
             {
