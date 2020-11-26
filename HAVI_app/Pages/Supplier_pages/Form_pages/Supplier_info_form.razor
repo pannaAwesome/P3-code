@@ -112,7 +112,7 @@
                     </td>
                     <td>
 
-                        <input type="text" class="form-control @EmailValidated" name="email" @bind="Email" @onfocus="RemoveEmailDanger" required>
+                        <input type="text" class="form-control @EmailValidated" name="email" @bind="Article.Email" @onfocus="RemoveEmailDanger" required>
                     </td>
                     <td>
                         <div></div>
@@ -131,10 +131,10 @@
                     </td>
                     <td>
                         <div class="text-center">
-                            <input type="radio" name="pallet_exchange" value="1" asp-for="PalletExchange" required>
+                            <input type="radio" name="pallet_exchange" checked="@(Article.PalletExchange == 1)" @onchange="@(() => Article.PalletExchange = 1)" required>
                             <label for="yes">Yes</label>
                             &nbsp;
-                            <input type="radio" value="0" name="pallet_exchange" asp-for="PalletExchange">
+                            <input type="radio" name="pallet_exchange" checked="@(Article.PalletExchange == 2)" @onchange="@(() => Article.PalletExchange = 2)">
                             <label for="no">No</label>
                         </div>
 
@@ -155,10 +155,10 @@
                     </td>
                     <td>
                         <div class="text-center">
-                            <input type="radio" name="freight_responsibility" value="CIP" asp-for="FreightResponsibility" required>
+                            <input type="radio" name="freight_responsibility" checked="@(Article.FreightResponsibility == "CIP")" @onchange="@(() => Article.FreightResponsibility = "CIP")" required>
                             <label for="CIP">CIP</label>
                             &nbsp;
-                            <input type="radio" value="EXW" name="freight_responsibility" asp-for="FreightResponsibility">
+                            <input type="radio" value="EXW" name="freight_responsibility" checked="@(Article.FreightResponsibility == "EXW")" @onchange="@(() => Article.FreightResponsibility = "EXW")">
                             <label for="EXW">EXW</label>
                         </div>
                     </td>
@@ -197,10 +197,10 @@
 
                     <td>
                         <div class="text-center">
-                            <input type="radio" name="transport" value="1" data-toggle="collapse" data-target="#hideTransit:not(.show)" aria-expanded="false" aria-controls="hideTransit" asp-for="BookingTransport" required>
+                            <input type="radio" name="transport" data-toggle="collapse" data-target="#hideTransit:not(.show)" aria-expanded="false" aria-controls="hideTransit" checked="@(Article.TransportBooking == 1)" @onchange="@(() => Article.TransportBooking = 1)" required>
                             <label for="yes">Yes</label>
                             &nbsp;
-                            <input type="radio" value="0" name="transport" data-toggle="collapse" data-target="#hideTransit.show" aria-expanded="false" aria-controls="hideTransit" asp-for="BookingTransport">
+                            <input type="radio" name="transport" data-toggle="collapse" data-target="#hideTransit.show" aria-expanded="false" aria-controls="hideTransit" checked="@(Article.TransportBooking == 2)" @onchange="@(() => Article.TransportBooking = 2)">
                             <label for="no">No</label>
                         </div>
                     </td>
@@ -235,10 +235,10 @@
                     </td>
                     <td>
                         <div class="text-center">
-                            <input type="radio" name="dangerous" value="0" data-toggle="collapse" data-target="#hideDanger:not(.show)" aria-expanded="false" aria-controls="hideDanger" asp-for="Adr" required>
+                            <input type="radio" name="dangerous" value="0" data-toggle="collapse" data-target="#hideDanger:not(.show)" aria-expanded="false" aria-controls="hideDanger" checked="@(Article.DangerousGoods == 1)" @onchange="@(() => Article.DangerousGoods = 1)" required>
                             <label for="yes">Yes</label>
                             &nbsp;
-                            <input type="radio" value="1" name="dangerous" data-toggle="collapse" data-target="#hideDanger.show" aria-expanded="false" aria-controls="hideDanger" asp-for="BookingTransport" />
+                            <input type="radio" value="1" name="dangerous" data-toggle="collapse" data-target="#hideDanger.show" aria-expanded="false" aria-controls="hideDanger" checked="@(Article.DangerousGoods == 2)" @onchange="@(() => Article.DangerousGoods = 2)" />
                             <label for="no">No</label>
                         </div>
                     </td>
@@ -334,12 +334,12 @@
 
     public void ValidationSupplierForm()
     {
-        if (IsEmailValid(Email))
+        if (IsEmailValid(Article.Email))
         {
             NavigationManager.NavigateTo("/article_info_form", true);
         }
 
-        if (!IsEmailValid(Email))
+        if (!IsEmailValid(Article.Email))
         {
             EmailValidated = "btn-danger";
         }
