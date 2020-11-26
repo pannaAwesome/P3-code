@@ -19,11 +19,11 @@ namespace HAVI_app.Api.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> GetQIPNumberss()
+        public async Task<ActionResult> GetQIPNumbers()
         {
             try
             {
-                var result = await _numbersRepository.GetQIPNumberss();
+                var result = await _numbersRepository.GetQIPNumbers();
                 if (result == null)
                 {
                     return NotFound();
