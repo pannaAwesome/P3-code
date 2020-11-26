@@ -17,7 +17,7 @@ namespace HAVI_app.Api.DatabaseClasses
         }
         public async Task<Purchaser> AddPurchaser(Purchaser purchaser)
         {
-            var profile = await _context.Profiles.AddAsync(purchaser.Profile);
+            await _context.Profiles.AddAsync(purchaser.Profile);
             await _context.SaveChangesAsync();
 
             var result = await _context.Purchasers.AddAsync(purchaser);
