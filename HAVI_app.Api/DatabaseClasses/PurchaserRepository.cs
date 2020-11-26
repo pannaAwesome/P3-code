@@ -44,12 +44,16 @@ namespace HAVI_app.Api.DatabaseClasses
 
         public async Task<Purchaser> GetPurchaser(int purchaserId)
         {
-            return await _context.Purchasers.FirstOrDefaultAsync(s => s.Id == purchaserId);
+            return await _context.Purchasers
+                                 .Include(p => p.Profile)
+                                 .FirstOrDefaultAsync(s => s.Id == purchaserId);
         }
 
         public async Task<IEnumerable<Purchaser>> GetPurchasers()
         {
-            return await _context.Purchasers.ToListAsync();
+            return await _context.Purchasers
+                                 .Include(p => p.Profile)
+                                 .ToListAsync();
         }
     }
 }

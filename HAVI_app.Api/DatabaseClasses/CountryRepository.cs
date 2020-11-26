@@ -57,12 +57,16 @@ namespace HAVI_app.Api.DatabaseClasses
 
         public async Task<Country> GetCountry(int countryId)
         {
-            return await _context.Countries.FirstOrDefaultAsync(s => s.Id == countryId);
+            return await _context.Countries
+                                 .Include(c => c.Profile)
+                                 .FirstOrDefaultAsync(s => s.Id == countryId);
         }
 
         public async Task<IEnumerable<Country>> GetCountries()
         {
-            return await _context.Countries.ToListAsync();
+            return await _context.Countries
+                                 .Include(c => c.Profile)
+                                 .ToListAsync();
         }
 
         public async Task<Country> UpdateCountry(Country country)
