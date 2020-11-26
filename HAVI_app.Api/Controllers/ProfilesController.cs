@@ -57,30 +57,5 @@ namespace HAVI_app.Api.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database.");
             }
         }
-
-        [HttpPut("{id}")]
-        public async Task<ActionResult<Profile>> UpdateProfile(int id, Profile profile)
-        {
-            try
-            {
-                if (id != profile.Id)
-                {
-                    return BadRequest();
-                }
-
-                var purchaserToUpdate = await _profileRepository.GetProfile(id);
-
-                if (purchaserToUpdate == null)
-                {
-                    return NotFound($"Supplier with id = {id} not found");
-                }
-
-                return await _profileRepository.UpdateProfile(profile);
-            }
-            catch (Exception)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database.");
-            }
-        }
     }
 }

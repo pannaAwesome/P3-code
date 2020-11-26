@@ -27,11 +27,5 @@ namespace HAVI_app.Services.Classes
         {
             return await httpClient.GetFromJsonAsync<Profile[]>("/api/profiles");
         }
-
-        public async Task<Profile> UpdateProfile(int id, Profile profile)
-        {
-            var result = await httpClient.PutAsJsonAsync($"/api/profiles/{id}", profile);
-            return await result.Content.ReadAsAsync<Profile>();
-        }
     }
 }
