@@ -1,6 +1,7 @@
 ﻿@layout HAVI_app.Shared.Supplier_layout.Form_layout
 @inject Microsoft.AspNetCore.Components.NavigationManager NavigationManager
 @page "/price_info_form"
+@inject Models.ArticleInformation Article
 
 <HAVI_app.Shared.Supplier_layout.Form_header SupplierState="filled" ArticleState="filled" MeasurementState="filled" ShipmentState="filled" PriceState="active" />
 
@@ -22,7 +23,7 @@
                         <label for="set_currency" class="required">Set currency:</label>
                     </td>
                     <td colspan="4">
-                        <select class="form-control" name="set_currency" required @onchange="@((x) => CurrencySelected(x.Value.ToString()))">
+                        <select class="form-control" name="set_currency" @bind="Article.SetCurrency" required @onchange="@((x) => CurrencySelected(x.Value.ToString()))">
                             <option>DKK</option>
                             <option>ADP</option>
                             <option>USD</option>
@@ -41,7 +42,7 @@
                         <label for="purchase_price" class="required">Purchase price:</label>
                     </td>
                     <td colspan="4">
-                        <input type="number" class="form-control" name="purchase_price" required>
+                        <input type="number" class="form-control" name="purchase_price" @bind="Article.PurchasePrice"required>
                     </td>
                     <td>
                         <HAVI_app.Shared.Shared_layout.Questionmark_top>
@@ -85,7 +86,7 @@
                             </td>
 
                             <td>
-                                <select class="form-control" name="afgift-@i" required>
+                                <select class="form-control" name="afgift-@i" @bind="Article.InformCostType" required>
                                     <option disabled selected>-- select an option --</option>
                                     <option>Chokoladeafgift</option>
                                     <option>Miljøafgift</option>
@@ -96,7 +97,7 @@
                                 <label for="amount-@i">Amount in @Currency:</label>
                             </td>
                             <td>
-                                <input type="number" class="form-control" name="amount-@i" required @onblur="Sum">
+                                <input type="number" class="form-control" name="amount-@i" @bind="Article.AmountInCurrency" required @onblur="Sum">
                             </td>
                             @if (i == NumberOfOtherCosts)
                             {

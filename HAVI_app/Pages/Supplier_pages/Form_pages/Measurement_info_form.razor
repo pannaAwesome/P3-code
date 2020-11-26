@@ -2,6 +2,7 @@
 @inject Microsoft.AspNetCore.Components.NavigationManager NavigationManager
 @page "/measurement_info_form"
 @inherits HAVI_app.Classes.Validation
+@inject Models.ArticleInformation Article
 
 <HAVI_app.Shared.Supplier_layout.Form_header SupplierState="filled" ArticleState="filled" MeasurementState="active" />
 
@@ -22,7 +23,7 @@
                         <label for="length" class="required">Length per salesunit:</label>
                     </td>
                     <td>
-                        <input type="text" class="form-control @LengthValidated" name="Length" @bind="LengthPrSalesunit" @onfocus="RemoveLengthDanger" required>
+                        <input type="text" class="form-control @LengthValidated" name="Length" @bind="Article.LengthPrSalesunit" @onfocus="RemoveLengthDanger" required>
                     </td>
                     <td>
                         <label class="center-for-units" for="length">cm</label>
@@ -40,7 +41,7 @@
                         <label for="width" class="required">Width per salesunit:</label>
                     </td>
                     <td>
-                        <input type="text" class="form-control @WidthValidated" name="width" @bind="WidthPrSalesunit" @onfocus="RemoveWidthDanger" required>
+                        <input type="text" class="form-control @WidthValidated" name="width" @bind="Article.WidthPrSalesunit" @onfocus="RemoveWidthDanger" required>
                     </td>
                     <td>
                         <label class="center-for-units" for="width">cm</label>
@@ -58,7 +59,7 @@
                         <label for="height" class="required">Height per salesunit:</label>
                     </td>
                     <td>
-                        <input type="text" class="form-control @HeightValidated" name="height" @bind="HeightPrSalesunit" @onfocus="RemoveHeightDanger" required>
+                        <input type="text" class="form-control @HeightValidated" name="height" @bind="Article.HeightPrSalesunit" @onfocus="RemoveHeightDanger" required>
                     </td>
                     <td>
                         <label class="center-for-units" for="height">cm</label>
@@ -76,7 +77,7 @@
                         <label for="net_weight" class="required">Net weight per salesunit:</label>
                     </td>
                     <td>
-                        <input type="text" class="form-control @NetWeightValidated" name="net_weight" @bind="NetWeightPrSalesunit" @onfocus="RemoveNetWeightDanger" required>
+                        <input type="text" class="form-control @NetWeightValidated" name="net_weight" @bind="Article.NetWeightPrSalesunit" @onfocus="RemoveNetWeightDanger" required>
                     </td>
                     <td>
                         <label class="center-for-units" for="net_weight">kg</label>
@@ -94,7 +95,7 @@
                         <label for="gross_weight" class="required">Gross weight per salesunit:</label>
                     </td>
                     <td>
-                        <input type="text" class="form-control @GrossWeightValidated" name="gross_weight" @bind="GrossWeightPrSalesunit" @onfocus="RemoveGrossWeightDanger" required>
+                        <input type="text" class="form-control @GrossWeightValidated" name="gross_weight" @bind="Article.GrossWeightPrSalesunit" @onfocus="RemoveGrossWeightDanger" required>
                     </td>
                     <td>
                         <label class="center-for-units" for="gross_weight">kg</label>
