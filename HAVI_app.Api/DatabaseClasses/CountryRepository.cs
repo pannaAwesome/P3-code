@@ -73,14 +73,17 @@ namespace HAVI_app.Api.DatabaseClasses
         }
 
         public async Task<Country> UpdateCountry(Country country)
-        {
-            var result = await _context.Countries.FirstOrDefaultAsync(s => s.Id == country.Id);
-            if (result != null)
+        {   
+            var resultCountry = await _context.Countries.FirstOrDefaultAsync(c => c.Id == country.Id);
+            var resultProfile = await _context.Profiles.FirstOrDefaultAsync(p => p.Id == resultCountry.ProfileId);
+
+            if (resultCountry != null && resultProfile != null)
             {
-                result.CountryCode = country.CountryCode;
-                result.CountryName = country.CountryName;
+                resultProfile.Password = country.Profile.Password;
+                resultCountry.CountryCode = country.CountryCode;
+                resultCountry.CountryName = country.CountryName;
                 await _context.SaveChangesAsync();
-                return result;
+                return resultCountry;
             }
 
             return null;
