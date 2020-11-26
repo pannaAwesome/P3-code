@@ -68,9 +68,9 @@ namespace HAVI_app.Api.Controllers
                     return BadRequest();
                 }
 
-                var supplierToUpdate = await _profileRepository.GetProfile(id);
+                var purchaserToUpdate = await _profileRepository.GetProfile(id);
 
-                if (supplierToUpdate == null)
+                if (purchaserToUpdate == null)
                 {
                     return NotFound($"Supplier with id = {id} not found");
                 }

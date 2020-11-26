@@ -83,9 +83,9 @@ namespace HAVI_app.Api.Controllers
         {
             try
             {
-                var supplierToDelete = await _purchaserRepository.GetPurchaser(id);
+                var purchaserToDelete = await _purchaserRepository.GetPurchaser(id);
 
-                if (supplierToDelete == null)
+                if (purchaserToDelete == null)
                 {
                     return NotFound($"Purchaser with id = {id} not found");
                 }
