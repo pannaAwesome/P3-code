@@ -8,16 +8,16 @@ using System.Threading.Tasks;
 
 namespace HAVI_app.Services.Classes
 {
-    public class QIPNumber
+    public class QIPNumberService
     {
         private readonly HttpClient httpClient;
-        public QIPNumber(HttpClient httpClient)
+        public QIPNumberService(HttpClient httpClient)
         {
             this.httpClient = httpClient;
         }
-        public async Task<IEnumerable<QIPNumber>> GetQIPNumbers()
+        public async Task<IEnumerable<QIPNumberService>> GetQIPNumbers()
         {
-            return await httpClient.GetFromJsonAsync<QIPNumber[]>("/api/qipNumbers");
+            return await httpClient.GetFromJsonAsync<QIPNumberService[]>("/api/qipNumbers");
         }
     }
 }
