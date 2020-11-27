@@ -55,8 +55,8 @@ namespace HAVI_app.Models
         public double? PurchasePrice { get; set; }
         public int? OtherCosts { get; set; }
 
-        public virtual Article Article { get; set; }
         [JsonIgnore]
+        public virtual Article Article { get; set; }
         public virtual ICollection<OtherCostsForArticle> OtherCostsForArticles { get; set; }
     }
 }

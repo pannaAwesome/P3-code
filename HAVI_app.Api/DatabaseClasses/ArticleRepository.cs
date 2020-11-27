@@ -61,7 +61,7 @@ namespace HAVI_app.Api.DatabaseClasses
 
         public async Task<IEnumerable<Article>> GetArticles()
         {
-            return await _context.Articles.Include(a => a.Purchaser)
+            return await _context.Articles.Include(a => a.Purchaser).ThenInclude(p => p.Profile)
                                           .Include(a => a.InternalArticleInformation)
                                           .Include(a => a.ArticleInformation)
                                           .ToListAsync();

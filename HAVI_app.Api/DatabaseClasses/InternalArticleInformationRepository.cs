@@ -61,7 +61,6 @@ namespace HAVI_app.Api.DatabaseClasses
                                                         .Include(b => b.Bundles)
                                                         .FirstOrDefaultAsync(s => s.Id == internalArticle.Id);
             
-
             if (resultInternalArticleInformation != null)
             {
                 resultInternalArticleInformation.Bosnumber = internalArticle.Bosnumber;
@@ -100,31 +99,54 @@ namespace HAVI_app.Api.DatabaseClasses
                 foreach(Sapplant plant in resultInternalArticleInformation.Sapplants)
                 {
                     var resultPlant = await _context.Sapplants.FirstOrDefaultAsync(s => s.Id == plant.Id);
-                    resultPlant.SapplantName = plant.SapplantName;
-                    resultPlant.SapplantValue = plant.SapplantValue;
+
+                    if (resultPlant != null)
+                    {
+                        resultPlant.SapplantName = plant.SapplantName;
+                        resultPlant.SapplantValue = plant.SapplantValue;
+                    }
+                    else
+                    {
+                        await _context.Sapplants.AddAsync(plant);
+                    }
                     await _context.SaveChangesAsync();
                 }
 
                 foreach(Qip qip in resultInternalArticleInformation.Qips)
                 {
                     var resultQIP = await _context.Qips.FirstOrDefaultAsync(q => q.Id == qip.Id);
-                    resultQIP.QipanswerOptions = qip.QipanswerOptions;
-                    resultQIP.Qipdescription = qip.Qipdescription;
-                    resultQIP.Qipfrequency = qip.Qipfrequency;
-                    resultQIP.QipfrequencyType = qip.QipfrequencyType;
-                    resultQIP.QiphighBoundary = qip.QiphighBoundary;
-                    resultQIP.QiplowBoundary = qip.QiplowBoundary;
-                    resultQIP.QipnameNumber = qip.QipnameNumber;
-                    resultQIP.Qipokvalue = qip.Qipokvalue;
-                    resultQIP.QipsetAnswer = qip.QipsetAnswer;
+
+                    if (resultQIP != null)
+                    {
+                        resultQIP.QipanswerOptions = qip.QipanswerOptions;
+                        resultQIP.Qipdescription = qip.Qipdescription;
+                        resultQIP.Qipfrequency = qip.Qipfrequency;
+                        resultQIP.QipfrequencyType = qip.QipfrequencyType;
+                        resultQIP.QiphighBoundary = qip.QiphighBoundary;
+                        resultQIP.QiplowBoundary = qip.QiplowBoundary;
+                        resultQIP.QipnameNumber = qip.QipnameNumber;
+                        resultQIP.Qipokvalue = qip.Qipokvalue;
+                        resultQIP.QipsetAnswer = qip.QipsetAnswer;
+                    }else
+                    {
+                        await _context.Qips.AddAsync(qip);
+                    }
                     await _context.SaveChangesAsync();
                 }
 
                 foreach (Bundle bundle in resultInternalArticleInformation.Bundles)
                 {
                     var resultBundle = await _context.Bundles.FirstOrDefaultAsync(b => b.Id == bundle.Id);
-                    resultBundle.ArticleBundle = bundle.ArticleBundle;
-                    resultBundle.ArticleBundleQuantity = bundle.ArticleBundleQuantity;
+
+                    if (resultBundle != null)
+                    {
+                        resultBundle.ArticleBundle = bundle.ArticleBundle;
+                        resultBundle.ArticleBundleQuantity = bundle.ArticleBundleQuantity;
+                    }
+                    else
+                    {
+                        await _context.Bundles.AddAsync(bundle);
+                    }
                     await _context.SaveChangesAsync();
                 }
                 return resultInternalArticleInformation;

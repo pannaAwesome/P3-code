@@ -31,7 +31,6 @@ namespace HAVI_app.Models
         public string CountryCode { get; set; }
 
         public virtual Profile Profile { get; set; }
-        [JsonIgnore]
         public virtual ICollection<Article> Articles { get; set; }
         [JsonIgnore]
         public virtual ICollection<Iloscategory> Iloscategories { get; set; }

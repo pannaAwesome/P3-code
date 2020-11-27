@@ -22,9 +22,9 @@ namespace HAVI_app.Models
         [ForeignKey("Country")]
         public int CountryId { get; set; }
 
+        [JsonIgnore]
         public virtual Country Country { get; set; }
         public virtual Profile Profile { get; set; }
-        [JsonIgnore]
         public virtual ICollection<Article> Articles { get; set; }
     }
 }

@@ -50,7 +50,6 @@ namespace HAVI_app.Api.DatabaseClasses
             var result = await _context.CreationCodes.FirstOrDefaultAsync(s => s.Id == code.Id);
             if (result != null)
             {
-                result.Code = code.Code;
                 result.Active = code.Active;
                 await _context.SaveChangesAsync();
                 return result;

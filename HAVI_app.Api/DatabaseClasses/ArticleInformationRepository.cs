@@ -78,6 +78,23 @@ namespace HAVI_app.Api.DatabaseClasses
                 result.TransportBooking = articleInformation.TransportBooking;
                 result.WidthPerSalesunit = articleInformation.WidthPerSalesunit;
                 await _context.SaveChangesAsync();
+
+                foreach(OtherCostsForArticle cost in result.OtherCostsForArticles)
+                {
+                    var resultCost = await _context.OtherCostsForArticles.FirstOrDefaultAsync(c => c.Id == cost.Id);
+
+                    if(resultCost != null)
+                    {
+                        resultCost.Amount = cost.Amount;
+                        resultCost.InformCostType = cost.InformCostType;
+                    }
+                    else
+                    {
+                        await _context.OtherCostsForArticles.AddAsync(cost);
+                    }
+                    await _context.SaveChangesAsync();
+                }
+
                 return result;
             }
 

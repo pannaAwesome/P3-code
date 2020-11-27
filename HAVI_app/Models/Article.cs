@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 #nullable disable
 
@@ -31,9 +32,11 @@ namespace HAVI_app.Models
         public string ErrorOwner { get; set; }
 
         public virtual ArticleInformation ArticleInformation { get; set; }
+        [JsonIgnore]
         public virtual Country Country { get; set; }
         public virtual InternalArticleInformation InternalArticleInformation { get; set; }
         public virtual Purchaser Purchaser { get; set; }
+        [JsonIgnore]
         public virtual Supplier Supplier { get; set; }
     }
 }

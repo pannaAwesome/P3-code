@@ -45,6 +45,7 @@ namespace HAVI_app.Api.DatabaseClasses
         {
             return await _context.Purchasers
                                  .Include(p => p.Profile)
+                                 .Include(p => p.Articles)
                                  .FirstOrDefaultAsync(s => s.Id == purchaserId);
         }
 

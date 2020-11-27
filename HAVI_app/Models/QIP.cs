@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 #nullable disable
 
@@ -22,7 +23,7 @@ namespace HAVI_app.Models
         public string QiphighBoundary { get; set; }
         public string QipfrequencyType { get; set; }
         public string Qipfrequency { get; set; }
-
+        [JsonIgnore]
         public virtual InternalArticleInformation InternalArticleInformation { get; set; }
     }
 }

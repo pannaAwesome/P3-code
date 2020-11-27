@@ -50,12 +50,10 @@ namespace HAVI_app.Models
         public int? PrimaryDcIloscode { get; set; }
         public int? TransitTimeForHavi { get; set; }
 
+        [JsonIgnore]
         public virtual Article Article { get; set; }
-        [JsonIgnore]
         public virtual ICollection<Bundle> Bundles { get; set; }
-        [JsonIgnore]
         public virtual ICollection<Qip> Qips { get; set; }
-        [JsonIgnore]
         public virtual ICollection<Sapplant> Sapplants { get; set; }
     }
 }

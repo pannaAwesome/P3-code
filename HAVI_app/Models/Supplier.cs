@@ -25,7 +25,6 @@ namespace HAVI_app.Models
         public string FreightResponsibility { get; set; }
 
         public virtual Profile Profile { get; set; }
-        [JsonIgnore]
         public virtual ICollection<Article> Articles { get; set; }
     }
 }

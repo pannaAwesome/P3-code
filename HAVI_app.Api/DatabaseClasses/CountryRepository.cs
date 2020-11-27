@@ -42,33 +42,11 @@ namespace HAVI_app.Api.DatabaseClasses
             return null;
         }
 
-        public async Task<Supplier> DeleteSupplierAsync(int supplierId)
-        {
-            var result = await _context.Suppliers
-                                       .Include(s => s.Profile)
-                                       .FirstOrDefaultAsync(s => s.Id == supplierId);
-            if (result != null)
-            {
-                _context.Suppliers.Remove(result);
-                await _context.SaveChangesAsync();
-
-                return result;
-            }
-
-            return null;
-        }
-
         public async Task<Country> GetCountry(int countryId)
         {
             return await _context.Countries
                                  .Include(c => c.Profile)
-                                 .Include(c => c.Ilosorderpickgroups)
-                                 .Include(c => c.Iloscategories)
-                                 .Include(c => c.InformCostTypes)
-                                 .Include(c => c.PrimaryDciloscodes)
-                                 .Include(c => c.Purchasers)
-                                 .Include(c => c.VailedForCustomers)
-                                 .Include(c => c.VatTaxCodes)
+                                 .Include(c => c.Articles)
                                  .FirstOrDefaultAsync(s => s.Id == countryId);
         }
 
@@ -76,13 +54,6 @@ namespace HAVI_app.Api.DatabaseClasses
         {
             return await _context.Countries
                                  .Include(c => c.Profile)
-                                 .Include(c => c.Ilosorderpickgroups)
-                                 .Include(c => c.Iloscategories)
-                                 .Include(c => c.InformCostTypes)
-                                 .Include(c => c.PrimaryDciloscodes)
-                                 .Include(c => c.Purchasers)
-                                 .Include(c => c.VailedForCustomers)
-                                 .Include(c => c.VatTaxCodes)
                                  .ToListAsync();
         }
 

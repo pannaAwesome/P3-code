@@ -44,10 +44,6 @@ namespace HAVI_app
             {
                 client.BaseAddress = new System.Uri("https://localhost:44394");
             });
-            services.AddHttpClient<ArticleBundleService>(client =>
-            {
-                client.BaseAddress = new System.Uri("https://localhost:44394");
-            });
             services.AddHttpClient<ArticleInformationService>(client =>
             {
                 client.BaseAddress = new System.Uri("https://localhost:44394");
