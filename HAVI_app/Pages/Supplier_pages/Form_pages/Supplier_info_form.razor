@@ -23,7 +23,7 @@
                         <label for="company_name" class="required">Company name:</label>
                     </td>
                     <td>
-                        <input type="text" class="form-control" name="company_name" @bind="Article.CompanyName" required>
+                        <input type="text" class="form-control" name="company_name" @bind="Article.CompanyName" required max="31">
                     </td>
                     <td>
                         <div></div>
@@ -112,7 +112,7 @@
                     </td>
                     <td>
 
-                        <input type="text" class="form-control @EmailValidated" name="email" @bind="Article.Email" @onfocus="RemoveEmailDanger" required>
+                        <input type="text" class="form-control @EmailValidated" name="email" @bind="Article.Email" @onfocus="RemoveEmailDanger" required max="50">
                     </td>
                     <td>
                         <div></div>
@@ -177,7 +177,7 @@
                 <tr>
                     <td colspan="2">
                         <label for="special_info">Special information regarding the article or cooperation?</label>
-                        <textarea class="form-control" name="special_info" @bind="Article.SpecialInformation"></textarea>
+                        <textarea class="form-control" name="special_info" @bind="Article.SpecialInformation" max="500"></textarea>
                     </td>
                     <td>
                         <div></div>
@@ -219,7 +219,7 @@
                         <label for="transittime" class="required">Transit time:</label>
                     </td>
                     <td>
-                        <input type="number" class="form-control" name="transittime" @bind="Article.TransitTime">
+                        <input type="number" class="form-control" name="transittime" @bind="Article.TransitTime" max="4">
                     </td>
                     <td>days</td>
                     <td>
@@ -258,7 +258,7 @@
                         <label for="class" class="required">Class:</label>
                     </td>
                     <td>
-                        <input type="text" class="form-control" name="class" @bind="Article.Class">
+                        <input type="text" class="form-control" name="class" @bind="Article.Class" max="31">
                     </td>
                     <td>
                         <div></div>
@@ -275,7 +275,7 @@
                         <label for="classificationCode" class="required">Classification code:</label>
                     </td>
                     <td>
-                        <input type="text" class="form-control" name="classificationcode" @bind="Article.ClassificationCode">
+                        <input type="text" class="form-control" name="classificationcode" @bind="Article.ClassificationCode" max="16">
                     </td>
                     <td>
                         <div></div>
