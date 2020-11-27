@@ -18,6 +18,7 @@ namespace HAVI_app.Models
         {
         }
 
+        /* public virtual DbSet<Developer> Developers { get; set; } */
         public virtual DbSet<Article> Articles { get; set; }
         public virtual DbSet<ArticleBundle> ArticleBundles { get; set; }
         public virtual DbSet<ArticleInformation> ArticleInformations { get; set; }
