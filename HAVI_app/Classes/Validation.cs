@@ -73,19 +73,20 @@ namespace HAVI_app.Classes
             return false;
         }
 
-        public string GTINValidation(string input)
+        public int? GTINValidation(int? input)
         {
+            string temp = input.ToString();
             List<char> GTIN = new List<char>();
             string ValidatedGTIN = "";
 
-            if(input.Length < 14)
+            if(temp.Length < 14)
             {
-                foreach(char num in input)
+                foreach(char num in temp)
                 {
                     GTIN.Add(num);
                 }
                 
-                int zeroCount = 14 - input.Length;
+                int zeroCount = 14 - temp.Length;
 
                 for(int i = 0; i < zeroCount; i++)
                 {
@@ -94,7 +95,7 @@ namespace HAVI_app.Classes
                 ValidatedGTIN = string.Join("",GTIN);
             }
 
-            return ValidatedGTIN;
+            return Convert.ToInt32(ValidatedGTIN);
         }
     }
 }

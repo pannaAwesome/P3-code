@@ -83,7 +83,7 @@
                         <label for="supplier_article_nn" class="required">Supplier article number/name:</label>
                     </td>
                     <td>
-                        <input type="text" class="form-control @SupplierArticleNumberValidated" name="supplier_article_nn" @bind="Article.SupplierArticleNumber" required> @SupplierArticleNumber
+                        <input type="text" class="form-control @SupplierArticleNumberValidated" name="supplier_article_nn" @bind="Article.SupplierArticleNumber" required>
                     </td>
                     <td>
                         <div></div>
@@ -101,7 +101,7 @@
                         <label for="GTIN" class="required">GTIN number:</label>
                     </td>
                     <td>
-                        <input type="number" class="form-control" name="GTIN" @bind="Article.Gtinnumber" required max="14"> @GtinNumber
+                        <input type="number" class="form-control" name="GTIN" @bind="Article.Gtinnumber" required max="14">
                     </td>
                     <td>
                         <div></div>
@@ -225,6 +225,11 @@
 
     public string ShelflifeAtHaviValidated;
 
+    private void GTINfiller()
+    {
+        Article.Gtinnumber = GTINValidation(Article.Gtinnumber);
+    }
+
     public void ValidationArticleInfoForm()
     {
 
@@ -234,6 +239,7 @@
             NumbersOnly(Shelflife) &&
             NumbersOnly(ShelflifeAtHavi)*/)
         {
+            GTINfiller();
             NavigationManager.NavigateTo("/measurement_info_form", true);
         }
 
