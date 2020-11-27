@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -6,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace HAVI_app.Models
 {
-    public partial class HAVIdatabaseContext : DbContext
+    public partial class HAVIdatabaseContext : IdentityDbContext<ApplicationUser>
     {
         public HAVIdatabaseContext()
         {
