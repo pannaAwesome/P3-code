@@ -275,7 +275,7 @@
                         <label for="classificationCode" class="required">Classification code:</label>
                     </td>
                     <td>
-                        <input type="text" class="form-control" name="classificationcode" @bind="Article.ClassificationCode">
+                        <input type="text" class="form-control @ClassificationCodeValidated" name="classificationcode" @bind="Article.ClassificationCode" @onfocus="RemoveClassDanger">
                     </td>
                     <td>
                         <div></div>
@@ -310,7 +310,7 @@
 
     public void ValidationSupplierForm()
     {
-        if (IsEmailValid(Article.Email))
+        if (IsEmailValid(Article.Email) && ((Article.DangerousGoods == 1) ? NumbersLettersDashOnly(Article.ClassificationCode) : false))
         {
             NavigationManager.NavigateTo("/article_info_form", true);
         }
@@ -320,10 +320,10 @@
             EmailValidated = "btn-danger";
         }
 
-        /*if (!NumbersLettersDashOnly(ClassificationCode))
+        if (!NumbersLettersDashOnly(Article.ClassificationCode))
         {
-            ClassificationCode = "btn-danger";
-        }*/
+            ClassificationCodeValidated = "btn-danger";
+        }
     }
 
     void RemoveEmailDanger()
@@ -335,16 +335,4 @@
     {
         ClassificationCodeValidated = "";
     }
-    /*
-    Article.CompanyName = CompanyName;
-    Article.CompanyLocation = CompanyLocation;
-    Article.Email = Email;
-    Article.PalletExchange = PalletExchange;
-    Article.FreightResponsibility = FreightResponsibility;
-    Article.SpecialInformation = SpecialInformation;
-    Article.TransportBooking = BookingTransport;
-    Article.TransitTime = TransitTime;
-    Article.DangerousGoods = Adr;
-    Article.Class = ClassInfo;
-    Article.ClassificationCode = ClassificationCode; */
 }

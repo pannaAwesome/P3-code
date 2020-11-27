@@ -16,7 +16,7 @@ namespace HAVI_app.Classes
             {
                 foreach (char letters in input)
                 {
-                    if (!char.IsLetter(letters))
+                    if (!char.IsLetter(letters) && !char.IsWhiteSpace(letters))
                         return false;
                 }
                 return true;

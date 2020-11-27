@@ -17,7 +17,7 @@
 
 <div class="row justify-content-center">
     <div class="col-12 d-flex justify-content-center">
-        <form>
+        <EditForm Model="Article" @onsubmit="ValidationArticleInfoForm">
             <table class="table">
 
                 <tr>
@@ -66,7 +66,7 @@
                         <label for="article_pr_salesunit" class="required">Articles per salesunit:</label>
                     </td>
                     <td>
-                        <input type="number" class="form-control @ArticlePerSalesunitValidated" name="article_pr_salesunit" @bind="Article.ArticlesPerSalesunit" required> @ArticlePerSalesunit
+                        <input type="number" class="form-control @ArticlePerSalesunitValidated" name="article_pr_salesunit" @bind="Article.ArticlesPerSalesunit" required>
                     </td>
                     <td>
                         <div></div>
@@ -119,7 +119,7 @@
                         <label for="Shelflife" class="required">Shelflife:</label>
                     </td>
                     <td>
-                        <input type="number" class="form-control @ShelflifeValidated" name="Shelflife" @bind="Article.Shelflife" required> @Shelflife
+                        <input type="number" class="form-control @ShelflifeValidated" name="Shelflife" @bind="Article.Shelflife" required>
                     </td>
                     <td>
                         <label class="center-for-units" for="Shelflife">days</label>
@@ -137,7 +137,7 @@
                         <label for="Min_shelflife" class="required">Min. shelflife at HAVI:</label>
                     </td>
                     <td>
-                        <input type="number" class="form-control @ShelflifeAtHaviValidated" name="Min_shelflife" @bind="Article.ShelflifeAtHavi" required> @ShelflifeAtHavi
+                        <input type="number" class="form-control @ShelflifeAtHaviValidated" name="Min_shelflife" @bind="Article.ShelflifeAtHavi" required>
                     </td>
                     <td>
                         <label class="center-for-units" for="Min_shelflife">days</label>
@@ -182,38 +182,14 @@
                     <input type="button" class="btn cancel-button button-size" value="Back" @onclick="OnPostBack" />
                 </div>
                 <div class="text-left col-6">
-                    <input type="button" class="btn green-button button-size" value="Next" @onclick="ValidationArticleInfoForm" />
+                    <input type="submit" class="btn green-button button-size" value="Next" />
                 </div>
             </div>
-        </form>
+        </EditForm>
     </div>
 </div>
 
 @code{
-
-    [Parameter]
-    public string ArticleName { get; set; }
-
-    [Parameter]
-    public string SalesUnit { get; set; }
-
-    [Parameter]
-    public string ArticlePerSalesunit { get; set; }
-
-    [Parameter]
-    public string SupplierArticleNumber { get; set; }
-
-    [Parameter]
-    public string GtinNumber { get; set; }
-
-    [Parameter]
-    public string Shelflife { get; set; }
-
-    [Parameter]
-    public string ShelflifeAtHavi { get; set; }
-
-    [Parameter]
-    public string OrganicLife { get; set; }
 
     public string ArticleNameValidated;
 
@@ -233,13 +209,10 @@
     public void ValidationArticleInfoForm()
     {
 
-        if (LettersOnly(Article.ArticleName)
-            /*NumbersOnly(ArticlePerSalesunit) &&
-            NumbersOnly(SupplierArticleNumber) &&
-            NumbersOnly(Shelflife) &&
-            NumbersOnly(ShelflifeAtHavi)*/)
+        if (LettersOnly(Article.ArticleName))
         {
-            GTINfiller();
+            Article.Gtinnumber = GTINValidation(Article.Gtinnumber);
+
             NavigationManager.NavigateTo("/measurement_info_form", true);
         }
 
@@ -247,43 +220,11 @@
         {
             ArticleNameValidated = "btn-danger";
         }
-        /*
-        if (!NumbersOnly(ArticlePerSalesunit))
-        {
-            ArticlePerSalesunitValidated = "btn-danger";
-        }
-
-        if (!NumbersOnly(SupplierArticleNumberValidated))
-        {
-            ArticlePerSalesunitValidated = "btn-danger";
-        }
-
-        if (!NumbersOnly(ShelflifeValidated))
-        {
-            ShelflifeValidated = "btn-danger";
-        }
-
-        if (!NumbersOnly(ShelflifeAtHaviValidated))
-        {
-            ShelflifeAtHaviValidated = "btn-danger";
-        }*/
-
-
-
-
     }
 
-    @code{
-
-        public void OnPostForward()
-        {
-            // NavigationManager.NavigateTo($"/measurement_info_form", true);
-        }
-
-        public void OnPostBack()
-        {
-            NavigationManager.NavigateTo($"/supplier_info_form", true);
-        }
+    public void OnPostBack()
+    {
+        NavigationManager.NavigateTo($"/supplier_info_form", true);
     }
 }
 

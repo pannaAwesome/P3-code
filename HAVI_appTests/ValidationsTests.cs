@@ -21,10 +21,10 @@ namespace HAVI_appTests
         }
 
         [TestMethod]
-        public void OnlyDecimalTest()
+        public void OnlyDoubleTest()
         {
             var numbers = new Validation();
-            Assert.IsTrue(numbers.DecimalOnly("11.323"));
+            Assert.IsTrue(numbers.DoubleOnly("11.323"));
         }
 
         [TestMethod]
@@ -44,8 +44,8 @@ namespace HAVI_appTests
         public void GTINValidationTest()
         {
             var gtin = new Validation();
-            var test = gtin.GTINValidation("12345");
-            Assert.AreEqual("00000000012345", test);
+            var test = gtin.GTINValidation(1234);
+            Assert.AreEqual(00000000001234, test);
         }
     }
 }
