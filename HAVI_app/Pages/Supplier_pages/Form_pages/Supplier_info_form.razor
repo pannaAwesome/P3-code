@@ -275,7 +275,7 @@
                         <label for="classificationCode" class="required">Classification code:</label>
                     </td>
                     <td>
-                        <input type="text" class="form-control @ClassificationCodeValidated" name="classificationcode" @bind="Article.ClassificationCode" @onfocus="RemoveClassDanger">
+                        <input type="text" class="form-control @ClassificationCodeValidated" name="classificationcode" @bind="Article.ClassificationCode" @onfocus="RemoveClassDanger" maxlength="15">
                     </td>
                     <td>
                         <div></div>
