@@ -15,6 +15,33 @@ namespace HAVI_app.Api.DatabaseClasses
         {
             _context = context;
         }
+
+        public async Task<IEnumerable<Article>> GetArticlesWithCertainState(int state, int countryId)
+        {
+            return await _context.Articles
+                                 .Where(a => a.ArticleState == state && a.CountryId == countryId)
+                                 .Include(a => a.Purchaser).ThenInclude(p => p.Profile)
+                                 .Include(a => a.ArticleInformation)
+                                 .Include(a => a.InternalArticleInformation)
+                                 .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Article>> GetArticlesForCountry(int countryId)
+        {
+            return await _context.Articles
+                                 .Where(a => a.CountryId == countryId)
+                                 .Include(a => a.Purchaser).ThenInclude(p => p.Profile)
+                                 .Include(a => a.ArticleInformation)
+                                 .ToListAsync();
+        }
+
+        public async Task<Article> GetArticle(int articleId)
+        {
+            return await _context.Articles.Include(a => a.InternalArticleInformation)
+                                          .Include(a => a.ArticleInformation)
+                                          .FirstOrDefaultAsync(s => s.Id == articleId);
+        }
+
         public async Task<Article> AddArticle(Article article)
         {
             await _context.ArticleInformations.AddAsync(article.ArticleInformation);
@@ -49,14 +76,6 @@ namespace HAVI_app.Api.DatabaseClasses
                 return article;
             }
             return null;
-        }
-
-        public async Task<Article> GetArticle(int articleId)
-        {
-            return await _context.Articles.Include(a => a.Purchaser).ThenInclude(p => p.Profile)
-                                          .Include(a => a.InternalArticleInformation)
-                                          .Include(a => a.ArticleInformation)
-                                          .FirstOrDefaultAsync(s => s.Id == articleId);
         }
 
         public async Task<IEnumerable<Article>> GetArticles()

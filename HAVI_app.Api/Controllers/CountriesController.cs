@@ -19,24 +19,6 @@ namespace HAVI_app.Api.Controllers
             _countryRepository = countryRepository;
         }
 
-        [HttpGet]
-        public async Task<ActionResult> GetCountries()
-        {
-            try
-            {
-                var result = await _countryRepository.GetCountries();
-                if (result == null)
-                {
-                    return NotFound();
-                }
-                return Ok(result);
-            }
-            catch (Exception)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database.");
-            }
-        }
-
         [HttpGet("{id:int}")]
         public async Task<ActionResult<Country>> GetCountry(int id)
         {
@@ -51,6 +33,24 @@ namespace HAVI_app.Api.Controllers
                 {
                     return result;
                 }
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database.");
+            }
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> GetCountries()
+        {
+            try
+            {
+                var result = await _countryRepository.GetCountries();
+                if (result == null)
+                {
+                    return NotFound();
+                }
+                return Ok(result);
             }
             catch (Exception)
             {

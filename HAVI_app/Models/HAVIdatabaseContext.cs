@@ -18,7 +18,6 @@ namespace HAVI_app.Models
         }
 
         public virtual DbSet<Article> Articles { get; set; }
-        public virtual DbSet<ArticleBundle> ArticleBundles { get; set; }
         public virtual DbSet<ArticleInformation> ArticleInformations { get; set; }
         public virtual DbSet<Bundle> Bundles { get; set; }
         public virtual DbSet<Country> Countries { get; set; }
@@ -122,15 +121,6 @@ namespace HAVI_app.Models
                     .HasForeignKey(d => d.SupplierId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__Article__Supplie__38996AB5");
-            });
-
-            modelBuilder.Entity<ArticleBundle>(entity =>
-            {
-                entity.ToTable("ArticleBundle");
-
-                entity.Property(e => e.Id).HasColumnName("ID");
-
-                entity.Property(e => e.Bundle).HasColumnType("text");
             });
 
             modelBuilder.Entity<ArticleInformation>(entity =>

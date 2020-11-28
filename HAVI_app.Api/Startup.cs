@@ -33,7 +33,6 @@ namespace HAVI_app.Api
             services.AddDbContext<HAVIdatabaseContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IProfileRepository, ProfileRepository>();
             services.AddScoped<ISupplierRepository, SupplierRepository>();
-            services.AddScoped<IArticleBundleRepository, ArticleBundleRepository>();
             services.AddScoped<IDepartmentIdRepository, DepartmentIdRepository>();
             services.AddScoped<IFreightResponsibilityRepository, FreightResponsibilityRepository>();
             services.AddScoped<IILOSSortGroupRepository, ILOSSortGroupRepository>();

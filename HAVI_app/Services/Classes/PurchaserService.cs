@@ -18,6 +18,12 @@ namespace HAVI_app.Services.Classes
         {
             this.httpClient = httpClient;
         }
+
+        public async Task<IEnumerable<Purchaser>> GetPurchasersForCountry(int id)
+        {
+            return await httpClient.GetFromJsonAsync<Purchaser[]>($"/api/purchasers/country/{id}");
+        }
+
         public async Task<Purchaser> GetPurchaser(int id)
         {
             return await httpClient.GetFromJsonAsync<Purchaser>($"/api/purchasers/{id}");

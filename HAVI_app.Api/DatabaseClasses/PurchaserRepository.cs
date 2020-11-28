@@ -15,6 +15,15 @@ namespace HAVI_app.Api.DatabaseClasses
         {
             _context = context;
         }
+
+        public async Task<Purchaser> GetPurchasersForCountry(int countryId)
+        {
+            return await _context.Purchasers
+                          .Where(p => p.CountryId == countryId)
+                          .Include(p => p.Profile)
+                          .FirstOrDefaultAsync();
+        }
+
         public async Task<Purchaser> AddPurchaser(Purchaser purchaser)
         {
             await _context.Profiles.AddAsync(purchaser.Profile);

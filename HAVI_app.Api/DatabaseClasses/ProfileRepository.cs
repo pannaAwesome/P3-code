@@ -15,6 +15,12 @@ namespace HAVI_app.Api.DatabaseClasses
         {
             _context = context;
         }
+
+        public async Task<Profile> GetProfileForCountry(int profileId)
+        {
+            return await _context.Profiles.Where(p => p.Id == profileId).FirstOrDefaultAsync();
+        }
+
         public async Task<Profile> AddProfile(Profile profile)
         {
             var result = await _context.Profiles.AddAsync(profile);

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using HAVI_app.Api.DatabaseInterfaces;
 using HAVI_app.Models;
+using HAVI_app.Api.DatabaseClasses;
 
 namespace HAVI_app.Api.Controllers
 {
@@ -13,10 +14,28 @@ namespace HAVI_app.Api.Controllers
     [ApiController]
     public class PurchasersController : ControllerBase
     {
-        private readonly IPurchaserRepository _purchaserRepository;
-        public PurchasersController(IPurchaserRepository purchaserRepository)
+        private readonly PurchaserRepository _purchaserRepository;
+        public PurchasersController(PurchaserRepository purchaserRepository)
         {
             _purchaserRepository = purchaserRepository;
+        }
+
+        [HttpGet("/country/{id}")]
+        public async Task<ActionResult> GetPurchasersForCountry(int id)
+        {
+            try
+            {
+                var result = await _purchaserRepository.GetPurchasersForCountry(id);
+                if (result == null)
+                {
+                    return NotFound();
+                }
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database.");
+            }
         }
 
         [HttpPost]

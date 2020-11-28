@@ -18,6 +18,12 @@ namespace HAVI_app.Services.Classes
         {
             this.httpClient = httpClient;
         }
+
+        public async Task<Profile> GetProfileForCountry(int id)
+        {
+            return await httpClient.GetFromJsonAsync<Profile>($"/api/profiles/country/{id}");
+        }
+
         public async Task<Profile> GetProfile(int id)
         {
             return await httpClient.GetFromJsonAsync<Profile>($"/api/profiles/{id}");

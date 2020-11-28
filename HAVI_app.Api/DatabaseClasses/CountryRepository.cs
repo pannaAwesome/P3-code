@@ -15,6 +15,12 @@ namespace HAVI_app.Api.DatabaseClasses
         {
             _context = context;
         }
+
+        public async Task<Country> GetCountry(int id)
+        {
+            return await _context.Countries.FirstOrDefaultAsync(c => c.Id == id);
+        }
+
         public async Task<Country> AddCountry(Country country)
         {
             var profile = await _context.Profiles.AddAsync(country.Profile);
@@ -42,7 +48,7 @@ namespace HAVI_app.Api.DatabaseClasses
             return null;
         }
 
-        public async Task<Country> GetCountry(int countryId)
+        public async Task<Country> GetCountryEverything(int countryId)
         {
             return await _context.Countries
                                  .Include(c => c.Profile)
