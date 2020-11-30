@@ -42,7 +42,7 @@
         <Table TableItem="SupplierInfo" Items="supplierdata" ColumnReorder="true" TableClass="table table-hover" TableHeadClass="blue-tabel-header" TableRowClass="@(x => x.RowClass)" RowClickAction="RowClicked" ShowSearchBar="true" SelectionType="selectionType" SelectedItems="selectedItems">
             <Column TableItem="SupplierInfo" Title="Article name" Field="@(x => x.ArticleName)" Sortable="true"/>
             <Column TableItem="SupplierInfo" Title="Supplier name" Field="@(x => x.SupplierName)" Sortable="true" />
-            <Column TableItem="SupplierInfo" Title="Vailed for customer" Field="@(x => x.VailedForCustomer)" Sortable="true" />
+            <Column TableItem="SupplierInfo" Title="Valid for customer" Field="@(x => x.ValidForCustomer)" Sortable="true" />
             <Column TableItem="SupplierInfo" Title="Purchaser email" Field="@(x => x.BuyerEmail)" Sortable="true" />
             <Column TableItem="SupplierInfo" Title="State" Field="@(x => x.State)" Class="text-center" Width="100px" DefaultSortColumn="true" Sortable="true" >
                 <Template>
@@ -110,17 +110,17 @@
 
     public class SupplierInfo
     {
-        public SupplierInfo(string articlename, string vailedforcustomer, string buyeremail, string suppliername, string state)
+        public SupplierInfo(string articlename, string validforcustomer, string buyeremail, string suppliername, string state)
         {
             ArticleName = articlename;
-            VailedForCustomer = vailedforcustomer;
+            ValidForCustomer = validforcustomer;
             State = state;
             SupplierName = suppliername;
             BuyerEmail = buyeremail;
         }
 
         public string ArticleName { get; set; }
-        public string VailedForCustomer { get; set; }
+        public string ValidForCustomer { get; set; }
         public string SupplierName { get; set; }
         public string BuyerEmail { get; set; }
         public string State { get; set; }
