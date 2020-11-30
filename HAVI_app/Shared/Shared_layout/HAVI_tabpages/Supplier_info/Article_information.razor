@@ -1,4 +1,6 @@
-﻿<div class="col-12 havi-info-box">
+﻿@inherits ArticleInformation
+
+<div class="col-12 havi-info-box">
 <div class="row justify-content-right">
     <div class="col-11">
         <h4> Article Information:</h4>
@@ -15,13 +17,15 @@
 
     </div>
 </div>
+    @if (Article != null)
+    {
     <table class="table table-borderless">
         <tr>
             <td>
                 <label for="article_name">Article name:</label>
             </td>
             <td colspan="2">
-                <input type="text" class="form-control" id="a_name" value="Peanuts" disabled>
+                <input type="text" class="form-control" id="a_name" @bind="Article.ArticleInformation.ArticleName" disabled>
             </td>
         </tr>
 
@@ -30,7 +34,7 @@
                 <label for="sales_unit">Salesunit:</label>
             </td>
             <td colspan="2">
-                <input type="text" class="form-control" id="sales_unit" value="Bakke // 374" disabled>
+                <input type="text" class="form-control" id="sales_unit" @bind="Article.ArticleInformation.Salesunit" disabled>
             </td>
         </tr>
 
@@ -39,7 +43,7 @@
                 <label for="article_pr_salesunit">Article per salesunit:</label>
             </td>
             <td colspan="2">
-                <input type="number" class="form-control" id="salesunit_quantity" value="123" disabled>
+                <input type="number" class="form-control" id="salesunit_quantity" @bind="Article.ArticleInformation.ArticlesPerSalesunit" disabled>
             </td>
         </tr>
 
@@ -48,7 +52,7 @@
                 <label for="supplier_article_nn">Supplier article number/name:</label>
             </td>
             <td colspan="2">
-                <input type="number" class="form-control" id="article_number_name" value="12312442123" disabled>
+                <input type="number" class="form-control" id="article_number_name" @bind="Article.ArticleInformation.SupplierArticleName" disabled>
             </td>
         </tr>
 
@@ -57,7 +61,7 @@
                 <label for="GTIN">GTIN number:</label>
             </td>
             <td colspan="2">
-                <input type="number" class="form-control" id="GTIN" value="12312312412312" disabled>
+                <input type="number" class="form-control" id="GTIN" @bind="Article.ArticleInformation.Gtinnumber" disabled>
             </td>
         </tr>
 
@@ -66,7 +70,7 @@
                 <label for="Shelflife">Shelflife:</label>
             </td>
             <td colspan="2">
-                <input type="number" class="form-control" id="Shelflife" value="2" disabled>
+                <input type="number" class="form-control" id="Shelflife" @bind="Article.ArticleInformation.Shelflife" disabled>
             </td>
             <td>
                 <label class="center-for-units" for="Shelflife">days</label>
@@ -78,7 +82,7 @@
                 <label for="Min_shelflife">Min. shelflife at HAVI:</label>
             </td>
             <td colspan="2">
-                <input type="number" class="form-control" id="Min_shelflife" value="12" disabled>
+                <input type="number" class="form-control" id="Min_shelflife" @bind="Article.ArticleInformation.MinimumShelflife" disabled>
             </td>
             <td>
                 <label class="center-for-units" for="Min_shelflife">days</label>
@@ -92,28 +96,25 @@
 
             <td colspan="2">
                 <div class="text-center">
-                    <input type="radio" name="organic" id="yes" value="yes" disabled>
-                    <label for="yes">Yes</label>
-                    &nbsp;
-                    <input type="radio" id="no" name="organic" checked="checked" disabled>
-                    <label for="no">No</label>
+                    @if (Article.ArticleInformation.OrganicArticle == 1)
+                    {
+                        <input type="radio" name="organic" id="yes" checked value="yes" disabled @onclick="x => OrganicArticle(1)">
+                        <label for="yes">Yes</label>
+                        
+                        <input type="radio" id="no" name="organic" disabled @onclick="x => OrganicArticle(0)">
+                        <label for="no">No</label>
+                    }
+                    else
+                    {
+                        <input type="radio" name="organic" id="yes" value="yes" disabled @onclick="x => OrganicArticle(1)">
+                        <label for="yes">Yes</label>
+                        
+                        <input type="radio" id="no" name="organic" checked disabled @onclick="x => OrganicArticle(0)">
+                        <label for="no">No</label>
+                    }
+
                 </div>
             </td>
         </tr>
-    </table>
+    </table>}
 </div>
-
-@code {
-
-    private bool EditingFields = false;
-
-    private void Editing()
-    {
-        EditingFields = true;
-    }
-
-    private void Saving()
-    {
-        EditingFields = false;
-    }
-}

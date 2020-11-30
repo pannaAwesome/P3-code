@@ -73,6 +73,8 @@ namespace HAVI_app.Models
 
                 entity.Property(e => e.DateCreated).HasColumnType("datetime");
 
+                entity.Property(e => e.ErrorField).HasColumnType("text");
+
                 entity.Property(e => e.ErrorMessage).HasColumnType("text");
 
                 entity.Property(e => e.ErrorOwner).HasColumnType("text");

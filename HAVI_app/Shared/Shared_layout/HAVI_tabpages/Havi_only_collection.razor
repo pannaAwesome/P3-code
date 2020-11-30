@@ -7,8 +7,8 @@
             <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Havi_only.Internal_info />
         </div>
         <div class="col-6">
-            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Supplier_information />
-            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Article_information />
+            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Supplier_information Id="ArticleId" />
+            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Article_information Id="ArticleId" />
         </div>
     </div>
 }
@@ -20,7 +20,7 @@
             <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Havi_only.Alias_info />
         </div>
         <div class="col-6">
-            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Article_information />
+            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Article_information Id="ArticleId" />
         </div>
     </div>
 }
@@ -43,7 +43,7 @@
             <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Havi_only.Bundle_info />
         </div>
         <div class="col-6">
-            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Article_information />
+            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Article_information Id="ArticleId" />
         </div>
     </div>
 }
@@ -52,10 +52,10 @@
 {
     <div class="row">
         <div class="col-6">
-            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Article_information />
+            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Article_information Id="ArticleId" />
         </div>
         <div class="col-6">
-            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Shipment_information />
+            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Shipment_information Id="ArticleId" />
         </div>
     </div>
     <div class="row">
@@ -112,7 +112,9 @@
 
     private void ReturnToOverview()
     {
-        //This only reroutes back to the admins article_view and needs to be updated to handle the purchaser
         NavigationManager.NavigateTo("/article_view", true);
     }
+
+    [Parameter]
+    public int ArticleId { get; set; }
 }

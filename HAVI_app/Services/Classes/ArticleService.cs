@@ -36,22 +36,19 @@ namespace HAVI_app.Services.Classes
             return await httpClient.GetFromJsonAsync<List<Article>>("/api/articles");
         }
 
-        public async Task<Article> CreateArticle(Article article)
+        public async void CreateArticle(Article article)
         {
-            var result = await httpClient.PostAsJsonAsync("/api/articles", article);
-            return await result.Content.ReadAsAsync<Article>();
+            await httpClient.PostAsJsonAsync("/api/articles", article);
         }
 
-        public async Task<Article> UpdateArticle(int id, Article article)
+        public async void UpdateArticle(int id, Article article)
         {
-            var result = await httpClient.PutAsJsonAsync($"/api/articles/{id}", article);
-            return await result.Content.ReadAsAsync<Article>();
+            await httpClient.PutAsJsonAsync($"/api/articles/{id}", article);
         }
 
-        public async Task<Article> DeleteArticle(int id)
+        public async void DeleteArticle(int id)
         {
-            var result = await httpClient.DeleteAsync($"/api/articles/{id}");
-            return await result.Content.ReadAsAsync<Article>();
+            await httpClient.DeleteAsync($"/api/articles/{id}");
         }
     }
 }
