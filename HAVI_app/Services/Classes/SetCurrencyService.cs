@@ -15,9 +15,9 @@ namespace HAVI_app.Services.Classes
         {
             this.httpClient = httpClient;
         }
-        public async Task<IEnumerable<SetCurrency>> GetSetCurrencies()
+        public async Task<List<SetCurrency>> GetSetCurrencies()
         {
-            return await httpClient.GetFromJsonAsync<SetCurrency[]>("/api/setCurrencies");
+            return await httpClient.GetFromJsonAsync<List<SetCurrency>>("/api/setCurrencies");
         }
     }
 }

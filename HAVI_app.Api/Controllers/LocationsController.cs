@@ -1,4 +1,5 @@
-﻿using HAVI_app.Api.DatabaseInterfaces;
+﻿using HAVI_app.Api.DatabaseClasses;
+
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -12,8 +13,8 @@ namespace HAVI_app.Api.Controllers
     [ApiController]
     public class LocationsController : ControllerBase
     {
-        private readonly ILocationRepository _locationRepository;
-        public LocationsController(ILocationRepository locationRepository)
+        private readonly LocationRepository _locationRepository;
+        public LocationsController(LocationRepository locationRepository)
         {
             _locationRepository = locationRepository;
         }

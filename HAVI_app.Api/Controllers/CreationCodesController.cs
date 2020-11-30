@@ -1,4 +1,5 @@
-﻿using HAVI_app.Api.DatabaseInterfaces;
+﻿using HAVI_app.Api.DatabaseClasses;
+
 using HAVI_app.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,8 +14,8 @@ namespace HAVI_app.Api.Controllers
     [ApiController]
     public class CreationCodes : ControllerBase
     {
-        private readonly ICreationCodeRepository _creationCodeRepository;
-        public CreationCodes(ICreationCodeRepository creationCodeRepository)
+        private readonly CreationCodeRepository _creationCodeRepository;
+        public CreationCodes(CreationCodeRepository creationCodeRepository)
         {
             _creationCodeRepository = creationCodeRepository;
         }

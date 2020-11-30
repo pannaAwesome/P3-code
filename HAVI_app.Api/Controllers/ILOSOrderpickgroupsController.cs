@@ -1,4 +1,5 @@
-﻿using HAVI_app.Api.DatabaseInterfaces;
+﻿using HAVI_app.Api.DatabaseClasses;
+
 using HAVI_app.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,18 +14,18 @@ namespace HAVI_app.Api.Controllers
     [ApiController]
     public class ILOSOrderpickgroupsController : ControllerBase
     {
-        private readonly IILOSOrderpickgroupRepository _orderpickgroup;
-        public ILOSOrderpickgroupsController(IILOSOrderpickgroupRepository orderpickgroup)
+        private readonly ILOSOrderpickgroupRepository _orderpickgroup;
+        public ILOSOrderpickgroupsController(ILOSOrderpickgroupRepository orderpickgroup)
         {
             _orderpickgroup = orderpickgroup;
         }
 
-        [HttpGet]
-        public async Task<ActionResult> GetILOSOrderpickgroups()
+        [HttpGet("country/{id}")]
+        public async Task<ActionResult> GetILOSOrderpickgroups(int id)
         {
             try
             {
-                var result = await _orderpickgroup.GetILOSOrderpickgroups();
+                var result = await _orderpickgroup.GetILOSOrderpickgroups(id);
                 if (result == null)
                 {
                     return NotFound();

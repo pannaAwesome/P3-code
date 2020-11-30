@@ -1,4 +1,5 @@
-﻿using HAVI_app.Api.DatabaseInterfaces;
+﻿using HAVI_app.Api.DatabaseClasses;
+
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -12,8 +13,8 @@ namespace HAVI_app.Api.Controllers
     [ApiController]
     public class QIPNumbersController : ControllerBase
     {
-        private readonly IQIPNumberRepository _numbersRepository;
-        public QIPNumbersController(IQIPNumberRepository numbersRepository)
+        private readonly QIPNumberRepository _numbersRepository;
+        public QIPNumbersController(QIPNumberRepository numbersRepository)
         {
             _numbersRepository = numbersRepository;
         }

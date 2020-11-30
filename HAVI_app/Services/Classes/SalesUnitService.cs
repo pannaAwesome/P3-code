@@ -15,9 +15,9 @@ namespace HAVI_app.Services.Classes
         {
             this.httpClient = httpClient;
         }
-        public async Task<IEnumerable<SalesUnit>> GetSalesUnits()
+        public async Task<List<SalesUnit>> GetSalesUnits()
         {
-            return await httpClient.GetFromJsonAsync<SalesUnit[]>("/api/salesUnits");
+            return await httpClient.GetFromJsonAsync<List<SalesUnit>>("/api/salesUnits");
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using HAVI_app.Api.DatabaseInterfaces;
+﻿using HAVI_app.Api.DatabaseClasses;
+
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -12,8 +13,8 @@ namespace HAVI_app.Api.Controllers
     [ApiController]
     public class DepartmentIdsController : ControllerBase
     {
-        private readonly IDepartmentIdRepository _departmentIdRepository;
-        public DepartmentIdsController(IDepartmentIdRepository departmentIdRepository)
+        private readonly DepartmentIdRepository _departmentIdRepository;
+        public DepartmentIdsController(DepartmentIdRepository departmentIdRepository)
         {
             _departmentIdRepository = departmentIdRepository;
         }

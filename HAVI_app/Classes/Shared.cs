@@ -7,7 +7,7 @@ namespace HAVI_app.Classes
 {
     public enum ArticleState { Created, Submitted, RobotReady, Completed, Error };
 
-    public class Shared
+    public static class Shared
     {
         public static Dictionary<int, string> StateDictionary = new Dictionary<int, string>()
         {
@@ -16,6 +16,13 @@ namespace HAVI_app.Classes
             { 2, "Robot ready" },
             { 3, "Completed" },
             { 4, "Error" }
+        };
+
+        public static Dictionary<int, string> UserDictionary = new Dictionary<int, string>()
+        {
+            { 0, "Admin" },
+            { 1, "Purchaser" },
+            { 2, "Supplier" }
         };
     }
 }

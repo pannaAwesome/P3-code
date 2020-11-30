@@ -4,8 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using HAVI_app.Api.DatabaseInterfaces;
+
 using HAVI_app.Models;
+using HAVI_app.Api.DatabaseClasses;
 
 namespace HAVI_app.Api.Controllers
 {
@@ -13,18 +14,18 @@ namespace HAVI_app.Api.Controllers
     [ApiController]
     public class VatTaxCodesController : ControllerBase
     {
-        private readonly IVatTaxCodeRepository _vatTaxCodeRepository;
-        public VatTaxCodesController(IVatTaxCodeRepository vatTaxCodeRepository)
+        private readonly VatTaxCodeRepository _vatTaxCodeRepository;
+        public VatTaxCodesController(VatTaxCodeRepository vatTaxCodeRepository)
         {
             _vatTaxCodeRepository = vatTaxCodeRepository;
         }
 
-        [HttpGet]
-        public async Task<ActionResult> GetVatTaxCodes()
+        [HttpGet("country/{id}")]
+        public async Task<ActionResult> GetVatTaxCodes(int id)
         {
             try
             {
-                var result = await _vatTaxCodeRepository.GetVatTaxCodes();
+                var result = await _vatTaxCodeRepository.GetVatTaxCodes(id);
                 if (result == null)
                 {
                     return NotFound();
@@ -42,7 +43,7 @@ namespace HAVI_app.Api.Controllers
         {
             try
             {
-                var vatTaxCodeToDelete = await _vatTaxCodeRepository.GetVatTaxCodes();
+                var vatTaxCodeToDelete = await _vatTaxCodeRepository.GetVatTaxCode(codeId);
 
                 if (vatTaxCodeToDelete == null)
                 {
@@ -67,7 +68,7 @@ namespace HAVI_app.Api.Controllers
                     return BadRequest();
                 }
 
-                var vatTaxCodeToUpdate = await _vatTaxCodeRepository.GetVatTaxCodes();
+                var vatTaxCodeToUpdate = await _vatTaxCodeRepository.GetVatTaxCode(id);
 
                 if (vatTaxCodeToUpdate == null)
                 {

@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using HAVI_app.Api.DatabaseInterfaces;
+
 using HAVI_app.Models;
 using HAVI_app.Api.DatabaseClasses;
 
@@ -20,7 +20,48 @@ namespace HAVI_app.Api.Controllers
             _purchaserRepository = purchaserRepository;
         }
 
-        [HttpGet("/country/{id}")]
+        [HttpGet("profile/{id}")]
+        public async Task<ActionResult<Purchaser>> GetPurchaserForProfile(int id)
+        {
+            try
+            {
+                var result = await _purchaserRepository.GetPurchaserForProfile(id);
+                if (result == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    return result;
+                }
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database.");
+            }
+        }
+
+        [HttpDelete("profile/{id}")]
+        public async Task<ActionResult<Purchaser>> DeletePurchaserForProfile(int id)
+        {
+            try
+            {
+                var purchaserToDelete = await _purchaserRepository.GetPurchaserForProfile(id);
+
+                if (purchaserToDelete == null)
+                {
+                    return NotFound($"Purchaser with id = {id} not found");
+                }
+
+                return await _purchaserRepository.DeletePurchaserForProfile(id);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database.");
+            }
+        }
+
+        [HttpGet("country/{id}")]
         public async Task<ActionResult> GetPurchasersForCountry(int id)
         {
             try
@@ -37,7 +78,7 @@ namespace HAVI_app.Api.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database.");
             }
         }
-
+        
         [HttpPost]
         public async Task<ActionResult<Purchaser>> CreatePurchaser(Purchaser purchaser)
         {

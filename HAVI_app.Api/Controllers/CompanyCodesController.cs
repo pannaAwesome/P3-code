@@ -11,20 +11,20 @@ namespace HAVI_app.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PrimaryDCILOSCodesController : ControllerBase
+    public class CompanyCodesController : ControllerBase
     {
-        private readonly PrimaryDCILOSCodeRepository _primaryDCILOSCodeRepository;
-        public PrimaryDCILOSCodesController(PrimaryDCILOSCodeRepository primaryDCILOSCodeRepository)
+        private readonly CompanyCodeRepository _codeRepository;
+        public CompanyCodesController(CompanyCodeRepository codeRepository)
         {
-            _primaryDCILOSCodeRepository = primaryDCILOSCodeRepository;
+            _codeRepository = codeRepository;
         }
 
         [HttpGet("country/{id}")]
-        public async Task<ActionResult> GetPrimaryDCILOSCodes(int id)
+        public async Task<ActionResult> GetCompanyCodes(int id)
         {
             try
             {
-                var result = await _primaryDCILOSCodeRepository.GetPrimaryDCILOSCodes(id);
+                var result = await _codeRepository.GetCompanyCodes(id);
                 if (result == null)
                 {
                     return NotFound();
@@ -38,11 +38,11 @@ namespace HAVI_app.Api.Controllers
         }
 
         [HttpGet("{id:int}")]
-        public async Task<ActionResult<PrimaryDciloscode>> GetPrimaryDCILOSCode(int id)
+        public async Task<ActionResult<CompanyCode>> GetCompanyCode(int id)
         {
             try
             {
-                var result = await _primaryDCILOSCodeRepository.GetPrimaryDCILOSCode(id);
+                var result = await _codeRepository.GetCompanyCode(id);
                 if (result == null)
                 {
                     return NotFound();
@@ -59,18 +59,18 @@ namespace HAVI_app.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<PrimaryDciloscode>> CreatePrimaryDCILOSCode(PrimaryDciloscode primaryDCILOSCode)
+        public async Task<ActionResult<CompanyCode>> CreateCompanyCode(CompanyCode code)
         {
             try
             {
-                if (primaryDCILOSCode == null)
+                if (code == null)
                 {
                     return BadRequest();
                 }
 
-                var createdPrimaryDCILOSCode = await _primaryDCILOSCodeRepository.AddPrimaryDCILOSCode(primaryDCILOSCode);
+                var createdCode = await _codeRepository.AddCompanyCode(code);
 
-                return CreatedAtAction(nameof(GetPrimaryDCILOSCode), new { id = createdPrimaryDCILOSCode.Id }, createdPrimaryDCILOSCode);
+                return CreatedAtAction(nameof(GetCompanyCode), new { id = createdCode.Id }, createdCode);
             }
             catch (Exception)
             {
@@ -79,23 +79,23 @@ namespace HAVI_app.Api.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<PrimaryDciloscode>> UpdatePrimaryDCILOSCode(int id, PrimaryDciloscode primaryDCILOSCode)
+        public async Task<ActionResult<CompanyCode>> UpdateCompanyCode(int id, CompanyCode code)
         {
             try
             {
-                if (id != primaryDCILOSCode.Id)
+                if (id != code.Id)
                 {
                     return BadRequest();
                 }
 
-                var primaryDCILOSCodeToUpdate = await _primaryDCILOSCodeRepository.GetPrimaryDCILOSCode(id);
+                var codeToUpdate = await _codeRepository.GetCompanyCode(id);
 
-                if (primaryDCILOSCodeToUpdate == null)
+                if (codeToUpdate == null)
                 {
-                    return NotFound($"PrimaryDciloscode with id = {id} not found");
+                    return NotFound($"ILOSCategory with id = {id} not found");
                 }
 
-                return await _primaryDCILOSCodeRepository.UpdatePrimaryDCILOSCode(primaryDCILOSCode);
+                return await _codeRepository.UpdateCompanyCode(code);
             }
             catch (Exception)
             {
@@ -104,18 +104,18 @@ namespace HAVI_app.Api.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<PrimaryDciloscode>> DeletePrimaryDCILOSCode(int id)
+        public async Task<ActionResult<CompanyCode>> DeleteCompanyCode(int id)
         {
             try
             {
-                var primaryDCILOSCodeToDelete = await _primaryDCILOSCodeRepository.GetPrimaryDCILOSCode(id);
+                var codeToDelete = await _codeRepository.DeleteCompanyCodeAsync(id);
 
-                if (primaryDCILOSCodeToDelete == null)
+                if (codeToDelete == null)
                 {
-                    return NotFound($"PrimaryDciloscode with id = {id} not found");
+                    return NotFound($"ILOSCategory with id = {id} not found");
                 }
 
-                return await _primaryDCILOSCodeRepository.DeletePrimaryDCILOSCodeAsync(id);
+                return await _codeRepository.DeleteCompanyCodeAsync(id);
             }
             catch (Exception)
             {

@@ -1,5 +1,5 @@
 using HAVI_app.Api.DatabaseClasses;
-using HAVI_app.Api.DatabaseInterfaces;
+
 using HAVI_app.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -31,33 +31,34 @@ namespace HAVI_app.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<HAVIdatabaseContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddScoped<IProfileRepository, ProfileRepository>();
-            services.AddScoped<ISupplierRepository, SupplierRepository>();
-            services.AddScoped<IDepartmentIdRepository, DepartmentIdRepository>();
-            services.AddScoped<IFreightResponsibilityRepository, FreightResponsibilityRepository>();
-            services.AddScoped<IILOSSortGroupRepository, ILOSSortGroupRepository>();
-            services.AddScoped<ILocationRepository, LocationRepository>();
-            services.AddScoped<IPackagingGroupRepository, PackagingGroupRepository>();
-            services.AddScoped<IQIPNumberRepository, QIPNumberRepository>();
-            services.AddScoped<ISalesUnitRepository, SalesUnitRepository>();
-            services.AddScoped<ISetCurrencyRepository, SetCurrencyRepository>();
-            services.AddScoped<IILOSCategoryRepository, ILOSCategoryRepository>();
-            services.AddScoped<IILOSOrderpickgroupRepository, ILOSOrderpickgroupRepository>();
-            services.AddScoped<IInformCostTypeRepository, InformCostTypeRepository>();
-            services.AddScoped<IPrimaryDCILOSCodeRepository, PrimaryILOSDCCodeRepository>();
-            services.AddScoped<ISupplierDeliveryUnitRepository, SupplierDeliveryUnitRepository>();
-            services.AddScoped<IVailedForCustomerRepository, VailedForCustomerRepository>();
-            services.AddScoped<IVatTaxCodeRepository, VatTaxCodeRepository>();
-            services.AddScoped<IArticleRepository, ArticleRepository>();
-            services.AddScoped<IArticleInformationRepository, ArticleInformationRepository>();
-            services.AddScoped<IBundleRepository, BundleRepository>();
-            services.AddScoped<ICountryRepository, CountryRepository>();
-            services.AddScoped<ICreationCodeRepository, CreationCodeRepository>();
-            services.AddScoped<IInternalArticleInformationRepository, InternalArticleInformationRepository>();
-            services.AddScoped<IOtherCostsForArticleRepository, OtherCostsForArticleRepository>();
-            services.AddScoped<IPurchaserRepository, PurchaserRepository>();
-            services.AddScoped<IQIPNumberRepository, QIPNumberRepository>();
-            services.AddScoped<ISAPPlantRepository, SAPPlantRepository>();
+            services.AddScoped<ProfileRepository>();
+            services.AddScoped<SupplierRepository>();
+            services.AddScoped<DepartmentIdRepository>();
+            services.AddScoped<FreightResponsibilityRepository>();
+            services.AddScoped<ILOSSortGroupRepository>();
+            services.AddScoped<LocationRepository>();
+            services.AddScoped<PackagingGroupRepository>();
+            services.AddScoped<QIPNumberRepository>();
+            services.AddScoped<SalesUnitRepository>();
+            services.AddScoped<SetCurrencyRepository>();
+            services.AddScoped<ILOSCategoryRepository>();
+            services.AddScoped<ILOSOrderpickgroupRepository>();
+            services.AddScoped<InformCostTypeRepository>();
+            services.AddScoped<PrimaryDCILOSCodeRepository>();
+            services.AddScoped<SupplierDeliveryUnitRepository>();
+            services.AddScoped<VailedForCustomerRepository>();
+            services.AddScoped<VatTaxCodeRepository>();
+            services.AddScoped<ArticleRepository>();
+            services.AddScoped<ArticleInformationRepository>();
+            services.AddScoped<BundleRepository>();
+            services.AddScoped<CompanyCodeRepository>();
+            services.AddScoped<CountryRepository>();
+            services.AddScoped<CreationCodeRepository>();
+            services.AddScoped<InternalArticleInformationRepository>();
+            services.AddScoped<OtherCostsForArticleRepository>();
+            services.AddScoped<PurchaserRepository>();
+            services.AddScoped<QIPNumberRepository>();
+            services.AddScoped<SAPPlantRepository>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

@@ -20,9 +20,9 @@ namespace HAVI_app.Services.Classes
             return await httpClient.GetFromJsonAsync<Bundle>($"/api/bundles/{id}");
         }
 
-        public async Task<IEnumerable<Bundle>> GetBundles()
+        public async Task<List<Bundle>> GetBundles()
         {
-            return await httpClient.GetFromJsonAsync<Bundle[]>("/api/bundles");
+            return await httpClient.GetFromJsonAsync<List<Bundle>>("/api/bundles");
         }
 
         public async Task<Bundle> UpdateBundle(int id, Bundle bundle)

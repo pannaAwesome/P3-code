@@ -1,5 +1,5 @@
 ﻿using HAVI_app.Api.DatabaseClasses;
-using HAVI_app.Api.DatabaseInterfaces;
+
 using HAVI_app.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -20,7 +20,7 @@ namespace HAVI_app.Api.Controllers
             _articleRepository = articleRepository;
         }
 
-        [HttpGet("/country/{state}/{id}")]
+        [HttpGet("country/{state}/{id}")]
         public async Task<ActionResult> GetArticlesWithCertainState(int id, int state)
         {
             try
@@ -38,7 +38,7 @@ namespace HAVI_app.Api.Controllers
             }
         }
 
-        [HttpGet("/country/{id}")]
+        [HttpGet("country/{id}")]
         public async Task<ActionResult> GetArticlesForCountry(int id)
         {
             try
@@ -94,7 +94,7 @@ namespace HAVI_app.Api.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database.");
             }
         }
-
+        
         [HttpPost]
         public async Task<ActionResult<Article>> CreateArticle(Article article)
         {

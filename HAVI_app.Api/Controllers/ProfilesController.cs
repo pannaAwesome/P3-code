@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using HAVI_app.Api.DatabaseInterfaces;
+
 using HAVI_app.Models;
 using HAVI_app.Api.DatabaseClasses;
 
@@ -20,7 +20,7 @@ namespace HAVI_app.Api.Controllers
             _profileRepository = profileRepository;
         }
 
-        [HttpGet("/country/{id:int}")]
+        [HttpGet("country/{id:int}")]
         public async Task<ActionResult<Profile>> GetProfileForCountry(int id)
         {
             try
@@ -73,6 +73,24 @@ namespace HAVI_app.Api.Controllers
                     return NotFound();
                 }
                 return Ok(result);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database.");
+            }
+        }
+
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult<Profile>> DeleteProfile(int id)
+        {
+            try
+            {
+                var result = await _profileRepository.DeleteProfileAsync(id);
+                if(result != null)
+                {
+                    return NotFound();
+                }
+                return result;
             }
             catch (Exception)
             {

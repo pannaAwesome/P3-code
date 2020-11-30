@@ -1,4 +1,4 @@
-﻿using HAVI_app.Api.DatabaseInterfaces;
+﻿
 using HAVI_app.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HAVI_app.Api.DatabaseClasses
 {
-    public class SupplierRepository : ISupplierRepository
+    public class SupplierRepository
     {
         private readonly HAVIdatabaseContext _context;
         public SupplierRepository(HAVIdatabaseContext context)
@@ -49,7 +49,7 @@ namespace HAVI_app.Api.DatabaseClasses
                                  .FirstOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<Supplier>> GetSuppliers()
+        public async Task<List<Supplier>> GetSuppliers()
         {
             return await _context.Suppliers
                                  .Include(s => s.Profile)

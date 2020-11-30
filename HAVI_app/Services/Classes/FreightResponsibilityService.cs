@@ -16,9 +16,9 @@ namespace HAVI_app.Services.Classes
             this.httpClient = httpClient;
         }
 
-        public async Task<IEnumerable<FreightResponsibility>> GetFreightResponsibilities()
+        public async Task<List<FreightResponsibility>> GetFreightResponsibilities()
         {
-            return await httpClient.GetFromJsonAsync<FreightResponsibility[]>("/api/freightResponsibilities");
+            return await httpClient.GetFromJsonAsync<List<FreightResponsibility>>("/api/freightResponsibilities");
         }
     }
 }

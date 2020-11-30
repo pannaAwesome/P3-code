@@ -20,7 +20,7 @@ namespace HAVI_app.Shared.Admin_layout
 
         protected async override Task OnInitializedAsync()
         {
-            Articles = (List<Article>)await ArticleService.GetArticleWithCertainState(1, (int)ArticleState.RobotReady);
+            Articles = await ArticleService.GetArticleWithCertainState(1, (int)ArticleState.RobotReady);
         }
     }
 }

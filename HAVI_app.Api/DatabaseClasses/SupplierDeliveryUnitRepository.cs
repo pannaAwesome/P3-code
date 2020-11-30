@@ -1,4 +1,4 @@
-﻿using HAVI_app.Api.DatabaseInterfaces;
+﻿
 using HAVI_app.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HAVI_app.Api.DatabaseClasses
 {
-    public class SupplierDeliveryUnitRepository : ISupplierDeliveryUnitRepository
+    public class SupplierDeliveryUnitRepository
     {
         private readonly HAVIdatabaseContext _context;
         public SupplierDeliveryUnitRepository(HAVIdatabaseContext context)
@@ -42,9 +42,11 @@ namespace HAVI_app.Api.DatabaseClasses
             return null;
         }
 
-        public async Task<IEnumerable<SupplierDeliveryUnit>> GetSupplierDeliveryUnits()
+        public async Task<IEnumerable<SupplierDeliveryUnit>> GetSupplierDeliveryUnits(int countryId)
         {
-            return await _context.SupplierDeliveryUnits.ToListAsync();
+            return await _context.SupplierDeliveryUnits
+                                 .Where(s => s.CountryId == countryId)
+                                 .ToListAsync();
         }
 
         public async Task<SupplierDeliveryUnit> UpdateSupplierDeliveryUnit(SupplierDeliveryUnit deliveryUnit)

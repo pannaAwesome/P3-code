@@ -16,9 +16,9 @@ namespace HAVI_app.Services.Classes
             this.httpClient = httpClient;
         }
 
-        public async Task<IEnumerable<VailedForCustomer>> GetVailedCustomers()
+        public async Task<List<VailedForCustomer>> GetVailedCustomers(int id)
         {
-            return await httpClient.GetFromJsonAsync<VailedForCustomer[]>("/api/vailedForCustomers");
+            return await httpClient.GetFromJsonAsync<List<VailedForCustomer>>($"/api/vailedForCustomers/country/{id}");
         }
 
         public async Task<VailedForCustomer> CreateVailedForCustomer(VailedForCustomer customer)
@@ -27,10 +27,9 @@ namespace HAVI_app.Services.Classes
             return await result.Content.ReadAsAsync<VailedForCustomer>();
         }
 
-        public async Task<VailedForCustomer> DeleteVailedForCustomer(int id)
+        public async void DeleteVailedForCustomer(int id)
         {
-            var result = await httpClient.DeleteAsync($"/api/vailedForCustomers/{id}");
-            return await result.Content.ReadAsAsync<VailedForCustomer>();
+            await httpClient.DeleteAsync($"/api/vailedForCustomers/{id}");
         }
 
         public async Task<VailedForCustomer> UpdateVailedForCustomer(int id, VailedForCustomer customer)

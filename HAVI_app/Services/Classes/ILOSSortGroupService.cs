@@ -16,9 +16,9 @@ namespace HAVI_app.Services.Classes
             this.httpClient = httpClient;
         }
 
-        public async Task<IEnumerable<IlossortGroup>> GetILOSSortgroups()
+        public async Task<List<IlossortGroup>> GetILOSSortgroups()
         {
-            return await httpClient.GetFromJsonAsync<IlossortGroup[]>("/api/ilossortGroups");
+            return await httpClient.GetFromJsonAsync<List<IlossortGroup>>("/api/ilossortGroups");
         }
     }
 }

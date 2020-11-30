@@ -15,9 +15,9 @@ namespace HAVI_app.Services.Classes
         {
             this.httpClient = httpClient;
         }
-        public async Task<IEnumerable<PackagingGroup>> GetPackagingGroups()
+        public async Task<List<PackagingGroup>> GetPackagingGroups()
         {
-            return await httpClient.GetFromJsonAsync<PackagingGroup[]>("/api/packagingGroups");
+            return await httpClient.GetFromJsonAsync<List<PackagingGroup>>("/api/packagingGroups");
         }
     }
 }

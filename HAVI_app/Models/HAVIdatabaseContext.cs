@@ -20,6 +20,7 @@ namespace HAVI_app.Models
         public virtual DbSet<Article> Articles { get; set; }
         public virtual DbSet<ArticleInformation> ArticleInformations { get; set; }
         public virtual DbSet<Bundle> Bundles { get; set; }
+        public virtual DbSet<CompanyCode> CompanyCodes { get; set; }
         public virtual DbSet<Country> Countries { get; set; }
         public virtual DbSet<CreationCode> CreationCodes { get; set; }
         public virtual DbSet<DepartmentId> DeparmentIds { get; set; }
@@ -191,6 +192,25 @@ namespace HAVI_app.Models
                     .HasForeignKey(d => d.InternalArticleInformationId)
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK__Bundle__Internal__3D5E1FD2");
+            });
+
+            modelBuilder.Entity<CompanyCode>(entity =>
+            {
+                entity.ToTable("CompanyCode");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.Code).HasColumnType("text");
+
+                entity.Property(e => e.CountryId)
+                    .IsRequired()
+                    .HasColumnName("CountryID");
+
+                entity.HasOne(d => d.Country)
+                    .WithMany(p => p.CompanyCodes)
+                    .HasForeignKey(d => d.CountryId)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("FK__Company__Count__440B1D61");
             });
 
             modelBuilder.Entity<Country>(entity =>

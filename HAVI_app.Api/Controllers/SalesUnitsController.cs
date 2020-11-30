@@ -4,9 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using HAVI_app.Api.DatabaseInterfaces;
-using HAVI_app.Models;
 
+using HAVI_app.Models;
+using HAVI_app.Api.DatabaseClasses;
 
 namespace HAVI_app.Api.Controllers
 {
@@ -14,8 +14,8 @@ namespace HAVI_app.Api.Controllers
     [ApiController]
     public class SalesUnitsController : ControllerBase
     {
-        private readonly ISalesUnitRepository _salesUnitRepository;
-        public SalesUnitsController(ISalesUnitRepository salesUnitRepository)
+        private readonly SalesUnitRepository _salesUnitRepository;
+        public SalesUnitsController(SalesUnitRepository salesUnitRepository)
         {
             _salesUnitRepository = salesUnitRepository;
         }

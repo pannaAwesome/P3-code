@@ -48,7 +48,7 @@ namespace HAVI_app.Shared.Admin_layout
                 await ArticleService.DeleteArticle(article.Id);
             }
 
-            Articles = (List<Article>)await ArticleService.GetArticlesForCountry(1);
+            NavigationManager.NavigateTo("/article_view", true);
         }
 
         public void RowClicked(Article data)
@@ -66,7 +66,7 @@ namespace HAVI_app.Shared.Admin_layout
 
         protected async override Task OnInitializedAsync()
         {
-            Articles = (List<Article>)await ArticleService.GetArticlesForCountry(1);
+            Articles = await ArticleService.GetArticlesForCountry(1);
         }
     }
 }

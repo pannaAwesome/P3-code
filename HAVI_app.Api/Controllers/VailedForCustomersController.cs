@@ -1,4 +1,5 @@
-﻿using HAVI_app.Api.DatabaseInterfaces;
+﻿using HAVI_app.Api.DatabaseClasses;
+
 using HAVI_app.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,18 +14,28 @@ namespace HAVI_app.Api.Controllers
     [ApiController]
     public class VailedForCustomersController : ControllerBase
     {
-        private readonly IVailedForCustomerRepository _vailedForCustomerRepository;
-        public VailedForCustomersController(IVailedForCustomerRepository vailedForCustomerRepository)
+        private readonly VailedForCustomerRepository _vailedForCustomerRepository;
+        public VailedForCustomersController(VailedForCustomerRepository vailedForCustomerRepository)
         {
             _vailedForCustomerRepository = vailedForCustomerRepository;
         }
 
-        [HttpGet]
-        public async Task<IEnumerable<VailedForCustomer>> GetVailedForCustomers()
+        [HttpGet("country/{id}")]
+        public async Task<ActionResult> GetVailedForCustomers(int id)
         {
-            var result = await _vailedForCustomerRepository.GetVailedForCustomers();
-
-            return result;
+            try
+            {
+                var result = await _vailedForCustomerRepository.GetVailedForCustomers(id);
+                if (result == null)
+                {
+                    return NotFound();
+                }
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database.");
+            }
         }
 
         [HttpGet("{id:int}")]

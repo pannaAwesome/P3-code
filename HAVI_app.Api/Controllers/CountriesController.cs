@@ -1,4 +1,5 @@
-﻿using HAVI_app.Api.DatabaseInterfaces;
+﻿using HAVI_app.Api.DatabaseClasses;
+
 using HAVI_app.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,8 +14,8 @@ namespace HAVI_app.Api.Controllers
     [ApiController]
     public class CountriesController : ControllerBase
     {
-        private readonly ICountryRepository _countryRepository;
-        public CountriesController(ICountryRepository countryRepository)
+        private readonly CountryRepository _countryRepository;
+        public CountriesController(CountryRepository countryRepository)
         {
             _countryRepository = countryRepository;
         }
