@@ -16,7 +16,7 @@
 </div>
 <div class="row justify-content-center ">
     <div class="col-12 d-flex justify-content-center">
-        <EditForm Model="Article" OnSubmit="ValidationSupplierForm">
+        <EditForm Model="Article" OnSubmit="@ValidationSupplierForm">
             <table class="table">
                 <tr>
                     <td>
@@ -310,7 +310,7 @@
 
     public void ValidationSupplierForm()
     {
-        if (IsEmailValid(Article.Email) && ((Article.DangerousGoods == 1) ? NumbersLettersDashOnly(Article.ClassificationCode) : false))
+        if (IsEmailValid(Article.Email) && ((Article.DangerousGoods == 1)  ? NumbersLettersDashOnly(Article.ClassificationCode) : true))
         {
             NavigationManager.NavigateTo("/article_info_form", true);
         }
