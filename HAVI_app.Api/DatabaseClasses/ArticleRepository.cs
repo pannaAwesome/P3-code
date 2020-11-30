@@ -38,7 +38,7 @@ namespace HAVI_app.Api.DatabaseClasses
         public async Task<Article> GetArticle(int articleId)
         {
             return await _context.Articles.Include(a => a.InternalArticleInformation)
-                                          .Include(a => a.ArticleInformation)
+                                          .Include(a => a.ArticleInformation).ThenInclude(a => a.OtherCostsForArticles)
                                           .FirstOrDefaultAsync(s => s.Id == articleId);
         }
 

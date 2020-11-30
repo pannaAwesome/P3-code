@@ -41,11 +41,11 @@ namespace HAVI_app.Shared.Admin_layout
             }
         }
 
-        public async void DeleteArticles()
+        public void DeleteArticles()
         {
             foreach(Article article in SelectedItems)
             {
-                await ArticleService.DeleteArticle(article.Id);
+                ArticleService.DeleteArticle(article.Id);
             }
 
             NavigationManager.NavigateTo("/article_view", true);
@@ -55,7 +55,7 @@ namespace HAVI_app.Shared.Admin_layout
         {
             if (SelectionType == SelectionType.None)
             {
-                NavigationManager.NavigateTo($"show_article/{data.Id}", true);
+                NavigationManager.NavigateTo($"show_article/1", true);
             }
             else
             {

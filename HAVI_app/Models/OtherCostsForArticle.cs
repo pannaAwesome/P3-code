@@ -15,7 +15,7 @@ namespace HAVI_app.Models
         [ForeignKey("ArticleInformation")]
         public int ArticleInformationId { get; set; }
         public string InformCostType { get; set; }
-        public double? Amount { get; set; }
+        public double Amount { get; set; }
         [JsonIgnore]
         public virtual ArticleInformation ArticleInformation { get; set; }
     }

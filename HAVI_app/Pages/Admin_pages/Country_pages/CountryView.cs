@@ -311,7 +311,7 @@ namespace HAVI_app.Pages.Admin_pages.Country_pages
             NumberOfCodes--;
         }
 
-        public async void UpdateCodes()
+        public void UpdateCodes()
         {
             foreach (int delete in ILOSCodesToDelete)
             {
@@ -347,7 +347,7 @@ namespace HAVI_app.Pages.Admin_pages.Country_pages
             NumberOfTAX--;
         }
 
-        public async void UpdateTaxCodes()
+        public void UpdateTaxCodes()
         {
             foreach (int delete in TaxCodesToDelete)
             {
@@ -383,7 +383,7 @@ namespace HAVI_app.Pages.Admin_pages.Country_pages
             NumberOfCat--;
         }
 
-        public async void UpdateCat()
+        public void UpdateCat()
         {
             foreach(int delete in ILOSCategoriesToDelete)
             {
