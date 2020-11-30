@@ -62,6 +62,27 @@ namespace HAVI_app.Api.Controllers
             }
         }
 
+        [HttpGet("{username}/{password}")]
+        public async Task<ActionResult<Profile>> GetProfileUsernameAndPassword(string username, string password)
+        {
+            try
+            {
+                var result = await _profileRepository.GetProfileWithUsernameAndPassword(username, password);
+                if (result == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    return result;
+                }
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database.");
+            }
+        }
+
         [HttpGet]
         public async Task<ActionResult> GetProfiles()
         {

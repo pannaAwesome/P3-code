@@ -1,8 +1,6 @@
 ﻿﻿@using BlazorTable
 @inject NavigationManager NavigationManager
 @using Microsoft.AspNetCore.Authorization
-@inject IAuthorizationService AuthorizationService
-@attribute [Authorize(Roles = "admin")]
 @inherits HAVI_app.Shared.Admin_layout.UserTableAdmin
 
 <div class="modal fade" id="deleting-rows" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

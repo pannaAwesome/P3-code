@@ -1,4 +1,5 @@
 ﻿@inject NavigationManager NavigationManager
+@inject HAVI_app.Services.Classes.ProfileService ProfileService
 
 <div class="col-12 user-login">
     <div class="row justify-content-center">
@@ -15,7 +16,7 @@
                             <label>Username:</label>
                         </td>
                         <td>
-                            <input class="form-control" type="text" name="admin_username" />
+                            <input class="form-control" type="text" name="admin_username" @bind="Username" />
                         </td>
                     </tr>
                     <tr class="form-group">
@@ -23,7 +24,7 @@
                             <label>Password:</label>
                         </td>
                         <td>
-                            <input class="form-control" type="password" name="admin_password" />
+                            <input class="form-control" type="password" name="admin_password" @bind="Password" />
                         </td>
                     </tr>
                 </table>
@@ -43,6 +44,13 @@
 
 @code {
 
+    [Parameter]
+    public string Username { get; set; }
+
+    [Parameter]
+    public string Password { get; set; }
+
+
     [CascadingParameter]
     private Task<AuthenticationState> authenticationStateTask { get; set; }
 
@@ -51,11 +59,12 @@
     private async Task LogUsername()
     {
         var authState = await authenticationStateTask;
-        var user = authState.User;
+        var user = await ProfileService.GetProfileByUsernameAndpassword(Username, Password);
 
-        if (user.Identity.IsAuthenticated)
+
+        if (user != null && user.Usertype == 0)
         {
-            _authMessage = $"{user.Identity.Name} is authenticated.";
+            _authMessage = $"{user.Username} is authenticated.";
             NavigationManager.NavigateTo("/overview_admin");
         }
         else

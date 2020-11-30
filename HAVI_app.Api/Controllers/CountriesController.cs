@@ -11,7 +11,6 @@ using System.Threading.Tasks;
 
 namespace HAVI_app.Api.Controllers
 {
-    [Authorize(Roles = "admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class CountriesController : ControllerBase
