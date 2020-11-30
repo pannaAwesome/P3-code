@@ -114,7 +114,7 @@
                                         class="@(column.Class)">
 
                                         @if (IsEditMode && column.EditTemplate != null)
-                                            @column.EditTemplate(item)
+                                            {@column.EditTemplate(item)}
                                         else if (column.Template == null)
                                             @column.Render(item)
                                         else

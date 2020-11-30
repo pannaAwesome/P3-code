@@ -17,6 +17,34 @@
     <div class="col-1">
         <button class="btn trash-button" data-target="deleting-rows"></button>
     </div>
+    <div class="col justify-content-end p-1"><button type="button" class="btn btn-success" data-toggle="modal" data-target="#creationCode">Get creation for supplier</button></div>
+
+    <div class="modal fade" id="creationCode" tabindex="-1" role="dialog" aria-labelledby="createCodeLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="creationCodeLabel">Generate creation code</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group mx-sm-3 mb-2">
+                <label for="creationCode" class="sr-only"></label>
+                <div>
+                    <input type="text" id="creationCode" value="@CreationCode"/>
+                    <button type="button" class="btn btn-success" @onclick="GenerateCreationCode">Generate</button>
+                </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
 </div>
 <div class="row">
     <div class="col-12">
@@ -72,6 +100,14 @@
     private List<SupplierInfo> selectedItems = new List<SupplierInfo>();
 
     private SupplierInfo selected;
+
+    private long CreationCode;
+    
+    private void GenerateCreationCode()
+    {
+        Random random = new Random();
+        CreationCode = random.Next(101, 989) * random.Next(11,19);
+    }
 
     protected override void OnInitialized()
     {

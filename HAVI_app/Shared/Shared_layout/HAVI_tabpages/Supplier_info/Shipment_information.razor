@@ -17,7 +17,7 @@
         </div>
     </div>    
     <table class="table table-borderless">
-        <tr>
+        <tr class="@CartonsPerPallet">
             <td colspan="3">
                 <label for="carton_pr_pallet">Cartons per pallet:</label>
             </td>
@@ -26,7 +26,7 @@
             </td>
         </tr>
 
-        <tr>
+        <tr class="@CartonsPerLayer">
             <td colspan="3">
                 <label for="carton_pr_layer">Cartons per layer:</label>
             </td>
@@ -36,7 +36,7 @@
         </tr>
 
 
-        <tr>
+        <tr class="@CountryOfOrigin">
             <td colspan="3">
                 <label for="country_origin">Country of origin:</label>
             </td>
@@ -45,7 +45,7 @@
             </td>
         </tr>
 
-        <tr>
+        <tr class="@ImportedFrom">
             <td colspan="3">
                 <label for="imported_from">Imported from:</label>
             </td>
@@ -54,7 +54,7 @@
             </td>
         </tr>
 
-        <tr>
+        <tr class="@TollTarif">
             <td colspan="3">
                 <label for="toll_tarrif_no">Toll-tarrif no:</label>
             </td>
@@ -63,7 +63,7 @@
             </td>
         </tr>
 
-        <tr>
+        <tr class="@MinOrderQuantity">
             <td colspan="3">
                 <label for="minimum_order_quantity">Minimum order quantity:</label>
             </td>
@@ -72,12 +72,12 @@
             </td>
         </tr>
 
-        <tr>
+        <tr class="@TemperatureTransportation">
             <td colspan="6">
                     <label for="temprature_during_transportation">Temperature during transportation:</label>
             </td>
         </tr>
-        <tr>
+        <tr class="@TemperatureTransportation">
             <td>
                     <label class="center-for-units" for="min">Min:</label>
             </td>
@@ -98,12 +98,12 @@
             </td>
         </tr>
 
-        <tr>
+        <tr class="@TemperatureStorage">
             <td colspan="6">
                 <label for="temprature_storage">Storage temperature requirements:</label>
             </td>
         </tr>
-        <tr>
+        <tr class="@TemperatureStorage">
             <td>
                     <label class="center-for-units" for="min">Min:</label>
             </td>
@@ -124,7 +124,7 @@
             </td>
         </tr>
 
-        <tr>
+        <tr class="@LeadTime">
             <td colspan="2">
                 <label for="lead_time">Lead time:</label>
             </td>
@@ -141,6 +141,33 @@
 </div>
 
 @code {
+
+    [Parameter]
+    public string CartonsPerPallet { get; set; }
+
+    [Parameter]
+    public string CartonsPerLayer { get; set; }
+
+    [Parameter]
+    public string CountryOfOrigin { get; set; }
+
+    [Parameter]
+    public string ImportedFrom { get; set; }
+
+    [Parameter]
+    public string TollTarif { get; set; }
+
+    [Parameter]
+    public string MinOrderQuantity { get; set; }
+
+    [Parameter]
+    public string TemperatureTransportation { get; set; }
+
+    [Parameter]
+    public string TemperatureStorage { get; set; }
+
+    [Parameter]
+    public string LeadTime { get; set; }
 
     private bool EditingFields = false;
 
