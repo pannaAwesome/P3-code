@@ -146,7 +146,7 @@
 
     [Parameter]
     public string Password { get; set; }
-    
+
     Supplier supplierObject = new Supplier();
 
     private async void CreateNewSupplier()
@@ -162,7 +162,10 @@
         supplierObject.Profile.Password = Password;
         supplierObject.Profile.Usertype = 2;
 
-        var user = await SupplierService.CreateSupplier(supplierObject);
-        NavigationManager.NavigateTo("/overview_supplier");
+        if(supplierObject != null)
+        {
+            var user = await SupplierService.CreateSupplier(supplierObject);
+            NavigationManager.NavigateTo("/overview_supplier");
+        }
     }
 }
