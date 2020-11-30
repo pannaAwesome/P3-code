@@ -92,7 +92,7 @@
                         <label for="toll_tarrif_no" class="required">Toll-tarrif no.:</label>
                     </td>
                     <td colspan="6">
-                        <input type="text" class="form-control" name="toll_tarrif_no" @bind="Article.TollTarifNumber" required maxlength="16">
+                        <input type="text" class="form-control @TollTarrifNoValidated" @onfocus="RemoveClassDanger" name="toll_tarrif_no" @bind="Article.TollTarifNumber" required maxlength="16">
                     </td>
                     <td>
                         <HAVI_app.Shared.Shared_layout.Questionmark_top>
@@ -289,5 +289,10 @@
     public void OnPostBack()
     {
         NavigationManager.NavigateTo($"/measurement_info_form", true);
+    }
+    
+    void RemoveClassDanger()
+    {
+        TollTarrifNoValidated = "";
     }
 }
