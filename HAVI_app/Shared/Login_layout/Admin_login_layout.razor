@@ -59,12 +59,9 @@
 
     private async Task LogUsername()
     {
-        var authState = await authenticationStateTask;
-        //var user = authState.User;
+        var user = await ProfileService.GetProfileByUsernameAndpassword(Username, Password);
 
-        var user2 = await ProfileService.GetProfileByUsernameAndpassword(Username, Password);
-
-        if (user2 != null && user2.Usertype == 0)
+        if (user != null && user.Usertype == 0)
         {
             NavigationManager.NavigateTo("/overview_admin");
         }
