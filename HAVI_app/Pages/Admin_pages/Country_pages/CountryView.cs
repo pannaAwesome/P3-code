@@ -82,7 +82,7 @@ namespace HAVI_app.Pages.Admin_pages.Country_pages
             }
             else
             {
-                NumberOfCustomers = Customers.Count;
+                NumberOfCustomers = Customers.Count-1;
             }
 
             CompanyCodes = new List<CompanyCode>();
@@ -93,7 +93,7 @@ namespace HAVI_app.Pages.Admin_pages.Country_pages
             }
             else
             {
-                NumberOfCodes = CompanyCodes.Count;
+                NumberOfCodes = CompanyCodes.Count-1;
             }
 
             Units = new List<SupplierDeliveryUnit>();
@@ -104,7 +104,7 @@ namespace HAVI_app.Pages.Admin_pages.Country_pages
             }
             else
             {
-                NumberOfUnits = Units.Count;
+                NumberOfUnits = Units.Count-1;
             }
 
             OrderPickGroups = new List<Ilosorderpickgroup>();
@@ -115,7 +115,7 @@ namespace HAVI_app.Pages.Admin_pages.Country_pages
             }
             else
             {
-                NumberOfOrders = OrderPickGroups.Count;
+                NumberOfOrders = OrderPickGroups.Count-1;
             }
 
             ILOSCodes = new List<PrimaryDciloscode>();
@@ -126,7 +126,7 @@ namespace HAVI_app.Pages.Admin_pages.Country_pages
             }
             else
             {
-                NumberOfPrim = ILOSCodes.Count;
+                NumberOfPrim = ILOSCodes.Count-1;
             }
 
 
@@ -138,7 +138,7 @@ namespace HAVI_app.Pages.Admin_pages.Country_pages
             }
             else
             {
-                NumberOfTAX = TaxCodes.Count;
+                NumberOfTAX = TaxCodes.Count-1;
             }
 
             ILOSCategories = new List<Iloscategory>();
@@ -149,7 +149,7 @@ namespace HAVI_app.Pages.Admin_pages.Country_pages
             }
             else
             {
-                NumberOfCat = ILOSCategories.Count;
+                NumberOfCat = ILOSCategories.Count-1;
             }
         }
 
@@ -161,6 +161,7 @@ namespace HAVI_app.Pages.Admin_pages.Country_pages
 
         public void RemoveCustomer(int toRemove)
         {
+            Console.WriteLine(toRemove);
             if(Customers[toRemove - 1].Id != 0)
             {
                 CustomersToDelete.Add(Customers[toRemove - 1].Id);
@@ -169,7 +170,7 @@ namespace HAVI_app.Pages.Admin_pages.Country_pages
             NumberOfCustomers--;
         }
 
-        public async void UpdateCustomers()
+        public void UpdateCustomers()
         {
             foreach (int delete in CustomersToDelete)
             {
@@ -180,11 +181,11 @@ namespace HAVI_app.Pages.Admin_pages.Country_pages
             {
                 if (customer.Id == 0)
                 {
-                    await VailedForCustomerService.CreateVailedForCustomer(customer);
+                    VailedForCustomerService.CreateVailedForCustomer(customer);
                 }
                 else
                 {
-                    await VailedForCustomerService.UpdateVailedForCustomer(customer.Id, customer);
+                    VailedForCustomerService.UpdateVailedForCustomer(customer.Id, customer);
                 }
             }
         }
@@ -203,7 +204,7 @@ namespace HAVI_app.Pages.Admin_pages.Country_pages
             CompanyCodes.RemoveAt(toRemove - 1);
             NumberOfCodes--;
         }
-        public async void UpdateCompany()
+        public void UpdateCompany()
         {
             foreach (int delete in CompanyCodesToDelete)
             {
@@ -214,11 +215,11 @@ namespace HAVI_app.Pages.Admin_pages.Country_pages
             {
                 if (code.Id == 0)
                 {
-                    await CompanyCodeService.CreateCompanyCode(code);
+                    CompanyCodeService.CreateCompanyCode(code);
                 }
                 else
                 {
-                    await CompanyCodeService.UpdateCompanyCode(code.Id, code);
+                    CompanyCodeService.UpdateCompanyCode(code.Id, code);
                 }
             }
         }
@@ -239,7 +240,7 @@ namespace HAVI_app.Pages.Admin_pages.Country_pages
             NumberOfUnits--;
         }
 
-        public async void UpdateUnits()
+        public void UpdateUnits()
         {
             foreach (int delete in UnitsToDelete)
             {
@@ -250,11 +251,11 @@ namespace HAVI_app.Pages.Admin_pages.Country_pages
             {
                 if (unit.Id == 0)
                 {
-                    await SupplierDeliveryUnitService.CreateSupplierDeliveryUnit(unit);
+                    SupplierDeliveryUnitService.CreateSupplierDeliveryUnit(unit);
                 }
                 else
                 {
-                    await SupplierDeliveryUnitService.UpdateSupplierDeliveryUnit(unit.Id, unit);
+                    SupplierDeliveryUnitService.UpdateSupplierDeliveryUnit(unit.Id, unit);
                 }
             }
         }
@@ -274,7 +275,7 @@ namespace HAVI_app.Pages.Admin_pages.Country_pages
             OrderPickGroups.RemoveAt(toRemove - 1);
             NumberOfOrders--;
         }
-        public async void UpdateOrderpickgroup()
+        public void UpdateOrderpickgroup()
         {
             foreach (int delete in OrderPickGroupsToDelete)
             {
@@ -285,11 +286,11 @@ namespace HAVI_app.Pages.Admin_pages.Country_pages
             {
                 if (group.Id == 0)
                 {
-                    await ILOSOrderpickgroupService.CreateILOSOrderpickgroup(group);
+                    ILOSOrderpickgroupService.CreateILOSOrderpickgroup(group);
                 }
                 else
                 {
-                    await ILOSOrderpickgroupService.UpdateILOSOrderpickgroup(group.Id, group);
+                    ILOSOrderpickgroupService.UpdateILOSOrderpickgroup(group.Id, group);
                 }
             }
         }
@@ -321,11 +322,11 @@ namespace HAVI_app.Pages.Admin_pages.Country_pages
             {
                 if (code.Id == 0)
                 {
-                    await PrimaryDCILOSCodeService.CreatePrimaryDCILOSCode(code);
+                    PrimaryDCILOSCodeService.CreatePrimaryDCILOSCode(code);
                 }
                 else
                 {
-                    await PrimaryDCILOSCodeService.UpdatePrimaryDCILOSCode(code.Id, code);
+                    PrimaryDCILOSCodeService.UpdatePrimaryDCILOSCode(code.Id, code);
                 }
             }
         }
@@ -357,11 +358,11 @@ namespace HAVI_app.Pages.Admin_pages.Country_pages
             {
                 if (code.Id == 0)
                 {
-                    await VatTaxCodeService.CreateVatTaxCode(code);
+                    VatTaxCodeService.CreateVatTaxCode(code);
                 }
                 else
                 {
-                    await VatTaxCodeService.UpdateVatTaxCode(code.Id, code);
+                    VatTaxCodeService.UpdateVatTaxCode(code.Id, code);
                 }
             }
         }
@@ -393,16 +394,16 @@ namespace HAVI_app.Pages.Admin_pages.Country_pages
             {
                 if(category.Id == 0)
                 {
-                    await ILOSCategoriesService.CreateILOSCategory(category);
+                    ILOSCategoriesService.CreateILOSCategory(category);
                 }
                 else
                 {
-                    await ILOSCategoriesService.UpdateILOSCategory(category.Id, category);
+                    ILOSCategoriesService.UpdateILOSCategory(category.Id, category);
                 }
             }
         }
 
-        public void SaveChanges()
+        public void SaveChangesForCountry()
         {
             UpdateCat();
             UpdateCodes();
