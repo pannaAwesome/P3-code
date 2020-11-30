@@ -41,6 +41,18 @@ namespace HAVI_app.Classes
             return false;
         }
 
+        public bool IntOnly(string input)
+        {
+            if (input.GetType() == typeof(int))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public bool NumbersLettersDashOnly(string input)
         {
             if(input != null){
