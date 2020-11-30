@@ -1,5 +1,8 @@
 ﻿@using BlazorTable
 @inject NavigationManager NavigationManager
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+@attribute [Authorize(Roles = "admin")]
 
 <div class="modal fade" id="deleting-rows" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -24,7 +27,7 @@
 <div class="row">
     <div class="col-12">
         <Table TableItem="SupplierInfo" Items="supplierdata" ColumnReorder="true" TableHeadClass="purple-table-header" TableRowClass="@(x => x.RowClass)" ShowSearchBar="true">
-            <Column TableItem="SupplierInfo" Title="Country" Field="@(x => x.Country)" DefaultSortColumn="true" Sortable="true"/>
+            <Column TableItem="SupplierInfo" Title="Country" Field="@(x => x.Country)" DefaultSortColumn="true" Sortable="true" />
             <Column TableItem="SupplierInfo" Title="Country code" Field="@(x => x.Countrycode)" Sortable="true" />
             <Column TableItem="SupplierInfo" Title="Admin" Field="@(x => x.Admin)" Sortable="true" />
             <Column TableItem="SupplierInfo" Title="" Field="@(x => x.Country)">

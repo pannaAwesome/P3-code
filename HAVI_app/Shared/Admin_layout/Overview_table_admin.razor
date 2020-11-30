@@ -1,16 +1,18 @@
 ﻿@using BlazorTable
 @inject NavigationManager NavigationManager
-
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+@attribute [Authorize(Roles = "admin")]
 
 
 <div class="row">
     <div class="col-12">
         <Table TableItem="SupplierInfo" Items="supplierdata" ColumnReorder="true" TableHeadClass="purple-table-header" TableRowClass="@(x => x.RowClass)">
-            <Column TableItem="SupplierInfo" Title="Article name" Field="@(x => x.ArticleName)"  Sortable="true"/>
-            <Column TableItem="SupplierInfo" Title="Supplier name" Field="@(x => x.SupplierName)"  Sortable="true" />
-            <Column TableItem="SupplierInfo" Title="Vailed for customer" Field="@(x => x.VailedForCustomer)"  Sortable="true" />
-            <Column TableItem="SupplierInfo" Title="Purchaser email" Field="@(x => x.PurchaserEmail)"  Sortable="true" />
-            <Column TableItem="SupplierInfo" Title="State" Field="@(x => x.State)" Class="text-center" Width="100px"  Sortable="true">
+            <Column TableItem="SupplierInfo" Title="Article name" Field="@(x => x.ArticleName)" Sortable="true" />
+            <Column TableItem="SupplierInfo" Title="Supplier name" Field="@(x => x.SupplierName)" Sortable="true" />
+            <Column TableItem="SupplierInfo" Title="Vailed for customer" Field="@(x => x.VailedForCustomer)" Sortable="true" />
+            <Column TableItem="SupplierInfo" Title="Purchaser email" Field="@(x => x.PurchaserEmail)" Sortable="true" />
+            <Column TableItem="SupplierInfo" Title="State" Field="@(x => x.State)" Class="text-center" Width="100px" Sortable="true">
                 <Template>
                     <div class="@context.State.ToLower()-state state">@context.State</div>
                 </Template>

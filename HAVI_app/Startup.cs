@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using HAVI_app.Models;
 using HAVI_app.Services.Classes;
 using System.Net.Http;
+using Microsoft.AspNetCore.Components.Authorization;
 
 namespace HAVI_app
 {
@@ -23,6 +24,8 @@ namespace HAVI_app
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();
+
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddDbContext<HAVIdatabaseContext>(options => options.UseSqlServer(Configuration.GetConnectionString("HAVIdatabaseContext")));

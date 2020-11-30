@@ -1,5 +1,8 @@
 ﻿@using BlazorTable
 @inject NavigationManager NavigationManager
+@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService
+@attribute [Authorize(Roles = "admin")]
 
 <div class="modal fade" id="deleting-rows" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -37,14 +40,14 @@
     </div>
 </div>
 <div class="row">
-    
+
     <div class="col-12">
         <Table TableItem="SupplierInfo" Items="supplierdata" ColumnReorder="true" TableClass="table table-hover" TableHeadClass="blue-tabel-header" TableRowClass="@(x => x.RowClass)" RowClickAction="RowClicked" ShowSearchBar="true" SelectionType="selectionType" SelectedItems="selectedItems">
-            <Column TableItem="SupplierInfo" Title="Article name" Field="@(x => x.ArticleName)" Sortable="true"/>
+            <Column TableItem="SupplierInfo" Title="Article name" Field="@(x => x.ArticleName)" Sortable="true" />
             <Column TableItem="SupplierInfo" Title="Supplier name" Field="@(x => x.SupplierName)" Sortable="true" />
             <Column TableItem="SupplierInfo" Title="Vailed for customer" Field="@(x => x.VailedForCustomer)" Sortable="true" />
             <Column TableItem="SupplierInfo" Title="Purchaser email" Field="@(x => x.BuyerEmail)" Sortable="true" />
-            <Column TableItem="SupplierInfo" Title="State" Field="@(x => x.State)" Class="text-center" Width="100px" DefaultSortColumn="true" Sortable="true" >
+            <Column TableItem="SupplierInfo" Title="State" Field="@(x => x.State)" Class="text-center" Width="100px" DefaultSortColumn="true" Sortable="true">
                 <Template>
                     <div class="@context.State.ToLower()-state state">@context.State</div>
                 </Template>
