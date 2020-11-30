@@ -42,7 +42,7 @@
                         <label for="purchase_price" class="required">Purchase price:</label>
                     </td>
                     <td colspan="4">
-                        <input type="number" class="form-control" name="purchase_price" @bind="Article.PurchasePrice"required max="10">
+                        <input type="number" class="form-control" name="purchase_price" @bind="Article.PurchasePrice"required maxlength="10">
                     </td>
                     <td>
                         <HAVI_app.Shared.Shared_layout.Questionmark_top>
@@ -97,7 +97,7 @@
                                 <label for="amount-@i">Amount in @Currency:</label>
                             </td>
                             <td>
-                                <input type="number" class="form-control" name="amount-@i" @bind="Article.AmountInCurrency" required @onblur="Sum" max="10">
+                                <input type="number" class="form-control" name="amount-@i" @bind="Article.AmountInCurrency" required @onblur="Sum" maxlength="10">
                             </td>
                             @if (i == NumberOfOtherCosts)
                             {
