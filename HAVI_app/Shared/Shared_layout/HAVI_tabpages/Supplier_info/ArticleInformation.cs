@@ -10,6 +10,30 @@ namespace HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info
 {
     public class ArticleInformation : ComponentBase
     {
+        [Parameter]
+        public string ArticleName { get; set; }
+
+        [Parameter]
+        public string Salesunit { get; set; }
+
+        [Parameter]
+        public string ArticlePerSalesunit { get; set; }
+
+        [Parameter]
+        public string SupplierNameNumber { get; set; }
+
+        [Parameter]
+        public string GTINNumber { get; set; }
+
+        [Parameter]
+        public string Shelflife { get; set; }
+
+        [Parameter]
+        public string MinShelflife { get; set; }
+
+        [Parameter]
+        public string OrganicArticles { get; set; }
+
         [Inject]
         public ArticleService ArticleService { get; set; }
 

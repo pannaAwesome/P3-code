@@ -1,5 +1,5 @@
 ﻿@using BlazorTable
-@inject NavigationManager NavigationManager
+@inherits OverviewTableSupplierPurchaser
 
 
 <div class="row">
@@ -48,17 +48,16 @@
 </div>
 <div class="row">
     <div class="col-12">
-        <Table TableItem="SupplierInfo" Items="supplierdata" ColumnReorder="true" TableHeadClass="blue-tabel-header" TableRowClass="@(x => x.RowClass)" RowClickAction="RowClicked" SelectionType="selectionType" SelectedItems="selectedItems" ShowSearchBar="true">
-            <Column TableItem="SupplierInfo" Title="Article no." Field="@(x => x.ArticleNumber)" Sortable="true" />
-            <Column TableItem="SupplierInfo" Title="Article name" Field="@(x => x.ArticleName)" Sortable="true" />
-            <Column TableItem="SupplierInfo" Title="Valid for customer" Field="@(x => x.ValidForCustomer)" Sortable="true"/>
-            <Column TableItem="SupplierInfo" Title="Supplier name" Field="@(x => x.SupplierName)" Sortable="true" />
-            <Column TableItem="SupplierInfo" Title="Date created" Field="@(x => x.DateCreated)" Sortable="true">
+        <Table TableItem="Article" Items="Articles" ColumnReorder="true" TableHeadClass="blue-tabel-header" RowClickAction="RowClicked" SelectionType="selectionType" SelectedItems="selectedItems" ShowSearchBar="true">
+            <Column TableItem="Article" Title="Article name " Field="@(x => x.ArticleInformation.ArticleName)" Sortable="true" />
+            <Column TableItem="Article" Title="Valid for customer " Field="@(x => x.VailedForCustomer)" Sortable="true"/>
+            <Column TableItem="Article" Title="Supplier name " Field="@(x => x.ArticleInformation.CompanyName)" Sortable="true" />
+            <Column TableItem="Article" Title="Date created " Field="@(x => x.DateCreated)" Sortable="true">
                 <Template>
                     @context.DateCreated.ToShortDateString()
                 </Template>
             </Column>
-            <Column TableItem="SupplierInfo" Title="State" Field="@(x => x.State)" Sortable="true" Class="text-center" DefaultSortColumn="true" Width="100px">
+            <Column TableItem="Article" Title="State" Field="@(x => x.ArticleState)" Sortable="true" Class="text-center" DefaultSortColumn="true" Width="100px">
                 <Template>
                     <div class="@context.State.ToLower()-state state">@context.State</div>
                 </Template>

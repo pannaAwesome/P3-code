@@ -1,36 +1,36 @@
-﻿@page "/overview_purchaserggg"
-    <div class="row form-content">
-        <div class="col-12">
-            <h1>Error description:</h1>
-            <p>Fix error's seen on this page</p>
-        </div>
+﻿@page "/article_error_view/{ArticleId:int}/{Username:string}"
+@layout HAVI_app.Shared.Purchaser_layout.Article_edit_layout
+
+<ul class="nav nav-tabs" id="myTabJust" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active navtabs-background" id="HAVI-tab-just" data-toggle="tab" href="#HAVI-just" role="tab" aria-controls="HAVI-just"
+           aria-selected="true"><small class="nav-text">HAVI Only</small></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link navtabs-background" id="Supplier-tab-just" data-toggle="tab" href="#Supplier-just" role="tab" aria-controls="Supplier-just"
+           aria-selected="false"><small class="nav-text">Supplier info</small></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link navtabs-background error-tab" id="Error-tab-just" data-toggle="tab" href="#Error-just" role="tab" aria-controls="Error-just"
+           aria-selected="false"><small class="nav-text error-tab">Error</small></a>
+    </li>
+</ul>
+<div class="tab-content background-tabs" id="myTabContentJust">
+    <div class="tab-pane fade show active" id="HAVI-just" role="tabpanel" aria-labelledby="HAVI-tab-just">
+        <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Havi_only_collection Username="Username" ArticleId="ArticleId" />
     </div>
-    <div class="row justify-content-center">
-        <div class="col-6">
-            <table class="table">
-                <thead>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Found in field:</td>
-                        <td> Country of origin </td>
-                    </tr>
-                    <tr>
-                        <td>Description:</td>
-                        <td> <input type="text" class="form-control" id="Description of error" value="Description of error" required> </td>
-                    </tr>
-                    <tr>
-                        <td>Found by: </td>
-                        <td> Kristoffer.sørensen@havi.com </td>
-                    </tr>
-                    
-                </tbody>
-            </table>
-            
-            <div class="row justify-content-center">
-    <div class="text-right col-6">
-        <NavLink class="nav-link" href="/overview_purchaser"><button class="btn cancel-button">Fixed error</button></NavLink>
+    <div class="tab-pane fade" id="Supplier-just" role="tabpanel" aria-labelledby="Supplier-tab-just">
+        <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_collection ArticleId="ArticleId" />
+    </div>
+    <div class="tab-pane fade" id="Error-just" role="tabpanel" aria-labelledby="Error-tab-just">
+        <HAVI_app.Shared.Shared_layout.HAVI_tabpages.View_error />
     </div>
 </div>
-        </div>
-    </div>
+
+@code {
+    [Parameter]
+    public string Username { get; set; }
+
+    [Parameter]
+    public int ArticleId { get; set; }
+}
