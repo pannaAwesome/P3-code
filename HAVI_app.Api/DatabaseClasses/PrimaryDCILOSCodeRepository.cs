@@ -1,4 +1,4 @@
-﻿using HAVI_app.Api.DatabaseInterfaces;
+﻿
 using HAVI_app.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace HAVI_app.Api.DatabaseClasses
 {
-    public class PrimaryILOSDCCodeRepository : IPrimaryDCILOSCodeRepository
+    public class PrimaryDCILOSCodeRepository
     {
         private readonly HAVIdatabaseContext _context;
-        public PrimaryILOSDCCodeRepository(HAVIdatabaseContext context)
+        public PrimaryDCILOSCodeRepository(HAVIdatabaseContext context)
         {
             _context = context;
         }
@@ -40,9 +40,11 @@ namespace HAVI_app.Api.DatabaseClasses
             return await _context.PrimaryDciloscodes.FirstOrDefaultAsync(s => s.Id == id);
         }
 
-        public async Task<IEnumerable<PrimaryDciloscode>> GetPrimaryDCILOSCodes()
+        public async Task<IEnumerable<PrimaryDciloscode>> GetPrimaryDCILOSCodes(int countryId)
         {
-            return await _context.PrimaryDciloscodes.ToListAsync();
+            return await _context.PrimaryDciloscodes
+                                 .Where(p => p.CountryId == countryId)
+                                 .ToListAsync();
         }
 
         public async Task<PrimaryDciloscode> UpdatePrimaryDCILOSCode(PrimaryDciloscode ilosCode)

@@ -15,9 +15,9 @@ namespace HAVI_app.Services.Classes
         {
             this.httpClient = httpClient;
         }
-        public async Task<IEnumerable<Iloscategory>> GetILOSCategories()
+        public async Task<List<Iloscategory>> GetILOSCategories(int id)
         {
-            return await httpClient.GetFromJsonAsync<Iloscategory[]>("/api/ilosCategories");
+            return await httpClient.GetFromJsonAsync<List<Iloscategory>>($"/api/ilosCategories/country/{id}");
         }
 
         public async Task<Iloscategory> CreateILOSCategory(Iloscategory ilosCategory)
@@ -32,10 +32,9 @@ namespace HAVI_app.Services.Classes
             return await result.Content.ReadAsAsync<Iloscategory>();
         }
 
-        public async Task<Iloscategory> DeleteILOSCategory(int id)
+        public async void DeleteILOSCategory(int id)
         {
-            var result = await httpClient.DeleteAsync($"/api/ilosCategoies/{id}");
-            return await result.Content.ReadAsAsync<Iloscategory>();
+            await httpClient.DeleteAsync($"/api/ilosCategoies/{id}");
         }
     }
 }

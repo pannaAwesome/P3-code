@@ -1,4 +1,4 @@
-﻿using HAVI_app.Api.DatabaseInterfaces;
+﻿using HAVI_app.Api.DatabaseClasses;
 using HAVI_app.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,18 +13,18 @@ namespace HAVI_app.Api.Controllers
     [ApiController]
     public class PrimaryDCILOSCodesController : ControllerBase
     {
-        private readonly IPrimaryDCILOSCodeRepository _primaryDCILOSCodeRepository;
-        public PrimaryDCILOSCodesController(IPrimaryDCILOSCodeRepository primaryDCILOSCodeRepository)
+        private readonly PrimaryDCILOSCodeRepository _primaryDCILOSCodeRepository;
+        public PrimaryDCILOSCodesController(PrimaryDCILOSCodeRepository primaryDCILOSCodeRepository)
         {
             _primaryDCILOSCodeRepository = primaryDCILOSCodeRepository;
         }
 
-        [HttpGet]
-        public async Task<ActionResult> GetPrimaryDCILOSCodes()
+        [HttpGet("country/{id}")]
+        public async Task<ActionResult> GetPrimaryDCILOSCodes(int id)
         {
             try
             {
-                var result = await _primaryDCILOSCodeRepository.GetPrimaryDCILOSCodes();
+                var result = await _primaryDCILOSCodeRepository.GetPrimaryDCILOSCodes(id);
                 if (result == null)
                 {
                     return NotFound();

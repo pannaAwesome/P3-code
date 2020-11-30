@@ -15,14 +15,25 @@ namespace HAVI_app.Services.Classes
         {
             this.httpClient = httpClient;
         }
+
+        public async Task<List<Article>> GetArticleWithCertainState(int countryid, int state)
+        {
+            return await httpClient.GetFromJsonAsync<List<Article>>($"/api/articles/country/{state}/{countryid}");
+        }
+
+        public async Task<List<Article>> GetArticlesForCountry(int countryid)
+        {
+            return await httpClient.GetFromJsonAsync<List<Article>>($"/api/articles/country/{countryid}");
+        }
+
         public async Task<Article> GetArticle(int id)
         {
             return await httpClient.GetFromJsonAsync<Article>($"/api/articles/{id}");
         }
 
-        public async Task<IEnumerable<Article>> GetArticles()
+        public async Task<List<Article>> GetArticles()
         {
-            return await httpClient.GetFromJsonAsync<Article[]>("/api/articles");
+            return await httpClient.GetFromJsonAsync<List<Article>>("/api/articles");
         }
 
         public async Task<Article> CreateArticle(Article article)

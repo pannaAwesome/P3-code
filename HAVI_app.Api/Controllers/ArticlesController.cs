@@ -1,4 +1,5 @@
-﻿using HAVI_app.Api.DatabaseInterfaces;
+﻿using HAVI_app.Api.DatabaseClasses;
+
 using HAVI_app.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,19 +14,37 @@ namespace HAVI_app.Api.Controllers
     [ApiController]
     public class ArticlesController : ControllerBase
     {
-        private readonly IArticleRepository _articleRepository;
-        public ArticlesController(IArticleRepository articleRepository)
+        private readonly ArticleRepository _articleRepository;
+        public ArticlesController(ArticleRepository articleRepository)
         {
             _articleRepository = articleRepository;
         }
 
-        [HttpGet]
-        public async Task<ActionResult> GetArticles()
+        [HttpGet("country/{state}/{id}")]
+        public async Task<ActionResult> GetArticlesWithCertainState(int id, int state)
         {
             try
             {
-                var result = await _articleRepository.GetArticles();
-                if (result == null)
+                var result = await _articleRepository.GetArticlesWithCertainState(state, id);
+                if(result == null)
+                {
+                    return NotFound();
+                }
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database.");
+            }
+        }
+
+        [HttpGet("country/{id}")]
+        public async Task<ActionResult> GetArticlesForCountry(int id)
+        {
+            try
+            {
+                var result = await _articleRepository.GetArticlesForCountry(id);
+                if(result == null)
                 {
                     return NotFound();
                 }
@@ -58,6 +77,24 @@ namespace HAVI_app.Api.Controllers
             }
         }
 
+        [HttpGet]
+        public async Task<ActionResult> GetArticles()
+        {
+            try
+            {
+                var result = await _articleRepository.GetArticles();
+                if (result == null)
+                {
+                    return NotFound();
+                }
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database.");
+            }
+        }
+        
         [HttpPost]
         public async Task<ActionResult<Article>> CreateArticle(Article article)
         {

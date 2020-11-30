@@ -1,4 +1,4 @@
-﻿using HAVI_app.Api.DatabaseInterfaces;
+﻿
 using HAVI_app.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HAVI_app.Api.DatabaseClasses
 {
-    public class VailedForCustomerRepository : IVailedForCustomerRepository
+    public class VailedForCustomerRepository
     {
         private readonly HAVIdatabaseContext _context;
         public VailedForCustomerRepository(HAVIdatabaseContext context)
@@ -44,9 +44,11 @@ namespace HAVI_app.Api.DatabaseClasses
             return null;
         }
 
-        public async Task<IEnumerable<VailedForCustomer>> GetVailedForCustomers()
+        public async Task<IEnumerable<VailedForCustomer>> GetVailedForCustomers(int countryId)
         {
-            return await _context.VailedForCustomers.ToListAsync();
+            return await _context.VailedForCustomers
+                                 .Where(v => v.CountryId == countryId)
+                                 .ToListAsync();
         }
 
         public async Task<VailedForCustomer> UpdateVailedForCustomer(VailedForCustomer customer)

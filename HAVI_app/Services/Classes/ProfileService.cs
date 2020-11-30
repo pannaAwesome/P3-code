@@ -18,14 +18,26 @@ namespace HAVI_app.Services.Classes
         {
             this.httpClient = httpClient;
         }
+
+        public async Task<Profile> GetProfileForCountry(int id)
+        {
+            return await httpClient.GetFromJsonAsync<Profile>($"/api/profiles/country/{id}");
+        }
+
         public async Task<Profile> GetProfile(int id)
         {
             return await httpClient.GetFromJsonAsync<Profile>($"/api/profiles/{id}");
         }
 
-        public async Task<IEnumerable<Profile>> GetProfiles()
+        public async Task<List<Profile>> GetProfiles()
         {
-            return await httpClient.GetFromJsonAsync<Profile[]>("/api/profiles");
+            return await httpClient.GetFromJsonAsync<List<Profile>>("/api/profiles");
+        }
+
+        public async Task<Profile> DeleteProfile(int id)
+        {
+            await httpClient.DeleteAsync($"/api/profiles/{id}");
+            return await httpClient.GetFromJsonAsync<Profile>($"/api/profiles/{id}");
         }
     }
 }

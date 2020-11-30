@@ -1,4 +1,5 @@
-﻿using HAVI_app.Api.DatabaseInterfaces;
+﻿using HAVI_app.Api.DatabaseClasses;
+
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -12,8 +13,8 @@ namespace HAVI_app.Api.Controllers
     [ApiController]
     public class PackagingGroupsController : ControllerBase
     {
-        private readonly IPackagingGroupRepository _packagingGroupRepository;
-        public PackagingGroupsController(IPackagingGroupRepository packagingGroupRepository)
+        private readonly PackagingGroupRepository _packagingGroupRepository;
+        public PackagingGroupsController(PackagingGroupRepository packagingGroupRepository)
         {
             _packagingGroupRepository = packagingGroupRepository;
         }

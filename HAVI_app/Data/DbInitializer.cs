@@ -366,6 +366,24 @@ namespace HAVI_app.Data
             context.Qipnumbers.AddRange(qipnumbers);
             context.SaveChanges();
 
+            List<CompanyCode> codes = new List<CompanyCode>();
+
+            using (TextFieldParser parser = new TextFieldParser(@"./Data/CompanyCode.csv"))
+            {
+                parser.TextFieldType = FieldType.Delimited;
+                parser.SetDelimiters(";");
+                while (!parser.EndOfData)
+                {
+                    string[] fields = parser.ReadFields();
+                    foreach (string field in fields)
+                    {
+                        codes.Add(new CompanyCode { Code = field, CountryId = 1 });
+                    }
+                }
+            }
+
+            context.CompanyCodes.AddRange(codes);
+            context.SaveChanges();
 
             Console.WriteLine("Database created!");
         }

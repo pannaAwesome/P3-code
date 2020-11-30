@@ -1,4 +1,4 @@
-﻿using HAVI_app.Api.DatabaseInterfaces;
+﻿
 using HAVI_app.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HAVI_app.Api.DatabaseClasses
 {
-    public class VatTaxCodeRepository : IVatTaxCodeRepository
+    public class VatTaxCodeRepository
     {
         private readonly HAVIdatabaseContext _context;
         public VatTaxCodeRepository(HAVIdatabaseContext context)
@@ -42,9 +42,11 @@ namespace HAVI_app.Api.DatabaseClasses
             return await _context.VatTaxCodes.FirstOrDefaultAsync(s => s.Id == VatTaxId);
         }
 
-        public async Task<IEnumerable<VatTaxCode>> GetVatTaxCodes()
+        public async Task<IEnumerable<VatTaxCode>> GetVatTaxCodes(int countryId)
         {
-            return await _context.VatTaxCodes.ToListAsync();
+            return await _context.VatTaxCodes
+                                 .Where(v => v.CountryId == countryId)
+                                 .ToListAsync();
         }
 
         public async Task<VatTaxCode> UpdateVatTaxCode(VatTaxCode code)

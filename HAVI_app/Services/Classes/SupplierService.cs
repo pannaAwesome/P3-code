@@ -23,9 +23,9 @@ namespace HAVI_app.Services.Classes
             return await httpClient.GetFromJsonAsync<Supplier>($"/api/suppliers/{id}"); 
         }
 
-        public async Task<IEnumerable<Supplier>> GetSuppliers()
+        public async Task<List<Supplier>> GetSuppliers()
         {
-            return await httpClient.GetFromJsonAsync<Supplier[]>("/api/suppliers");
+            return await httpClient.GetFromJsonAsync<List<Supplier>>("/api/suppliers");
         }
         
         public async Task<Supplier> CreateSupplier(Supplier supplier)

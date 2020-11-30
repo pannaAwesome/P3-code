@@ -1,4 +1,4 @@
-﻿using HAVI_app.Api.DatabaseInterfaces;
+﻿
 using HAVI_app.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HAVI_app.Api.DatabaseClasses
 {
-    public class ILOSCategoryRepository : IILOSCategoryRepository
+    public class ILOSCategoryRepository
     {
         private readonly HAVIdatabaseContext _context;
         public ILOSCategoryRepository(HAVIdatabaseContext context)
@@ -35,9 +35,11 @@ namespace HAVI_app.Api.DatabaseClasses
             return null;
         }
 
-        public async Task<IEnumerable<Iloscategory>> GetILOSCategories()
+        public async Task<IEnumerable<Iloscategory>> GetILOSCategories(int countryId)
         {
-            return await _context.Iloscategories.ToListAsync();
+            return await _context.Iloscategories
+                                 .Where(c => c.CountryId == countryId)
+                                 .ToListAsync();
         }
 
         public async Task<Iloscategory> GetILOSCategory(int id)

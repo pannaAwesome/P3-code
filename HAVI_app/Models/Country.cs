@@ -13,6 +13,7 @@ namespace HAVI_app.Models
         public Country()
         {
             Articles = new HashSet<Article>();
+            CompanyCodes = new HashSet<CompanyCode>();
             Iloscategories = new HashSet<Iloscategory>();
             Ilosorderpickgroups = new HashSet<Ilosorderpickgroup>();
             InformCostTypes = new HashSet<InformCostType>();
@@ -32,6 +33,8 @@ namespace HAVI_app.Models
 
         public virtual Profile Profile { get; set; }
         public virtual ICollection<Article> Articles { get; set; }
+        [JsonIgnore]
+        public virtual ICollection<CompanyCode> CompanyCodes { get; set; }
         [JsonIgnore]
         public virtual ICollection<Iloscategory> Iloscategories { get; set; }
         [JsonIgnore]

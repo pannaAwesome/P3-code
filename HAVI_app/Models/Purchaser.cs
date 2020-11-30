@@ -25,6 +25,7 @@ namespace HAVI_app.Models
         [JsonIgnore]
         public virtual Country Country { get; set; }
         public virtual Profile Profile { get; set; }
+        [JsonIgnore]
         public virtual ICollection<Article> Articles { get; set; }
     }
 }

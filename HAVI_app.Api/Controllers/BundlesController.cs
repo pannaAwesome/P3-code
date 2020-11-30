@@ -1,4 +1,5 @@
-﻿using HAVI_app.Api.DatabaseInterfaces;
+﻿using HAVI_app.Api.DatabaseClasses;
+
 using HAVI_app.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,8 +14,8 @@ namespace HAVI_app.Api.Controllers
     [ApiController]
     public class BundlesController : ControllerBase
     {
-        private readonly IBundleRepository _bundleRepository;
-        public BundlesController(IBundleRepository bundleRepository)
+        private readonly BundleRepository _bundleRepository;
+        public BundlesController(BundleRepository bundleRepository)
         {
             _bundleRepository = bundleRepository;
         }

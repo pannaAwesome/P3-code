@@ -1,4 +1,5 @@
-﻿using HAVI_app.Api.DatabaseInterfaces;
+﻿using HAVI_app.Api.DatabaseClasses;
+
 using HAVI_app.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,8 +14,8 @@ namespace HAVI_app.Api.Controllers
     [ApiController]
     public class InformCostTypesController : ControllerBase
     {
-        private readonly IInformCostTypeRepository _informCostTypeRepository;
-        public InformCostTypesController(IInformCostTypeRepository informCostTypeRepository)
+        private readonly InformCostTypeRepository _informCostTypeRepository;
+        public InformCostTypesController(InformCostTypeRepository informCostTypeRepository)
         {
             _informCostTypeRepository = informCostTypeRepository;
         }

@@ -1,4 +1,4 @@
-﻿using HAVI_app.Api.DatabaseInterfaces;
+﻿
 using HAVI_app.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HAVI_app.Api.DatabaseClasses
 {
-    public class ILOSOrderpickgroupRepository : IILOSOrderpickgroupRepository
+    public class ILOSOrderpickgroupRepository
     {
         private readonly HAVIdatabaseContext _context;
         public ILOSOrderpickgroupRepository(HAVIdatabaseContext context)
@@ -42,9 +42,11 @@ namespace HAVI_app.Api.DatabaseClasses
            
         }
 
-        public async Task<IEnumerable<Ilosorderpickgroup>> GetILOSOrderpickgroups()
+        public async Task<IEnumerable<Ilosorderpickgroup>> GetILOSOrderpickgroups(int countryId)
         {
-            return await _context.Ilosorderpickgroups.ToListAsync();
+            return await _context.Ilosorderpickgroups
+                                 .Where(i => i.CountryId == countryId)
+                                 .ToListAsync();
         }
 
         public async Task<Ilosorderpickgroup> UpdateILOSOrderpickgroup(Ilosorderpickgroup orderGroup)

@@ -18,14 +18,20 @@ namespace HAVI_app.Services.Classes
         {
             this.httpClient = httpClient;
         }
+
+        public async Task<List<Purchaser>> GetPurchasersForCountry(int id)
+        {
+            return await httpClient.GetFromJsonAsync<List<Purchaser>>($"/api/purchasers/country/{id}");
+        }
+
         public async Task<Purchaser> GetPurchaser(int id)
         {
             return await httpClient.GetFromJsonAsync<Purchaser>($"/api/purchasers/{id}");
         }
 
-        public async Task<IEnumerable<Purchaser>> GetPurchasers()
+        public async Task<List<Purchaser>> GetPurchasers()
         {
-            return await httpClient.GetFromJsonAsync<Purchaser[]>("/api/purchasers");
+            return await httpClient.GetFromJsonAsync<List<Purchaser>>("/api/purchasers");
         }
 
         public async Task<Purchaser> CreatePurchaser(Purchaser purchaser)
@@ -34,16 +40,20 @@ namespace HAVI_app.Services.Classes
             return await result.Content.ReadAsAsync<Purchaser>();
         }
 
-        public async Task<Purchaser> DeletePurchaser(int id)
+        public async Task DeletePurchaserForProfile(int id)
         {
-            var result = await httpClient.DeleteAsync($"/api/purchasers/{id}");
-            return await result.Content.ReadAsAsync<Purchaser>();
+            await httpClient.DeleteAsync($"/api/purchasers/profile/{id}");
         }
 
         public async Task<Purchaser> UpdatePurchaser(int id, Purchaser purchaser)
         {
             var result = await httpClient.PutAsJsonAsync($"/api/purchasers/{id}", purchaser);
             return await result.Content.ReadAsAsync<Purchaser>();
+        }
+
+        public async Task<Purchaser> GetPurchaserForProfile(int profileId)
+        {
+            return await httpClient.GetFromJsonAsync<Purchaser>($"/api/purchasers/profile/{profileId}");
         }
     }
 }

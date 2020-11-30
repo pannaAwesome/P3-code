@@ -16,9 +16,9 @@ namespace HAVI_app.Services.Classes
             this.httpClient = httpClient;
         }
 
-        public async Task<IEnumerable<VatTaxCode>> GetVatTaxCodes()
+        public async Task<List<VatTaxCode>> GetVatTaxCodes(int id)
         {
-            return await httpClient.GetFromJsonAsync<VatTaxCode[]>("/api/vatTaxCodes");
+            return await httpClient.GetFromJsonAsync<List<VatTaxCode>>($"/api/vatTaxCodes/country/{id}");
         }
 
         public async Task<VatTaxCode> CreateVatTaxCode(VatTaxCode code)
@@ -27,10 +27,9 @@ namespace HAVI_app.Services.Classes
             return await result.Content.ReadAsAsync<VatTaxCode>();
         }
 
-        public async Task<VatTaxCode> DeleteVatTaxCode(int id)
+        public async void DeleteVatTaxCode(int id)
         {
-            var result = await httpClient.DeleteAsync($"/api/vatTaxCodes/{id}");
-            return await result.Content.ReadAsAsync<VatTaxCode>();
+            await httpClient.DeleteAsync($"/api/vatTaxCodes/{id}");
         }
 
         public async Task<VatTaxCode> UpdateVatTaxCode(int id, VatTaxCode code)

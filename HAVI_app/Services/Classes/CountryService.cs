@@ -23,9 +23,9 @@ namespace HAVI_app.Services.Classes
             return await httpClient.GetFromJsonAsync<Country>($"/api/countries/{id}");
         }
 
-        public async Task<IEnumerable<Country>> GetCountries()
+        public async Task<List<Country>> GetCountries()
         {
-            return await httpClient.GetFromJsonAsync<Country[]>("/api/countries");
+            return await httpClient.GetFromJsonAsync<List<Country>>("/api/countries");
         }
 
         public async Task<Country> CreateCountry(Country country)

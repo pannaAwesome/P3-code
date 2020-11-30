@@ -1,4 +1,4 @@
-﻿using HAVI_app.Api.DatabaseInterfaces;
+﻿
 using HAVI_app.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HAVI_app.Api.DatabaseClasses
 {
-    public class QIPNumberRepository : IQIPNumberRepository
+    public class QIPNumberRepository
     {
         private readonly HAVIdatabaseContext _context;
         public QIPNumberRepository(HAVIdatabaseContext context)

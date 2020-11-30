@@ -16,9 +16,9 @@ namespace HAVI_app.Services.Classes
             this.httpClient = httpClient;
         }
 
-        public async Task<IEnumerable<InformCostType>> GetInformCostTypes()
+        public async Task<List<InformCostType>> GetInformCostTypes()
         {
-            return await httpClient.GetFromJsonAsync<InformCostType[]>("/api/informCostTypes");
+            return await httpClient.GetFromJsonAsync<List<InformCostType>>("/api/informCostTypes");
         }
 
         public async Task<InformCostType> CreateInformCostType(InformCostType type)

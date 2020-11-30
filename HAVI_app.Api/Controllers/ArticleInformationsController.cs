@@ -1,4 +1,5 @@
-﻿using HAVI_app.Api.DatabaseInterfaces;
+﻿using HAVI_app.Api.DatabaseClasses;
+
 using HAVI_app.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,8 +14,8 @@ namespace HAVI_app.Api.Controllers
     [ApiController]
     public class ArticleInformationsController : ControllerBase
     {
-        private readonly IArticleInformationRepository _articleInformationRepository;
-        public ArticleInformationsController(IArticleInformationRepository articleInformationRepository)
+        private readonly ArticleInformationRepository _articleInformationRepository;
+        public ArticleInformationsController(ArticleInformationRepository articleInformationRepository)
         {
             _articleInformationRepository = articleInformationRepository;
         }

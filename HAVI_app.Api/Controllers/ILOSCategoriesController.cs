@@ -1,4 +1,5 @@
-﻿using HAVI_app.Api.DatabaseInterfaces;
+﻿using HAVI_app.Api.DatabaseClasses;
+
 using HAVI_app.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,18 +14,18 @@ namespace HAVI_app.Api.Controllers
     [ApiController]
     public class ILOSCategoriesController : ControllerBase
     {
-        private readonly IILOSCategoryRepository _categoryRepository;
-        public ILOSCategoriesController(IILOSCategoryRepository categoryRepository)
+        private readonly ILOSCategoryRepository _categoryRepository;
+        public ILOSCategoriesController(ILOSCategoryRepository categoryRepository)
         {
             _categoryRepository = categoryRepository;
         }
 
-        [HttpGet]
-        public async Task<ActionResult> GetILOSCategories()
+        [HttpGet("country/{id}")]
+        public async Task<ActionResult> GetILOSCategories(int id)
         {
             try
             {
-                var result = await _categoryRepository.GetILOSCategories();
+                var result = await _categoryRepository.GetILOSCategories(id);
                 if (result == null)
                 {
                     return NotFound();

@@ -1,4 +1,4 @@
-﻿using HAVI_app.Api.DatabaseInterfaces;
+﻿
 using HAVI_app.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -8,13 +8,19 @@ using System.Threading.Tasks;
 
 namespace HAVI_app.Api.DatabaseClasses
 {
-    public class ProfileRepository : IProfileRepository 
+    public class ProfileRepository 
     {
         private readonly HAVIdatabaseContext _context;
         public ProfileRepository(HAVIdatabaseContext context)
         {
             _context = context;
         }
+
+        public async Task<Profile> GetProfileForCountry(int profileId)
+        {
+            return await _context.Profiles.Where(p => p.Id == profileId).FirstOrDefaultAsync();
+        }
+
         public async Task<Profile> AddProfile(Profile profile)
         {
             var result = await _context.Profiles.AddAsync(profile);
@@ -25,13 +31,16 @@ namespace HAVI_app.Api.DatabaseClasses
 
         public async Task<Profile> DeleteProfileAsync(int profileId)
         {
-            var result = await _context.Profiles.FirstOrDefaultAsync(s => s.Id == profileId);
-            if (result != null)
+            var profile = await _context.Profiles
+                                        .Where(p => p.Id == profileId)
+                                        .FirstOrDefaultAsync();
+            if (profile != null)
             {
-                _context.Profiles.Remove(result);
+                _context.Profiles.Remove(profile);
                 await _context.SaveChangesAsync();
-                return result;
+                return profile;
             }
+
             return null;
         }
 
@@ -40,7 +49,7 @@ namespace HAVI_app.Api.DatabaseClasses
             return await _context.Profiles.FirstOrDefaultAsync(s => s.Id == profileId);
         }
 
-        public async Task<IEnumerable<Profile>> GetProfiles()
+        public async Task<List<Profile>> GetProfiles()
         {
             return await _context.Profiles.ToListAsync();
         }
@@ -52,7 +61,6 @@ namespace HAVI_app.Api.DatabaseClasses
             {
                 result.Username = profile.Username;
                 result.Password = profile.Password;
-                result.Usertype = profile.Usertype;
                 await _context.SaveChangesAsync();
                 return result;
             }

@@ -3,6 +3,7 @@
 @using Microsoft.AspNetCore.Authorization
 @inject IAuthorizationService AuthorizationService
 @attribute [Authorize(Roles = "admin")]
+@inherits HAVI_app.Shared.Admin_layout.ArticleTableAdmin
 
 <div class="modal fade" id="deleting-rows" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -18,7 +19,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn cancel-button" data-dismiss="modal">Close</button>
-                <button type="button" class="btn red-button">Delete</button>
+                <button type="button" class="btn red-button" @onclick="DeleteArticles">Delete</button>
             </div>
         </div>
     </div>
@@ -42,92 +43,21 @@
 <div class="row">
 
     <div class="col-12">
-        <Table TableItem="SupplierInfo" Items="supplierdata" ColumnReorder="true" TableClass="table table-hover" TableHeadClass="blue-tabel-header" TableRowClass="@(x => x.RowClass)" RowClickAction="RowClicked" ShowSearchBar="true" SelectionType="selectionType" SelectedItems="selectedItems">
-            <Column TableItem="SupplierInfo" Title="Article name" Field="@(x => x.ArticleName)" Sortable="true" />
-            <Column TableItem="SupplierInfo" Title="Supplier name" Field="@(x => x.SupplierName)" Sortable="true" />
-            <Column TableItem="SupplierInfo" Title="Vailed for customer" Field="@(x => x.VailedForCustomer)" Sortable="true" />
-            <Column TableItem="SupplierInfo" Title="Purchaser email" Field="@(x => x.BuyerEmail)" Sortable="true" />
-            <Column TableItem="SupplierInfo" Title="State" Field="@(x => x.State)" Class="text-center" Width="100px" DefaultSortColumn="true" Sortable="true">
+        <Table TableItem="Article" Items="Articles" ColumnReorder="true" TableClass="table table-hover" TableHeadClass="blue-tabel-header" RowClickAction="RowClicked" ShowSearchBar="true" SelectionType="SelectionType" SelectedItems="SelectedItems">
+            <Column TableItem="Article" Title="Article name " Field="@(x => x.ArticleInformation.ArticleName)" Sortable="true"/>
+            <Column TableItem="Article" Title="Supplier name " Field="@(x => x.ArticleInformation.CompanyName)" Sortable="true" />
+            <Column TableItem="Article" Title="Valid for customer " Field="@(x => x.VailedForCustomer)" Sortable="true" />
+            <Column TableItem="Article" Title="Purchaser email " Field="@(x => x.Purchaser.Profile.Username)" Sortable="true" />
+            <Column TableItem="Article" Title="State " Field="@(x => x.ArticleState)" Class="text-center" Width="100px" DefaultSortColumn="true" Sortable="true" >
                 <Template>
-                    <div class="@context.State.ToLower()-state state">@context.State</div>
+                    <div class="@Classes.Shared.StateDictionary[context.ArticleState].ToLower()-state state">@Classes.Shared.StateDictionary[context.ArticleState]</div>
                 </Template>
             </Column>
             <EmptyDataTemplate>
                 <div class="text-center">
-                    There are no new article information!
+                    There are no new article informations!
                 </div>
             </EmptyDataTemplate>
         </Table>
     </div>
 </div>
-
-@code{
-    private SupplierInfo[] supplierdata;
-
-    private SelectionType selectionType;
-
-    private List<SupplierInfo> selectedItems = new List<SupplierInfo>();
-
-    private SupplierInfo selected;
-
-    private string hideornot = "hide-trash";
-
-    protected override void OnInitialized()
-    {
-        supplierdata = new SupplierInfo[]{
-            new SupplierInfo("French fries", "McDonalds", "winnie@havi.com", "Hello and Co.", "Completed"),
-            new SupplierInfo("French fries", "McDonalds", "winnie@havi.com", "Hello and Co.", "Error"),
-            new SupplierInfo("French fries", "McDonalds", "winnie@havi.com", "Hello and Co.", "Robot ready"),
-            new SupplierInfo("French fries", "McDonalds", "winnie@havi.com", "Hello and Co.", "Created"),
-            new SupplierInfo("Strawberry", "Sticks N Sushi", "anders@havi.com", "Hello and Co.", "Submitted")
-            };
-    }
-
-    private void SelectionChanged(string selectvalue)
-    {
-        selectionType = (SelectionType)Enum.Parse(typeof(SelectionType), selectvalue);
-
-        if (selectionType == SelectionType.Multiple)
-        {
-            hideornot = "show-trash";
-        }
-        else
-        {
-            hideornot = "hide-trash";
-        }
-
-    }
-
-    private void RowClicked(SupplierInfo data)
-    {
-        if (selectionType == SelectionType.None)
-        {
-            NavigationManager.NavigateTo("show_article", true);
-        }
-        else
-        {
-            selected = data;
-            StateHasChanged();
-        }
-    }
-
-    public class SupplierInfo
-    {
-        public SupplierInfo(string articlename, string vailedforcustomer, string buyeremail, string suppliername, string state)
-        {
-            ArticleName = articlename;
-            VailedForCustomer = vailedforcustomer;
-            State = state;
-            SupplierName = suppliername;
-            BuyerEmail = buyeremail;
-        }
-
-        public string ArticleName { get; set; }
-        public string VailedForCustomer { get; set; }
-        public string SupplierName { get; set; }
-        public string BuyerEmail { get; set; }
-        public string State { get; set; }
-
-        public string RowClass => "table tabel-row";
-    }
-}

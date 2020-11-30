@@ -15,27 +15,26 @@ namespace HAVI_app.Services.Classes
         {
             this.httpClient = httpClient;
         }
-        public async Task<IEnumerable<Ilosorderpickgroup>> GetILOSCategories()
+        public async Task<List<Ilosorderpickgroup>> GetILOSOrderpickgroup(int id)
         {
-            return await httpClient.GetFromJsonAsync<Ilosorderpickgroup[]>("/api/IlosOrderpickgroups");
+            return await httpClient.GetFromJsonAsync<List<Ilosorderpickgroup>>($"/api/IlosOrderpickgroups/country/{id}");
         }
 
-        public async Task<Ilosorderpickgroup> CreateILOSCategory(Ilosorderpickgroup IlosOrderpickgroup)
+        public async Task<Ilosorderpickgroup> CreateILOSOrderpickgroup(Ilosorderpickgroup IlosOrderpickgroup)
         {
             var result = await httpClient.PostAsJsonAsync("/api/IlosOrderpickgroups", IlosOrderpickgroup);
             return await result.Content.ReadAsAsync<Ilosorderpickgroup>();
         }
 
-        public async Task<Ilosorderpickgroup> UpdateILOSCategory(int id, Ilosorderpickgroup ilosCategory)
+        public async Task<Ilosorderpickgroup> UpdateILOSOrderpickgroup(int id, Ilosorderpickgroup ilosCategory)
         {
             var result = await httpClient.PutAsJsonAsync($"/api/IlosOrderpickgroups/{id}", ilosCategory);
             return await result.Content.ReadAsAsync<Ilosorderpickgroup>();
         }
 
-        public async Task<Ilosorderpickgroup> DeleteILOSCategory(int id)
+        public async void DeleteILOSOrderpickgroup(int id)
         {
-            var result = await httpClient.DeleteAsync($"/api/ilosCategoies/{id}");
-            return await result.Content.ReadAsAsync<Ilosorderpickgroup>();
+            await httpClient.DeleteAsync($"/api/ilosCategoies/{id}");
         }
     }
 }

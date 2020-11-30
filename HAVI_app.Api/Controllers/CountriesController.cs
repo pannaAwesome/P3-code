@@ -1,4 +1,5 @@
-﻿using HAVI_app.Api.DatabaseInterfaces;
+﻿using HAVI_app.Api.DatabaseClasses;
+
 using HAVI_app.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -15,28 +16,10 @@ namespace HAVI_app.Api.Controllers
     [ApiController]
     public class CountriesController : ControllerBase
     {
-        private readonly ICountryRepository _countryRepository;
-        public CountriesController(ICountryRepository countryRepository)
+        private readonly CountryRepository _countryRepository;
+        public CountriesController(CountryRepository countryRepository)
         {
             _countryRepository = countryRepository;
-        }
-
-        [HttpGet]
-        public async Task<ActionResult> GetCountries()
-        {
-            try
-            {
-                var result = await _countryRepository.GetCountries();
-                if (result == null)
-                {
-                    return NotFound();
-                }
-                return Ok(result);
-            }
-            catch (Exception)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database.");
-            }
         }
 
         [HttpGet("{id:int}")]
@@ -53,6 +36,24 @@ namespace HAVI_app.Api.Controllers
                 {
                     return result;
                 }
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database.");
+            }
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> GetCountries()
+        {
+            try
+            {
+                var result = await _countryRepository.GetCountries();
+                if (result == null)
+                {
+                    return NotFound();
+                }
+                return Ok(result);
             }
             catch (Exception)
             {

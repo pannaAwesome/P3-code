@@ -15,9 +15,9 @@ namespace HAVI_app.Services.Classes
         {
             this.httpClient = httpClient;
         }
-        public async Task<IEnumerable<Location>> GetLocations()
+        public async Task<List<Location>> GetLocations()
         {
-            return await httpClient.GetFromJsonAsync<Location[]>("/api/locations");
+            return await httpClient.GetFromJsonAsync<List<Location>>("/api/locations");
         }
     }
 }

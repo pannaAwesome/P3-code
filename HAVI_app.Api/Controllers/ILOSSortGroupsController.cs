@@ -1,4 +1,5 @@
-﻿using HAVI_app.Api.DatabaseInterfaces;
+﻿using HAVI_app.Api.DatabaseClasses;
+
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -12,8 +13,8 @@ namespace HAVI_app.Api.Controllers
     [ApiController]
     public class ILOSSortGroupsController : ControllerBase
     {
-        private readonly IILOSSortGroupRepository _sortGroup;
-        public ILOSSortGroupsController(IILOSSortGroupRepository sortGroup)
+        private readonly ILOSSortGroupRepository _sortGroup;
+        public ILOSSortGroupsController(ILOSSortGroupRepository sortGroup)
         {
             _sortGroup = sortGroup;
         }

@@ -21,7 +21,6 @@ namespace HAVI_app.Pages.Supplier_pages
         protected async override Task OnInitializedAsync()
         {
             Supplier = await SupplierService.GetSupplier(supplierId);
-            Console.WriteLine("hello " + Supplier.Profile.Username);
         }
 
     }

@@ -1,4 +1,4 @@
-﻿using HAVI_app.Api.DatabaseInterfaces;
+﻿
 using HAVI_app.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HAVI_app.Api.DatabaseClasses
 {
-    public class LocationRepository : ILocationRepository
+    public class LocationRepository
     {
         private readonly HAVIdatabaseContext _context;
         public LocationRepository(HAVIdatabaseContext context)

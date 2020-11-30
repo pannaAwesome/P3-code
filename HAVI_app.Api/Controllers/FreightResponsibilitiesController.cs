@@ -1,4 +1,5 @@
-﻿using HAVI_app.Api.DatabaseInterfaces;
+﻿using HAVI_app.Api.DatabaseClasses;
+
 using HAVI_app.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,8 +14,8 @@ namespace HAVI_app.Api.Controllers
     [ApiController]
     public class FreightResponsibilitiesController : ControllerBase {
 
-        private readonly IFreightResponsibilityRepository _freightResponsibilityRepository;
-        public FreightResponsibilitiesController(IFreightResponsibilityRepository freightResponsibilityRepository)
+        private readonly FreightResponsibilityRepository _freightResponsibilityRepository;
+        public FreightResponsibilitiesController(FreightResponsibilityRepository freightResponsibilityRepository)
         {
             _freightResponsibilityRepository = freightResponsibilityRepository;
         }
