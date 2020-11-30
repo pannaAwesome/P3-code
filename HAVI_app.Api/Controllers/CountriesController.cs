@@ -1,5 +1,4 @@
 ﻿using HAVI_app.Api.DatabaseClasses;
-
 using HAVI_app.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -13,6 +12,7 @@ namespace HAVI_app.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "admin")]
     public class CountriesController : ControllerBase
     {
         private readonly CountryRepository _countryRepository;
