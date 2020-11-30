@@ -119,7 +119,7 @@
         <div class="row">
             <div class="col-5"></div>
             <div class="col-2 justify-content-center">
-                <input class="btn green-button" type="submit" name="Submit" value="Sign up" @onclick="CreateNewSupplier" />
+                <input class="btn green-button" type="button" name="Submit" value="Sign up" @onclick="CreateNewSupplier" />
             </div>
         </div>
     </form>
@@ -146,12 +146,12 @@
 
     [Parameter]
     public string Password { get; set; }
-
-    Profile profile = new Profile();
+    
     Supplier supplierObject = new Supplier();
 
     private async void CreateNewSupplier()
     {
+        supplierObject.Profile = new Profile();
         supplierObject.Profile.Id = 0;
         supplierObject.Id = 0;
         supplierObject.Profile.Username = Email;
@@ -160,6 +160,7 @@
         supplierObject.PalletExchange = YesRadioPalletExchange == 1 ? 1 : 0;
         supplierObject.FreightResponsibility = Freight;
         supplierObject.Profile.Password = Password;
+        supplierObject.Profile.Usertype = 2;
 
         var user = await SupplierService.CreateSupplier(supplierObject);
         NavigationManager.NavigateTo("/overview_supplier");
