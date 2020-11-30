@@ -92,7 +92,7 @@
                         <label for="toll_tarrif_no" class="required">Toll-tarrif no.:</label>
                     </td>
                     <td colspan="6">
-                        <input type="number" class="form-control" name="toll_tarrif_no" @bind="Article.TollTarifNumber" required maxlength="16">
+                        <input type="text" class="form-control" name="toll_tarrif_no" @bind="Article.TollTarifNumber" required maxlength="16">
                     </td>
                     <td>
                         <HAVI_app.Shared.Shared_layout.Questionmark_top>
@@ -202,7 +202,7 @@
                     <input type="submit" class="btn cancel-button button-size" value="Back" @onclick="OnPostBack" />
                 </div>
                 <div class="text-left col-6">
-                    <input type="submit" class="btn green-button button-size" value="Next" @onclick="OnPostForward" />
+                    <input type="submit" class="btn green-button button-size" value="Next"  />
                 </div>
             </div>
         </EditForm>
@@ -257,8 +257,19 @@
 
     public void ValidationShipmentInfo()
     {
-
-
+        if (IntOnly(Article.CartonsPerPallet) &&
+            IntOnly(Article.CartonsPerLayer) &&
+            NumbersLettersDashOnly(Article.TollTarifNumber) &&
+            DoubleOnly(Article.MinimumOrderQuantity) &&
+            DoubleOnly(Article.TemperatureTransportationMin) &&
+            DoubleOnly(Article.TemperatureTransportationMax) &&
+            DoubleOnly(Article.TemperatureStorageMin) &&
+            DoubleOnly(Article.TemperatureStorageMax) &&
+            IntOnly(Article.LeadTime))
+        {
+            NavigationManager.NavigateTo($"/price_info_form", true);
+        }
+        
         if (!IntOnly(Article.CartonsPerPallet))
         {
             CartonPrPalletValidated = "btn-danger";
@@ -300,11 +311,6 @@
 }
 
 @code{
-    public void OnPostForward()
-    {
-        NavigationManager.NavigateTo($"/price_info_form", true);
-    }
-
     public void OnPostBack()
     {
         NavigationManager.NavigateTo($"/measurement_info_form", true);
