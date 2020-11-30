@@ -50,7 +50,12 @@
 
                                 protected override async Task OnInitializedAsync()
                                 {
-                                    var something = await SalesUnitService.GetSalesUnits();
+                                    var Sales = await SalesUnitService.GetSalesUnits();
+
+                                    foreach (var item in Sales)
+                                    {
+                                        <option>@item</option>
+                                    }
                                 }
                             }
                         </select>
