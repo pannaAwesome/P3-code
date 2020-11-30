@@ -24,8 +24,18 @@ namespace HAVI_app.Classes
             return false;
         }
 
-        public bool DoubleOnly(string input)
+        public bool DoubleOnly(double? input)
         {
+            if(input.GetType() == typeof(double))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+            /*
             double number;
             if(input != null)
             {
@@ -38,7 +48,7 @@ namespace HAVI_app.Classes
                     return false;
                 }
             }
-            return false;
+            return false; */
         }
 
         public bool NumbersLettersDashOnly(string input)

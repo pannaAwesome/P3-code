@@ -24,7 +24,7 @@ namespace HAVI_appTests
         public void OnlyDoubleTest()
         {
             var numbers = new Validation();
-            Assert.IsTrue(numbers.DoubleOnly("11.323"));
+            Assert.IsTrue(numbers.DoubleOnly(11.323));
         }
 
         [TestMethod]
