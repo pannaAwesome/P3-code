@@ -1,76 +1,6 @@
 ﻿@using BlazorTable
 @inherits OverviewTableSupplierPurchaser
 
-
-<div class="row">
-    <div class="col-6">
-        Options:
-    </div>
-</div>
-<div class="row">
-    <div class="col-2">
-        <select class="form-control" @onchange="@((x) => selectionType = (SelectionType)Enum.Parse(typeof(SelectionType), x.Value.ToString()))">
-            <option value="@SelectionType.None">@SelectionType.None</option>
-            <option value="@SelectionType.Multiple">@SelectionType.Multiple</option>
-        </select>
-    </div>
-    <div class="col-1">
-        <button class="btn trash-button" data-target="deleting-rows"></button>
-    </div>
-    <div class="col justify-content-end p-1"><button type="button" class="btn btn-success" data-toggle="modal" data-target="#creationCode">Get creation for supplier</button></div>
-
-    <div class="modal fade" id="creationCode" tabindex="-1" role="dialog" aria-labelledby="createCodeLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="creationCodeLabel">Generate creation code</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <div class="form-group mx-sm-3 mb-2">
-                <label for="creationCode" class="sr-only"></label>
-                <div>
-                    <input type="text" id="creationCode" value="@CreationCode"/>
-                    <button type="button" class="btn btn-success" @onclick="GenerateCreationCode">Generate</button>
-                </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    
-</div>
-<div class="row">
-    <div class="col-12">
-        <Table TableItem="Article" Items="Articles" ColumnReorder="true" TableHeadClass="blue-tabel-header" RowClickAction="RowClicked" SelectionType="selectionType" SelectedItems="selectedItems" ShowSearchBar="true">
-            <Column TableItem="Article" Title="Article name " Field="@(x => x.ArticleInformation.ArticleName)" Sortable="true" />
-            <Column TableItem="Article" Title="Valid for customer " Field="@(x => x.VailedForCustomer)" Sortable="true"/>
-            <Column TableItem="Article" Title="Supplier name " Field="@(x => x.ArticleInformation.CompanyName)" Sortable="true" />
-            <Column TableItem="Article" Title="Date created " Field="@(x => x.DateCreated)" Sortable="true">
-                <Template>
-                    @context.DateCreated.ToShortDateString()
-                </Template>
-            </Column>
-            <Column TableItem="Article" Title="State" Field="@(x => x.ArticleState)" Sortable="true" Class="text-center" DefaultSortColumn="true" Width="100px">
-                <Template>
-                    <div class="@context.State.ToLower()-state state">@context.State</div>
-                </Template>
-            </Column>
-            <EmptyDataTemplate>
-                <div class="text-center">
-                    You have not created any article informations yet!
-                </div>
-            </EmptyDataTemplate>
-        </Table>
-    </div>
-</div>
-
 <div class="modal fade" id="deleting-rows" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -85,69 +15,79 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn cancel-button" data-dismiss="modal">Close</button>
-                <button type="button" class="btn discard-button">Delete</button>
+                <button type="button" class="btn red-button" @onclick="DeleteArticles">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-6">
+        Options:
+    </div>
+</div>
+<div class="row">
+    <div class="col-3">
+        <select class="form-control row-selection" @onchange="@((x) => SelectionChanged(x.Value.ToString()))">
+            <option value="@SelectionType.None">Select no rows</option>
+            <option value="@SelectionType.Multiple">Select multiple rows</option>
+        </select>
+    </div>
+    <div class="col-1">
+        <button class="btn trash-button @hideornot" data-toggle="modal" data-target="#deleting-rows"></button>
+    </div>
+</div>
+
+<div class="col justify-content-end p-1"><button type="button" class="btn btn-success" data-toggle="modal" data-target="#creationCode">Get creation for supplier</button></div>
+
+<div class="modal fade" id="creationCode" tabindex="-1" role="dialog" aria-labelledby="createCodeLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="creationCodeLabel">Generate creation code</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group mx-sm-3 mb-2">
+                    <label for="creationCode" class="sr-only"></label>
+                    <div>
+                        <input type="text" id="creationCode" value="@CreationCode" />
+                        <button type="button" class="btn btn-success" @onclick="GenerateCreationCode">Generate</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
 </div>
 
-@code{
-    private SupplierInfo[] supplierdata;
 
-    private SelectionType selectionType;
+<div class="row">
 
-    private List<SupplierInfo> selectedItems = new List<SupplierInfo>();
+    <div class="col-12">
+        <Table TableItem="Article" Items="Articles" ColumnReorder="true" TableClass="table table-hover" TableHeadClass="blue-tabel-header" RowClickAction="RowClicked" ShowSearchBar="true" SelectionType="SelectionType" SelectedItems="SelectedItems">
+            <Column TableItem="Article" Title="Article name " Field="@(x => x.ArticleInformation.ArticleName)" Sortable="true" />
+            <Column TableItem="Article" Title="Supplier name " Field="@(x => x.ArticleInformation.CompanyName)" Sortable="true" />
+            <Column TableItem="Article" Title="Valid for customer " Field="@(x => x.VailedForCustomer)" Sortable="true" />
+            <Column TableItem="Article" Title="State " Field="@(x => x.DateCreated)" Sortable="true">
+                <Template>
+                    @context.DateCreated.ToShortDateString();
+                </Template>
+            </Column>
+            <Column TableItem="Article" Title="State " Field="@(x => x.ArticleState)" Class="text-center" Width="100px" DefaultSortColumn="true" Sortable="true">
 
-    private SupplierInfo selected;
-
-    private long CreationCode;
-    
-    private void GenerateCreationCode()
-    {
-        Random random = new Random();
-        CreationCode = random.Next(101, 989) * random.Next(11,19);
-    }
-
-    protected override void OnInitialized()
-    {
-        supplierdata = new SupplierInfo[]{
-            new SupplierInfo(1234, "French fries", "McDonalds", "Hello and Co.", "Created", new DateTime(2020, 11, 10)),
-            new SupplierInfo(1234, "French fries", "McDonalds", "Hello and Co.", "Submitted", new DateTime(2020, 11, 10))
-            };
-    }
-
-    private void RowClicked(SupplierInfo data)
-    {
-        if (selectionType == SelectionType.None)
-        {
-            NavigationManager.NavigateTo("/article_edit_view");
-        }
-        else
-        {
-            selected = data;
-            StateHasChanged();
-        }
-    }
-
-    public class SupplierInfo
-    {
-        public SupplierInfo(int articlenumber, string articlename, string validforcustomer, string suppliername, string state, DateTime date)
-        {
-            ArticleName = articlename;
-            ValidForCustomer = validforcustomer;
-            State = state;
-            SupplierName = suppliername;
-            ArticleNumber = articlenumber;
-            DateCreated = date;
-        }
-
-        public string ArticleName { get; set; }
-        public string ValidForCustomer { get; set; }
-        public string SupplierName { get; set; }
-        public string State { get; set; }
-        public int ArticleNumber { get; set; }
-        public DateTime DateCreated { get; set; }
-
-        public string RowClass => "table tabel-row";
-    }
-}
+                <Template>
+                    <div class="@Classes.Shared.StateDictionary[context.ArticleState].ToLower()-state state">@Classes.Shared.StateDictionary[context.ArticleState]</div>
+                </Template>
+            </Column>
+            <EmptyDataTemplate>
+                <div class="text-center">
+                    There are no new article informations!
+                </div>
+            </EmptyDataTemplate>
+        </Table>
+    </div>
+</div>

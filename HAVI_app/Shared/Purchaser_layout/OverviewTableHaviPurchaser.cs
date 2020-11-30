@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace HAVI_app.Shared.Purchaser_layout
 {
-    public class OverviewTableSupplierPurchaser : ComponentBase
+    public class OverviewTableHaviPurchaser : ComponentBase
     {
         [Inject]
         public NavigationManager NavigationManager { get; set; }
