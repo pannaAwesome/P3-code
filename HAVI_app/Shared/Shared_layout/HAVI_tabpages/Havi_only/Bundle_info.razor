@@ -2,84 +2,85 @@
 @layout HAVI_app.Shared.Admin_layout.Show_artikel_layout
 
 
-        <h3>Bundles:</h3>
+<h3>Bundles:</h3>
 
-        <div class="justify-content-center row">
-            <div class="col-12">
-                <form>
-                    <table class="table">
-                        <tr>
-                            <td>
-                                <label for="Article" class="required">Article bundles</label>
-                            </td>
-                            <td>
-                                <label for="Quantity" class="required">Quantity</label>
-                            </td>
-                        </tr>
+<div class="justify-content-center row">
+    <div class="col-12">
+        <form>
+            <table class="table">
+                <tr>
+                    <td>
+                        <label for="Article" class="required">Article bundles</label>
+                    </td>
+                    <td>
+                        <label for="Quantity" class="required">Quantity</label>
+                    </td>
+                </tr>
 
-                        <tr>
-                            <td>
-                                <select class="form-control" name="Articlebundle">
-                                    <option disabled selected>-- select an option --</option>
-                                    <option>Ark // 225</option>
-                                    <option>Bag in box // 204</option>
-                                    <option>Bakke // 374</option>
-                                </select>
+                <tr>
+                    <td>
+                        <select class="form-control" name="Articlebundle">
+                            <option disabled selected>-- select an option --</option>
+                            <option>Ark // 225</option>
+                            <option>Bag in box // 204</option>
+                            <option>Bakke // 374</option>
+                        </select>
 
-                            </td>
-                            <td>
-                                <input type="number" class="form-control" id="Quantity" required>
-                            </td>
-                        </tr>
+                    </td>
+                    <td>
+                        <input type="number" class="form-control" id="Quantity" required @enabledOrNot>
+                    </td>
+                </tr>
 
-                        <tr>
-                            <td>
-                                <select class="form-control" name="Articlebundle1">
-                                    <option disabled selected>-- select an option --</option>
-                                    <option>Ark // 225</option>
-                                    <option>Bag in box // 204</option>
-                                    <option>Bakke // 374</option>
-                                </select>
+                <tr>
+                    <td>
+                        <select class="form-control" name="Articlebundle1">
+                            <option disabled selected>-- select an option --</option>
+                            <option>Ark // 225</option>
+                            <option>Bag in box // 204</option>
+                            <option>Bakke // 374</option>
+                        </select>
 
-                            </td>
-                            <td>
-                                <input type="number" class="form-control" id="Quantity1" required>
-                            </td>
-                        </tr>
+                    </td>
+                    <td>
+                        <input type="number" class="form-control" id="Quantity1" required @enabledOrNot>
+                    </td>
+                </tr>
 
-                        <tr>
-                            <td>
-                                <select class="form-control" name="Articlebundle2">
-                                    <option disabled selected>-- select an option --</option>
-                                    <option>Ark // 225</option>
-                                    <option>Bag in box // 204</option>
-                                    <option>Bakke // 374</option>
-                                </select>
+                <tr>
+                    <td>
+                        <select class="form-control" name="Articlebundle2">
+                            <option disabled selected>-- select an option --</option>
+                            <option>Ark // 225</option>
+                            <option>Bag in box // 204</option>
+                            <option>Bakke // 374</option>
+                        </select>
 
-                            </td>
-                            <td>
-                                <input type="number" class="form-control" id="Quantity2" required>
-                            </td>
-                        </tr>
+                    </td>
+                    <td>
+                        <input type="number" class="form-control" id="Quantity2" required @enabledOrNot>
+                    </td>
+                </tr>
 
-                        <tr>
-                            <td>
-                                <select class="form-control" name="Articlebundle3">
-                                    <option disabled selected>-- select an option --</option>
-                                    <option>Ark // 225</option>
-                                    <option>Bag in box // 204</option>
-                                    <option>Bakke // 374</option>
-                                </select>
-                            </td>
-                            <td>
-                                <input type="number" class="form-control" id="Quantity3" required>
-                            </td>
-                        </tr>
-                    </table>
-                </form>
-            </div>
-        </div>
+                <tr>
+                    <td>
+                        <select class="form-control" name="Articlebundle3">
+                            <option disabled selected>-- select an option --</option>
+                            <option>Ark // 225</option>
+                            <option>Bag in box // 204</option>
+                            <option>Bakke // 374</option>
+                        </select>
+                    </td>
+                    <td>
+                        <input type="number" class="form-control" id="Quantity3" required @enabledOrNot>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
 
 @code {
-
+    [Parameter]
+    public string enabledOrNot { get; set; }
 }

@@ -4,11 +4,11 @@
 {
     <div class="row">
         <div class="col-6">
-            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Havi_only.Internal_info />
+            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Havi_only.Internal_info EnabledOrNot="enabled"/>
         </div>
         <div class="col-6">
-            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Supplier_information />
-            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Article_information />
+            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Supplier_information Id="ArticleId" />
+            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Article_information ArticleName="d-none" ArticlePerSalesunit="d-none" SupplierNameNumber="d-none" GTINNumber="d-none" Id="ArticleId" />
         </div>
     </div>
 }
@@ -20,7 +20,7 @@
             <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Havi_only.Alias_info />
         </div>
         <div class="col-6">
-            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Article_information />
+            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Article_information Id="ArticleId" ArticleName="d-none" ArticlePerSalesunit="d-none" Salesunit="d-none" SupplierNameNumber="d-none" Shelflife="d-none" MinShelflife="d-none" OrganicArticle="d-none" />
         </div>
     </div>
 }
@@ -28,10 +28,8 @@
 @if (PageIndex == 2)
 {
     <div class="row">
-        <div class="col-6">
+        <div class="col-8 d-flex justify-content-center">
             <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Havi_only.Pick_storage />
-        </div>
-        <div class="col-6">
         </div>
     </div>
 }
@@ -43,7 +41,7 @@
             <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Havi_only.Bundle_info />
         </div>
         <div class="col-6">
-            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Article_information />
+            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Article_information Id="ArticleId" SupplierNameNumber="d-none" GTINNumber="d-none" Shelflife="d-none" MinShelflife="d-none" OrganicArticle="d-none" />master
         </div>
     </div>
 }
@@ -52,10 +50,10 @@
 {
     <div class="row">
         <div class="col-6">
-            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Article_information />
+            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Article_information Id="ArticleId" Shelflife="d-none" MinShelflife="d-none" GTINNumber="d-none" ArticlePerSalesunit="d-none" SupplierNameNumber="d-none" Salesunit="d-none" />
         </div>
         <div class="col-6">
-            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Shipment_information />
+            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Shipment_information Id="ArticleId" />
         </div>
     </div>
     <div class="row">
@@ -90,6 +88,9 @@
 
 
 @code{
+    [Parameter]
+    public string Username { get; set; }
+
     private int PageIndex = 0;
 
     private void PageUp()
@@ -112,7 +113,13 @@
 
     private void ReturnToOverview()
     {
-        //This only reroutes back to the admins article_view and needs to be updated to handle the purchaser
-        NavigationManager.NavigateTo("/article_view", true);
+        if(Username == "purchaser@info.com")
+        {
+            NavigationManager.NavigateTo("/overview_purchaser", true);
+        }
+        else NavigationManager.NavigateTo("/article_view", true);
     }
+
+    [Parameter]
+    public int ArticleId { get; set; }
 }

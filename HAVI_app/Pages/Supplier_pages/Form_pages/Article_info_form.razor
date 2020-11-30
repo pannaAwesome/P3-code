@@ -1,7 +1,9 @@
 ﻿@layout HAVI_app.Shared.Supplier_layout.Form_layout
 @inject Microsoft.AspNetCore.Components.NavigationManager NavigationManager
 @page "/article_info_form"
-@inject HAVI_app.Ser
+@inherits HAVI_app.Classes.Validation
+@inject Models.ArticleInformation Article
+
 
 <HAVI_app.Shared.Supplier_layout.Form_header SupplierState="filled" ArticleState="active" />
 
@@ -13,9 +15,9 @@
     </div>
 </div>
 
-<div class="row justify-content-center ">
+<div class="row justify-content-center">
     <div class="col-12 d-flex justify-content-center">
-        <form>
+        <EditForm Model="Article" OnSubmit="@ValidationArticleInfoForm">
             <table class="table">
 
                 <tr>
@@ -23,7 +25,7 @@
                         <label for="article_name" class="required">Article name:</label>
                     </td>
                     <td>
-                        <input type="text" class="form-control" name="article_name" required>
+                        <input type="text" class="form-control @ArticleNameValidated" name="article_name" @bind="Article.ArticleName" required maxlength="31"> 
                     </td>
                     <td>
                         <div></div>
@@ -41,7 +43,7 @@
                         <label for="salesunit" class="required">Salesunit:</label>
                     </td>
                     <td>
-                        <select class="form-control" name="salesunit" required>
+                        <select class="form-control" name="salesunit" @bind="Article.Salesunit" required>
                             <option disabled selected>-- select an option --</option>
                             @code{
 
@@ -68,7 +70,7 @@
                         <label for="article_pr_salesunit" class="required">Articles per salesunit:</label>
                     </td>
                     <td>
-                        <input type="number" class="form-control" name="article_pr_salesunit" required>
+                        <input type="number" class="form-control @ArticlePerSalesunitValidated" name="article_pr_salesunit" @bind="Article.ArticlesPerSalesunit" required maxlength="5">
                     </td>
                     <td>
                         <div></div>
@@ -85,7 +87,7 @@
                         <label for="supplier_article_nn" class="required">Supplier article number/name:</label>
                     </td>
                     <td>
-                        <input type="text" class="form-control" name="supplier_article_nn" required>
+                        <input type="text" class="form-control @SupplierArticleNumberValidated" name="supplier_article_nn" @bind="Article.SupplierArticleNumber" required maxlength="16">
                     </td>
                     <td>
                         <div></div>
@@ -103,7 +105,7 @@
                         <label for="GTIN" class="required">GTIN number:</label>
                     </td>
                     <td>
-                        <input type="number" class="form-control" name="GTIN" required max="99999999999999" min="00000000000000">
+                        <input type="number" class="form-control" name="GTIN" @bind="Article.Gtinnumber" required maxlength="14">
                     </td>
                     <td>
                         <div></div>
@@ -121,7 +123,7 @@
                         <label for="Shelflife" class="required">Shelflife:</label>
                     </td>
                     <td>
-                        <input type="number" class="form-control" name="Shelflife" required>
+                        <input type="number" class="form-control @ShelflifeValidated" name="Shelflife" @bind="Article.Shelflife" required maxlength="3">
                     </td>
                     <td>
                         <label class="center-for-units" for="Shelflife">days</label>
@@ -139,7 +141,7 @@
                         <label for="Min_shelflife" class="required">Min. shelflife at HAVI:</label>
                     </td>
                     <td>
-                        <input type="number" class="form-control" name="Min_shelflife" required>
+                        <input type="number" class="form-control @ShelflifeAtHaviValidated" name="Min_shelflife" @bind="Article.ShelflifeAtHavi" required maxlength="4">
                     </td>
                     <td>
                         <label class="center-for-units" for="Min_shelflife">days</label>
@@ -159,7 +161,7 @@
 
                     <td>
                         <div class="text-center">
-                            <input type="radio" name="organic" value="yes">
+                            <input type="radio" name="organic" value="yes" required>
                             <label for="yes">Yes</label>
                             &nbsp;
                             <input type="radio" value="no" name="organic">
@@ -181,46 +183,47 @@
             </table>
             <div class="row justify-content-center">
                 <div class="text-right col-6">
-                    <input type="submit" class="btn cancel-button button-size" value="Back" @onclick="OnPostBack" />
+                    <input type="button" class="btn cancel-button button-size" value="Back" @onclick="OnPostBack" />
                 </div>
                 <div class="text-left col-6">
-                    <input type="submit" class="btn green-button button-size" value="Next" @onclick="OnPostForward" />
+                    <input type="submit" class="btn green-button button-size" value="Next" />
                 </div>
             </div>
-        </form>
+        </EditForm>
     </div>
 </div>
 
 @code{
-    [Parameter]
-    public string ArticleName { get; set; }
 
-    [Parameter]
-    public string SalesUnit { get; set; }
+    public string ArticleNameValidated;
 
-    [Parameter]
-    public int ArticlePrSalesUnit { get; set; }
+    public string ArticlePerSalesunitValidated;
 
-    [Parameter]
-    public string SupplierArticleNumber { get; set; }
+    public string SupplierArticleNumberValidated;
 
-    [Parameter]
-    public int GtinNumber { get; set; }
+    public string ShelflifeValidated;
 
-    [Parameter]
-    public int Shelflife { get; set; }
+    public string ShelflifeAtHaviValidated;
 
-    [Parameter]
-    public int ShelflifeAtHavi { get; set; }
-
-    [Parameter]
-    public string OrganicLife { get; set; }
-}
-
-@code{
-    public void OnPostForward()
+    private void GTINfiller()
     {
-        NavigationManager.NavigateTo($"/measurement_info_form", true);
+        Article.Gtinnumber = GTINValidation(Article.Gtinnumber);
+    }
+
+    public void ValidationArticleInfoForm()
+    {
+
+        if (LettersOnly(Article.ArticleName))
+        {
+            Article.Gtinnumber = GTINValidation(Article.Gtinnumber);
+
+            NavigationManager.NavigateTo("/measurement_info_form", true);
+        }
+
+        if (!LettersOnly(Article.ArticleName))
+        {
+            ArticleNameValidated = "btn-danger";
+        }
     }
 
     public void OnPostBack()
@@ -228,3 +231,4 @@
         NavigationManager.NavigateTo($"/supplier_info_form", true);
     }
 }
+

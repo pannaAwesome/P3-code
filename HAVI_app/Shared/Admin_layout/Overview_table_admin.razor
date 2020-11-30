@@ -1,63 +1,26 @@
 ﻿@using BlazorTable
 @inject NavigationManager NavigationManager
-
+@inherits HAVI_app.Shared.Admin_layout.OverviewTableAdmin
 
 
 <div class="row">
     <div class="col-12">
-        <Table TableItem="SupplierInfo" Items="supplierdata" ColumnReorder="true" TableHeadClass="purple-table-header" TableRowClass="@(x => x.RowClass)">
-            <Column TableItem="SupplierInfo" Title="Article name" Field="@(x => x.ArticleName)"  Sortable="true"/>
-            <Column TableItem="SupplierInfo" Title="Supplier name" Field="@(x => x.SupplierName)"  Sortable="true" />
-            <Column TableItem="SupplierInfo" Title="Vailed for customer" Field="@(x => x.VailedForCustomer)"  Sortable="true" />
-            <Column TableItem="SupplierInfo" Title="Purchaser email" Field="@(x => x.PurchaserEmail)"  Sortable="true" />
-            <Column TableItem="SupplierInfo" Title="State" Field="@(x => x.State)" Class="text-center" Width="100px"  Sortable="true">
+        <Table TableItem="Article" Items="Articles" ColumnReorder="true" TableHeadClass="purple-table-header">
+            <Column TableItem="Article" Title="Article name " Field="@(x => x.ArticleInformation.ArticleName)"  Sortable="true"/>
+            <Column TableItem="Article" Title="Supplier name " Field="@(x => x.ArticleInformation.CompanyName)"  Sortable="true" />
+            <Column TableItem="Article" Title="Vailed for customer " Field="@(x => x.VailedForCustomer)"  Sortable="true" />
+            <Column TableItem="Article" Title="Purchaser email " Field="@(x => x.Purchaser.Profile.Username)"  Sortable="true" />
+            <Column TableItem="Article" Title="State " Field="@(x => x.ArticleState)" Class="text-center" Width="100px"  Sortable="true">
+
                 <Template>
-                    <div class="@context.State.ToLower()-state state">@context.State</div>
+                    <div class="@Classes.Shared.StateDictionary[context.ArticleState].ToLower()-state state">@Classes.Shared.StateDictionary[context.ArticleState]</div>
                 </Template>
             </Column>
             <EmptyDataTemplate>
                 <div class="text-center">
-                    There are no new article information!
+                    There are no new article informations!
                 </div>
             </EmptyDataTemplate>
         </Table>
     </div>
 </div>
-
-@code{
-    private SupplierInfo[] supplierdata;
-
-    private SelectionType selectionType;
-
-    private List<SupplierInfo> selectedItems = new List<SupplierInfo>();
-
-    private SupplierInfo selected;
-
-    protected override void OnInitialized()
-    {
-        supplierdata = new SupplierInfo[]{
-            new SupplierInfo("French fries", "McDonalds", "winnie@havi.com", "Hello and Co.", "Robot ready"),
-            new SupplierInfo("Strawberry", "Sticks N Sushi", "anders@havi.com", "Hello and Co.", "Robot ready")
-            };
-    }
-
-    public class SupplierInfo
-    {
-        public SupplierInfo(string articlename, string vailedforcustomer, string purchaseremail, string suppliername, string state)
-        {
-            ArticleName = articlename;
-            VailedForCustomer = vailedforcustomer;
-            State = state;
-            SupplierName = suppliername;
-            PurchaserEmail = purchaseremail;
-        }
-
-        public string ArticleName { get; set; }
-        public string VailedForCustomer { get; set; }
-        public string SupplierName { get; set; }
-        public string PurchaserEmail { get; set; }
-        public string State { get; set; }
-
-        public string RowClass => "table tabel-row";
-    }
-}

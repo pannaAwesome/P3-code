@@ -20,86 +20,183 @@
 }
 
 
-/* Tooltip to the right of the questionmark */
+    /* Tooltip to the right of the questionmark */
 
-.questionmark:hover {
-    background-color: #385072;
-}
-
-.questionmark:hover .tooltip-right {
-    visibility: visible;
-    opacity: 1;
-}
-
-
-.questionmark .tooltip-right {
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    flex-direction: column;
-    position: absolute;
-    width: 240px;
-    height: 100px;
-    top: -42px;
-    left: 40px;
-    visibility: hidden;
-    background: #555;
-    border-radius: 5px;
-    padding: 5px;
-    text-align: center;
-    font-weight: normal;
-    font-size: smaller;
-}
-
-    .questionmark .tooltip-right::after {
-        content: " ";
-        position: absolute;
-        top: 50%;
-        right: 100%;
-        border-width: 5px;
-        border-style: solid;
-        border-color: transparent #555 transparent transparent;
+    .questionmark:hover {
+        background-color: #385072;
     }
 
-/* Tooltip above the questionmark */
+        .questionmark:hover .tooltip-right {
+            visibility: visible;
+            opacity: 1;
+        }
 
 
-.questionmark:hover .tooltip-top {
-    visibility: visible;
-    opacity: 1;
-}
-
-
-.questionmark .tooltip-top {
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    flex-direction: column;
-    position: absolute;
-    width: 288px;
-    height: 110px;
-    bottom: 150%;
-    left: 50%;
-    margin-left: -1135%;
-    visibility: hidden;
-    background: #555;
-    border-radius: 5px;
-    padding: 5px;
-    text-align: center;
-    font-weight: normal;
-    font-size: smaller;
-}
-
-    .questionmark .tooltip-top::after {
-        content: " ";
+    .questionmark .tooltip-right {
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        flex-direction: column;
         position: absolute;
-        top: 100%;
-        left: 98%;
-        margin-left: -5%;
-        border-width: 5px;
-        border-style: solid;
-        border-color: #555 transparent transparent transparent;
+        width: 240px;
+        height: 100px;
+        top: -42px;
+        left: 40px;
+        visibility: hidden;
+        background: #555;
+        border-radius: 5px;
+        padding: 5px;
+        text-align: center;
+        font-weight: normal;
+        font-size: smaller;
     }
+
+        .questionmark .tooltip-right::after {
+            content: " ";
+            position: absolute;
+            top: 50%;
+            right: 100%;
+            border-width: 5px;
+            border-style: solid;
+            border-color: transparent #555 transparent transparent;
+        }
+
+    /* Tooltip above the questionmark */
+
+
+    .questionmark:hover .tooltip-top {
+        visibility: visible;
+        opacity: 1;
+    }
+
+
+    .questionmark .tooltip-top {
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        flex-direction: column;
+        position: absolute;
+        width: 288px;
+        height: 110px;
+        bottom: 150%;
+        left: 50%;
+        margin-left: -1135%;
+        visibility: hidden;
+        background: #555;
+        border-radius: 5px;
+        padding: 5px;
+        text-align: center;
+        font-weight: normal;
+        font-size: smaller;
+    }
+
+        .questionmark .tooltip-top::after {
+            content: " ";
+            position: absolute;
+            top: 100%;
+            left: 98%;
+            margin-left: -5%;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #555 transparent transparent transparent;
+        }
+/*######################################################################################################################*/
+/* Questionmark and tooltip for help text */
+
+.questionmark {
+    text-align: center;
+    border-radius: 20px;
+    color: #fdfdfd;
+    background-color: #686766;
+    font-weight: 700;
+    position: relative;
+    height: 24px;
+    width: 24px;
+    padding: 1px;
+}
+
+
+    /* Tooltip to the right of the questionmark */
+
+    .questionmark:hover {
+        background-color: #385072;
+    }
+
+        .questionmark:hover .tooltip-right {
+            visibility: visible;
+            opacity: 1;
+        }
+
+
+    .questionmark .tooltip-right {
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        flex-direction: column;
+        position: absolute;
+        width: 240px;
+        height: 100px;
+        top: -42px;
+        left: 40px;
+        visibility: hidden;
+        background: #555;
+        border-radius: 5px;
+        padding: 5px;
+        text-align: center;
+        font-weight: normal;
+        font-size: smaller;
+    }
+
+        .questionmark .tooltip-right::after {
+            content: " ";
+            position: absolute;
+            top: 50%;
+            right: 100%;
+            border-width: 5px;
+            border-style: solid;
+            border-color: transparent #555 transparent transparent;
+        }
+
+    /* Tooltip above the questionmark */
+
+
+    .questionmark:hover .tooltip-top {
+        visibility: visible;
+        opacity: 1;
+    }
+
+
+    .questionmark .tooltip-top {
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        flex-direction: column;
+        position: absolute;
+        width: 288px;
+        height: 110px;
+        bottom: 150%;
+        left: 50%;
+        margin-left: -1135%;
+        visibility: hidden;
+        background: #555;
+        border-radius: 5px;
+        padding: 5px;
+        text-align: center;
+        font-weight: normal;
+        font-size: smaller;
+    }
+
+        .questionmark .tooltip-top::after {
+            content: " ";
+            position: absolute;
+            top: 100%;
+            left: 98%;
+            margin-left: -5%;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #555 transparent transparent transparent;
+        }
+
 
 
 
@@ -262,4 +359,54 @@
     border-radius: 10px;
     padding: 20px;
     outline: 5px;
+}
+
+/*##############################################################################*/
+/*Spinner layout*/
+.spinner {
+    margin: 100px auto 0;
+    width: 70px;
+    text-align: center;
+}
+
+    .spinner > div {
+        width: 18px;
+        height: 18px;
+        background-color: #333;
+        border-radius: 100%;
+        display: inline-block;
+        -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+        animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+    }
+
+    .spinner .bounce1 {
+        -webkit-animation-delay: -0.32s;
+        animation-delay: -0.32s;
+    }
+
+    .spinner .bounce2 {
+        -webkit-animation-delay: -0.16s;
+        animation-delay: -0.16s;
+    }
+
+@-webkit-keyframes sk-bouncedelay {
+    0%, 80%, 100% {
+        -webkit-transform: scale(0)
+    }
+
+    40% {
+        -webkit-transform: scale(1.0)
+    }
+}
+
+@keyframes sk-bouncedelay {
+    0%, 80%, 100% {
+        -webkit-transform: scale(0);
+        transform: scale(0);
+    }
+
+    40% {
+        -webkit-transform: scale(1.0);
+        transform: scale(1.0);
+    }
 }

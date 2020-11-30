@@ -1,0 +1,39 @@
+﻿using HAVI_app.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Json;
+using System.Threading.Tasks;
+
+namespace HAVI_app.Services.Classes
+{
+    public class SupplierDeliveryUnitService
+    {
+        private readonly HttpClient httpClient;
+        public SupplierDeliveryUnitService(HttpClient httpClient)
+        {
+            this.httpClient = httpClient;
+        }
+
+        public async Task<List<SupplierDeliveryUnit>> GetSupplierDeliveryUnits(int id)
+        {
+            return await httpClient.GetFromJsonAsync<List<SupplierDeliveryUnit>>($"/api/SuppliersDeliveryUnits/country/{id}");
+        }
+
+        public async void CreateSupplierDeliveryUnit(SupplierDeliveryUnit unit)
+        {
+            await httpClient.PostAsJsonAsync("/api/supplierDeliveryUnits", unit);
+        }
+
+        public async void DeleteSupplierDeliveryUnit(int id)
+        {
+            await httpClient.DeleteAsync($"/api/supplierDeliveryUnits/{id}");
+        }
+
+        public async void UpdateSupplierDeliveryUnit(int id, SupplierDeliveryUnit unit)
+        {
+            await httpClient.PutAsJsonAsync($"/api/supplierDeliveryUnits/{id}", unit);
+        }
+    }
+}
