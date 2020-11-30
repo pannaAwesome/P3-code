@@ -1,0 +1,312 @@
+﻿
+@page "/overview_purchaser2345"
+@inject NavigationManager NavigationManager
+
+<div class="row form-content">
+    <div class="col-12">
+        <HAVI_app.Shared.Shared_layout.Logo_image />
+        <div class="col-11 text-right">
+            <button class="btn discard-button form-header-button" data-toggle="modal" data-target="#discard-changes-modal">Discard changes</button>
+        </div>
+        <div class="modal fade" id="discard-changes-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Discard changes</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to discard all your changes and return to the overview?
+                    </div>
+                    <div class="modal-footer d-flex justify-content-center">
+                        <button type="button" class="btn cancel-button" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn red-button" @onclick="DiscardChanges">Discard changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h1>HAVI internal information:</h1>
+    </div>
+</div>
+<div class="justify-content-center row">
+    <div class="col-12">
+        <form>
+            <table class="table">
+                <tr>
+                    <td>
+                        <label for="company_code" class="required">Company code:</label>
+                    </td>
+                    <td>
+                        <select class="form-control" name="company_code">
+                            <option disabled selected>-- select an option --</option>
+                            <option>Denmark/1006</option>
+                            <option>Sweden/1008</option>
+                            <option>Norway/2323</option>
+                        </select>
+                        <!--<div class="dropdown">
+                            <button type="button" class="btn btn-primary dropdown-toggle">
+                                Pick something
+                            </button>
+                            <div class="dropdown-content dropdown-menu-lg-right">
+                                <button class="dropdown-item" type="button">Denmark/1006</button>
+                                <button class="dropdown-item" type="button">Sweden/1008</button>
+                                <button class="dropdown-item" type="button">Norway/2323</button>
+                            </div>
+                        </div>-->
+                    </td>
+                    <td>
+                        <HAVI_app.Shared.Shared_layout.Questionmark_top>
+                            Enter the country code of your company
+                        </HAVI_app.Shared.Shared_layout.Questionmark_top>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="supplier_id" class="required">Supplier ID (ILOS): </label>
+                    </td>
+                    <td>
+                        <input type="number" class="form-control" name="supplier_id">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="supplier_delivery_unit" class="required">Supplier delivery unit:</label>
+                    </td>
+                    <td>
+                        <input type="radio" name="pallet_exchange" id="yes" value="yes">
+                        <label for="yes">Europalle // 901</label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="remain_shelf" class="required">Remain shelf store value: </label>
+                    </td>
+                    <td>
+                        <input type="number" class="form-control" name="remain_shelf"> days
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="ilos_category" class="required">ILOS orderpickgroup:</label>
+                    </td>
+                    <td>
+                        <select class="form-control" name="company_code">
+                            <option disabled selected>-- select an option --</option>
+                            <option>B-FR</option>
+                            <option>B-DE</option>
+                            <option>B-SW</option>
+                        </select>
+                        <!--<div class="dropdown">
+                            <button type="button" class="btn btn-primary dropdown-toggle">
+                                Pick something
+                            </button>
+                            <div class="dropdown-content dropdown-menu-lg-right">
+                                <button class="dropdown-item" type="button">B-FR</button>
+                                <button class="dropdown-item" type="button">B-DE</button>
+                                <button class="dropdown-item" type="button">B-SW</button>
+                            </div>
+                        </div>-->
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="ilos_temp" class="required">ILOS Temp groups:</label>
+                    </td>
+                    <td>
+                        <select class="form-control" name="ilos_temp">
+                            <option disabled selected>-- select an option --</option>
+                            <option>DRY</option>
+                            <option>FREEZE</option>
+                        </select>
+                        <!--<div class="dropdown">
+                            <button type="button" class="btn btn-primary dropdown-toggle">
+                                Pick something
+                            </button>
+                            <div class="dropdown-content dropdown-menu-lg-right">
+                                <button class="dropdown-item" type="button">DRY</button>
+                                <button class="dropdown-item" type="button">FREEZE</button>
+                            </div>
+                        </div>-->
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="new_ilos" class="required">New ILOS article number: </label>
+                    </td>
+                    <td>
+                        <input type="number" class="form-control" name="new_ilos">
+                    </td>
+                    <td>
+                        <HAVI_app.Shared.Shared_layout.Questionmark_top>
+                            Number which shall be created
+                        </HAVI_app.Shared.Shared_layout.Questionmark_top>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="reference_ilos" class="required">Reference ILOS number:</label>
+                    </td>
+                    <td>
+                        <input type="number" class="form-control" name="reference_ilos">
+                    </td>
+                    <td>
+                        <HAVI_app.Shared.Shared_layout.Questionmark_top>
+                            Number which shall be copied from
+                        </HAVI_app.Shared.Shared_layout.Questionmark_top>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="reference_sap" class="required">Reference SAP from material no:</label>
+                    </td>
+                    <td>
+                        <input type="number" class="form-control" name="reference_sap">
+                    </td>
+                    <td>
+                        <HAVI_app.Shared.Shared_layout.Questionmark_top>
+                            Number which shall be copied from
+                        </HAVI_app.Shared.Shared_layout.Questionmark_top>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="ilos_category" class="required">ILOS category/account:</label>
+                    </td>
+                    <td>
+                        <select class="form-control" name="ilos_category">
+                            <option disabled selected>-- select an option --</option>
+                            <option>Op'supplies//3</option>
+                        </select>
+                        <!--<div class="dropdown">
+                            <button type="button" class="btn btn-primary dropdown-toggle">
+                                Pick something
+                            </button>
+                            <div class="dropdown-content dropdown-menu-lg-right">
+                                <button class="dropdown-item" type="button">Op'supplies//3</button>
+
+                            </div>
+                        </div>-->
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="vat_tax_code" class="required">VAT/TAX code:</label>
+                    </td>
+                    <td>
+                        <input type="radio" name="vat_tax_code" id="yes" value="yes">
+                        <label for="yes">Full TAX 25% // 01</label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="department_id" class="Department ID" :> </label>
+                    </td>
+                    <td>
+                        <select class="form-control" name="department_id">
+                            <option disabled selected>-- select an option --</option>
+                            <option>MCD</option>
+                        </select>
+                        <!--<div class="dropdown">
+                            <button type="button" class="btn btn-primary dropdown-toggle">
+                                Pick something
+                            </button>
+                            <div class="dropdown-content dropdown-menu-lg-right">
+                                <button class="dropdown-item" type="button">MCD</button>
+                            </div>
+                        </div>-->
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="innerpacking_ilos" class="required">Innerpacking ILOS:</label>
+                    </td>
+                    <td>
+                        <input type="radio" name="innerpacking_ilos" id="yes" value="yes">
+                        <label for="yes">1/10</label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="text_purchase_number" class="required">Text purchase number:</label>
+                    </td>
+                    <td>
+                        <input type="text" class="form-control" name="text_purchase_number">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="register_shelflife" class="required">Register shelflife:</label>
+                    </td>
+                    <td>
+                        <input type="radio" name="register_shelflife" id="yes" value="yes">
+                        <label for="yes">Yes</label>
+                        &nbsp;
+                        <input type="radio" id="no" name="register_shelflife">
+                        <label for="no">No</label>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="classification_code" class="required">Classification code:</label>
+                    </td>
+                    <td>
+                        <input type="number" class="form-control" name="classification_code">
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="packaging_group" class="required">Packaging group:</label>
+                    </td>
+                    <td>
+                        <select class="form-control" name="packaging_group">
+                            <option disabled selected>-- select an option --</option>
+                            <option>I</option>
+                            <option>II</option>
+                            <option>III</option>
+                        </select>
+                        <!--<div class="dropdown">
+                            <button type="button" class="btn btn-primary dropdown-toggle">
+                                Pick something
+                            </button>
+                            <div class="dropdown-content dropdown-menu-lg-right">
+                                <button class="dropdown-item" type="button">I</button>
+                                <button class="dropdown-item" type="button">II</button>
+                                <button class="dropdown-item" type="button">III</button>
+                            </div>
+                        </div>-->
+                    </td>
+                </tr>
+
+            </table>
+            <div class="row justify-content-center">
+                <div class="text-right col-6">
+                    <NavLink class="nav-link" href="/Overview_purchaser"><button class="btn cancel-button">Back</button></NavLink>
+                </div>
+                <div class="text-left col-6">
+                    <NavLink class="nav-link" href="/Havi_alias"><button class="btn green-button">Next</button></NavLink>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+@code{ private void DiscardChanges()
+    {
+        NavigationManager.NavigateTo("/overview_purchaser", true);
+    } }

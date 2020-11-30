@@ -1,6 +1,11 @@
 ﻿@layout HAVI_app.Shared.Supplier_layout.Form_layout
 @inject Microsoft.AspNetCore.Components.NavigationManager NavigationManager
 @page "/supplier_info_form"
+@inherits HAVI_app.Classes.Validation
+@inject Models.ArticleInformation Article
+
+
+
 
 <HAVI_app.Shared.Supplier_layout.Form_header SupplierState="active" />
 <div class="row justify-content-center">
@@ -11,16 +16,14 @@
 </div>
 <div class="row justify-content-center ">
     <div class="col-12 d-flex justify-content-center">
-        <form>
-
-
+        <EditForm Model="Article" OnSubmit="@ValidationSupplierForm">
             <table class="table">
                 <tr>
                     <td>
                         <label for="company_name" class="required">Company name:</label>
                     </td>
                     <td>
-                        <input type="text" class="form-control" name="company_name" required>
+                        <input type="text" class="form-control" name="company_name" @bind="Article.CompanyName" required maxlength="31">
                     </td>
                     <td>
                         <div></div>
@@ -37,7 +40,7 @@
                         <label for="company_location" class="required">Company location:</label>
                     </td>
                     <td>
-                        <select class="form-control" name="company_location" required>
+                        <select class="form-control" name="company_location" @bind="Article.CompanyLocation" required>
                             <option disabled selected>-- select an option --</option>
                             
                         </select>
@@ -57,7 +60,8 @@
                         <label for="email" class="required">Email:</label>
                     </td>
                     <td>
-                        <input type="text" class="form-control" name="email" required>
+
+                        <input type="text" class="form-control @EmailValidated" name="email" @bind="Article.Email" @onfocus="RemoveEmailDanger" required maxlength="50">
                     </td>
                     <td>
                         <div></div>
@@ -76,10 +80,10 @@
                     </td>
                     <td>
                         <div class="text-center">
-                            <input type="radio" name="pallet_exchange" value="yes">
+                            <input type="radio" name="pallet_exchange" checked="@(Article.PalletExchange == 1)" @onchange="@(() => Article.PalletExchange = 1)" required>
                             <label for="yes">Yes</label>
                             &nbsp;
-                            <input type="radio" value="no" name="pallet_exchange">
+                            <input type="radio" name="pallet_exchange" checked="@(Article.PalletExchange == 2)" @onchange="@(() => Article.PalletExchange = 2)">
                             <label for="no">No</label>
                         </div>
 
@@ -100,10 +104,10 @@
                     </td>
                     <td>
                         <div class="text-center">
-                            <input type="radio" name="freight_responsibility" value="CIP">
+                            <input type="radio" name="freight_responsibility" checked="@(Article.FreightResponsibility == "CIP")" @onchange="@(() => Article.FreightResponsibility = "CIP")" required>
                             <label for="CIP">CIP</label>
                             &nbsp;
-                            <input type="radio" value="EXW" name="freight_responsibility">
+                            <input type="radio" value="EXW" name="freight_responsibility" checked="@(Article.FreightResponsibility == "EXW")" @onchange="@(() => Article.FreightResponsibility = "EXW")">
                             <label for="EXW">EXW</label>
                         </div>
                     </td>
@@ -122,7 +126,7 @@
                 <tr>
                     <td colspan="2">
                         <label for="special_info">Special information regarding the article or cooperation?</label>
-                        <textarea class="form-control" name="special_info"></textarea>
+                        <textarea class="form-control" name="special_info" @bind="Article.SpecialInformation" maxlength="500"></textarea>
                     </td>
                     <td>
                         <div></div>
@@ -142,10 +146,10 @@
 
                     <td>
                         <div class="text-center">
-                            <input type="radio" name="transport" value="yes" data-toggle="collapse" data-target="#hideTransit:not(.show)" aria-expanded="false" aria-controls="hideTransit">
+                            <input type="radio" name="transport" data-toggle="collapse" data-target="#hideTransit:not(.show)" aria-expanded="false" aria-controls="hideTransit" checked="@(Article.TransportBooking == 1)" @onchange="@(() => Article.TransportBooking = 1)" required>
                             <label for="yes">Yes</label>
                             &nbsp;
-                            <input type="radio" value="no" name="transport" data-toggle="collapse" data-target="#hideTransit.show" aria-expanded="false" aria-controls="hideTransit">
+                            <input type="radio" name="transport" data-toggle="collapse" data-target="#hideTransit.show" aria-expanded="false" aria-controls="hideTransit" checked="@(Article.TransportBooking == 2)" @onchange="@(() => Article.TransportBooking = 2)">
                             <label for="no">No</label>
                         </div>
                     </td>
@@ -164,7 +168,7 @@
                         <label for="transittime" class="required">Transit time:</label>
                     </td>
                     <td>
-                        <input type="text" class="form-control" name="transittime" required>
+                        <input type="number" class="form-control" name="transittime" @bind="Article.TransitTime" maxlength="4">
                     </td>
                     <td>days</td>
                     <td>
@@ -180,10 +184,10 @@
                     </td>
                     <td>
                         <div class="text-center">
-                            <input type="radio" name="dangerous" value="yes" data-toggle="collapse" data-target="#hideDanger:not(.show)" aria-expanded="false" aria-controls="hideDanger">
+                            <input type="radio" name="dangerous" value="0" data-toggle="collapse" data-target="#hideDanger:not(.show)" aria-expanded="false" aria-controls="hideDanger" checked="@(Article.DangerousGoods == 1)" @onchange="@(() => Article.DangerousGoods = 1)" required>
                             <label for="yes">Yes</label>
                             &nbsp;
-                            <input type="radio" value="no" name="dangerous" data-toggle="collapse" data-target="#hideDanger.show" aria-expanded="false" aria-controls="hideDanger" />
+                            <input type="radio" value="1" name="dangerous" data-toggle="collapse" data-target="#hideDanger.show" aria-expanded="false" aria-controls="hideDanger" checked="@(Article.DangerousGoods == 2)" @onchange="@(() => Article.DangerousGoods = 2)" />
                             <label for="no">No</label>
                         </div>
                     </td>
@@ -203,7 +207,7 @@
                         <label for="class" class="required">Class:</label>
                     </td>
                     <td>
-                        <input type="text" class="form-control" name="class" required>
+                        <input type="text" class="form-control" name="class" @bind="Article.Class" maxlength="31">
                     </td>
                     <td>
                         <div></div>
@@ -220,7 +224,7 @@
                         <label for="classificationCode" class="required">Classification code:</label>
                     </td>
                     <td>
-                        <input type="text" class="form-control" name="classificationcode" required>
+                        <input type="text" class="form-control @ClassificationCodeValidated" name="classificationcode" @bind="Article.ClassificationCode" @onfocus="RemoveClassDanger" maxlength="15">
                     </td>
                     <td>
                         <div></div>
@@ -235,84 +239,49 @@
             </table>
             <div class="row justify-content-center">
                 <div class="text-right col-6">
-                    <input type="submit" class="btn cancel-button button-size" value="Back" @onclick="OnPostBack" />
                 </div>
                 <div class="text-left col-6">
-                    <input type="submit" class="btn green-button button-size" value="Next" @onclick="OnPostForward" />
+                    <input type="submit" class="btn green-button button-size" value="Next"/>
                 </div>
             </div>
 
-        </form>
+        </EditForm>
 
     </div>
 </div>
 
 
 @code {
-    [Parameter]
-    public string CompanyName { get; set; }
 
-    [Parameter]
-    public string CompanyLocation { get; set; }
+    public string EmailValidated;
 
-    [Parameter]
-    public string Email { get; set; }
+    public string ClassificationCodeValidated;
 
-    [Parameter]
-    public string PalletExchange { get; set; }
-
-    [Parameter]
-    public string FreightResponsibility { get; set; }
-
-    [Parameter]
-    public string SpecialInformation { get; set; }
-
-    [Parameter]
-    public string BookingTransport { get; set; }
-
-    [Parameter]
-    public string TransitTime { get; set; }
-
-    [Parameter]
-    public string Adr { get; set; }
-
-    [Parameter]
-    public int ClassInfo { get; set; }
-
-    [Parameter]
-    public int ClassificationCode { get; set; }
-
-    @*public class Test
-        {
-            public int kat = 3;
-            public int hund = 2;
-            public int and = 2;
-        }*@
-}
-
-@code{
-    public void OnPostForward()
+    public void ValidationSupplierForm()
     {
-        @*Test test = new Test();
-            {
-                CompanyName,
-                CompanyLocation,
-                Email,
-                PalletExchange,
-                FreightResponsibility,
-                SpecialInformation,
-                BookingTransport,
-                TransitTime,
-                Adr,
-                ClassInfo,
-                ClassificationCode
-            };*@
+        if (IsEmailValid(Article.Email) && ((Article.DangerousGoods == 1)  ? NumbersLettersDashOnly(Article.ClassificationCode) : true))
+        {
+            NavigationManager.NavigateTo("/article_info_form", true);
+        }
 
-        NavigationManager.NavigateTo($"/article_info_form", true);
+        if (!IsEmailValid(Article.Email))
+        {
+            EmailValidated = "btn-danger";
+        }
+
+        if (!NumbersLettersDashOnly(Article.ClassificationCode))
+        {
+            ClassificationCodeValidated = "btn-danger";
+        }
     }
 
-    public void OnPostBack()
+    void RemoveEmailDanger()
     {
-        NavigationManager.NavigateTo($"/overview_supplier", true);
+        EmailValidated = "";
+    }
+
+    void RemoveClassDanger()
+    {
+        ClassificationCodeValidated = "";
     }
 }

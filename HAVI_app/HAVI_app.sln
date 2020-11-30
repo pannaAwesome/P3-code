@@ -8,6 +8,7 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorTable", "..\BlazorTables\BlazorTable.csproj", "{FB235F22-2F7C-4EBD-B5A1-C7590A2E3333}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HAVI_app.Api", "..\HAVI_app.Api\HAVI_app.Api.csproj", "{96F41B0D-B566-4A92-BB33-E042AB6B6219}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HAVI_appTests", "..\HAVI_appTests\HAVI_appTests.csproj", "{39D2AA7A-01B9-4550-96C3-5D6889F6B42C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -19,7 +19,7 @@
     @if (Article != null)
     {
 <table class="table table-borderless">
-    <tr>
+    <tr class="@Length">
         <td>
             <label for="length">Length per salesunit:</label>
         </td>
@@ -31,7 +31,7 @@
         </td>
     </tr>
 
-    <tr>
+    <tr class="@Width">
         <td>
             <label for="width">Width per salesunit:</label>
         </td>
@@ -43,7 +43,7 @@
         </td>
     </tr>
 
-    <tr>
+    <tr class="@Height">
         <td>
             <label for="height">Height per salesunit:</label>
         </td>
@@ -55,7 +55,7 @@
         </td>
     </tr>
 
-    <tr>
+    <tr class="@NetWeight">
         <td>
             <label for="net_weight">Net weight per salesunit:</label>
         </td>
@@ -67,7 +67,7 @@
         </td>
     </tr>
 
-    <tr>
+    <tr class="@GrossWeight">
         <td>
             <label for="gross_weight">Gross weight per salesunit:</label>
         </td>
@@ -80,3 +80,21 @@
     </tr>
 </table>}
 </div>
+
+
+@code {
+    [Parameter]
+    public string Length { get; set; }
+
+    [Parameter]
+    public string Width { get; set; }
+
+    [Parameter]
+    public string Height { get; set; }
+
+    [Parameter]
+    public string NetWeight { get; set; }
+
+    [Parameter]
+    public string GrossWeight { get; set; }
+}

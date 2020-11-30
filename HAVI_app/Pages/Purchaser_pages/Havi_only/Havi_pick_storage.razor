@@ -1,8 +1,11 @@
-﻿@page "/pick_storage"
-@layout HAVI_app.Shared.Admin_layout.Show_artikel_layout
+﻿@page "/Havi_pick_storage"
 
-<h3>Pick storage</h3>
-
+<div class="row form-content">
+    <div class="col-12">
+        <HAVI_app.Shared.Shared_layout.Logo_image />
+        <h1>Pick storage:</h1>
+    </div>
+</div>
 <div class="justify-content-center row">
     <div class="col-12">
         <form>
@@ -18,6 +21,16 @@
                             <option>500</option>
                             <option>600</option>
                         </select>
+                        <!--<div class="dropdown">
+                <button type="button" class="btn btn-primary dropdown-toggle">
+                    Pick something
+                </button>
+                <div class="dropdown-content dropdown-menu-lg-right">
+                    <button class="dropdown-item" type="button">400</button>
+                    <button class="dropdown-item" type="button">500</button>
+                    <button class="dropdown-item" type="button">600</button>
+                </div>
+            </div>-->
                     </td>
                 </tr>
 
@@ -26,10 +39,10 @@
                         <label for="sap_plant1" class="required">SAP Plant: 0640 // 400 </label>
                     </td>
                     <td>
-                        <input type="radio" name="sap_plant1" id="yes" value="yes" @enabledOrNot>
+                        <input type="radio" name="sap_plant1" id="yes" value="yes">
                         <label for="yes">Yes</label>
                         &nbsp;
-                        <input type="radio" id="no" name="sap_plant1" @enabledOrNot>
+                        <input type="radio" id="no" name="sap_plant1">
                         <label for="no">No</label>
                     </td>
                 </tr>
@@ -39,10 +52,10 @@
                         <label for="sap_plant2" class="required">SAP Plant: 0650 // 500 </label>
                     </td>
                     <td>
-                        <input type="radio" name="sap_plant2" id="yes" value="yes" @enabledOrNot>
+                        <input type="radio" name="sap_plant2" id="yes" value="yes">
                         <label for="yes">Yes</label>
                         &nbsp;
-                        <input type="radio" id="no" name="sap_plant2" @enabledOrNot>
+                        <input type="radio" id="no" name="sap_plant2">
                         <label for="no">No</label>
                     </td>
                 </tr>
@@ -52,10 +65,10 @@
                         <label for="sap_plant3" class="required">SAP Plant: 0660 // 600 </label>
                     </td>
                     <td>
-                        <input type="radio" name="sap_plant3" id="yes" value="yes" @enabledOrNot>
+                        <input type="radio" name="sap_plant3" id="yes" value="yes">
                         <label for="yes">Yes</label>
                         &nbsp;
-                        <input type="radio" id="no" name="sap_plant3" @enabledOrNot>
+                        <input type="radio" id="no" name="sap_plant3">
                         <label for="no">No</label>
                     </td>
                 </tr>
@@ -65,7 +78,3 @@
     </div>
 </div>
 
-@code {
-    [Parameter]
-    public string enabledOrNot { get; set; }
-}

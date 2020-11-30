@@ -20,7 +20,7 @@
     @if (Article != null)
     {
     <table class="table table-borderless">
-        <tr>
+        <tr class="@ArticleName">
             <td>
                 <label for="article_name">Article name:</label>
             </td>
@@ -29,7 +29,7 @@
             </td>
         </tr>
 
-        <tr>
+        <tr class="@Salesunit">
             <td>
                 <label for="sales_unit">Salesunit:</label>
             </td>
@@ -38,16 +38,16 @@
             </td>
         </tr>
 
-        <tr>
+        <tr class="@ArticlePerSalesunit">
             <td>
-                <label for="article_pr_salesunit">Article per salesunit:</label>
+                <label for="salesunit_quantity">Article per salesunit:</label>
             </td>
             <td colspan="2">
                 <input type="number" class="form-control" id="salesunit_quantity" @bind="Article.ArticleInformation.ArticlesPerSalesunit" disabled>
             </td>
         </tr>
 
-        <tr>
+        <tr class="@SupplierNameNumber">
             <td>
                 <label for="supplier_article_nn">Supplier article number/name:</label>
             </td>
@@ -56,7 +56,7 @@
             </td>
         </tr>
 
-        <tr>
+        <tr class="@GTINNumber">
             <td>
                 <label for="GTIN">GTIN number:</label>
             </td>
@@ -65,7 +65,7 @@
             </td>
         </tr>
 
-        <tr>
+        <tr class="@Shelflife">
             <td>
                 <label for="Shelflife">Shelflife:</label>
             </td>
@@ -77,7 +77,7 @@
             </td>
         </tr>
 
-        <tr>
+        <tr class="@MinShelflife">
             <td>
                 <label for="Min_shelflife">Min. shelflife at HAVI:</label>
             </td>
@@ -89,7 +89,7 @@
             </td>
         </tr>
 
-        <tr>
+        <tr class="@OrganicArticle">
             <td>
                 <label for="organic_article" value="">Organic article?</label>
             </td>
@@ -118,3 +118,4 @@
         </tr>
     </table>}
 </div>
+
