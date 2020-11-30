@@ -20,3 +20,13 @@
         <HAVI_app.Shared.Purchaser_layout.Overview_table_havi_purchaser />
     </div>
 </div>
+
+@code{
+
+    private void GenerateCreationCode()
+    {
+        Random random = new Random();
+        long code = random.Next(100, 900) * long.Parse(DateTime.Today.ToString());
+    }
+
+}
