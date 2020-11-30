@@ -14,7 +14,7 @@
 
 <div class="justify-content-center row">
     <div class="col-12 d-flex justify-content-center">
-        <form>
+        <EditForm Model="Article" OnSubmit="@ValidationShipmentInfo">
             <table class="table">
 
                 <tr>
@@ -205,7 +205,7 @@
                     <input type="submit" class="btn green-button button-size" value="Next" @onclick="OnPostForward" />
                 </div>
             </div>
-        </form>
+        </EditForm>
     </div>
 </div>
 
@@ -233,70 +233,69 @@
 
     public string LeadTime { get; set; }
 
-    /*  public string CartonPrPalletValidated;
+    public string CartonPrPalletValidated;
 
-      public string CartonPrLayerValidated;
+    public string CartonPrLayerValidated;
 
-      public string CountryOfOriginValidated;
+    public string CountryOfOriginValidated;
 
-      public string ImportedFromValidated;
+    public string ImportedFromValidated;
 
-      public string TollTarrifNoValidated;
+    public string TollTarrifNoValidated;
 
-      public string MinimumOrderQuantityValidated;
+    public string MinimumOrderQuantityValidated;
 
-      public string MinTempratureDuringTransportationValidated;
+    public string MinTempratureDuringTransportationValidated;
 
-      public string MaxTempratureDuringTransportationValidated;
+    public string MaxTempratureDuringTransportationValidated;
 
-      public string MinTemperatureStorageValdiated;
+    public string MinTemperatureStorageValdiated;
 
-      public string MaxTemperatureStorageValidated;
+    public string MaxTemperatureStorageValidated;
 
-      public string LeadTimeValidated;
+    public string LeadTimeValidated;
 
-      /*public void ValidationShipmentInfo()
-      {
+    public void ValidationShipmentInfo()
+    {
 
 
-          if (!NumbersOnly(CartonPrPallet))
-          {
-              CartonPrPalletValidated = "btn-danger";
-          }
-          if (!NumbersOnly(CartonPrLayer))
-          {
-              CartonPrLayerValidated = "btn-danger";
-          }
-          if (!NumbersOnly(CountryOfOrigin))
-          {
-              CountryOfOriginValidated = "btn-danger";
-          }
-          if (!NumbersOnly(ImportedFrom))
-          {
-              ImportedFromValidated = "btn-damger";
-          }
-          if (!NumbersOnly(MinimumOrderQuantity))
-          {
-              MinimumOrderQuantityValidated = "btn-danger";
-          }
-          if (!NumbersOnly(MinTempratureDuringTransportation))
-          {
-              MinTempratureDuringTransportationValidated = "btn-danger";
-          }
-          if (!NumbersOnly(MaxTempratureDuringTransportation))
-          {
-              MaxTempratureDuringTransportationValidated = "btn-danger";
-          }
-          if (!NumbersOnly(MinTemperatureStorage))
-          {
-              MinTemperatureStorageValdiated = "btn-danger";
-          }
-          if (!NumbersOnly(LeadTime))
-          {
-              LeadTimeValidated = "btn-danger";
-          }
-  */
-}
+        if (!IntOnly(Article.CartonsPerPallet))
+        {
+            CartonPrPalletValidated = "btn-danger";
+        }
+        if (!IntOnly(Article.CartonsPerLayer))
+        {
+            CartonPrLayerValidated = "btn-danger";
+        }
+        if (!NumbersLettersDashOnly(Article.TollTarifNumber))
+        {
+            TollTarrifNoValidated = "btn-danger";
+        }
+        if (!DoubleOnly(Article.MinimumOrderQuantity))
+        {
+            MinimumOrderQuantityValidated = "btn-danger";
+        }
+        if (!DoubleOnly(Article.TemperatureTransportationMin))
+        {
+            MinTempratureDuringTransportationValidated = "btn-danger";
+        }
+        if (!DoubleOnly(Article.TemperatureTransportationMax))
+        {
+            MaxTempratureDuringTransportationValidated = "btn-danger";
+        }
+        if (!DoubleOnly(Article.TemperatureStorageMin))
+        {
+            MinTemperatureStorageValdiated = "btn-danger";
+        }
+        if (!DoubleOnly(Article.TemperatureStorageMax))
+        {
+            MaxTemperatureStorageValidated = "btn-danger";
+        }
+        if (!IntOnly(Article.LeadTime))
+        {
+            LeadTimeValidated = "btn-danger";
+        }
+    }
 
 }
 

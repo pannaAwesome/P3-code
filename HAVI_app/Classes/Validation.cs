@@ -51,7 +51,7 @@ namespace HAVI_app.Classes
             return false; */
         }
 
-        public bool IntOnly(string input)
+        public bool IntOnly(int? input)
         {
             if (input.GetType() == typeof(int))
             {
