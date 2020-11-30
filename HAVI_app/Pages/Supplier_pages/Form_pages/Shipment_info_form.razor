@@ -211,28 +211,6 @@
 
 @code {
 
-    public string CartonPrPallet { get; set; }
-
-    public string CartonPrLayer { get; set; }
-
-    public string CountryOfOrigin { get; set; }
-
-    public string ImportedFrom { get; set; }
-
-    public int TollTarrifNo { get; set; }
-
-    public string MinimumOrderQuantity { get; set; }
-
-    public string MinTempratureDuringTransportation { get; set; }
-
-    public string MaxTempratureDuringTransportation { get; set; }
-
-    public string MinTemperatureStorage { get; set; }
-
-    public string MaxTemperatureStorage { get; set; }
-
-    public string LeadTime { get; set; }
-
     public string CartonPrPalletValidated;
 
     public string CartonPrLayerValidated;
@@ -308,9 +286,6 @@
         }
     }
 
-}
-
-@code{
     public void OnPostBack()
     {
         NavigationManager.NavigateTo($"/measurement_info_form", true);

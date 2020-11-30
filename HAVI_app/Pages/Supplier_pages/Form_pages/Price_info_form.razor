@@ -15,7 +15,7 @@
 
 <div class="justify-content-center row">
     <div class="col-12 d-flex justify-content-center">
-        <form>
+        <EditForm Model="Article" OnSubmit="@OnPostForward">
             <table class="table">
 
                 <tr>
@@ -62,7 +62,7 @@
                             <input type="radio" name="organic" value="yes" @onchange="@((x) => AddOtherCost(x.Value.ToString()))" required>
                             <label for="yes">Yes</label>
                             &nbsp;
-                            <input type="radio" name="organic" value="no"/>
+                            <input type="radio" name="organic" value="no" @onchange="RemoveExtraCosts"/>
                             <label for="no">No</label>
                         </div>
                     </td>
@@ -130,7 +130,7 @@
                     <input type="submit" class="btn green-button button-size" value="Next" @onclick="OnPostForward" />
                 </div>
             </div>
-        </form>
+        </EditForm>
     </div>
 </div>
 
