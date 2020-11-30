@@ -1,6 +1,7 @@
 ﻿@layout HAVI_app.Shared.Supplier_layout.Form_layout
 @inject Microsoft.AspNetCore.Components.NavigationManager NavigationManager
 @page "/article_info_form"
+@inject HAVI_app.Ser
 
 <HAVI_app.Shared.Supplier_layout.Form_header SupplierState="filled" ArticleState="active" />
 
@@ -42,9 +43,13 @@
                     <td>
                         <select class="form-control" name="salesunit" required>
                             <option disabled selected>-- select an option --</option>
-                            <option>Ark // 225</option>
-                            <option>Bag in box // 204</option>
-                            <option>Bakke // 374</option>
+                            @code{
+
+                                protected override async Task OnInitializedAsync()
+                                {
+
+                                }
+                            }
                         </select>
                     </td>
                     <td>
