@@ -31,9 +31,9 @@
           <div class="modal-body">
             <div class="form-group mx-sm-3 mb-2">
                 <label for="creationCode" class="sr-only"></label>
-                <input type="text" class="form-control" id="creationCode" placeholder="Click 'Generate'">
+                <input type="text" class="form-control" id="creationCode" @bind="CreationCode" disabled/>
                 <br>
-                <button type="button" class="btn btn-success p">Generate</button>
+                <button type="button" class="btn btn-success" @onclick="GenerateCreationCode">Generate</button>
             </div>
           </div>
           <div class="modal-footer">
@@ -99,8 +99,14 @@
     private List<SupplierInfo> selectedItems = new List<SupplierInfo>();
 
     private SupplierInfo selected;
+
+    private long CreationCode;
     
-    
+    private void GenerateCreationCode()
+    {
+        Random random = new Random();
+        CreationCode = random.Next(100, 900) * long.Parse(DateTime.Today.ToString());
+    }
 
     protected override void OnInitialized()
     {
