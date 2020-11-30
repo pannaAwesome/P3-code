@@ -8,7 +8,7 @@
         <Table TableItem="SupplierInfo" Items="supplierdata" ColumnReorder="true" TableHeadClass="purple-table-header" TableRowClass="@(x => x.RowClass)">
             <Column TableItem="SupplierInfo" Title="Article name" Field="@(x => x.ArticleName)"  Sortable="true"/>
             <Column TableItem="SupplierInfo" Title="Supplier name" Field="@(x => x.SupplierName)"  Sortable="true" />
-            <Column TableItem="SupplierInfo" Title="Vailed for customer" Field="@(x => x.VailedForCustomer)"  Sortable="true" />
+            <Column TableItem="SupplierInfo" Title="Valid for customer" Field="@(x => x.ValidForCustomer)"  Sortable="true" />
             <Column TableItem="SupplierInfo" Title="Purchaser email" Field="@(x => x.PurchaserEmail)"  Sortable="true" />
             <Column TableItem="SupplierInfo" Title="State" Field="@(x => x.State)" Class="text-center" Width="100px"  Sortable="true">
                 <Template>
@@ -43,17 +43,17 @@
 
     public class SupplierInfo
     {
-        public SupplierInfo(string articlename, string vailedforcustomer, string purchaseremail, string suppliername, string state)
+        public SupplierInfo(string articlename, string validforcustomer, string purchaseremail, string suppliername, string state)
         {
             ArticleName = articlename;
-            VailedForCustomer = vailedforcustomer;
+            ValidForCustomer = validforcustomer;
             State = state;
             SupplierName = suppliername;
             PurchaserEmail = purchaseremail;
         }
 
         public string ArticleName { get; set; }
-        public string VailedForCustomer { get; set; }
+        public string ValidForCustomer { get; set; }
         public string SupplierName { get; set; }
         public string PurchaserEmail { get; set; }
         public string State { get; set; }
