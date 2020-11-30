@@ -1,28 +1,29 @@
-﻿@page "/show_article"
+﻿@page "/show_article/{Id:int}"
 @layout HAVI_app.Shared.Admin_layout.Show_artikel_layout
+@inherits ShowArticle
 
-<ul class="nav nav-tabs" id="myTabJust" role="tablist">
-    <li class="nav-item">
-        <a class="nav-link active navtabs-background" id="HAVI-tab-just" data-toggle="tab" href="#HAVI-just" role="tab" aria-controls="HAVI-just"
-           aria-selected="true"><small class="nav-text">HAVI Only</small></a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link navtabs-background" id="Supplier-tab-just" data-toggle="tab" href="#Supplier-just" role="tab" aria-controls="Supplier-just"
-           aria-selected="false"><small class="nav-text">Supplier info</small></a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link navtabs-background error-tab" id="Error-tab-just" data-toggle="tab" href="#Error-just" role="tab" aria-controls="Error-just"
-           aria-selected="false"><small class="nav-text error-tab">Report Error</small></a>
-    </li>
-</ul>
-<div class="tab-content background-tabs" id="myTabContentJust">
-    <div class="tab-pane fade show active" id="HAVI-just" role="tabpanel" aria-labelledby="HAVI-tab-just">
-        <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Havi_only_collection/>
+    <ul class="nav nav-tabs" id="myTabJust" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active navtabs-background" id="HAVI-tab-just" data-toggle="tab" href="#HAVI-just" role="tab" aria-controls="HAVI-just"
+               aria-selected="true"><small class="nav-text">HAVI Only</small></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link navtabs-background" id="Supplier-tab-just" data-toggle="tab" href="#Supplier-just" role="tab" aria-controls="Supplier-just"
+               aria-selected="false"><small class="nav-text">Supplier info</small></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link navtabs-background error-tab" id="Error-tab-just" data-toggle="tab" href="#Error-just" role="tab" aria-controls="Error-just"
+               aria-selected="false"><small class="nav-text error-tab">Report Error</small></a>
+        </li>
+    </ul>
+    <div class="tab-content background-tabs" id="myTabContentJust">
+        <div class="tab-pane fade show active" id="HAVI-just" role="tabpanel" aria-labelledby="HAVI-tab-just">
+            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Havi_only_collection ArticleId="Id"/>
+        </div>
+        <div class="tab-pane fade" id="Supplier-just" role="tabpanel" aria-labelledby="Supplier-tab-just">
+            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_collection ArticleId="Id" />
+        </div>
+        <div class="tab-pane fade" id="Error-just" role="tabpanel" aria-labelledby="Error-tab-just">
+            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Report_new_error ArticleId="Id" />
+        </div>
     </div>
-    <div class="tab-pane fade" id="Supplier-just" role="tabpanel" aria-labelledby="Supplier-tab-just">
-        <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_collection/>
-    </div>
-    <div class="tab-pane fade" id="Error-just" role="tabpanel" aria-labelledby="Error-tab-just">
-        <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Report_new_error/>
-    </div>
-</div>

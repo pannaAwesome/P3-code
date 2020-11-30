@@ -1,4 +1,6 @@
-﻿<h2>Describe the error:</h2>
+﻿@inherits ReportNewError
+
+<h2>Describe the error:</h2>
 
 <table class="table table-borderless">
     <tr>
@@ -17,7 +19,7 @@
     <div class="row country-buttons">
         <div class="col-6 d-flex justify-content-center">
             <NavLink class="nav-link button-save" href="Article_view">
-                <button class="btn green-button" aria-hidden="true">Report error</button>
+                <button class="btn green-button" aria-hidden="true" @onclick="SaveError">Report error</button>
             </NavLink>
         </div>
     </div>

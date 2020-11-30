@@ -1,4 +1,5 @@
-﻿<div class="col-12 havi-info-box">
+﻿@inherits PriceInformation
+<div class="col-12 havi-info-box">
     <div class="row justify-content-right">
         <div class="col-11">
             <h4> Price Information:</h4>
@@ -15,6 +16,8 @@
 
         </div>
     </div>
+    @if (Article != null)
+    {
     <div class="row">
         <div class="col-6">
             <table class="table table-borderless">
@@ -23,7 +26,7 @@
                         <label for="set_currency">Set currency:</label>
                     </td>
                     <td>
-                        <input type="text" class="form-control" id="purchase_price" value="DKK" disabled>
+                        <input type="text" class="form-control" id="purchase_price" @bind="Article.ArticleInformation.SetCurrency" disabled>
                     </td>
                 </tr>
 
@@ -32,7 +35,7 @@
                         <label for="purchase_price">Purchase price:</label>
                     </td>
                     <td>
-                        <input type="number" class="form-control" id="purchase_price" value="100" disabled>
+                        <input type="number" class="form-control" id="purchase_price" @bind="Article.ArticleInformation.PurchasePrice" disabled>
                     </td>
                 </tr>
 
@@ -42,11 +45,21 @@
                     </td>
                     <td>
                         <div class="text-center">
-                            <input type="radio" name="organic" id="yes" value="yes" data-toggle="collapse" data-target="#hideOrganic:not(.show)" aria-expanded="false" aria-controls="hideOrganic" checked="checked" disabled>
-                            <label for="yes">Yes</label>
-                            &nbsp;
-                            <input type="radio" name="organic" id="no" value="no" data-toggle="collapse" data-target="#hideOrganic.show" aria-expanded="false" aria-controls="hideOrganic" disabled>
-                            <label for="no">No</label>
+                            @if (Article.ArticleInformation.OtherCosts == 1)
+                            {
+                                <input type="radio" name="organic" id="yes" value="yes" data-toggle="collapse" data-target="#hideOrganic:not(.show)" aria-expanded="false" aria-controls="hideOrganic" checked disabled @onclick="x => OtherCosts(1)">
+                                <label for="yes">Yes</label>
+                                <input type="radio" name="organic" id="no" value="no" data-toggle="collapse" data-target="#hideOrganic.show" aria-expanded="false" aria-controls="hideOrganic" disabled @onclick="x => OtherCosts(0)">
+                                <label for="no">No</label>
+                            }
+                            else
+                            {
+                                <input type="radio" name="organic" id="yes" value="yes" data-toggle="collapse" data-target="#hideOrganic:not(.show)" aria-expanded="false" aria-controls="hideOrganic" disabled @onclick="x => OtherCosts(1)">
+                                <label for="yes">Yes</label>
+                                <input type="radio" name="organic" id="no" value="no" data-toggle="collapse" data-target="#hideOrganic.show" aria-expanded="false" aria-controls="hideOrganic" checked disabled @onclick="x => OtherCosts(0)">
+                                <label for="no">No</label>
+                            }
+
                         </div>
                     </td>
                 </tr>
@@ -54,9 +67,9 @@
         </div>
         <div class="col-6">
             <table>
-                @if (OtherCost == "yes")
+                @if (Article.ArticleInformation.OtherCosts == 1)
                 {
-                    @for (int i = 1; i <= NumberOfOtherCosts; i++)
+                    @for (int i = 0; i < NumberOfOtherCosts; i++)
                     {
 
                         <tr>
@@ -65,13 +78,13 @@
                             </td>
 
                             <td>
-                                <input type="text" class="form-control" value="chokoladeafgift" name="afgift-@i" disabled>
+                                <input type="text" class="form-control" @bind="OtherCostsForArticle[i].InformCostType" name="afgift-@i" disabled>
                             </td>
                             <td>
                                 <label for="amount-@i">Amount in @Currency:</label>
                             </td>
                             <td>
-                                <input type="number" class="form-control" value="150" name="amount-@i" disabled>
+                                <input type="number" class="form-control" @bind="OtherCostsForArticle[i].InformCostType" name="amount-@i" disabled>
                             </td>
                         </tr>
 
@@ -83,32 +96,11 @@
                             <label class="text-right" for="totalAmount">Total amount in @Currency</label>
                         </td>
                         <td colspan="1">
-                            <label>150</label>
+                            <label>@TotalAmount</label>
                         </td>
                     </tr>
                 }
             </table>
         </div>
-    </div>
+    </div>}
 </div>
-
-@code {
-
-    private string OtherCost = "yes";
-
-    private string Currency = "DKK";
-
-    private int NumberOfOtherCosts = 1;
-
-    private bool EditingFields = false;
-
-    private void Editing()
-    {
-        EditingFields = true;
-    }
-
-    private void Saving()
-    {
-        EditingFields = false;
-    }
-}
