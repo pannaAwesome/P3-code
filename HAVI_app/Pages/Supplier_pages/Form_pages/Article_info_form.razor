@@ -3,6 +3,7 @@
 @page "/article_info_form"
 @inherits HAVI_app.Classes.Validation
 @inject Models.ArticleInformation Article
+@inject HAVI_app.Services.Classes.SalesUnitService SalesUnitService 
 
 
 <HAVI_app.Shared.Supplier_layout.Form_header SupplierState="filled" ArticleState="active" />
@@ -49,7 +50,7 @@
 
                                 protected override async Task OnInitializedAsync()
                                 {
-
+                                    var something = await SalesUnitService.GetSalesUnits();
                                 }
                             }
                         </select>
