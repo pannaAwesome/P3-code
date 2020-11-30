@@ -23,7 +23,7 @@
                         <label for="set_currency" class="required">Set currency:</label>
                     </td>
                     <td colspan="4">
-                        <select class="form-control" name="set_currency" @bind="Article.SetCurrency" required @oninput="@((x) => CurrencySelected(x.Value.ToString()))">
+                        <select class="form-control" name="set_currency" @bind="Article.SetCurrency" required>
                             <option>DKK</option>
                             <option>ADP</option>
                             <option>USD</option>
@@ -59,10 +59,10 @@
 
                     <td colspan="4">
                         <div class="text-center">
-                            <input type="radio" name="organic" value="yes" @onchange="@((x) => AddOtherCost(x.Value.ToString()))" required>
+                            <input type="radio" name="organic" value="yes" @onchange="@((x) => AddOtherCost(x.Value.ToString()))" checked="@(Article.OtherCosts == 1)" @oninput="(() => Article.OtherCosts = 1)" required>
                             <label for="yes">Yes</label>
                             &nbsp;
-                            <input type="radio" name="organic" value="no" @onchange="RemoveExtraCosts"/>
+                            <input type="radio" name="organic" value="no" checked="@(Article.OtherCosts == 2)" @onchange="@(() => Article.OtherCosts = 2)"/>
                             <label for="no">No</label>
                         </div>
                     </td>
@@ -74,7 +74,7 @@
                     </td>
                 </tr>
             </table>
-            @if (OtherCost == "yes")
+            @if (Article.OtherCosts == 1)
             {
                 <table>
                     @for (int i = 1; i <= NumberOfOtherCosts; i++)
@@ -86,7 +86,7 @@
                             </td>
 
                             <td>
-                                <select class="form-control" name="afgift-@i" @bind="Article.InformCostType" required>
+                                <select class="form-control" name="afgift-@i" @bind="Article.OtherCosts" required>
                                     <option disabled selected>-- select an option --</option>
                                     <option>Chokoladeafgift</option>
                                     <option>Miljøafgift</option>
@@ -94,7 +94,7 @@
                                 </select>
                             </td>
                             <td>
-                                <label for="amount-@i">Amount in @Currency:</label>
+                                <label for="amount-@i">Amount in @Article.SetCurrency:</label>
                             </td>
                             <td>
                                 <input type="number" class="form-control" name="amount-@i" @bind="Article.AmountInCurrency" required @onblur="Sum" maxlength="10">
@@ -114,7 +114,7 @@
                     <tr>
                         <td colspan="1"></td>
                         <td colspan="2" class="text-right">
-                            <label class="text-right" for="totalAmount">Total amount in @Currency</label>
+                            <label class="text-right" for="totalAmount">Total amount in @Article.SetCurrency</label>
                         </td>
                         <td>
                             <label>@TotalAmount</label>
@@ -124,10 +124,10 @@
             }
             <div class="row justify-content-center">
                 <div class="text-right col-6">
-                    <input type="submit" class="btn cancel-button button-size" value="Back" @onclick="OnPostBack" />
+                    <input type="button" class="btn cancel-button button-size" value="Back" @onclick="OnPostBack" />
                 </div>
                 <div class="text-left col-6">
-                    <input type="submit" class="btn green-button button-size" value="Next" @onclick="OnPostForward" />
+                    <input type="submit" class="btn green-button button-size" value="Next"/>
                 </div>
             </div>
         </EditForm>
@@ -151,6 +151,8 @@
     [Parameter]
     public string CostType { get; set; }
 
+    public OtherCostService otherCostService { get; set; }
+
     public int TotalAmount = 0;
 }
 
@@ -158,6 +160,7 @@
     public void OnPostForward()
     {
         NavigationManager.NavigateTo($"/confirm_details", true);
+
     }
 
     public void OnPostBack()
@@ -165,39 +168,33 @@
         NavigationManager.NavigateTo($"/shipment_info_form", true);
     }
 
-    private string Currency = "DKK";
-
-    private void CurrencySelected(string currency)
-    {
-        Currency = currency;
-    }
-
     private int NumberOfOtherCosts = 1;
 
     private string ExtraCosts = "";
 
-    private string OtherCost = "no";
+    //private string OtherCost = "no";
 
     private void AddOtherCost(string othercostvalue)
     {
         if (othercostvalue == "yes")
         {
-            OtherCost = "yes";
+            //OtherCost = "yes";
         }
         else
         {
-            OtherCost = "no";
+            //OtherCost = "no";
         }
     }
 
     private void AddExtraCosts()
     {
         NumberOfOtherCosts++;
+
     }
 
     private void RemoveExtraCosts()
     {
-        if(NumberOfOtherCosts != 1)
+        if(NumberOfOtherCosts != 0)
         {
             NumberOfOtherCosts--;
         }
