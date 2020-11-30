@@ -2,6 +2,7 @@
 @inject Microsoft.AspNetCore.Components.NavigationManager NavigationManager
 @page "/price_info_form"
 @inject Models.ArticleInformation Article
+@inject HAVI_app.Services.Classes.SetCurrencyService SetCurrencyService
 
 <HAVI_app.Shared.Supplier_layout.Form_header SupplierState="filled" ArticleState="filled" MeasurementState="filled" ShipmentState="filled" PriceState="active" />
 
@@ -24,9 +25,18 @@
                     </td>
                     <td colspan="4">
                         <select class="form-control" name="set_currency" @bind="Article.SetCurrency" required>
-                            <option>DKK</option>
-                            <option>ADP</option>
-                            <option>USD</option>
+                            @code{
+
+                                protected override async Task OnInitializedAsync()
+                                {
+                                    var contries = await SetCurrencyService.GetSetCurrencies();
+
+                                    foreach (var item in contries)
+                                    {
+                                        <option>@item</option>
+                                    }
+                                }
+                            }
                         </select>
                     </td>
                     <td>

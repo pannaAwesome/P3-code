@@ -3,6 +3,8 @@
 @page "/shipment_info_form"
 @inherits HAVI_app.Classes.Validation
 @inject Models.ArticleInformation Article
+@inject HAVI_app.Services.Classes.CountryService ContryService
+
 
 <HAVI_app.Shared.Supplier_layout.Form_header SupplierState="filled" ArticleState="filled" MeasurementState="filled" ShipmentState="active" />
 <div class="row justify-content-center">
@@ -54,9 +56,18 @@
                     <td colspan="6">
                         <select class="form-control" name="county_origin" @bind="Article.CountryOfOrigin" required>
                             <option disabled selected>-- select an option --</option>
-                            <option>Denmark</option>
-                            <option>Sweden</option>
-                            <option>China</option>
+                            @code{
+
+                                protected override async Task OnInitializedAsync()
+                                {
+                                    var contries = await ContryService.GetCountries();
+
+                                    foreach (var item in contries)
+                                    {
+                                        <option>@item</option>
+                                    }
+                                }
+                            }
                         </select>
                     </td>
                     <td>
@@ -74,9 +85,17 @@
                     <td colspan="6">
                         <select class="form-control" name="imported_from" @bind="Article.ImportedFrom" required>
                             <option disabled selected>-- select an option --</option>
-                            <option>Denmark</option>
-                            <option>Sweden</option>
-                            <option>China</option>
+                            @code{
+                                protected async Task OnInitializedAsync2()
+                                {
+                                    var contries = await ContryService.GetCountries();
+
+                                    foreach (var item in contries)
+                                    {
+                                        <option>@item</option>
+                                    }
+                                }
+                            }
                         </select>
                     </td>
                     <td>
@@ -202,7 +221,7 @@
                     <input type="submit" class="btn cancel-button button-size" value="Back" @onclick="OnPostBack" />
                 </div>
                 <div class="text-left col-6">
-                    <input type="submit" class="btn green-button button-size" value="Next"  />
+                    <input type="submit" class="btn green-button button-size" value="Next" />
                 </div>
             </div>
         </EditForm>
@@ -247,7 +266,7 @@
         {
             NavigationManager.NavigateTo($"/price_info_form", true);
         }
-        
+
         if (!IntOnly(Article.CartonsPerPallet))
         {
             CartonPrPalletValidated = "btn-danger";
@@ -290,7 +309,7 @@
     {
         NavigationManager.NavigateTo($"/measurement_info_form", true);
     }
-    
+
     void RemoveClassDanger()
     {
         TollTarrifNoValidated = "";

@@ -50,7 +50,12 @@
 
                                 protected override async Task OnInitializedAsync()
                                 {
-                                    var something = await SalesUnitService.GetSalesUnits();
+                                    var Sales = await SalesUnitService.GetSalesUnits();
+
+                                    foreach (var item in Sales)
+                                    {
+                                        <option>@item</option>
+                                    }
                                 }
                             }
                         </select>
@@ -162,10 +167,10 @@
 
                     <td>
                         <div class="text-center">
-                            <input type="radio" name="organic" value="yes" required>
+                            <input type="radio" name="Organic_article" value="yes" checked="@(Article.OrganicArticle == 1)" @onchange="@(() => Article.OrganicArticle = 1)" required>
                             <label for="yes">Yes</label>
                             &nbsp;
-                            <input type="radio" value="no" name="organic">
+                            <input type="radio" value="no" name="Organic_article" checked="@(Article.OrganicArticle == 2)" @onchange="@(() => Article.OrganicArticle = 2)">
                             <label for="no">No</label>
                         </div>
                     </td>
