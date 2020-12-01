@@ -37,14 +37,11 @@ namespace HAVI_app.Classes
                     sheet.Range["D2"].ColumnWidth = 30;
                     sheet.Range["A2:D2"].Merge(true);
                     //Inserting sample text into the first cell of the first sheet
-                    sheet.Range["B3"].Text = "Company code";
                     sheet.Range["A2"].CellStyle.Font.FontName = "Verdana";
                     sheet.Range["A2"].CellStyle.Font.Bold = true;
                     sheet.Range["A2"].CellStyle.Font.Size = 28;
                     sheet.Range["A2"].CellStyle.Font.RGBColor = Color.FromArgb(0, 0, 112, 192);
                     sheet.Range["A2"].HorizontalAlignment = ExcelHAlign.HAlignCenter;
-                    sheet.Range["B4"].Text = "Supplier ID";
-                    sheet.Range["B5"].Text = "Supplier Delivery Unit";
                     sheet.Range["A4:B7"].CellStyle.Font.FontName = "Verdana";
                     sheet.Range["A4:B7"].CellStyle.Font.Bold = true;
                     sheet.Range["A4:B7"].CellStyle.Font.Size = 11;
@@ -54,6 +51,10 @@ namespace HAVI_app.Classes
                     sheet.Range["B4:B7"].HorizontalAlignment = ExcelHAlign.HAlignRight;
                     sheet.Range["A9:D20"].CellStyle.Font.FontName = "Verdana";
                     sheet.Range["A9:D20"].CellStyle.Font.Size = 11;
+
+                    sheet.Range["B3"].Text = "Company code";
+                    sheet.Range["B4"].Text = "Supplier ID";
+                    sheet.Range["B5"].Text = "Supplier Delivery Unit";
                     sheet.Range["B6"].Text = "Remain Shelf Store value";
                     sheet.Range["B7"].Text = "ILOS Orderpick Group";
                     sheet.Range["B8"].Text = "ILOS Temp group";
