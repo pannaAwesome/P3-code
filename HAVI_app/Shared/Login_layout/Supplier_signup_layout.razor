@@ -1,4 +1,5 @@
 ﻿@inject NavigationManager NavigationManager
+@inject HAVI_app.Services.Classes.SupplierService SupplierService
 
 <div class="col-12 user-login">
     <div class="row justify-content-center">
@@ -15,7 +16,7 @@
                             <label>Creation code from HAVI:</label>
                         </td>
                         <td>
-                            <input class="form-control" type="number" name="creation_code" required />
+                            <input class="form-control" type="number" name="creation_code" required @bind="CreationCode" />
                         </td>
                     </tr>
                     <tr class="form-group">
@@ -23,7 +24,7 @@
                             <label>Email:</label>
                         </td>
                         <td>
-                            <input class="form-control" type="email" name="email_username" required />
+                            <input class="form-control" type="email" name="email_username" required @bind="Email" />
                         </td>
                     </tr>
                     <tr class="form-group">
@@ -31,7 +32,7 @@
                             <label>Company name:</label>
                         </td>
                         <td>
-                            <input class="form-control" type="text" name="company_name" required />
+                            <input class="form-control" type="text" name="company_name" required @bind="CompanyName" />
                         </td>
                     </tr>
                     <tr class="form-group">
@@ -39,7 +40,7 @@
                             <label>Company location:</label>
                         </td>
                         <td>
-                            <input class="form-control" type="text" name="company_location" required />
+                            <input class="form-control" type="text" name="company_location" required @bind="CompanyLocation" />
                         </td>
                     </tr>
                     <tr class="form-group">
@@ -51,13 +52,13 @@
                                 <div class="col-1"></div>
                                 <div class="col-4">
                                     <label class="form-check-label">
-                                        <input class="form-check-input" type="radio" name="pallet_exchange" value="Yes" required />
+                                        <input class="form-check-input" type="radio" name="pallet_exchange" required checked="@YesRadioPalletExchange == 1" @onchange="( () => YesRadioPalletExchange = 1)" />
                                         Yes
                                     </label>
                                 </div>
                                 <div class="col-4">
                                     <label class="form-check-label">
-                                        <input class="form-check-input" type="radio" name="pallet_exchange" value="No" required />
+                                        <input class="form-check-input" type="radio" name="pallet_exchange" required />
                                         No
                                     </label>
                                 </div>
@@ -78,13 +79,13 @@
                                 <div class="col-1"></div>
                                 <div class="col-4">
                                     <label class="form-check-label">
-                                        <input class="form-check-input" type="radio" name="freight_responsibility" value="CIP" required />
+                                        <input class="form-check-input" type="radio" name="freight_responsibility" required @bind="Freight" />
                                         CIP
                                     </label>
                                 </div>
                                 <div class="col-4">
                                     <label class="form-check-label">
-                                        <input class="form-check-input" type="radio" name="freight_responsibility" value="EXW" required />
+                                        <input class="form-check-input" type="radio" name="freight_responsibility" required />
                                         EXW
                                     </label>
                                 </div>
@@ -109,7 +110,7 @@
                             <label>Confirm password:</label>
                         </td>
                         <td>
-                            <input class="form-control" type="password" name="confirm_password" required />
+                            <input class="form-control" type="password" name="confirm_password" required @bind="Password" />
                         </td>
                     </tr>
                 </table>
@@ -118,15 +119,53 @@
         <div class="row">
             <div class="col-5"></div>
             <div class="col-2 justify-content-center">
-                <input class="btn green-button" type="submit" name="Submit" value="Sign up" @onclick="CreateNewSupplier"/>
+                <input class="btn green-button" type="button" name="Submit" value="Sign up" @onclick="CreateNewSupplier" />
             </div>
         </div>
     </form>
 </div>
 
 @code {
-    private void CreateNewSupplier()
+    [Parameter]
+    public int CreationCode { get; set; }
+
+    [Parameter]
+    public string Email { get; set; }
+
+    [Parameter]
+    public string CompanyName { get; set; }
+
+    [Parameter]
+    public string CompanyLocation { get; set; }
+
+    [Parameter]
+    public int YesRadioPalletExchange { get; set; }
+
+    [Parameter]
+    public string Freight { get; set; }
+
+    [Parameter]
+    public string Password { get; set; }
+
+    Supplier supplierObject = new Supplier();
+
+    private async void CreateNewSupplier()
     {
-        NavigationManager.NavigateTo("/overview_supplier", true);
+        supplierObject.Profile = new Profile();
+        supplierObject.Profile.Id = 0;
+        supplierObject.Id = 0;
+        supplierObject.Profile.Username = Email;
+        supplierObject.CompanyName = CompanyName;
+        supplierObject.CompanyLocation = CompanyLocation;
+        supplierObject.PalletExchange = YesRadioPalletExchange == 1 ? 1 : 0;
+        supplierObject.FreightResponsibility = Freight;
+        supplierObject.Profile.Password = Password;
+        supplierObject.Profile.Usertype = 2;
+
+        if(supplierObject != null)
+        {
+            var user = await SupplierService.CreateSupplier(supplierObject);
+            NavigationManager.NavigateTo("/overview_supplier");
+        }
     }
 }

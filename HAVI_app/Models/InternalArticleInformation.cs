@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 #nullable disable
 
@@ -9,12 +11,12 @@ namespace HAVI_app.Models
     {
         public InternalArticleInformation()
         {
-            Articles = new HashSet<Article>();
             Bundles = new HashSet<Bundle>();
             Qips = new HashSet<Qip>();
             Sapplants = new HashSet<Sapplant>();
         }
 
+        [Key]
         public int Id { get; set; }
         public int? SupplierIdIlos { get; set; }
         public int? CompanyCode { get; set; }
@@ -48,7 +50,8 @@ namespace HAVI_app.Models
         public int? PrimaryDcIloscode { get; set; }
         public int? TransitTimeForHavi { get; set; }
 
-        public virtual ICollection<Article> Articles { get; set; }
+        [JsonIgnore]
+        public virtual Article Article { get; set; }
         public virtual ICollection<Bundle> Bundles { get; set; }
         public virtual ICollection<Qip> Qips { get; set; }
         public virtual ICollection<Sapplant> Sapplants { get; set; }

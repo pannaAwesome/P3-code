@@ -1,6 +1,8 @@
 ﻿@layout HAVI_app.Shared.Admin_layout.Profile_admin
-
+@using Microsoft.AspNetCore.Authorization
+@inject Models.Profile Profile
 @inject NavigationManager NavigationManager
+
 @page "/profile_admin"
 
 <HAVI_app.Shared.Shared_layout.Backgrounds.Purple_background />
@@ -18,14 +20,14 @@
         </div>
         <div class="row justify-content-center">
             <div class="col-10">
-                <form>
+                <EditForm Model="Profile" OnSubmit="@BackToOverview">
                     <table class="table table-font">
                         <tr>
                             <td>
                                 <label>Username:</label>
                             </td>
                             <td>
-                                <input type="text" class="form-control" value="DKAdmin" disabled>
+                                <input type="text" class="form-control" value="@Profile.Username" disabled>
                             </td>
                             <td>
                                 <div></div>
@@ -57,13 +59,13 @@
                     </table>
                     <div class="row">
                         <div class="text-right col-6">
-                            <input type="submit" class="btn cancel-button button-size" value="Back" @onclick="BackToOverview">
+                            <input type="submit" class="btn cancel-button button-size" value="Back">
                         </div>
                         <div class="text-left col-6">
-                            <input type="submit" class="btn green-button button-size" value="Save" @onclick="BackToOverview">
+                            <input type="submit" class="btn green-button button-size" value="Save">
                         </div>
                     </div>
-                </form>
+                </EditForm>
             </div>
         </div>
     </div>
@@ -79,14 +81,14 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form>
+                <EditForm Model="Profile" OnSubmit="@ChangePassword">
                     <table class="table-font table col-12">
                         <tr>
                             <td class="">
                                 <label for="current-password">Input current Password:</label>
                             </td>
                             <td class="">
-                                <input type="password" class="form-control" id="current-password" required>
+                                <input type="password" class="form-control" id="current-password" @bind="OldPassword" required>
                             </td>
                         </tr>
 
@@ -95,7 +97,7 @@
                                 <label for="new-password">Input new Password:</label>
                             </td>
                             <td>
-                                <input type="text" class="form-control" id="new-password" required>
+                                <input type="text" class="form-control" id="new-password" @bind="NewPassword" required>
                             </td>
                         </tr>
 
@@ -104,7 +106,7 @@
                                 <label for="confirm-new-password">Confirm new password:</label>
                             </td>
                             <td>
-                                <input type="text" class="form-control" id="confirm-new-password" required>
+                                <input type="text" class="form-control" id="confirm-new-password" @bind="ConfirmPassword" required>
                             </td>
                         </tr>
 
@@ -114,18 +116,56 @@
                         </tr>
 
                     </table>
-                </form>
                 <div class="row justify-content-center">
-                    <button type="button" class="save-password btn button-size" data-dismiss="modal">Save</button>
+                    <button type="submit" class="save-password btn button-size" data-dismiss="modal">Save</button>
                 </div>
+                </EditForm>
             </div>
         </div>
     </div>
 </div>
 
 @code {
+    private string OldPassword { get; set; }
+
+    private string NewPassword { get; set; }
+
+    private string ConfirmPassword { get; set; }
+
+    private string PasswordAlert = "";
+
+    private string NewPasswordAlert = "";
+
+    private string ConfirmPasswordAlert = "";
+
     private void BackToOverview()
     {
         NavigationManager.NavigateTo("/overview_admin", true);
     }
+
+    private void ChangePassword()
+    {
+        if(Profile.Password == OldPassword)
+        {
+
+            if(NewPassword == ConfirmPassword)
+            {
+
+                Profile.Password = NewPassword; //Password succesfully changed
+
+            }
+            else
+            {
+                ConfirmPasswordAlert = "btn-danger";
+            }
+
+        }
+        else
+        {
+            PasswordAlert = "btn-danger";
+        }
+
+    }
+
+
 }

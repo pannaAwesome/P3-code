@@ -18,10 +18,11 @@ namespace HAVI_app.Models
         }
 
         public virtual DbSet<Article> Articles { get; set; }
-        public virtual DbSet<ArticleBundle> ArticleBundles { get; set; }
         public virtual DbSet<ArticleInformation> ArticleInformations { get; set; }
         public virtual DbSet<Bundle> Bundles { get; set; }
+        public virtual DbSet<CompanyCode> CompanyCodes { get; set; }
         public virtual DbSet<Country> Countries { get; set; }
+        public virtual DbSet<CreationCode> CreationCodes { get; set; }
         public virtual DbSet<DepartmentId> DeparmentIds { get; set; }
         public virtual DbSet<PackagingGroup> PackagingGroups { get; set; }
         public virtual DbSet<FreightResponsibility> FreightResponsibilities { get; set; }
@@ -60,49 +61,56 @@ namespace HAVI_app.Models
             {
                 entity.ToTable("Article");
 
-                entity.HasIndex(e => e.Id, "UQ__Article__3214EC26473E7B8A")
-                    .IsUnique();
+                entity.Property(e => e.Id).HasColumnName("ID");
 
-                entity.Property(e => e.Id)
-                    .ValueGeneratedNever()
-                    .HasColumnName("ID");
+                entity.Property(e => e.ArticleInformationId)
+                                .IsRequired()
+                                .HasColumnName("ArticleInformationID");
 
-                entity.Property(e => e.ArticleInformationId).HasColumnName("ArticleInformationID");
-
-                entity.Property(e => e.CountryId).HasColumnName("CountryID");
+                entity.Property(e => e.CountryId)
+                                .IsRequired()
+                                .HasColumnName("CountryID");
 
                 entity.Property(e => e.DateCreated).HasColumnType("datetime");
+
+                entity.Property(e => e.ErrorField).HasColumnType("text");
 
                 entity.Property(e => e.ErrorMessage).HasColumnType("text");
 
                 entity.Property(e => e.ErrorOwner).HasColumnType("text");
 
-                entity.Property(e => e.InternalArticleInformationId).HasColumnName("InternalArticleInformationID");
+                entity.Property(e => e.InternalArticleInformationId)
+                                .IsRequired()
+                                .HasColumnName("InternalArticleInformationID");
 
-                entity.Property(e => e.PurchaserId).HasColumnName("PurchaserID");
+                entity.Property(e => e.PurchaserId)
+                                .IsRequired()
+                                .HasColumnName("PurchaserID");
 
-                entity.Property(e => e.SupplierId).HasColumnName("SupplierID");
+                entity.Property(e => e.SupplierId)
+                                .IsRequired()
+                                .HasColumnName("SupplierID");
 
                 entity.Property(e => e.VailedForCustomer)
                     .IsRequired()
                     .HasColumnType("text");
 
                 entity.HasOne(d => d.ArticleInformation)
-                    .WithMany(p => p.Articles)
-                    .HasForeignKey(d => d.ArticleInformationId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .WithOne(p => p.Article)
+                    .HasForeignKey<ArticleInformation>(d => d.Id)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK__Article__Article__34C8D9D1");
 
                 entity.HasOne(d => d.Country)
                     .WithMany(p => p.Articles)
                     .HasForeignKey(d => d.CountryId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK__Article__Country__35BCFE0A");
 
                 entity.HasOne(d => d.InternalArticleInformation)
-                    .WithMany(p => p.Articles)
-                    .HasForeignKey(d => d.InternalArticleInformationId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .WithOne(p => p.Article)
+                    .HasForeignKey<InternalArticleInformation>(d => d.Id)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK__Article__Interna__36B12243");
 
                 entity.HasOne(d => d.Purchaser)
@@ -116,15 +124,6 @@ namespace HAVI_app.Models
                     .HasForeignKey(d => d.SupplierId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__Article__Supplie__38996AB5");
-            });
-
-            modelBuilder.Entity<ArticleBundle>(entity =>
-            {
-                entity.ToTable("ArticleBundle");
-
-                entity.Property(e => e.Id).HasColumnName("ID");
-
-                entity.Property(e => e.Bundle).HasColumnType("text");
             });
 
             modelBuilder.Entity<ArticleInformation>(entity =>
@@ -170,6 +169,12 @@ namespace HAVI_app.Models
                 entity.Property(e => e.SupplierArticleName).HasColumnType("text");
 
                 entity.Property(e => e.TollTarifNumber).HasColumnType("text");
+
+                entity.HasOne(d => d.Article)
+                    .WithOne(p => p.ArticleInformation)
+                    .HasForeignKey<Article>(d => d.ArticleInformationId)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("FK__Article__Article__34C8D9D1");
             });
 
             modelBuilder.Entity<Bundle>(entity =>
@@ -180,20 +185,46 @@ namespace HAVI_app.Models
 
                 entity.Property(e => e.ArticleBundle).HasColumnType("text");
 
-                entity.Property(e => e.InternalArticleInformationId).HasColumnName("InternalArticleInformationID");
+                entity.Property(e => e.InternalArticleInformationId)
+                                .IsRequired()
+                                .HasColumnName("InternalArticleInformationID");
 
                 entity.HasOne(d => d.InternalArticleInformation)
                     .WithMany(p => p.Bundles)
                     .HasForeignKey(d => d.InternalArticleInformationId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK__Bundle__Internal__3D5E1FD2");
+            });
+
+            modelBuilder.Entity<CompanyCode>(entity =>
+            {
+                entity.ToTable("CompanyCode");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.Code).HasColumnType("text");
+
+                entity.Property(e => e.CountryId)
+                    .IsRequired()
+                    .HasColumnName("CountryID");
+
+                entity.HasOne(d => d.Country)
+                    .WithMany(p => p.CompanyCodes)
+                    .HasForeignKey(d => d.CountryId)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("FK__Company__Count__440B1D61");
             });
 
             modelBuilder.Entity<Country>(entity =>
             {
                 entity.ToTable("Country");
 
-                entity.Property(e => e.Id).HasColumnName("ID");
+                entity.HasIndex(e => e.Id, "UQ__Country__25112020")
+                    .IsUnique();
+
+                entity.Property(e => e.Id)
+                    
+                    .HasColumnName("ID");
 
                 entity.Property(e => e.CountryCode)
                     .IsRequired()
@@ -203,17 +234,30 @@ namespace HAVI_app.Models
                     .IsRequired()
                     .HasColumnType("text");
 
-                entity.Property(e => e.CreationCode)
+                entity.Property(e => e.ProfileId)
                     .IsRequired()
-                    .HasColumnType("text");
-
-                entity.Property(e => e.ProfileId).HasColumnName("ProfileID");
+                    .HasColumnName("ProfileID");
 
                 entity.HasOne(d => d.Profile)
                     .WithMany(p => p.Countries)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasForeignKey(d => d.ProfileId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK__Country__Profile__267ABA7A");
+            });
+
+            modelBuilder.Entity<CreationCode>(entity =>
+            {
+                entity.ToTable("CreationCode");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.Code)
+                    .IsRequired()
+                    .HasColumnType("text");
+
+                entity.Property(e => e.Active)
+                    .IsRequired()
+                    .HasColumnName("Active");
             });
 
             modelBuilder.Entity<DepartmentId>(entity =>
@@ -251,12 +295,14 @@ namespace HAVI_app.Models
 
                 entity.Property(e => e.Category).HasColumnType("text");
 
-                entity.Property(e => e.CountryId).HasColumnName("CountryID");
+                entity.Property(e => e.CountryId)
+                    .IsRequired()
+                    .HasColumnName("CountryID");
 
                 entity.HasOne(d => d.Country)
                     .WithMany(p => p.Iloscategories)
                     .HasForeignKey(d => d.CountryId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK__ILOSCateg__Count__440B1D61");
             });
 
@@ -266,14 +312,16 @@ namespace HAVI_app.Models
 
                 entity.Property(e => e.Id).HasColumnName("ID");
 
-                entity.Property(e => e.CountryId).HasColumnName("CountryID");
+                entity.Property(e => e.CountryId)
+                    .IsRequired()
+                    .HasColumnName("CountryID");
 
                 entity.Property(e => e.Orderpickgroup).HasColumnType("text");
 
                 entity.HasOne(d => d.Country)
                     .WithMany(p => p.Ilosorderpickgroups)
                     .HasForeignKey(d => d.CountryId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK__ILOSOrder__Count__46E78A0C");
             });
 
@@ -294,12 +342,14 @@ namespace HAVI_app.Models
 
                 entity.Property(e => e.CostType).HasColumnType("text");
 
-                entity.Property(e => e.CountryId).HasColumnName("CountryID");
+                entity.Property(e => e.CountryId)
+                    .IsRequired()
+                    .HasColumnName("CountryID");
 
                 entity.HasOne(d => d.Country)
                     .WithMany(p => p.InformCostTypes)
                     .HasForeignKey(d => d.CountryId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK__InformCos__Count__4BAC3F29");
             });
 
@@ -374,6 +424,12 @@ namespace HAVI_app.Models
                 entity.Property(e => e.VatTaxcode)
                     .HasColumnType("text")
                     .HasColumnName("VAT_TAXCode");
+
+                entity.HasOne(d => d.Article)
+                    .WithOne(p => p.InternalArticleInformation)
+                    .HasForeignKey<Article>(d => d.InternalArticleInformationId)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("FK__Article__Interna__36B12243");
             });
 
             modelBuilder.Entity<Location>(entity =>
@@ -391,14 +447,16 @@ namespace HAVI_app.Models
 
                 entity.Property(e => e.Id).HasColumnName("ID");
 
-                entity.Property(e => e.ArticleInformationId).HasColumnName("ArticleInformationID");
+                entity.Property(e => e.ArticleInformationId)
+                    .IsRequired()
+                    .HasColumnName("ArticleInformationID");
 
                 entity.Property(e => e.InformCostType).HasColumnType("text");
 
                 entity.HasOne(d => d.ArticleInformation)
                     .WithMany(p => p.OtherCostsForArticles)
                     .HasForeignKey(d => d.ArticleInformationId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK__OtherCost__Artic__5070F446");
             });
 
@@ -408,7 +466,9 @@ namespace HAVI_app.Models
 
                 entity.Property(e => e.Id).HasColumnName("ID");
 
-                entity.Property(e => e.CountryId).HasColumnName("CountryID");
+                entity.Property(e => e.CountryId)
+                    .IsRequired()
+                    .HasColumnName("CountryID");
 
                 entity.Property(e => e.PrimaryCode)
                     .HasColumnType("text")
@@ -421,7 +481,7 @@ namespace HAVI_app.Models
                 entity.HasOne(d => d.Country)
                     .WithMany(p => p.PrimaryDciloscodes)
                     .HasForeignKey(d => d.CountryId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK__PrimaryDC__Count__534D60F1");
             });
 
@@ -446,20 +506,24 @@ namespace HAVI_app.Models
 
                 entity.Property(e => e.Id).HasColumnName("ID");
 
-                entity.Property(e => e.CountryId).HasColumnName("CountryID");
+                entity.Property(e => e.CountryId)
+                    .IsRequired()
+                    .HasColumnName("CountryID");
 
-                entity.Property(e => e.ProfileId).HasColumnName("ProfileID");
+                entity.Property(e => e.ProfileId)
+                    .IsRequired()
+                    .HasColumnName("ProfileID");
 
                 entity.HasOne(d => d.Country)
                     .WithMany(p => p.Purchasers)
                     .HasForeignKey(d => d.CountryId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .OnDelete(DeleteBehavior.ClientCascade)
                     .HasConstraintName("FK__Purchaser__Count__29572725");
 
                 entity.HasOne(d => d.Profile)
                     .WithMany(p => p.Purchasers)
                     .HasForeignKey(d => d.ProfileId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .OnDelete(DeleteBehavior.ClientCascade)
                     .HasConstraintName("FK__Purchaser__Profi__2A4B4B5E");
             });
 
@@ -469,7 +533,9 @@ namespace HAVI_app.Models
 
                 entity.Property(e => e.Id).HasColumnName("ID");
 
-                entity.Property(e => e.InternalArticleInformationId).HasColumnName("InternalArticleInformationID");
+                entity.Property(e => e.InternalArticleInformationId)
+                    .IsRequired()
+                    .HasColumnName("InternalArticleInformationID");
 
                 entity.Property(e => e.QipanswerOptions)
                     .HasColumnType("text")
@@ -510,7 +576,7 @@ namespace HAVI_app.Models
                 entity.HasOne(d => d.InternalArticleInformation)
                     .WithMany(p => p.Qips)
                     .HasForeignKey(d => d.InternalArticleInformationId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK__QIP__InternalArt__5629CD9C");
             });
 
@@ -552,7 +618,9 @@ namespace HAVI_app.Models
 
                 entity.Property(e => e.Id).HasColumnName("ID");
 
-                entity.Property(e => e.InternalArticleInformationId).HasColumnName("InternalArticleInformationID");
+                entity.Property(e => e.InternalArticleInformationId)
+                    .IsRequired()
+                    .HasColumnName("InternalArticleInformationID");
 
                 entity.Property(e => e.SapplantName)
                     .HasColumnType("text")
@@ -563,7 +631,7 @@ namespace HAVI_app.Models
                 entity.HasOne(d => d.InternalArticleInformation)
                     .WithMany(p => p.Sapplants)
                     .HasForeignKey(d => d.InternalArticleInformationId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK__SAPPlant__Intern__5CD6CB2B");
             });
 
@@ -596,12 +664,14 @@ namespace HAVI_app.Models
                     .IsRequired()
                     .HasColumnType("text");
 
-                entity.Property(e => e.ProfileId).HasColumnName("ProfileID");
+                entity.Property(e => e.ProfileId)
+                    .IsRequired()
+                    .HasColumnName("ProfileID");
 
                 entity.HasOne(d => d.Profile)
                     .WithMany(p => p.Suppliers)
                     .HasForeignKey(d => d.ProfileId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .OnDelete(DeleteBehavior.ClientCascade)
                     .HasConstraintName("FK__Supplier__Profil__2D27B809");
             });
 
@@ -611,14 +681,16 @@ namespace HAVI_app.Models
 
                 entity.Property(e => e.Id).HasColumnName("ID");
 
-                entity.Property(e => e.CountryId).HasColumnName("CountryID");
+                entity.Property(e => e.CountryId)
+                    .IsRequired()
+                    .HasColumnName("CountryID");
 
                 entity.Property(e => e.Unit).HasColumnType("text");
 
                 entity.HasOne(d => d.Country)
                     .WithMany(p => p.SupplierDeliveryUnits)
                     .HasForeignKey(d => d.CountryId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK__SupplierD__Count__619B8048");
             });
 
@@ -628,14 +700,16 @@ namespace HAVI_app.Models
 
                 entity.Property(e => e.Id).HasColumnName("ID");
 
-                entity.Property(e => e.CountryId).HasColumnName("CountryID");
+                entity.Property(e => e.CountryId)
+                    .IsRequired()
+                    .HasColumnName("CountryID");
 
                 entity.Property(e => e.Customer).HasColumnType("text");
 
                 entity.HasOne(d => d.Country)
                     .WithMany(p => p.VailedForCustomers)
                     .HasForeignKey(d => d.CountryId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK__VailedFor__Count__6477ECF3");
             });
 
@@ -647,12 +721,14 @@ namespace HAVI_app.Models
 
                 entity.Property(e => e.Code).HasColumnType("text");
 
-                entity.Property(e => e.CountryId).HasColumnName("CountryID");
+                entity.Property(e => e.CountryId)
+                    .IsRequired()
+                    .HasColumnName("CountryID");
 
                 entity.HasOne(d => d.Country)
                     .WithMany(p => p.VatTaxCodes)
                     .HasForeignKey(d => d.CountryId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK__VatTaxCod__Count__6754599E");
             });
 

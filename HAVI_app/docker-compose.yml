@@ -1,8 +1,0 @@
-version: '3.4'
-
-services:
-  havi_app:
-    image: ${DOCKER_REGISTRY-}haviapp
-    build:
-      context: .
-      dockerfile: ./Dockerfile
