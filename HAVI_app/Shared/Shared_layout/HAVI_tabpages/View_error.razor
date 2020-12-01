@@ -1,17 +1,19 @@
-﻿<h2>View error</h2>
+﻿@inject HAVI_app.Shared.Shared_layout.HAVI_tabpages.ReportNewError Report
+
+<h2>View error</h2>
 
 <table class="table table-borderless">
     <tr>
         <td><label for="found_in">Found in field:</label></td>
-        <td><input type="text" name="found_in" class="form-control" disabled/></td>
+        <td><input type="text" name="found_in" class="form-control" value="@Report.ErrorField" disabled/></td>
     </tr>
     <tr>
         <td><label for="description">Describe error:</label></td>
-        <td><textarea class="form-control" name="description" placeholder="No Error" disabled></textarea></td>
+        <td><textarea class="form-control" name="description" value="@Report.ErrorMessage" disabled></textarea></td>
     </tr>
     <tr>
         <td><label for="found_by">Found by:</label></td>
-        <td><input name="found_by" class="form-control" type="text" disabled/></td>
+        <td><input name="found_by" class="form-control" type="text" value="@Report.ErrorSender" disabled/></td>
     </tr>
 </table>
 <div class="row country-buttons">
