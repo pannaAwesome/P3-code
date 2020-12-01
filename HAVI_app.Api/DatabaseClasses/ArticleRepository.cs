@@ -51,6 +51,16 @@ namespace HAVI_app.Api.DatabaseClasses
                                           .FirstOrDefaultAsync(s => s.Id == articleId);
         }
 
+        public async Task<Article> GetArticleWithInformation(int Id)
+        {
+            return await _context.Articles.Where(a => a.ArticleInformationId == Id).FirstOrDefaultAsync();
+        }
+
+        public async Task<Article> GetArticleWithInternal(int Id)
+        {
+            return await _context.Articles.Where(a => a.InternalArticleInformationId == Id).FirstOrDefaultAsync();
+        }
+
         public async Task<Article> AddArticle(Article article)
         {
             await _context.ArticleInformations.AddAsync(article.ArticleInformation);

@@ -9,7 +9,7 @@ namespace HAVI_app.Classes
 
     public static class Shared
     {
-        public static Dictionary<int, string> StateDictionary = new Dictionary<int, string>()
+        public static readonly Dictionary<int, string> StateDictionary = new Dictionary<int, string>()
         {
             { 0, "Created" },
             { 1, "Submitted" },
@@ -18,7 +18,7 @@ namespace HAVI_app.Classes
             { 4, "Error" }
         };
 
-        public static Dictionary<int, string> UserDictionary = new Dictionary<int, string>()
+        public static readonly Dictionary<int, string> UserDictionary = new Dictionary<int, string>()
         {
             { 0, "Admin" },
             { 1, "Purchaser" },

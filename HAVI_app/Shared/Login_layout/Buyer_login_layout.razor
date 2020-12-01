@@ -39,6 +39,9 @@
             </div>
         </div>
     </form>
+    <div>
+        <p>@_authMessage</p>
+    </div>
 </div>
 
 @code {
@@ -59,7 +62,7 @@
     {
         var user = await ProfileService.GetProfileByUsernameAndpassword(Username, Password);
 
-        if (user != null && user.Usertype == 1 && user.Password == Password)
+        if (user != (new Profile()) && user.Usertype == 1 && user.Password == Password)
         {
             Purchaser purchaser = await PurchaserService.GetPurchaserForProfile(user.Id);
             NavigationManager.NavigateTo($"/overview_purchaser/{purchaser.Id}", true);

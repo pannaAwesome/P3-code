@@ -3,6 +3,9 @@
 @page "/confirm_details"
 @inject HAVI_app.Models.ArticleInformation ArticleInformation
 @inject Models.ArticleInformation Article
+@inject HAVI_app.Services.Classes.ArticleInformationService ArticleInformationService 
+@inject HAVI_app.Services.Classes.ArticleService ArticleService
+@using HAVI_app.Classes
 
 <HAVI_app.Shared.Supplier_layout.Form_header SupplierState="filled" ArticleState="filled" MeasurementState="filled" ShipmentState="filled" PriceState="filled" ConfirmState="active" />
 
@@ -15,7 +18,6 @@
 
 <div class="row justify-content-center ">
     <div class="col-12 d-flex justify-content-center">
-        @*<fieldset disabled="disabled">*@
         <EditForm Model="Article" OnSubmit="Submit">
             <table class="table">
 
@@ -659,8 +661,15 @@
 
 @code
 {
-    public void Submit()
+    public async void Submit()
     {
+        await ArticleInformationService.UpdateArticleInformation(Article.Id, Article);
+
+        Article thisArticle = await ArticleService.GetArticleWithInformation(Article.Id);
+        thisArticle.ArticleState = (int)ArticleState.Submitted;
+        thisArticle.ArticleInformationCompleted = 1;
+        await ArticleService.UpdateArticle(thisArticle.Id, thisArticle);
+
         NavigationManager.NavigateTo($"/submission_accepted", true);
     }
 
@@ -682,28 +691,3 @@
 
     private int NumberOfOtherCosts = 1;
 }
-
-
-@*@code
-    {*@
-@*[Parameter]
-    public string values { get; set; }*@
-
-@*[Parameter]
-    public Test values { get; set; }
-
-    public class Test
-    {
-        public int kat { get; set; }
-        public int hund { get; set; }
-        public int and { get; set; }
-    }
-
-    public Test test;
-
-    protected override void OnParametersSet()
-    {
-        //the param will be set now
-        test = values;
-    }
-     }*@
