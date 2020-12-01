@@ -28,7 +28,7 @@ namespace HAVI_app.Api.Controllers
                 var result = await _orderpickgroup.GetILOSOrderpickgroups(id);
                 if (result == null)
                 {
-                    return null;
+                    return Ok(new List<Ilosorderpickgroup>());
                 }
                 return Ok(result);
             }
@@ -46,7 +46,7 @@ namespace HAVI_app.Api.Controllers
                 var result = await _orderpickgroup.GetILOSOrderpickgroup(id);
                 if (result == null)
                 {
-                    return null;
+                    return new Ilosorderpickgroup();
                 }
                 else
                 {

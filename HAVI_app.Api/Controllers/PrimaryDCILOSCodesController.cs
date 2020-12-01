@@ -27,7 +27,7 @@ namespace HAVI_app.Api.Controllers
                 var result = await _primaryDCILOSCodeRepository.GetPrimaryDCILOSCodes(id);
                 if (result == null)
                 {
-                    return null;
+                    return Ok(new List<PrimaryDciloscode>());
                 }
                 return Ok(result);
             }
@@ -45,7 +45,7 @@ namespace HAVI_app.Api.Controllers
                 var result = await _primaryDCILOSCodeRepository.GetPrimaryDCILOSCode(id);
                 if (result == null)
                 {
-                    return null;
+                    return new PrimaryDciloscode();
                 }
                 else
                 {

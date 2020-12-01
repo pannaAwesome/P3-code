@@ -28,7 +28,7 @@ namespace HAVI_app.Api.Controllers
                 var result = await _informCostTypeRepository.GetInformCostTypes();
                 if (result == null)
                 {
-                    return null;
+                    return Ok(new List<InformCostType>());
                 }
                 return Ok(result);
             }
@@ -46,7 +46,7 @@ namespace HAVI_app.Api.Controllers
                 var result = await _informCostTypeRepository.GetInformCostType(id);
                 if (result == null)
                 {
-                    return null;
+                    return new InformCostType();
                 }
                 else
                 {

@@ -1,5 +1,5 @@
 ﻿using HAVI_app.Api.DatabaseClasses;
-
+using HAVI_app.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -27,7 +27,7 @@ namespace HAVI_app.Api.Controllers
                 var result = await _locationRepository.GetLocations();
                 if (result == null)
                 {
-                    return null;
+                    return Ok(new List<Location>());
                 }
                 return Ok(result);
             }

@@ -48,7 +48,7 @@ namespace HAVI_app.Api.Controllers
                 var result = await _supplierDeliveryUnitRepository.GetSupplierDeliveryUnit(id);
                 if (result == null)
                 {
-                    return null;
+                    return new SupplierDeliveryUnit();
                 }
                 else
                 {
@@ -89,7 +89,7 @@ namespace HAVI_app.Api.Controllers
                 var result = await _supplierDeliveryUnitRepository.GetSupplierDeliveryUnits(id);
                 if (result == null)
                 {
-                    return null;
+                    return Ok(new List<VailedForCustomer>());
                 }
                 return Ok(result);
             }
