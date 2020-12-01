@@ -28,7 +28,7 @@ namespace HAVI_app.Api.Controllers
                 var result = await _bundleRepository.GetBundles();
                 if (result == null)
                 {
-                    return null;
+                    return Ok(new List<Bundle>());
                 }
                 return Ok(result);
             }
@@ -46,7 +46,7 @@ namespace HAVI_app.Api.Controllers
                 var result = await _bundleRepository.GetBundle(id);
                 if (result == null)
                 {
-                    return null;
+                    return Ok(new Bundle());
                 }
                 else
                 {
