@@ -20,9 +20,10 @@ namespace HAVI_app.Services.Classes
             return await httpClient.GetFromJsonAsync<List<Iloscategory>>($"/api/ilosCategories/country/{id}");
         }
 
-        public async void CreateILOSCategory(Iloscategory ilosCategory)
+        public async Task<Iloscategory> CreateILOSCategory(Iloscategory ilosCategory)
         {
-            await httpClient.PostAsJsonAsync("/api/ilosCategories", ilosCategory);
+            var result = await httpClient.PostAsJsonAsync("/api/ilosCategories", ilosCategory);
+            return await result.Content.ReadAsAsync<Iloscategory>();
         }
 
         public async void UpdateILOSCategory(int id, Iloscategory ilosCategory)

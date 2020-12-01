@@ -192,6 +192,8 @@
 </div>
 
 @code{
+    [Parameter]
+    public int Id { get; set; }
 
     List<SalesUnit> sales;
 
@@ -217,7 +219,7 @@
         {
             Article.Gtinnumber = GTINValidation(Article.Gtinnumber);
 
-            NavigationManager.NavigateTo("/measurement_info_form", true);
+            NavigationManager.NavigateTo($"/measurement_info_form", true);
         }
 
         if (!LettersOnly(Article.ArticleName))

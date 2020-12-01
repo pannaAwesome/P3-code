@@ -71,7 +71,7 @@ namespace HAVI_app.Api.Controllers
 
                 var createdInformCostType = await _informCostTypeRepository.AddInformCostType(informCostType);
 
-                return CreatedAtAction(nameof(GetInformCostType), new { id = createdInformCostType.Id }, createdInformCostType);
+                return createdInformCostType;
             }
             catch (Exception)
             {

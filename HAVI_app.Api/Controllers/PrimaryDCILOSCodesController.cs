@@ -70,7 +70,7 @@ namespace HAVI_app.Api.Controllers
 
                 var createdPrimaryDCILOSCode = await _primaryDCILOSCodeRepository.AddPrimaryDCILOSCode(primaryDCILOSCode);
 
-                return CreatedAtAction(nameof(GetPrimaryDCILOSCode), new { id = createdPrimaryDCILOSCode.Id }, createdPrimaryDCILOSCode);
+                return createdPrimaryDCILOSCode;
             }
             catch (Exception)
             {

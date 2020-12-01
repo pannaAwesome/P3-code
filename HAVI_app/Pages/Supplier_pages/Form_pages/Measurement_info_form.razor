@@ -122,6 +122,8 @@
 </div>
 
 @code {
+    [Parameter]
+    public int Id { get; set; }
 
     public string LengthValidated;
 
@@ -133,13 +135,13 @@
 
     public string GrossWeightValidated;
 
-    public void ValidationMeasurementForm() 
+    public void ValidationMeasurementForm()
     {
-        
+
         if (DoubleOnly(Article.LengthPrSalesunit) &&
-            DoubleOnly(Article.WidthPrSalesunit) && 
-            DoubleOnly(Article.HeightPrSalesunit) && 
-            DoubleOnly(Article.NetWeightPrSalesunit) &&  
+            DoubleOnly(Article.WidthPrSalesunit) &&
+            DoubleOnly(Article.HeightPrSalesunit) &&
+            DoubleOnly(Article.NetWeightPrSalesunit) &&
             DoubleOnly(Article.GrossWeightPrSalesunit))
         {
             NavigationManager.NavigateTo($"/shipment_info_form", true);

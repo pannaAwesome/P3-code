@@ -15,6 +15,6 @@ namespace HAVI_app.Models
         public string Orderpickgroup { get; set; }
         [ForeignKey("Country")]
         public int CountryId { get; set; }
-        public virtual Country Country { get; set; }
+        public virtual Country Country { get; set; } = null;
     }
 }

@@ -1,6 +1,6 @@
 ﻿@layout HAVI_app.Shared.Supplier_layout.Form_layout
 @inject Microsoft.AspNetCore.Components.NavigationManager NavigationManager
-@page "/supplier_info_form"
+@page "/supplier_info_form/{Id:int}"
 @inherits HAVI_app.Classes.Validation
 @inject Models.ArticleInformation Article
 @inject HAVI_app.Services.Classes.CountryService ContryService
@@ -254,6 +254,8 @@
 
 
 @code {
+    [Parameter]
+    public int Id { get; set; }
 
     List<Country> contries;
 
@@ -265,7 +267,8 @@
     {
         if (IsEmailValid(Article.Email) && ((Article.DangerousGoods == 1)  ? NumbersLettersDashOnly(Article.ClassificationCode) : true))
         {
-            NavigationManager.NavigateTo("/article_info_form", true);
+            Article.Id = Id;
+            NavigationManager.NavigateTo($"/article_info_form", true);
         }
 
         if (!IsEmailValid(Article.Email))

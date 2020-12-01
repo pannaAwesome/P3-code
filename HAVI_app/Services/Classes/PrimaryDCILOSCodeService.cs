@@ -21,9 +21,10 @@ namespace HAVI_app.Services.Classes
             return await httpClient.GetFromJsonAsync<List<PrimaryDciloscode>>($"/api/PrimaryDciloscodes/country/{id}");
         }
 
-        public async void CreatePrimaryDCILOSCode(PrimaryDciloscode code)
+        public async Task<PrimaryDciloscode> CreatePrimaryDCILOSCode(PrimaryDciloscode code)
         {
-            await httpClient.PostAsJsonAsync("/api/PrimaryDciloscodes", code);
+            var result = await httpClient.PostAsJsonAsync("/api/PrimaryDciloscodes", code);
+            return await result.Content.ReadAsAsync<PrimaryDciloscode>();
         }
 
         public async void DeletePrimaryDCILOSCode(int id)

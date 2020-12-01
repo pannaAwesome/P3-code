@@ -5,6 +5,7 @@
 @inject Models.ArticleInformation Article
 @inject HAVI_app.Services.Classes.ArticleInformationService ArticleInformationService 
 @inject HAVI_app.Services.Classes.ArticleService ArticleService
+@inject HAVI_app.Services.Classes.SupplierService SupplierService 
 @using HAVI_app.Classes
 
 <HAVI_app.Shared.Supplier_layout.Form_header SupplierState="filled" ArticleState="filled" MeasurementState="filled" ShipmentState="filled" PriceState="filled" ConfirmState="active" />
@@ -670,7 +671,7 @@
         thisArticle.ArticleInformationCompleted = 1;
         await ArticleService.UpdateArticle(thisArticle.Id, thisArticle);
 
-        NavigationManager.NavigateTo($"/submission_accepted", true);
+        NavigationManager.NavigateTo($"/submission_accepted/", true);
     }
 
     public void GoBack()

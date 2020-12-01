@@ -92,7 +92,7 @@ namespace HAVI_app.Api.Controllers
 
                 var createdCountry = await _countryRepository.AddCountry(country);
 
-                return CreatedAtAction(nameof(GetCountry), new { id = createdCountry.Id }, createdCountry);
+                return createdCountry;
             }
             catch (Exception)
             {

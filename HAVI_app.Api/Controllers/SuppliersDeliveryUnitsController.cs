@@ -32,7 +32,7 @@ namespace HAVI_app.Api.Controllers
 
                 var createdSupplierDeliveryUnit = await _supplierDeliveryUnitRepository.AddSupplierDeliveryUnit(deliveryUnit);
 
-                return CreatedAtAction(nameof(GetSupplierDeliveryUnit), new { id = createdSupplierDeliveryUnit.Id }, createdSupplierDeliveryUnit);
+                return createdSupplierDeliveryUnit;
             }
             catch (Exception)
             {

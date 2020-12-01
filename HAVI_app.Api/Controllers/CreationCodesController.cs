@@ -53,7 +53,7 @@ namespace HAVI_app.Api.Controllers
 
                 var createdCreationCode = await _creationCodeRepository.AddCreationCode(creationCode);
 
-                return CreatedAtAction(nameof(GetCreationCode), new { id = createdCreationCode.Id }, createdCreationCode);
+                return createdCreationCode;
             }
             catch (Exception)
             {

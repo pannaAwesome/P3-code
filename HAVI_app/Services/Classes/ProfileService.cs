@@ -39,10 +39,9 @@ namespace HAVI_app.Services.Classes
             return await httpClient.GetFromJsonAsync<List<Profile>>("/api/profiles");
         }
 
-        public async Task<Profile> DeleteProfile(int id)
+        public async Task DeleteProfile(int id)
         {
             await httpClient.DeleteAsync($"/api/profiles/{id}");
-            return await httpClient.GetFromJsonAsync<Profile>($"/api/profiles/{id}");
         }
     }
 }

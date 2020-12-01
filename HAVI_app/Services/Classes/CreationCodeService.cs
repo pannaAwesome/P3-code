@@ -26,10 +26,9 @@ namespace HAVI_app.Services.Classes
             return await result.Content.ReadAsAsync<CreationCode>();
         }
 
-        public async Task<CreationCode> UpdateCreationCode(int id, CreationCode creationCode)
+        public async Task UpdateCreationCode(int id, CreationCode creationCode)
         {
-            var result = await httpClient.PutAsJsonAsync($"/api/creationCodes/{id}", creationCode);
-            return await result.Content.ReadAsAsync<CreationCode>();
+            await httpClient.PutAsJsonAsync($"/api/creationCodes/{id}", creationCode);
         }
     }
 }

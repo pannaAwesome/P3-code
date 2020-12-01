@@ -71,7 +71,7 @@ namespace HAVI_app.Api.Controllers
 
                 var createdILOSOrderpickgroup = await _orderpickgroup.AddILOSOrderpickgroup(orderpickgroup);
 
-                return CreatedAtAction(nameof(GetILOSOrderpickgroup), new { id = createdILOSOrderpickgroup.Id }, createdILOSOrderpickgroup);
+                return createdILOSOrderpickgroup;
             }
             catch (Exception)
             {
