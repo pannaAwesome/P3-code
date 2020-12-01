@@ -13,7 +13,7 @@ namespace HAVI_app.Classes
             /// Create a simple Excel document
             /// </summary>
             /// <returns>Return the created excel document as stream</returns>
-            public MemoryStream CreateXlsIO(string version)
+            MemoryStream CreateXlsIO(string version)
             {
                 //New instance of XlsIO is created.[Equivalent to launching MS Excel with no workbooks open].
                 //The instantiation process consists of two steps.
@@ -37,14 +37,14 @@ namespace HAVI_app.Classes
                     sheet.Range["D2"].ColumnWidth = 30;
                     sheet.Range["A2:D2"].Merge(true);
                     //Inserting sample text into the first cell of the first sheet
-                    sheet.Range["A2"].Text = "EXPENSE REPORT";
+                    sheet.Range["B3"].Text = "Company code";
                     sheet.Range["A2"].CellStyle.Font.FontName = "Verdana";
                     sheet.Range["A2"].CellStyle.Font.Bold = true;
                     sheet.Range["A2"].CellStyle.Font.Size = 28;
                     sheet.Range["A2"].CellStyle.Font.RGBColor = Color.FromArgb(0, 0, 112, 192);
                     sheet.Range["A2"].HorizontalAlignment = ExcelHAlign.HAlignCenter;
-                    sheet.Range["A4"].Text = "Employee";
-                    sheet.Range["B4"].Text = "Roger Federer";
+                    sheet.Range["B4"].Text = "Supplier ID";
+                    sheet.Range["B5"].Text = "Supplier Delivery Unit";
                     sheet.Range["A4:B7"].CellStyle.Font.FontName = "Verdana";
                     sheet.Range["A4:B7"].CellStyle.Font.Bold = true;
                     sheet.Range["A4:B7"].CellStyle.Font.Size = 11;
@@ -54,25 +54,63 @@ namespace HAVI_app.Classes
                     sheet.Range["B4:B7"].HorizontalAlignment = ExcelHAlign.HAlignRight;
                     sheet.Range["A9:D20"].CellStyle.Font.FontName = "Verdana";
                     sheet.Range["A9:D20"].CellStyle.Font.Size = 11;
-                    sheet.Range["A5"].Text = "Department";
-                    sheet.Range["B5"].Text = "Administration";
-                    sheet.Range["A6"].Text = "Week Ending";
-                    sheet.Range["B6"].NumberFormat = "m/d/yyyy";
-                    sheet.Range["B6"].DateTime = DateTime.Parse("10/20/2012", CultureInfo.InvariantCulture);
-                    sheet.Range["A7"].Text = "Mileage Rate";
-                    sheet.Range["B7"].NumberFormat = "$#,##0.00";
-                    sheet.Range["B7"].Number = 0.70;
-                    sheet.Range["A10"].Text = "Miles Driven";
-                    sheet.Range["A11"].Text = "Miles Reimbursement";
-                    sheet.Range["A12"].Text = "Parking and Tolls";
-                    sheet.Range["A13"].Text = "Auto Rental";
-                    sheet.Range["A14"].Text = "Lodging";
-                    sheet.Range["A15"].Text = "Breakfast";
-                    sheet.Range["A16"].Text = "Lunch";
-                    sheet.Range["A17"].Text = "Dinner";
-                    sheet.Range["A18"].Text = "Snacks";
-                    sheet.Range["A19"].Text = "Others";
-                    sheet.Range["A20"].Text = "Total";
+                    sheet.Range["B6"].Text = "Remain Shelf Store value";
+                    sheet.Range["B7"].Text = "ILOS Orderpick Group";
+                    sheet.Range["B8"].Text = "ILOS Temp group";
+                    sheet.Range["B9"].Text = "New IOS Article number";
+                    sheet.Range["B10"].Text = "Ref ILOS number";
+                    sheet.Range["B11"].Text = "Ref SAP mat Number";
+                    sheet.Range["B12"].Text = "ILOS catagory/Account";
+                    sheet.Range["B13"].Text = "VAT/tax Code";
+                    sheet.Range["B14"].Text = "Department ID";
+                    sheet.Range["B15"].Text = "Innerpacking ILOS";
+                    sheet.Range["B16"].Text = "If forign currency ";
+                    sheet.Range["B17"].Text = "Text Purchase members";
+                    sheet.Range["B18"].Text = "Insert EAN in SAP";
+                    sheet.Range["B19"].Text = "Insert GRIN in SAP";
+                    sheet.Range["B20"].Text = "Insert BOS in SAP";
+                    sheet.Range["B25"].Text = "Primary DC ILOS code";
+                    sheet.Range["E8"].Text = "Register Shelvelife";
+                    sheet.Range["E25"].Text = "Alias EAN";
+                    sheet.Range["E26"].Text = "Alias GRIN";
+                    sheet.Range["E27"].Text = "Alias BOS";
+
+
+                    //Supplier ark
+
+                    sheet.Range["B3"].Text = "Valid for costumer";
+                    sheet.Range["B14"].Text = "Salesunit";
+                    sheet.Range["B15"].Text = "Article number";
+                    sheet.Range["B17"].Text = "Length";
+                    sheet.Range["B18"].Text = "Width";
+                    sheet.Range["B19"].Text = "Height";
+                    sheet.Range["B20"].Text = "Net Weight";
+                    sheet.Range["B21"].Text = "Gross Weight";
+                    sheet.Range["B22"].Text = "GTIN Number";
+                    sheet.Range["B26"].Text = "Shelv life";
+                    sheet.Range["B27"].Text = "Shelve Life HAVI";
+                    sheet.Range["B43"].Text = "Register Shelvelife";
+                    sheet.Range["B47"].Text = "Alias EAN";
+                    sheet.Range["B48"].Text = "Alias GRIN";
+                    
+
+                    sheet.Range["E15"].Text = "Cartons pr pallet";
+                    sheet.Range["E16"].Text = "Cartons pr layer ";
+                    sheet.Range["E17"].Text = "Country of origin";
+                    sheet.Range["E18"].Text = "Imported from";
+                    sheet.Range["E19"].Text = "Toll tariff nr";
+                    sheet.Range["E20"].Text = "Min order quantity";
+                    sheet.Range["E21"].Text = "Min order Type";
+                    sheet.Range["E22"].Text = "Lead Time";
+                    sheet.Range["E23"].Text = "Organic article";
+                    sheet.Range["E25"].Text = "Alias EAN";
+                    sheet.Range["E26"].Text = "Alias GRIN";
+                    sheet.Range["E27"].Text = "Alias BOS";
+                    sheet.Range["E43"].Text = "Alias BOS";
+
+
+
+
                     sheet.Range["A20:D20"].CellStyle.Color = Color.FromArgb(0, 0, 112, 192);
                     sheet.Range["A20:D20"].CellStyle.Font.Color = ExcelKnownColors.White;
                     sheet.Range["A20:D20"].CellStyle.Font.Bold = true;
@@ -82,76 +120,7 @@ namespace HAVI_app.Classes
                     style.Color = Color.FromArgb(0, 0, 112, 192);
                     style.Font.Bold = true;
                     style.Font.Color = ExcelKnownColors.White;
-                    sheet.Range["A9"].Text = "Expenses";
-                    sheet.Range["A9"].CellStyle.Color = Color.FromArgb(0, 0, 112, 192);
-                    sheet.Range["A9"].CellStyle.Font.Color = ExcelKnownColors.White;
-                    sheet.Range["A9"].CellStyle.Font.Bold = true;
-                    sheet.Range["B9"].Text = "Day 1";
-                    sheet.Range["B10"].Number = 100;
-                    sheet.Range["B11"].NumberFormat = "$#,##0.00";
-                    sheet.Range["B11"].Formula = "=(B7*B10)";
-                    sheet.Range["B12"].NumberFormat = "$#,##0.00";
-                    sheet.Range["B12"].Number = 0;
-                    sheet.Range["B13"].NumberFormat = "$#,##0.00";
-                    sheet.Range["B13"].Number = 0;
-                    sheet.Range["B14"].NumberFormat = "$#,##0.00";
-                    sheet.Range["B14"].Number = 0;
-                    sheet.Range["B15"].NumberFormat = "$#,##0.00";
-                    sheet.Range["B15"].Number = 9;
-                    sheet.Range["B16"].NumberFormat = "$#,##0.00";
-                    sheet.Range["B16"].Number = 12;
-                    sheet.Range["B17"].NumberFormat = "$#,##0.00";
-                    sheet.Range["B17"].Number = 13;
-                    sheet.Range["B18"].NumberFormat = "$#,##0.00";
-                    sheet.Range["B18"].Number = 9.5;
-                    sheet.Range["B19"].NumberFormat = "$#,##0.00";
-                    sheet.Range["B19"].Number = 0;
-                    sheet.Range["B20"].NumberFormat = "$#,##0.00";
-                    sheet.Range["B20"].Formula = "=SUM(B11:B19)";
-                    sheet.Range["C9"].Text = "Day 2";
-                    sheet.Range["C10"].Number = 145;
-                    sheet.Range["C11"].NumberFormat = "$#,##0.00";
-                    sheet.Range["C11"].Formula = "=(B7*C10)";
-                    sheet.Range["C12"].NumberFormat = "$#,##0.00";
-                    sheet.Range["C12"].Number = 15;
-                    sheet.Range["C13"].NumberFormat = "$#,##0.00";
-                    sheet.Range["C13"].Number = 0;
-                    sheet.Range["C14"].NumberFormat = "$#,##0.00";
-                    sheet.Range["C14"].Number = 45;
-                    sheet.Range["C15"].NumberFormat = "$#,##0.00";
-                    sheet.Range["C15"].Number = 9;
-                    sheet.Range["C16"].NumberFormat = "$#,##0.00";
-                    sheet.Range["C16"].Number = 12;
-                    sheet.Range["C17"].NumberFormat = "$#,##0.00";
-                    sheet.Range["C17"].Number = 15;
-                    sheet.Range["C18"].NumberFormat = "$#,##0.00";
-                    sheet.Range["C18"].Number = 7;
-                    sheet.Range["C19"].NumberFormat = "$#,##0.00";
-                    sheet.Range["C19"].Number = 0;
-                    sheet.Range["C20"].NumberFormat = "$#,##0.00";
-                    sheet.Range["C20"].Formula = "=SUM(C11:C19)";
-                    sheet.Range["D9"].Text = "Day 3";
-                    sheet.Range["D10"].Number = 113;
-                    sheet.Range["D11"].NumberFormat = "$#,##0.00";
-                    sheet.Range["D11"].Formula = "=(B7*D10)";
-                    sheet.Range["D12"].NumberFormat = "$#,##0.00";
-                    sheet.Range["D12"].Number = 17;
-                    sheet.Range["D13"].NumberFormat = "$#,##0.00";
-                    sheet.Range["D13"].Number = 8;
-                    sheet.Range["D14"].NumberFormat = "$#,##0.00";
-                    sheet.Range["D14"].Number = 45;
-                    sheet.Range["D15"].NumberFormat = "$#,##0.00";
-                    sheet.Range["D15"].Number = 7;
-                    sheet.Range["D16"].NumberFormat = "$#,##0.00";
-                    sheet.Range["D16"].Number = 11;
-                    sheet.Range["D17"].NumberFormat = "$#,##0.00";
-                    sheet.Range["D17"].Number = 16;
-                    sheet.Range["D18"].NumberFormat = "$#,##0.00";
-                    sheet.Range["D18"].Number = 7;
-                    sheet.Range["D19"].NumberFormat = "$#,##0.00";
-                    sheet.Range["D19"].Number = 5;
-                    sheet.Range["D20"].NumberFormat = "$#,##0.00";
-                    sheet.Range["D20"].Formula = "=SUM(D11:D19)";
+                   
                     #endregion
                     //Save the document as a stream and retrun the stream
                     using (MemoryStream stream = new MemoryStream())
