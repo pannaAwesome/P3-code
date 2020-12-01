@@ -8,7 +8,7 @@ using System;
 
 namespace HAVI_app.Pages.Supplier_pages
 {
-    public class BaseProfileSupplier : ComponentBase
+    public class ProfileSupplier : ComponentBase
     {
         [Parameter]
         public int supplierId { get; set; }

@@ -1,6 +1,8 @@
 ﻿@layout HAVI_app.Shared.Supplier_layout.Form_layout
 @inject Microsoft.AspNetCore.Components.NavigationManager NavigationManager
 @page "/confirm_details"
+@inject HAVI_app.Models.ArticleInformation ArticleInformation
+@inject Models.ArticleInformation Article
 
 <HAVI_app.Shared.Supplier_layout.Form_header SupplierState="filled" ArticleState="filled" MeasurementState="filled" ShipmentState="filled" PriceState="filled" ConfirmState="active" />
 
@@ -14,7 +16,7 @@
 <div class="row justify-content-center ">
     <div class="col-12 d-flex justify-content-center">
         @*<fieldset disabled="disabled">*@
-        <form>
+        <EditForm Model="Article" OnSubmit="Submit">
             <table class="table">
 
                 <!-- ############## Supplier Information ############## -->
@@ -32,7 +34,7 @@
                         <label for="company_name">Company name:</label>
                     </td>
                     <td colspan="3">
-                        <input type="text" class="form-control" name="company_name" value="Hello & Co." disabled>
+                        <input type="text" class="form-control" name="company_name" value="@Article.CompanyName" disabled>
                     </td>
                     <td>
                         <div></div>
@@ -44,7 +46,7 @@
                         <label for="company_location">Company location:</label>
                     </td>
                     <td colspan="3">
-                        <input type="text" class="form-control" name="company_location" value="Denmark" disabled>
+                        <input type="text" class="form-control" name="company_location" value="@Article.CompanyLocation." disabled>
                     </td>
                     <td>
                         <div></div>
@@ -56,7 +58,7 @@
                         <label for="email">Email:</label>
                     </td>
                     <td colspan="4">
-                        <input type="text" class="form-control" name="email" value="HelloCompany@@mail.com" disabled>
+                        <input type="text" class="form-control" name="email" value="@Article.Email" disabled>
                     </td>
                     <td>
                         <div></div>
@@ -69,10 +71,10 @@
                     </td>
                     <td colspan="5">
                         <div class="text-center">
-                            <input type="radio" name="pallet_exchange" id="yes" value="yes" checked="checked" disabled>
+                            <input type="radio" name="pallet_exchange" checked="@(Article.PalletExchange == 1)" @onchange="@(() => Article.PalletExchange = 1)" disabled>
                             <label for="yes">Yes</label>
                             &nbsp;
-                            <input type="radio" id="no" name="pallet_exchange" disabled>
+                            <input type="radio" name="pallet_exchange" checked="@(Article.PalletExchange == 2)" @onchange="@(() => Article.PalletExchange = 2)" disabled>
                             <label for="no">No</label>
                         </div>
                     </td>
@@ -87,10 +89,10 @@
                     </td>
                     <td colspan="5">
                         <div class="text-center">
-                            <input type="radio" name="freight_responsibility" id="CIP" value="CIP" checked="checked" disabled>
+                            <input type="radio" name="freight_responsibility" checked="@(Article.FreightResponsibility == "CIP")" @onchange="@(() => Article.FreightResponsibility = "CIP")" disabled>
                             <label for="CIP">CIP</label>
                             &nbsp;
-                            <input type="radio" id="EXW" name="freight_responsibility" disabled>
+                            <input type="radio" value="EXW" name="freight_responsibility" checked="@(Article.FreightResponsibility == "EXW")" @onchange="@(() => Article.FreightResponsibility = "EXW")" disabled>
                             <label for="EXW">EXW</label>
                         </div>
                     </td>
@@ -102,7 +104,7 @@
                 <tr>
                     <td colspan="6">
                         <label for="special_info">Special information regarding the article or cooperation?</label>
-                        <textarea class="form-control" name="special_info" value="" disabled>Absolutely none</textarea>
+                        <textarea class="form-control" name="special_info" value="@Article.SpecialInformation" disabled></textarea>
                     </td>
                     <td>
                         <div></div>
@@ -116,10 +118,10 @@
 
                     <td colspan="5">
                         <div class="text-center">
-                            <input type="radio" name="transport" value="yes" checked disabled>
+                            <input type="radio" name="transport" data-toggle="collapse" data-target="#hideTransit:not(.show)" aria-expanded="false" aria-controls="hideTransit" checked="@(Article.TransportBooking == 1)" @onchange="@(() => Article.TransportBooking = 1)" disabled>
                             <label for="yes">Yes</label>
                             &nbsp;
-                            <input type="radio" value="no" name="transport" disabled>
+                            <input type="radio" name="transport" data-toggle="collapse" data-target="#hideTransit.show" aria-expanded="false" aria-controls="hideTransit" checked="@(Article.TransportBooking == 2)" @onchange="@(() => Article.TransportBooking = 2)" disabled>
                             <label for="no">No</label>
                         </div>
                     </td>
@@ -127,14 +129,14 @@
                         <div></div>
                     </td>
                 </tr>
-                @if (BookingTransport == "yes")
+                @if (Article.TransportBooking == 1)
                 {
                     <tr>
                         <td>
                             <label for="class">Transit time:</label>
                         </td>
                         <td colspan="5">
-                            <input type="number" class="form-control" id="class" value="10" disabled>
+                            <input type="number" class="form-control" id="class" value="@Article.TransitTime" disabled>
                         </td>
                         <td>
                             <label for="class" class="labels">days</label>
@@ -148,10 +150,10 @@
                     </td>
                     <td colspan="5">
                         <div class="text-center">
-                            <input type="radio" name="dangerous" value="yes" checked disabled>
+                            <input type="radio" name="dangerous" data-toggle="collapse" data-target="#hideDanger:not(.show)" aria-expanded="false" aria-controls="hideDanger" checked="@(Article.DangerousGoods == 1)" @onchange="@(() => Article.DangerousGoods = 1)" disabled>
                             <label for="yes">Yes</label>
                             &nbsp;
-                            <input type="radio" value="no" name="dangerous" disabled />
+                            <input type="radio" name="dangerous" data-toggle="collapse" data-target="#hideDanger.show" aria-expanded="false" aria-controls="hideDanger" checked="@(Article.DangerousGoods == 2)" @onchange="@(() => Article.DangerousGoods = 2)" disabled/>
                             <label for="no">No</label>
                         </div>
                     </td>
@@ -159,14 +161,14 @@
                         <div></div>
                     </td>
                 </tr>
-                @if (DangerousGoods == "yes")
+                @if (Article.DangerousGoods == 1)
                 {
                     <tr>
                         <td>
                             <label for="class">Class:</label>
                         </td>
                         <td colspan="5">
-                            <input type="text" class="form-control" id="class" value="" disabled>
+                            <input type="text" class="form-control" id="class" value="@Article.Class" disabled>
                         </td>
                         <td>
                             <div></div>
@@ -178,7 +180,7 @@
                             <label for="classificationCode">Classification code:</label>
                         </td>
                         <td colspan="3">
-                            <input type="number" class="form-control" id="classificationCode" value="1293871293" disabled>
+                            <input type="number" class="form-control" id="classificationCode" value="@Article.ClassificationCode" disabled>
                         </td>
                         <td>
                             <div></div>
@@ -204,7 +206,7 @@
                         <label for="article_name">Article name:</label>
                     </td>
                     <td colspan="4">
-                        <input type="text" class="form-control" id="a_name" value="Peanuts" disabled>
+                        <input type="text" class="form-control" id="a_name" value="@Article.ArticleName" disabled>
                     </td>
                     <td>
                         <div></div>
@@ -216,7 +218,7 @@
                         <label for="sales_unit">Salesunit:</label>
                     </td>
                     <td colspan="4">
-                        <input type="text" class="form-control" id="sales_unit" value="Bakke // 374" disabled>
+                        <input type="text" class="form-control" id="sales_unit" value="@Article.Salesunit" disabled>
                     </td>
                     <td>
                         <div></div>
@@ -228,7 +230,7 @@
                         <label for="article_pr_salesunit">Article per salesunit:</label>
                     </td>
                     <td colspan="3">
-                        <input type="number" class="form-control" id="salesunit_quantity" value="123" disabled>
+                        <input type="number" class="form-control" id="salesunit_quantity" value="@Article.ArticlesPerSalesunit" disabled>
                     </td>
                     <td>
                         <div></div>
@@ -240,7 +242,7 @@
                         <label for="supplier_article_nn">Supplier article number/name:</label>
                     </td>
                     <td colspan="4">
-                        <input type="number" class="form-control" id="article_number_name" value="12312442123" disabled>
+                        <input type="number" class="form-control" id="article_number_name" value="@Article.SupplierArticleNumber" disabled>
                     </td>
                     <td>
                         <div></div>
@@ -252,7 +254,7 @@
                         <label for="GTIN">GTIN number:</label>
                     </td>
                     <td colspan="4">
-                        <input type="number" class="form-control" id="GTIN" value="12312312412312" disabled>
+                        <input type="number" class="form-control" id="GTIN" value="@Article.Gtinnumber" disabled>
                     </td>
                     <td>
                         <div></div>
@@ -264,7 +266,7 @@
                         <label for="Shelflife">Shelflife:</label>
                     </td>
                     <td colspan="2">
-                        <input type="number" class="form-control" id="Shelflife" value="2" disabled>
+                        <input type="number" class="form-control" id="Shelflife" value="@Article.Shelflife" disabled>
                     </td>
                     <td>
                         <label class="center-for-units" for="Shelflife">days</label>
@@ -276,7 +278,7 @@
                         <label for="Min_shelflife">Min. shelflife at HAVI:</label>
                     </td>
                     <td colspan="2">
-                        <input type="number" class="form-control" id="Min_shelflife" value="12" disabled>
+                        <input type="number" class="form-control" id="Min_shelflife" value="@Article.ShelflifeAtHavi" disabled>
                     </td>
                     <td>
                         <label class="center-for-units" for="Min_shelflife">days</label>
@@ -285,15 +287,15 @@
 
                 <tr>
                     <td>
-                        <label for="organic_article" value="">Organic article?</label>
+                        <label for="Organic_article" value="">Organic article?</label>
                     </td>
 
                     <td colspan="5">
                         <div class="text-center">
-                            <input type="radio" name="organic" id="yes" value="yes" disabled>
+                            <input type="radio" name="Organic_article" checked="@(Article.OrganicArticle == 1)" @onchange="@(() => Article.OrganicArticle = 1)" disabled>
                             <label for="yes">Yes</label>
                             &nbsp;
-                            <input type="radio" id="no" name="organic" checked="checked" disabled>
+                            <input type="radio" name="Organic_article" checked="@(Article.OrganicArticle == 2)" @onchange="@(() => Article.OrganicArticle = 2)" disabled>
                             <label for="no">No</label>
                         </div>
                     </td>
@@ -317,7 +319,7 @@
                         <label for="length">Length per salesunit:</label>
                     </td>
                     <td colspan="3">
-                        <input type="number" class="form-control" id="Length" value="3" disabled>
+                        <input type="number" class="form-control" id="Length" value="@Article.LengthPrSalesunit" disabled>
                     </td>
                     <td>
                         <label class="center-for-units" for="length">cm</label>
@@ -329,7 +331,7 @@
                         <label for="width">Width per salesunit:</label>
                     </td>
                     <td colspan="3">
-                        <input type="number" class="form-control" id="width" value="12" disabled>
+                        <input type="number" class="form-control" id="width" value="@Article.WidthPrSalesunit" disabled>
                     </td>
                     <td>
                         <label class="center-for-units" for="width">cm</label>
@@ -341,7 +343,7 @@
                         <label for="height">Height per salesunit:</label>
                     </td>
                     <td colspan="3">
-                        <input type="number" class="form-control" id="height" value="10" disabled>
+                        <input type="number" class="form-control" id="height" value="@Article.HeightPrSalesunit" disabled>
                     </td>
                     <td>
                         <label class="center-for-units" for="height">cm</label>
@@ -353,7 +355,7 @@
                         <label for="net_weight">Net weight per salesunit:</label>
                     </td>
                     <td colspan="3">
-                        <input type="number" class="form-control" id="net_weight" value="12" disabled>
+                        <input type="number" class="form-control" id="net_weight" value="@Article.NetWeightPrSalesunit" disabled>
                     </td>
                     <td>
                         <label class="center-for-units" for="net_weight">kg</label>
@@ -365,7 +367,7 @@
                         <label for="gross_weight">Gross weight per salesunit:</label>
                     </td>
                     <td colspan="3">
-                        <input type="number" class="form-control" id="gross_weight" value="113" disabled>
+                        <input type="number" class="form-control" id="gross_weight" value="@Article.GrossWeightPrSalesunit" disabled>
                     </td>
                     <td>
                         <label class="center-for-units" for="gross_weight">kg</label>
@@ -391,7 +393,7 @@
                         <label for="carton_pr_pallet">Cartons per pallet:</label>
                     </td>
                     <td colspan="5">
-                        <input type="number" class="form-control" id="carton_pr_pallet" value="1" disabled>
+                        <input type="number" class="form-control" id="@Article.CartonsPerPallet" value="1" disabled>
                     </td>
                     <td>
                         <div></div>
@@ -403,7 +405,7 @@
                         <label for="carton_pr_layer">Cartons per layer:</label>
                     </td>
                     <td colspan="5">
-                        <input type="number" class="form-control" value="1" disabled>
+                        <input type="number" class="form-control" value="@Article.CartonsPerLayer" disabled>
                     </td>
                     <td>
                         <div></div>
@@ -416,7 +418,7 @@
                         <label for="country_origin">Country of origin:</label>
                     </td>
                     <td colspan="5">
-                        <input type="text" class="form-control" value="Denmark" disabled>
+                        <input type="text" class="form-control" value="@Article.CountryOfOrigin" disabled>
                     </td>
                     <td>
                         <div></div>
@@ -428,7 +430,7 @@
                         <label for="imported_from">Imported from:</label>
                     </td>
                     <td colspan="5">
-                        <input type="text" class="form-control" value="Denmark" disabled>
+                        <input type="text" class="form-control" value="@Article.ImportedFrom" disabled>
                     </td>
                     <td>
                         <div></div>
@@ -440,7 +442,7 @@
                         <label for="toll_tarrif_no">Toll-tarrif no:</label>
                     </td>
                     <td colspan="5">
-                        <input type="number" class="form-control" id="toll_tarrif_no" value="2" disabled>
+                        <input type="number" class="form-control" id="toll_tarrif_no" value="@Article.TollTarifNumber" disabled>
                     </td>
                     <td>
                         <div></div>
@@ -452,7 +454,7 @@
                         <label for="minimum_order_quantity">Minimum order quantity:</label>
                     </td>
                     <td colspan="5">
-                        <input type="number" class="form-control" id="minimum_order_quantity" value="10" disabled>
+                        <input type="number" class="form-control" id="minimum_order_quantity" value="@Article.MinimumOrderQuantity" disabled>
                     </td>
                     <td>
                         <div></div>
@@ -472,7 +474,7 @@
                     </td>
                     <td>
                         <div class="text-left">
-                            <input type="number" class="form-control" id="min" value="2" disabled>
+                            <input type="number" class="form-control" id="min" value="@Article.TemperatureTransportationMin" disabled>
                         </div>
                     </td>
                     <td>
@@ -487,7 +489,7 @@
                     </td>
                     <td>
                         <div class="text-left">
-                            <input type="number" class="form-control" id="max" value="4" disabled>
+                            <input type="number" class="form-control" id="max" value="@Article.TemperatureTransportationMax" disabled>
                         </div>
                     </td>
                     <td>
@@ -508,7 +510,7 @@
                     </td>
                     <td>
                         <div class="text-left">
-                            <input type="number" class="form-control" id="min" value="5" disabled>
+                            <input type="number" class="form-control" id="min" value="@Article.TemperatureStorageMin" disabled>
                         </div>
                     </td>
                     <td>
@@ -523,7 +525,7 @@
                     </td>
                     <td>
                         <div class="text-left">
-                            <input type="number" class="form-control" id="max" value="2" disabled>
+                            <input type="number" class="form-control" id="max" value="@Article.TemperatureStorageMax" disabled>
                         </div>
                     </td>
                     <td>
@@ -538,7 +540,7 @@
                         <label for="lead_time">Lead time:</label>
                     </td>
                     <td colspan="5">
-                        <input type="number" class="form-control" id="lead_time" value="5" disabled>
+                        <input type="number" class="form-control" id="lead_time" value="@Article.LeadTime" disabled>
                     </td>
                     <td>
                         <div class="text-right">
@@ -565,7 +567,7 @@
                         <label for="set_currency">Set currency:</label>
                     </td>
                     <td colspan="5">
-                        <input type="text" class="form-control" id="purchase_price" value="DKK" disabled>
+                        <input type="text" class="form-control" id="purchase_price" value="@Article.SetCurrency" disabled>
                     </td>
                     <td>
                         <div></div>
@@ -577,7 +579,7 @@
                         <label for="purchase_price">Purchase price:</label>
                     </td>
                     <td colspan="5">
-                        <input type="number" class="form-control" id="purchase_price" value="100" disabled>
+                        <input type="number" class="form-control" id="purchase_price" value="@Article.PurchasePrice" disabled>
                     </td>
                     <td>
                         <div></div>
@@ -590,10 +592,10 @@
                     </td>
                     <td colspan="5">
                         <div class="text-center">
-                            <input type="radio" name="organic" id="yes" value="yes" data-toggle="collapse" data-target="#hideOrganic:not(.show)" aria-expanded="false" aria-controls="hideOrganic" checked="checked" disabled>
+                            <input type="radio" name="organic" id="yes" value="yes" data-toggle="collapse" data-target="#hideOrganic:not(.show)" aria-expanded="false" aria-controls="hideOrganic" checked="@(Article.OtherCosts == 1)" @onchange="@(() => Article.OtherCosts = 1)" disabled>
                             <label for="yes">Yes</label>
                             &nbsp;
-                            <input type="radio" name="organic" id="no" value="no" data-toggle="collapse" data-target="#hideOrganic.show" aria-expanded="false" aria-controls="hideOrganic" disabled>
+                            <input type="radio" name="organic" id="no" value="no" data-toggle="collapse" data-target="#hideOrganic.show" aria-expanded="false" aria-controls="hideOrganic" checked="@(Article.OtherCosts == 2)" @onchange="@(() => Article.OtherCosts = 2)" disabled>
                             <label for="no">No</label>
                         </div>
                     </td>
@@ -601,7 +603,7 @@
                         <div></div>
                     </td>
                 </tr>
-                @if (OtherCost == "yes")
+                @if (Article.OtherCosts == 1)
                 {
                         @for (int i = 1; i <= NumberOfOtherCosts; i++)
                         {
@@ -612,7 +614,7 @@
                                 </td>
 
                                 <td colspan="2">
-                                    <select class="form-control" name="afgift-@i" required>
+                                    <select class="form-control" name="afgift-@i" @bind="Article.InformCostType" required>
                                         <option disabled selected>-- select an option --</option>
                                         <option>Chokoladeafgift</option>
                                         <option>Miljøafgift</option>
@@ -620,7 +622,7 @@
                                     </select>
                                 </td>
                                 <td colspan="2">
-                                    <label for="amount-@i">Amount in @Currency:</label>
+                                    <label for="amount-@i">Amount in @Article.SetCurrency:</label>
                                 </td>
                                 <td colspan="2">
                                     <input type="number" class="form-control" name="amount-@i">
@@ -632,7 +634,7 @@
                         <tr>
                             <td colspan="3"></td>
                             <td colspan="2" class="text-right">
-                                <label class="text-right" for="totalAmount">Total amount in @Currency</label>
+                                <label class="text-right" for="totalAmount">Total amount in @Article.SetCurrency</label>
                             </td>
                             <td>
                                 <label>150</label>
@@ -647,10 +649,10 @@
                     <input type="submit" class="btn cancel-button button-size" value="Back" @onclick="GoBack" />
                 </div>
                 <div class="text-left col-6">
-                    <input type="submit" class="btn green-button button-size" value="Submit" @onclick="Submit" />
+                    <input type="submit" class="btn green-button button-size" value="Submit"/>
                 </div>
             </div>
-        </form>
+        </EditForm>
         @*</fieldset>*@
     </div>
 </div>
@@ -659,12 +661,12 @@
 {
     public void Submit()
     {
-    NavigationManager.NavigateTo($"/submission_accepted", true);
+        NavigationManager.NavigateTo($"/submission_accepted", true);
     }
 
     public void GoBack()
     {
-    NavigationManager.NavigateTo($"/price_info_form", true);
+        NavigationManager.NavigateTo($"/price_info_form", true);
     }
 
 }

@@ -47,6 +47,7 @@
             <Column TableItem="Article" Title="Valid for customer " Field="@(x => x.VailedForCustomer)" Sortable="true" />
             <Column TableItem="Article" Title="Purchaser email " Field="@(x => x.Purchaser.Profile.Username)" Sortable="true" />
             <Column TableItem="Article" Title="State " Field="@(x => x.ArticleState)" Class="text-center" Width="100px" DefaultSortColumn="true" Sortable="true" >
+
                 <Template>
                     <div class="@Classes.Shared.StateDictionary[context.ArticleState].ToLower()-state state">@Classes.Shared.StateDictionary[context.ArticleState]</div>
                 </Template>

@@ -385,6 +385,25 @@ namespace HAVI_app.Data
             context.CompanyCodes.AddRange(codes);
             context.SaveChanges();
 
+            List<SupplierDeliveryUnit> units = new List<SupplierDeliveryUnit>();
+
+            using (TextFieldParser parser = new TextFieldParser(@"./Data/DeliveryUnit.csv"))
+            {
+                parser.TextFieldType = FieldType.Delimited;
+                parser.SetDelimiters(";");
+                while (!parser.EndOfData)
+                {
+                    string[] fields = parser.ReadFields();
+                    foreach (string field in fields)
+                    {
+                        units.Add(new SupplierDeliveryUnit { Unit = field, CountryId = 1 });
+                    }
+                }
+            }
+
+            context.SupplierDeliveryUnits.AddRange(units);
+            context.SaveChanges();
+
             Console.WriteLine("Database created!");
         }
     }

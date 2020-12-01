@@ -18,13 +18,12 @@ namespace HAVI_app.Services.Classes
 
         public async Task<List<SupplierDeliveryUnit>> GetSupplierDeliveryUnits(int id)
         {
-            return await httpClient.GetFromJsonAsync<List<SupplierDeliveryUnit>>($"/api/supplierDeliveryUnits/country/{id}");
+            return await httpClient.GetFromJsonAsync<List<SupplierDeliveryUnit>>($"/api/SuppliersDeliveryUnits/country/{id}");
         }
 
-        public async Task<SupplierDeliveryUnit> CreateSupplierDeliveryUnit(SupplierDeliveryUnit unit)
+        public async void CreateSupplierDeliveryUnit(SupplierDeliveryUnit unit)
         {
-            var result = await httpClient.PostAsJsonAsync("/api/supplierDeliveryUnits", unit);
-            return await result.Content.ReadAsAsync<SupplierDeliveryUnit>();
+            await httpClient.PostAsJsonAsync("/api/supplierDeliveryUnits", unit);
         }
 
         public async void DeleteSupplierDeliveryUnit(int id)
@@ -32,10 +31,9 @@ namespace HAVI_app.Services.Classes
             await httpClient.DeleteAsync($"/api/supplierDeliveryUnits/{id}");
         }
 
-        public async Task<SupplierDeliveryUnit> UpdateSupplierDeliveryUnit(int id, SupplierDeliveryUnit unit)
+        public async void UpdateSupplierDeliveryUnit(int id, SupplierDeliveryUnit unit)
         {
-            var result = await httpClient.PutAsJsonAsync($"/api/supplierDeliveryUnits/{id}", unit);
-            return await result.Content.ReadAsAsync<SupplierDeliveryUnit>();
+            await httpClient.PutAsJsonAsync($"/api/supplierDeliveryUnits/{id}", unit);
         }
     }
 }

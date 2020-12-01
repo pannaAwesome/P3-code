@@ -1,1 +1,29 @@
-﻿@page "/article_completed_view"
+﻿@page "/article_completed_view/{ArticleId:int}/{Username:string}"
+@layout HAVI_app.Shared.Purchaser_layout.Article_edit_layout
+
+<ul class="nav nav-tabs" id="myTabJust" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active navtabs-background" id="HAVI-tab-just" data-toggle="tab" href="#HAVI-just" role="tab" aria-controls="HAVI-just"
+           aria-selected="true"><small class="nav-text">HAVI Only</small></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link navtabs-background" id="Supplier-tab-just" data-toggle="tab" href="#Supplier-just" role="tab" aria-controls="Supplier-just"
+           aria-selected="false"><small class="nav-text">Supplier info</small></a>
+    </li>
+</ul>
+<div class="tab-content background-tabs" id="myTabContentJust">
+    <div class="tab-pane fade show active" id="HAVI-just" role="tabpanel" aria-labelledby="HAVI-tab-just">
+        <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Havi_only_collection Username="Username" ArticleId="ArticleId" />
+    </div>
+    <div class="tab-pane fade" id="Supplier-just" role="tabpanel" aria-labelledby="Supplier-tab-just">
+        <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_collection ArticleId="ArticleId" />
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public string Username { get; set; }
+
+    [Parameter]
+    public int ArticleId { get; set; }
+}

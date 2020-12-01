@@ -28,6 +28,7 @@ namespace HAVI_app.Models
         public int InternalArticalInformationCompleted { get; set; }
         public int ArticleState { get; set; }
         public int ErrorReported { get; set; }
+        public string ErrorField { get; set; }
         public string ErrorMessage { get; set; }
         public string ErrorOwner { get; set; }
 

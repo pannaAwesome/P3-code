@@ -20,16 +20,14 @@ namespace HAVI_app.Services.Classes
             return await httpClient.GetFromJsonAsync<List<Iloscategory>>($"/api/ilosCategories/country/{id}");
         }
 
-        public async Task<Iloscategory> CreateILOSCategory(Iloscategory ilosCategory)
+        public async void CreateILOSCategory(Iloscategory ilosCategory)
         {
-            var result = await httpClient.PostAsJsonAsync("/api/ilosCategories", ilosCategory);
-            return await result.Content.ReadAsAsync<Iloscategory>();
+            await httpClient.PostAsJsonAsync("/api/ilosCategories", ilosCategory);
         }
 
-        public async Task<Iloscategory> UpdateILOSCategory(int id, Iloscategory ilosCategory)
+        public async void UpdateILOSCategory(int id, Iloscategory ilosCategory)
         {
-            var result = await httpClient.PutAsJsonAsync($"/api/ilosCategories/{id}", ilosCategory);
-            return await result.Content.ReadAsAsync<Iloscategory>();
+            await httpClient.PutAsJsonAsync($"/api/ilosCategories/{id}", ilosCategory);
         }
 
         public async void DeleteILOSCategory(int id)

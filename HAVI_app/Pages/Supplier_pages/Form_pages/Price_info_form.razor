@@ -1,6 +1,8 @@
 ﻿@layout HAVI_app.Shared.Supplier_layout.Form_layout
 @inject Microsoft.AspNetCore.Components.NavigationManager NavigationManager
 @page "/price_info_form"
+@inject Models.ArticleInformation Article
+@inject HAVI_app.Services.Classes.SetCurrencyService SetCurrencyService
 
 <HAVI_app.Shared.Supplier_layout.Form_header SupplierState="filled" ArticleState="filled" MeasurementState="filled" ShipmentState="filled" PriceState="active" />
 
@@ -14,7 +16,7 @@
 
 <div class="justify-content-center row">
     <div class="col-12 d-flex justify-content-center">
-        <form>
+        <EditForm Model="Article" OnSubmit="@OnPostForward">
             <table class="table">
 
                 <tr>
@@ -22,10 +24,11 @@
                         <label for="set_currency" class="required">Set currency:</label>
                     </td>
                     <td colspan="4">
-                        <select class="form-control" name="set_currency" required @onchange="@((x) => CurrencySelected(x.Value.ToString()))">
-                            <option>DKK</option>
-                            <option>ADP</option>
-                            <option>USD</option>
+                        <select class="form-control" name="set_currency" @bind="Article.SetCurrency" required>
+                            @foreach (var item in contries)
+                            {
+                                <option>@item</option>
+                            }
                         </select>
                     </td>
                     <td>
@@ -41,7 +44,7 @@
                         <label for="purchase_price" class="required">Purchase price:</label>
                     </td>
                     <td colspan="4">
-                        <input type="number" class="form-control" name="purchase_price" required>
+                        <input type="number" class="form-control" name="purchase_price" @bind="Article.PurchasePrice"required maxlength="10">
                     </td>
                     <td>
                         <HAVI_app.Shared.Shared_layout.Questionmark_top>
@@ -53,15 +56,15 @@
 
                 <tr>
                     <td>
-                        <label for="other_cost" class="required" value="@CostRegardingArticle">Other cost regarding the article?</label>
+                        <label for="other_cost" class="required" value="@CostRegardingArticle">Other cost regarding the article? </label>
                     </td>
 
                     <td colspan="4">
                         <div class="text-center">
-                            <input type="radio" name="organic" value="yes" @onchange="@((x) => AddOtherCost(x.Value.ToString()))">
+                            <input type="radio" name="organic" value="yes" @onchange="@((x) => AddOtherCost(x.Value.ToString()))" checked="@(Article.OtherCosts == 1)" @oninput="(() => Article.OtherCosts = 1)" required>
                             <label for="yes">Yes</label>
                             &nbsp;
-                            <input type="radio" name="organic" value="no">
+                            <input type="radio" name="organic" value="no" checked="@(Article.OtherCosts == 2)" @onchange="@(() => Article.OtherCosts = 2)"/>
                             <label for="no">No</label>
                         </div>
                     </td>
@@ -73,7 +76,7 @@
                     </td>
                 </tr>
             </table>
-            @if (OtherCost == "yes")
+            @if (Article.OtherCosts == 1)
             {
                 <table>
                     @for (int i = 1; i <= NumberOfOtherCosts; i++)
@@ -85,7 +88,7 @@
                             </td>
 
                             <td>
-                                <select class="form-control" name="afgift-@i" required>
+                                <select class="form-control" name="afgift-@i" @bind="Article.OtherCosts" required>
                                     <option disabled selected>-- select an option --</option>
                                     <option>Chokoladeafgift</option>
                                     <option>Miljøafgift</option>
@@ -93,10 +96,10 @@
                                 </select>
                             </td>
                             <td>
-                                <label for="amount-@i">Amount in @Currency:</label>
+                                <label for="amount-@i">Amount in @Article.SetCurrency:</label>
                             </td>
                             <td>
-                                <input type="number" class="form-control" name="amount-@i" required @onblur="Sum">
+                                <input type="number" class="form-control" name="amount-@i" @bind="Article.AmountInCurrency" required @onblur="Sum" maxlength="10">
                             </td>
                             @if (i == NumberOfOtherCosts)
                             {
@@ -113,7 +116,7 @@
                     <tr>
                         <td colspan="1"></td>
                         <td colspan="2" class="text-right">
-                            <label class="text-right" for="totalAmount">Total amount in @Currency</label>
+                            <label class="text-right" for="totalAmount">Total amount in @Article.SetCurrency</label>
                         </td>
                         <td>
                             <label>@TotalAmount</label>
@@ -123,22 +126,26 @@
             }
             <div class="row justify-content-center">
                 <div class="text-right col-6">
-                    <input type="submit" class="btn cancel-button button-size" value="Back" @onclick="OnPostBack" />
+                    <input type="button" class="btn cancel-button button-size" value="Back" @onclick="OnPostBack" />
                 </div>
                 <div class="text-left col-6">
-                    <input type="submit" class="btn green-button button-size" value="Next" @onclick="OnPostForward" />
+                    <input type="submit" class="btn green-button button-size" value="Next"/>
                 </div>
             </div>
-        </form>
+        </EditForm>
     </div>
 </div>
 
 @code {
+
     [Parameter]
     public string SetCurrency { get; set; }
 
     [Parameter]
     public int PurchasePrice { get; set; }
+
+    [Parameter]
+    public int AmountInCurrency { get; set; }
 
     [Parameter]
     public string CostRegardingArticle { get; set; }
@@ -150,9 +157,12 @@
 }
 
 @code{
+    List<SetCurrency> contries;
+
     public void OnPostForward()
     {
         NavigationManager.NavigateTo($"/confirm_details", true);
+
     }
 
     public void OnPostBack()
@@ -160,39 +170,38 @@
         NavigationManager.NavigateTo($"/shipment_info_form", true);
     }
 
-    private string Currency = "DKK";
-
-    private void CurrencySelected(string currency)
+    protected override async Task OnInitializedAsync()
     {
-        Currency = currency;
+        contries = await SetCurrencyService.GetSetCurrencies();
     }
 
     private int NumberOfOtherCosts = 1;
 
     private string ExtraCosts = "";
 
-    private string OtherCost = "no";
+    //private string OtherCost = "no";
 
     private void AddOtherCost(string othercostvalue)
     {
         if (othercostvalue == "yes")
         {
-            OtherCost = "yes";
+            //OtherCost = "yes";
         }
         else
         {
-            OtherCost = "no";
+            //OtherCost = "no";
         }
     }
 
     private void AddExtraCosts()
     {
         NumberOfOtherCosts++;
+
     }
 
     private void RemoveExtraCosts()
     {
-        if(NumberOfOtherCosts != 1)
+        if(NumberOfOtherCosts != 0)
         {
             NumberOfOtherCosts--;
         }
