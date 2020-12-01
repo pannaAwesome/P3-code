@@ -12,7 +12,6 @@ namespace HAVI_app.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = "admin")]
     public class CountriesController : ControllerBase
     {
         private readonly CountryRepository _countryRepository;
@@ -42,7 +41,7 @@ namespace HAVI_app.Api.Controllers
             }
         }
 
-        [HttpGet("{name:string}")]
+        [HttpGet("{name}")]
         public async Task<ActionResult<Country>> GetCountryWithName(string name)
         {
             try
