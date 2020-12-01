@@ -165,7 +165,7 @@
         if(supplierObject != null)
         {
             var user = await SupplierService.CreateSupplier(supplierObject);
-            NavigationManager.NavigateTo($"/overview_supplier/{user.Id}");
+            NavigationManager.NavigateTo($"/overview_supplier/{user.Id}", true);
         }
     }
 }

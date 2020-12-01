@@ -62,7 +62,7 @@
         if (user != null && user.Usertype == 1 && user.Password == Password)
         {
             Purchaser purchaser = await PurchaserService.GetPurchaserForProfile(user.Id);
-            NavigationManager.NavigateTo($"/overview_purchaser/{purchaser.Id}");
+            NavigationManager.NavigateTo($"/overview_purchaser/{purchaser.Id}", true);
         }
         else
         {
