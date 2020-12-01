@@ -1,4 +1,5 @@
-﻿<div class="col-12 havi-info-box">
+﻿@inherits ShipmentInformation 
+<div class="col-12 havi-info-box">
 
     <div class="row justify-content-right">
         <div class="col-11">
@@ -16,13 +17,15 @@
 
         </div>
     </div>    
+    @if (Article != null)
+    {
     <table class="table table-borderless">
         <tr class="@CartonsPerPallet">
             <td colspan="3">
                 <label for="carton_pr_pallet">Cartons per pallet:</label>
             </td>
             <td colspan="3">
-                <input type="number" class="form-control" id="carton_pr_pallet" value="1" disabled>
+                <input type="number" class="form-control" id="carton_pr_pallet" @bind="Article.ArticleInformation.CartonsPerPallet" disabled>
             </td>
         </tr>
 
@@ -31,7 +34,7 @@
                 <label for="carton_pr_layer">Cartons per layer:</label>
             </td>
             <td colspan="3">
-                <input type="number" class="form-control" value="1" disabled>
+                <input type="number" class="form-control" @bind="Article.ArticleInformation.CartonsPerLayer" disabled>
             </td>
         </tr>
 
@@ -41,7 +44,7 @@
                 <label for="country_origin">Country of origin:</label>
             </td>
             <td colspan="3">
-                <input type="text" class="form-control" value="Denmark" disabled>
+                <input type="text" class="form-control" @bind="Article.ArticleInformation.CountryOfOrigin" disabled>
             </td>
         </tr>
 
@@ -50,7 +53,7 @@
                 <label for="imported_from">Imported from:</label>
             </td>
             <td colspan="3">
-                <input type="text" class="form-control" value="Denmark" disabled>
+                <input type="text" class="form-control" @bind="Article.ArticleInformation.ImportedFrom" disabled>
             </td>
         </tr>
 
@@ -59,7 +62,7 @@
                 <label for="toll_tarrif_no">Toll-tarrif no:</label>
             </td>
             <td colspan="3">
-                <input type="number" class="form-control" id="toll_tarrif_no" value="2" disabled>
+                <input type="number" class="form-control" id="toll_tarrif_no" @bind="Article.ArticleInformation.TollTarifNumber" disabled>
             </td>
         </tr>
 
@@ -68,7 +71,7 @@
                 <label for="minimum_order_quantity">Minimum order quantity:</label>
             </td>
             <td colspan="3">
-                <input type="number" class="form-control" id="minimum_order_quantity" value="10" disabled>
+                <input type="number" class="form-control" id="minimum_order_quantity" @bind="Article.ArticleInformation.MinimumOrderQuantity" disabled>
             </td>
         </tr>
 
@@ -82,7 +85,7 @@
                     <label class="center-for-units" for="min">Min:</label>
             </td>
             <td>
-                    <input type="number" class="form-control" id="min" value="2" disabled>
+                    <input type="number" class="form-control" id="min" @bind="Article.ArticleInformation.TemperatureTransportationMin" disabled>
             </td>
             <td>
                     <label class="center-for-units" for="degrees">&#8451;</label>
@@ -91,7 +94,7 @@
                     <label class="center-for-units" for="max">Max:</label>
             </td>
             <td>
-                    <input type="number" class="form-control" id="max" value="4" disabled>
+                    <input type="number" class="form-control" id="max" @bind="Article.ArticleInformation.TemperatureTransportationMax" disabled>
             </td>
             <td>
                     <label class="center-for-units" for="degrees">&#8451;</label>
@@ -108,7 +111,7 @@
                     <label class="center-for-units" for="min">Min:</label>
             </td>
             <td>
-                    <input type="number" class="form-control" id="min" value="5" disabled>
+                    <input type="number" class="form-control" id="min" @bind="Article.ArticleInformation.TemperatureStorageMin" disabled>
             </td>
             <td>
                     <label class="center-for-units" for="degrees">&#8451;</label>
@@ -117,7 +120,7 @@
                     <label class="center-for-units" for="max">Max:</label>
             </td>
             <td>
-                    <input type="number" class="form-control" id="max" value="2" disabled>
+                    <input type="number" class="form-control" id="max"  @bind="Article.ArticleInformation.TemperatureStorageMax" disabled>
             </td>
             <td>
                     <label class="center-for-units" for="degrees">&#8451;</label>
@@ -129,7 +132,7 @@
                 <label for="lead_time">Lead time:</label>
             </td>
             <td colspan="2">
-                <input type="number" class="form-control" id="lead_time" value="5" disabled>
+                <input type="number" class="form-control" id="lead_time" @bind="Article.ArticleInformation.LeadTime" disabled>
             </td>
             <td colspan="2">
                 <div class="text-right">
@@ -137,7 +140,7 @@
                 </div>
             </td>
         </tr>
-    </table>
+    </table>}
 </div>
 
 @code {
@@ -169,15 +172,5 @@
     [Parameter]
     public string LeadTime { get; set; }
 
-    private bool EditingFields = false;
-
-    private void Editing()
-    {
-        EditingFields = true;
-    }
-
-    private void Saving()
-    {
-        EditingFields = false;
-    }
+    
 }

@@ -42,7 +42,7 @@
         <Table TableItem="SupplierInfo" Items="supplierdata" ColumnReorder="true" TableHeadClass="blue-tabel-header" TableClass="table table-hover" TableRowClass="@(x => x.RowClass)" RowClickAction="RowClicked" SelectionType="selectionType" SelectedItems="selectedItems" ShowSearchBar="true">
             <Column TableItem="SupplierInfo" Title="Article no." Field="@(x => x.ArticleNumber)" Sortable="true" />
             <Column TableItem="SupplierInfo" Title="Article name" Field="@(x => x.ArticleName)" Sortable="true" />
-            <Column TableItem="SupplierInfo" Title="Vailed for customer" Field="@(x => x.VailedForCustomer)" Sortable="true" />
+            <Column TableItem="SupplierInfo" Title="Valid for customer" Field="@(x => x.ValidForCustomer)" Sortable="true" />
             <Column TableItem="SupplierInfo" Title="HAVI employee" Field="@(x => x.HAVIEmployee)" Sortable="true" />
             <Column TableItem="SupplierInfo" Title="Date created" Field="@(x => x.DateCreated)" Sortable="true">
                 <Template>
@@ -112,11 +112,11 @@
 
     public class SupplierInfo
     {
-        public SupplierInfo(int articlenumber, string articlename, string vailedforcustomer, string haviemployee, DateTime datecreated, string state)
+        public SupplierInfo(int articlenumber, string articlename, string validforcustomer, string haviemployee, DateTime datecreated, string state)
         {
             ArticleNumber = articlenumber;
             ArticleName = articlename;
-            VailedForCustomer = vailedforcustomer;
+            ValidForCustomer = validforcustomer;
             HAVIEmployee = haviemployee;
             DateCreated = datecreated;
             State = state;
@@ -124,7 +124,7 @@
 
         public int ArticleNumber { get; set; }
         public string ArticleName { get; set; }
-        public string VailedForCustomer { get; set; }
+        public string ValidForCustomer { get; set; }
         public string HAVIEmployee { get; set; }
         public DateTime DateCreated { get; set; }
         public string State { get; set; }

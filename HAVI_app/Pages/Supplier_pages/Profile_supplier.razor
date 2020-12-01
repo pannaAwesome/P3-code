@@ -1,8 +1,16 @@
 ﻿@inject NavigationManager NavigationManager
-@page "/profile_supplier"
+@inherits ProfileSupplier
+@page "/profile_supplier/{supplierId:int}"
 
 @layout HAVI_app.Shared.Supplier_layout.Profile_layout
 
+@if(Supplier == null || Supplier.Profile == null){
+<div class="spinner">
+    <div class="bounce1"></div>
+    <div class="bounce2"></div>
+    <div class="bounce3"></div>
+</div>
+}else{
 <div class="row align-content-center">
     <div class="col-1"></div>
     <div class="col-10 white-box header">
@@ -23,7 +31,7 @@
                                 <label for="email">Email:</label>
                             </td>
                             <td>
-                                <input type="email" class="form-control" name="email" value="supplier@@mail.com" required>
+                                <input type="email" class="form-control" name="email" @bind="@Supplier.Profile.Username" required>
                             </td>
                             <td>
                                 <div></div>
@@ -47,7 +55,7 @@
                                 <label for="company_name">Company Name:</label>
                             </td>
                             <td>
-                                <input type="text" class="form-control" name="company_name" value="Company Name" required>
+                                <input type="text" class="form-control" name="company_name" @bind="@Supplier.CompanyName" required>
                             </td>
                             <td>
                                 <div></div>
@@ -59,7 +67,7 @@
                                 <label for="company_location" >Company's Location:</label>
                             </td>
                             <td>
-                                <input type="text" class="form-control" name="company_location" value="Company location" required>
+                                <input type="text" class="form-control" name="company_location" @bind="@Supplier.CompanyLocation" required>
                             </td>
                             <td>
                                 <div></div>
@@ -75,14 +83,25 @@
                                     <div class="col-12">
                                         <div class="row">
                                             <div class="col-2"></div>
+                                            @if(Supplier.PalletExchange == 1){
                                             <div class="col-4">
-                                                <input type="radio" name="pallet_exchange" id="yes" value="yes" checked required>
+                                                <input type="radio" name="pallet_exchange" value="1" checked required>
                                                 <label for="yes">Yes</label>
                                             </div>
                                             <div class="col-4">
-                                                <input type="radio" id="no" name="pallet_exchange" required>
+                                                <input type="radio" name="pallet_exchange" value="0" required>
                                                 <label for="no">No</label>
                                             </div>
+                                            }else{
+                                            <div class="col-4">
+                                                <input type="radio" name="pallet_exchange" value="1" required>
+                                                <label for="yes">Yes</label>
+                                            </div>
+                                            <div class="col-4">
+                                                <input type="radio" name="pallet_exchange" value="0" checked required>
+                                                <label for="no">No</label>
+                                            </div>
+                                            }
                                         </div>
                                     </div>
                                 </div>
@@ -100,19 +119,10 @@
                             </td>
                             <td>
                                 <div class="row justify-content-center">
-                                    <div class="col-12">
-                                        <div class="row">
-                                            <div class="col-2"></div>
-                                            <div class="col-4">
-                                                <input type="radio" name="freight_responsibility" id="cip" value="yes" checked required>
-                                                <label for="cip">CIP</label>
-                                            </div>
-                                            <div class="col-4">
-                                                <input type="radio" id="exw" name="freight_responsibility" required>
-                                                <label for="exw">EXW</label>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <select class="form-control" name="salesunit" @bind="@Supplier.FreightResponsibility" required>
+                                        <option>EXW</option>
+                                        <option>CIP</option>
+                                    </select>
                                 </div>
                             </td>
                             <td>
@@ -200,10 +210,10 @@
                                 </div>
                             </div>
                         </div>
-
+}
 @code {
     private void BackToSupplierOverview()
     {
-    NavigationManager.NavigateTo("/overview_supplier", true);
+        NavigationManager.NavigateTo("/overview_supplier", true);
     }
 }

@@ -3,6 +3,7 @@
 @page "/article_info_form"
 @inherits HAVI_app.Classes.Validation
 @inject Models.ArticleInformation Article
+@inject HAVI_app.Services.Classes.SalesUnitService SalesUnitService 
 
 
 <HAVI_app.Shared.Supplier_layout.Form_header SupplierState="filled" ArticleState="active" />
@@ -45,9 +46,18 @@
                     <td>
                         <select class="form-control" name="salesunit" @bind="Article.Salesunit" required>
                             <option disabled selected>-- select an option --</option>
-                            <option>Ark // 225</option>
-                            <option>Bag in box // 204</option>
-                            <option>Bakke // 374</option>
+                            @code{
+
+                                protected override async Task OnInitializedAsync()
+                                {
+                                    var Sales = await SalesUnitService.GetSalesUnits();
+
+                                    foreach (var item in Sales)
+                                    {
+                                        <option>@item</option>
+                                    }
+                                }
+                            }
                         </select>
                     </td>
                     <td>
@@ -157,10 +167,10 @@
 
                     <td>
                         <div class="text-center">
-                            <input type="radio" name="organic" value="yes" required>
+                            <input type="radio" name="Organic_article" value="yes" checked="@(Article.OrganicArticle == 1)" @onchange="@(() => Article.OrganicArticle = 1)" required>
                             <label for="yes">Yes</label>
                             &nbsp;
-                            <input type="radio" value="no" name="organic">
+                            <input type="radio" value="no" name="Organic_article" checked="@(Article.OrganicArticle == 2)" @onchange="@(() => Article.OrganicArticle = 2)">
                             <label for="no">No</label>
                         </div>
                     </td>

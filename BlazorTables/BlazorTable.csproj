@@ -22,7 +22,7 @@
     <Watch Include="..\**\*.razor" />
     <BlazorLinkerDescriptor Include="LinkerConfig.xml" />
     <EmbeddedResource Include="LinkerConfig.xml">
-      <LogicalName>$(MSBuildProjectName).xml</LogicalName>
+      <LogicalName>BlazorTable.xml</LogicalName>
     </EmbeddedResource>
   </ItemGroup>
 
