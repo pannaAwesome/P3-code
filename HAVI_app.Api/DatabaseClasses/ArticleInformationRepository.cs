@@ -52,15 +52,15 @@ namespace HAVI_app.Api.DatabaseClasses
                 result.CountryOfOrigin = articleInformation.CountryOfOrigin;
                 result.DangerousGoods = articleInformation.DangerousGoods;
                 result.Email = articleInformation.Email;
-                result.GrossWeightPerSalesunit = articleInformation.GrossWeightPerSalesunit;
+                result.GrossWeightPrSalesunit = articleInformation.GrossWeightPrSalesunit;
                 result.Gtinnumber = articleInformation.Gtinnumber;
-                result.HeightPerSalesunit = articleInformation.HeightPerSalesunit;
+                result.HeightPrSalesunit = articleInformation.HeightPrSalesunit;
                 result.ImportedFrom = articleInformation.ImportedFrom;
                 result.LeadTime = articleInformation.LeadTime;
-                result.LengthPerSalesunit = articleInformation.LengthPerSalesunit;
+                result.LengthPrSalesunit = articleInformation.LengthPrSalesunit;
                 result.MinimumOrderQuantity = articleInformation.MinimumOrderQuantity;
                 result.MinimumShelflife = articleInformation.MinimumShelflife;
-                result.NetWeightPerSalesunit = articleInformation.NetWeightPerSalesunit;
+                result.NetWeightPrSalesunit = articleInformation.NetWeightPrSalesunit;
                 result.OrganicArticle = articleInformation.OrganicArticle;
                 result.OtherCosts = articleInformation.OtherCosts;
                 result.PurchasePrice = articleInformation.PurchasePrice;
@@ -76,7 +76,7 @@ namespace HAVI_app.Api.DatabaseClasses
                 result.TollTarifNumber = articleInformation.TollTarifNumber;
                 result.TransitTime = articleInformation.TransitTime;
                 result.TransportBooking = articleInformation.TransportBooking;
-                result.WidthPerSalesunit = articleInformation.WidthPerSalesunit;
+                result.WidthPrSalesunit = articleInformation.WidthPrSalesunit;
                 await _context.SaveChangesAsync();
 
                 foreach(OtherCostsForArticle cost in result.OtherCostsForArticles)
