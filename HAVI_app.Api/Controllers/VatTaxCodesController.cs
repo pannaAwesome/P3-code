@@ -28,7 +28,7 @@ namespace HAVI_app.Api.Controllers
                 var result = await _vatTaxCodeRepository.GetVatTaxCodes(id);
                 if (result == null)
                 {
-                    return NotFound();
+                    return null;
                 }
                 return Ok(result);
             }

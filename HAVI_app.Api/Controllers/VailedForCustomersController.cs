@@ -28,7 +28,7 @@ namespace HAVI_app.Api.Controllers
                 var result = await _vailedForCustomerRepository.GetVailedForCustomers(id);
                 if (result == null)
                 {
-                    return NotFound();
+                    return null;
                 }
                 return Ok(result);
             }
@@ -46,7 +46,7 @@ namespace HAVI_app.Api.Controllers
                 var result = await _vailedForCustomerRepository.GetVailedForCustomer(id);
                 if (result == null)
                 {
-                    return NotFound();
+                    return null;
                 }
                 else
                 {

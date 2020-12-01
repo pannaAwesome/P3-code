@@ -28,7 +28,7 @@ namespace HAVI_app.Api.Controllers
                 var result = await _creationCodeRepository.GetCreationCode(id);
                 if (result == null)
                 {
-                    return NotFound();
+                    return null;
                 }
                 else
                 {

@@ -28,7 +28,7 @@ namespace HAVI_app.Api.Controllers
                 var result = await _articleInformationRepository.GetArticleInformation(id);
                 if (result == null)
                 {
-                    return NotFound();
+                    return new ArticleInformation();
                 }
                 else
                 {

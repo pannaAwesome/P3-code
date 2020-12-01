@@ -21,7 +21,7 @@ namespace HAVI_app.Shared.Supplier_layout
         [Inject]
         public ArticleService ArticleService { get; set; }
 
-        public List<Article> Articles;
+        public List<Article> Articles = new List<Article>();
 
         public SelectionType SelectionType;
 

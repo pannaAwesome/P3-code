@@ -27,7 +27,7 @@ namespace HAVI_app.Api.Controllers
                 var result = await _numbersRepository.GetQIPNumbers();
                 if (result == null)
                 {
-                    return NotFound();
+                    return null;
                 }
                 return Ok(result);
             }

@@ -28,7 +28,7 @@ namespace HAVI_app.Api.Controllers
                 var result = await _articleRepository.GetArticlesWithCertainState(state, id);
                 if(result == null)
                 {
-                    return NotFound();
+                    return new ArticleInformation();
                 }
                 return Ok(result);
             }
@@ -46,7 +46,7 @@ namespace HAVI_app.Api.Controllers
                 var result = await _articleRepository.GetArticlesForCountry(id);
                 if(result == null)
                 {
-                    return NotFound();
+                    return null;
                 }
                 return Ok(result);
             }
@@ -64,7 +64,7 @@ namespace HAVI_app.Api.Controllers
                 var result = await _articleRepository.GetArticlesForSupplier(id);
                 if (result == null)
                 {
-                    return NotFound();
+                    return null;
                 }
                 return Ok(result);
             }
@@ -82,7 +82,7 @@ namespace HAVI_app.Api.Controllers
                 var result = await _articleRepository.GetArticle(id);
                 if (result == null)
                 {
-                    return NotFound();
+                    return null;
                 }
                 else
                 {
@@ -103,7 +103,7 @@ namespace HAVI_app.Api.Controllers
                 var result = await _articleRepository.GetArticles();
                 if (result == null)
                 {
-                    return NotFound();
+                    return null;
                 }
                 return Ok(result);
             }

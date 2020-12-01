@@ -52,8 +52,7 @@ namespace HAVI_app.Api.DatabaseClasses
         public async Task<Supplier> GetSupplierWithProfile(int profileId)
         {
             return await _context.Suppliers
-                                 .Where(s => s.ProfileId == profileId)
-                                 .Include(s => s.Profile)
+                                 .Include(p => p.Profile).Where(p => p.Profile.Id == profileId)
                                  .FirstOrDefaultAsync();
         }
 

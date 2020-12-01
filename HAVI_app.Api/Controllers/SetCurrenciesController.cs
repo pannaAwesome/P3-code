@@ -28,7 +28,7 @@ namespace HAVI_app.Api.Controllers
                 var result = await _setCurrencyRepository.GetSetCurrencies();
                 if (result == null)
                 {
-                    return NotFound();
+                    return null;
                 }
                 return Ok(result);
             }

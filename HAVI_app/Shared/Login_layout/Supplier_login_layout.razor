@@ -1,6 +1,5 @@
 ﻿@inject NavigationManager NavigationManager
 @inject HAVI_app.Services.Classes.ProfileService ProfileService
-@inject AuthenticationStateProvider AuthenticationStateProvider
 @inject HAVI_app.Services.Classes.SupplierService SupplierService
 
 <div class="col-12 user-login">
@@ -35,7 +34,7 @@
         <div class="row">
             <div class="col-5"></div>
             <div class="col-2 justify-content-center">
-                <input class="btn green-button" type="submit" name="Submit" value="Sign in" @onclick="LogUsername" />
+                <input class="btn green-button" type="button" name="Submit" value="Sign in" @onclick="LogUsername" />
             </div>
         </div>
     </form>
@@ -48,10 +47,6 @@
 
     [Parameter]
     public string Password { get; set; }
-
-
-    [CascadingParameter]
-    private Task<AuthenticationState> authenticationStateTask { get; set; }
 
     private string _authMessage;
 

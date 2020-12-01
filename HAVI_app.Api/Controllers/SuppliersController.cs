@@ -28,7 +28,7 @@ namespace HAVI_app.Api.Controllers
                 var result = await _supplierRepository.GetSuppliers();
                 if(result == null)
                 {
-                    return NotFound();
+                    return null;
                 }
                 return Ok(result);
             }
@@ -46,7 +46,7 @@ namespace HAVI_app.Api.Controllers
                 var result = await _supplierRepository.GetSupplier(id);
                 if (result == null)
                 {
-                    return NotFound();
+                    return null;
                 }
                 else
                 {
@@ -67,7 +67,7 @@ namespace HAVI_app.Api.Controllers
                 var result = await _supplierRepository.GetSupplierWithProfile(id);
                 if (result == null)
                 {
-                    return NotFound();
+                    return null;
                 }
                 else
                 {
