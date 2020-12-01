@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace HAVI_app.Services.Classes
 {
@@ -18,6 +19,7 @@ namespace HAVI_app.Services.Classes
         {
             this.httpClient = httpClient;
         }
+
         public async Task<Supplier> GetSupplier(int id)
         {
             return await httpClient.GetFromJsonAsync<Supplier>($"/api/suppliers/{id}"); 
