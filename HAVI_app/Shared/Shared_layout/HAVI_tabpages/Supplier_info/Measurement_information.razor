@@ -7,10 +7,12 @@
         @if (EditingFields)
         {
             <div class="save-button" @onclick="Saving"></div>
+            IsDisabled = false;
         }
         else
         {
             <div class="edit-button" @onclick="Editing"></div>
+            IsDisabled = true;
         }
 
     </div>
@@ -21,7 +23,7 @@
             <label for="length">Length per salesunit:</label>
         </td>
         <td>
-            <input type="number" class="form-control" id="Length" value="3" disabled>
+            <input type="number" class="form-control" id="Length" value="3" disabled="@IsDisabled">
         </td>
         <td>
             <label class="center-for-units" for="length">cm</label>
@@ -33,7 +35,7 @@
             <label for="width">Width per salesunit:</label>
         </td>
         <td>
-            <input type="number" class="form-control" id="width" value="12" disabled>
+            <input type="number" class="form-control" id="width" value="12" disabled="@IsDisabled">
         </td>
         <td>
             <label class="center-for-units" for="width">cm</label>
@@ -45,7 +47,7 @@
             <label for="height">Height per salesunit:</label>
         </td>
         <td>
-            <input type="number" class="form-control" id="height" value="10" disabled>
+            <input type="number" class="form-control" id="height" value="10" disabled="@IsDisabled">
         </td>
         <td>
             <label class="center-for-units" for="height">cm</label>
@@ -57,7 +59,7 @@
             <label for="net_weight">Net weight per salesunit:</label>
         </td>
         <td>
-            <input type="number" class="form-control" id="net_weight" value="12" disabled>
+            <input type="number" class="form-control" id="net_weight" value="12" disabled="@IsDisabled">
         </td>
         <td>
             <label class="center-for-units" for="net_weight">kg</label>
@@ -69,7 +71,7 @@
             <label for="gross_weight">Gross weight per salesunit:</label>
         </td>
         <td>
-            <input type="number" class="form-control" id="gross_weight" value="113" disabled>
+            <input type="number" class="form-control" id="gross_weight" value="113" disabled="@IsDisabled">
         </td>
         <td>
             <label class="center-for-units" for="gross_weight">kg</label>
@@ -94,6 +96,8 @@
     [Parameter]
     public string GrossWeight { get; set; }
 
+    protected bool IsDisabled = true;
+    
     private bool EditingFields = false;
 
     private void Editing()

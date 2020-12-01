@@ -7,10 +7,12 @@
             @if (EditingFields)
             {
                 <div class="save-button" @onclick="Saving"></div>
+                IsDisabled = false;
             }
             else
             {
                 <div class="edit-button" @onclick="Editing"></div>
+                IsDisabled = true;
             }
 
         </div>
@@ -32,7 +34,7 @@
                         <label for="purchase_price">Purchase price:</label>
                     </td>
                     <td>
-                        <input type="number" class="form-control" id="purchase_price" value="100" disabled>
+                        <input type="number" class="form-control" id="purchase_price" value="100" disabled="@IsDisabled">
                     </td>
                 </tr>
 
@@ -101,6 +103,8 @@
     private int NumberOfOtherCosts = 1;
 
     private bool EditingFields = false;
+
+    private bool IsDisabled = true;
 
     private void Editing()
     {

@@ -7,10 +7,12 @@
         @if (EditingFields)
         {
             <div class="save-button" @onclick="Saving"></div>
+            IsDisabled = false;
         }
         else
         {
             <div class="edit-button" @onclick="Editing"></div>
+            IsDisabled = true;
         }
 
     </div>
@@ -21,7 +23,7 @@
                 <label for="article_name">Article name:</label>
             </td>
             <td colspan="2">
-                <input type="text" class="form-control" name="article_name" value="Peanuts" disabled>
+                <input type="text" class="form-control" name="article_name" value="Peanuts" disabled="@IsDisabled">
             </td>
         </tr>
 
@@ -36,10 +38,10 @@
 
         <tr class="@ArticlePerSalesunit">
             <td>
-                <label for="salesunit_quantity">Article per salesunit:</label>
+                <label for="salesunit_quantity">Articles per salesunit:</label>
             </td>
             <td colspan="2">
-                <input type="number" class="form-control" name="salesunit_quantity" value="123" disabled>
+                <input type="number" class="form-control" name="salesunit_quantity" value="123" disabled="@IsDisabled">
             </td>
         </tr>
 
@@ -48,7 +50,7 @@
                 <label for="supplier_article_nn">Supplier article number/name:</label>
             </td>
             <td colspan="2">
-                <input type="number" class="form-control" name="article_number_name" value="12312442123" disabled>
+                <input type="number" class="form-control" name="article_number_name" value="12312442123" disabled="@IsDisabled">
             </td>
         </tr>
 
@@ -57,7 +59,7 @@
                 <label for="GTIN">GTIN number:</label>
             </td>
             <td colspan="2">
-                <input type="number" class="form-control" name="GTIN" value="12312312412312" disabled>
+                <input type="number" class="form-control" name="GTIN" value="12312312412312" disabled="@IsDisabled">
             </td>
         </tr>
 
@@ -66,7 +68,7 @@
                 <label for="Shelflife">Shelflife:</label>
             </td>
             <td colspan="2">
-                <input type="number" class="form-control" name="Shelflife" value="2" disabled>
+                <input type="number" class="form-control" name="Shelflife" value="2" disabled="@IsDisabled">
             </td>
             <td>
                 <label class="center-for-units" for="Shelflife">days</label>
@@ -78,7 +80,7 @@
                 <label for="Min_shelflife">Min. shelflife at HAVI:</label>
             </td>
             <td colspan="2">
-                <input type="number" class="form-control" name="Min_shelflife" value="12" disabled>
+                <input type="number" class="form-control" name="Min_shelflife" value="12" disabled="@IsDisabled">
             </td>
             <td>
                 <label class="center-for-units" for="Min_shelflife">days</label>
@@ -129,8 +131,10 @@
     [Parameter]
     public string OrganicArticle { get; set; }
 
+    protected bool IsDisabled = true;
+    
     private bool EditingFields = false;
-
+    
     private void Editing()
     {
         EditingFields = true;
