@@ -1,9 +1,14 @@
 ﻿@layout HAVI_app.Shared.Supplier_layout.Overview_layout
-@inject NavigationManager NavigationManager
-@using Microsoft.AspNetCore.Authorization
 @inherits OverviewSupplier
 @page "/overview_supplier/{Id:int}"
 
+<header>
+    <div class="row heading-overview">
+        <HAVI_app.Shared.Shared_layout.Logo_image />
+        <div class="col-4"></div>
+        <HAVI_app.Shared.Shared_layout.Profile_menu Username="@Profile.Username" OnProfileClickCallback="@NavigateToProfilePage" />
+    </div>
+</header>
 <div class="col-12">
     <div class="row" id="overview-supplier-header">
         <div class="col-5">
@@ -11,19 +16,16 @@
         </div>
         <div class="col-2"></div>
         <div class="col-5 text-right">
-            <a href="#" data-toggle="modal" data-target="#addArticle">
-                <button class="btn dark-green-button">
-                    Add article
-                    <span class="plus-sign-for-button">&#10010</span>
-                </button>
-            </a>
+            <button class="btn dark-green-button" data-toggle="modal" data-target="#addArticle">
+                Add article
+                <span class="plus-sign-for-button">&#10010</span>
+            </button>
         </div>
     </div>
 </div>
 
-<HAVI_app.Shared.Supplier_layout.Overview_table_supplier />
+<HAVI_app.Shared.Supplier_layout.Overview_table_supplier Id="Id"/>
 
-<!-- Form adding an article. Only appears when link is toggeled -->
 <div class="modal fade" id="addArticle" tabindex="-1" role="dialog" aria-labelledby="addArticle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content" id="modal-addArticle">
@@ -37,39 +39,28 @@
                 <form>
                     <div class="form-group">
                         <label for="country">Pick country:</label>
-                        <select class="form-control" name="country">
-                            <option disabled selected>-- select an option --</option>
+                        <select @onchange="@((ChangeEventArgs __e) => { CountryName = __e.Value.ToString(); UpdateFields(); })" class="form-control" name="country">
+                            @foreach (Country country in Countries)
+                            {
+                                <option>@country.CountryName</option>
+                            }
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="selectCustomer">Valid For Customer</label>
-                        <select class="form-control" id="selectCustomer">
-                            @for (int i = 0; i < 5; i++)
+                        <select @bind="ValidForCustomer" class="form-control" id="selectCustomer">
+                            @foreach (VailedForCustomer customer in Customers)
                             {
-                                if (i == 0)
-                                {
-                                    <option disabled selected>-- select an option --</option>
-                                }
-                                else
-                                {
-                                    <option>@i</option>
-                                }
+                                <option>@customer.Customer</option>
                             }
                         </select>
                     </div>
                     <div class="form-group">
                         <label for="haviRecipent">HAVI recipient</label>
-                        <select class="form-control" id="haviRecipent">
-                            @for (int i = 0; i < 5; i++)
+                        <select @bind="PurchaserUsername" class="form-control" id="haviRecipent">
+                            @foreach (Purchaser purchaser in Purchasers)
                             {
-                                if (i == 0)
-                                {
-                                    <option disabled selected>-- select an option --</option>
-                                }
-                                else
-                                {
-                                    <option>@i</option>
-                                }
+                                <option>@purchaser.Profile.Username</option>
                             }
                         </select>
                     </div>

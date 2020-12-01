@@ -2,25 +2,6 @@
 @inject NavigationManager NavigationManager
 
     <div class="container">
-        <header>
-            <div class="row heading-overview">
-                <HAVI_app.Shared.Shared_layout.Logo_image />
-                <div class="col-4"></div>
-
-                <HAVI_app.Shared.Shared_layout.Profile_menu Username="supplier@info.com" OnProfileClickCallback="@NavigateToProfilePage" />
-
-                @code {
-                    void NavigateToProfilePage()
-                    {
-                        NavigationManager.NavigateTo("/profile_supplier/1");
-                    }
-                }
-
-            </div>
-
-        </header>
-    </div>
-    <div class="container">
         @Body
     </div>
 
