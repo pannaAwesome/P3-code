@@ -1,4 +1,6 @@
 ﻿@layout HAVI_app.Shared.Supplier_layout.Overview_layout
+@inject NavigationManager NavigationManager
+@using Microsoft.AspNetCore.Authorization
 @inherits OverviewSupplier
 @page "/overview_supplier/{Id:int}"
 
@@ -19,7 +21,7 @@
     </div>
 </div>
 
-<HAVI_app.Shared.Supplier_layout.Overview_table_supplier/>
+<HAVI_app.Shared.Supplier_layout.Overview_table_supplier />
 
 <!-- Form adding an article. Only appears when link is toggeled -->
 <div class="modal fade" id="addArticle" tabindex="-1" role="dialog" aria-labelledby="addArticle" aria-hidden="true">

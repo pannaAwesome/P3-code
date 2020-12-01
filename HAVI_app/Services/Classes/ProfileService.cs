@@ -29,6 +29,11 @@ namespace HAVI_app.Services.Classes
             return await httpClient.GetFromJsonAsync<Profile>($"/api/profiles/{id}");
         }
 
+        public async Task<Profile> GetProfileByUsernameAndpassword(string username, string password)
+        {
+            return await httpClient.GetFromJsonAsync<Profile>($"/api/profiles/{username}/{password}");
+        }
+
         public async Task<List<Profile>> GetProfiles()
         {
             return await httpClient.GetFromJsonAsync<List<Profile>>("/api/profiles");

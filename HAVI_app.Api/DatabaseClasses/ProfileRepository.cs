@@ -49,6 +49,11 @@ namespace HAVI_app.Api.DatabaseClasses
             return await _context.Profiles.FirstOrDefaultAsync(s => s.Id == profileId);
         }
 
+        public async Task<Profile> GetProfileWithUsernameAndPassword(string username, string password)
+        {
+            return await _context.Profiles.FromSqlRaw($"SELECT * from Profile where Username like '{username}'").FirstOrDefaultAsync();
+        }
+
         public async Task<List<Profile>> GetProfiles()
         {
             return await _context.Profiles.ToListAsync();
