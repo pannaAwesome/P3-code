@@ -18,6 +18,9 @@ namespace HAVI_app.Shared.Purchaser_layout
         [Inject]
         public ArticleService ArticleService { get; set; }
 
+        [Parameter]
+        public int PurchaserId { get; set; }
+
         public List<Article> Articles;
 
         public SelectionType SelectionType;
@@ -56,7 +59,7 @@ namespace HAVI_app.Shared.Purchaser_layout
         {
             if (SelectionType == SelectionType.None && data.ArticleState == (int)ArticleState.Submitted)
             {
-                NavigationManager.NavigateTo($"/article_edit/{data.Id}", true);
+                NavigationManager.NavigateTo($"/article_edit_view/{data.Id}/{data.Purchaser.Profile.Username}", true);
             }
             else
             {

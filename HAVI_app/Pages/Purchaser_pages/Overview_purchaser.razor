@@ -1,6 +1,5 @@
 ﻿@layout HAVI_app.Shared.Purchaser_layout.Overview_layout_purchaser
-@inject NavigationManager NavigationManager
-@page "/overview_purchaser"
+@page "/overview_purchaser/{Id:int}"
 
 <ul class="nav nav-tabs" id="myTabJust" role="tablist">
     <li class="nav-item">
@@ -14,19 +13,14 @@
 </ul>
 <div class="tab-content background-tabs" id="myTabContentJust">
     <div class="tab-pane fade show active" id="HAVI-just" role="tabpanel" aria-labelledby="HAVI-tab-just">
-        <HAVI_app.Shared.Purchaser_layout.Overview_table_supplier_purchaser />
+        <HAVI_app.Shared.Purchaser_layout.Overview_table_supplier_purchaser PurchaserId="Id" />
     </div>
     <div class="tab-pane fade" id="Supplier-just" role="tabpanel" aria-labelledby="Supplier-tab-just">
-        <HAVI_app.Shared.Purchaser_layout.Overview_table_havi_purchaser />
+        <HAVI_app.Shared.Purchaser_layout.Overview_table_havi_purchaser Id="Id" />
     </div>
 </div>
 
 @code{
-
-    private void GenerateCreationCode()
-    {
-        Random random = new Random();
-        long code = random.Next(100, 900) * long.Parse(DateTime.Today.ToString());
-    }
-
+    [Parameter]
+    public int Id { get; set; }
 }

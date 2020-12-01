@@ -59,6 +59,27 @@ namespace HAVI_app.Api.Controllers
             }
         }
 
+        [HttpGet("profile/{id:int}")]
+        public async Task<ActionResult<Supplier>> GetSupplierWithProfile(int id)
+        {
+            try
+            {
+                var result = await _supplierRepository.GetSupplierWithProfile(id);
+                if (result == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    return result;
+                }
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database.");
+            }
+        }
+
         [HttpPost]
         public async Task<ActionResult<Supplier>> CreateSupplier(Supplier supplier)
         {

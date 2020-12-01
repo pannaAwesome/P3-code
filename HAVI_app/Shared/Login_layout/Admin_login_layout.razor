@@ -61,9 +61,9 @@
     {
         var user = await ProfileService.GetProfileByUsernameAndpassword(Username, Password);
 
-        if (user != null && user.Usertype == 0)
+        if (user != null && user.Usertype == 0 && user.Password == Password)
         {
-            NavigationManager.NavigateTo("/overview_admin");
+            NavigationManager.NavigateTo("/overview_admin/1");
         }
         else
         {

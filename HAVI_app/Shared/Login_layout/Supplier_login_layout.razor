@@ -1,6 +1,7 @@
 ﻿@inject NavigationManager NavigationManager
 @inject HAVI_app.Services.Classes.ProfileService ProfileService
 @inject AuthenticationStateProvider AuthenticationStateProvider
+@inject HAVI_app.Services.Classes.SupplierService SupplierService
 
 <div class="col-12 user-login">
     <div class="row justify-content-center">
@@ -58,9 +59,10 @@
     {
         var user = await ProfileService.GetProfileByUsernameAndpassword(Username, Password);
 
-        if (user != null && user.Usertype == 2)
+        if (user != null && user.Usertype == 2 && user.Password == Password)
         {
-            NavigationManager.NavigateTo("/overview_supplier");
+            Supplier supplier = await SupplierService.GetSupplierWithProfile(user.Id);
+            NavigationManager.NavigateTo($"/overview_supplier/{supplier.Id}");
         }
         else
         {

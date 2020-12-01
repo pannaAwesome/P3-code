@@ -23,6 +23,11 @@ namespace HAVI_app.Services.Classes
             return await httpClient.GetFromJsonAsync<Supplier>($"/api/suppliers/{id}"); 
         }
 
+        public async Task<Supplier> GetSupplierWithProfile(int id)
+        {
+            return await httpClient.GetFromJsonAsync<Supplier>($"/api/suppliers/profile/{id}");
+        }
+
         public async Task<List<Supplier>> GetSuppliers()
         {
             return await httpClient.GetFromJsonAsync<List<Supplier>>("/api/suppliers");

@@ -18,6 +18,9 @@ namespace HAVI_app.Shared.Purchaser_layout
         [Inject]
         public ArticleService ArticleService { get; set; }
 
+        [Parameter]
+        public int Id { get; set; }
+
         public List<Article> Articles;
 
         public SelectionType SelectionType;
@@ -54,9 +57,13 @@ namespace HAVI_app.Shared.Purchaser_layout
 
         public void RowClicked(Article data)
         {
-            if (SelectionType == SelectionType.None && data.ArticleState == (int)ArticleState.Submitted)
+            if (SelectionType == SelectionType.None && data.ArticleState == (int)ArticleState.Completed)
             {
-                NavigationManager.NavigateTo($"/article_edit/{data.Id}", true);
+                //NavigationManager.NavigateTo($"/article_completed_view/{data.Id}/{data.Purchaser.Profile.Username}", true);
+            }
+            else if (SelectionType == SelectionType.None && data.ArticleState == (int)ArticleState.Error)
+            {
+                NavigationManager.NavigateTo($"/article_error_view/{data.Id}/{data.Purchaser.Profile.Username}", true);
             }
             else
             {
@@ -67,11 +74,13 @@ namespace HAVI_app.Shared.Purchaser_layout
 
         protected async override Task OnInitializedAsync()
         {
-            var created = await ArticleService.GetArticleWithCertainState(1, (int)ArticleState.Created);
-            var submitted = await ArticleService.GetArticleWithCertainState(1, (int)ArticleState.Submitted);
+            var robot = await ArticleService.GetArticleWithCertainState(1, (int)ArticleState.RobotReady);
+            var error = await ArticleService.GetArticleWithCertainState(1, (int)ArticleState.Error);
+            var completed = await ArticleService.GetArticleWithCertainState(1, (int)ArticleState.Completed);
 
-            Articles.AddRange(created);
-            Articles.AddRange(submitted);
+            Articles.AddRange(robot);
+            Articles.AddRange(error);
+            Articles.AddRange(completed);
         }
 
         public long CreationCode;
