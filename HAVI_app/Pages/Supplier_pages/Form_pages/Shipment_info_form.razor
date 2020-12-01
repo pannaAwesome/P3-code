@@ -56,18 +56,10 @@
                     <td colspan="6">
                         <select class="form-control" name="county_origin" @bind="Article.CountryOfOrigin" required>
                             <option disabled selected>-- select an option --</option>
-                            @code{
-
-                                protected override async Task OnInitializedAsync()
+                                @foreach (var item in contries)
                                 {
-                                    var contries = await ContryService.GetCountries();
-
-                                    foreach (var item in contries)
-                                    {
-                                        <option>@item</option>
-                                    }
+                                    <option>@item</option>
                                 }
-                            }
                         </select>
                     </td>
                     <td>
@@ -85,17 +77,10 @@
                     <td colspan="6">
                         <select class="form-control" name="imported_from" @bind="Article.ImportedFrom" required>
                             <option disabled selected>-- select an option --</option>
-                            @code{
-                                protected async Task OnInitializedAsync2()
+                                @foreach (var item in contries)
                                 {
-                                    var contries = await ContryService.GetCountries();
-
-                                    foreach (var item in contries)
-                                    {
-                                        <option>@item</option>
-                                    }
+                                    <option>@item</option>
                                 }
-                            }
                         </select>
                     </td>
                     <td>
@@ -230,6 +215,8 @@
 
 @code {
 
+    List<Country> contries;
+
     public string CartonPrPalletValidated;
 
     public string CartonPrLayerValidated;
@@ -313,5 +300,10 @@
     void RemoveClassDanger()
     {
         TollTarrifNoValidated = "";
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var contries = await ContryService.GetCountries();
     }
 }

@@ -41,18 +41,10 @@
                     <td>
                         <select class="form-control" name="company_location" @bind="Article.CompanyLocation" required>
                             <option disabled selected>-- select an option --</option>
-                            @code{
-
-                                protected override async Task OnInitializedAsync()
+                                @foreach (var item in contries)
                                 {
-                                    var contries = await ContryService.GetCountries();
-
-                                    foreach (var item in contries)
-                                    {
-                                        <option>@item</option>
-                                    }
+                                    <option>@item</option>
                                 }
-                            }
                         </select>
                     </td>
                     <td>
@@ -263,6 +255,8 @@
 
 @code {
 
+    List<Country> contries;
+
     public string EmailValidated;
 
     public string ClassificationCodeValidated;
@@ -293,5 +287,11 @@
     void RemoveClassDanger()
     {
         ClassificationCodeValidated = "";
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        contries = await ContryService.GetCountries();
+
     }
 }

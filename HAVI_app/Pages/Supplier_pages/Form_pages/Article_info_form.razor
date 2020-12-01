@@ -46,18 +46,10 @@
                     <td>
                         <select class="form-control" name="salesunit" @bind="Article.Salesunit" required>
                             <option disabled selected>-- select an option --</option>
-                            @code{
-
-                                protected override async Task OnInitializedAsync()
+                                @foreach (var item in sales)
                                 {
-                                    var Sales = await SalesUnitService.GetSalesUnits();
-
-                                    foreach (var item in Sales)
-                                    {
-                                        <option>@item</option>
-                                    }
+                                    <option>@item</option>
                                 }
-                            }
                         </select>
                     </td>
                     <td>
@@ -201,6 +193,8 @@
 
 @code{
 
+    List<SalesUnit> sales;
+
     public string ArticleNameValidated;
 
     public string ArticlePerSalesunitValidated;
@@ -235,6 +229,12 @@
     public void OnPostBack()
     {
         NavigationManager.NavigateTo($"/supplier_info_form", true);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        sales = await SalesUnitService.GetSalesUnits();
+
     }
 }
 
