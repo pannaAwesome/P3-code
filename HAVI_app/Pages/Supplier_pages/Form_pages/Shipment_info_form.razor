@@ -253,11 +253,11 @@
             NavigationManager.NavigateTo($"/price_info_form", true);
         }
 
-        if (!IntOnly(Article.CartonsPerPallet))
+        if (!IntOnly(Article.CartonsPerPallet) || !MustNotBeZeroOrNegativeNumbere(Article.CartonsPerPallet))
         {
             CartonPrPalletValidated = "btn-danger";
         }
-        if (!IntOnly(Article.CartonsPerLayer))
+        if (!IntOnly(Article.CartonsPerLayer) || !MustNotBeZeroOrNegativeNumbere(Article.CartonsPerLayer))
         {
             CartonPrLayerValidated = "btn-danger";
         }
@@ -265,7 +265,7 @@
         {
             TollTarrifNoValidated = "btn-danger";
         }
-        if (!DoubleOnly(Article.MinimumOrderQuantity))
+        if (!DoubleOnly(Article.MinimumOrderQuantity) || !MustNotBeZeroOrNegativeNumbere(Article.MinimumOrderQuantity))
         {
             MinimumOrderQuantityValidated = "btn-danger";
         }
@@ -285,7 +285,7 @@
         {
             MaxTemperatureStorageValidated = "btn-danger";
         }
-        if (!IntOnly(Article.LeadTime))
+        if (!IntOnly(Article.LeadTime) || !MustNotBeZeroOrNegativeNumbere(Article.Leadtime))
         {
             LeadTimeValidated = "btn-danger";
         }
