@@ -8,19 +8,19 @@
             <NavLink class="nav-link button-overview-logout" href="/">
                 Logout
             </NavLink>
-            <NavLink class="nav-link button-overview" href="profile_admin">
+            <NavLink class="nav-link button-overview" href="@profile">
                 Profile
             </NavLink>
-            <NavLink class="nav-link button-overview" href="country_view">
+            <NavLink class="nav-link button-overview" href="@country">
                 Country
             </NavLink>
-            <NavLink class="nav-link button-overview" href="user_view">
+            <NavLink class="nav-link button-overview" href="@user">
                 Users
             </NavLink>
-            <NavLink class="nav-link button-overview" href="article_view">
+            <NavLink class="nav-link button-overview" href="@article">
                 Article info
             </NavLink>
-            <NavLink class="nav-link button-overview" href="overview_admin">
+            <NavLink class="nav-link button-overview" href="@overview">
                 Home
             </NavLink>
         </div>
@@ -39,7 +39,13 @@
         </div>
     </div>
 
-    @code {
-        [Parameter]
-        public int Id { get; set; }
-    }
+@code {
+    [Parameter]
+    public static int Id { get; set; }
+
+    public string profile = $"/profile_admin/{Id}";
+    public string country = $"/country_view/{Id}";
+    public string user = $"/user_view/{Id}";
+    public string article = $"/article_view/{Id}";
+    public string overview = $"/overview_admin/{Id}";
+}
