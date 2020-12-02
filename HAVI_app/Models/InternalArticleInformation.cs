@@ -11,9 +11,9 @@ namespace HAVI_app.Models
     {
         public InternalArticleInformation()
         {
-            Bundles = new HashSet<Bundle>();
-            Qips = new HashSet<Qip>();
-            Sapplants = new HashSet<Sapplant>();
+            Bundles = new List<Bundle>();
+            Qips = new List<Qip>();
+            Sapplants = new List<Sapplant>();
         }
 
         [Key]
@@ -53,8 +53,8 @@ namespace HAVI_app.Models
 
         [JsonIgnore]
         public virtual Article Article { get; set; } = null;
-        public virtual ICollection<Bundle> Bundles { get; set; } = null;
-        public virtual ICollection<Qip> Qips { get; set; } = null;
-        public virtual ICollection<Sapplant> Sapplants { get; set; } = null;
+        public virtual List<Bundle> Bundles { get; set; } = null;
+        public virtual List<Qip> Qips { get; set; } = null;
+        public virtual List<Sapplant> Sapplants { get; set; } = null;
     }
 }
