@@ -119,5 +119,24 @@ namespace HAVI_app.Classes
 
             return Convert.ToInt32(ValidatedGTIN);
         }
+
+        public bool MustNotBeZeroOrNegativeNumbere(double? input)
+        {
+            if (input.GetType() == typeof(int))
+            {
+                if (input > 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
     }
 }

@@ -30,7 +30,7 @@
                     </td>
                     <td>
                         <HAVI_app.Shared.Shared_layout.Questionmark_top>
-                            The numerical length of your salesunit
+                            The numerical length of your salesunit. Must not be zero or less
                         </HAVI_app.Shared.Shared_layout.Questionmark_top>
 
                     </td>
@@ -48,7 +48,7 @@
                     </td>
                     <td>
                         <HAVI_app.Shared.Shared_layout.Questionmark_top>
-                            The numerical width of your salesunit
+                            The numerical width of your salesunit. Must not be zero or less
                         </HAVI_app.Shared.Shared_layout.Questionmark_top>
 
                     </td>
@@ -66,7 +66,7 @@
                     </td>
                     <td>
                         <HAVI_app.Shared.Shared_layout.Questionmark_top>
-                            The numerical height of your salesunit
+                            The numerical height of your salesunit. Must not be zero or less
                         </HAVI_app.Shared.Shared_layout.Questionmark_top>
 
                     </td>
@@ -84,7 +84,7 @@
                     </td>
                     <td>
                         <HAVI_app.Shared.Shared_layout.Questionmark_top>
-                            The weight of the content in a salesunit
+                            The weight of the content in a salesunit. Must not be zero or less
                         </HAVI_app.Shared.Shared_layout.Questionmark_top>
 
                     </td>
@@ -102,7 +102,7 @@
                     </td> 
                     <td>
                         <HAVI_app.Shared.Shared_layout.Questionmark_top>
-                            The total weight of the salesunit
+                            The total weight of the salesunit. Must not be zero or less
                         </HAVI_app.Shared.Shared_layout.Questionmark_top>
 
                     </td>
@@ -138,36 +138,36 @@
     public void ValidationMeasurementForm()
     {
 
-        if (DoubleOnly(Article.LengthPrSalesunit) &&
-            DoubleOnly(Article.WidthPrSalesunit) &&
-            DoubleOnly(Article.HeightPrSalesunit) &&
-            DoubleOnly(Article.NetWeightPrSalesunit) &&
-            DoubleOnly(Article.GrossWeightPrSalesunit))
+        if (DoubleOnly(Article.LengthPrSalesunit) && MustNotBeZeroOrNegativeNumbere(Article.LengthPrSalesunit) &&
+            DoubleOnly(Article.WidthPrSalesunit) && MustNotBeZeroOrNegativeNumbere(Article.WidthPrSalesunit) &&
+            DoubleOnly(Article.HeightPrSalesunit) && MustNotBeZeroOrNegativeNumbere(Article.HeightPrSalesunit) &&
+            DoubleOnly(Article.NetWeightPrSalesunit) && MustNotBeZeroOrNegativeNumbere(Article.NetWeightPrSalesunit) &&
+            DoubleOnly(Article.GrossWeightPrSalesunit) && MustNotBeZeroOrNegativeNumbere(Article.GrossWeightPrSalesunit))
         {
             NavigationManager.NavigateTo($"/shipment_info_form", true);
         }
 
-        if (!DoubleOnly(Article.LengthPrSalesunit))
+        if (!DoubleOnly(Article.LengthPrSalesunit) || (!MustNotBeZeroOrNegativeNumbere(Article.LengthPrSalesunit)))
         {
             LengthValidated = "btn-danger";
         }
 
-        if (!DoubleOnly(Article.WidthPrSalesunit))
+        if (!DoubleOnly(Article.WidthPrSalesunit) || (!MustNotBeZeroOrNegativeNumbere(Article.WidthPrSalesunit)))
         {
             WidthValidated = "btn-danger";
         }
 
-        if (!DoubleOnly(Article.WidthPrSalesunit))
+        if (!DoubleOnly(Article.HeightPrSalesunit) || (!MustNotBeZeroOrNegativeNumbere(Article.HeightPrSalesunit)))
         {
             HeightValidated = "btn-danger";
         }
 
-        if (!DoubleOnly(Article.WidthPrSalesunit))
+        if (!DoubleOnly(Article.NetWeightPrSalesunit) || (!MustNotBeZeroOrNegativeNumbere(Article.NetWeightPrSalesunit)))
         {
             NetWeightValidated = "btn-danger";
         }
 
-        if (!DoubleOnly(Article.WidthPrSalesunit))
+        if (!DoubleOnly(Article.GrossWeightPrSalesunit) || (!MustNotBeZeroOrNegativeNumbere(Article.GrossWeightPrSalesunit)))
         {
             GrossWeightValidated = "btn-danger";
         }

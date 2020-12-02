@@ -28,7 +28,7 @@
                     </td>
                     <td>
                         <HAVI_app.Shared.Shared_layout.Questionmark_top>
-                            Enter the amount of cartons one pallet can have
+                            Enter the amount of cartons one pallet can have. Must not be zero or less
                         </HAVI_app.Shared.Shared_layout.Questionmark_top>
 
                     </td>
@@ -43,7 +43,7 @@
                     </td>
                     <td>
                         <HAVI_app.Shared.Shared_layout.Questionmark_top>
-                            Enter the amount of cartons per layer
+                            Enter the amount of cartons per layer. Must not be zero or less
                         </HAVI_app.Shared.Shared_layout.Questionmark_top>
 
                     </td>
@@ -116,7 +116,7 @@
                     </td>
                     <td>
                         <HAVI_app.Shared.Shared_layout.Questionmark_top>
-                            Enter minimum amount of units to order
+                            Enter minimum amount of units to order. Must not be zero or less
                         </HAVI_app.Shared.Shared_layout.Questionmark_top>
 
                     </td>
@@ -194,7 +194,7 @@
                     </td>
                     <td>
                         <HAVI_app.Shared.Shared_layout.Questionmark_top>
-                            Enter the amount of time in days from order initiation until it is delivered
+                            Enter the amount of time in days from order initiation until it is delivered. Must not be zero or less
                         </HAVI_app.Shared.Shared_layout.Questionmark_top>
                     </td>
                 </tr>
@@ -240,15 +240,15 @@
 
     public void ValidationShipmentInfo()
     {
-        if (IntOnly(Article.CartonsPerPallet) &&
-            IntOnly(Article.CartonsPerLayer) &&
+        if (IntOnly(Article.CartonsPerPallet) && MustNotBeZeroOrNegativeNumbere(Article.CartonsPerPallet) &&
+            IntOnly(Article.CartonsPerLayer) && MustNotBeZeroOrNegativeNumbere(Article.CartonsPerLayer) &&
             NumbersLettersDashOnly(Article.TollTarifNumber) &&
-            DoubleOnly(Article.MinimumOrderQuantity) &&
+            DoubleOnly(Article.MinimumOrderQuantity) && MustNotBeZeroOrNegativeNumbere(Article.MinimumOrderQuantity) &&
             DoubleOnly(Article.TemperatureTransportationMin) &&
             DoubleOnly(Article.TemperatureTransportationMax) &&
             DoubleOnly(Article.TemperatureStorageMin) &&
             DoubleOnly(Article.TemperatureStorageMax) &&
-            IntOnly(Article.LeadTime))
+            IntOnly(Article.LeadTime) && MustNotBeZeroOrNegativeNumbere(Article.LeadTime))
         {
             NavigationManager.NavigateTo($"/price_info_form", true);
         }

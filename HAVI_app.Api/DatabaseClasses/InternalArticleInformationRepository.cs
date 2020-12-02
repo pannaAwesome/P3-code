@@ -69,6 +69,7 @@ namespace HAVI_app.Api.DatabaseClasses
                 resultInternalArticleInformation.CompanyCode = internalArticle.CompanyCode;
                 resultInternalArticleInformation.CurrencyRate = internalArticle.CurrencyRate;
                 resultInternalArticleInformation.DepartmentId = internalArticle.DepartmentId;
+                resultInternalArticleInformation.AmountInCurrency = internalArticle.AmountInCurrency;
                 resultInternalArticleInformation.Eannumber = internalArticle.Eannumber;
                 resultInternalArticleInformation.Grinnumber = internalArticle.Grinnumber;
                 resultInternalArticleInformation.Gtinnumber = internalArticle.Gtinnumber;
