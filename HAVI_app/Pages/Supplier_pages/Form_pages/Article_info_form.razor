@@ -68,7 +68,7 @@
                         <label for="article_pr_salesunit" class="required">Articles per salesunit:</label>
                     </td>
                     <td>
-                        <input type="number" class="form-control @ArticlePerSalesunitValidated" name="article_pr_salesunit" @bind="Article.ArticlesPerSalesunit" required maxlength="5">
+                        <input type="text" class="form-control @ArticlePerSalesunitValidated" name="article_pr_salesunit" @bind="Article.ArticlesPerSalesunit" required maxlength="5">
                     </td>
                     <td>
                         <div></div>
@@ -230,7 +230,7 @@
 
     public void OnPostBack()
     {
-        NavigationManager.NavigateTo($"/supplier_info_form", true);
+        NavigationManager.NavigateTo($"/supplier_info_form/{Article.Id}", true);
     }
 
     protected override async Task OnInitializedAsync()
