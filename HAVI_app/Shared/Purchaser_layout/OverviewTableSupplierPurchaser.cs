@@ -77,8 +77,21 @@ namespace HAVI_app.Shared.Purchaser_layout
             var submitted = await ArticleService.GetArticleWithCertainState(1, (int)ArticleState.Submitted);
 
             Articles = new List<Article>();
-            Articles.AddRange(created);
-            Articles.AddRange(submitted);
+            foreach (Article item in created)
+            {
+                if (item.PurchaserId == PurchaserId)
+                {
+                    Articles.Add(item);
+                }
+            }
+
+            foreach (Article item in submitted)
+            {
+                if (item.PurchaserId == PurchaserId)
+                {
+                    Articles.Add(item);
+                }
+            }
         }
 
         public long CreationCode;

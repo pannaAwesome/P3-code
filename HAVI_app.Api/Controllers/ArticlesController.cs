@@ -57,6 +57,24 @@ namespace HAVI_app.Api.Controllers
             }
         }
 
+        [HttpGet("purchaser/{id}")]
+        public async Task<ActionResult> GetArticlesForPurchaser(int id)
+        {
+            try
+            {
+                var result = await _articleRepository.GetArticlesForPurchaser(id);
+                if (result == null)
+                {
+                    return Ok(new List<Article>());
+                }
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database.");
+            }
+        }
+
         [HttpGet("supplier/{id}")]
         public async Task<ActionResult> GetArticlesForSupplier(int id)
         {

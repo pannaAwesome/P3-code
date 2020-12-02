@@ -79,9 +79,30 @@ namespace HAVI_app.Shared.Purchaser_layout
             var completed = await ArticleService.GetArticleWithCertainState(1, (int)ArticleState.Completed);
 
             Articles = new List<Article>();
-            Articles.AddRange(robot);
-            Articles.AddRange(error);
-            Articles.AddRange(completed);
+
+            foreach(Article item in robot)
+            {
+                if(item.PurchaserId == Id)
+                {
+                    Articles.Add(item);
+                }
+            }
+
+            foreach (Article item in error)
+            {
+                if (item.PurchaserId == Id)
+                {
+                    Articles.Add(item);
+                }
+            }
+
+            foreach (Article item in completed)
+            {
+                if (item.PurchaserId == Id)
+                {
+                    Articles.Add(item);
+                }
+            }
         }
     }
 }
