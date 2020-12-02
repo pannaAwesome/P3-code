@@ -57,7 +57,7 @@
                     </td>
                     <td>
                         <HAVI_app.Shared.Shared_layout.Questionmark_top>
-                            Enter the unit in which the article is delivered
+                            Enter the unit in which the article is delivered. This cannot be zero
                         </HAVI_app.Shared.Shared_layout.Questionmark_top>
 
                     </td>
@@ -75,7 +75,7 @@
                     </td>
                     <td>
                         <HAVI_app.Shared.Shared_layout.Questionmark_top>
-                            Enter how many articles are delivered per salesunit
+                            Enter how many articles are delivered per salesunit. This cannot be zero
                         </HAVI_app.Shared.Shared_layout.Questionmark_top>
                     </td>
                 </tr>
@@ -103,7 +103,7 @@
                         <label for="GTIN" class="required">GTIN number:</label>
                     </td>
                     <td>
-                        <input type="number" class="form-control" name="GTIN" @bind="Article.Gtinnumber" required maxlength="14">
+                        <input type="text" class="form-control" name="GTIN" @bind="Article.Gtinnumber" required minlength="14" maxlength="14">
                     </td>
                     <td>
                         <div></div>
@@ -128,7 +128,7 @@
                     </td>
                     <td>
                         <HAVI_app.Shared.Shared_layout.Questionmark_top>
-                            Enter expiration time for the article in days
+                            Enter expiration time for the article in days. This cannot be zero
                         </HAVI_app.Shared.Shared_layout.Questionmark_top>
 
                     </td>
@@ -146,7 +146,7 @@
                     </td>
                     <td>
                         <HAVI_app.Shared.Shared_layout.Questionmark_top>
-                            Enter the least amount of days that HAVI should have the article
+                            Enter the least amount of days that HAVI should have the article. This cannot be zero
                         </HAVI_app.Shared.Shared_layout.Questionmark_top>
 
                     </td>
@@ -192,10 +192,10 @@
 </div>
 
 @code{
-    [Parameter]
-    public int Id { get; set; }
+        [Parameter]
+        public int Id { get; set; }
 
-    List<SalesUnit> sales = new List<SalesUnit>();
+        List<SalesUnit> sales = new List<SalesUnit>();
 
     public string ArticleNameValidated;
 
@@ -215,7 +215,8 @@
     public void ValidationArticleInfoForm()
     {
 
-        if (LettersOnly(Article.ArticleName))
+        if (LettersOnly(Article.ArticleName) && MustNotBeZeroOrNegativeNumbere(Article.ArticlesPerSalesunit) &&
+            MustNotBeZeroOrNegativeNumbere(Article.Shelflife) && MustNotBeZeroOrNegativeNumbere(Article.ShelflifeAtHavi))
         {
             Article.Gtinnumber = GTINValidation(Article.Gtinnumber);
 
@@ -225,6 +226,21 @@
         if (!LettersOnly(Article.ArticleName))
         {
             ArticleNameValidated = "btn-danger";
+        }
+
+        if (!MustNotBeZeroOrNegativeNumbere(Article.ArticlesPerSalesunit))
+        {
+            ArticlePerSalesunitValidated = "btn-danger";
+        }
+
+        if (!MustNotBeZeroOrNegativeNumbere(Article.Shelflife))
+        {
+            ShelflifeValidated = "btn-danger";
+        }
+
+        if (!MustNotBeZeroOrNegativeNumbere(Article.ShelflifeAtHavi))
+        {
+            ShelflifeAtHaviValidated = "btn-danger";
         }
     }
 
