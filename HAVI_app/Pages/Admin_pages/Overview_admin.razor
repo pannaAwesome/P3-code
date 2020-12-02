@@ -1,5 +1,6 @@
 ﻿@layout HAVI_app.Shared.Admin_layout.Overview
 @page "/overview_admin/{Id:int}"
+@inherits OverviewAdmin
 
 <div class="row">
         <HAVI_app.Shared.Shared_layout.Logo_image />
@@ -40,12 +41,6 @@
     </div>
 
 @code {
-    [Parameter]
-    public static int Id { get; set; }
+    
 
-    public string profile = $"/profile_admin/{Id}";
-    public string country = $"/country_view/{Id}";
-    public string user = $"/user_view/{Id}";
-    public string article = $"/article_view/{Id}";
-    public string overview = $"/overview_admin/{Id}";
 }

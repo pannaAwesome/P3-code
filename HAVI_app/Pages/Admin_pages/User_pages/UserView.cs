@@ -11,7 +11,7 @@ namespace HAVI_app.Pages.Admin_pages.User_pages
     public class UserView : ComponentBase
     {
         [Parameter]
-        public static int Id { get; set; }
+        public int Id { get; set; }
 
         [Inject]
         public PurchaserService PurchaserService { get; set; }
@@ -19,11 +19,20 @@ namespace HAVI_app.Pages.Admin_pages.User_pages
         [Inject]
         public NavigationManager NavigationManager { get; set; }
 
-        public string profile = $"/profile_admin/{Id}";
-        public string country = $"/country_view/{Id}";
-        public string user = $"/user_view/{Id}";
-        public string article = $"/article_view/{Id}";
-        public string overview = $"/overview_admin/{Id}";
+        public string profile;
+        public string country;
+        public string user;
+        public string article;
+        public string overview;
+
+        protected override void OnInitialized()
+        {
+            profile = $"/profile_admin/" + Id;
+            country = $"/country_view/{Id}";
+            user = $"/user_view/{Id}";
+            article = $"/article_view/{Id}";
+            overview = $"/overview_admin/{Id}";
+        }
 
         public string Email { get; set; }
 
@@ -37,6 +46,7 @@ namespace HAVI_app.Pages.Admin_pages.User_pages
 
             purchaser.Profile.Username = Email;
             purchaser.Profile.Password = "1234";
+            purchaser.Profile.Usertype = 1;
 
             await PurchaserService.CreatePurchaser(purchaser);
 

@@ -31,9 +31,9 @@
         <div class="col-10">
             <h3>Article Info:</h3>
         </div>
-        <div class="col-md-2">
+        <!--<div class="col-md-2">
             <button class="btn button-options-overview" data-toggle="modal" data-target="#myModal">Transfer order</button>
-        </div>
+        </div>-->
     </div>
     <div class="row">
         <div class="col-12">
@@ -56,7 +56,6 @@
                         <form>
                             <label for="purchaser">Select purchaser:</label>
                             <select class="form-control" name="purchaser" id="purchaser">
-
                             </select>
                         </form>
                     </div>
@@ -74,18 +73,24 @@
 
     @code {
         [Parameter]
-        public static int Id { get; set; }
-
-        public string profile = $"/profile_admin/{Id}";
-        public string country = $"/country_view/{Id}";
-        public string user = $"/user_view/{Id}";
-        public string article = $"/article_view/{Id}";
-        public string overview = $"/overview_admin/{Id}";
+        public int Id { get; set; }
 
         public List<Purchaser> Purchasers { get; set; }
 
-        protected override async Task OnInitializedAsync()
-        {
+        public string profile;
+        public string country;
+        public string user;
+        public string article;
+        public string overview;
 
+        protected async override Task OnInitializedAsync()
+        {
+            profile = $"/profile_admin/" + Id;
+            country = $"/country_view/{Id}";
+            user = $"/user_view/{Id}";
+            article = $"/article_view/{Id}";
+            overview = $"/overview_admin/{Id}";
+
+            Purchasers = await PurchaserService.GetPurchasers();
         }
     }

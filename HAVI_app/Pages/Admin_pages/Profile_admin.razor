@@ -1,9 +1,8 @@
 ﻿@layout HAVI_app.Shared.Admin_layout.Profile_admin
-@using Microsoft.AspNetCore.Authorization
-@inject Models.Profile Profile
 @inject NavigationManager NavigationManager
-
-@page "/profile_admin"
+@page "/profile_admin/{Id:int}"
+@inject HAVI_app.Services.Classes.ProfileService ProfileService 
+@inject HAVI_app.Services.Classes.CountryService CountryService
 
 <HAVI_app.Shared.Shared_layout.Backgrounds.Purple_background />
 
@@ -20,14 +19,14 @@
         </div>
         <div class="row justify-content-center">
             <div class="col-10">
-                <EditForm Model="Profile" OnSubmit="@BackToOverview">
+                <form>
                     <table class="table table-font">
                         <tr>
                             <td>
                                 <label>Username:</label>
                             </td>
                             <td>
-                                <input type="text" class="form-control" value="@Profile.Username" disabled>
+                                <input type="text" class="form-control" value="@Country.Profile.Username" disabled>
                             </td>
                             <td>
                                 <div></div>
@@ -59,13 +58,13 @@
                     </table>
                     <div class="row">
                         <div class="text-right col-6">
-                            <input type="submit" class="btn cancel-button button-size" value="Back">
+                            <input type="button" class="btn cancel-button button-size" value="Back">
                         </div>
                         <div class="text-left col-6">
-                            <input type="submit" class="btn green-button button-size" value="Save">
+                            <input type="button" class="btn green-button button-size" value="Save">
                         </div>
                     </div>
-                </EditForm>
+                </form>            
             </div>
         </div>
     </div>
@@ -81,7 +80,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <EditForm Model="Profile" OnSubmit="@ChangePassword">
+                <form>
                     <table class="table-font table col-12">
                         <tr>
                             <td class="">
@@ -110,62 +109,64 @@
                             </td>
                         </tr>
 
-                        <tr>
-                            <td></td>
-                            <td></td>
+                        <tr colspan="2">
+                            @PasswordAlert
                         </tr>
 
                     </table>
-                <div class="row justify-content-center">
-                    <button type="submit" class="save-password btn button-size" data-dismiss="modal">Save</button>
-                </div>
-                </EditForm>
+                    <div class="row justify-content-center">
+                        <button type="submit" class="save-password btn button-size" data-dismiss="modal" @onclick="SavePassword">Save</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
 </div>
 
 @code {
-    private string OldPassword { get; set; }
+    [Parameter]
+    public int Id { get; set; }
 
-    private string NewPassword { get; set; }
+    private Country Country = new Country();
 
-    private string ConfirmPassword { get; set; }
+    private string OldPassword { get; set; } = "";
+
+    private string NewPassword { get; set; } = "";
+
+    private string ConfirmPassword { get; set; } = "";
 
     private string PasswordAlert = "";
 
-    private string NewPasswordAlert = "";
-
-    private string ConfirmPasswordAlert = "";
+    protected override async Task OnInitializedAsync()
+    {
+        Country = await CountryService.GetCountry(Id);
+    }
 
     private void BackToOverview()
     {
-        NavigationManager.NavigateTo("/overview_admin", true);
+        NavigationManager.NavigateTo($"overview_admin/{Id}", true);
     }
 
-    private void ChangePassword()
+    public async void SavePassword()
     {
-        if(Profile.Password == OldPassword)
+        if (OldPassword == Country.Profile.Password && NewPassword == ConfirmPassword)
         {
-
-            if(NewPassword == ConfirmPassword)
-            {
-
-                Profile.Password = NewPassword; //Password succesfully changed
-
-            }
-            else
-            {
-                ConfirmPasswordAlert = "btn-danger";
-            }
-
+            Country.Profile.Password = NewPassword;
+            await CountryService.UpdateCountry(Id, Country);
+        }
+        else if (OldPassword != Country.Profile.Password)
+        {
+            PasswordAlert = "Incorrect password!";
         }
         else
         {
-            PasswordAlert = "btn-danger";
+            PasswordAlert = "The new passwords do not match!";
         }
-
     }
 
-
+    public async void SaveProfile()
+    {
+        await CountryService.UpdateCountry(Id, Country);
+        NavigationManager.NavigateTo($"overview_admin/{Id}", true);
+    }
 }

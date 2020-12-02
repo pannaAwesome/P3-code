@@ -23,6 +23,11 @@ namespace HAVI_app.Services.Classes
             return await httpClient.GetFromJsonAsync<Country>($"/api/countries/{id}");
         }
 
+        public async Task<Country> GetCountryWithProfile(int id)
+        {
+            return await httpClient.GetFromJsonAsync<Country>($"/api/countries/profile/{id}");
+        }
+
         public async Task<Country> GetCountryWithName(string name)
         {
             return await httpClient.GetFromJsonAsync<Country>($"/api/countries/{name}");

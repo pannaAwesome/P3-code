@@ -11,7 +11,7 @@ namespace HAVI_app.Pages.Admin_pages.Country_pages
     public class CountryView : ComponentBase
     {
         [Parameter]
-        public static int Id { get; set; }
+        public int Id { get; set; }
 
         [Inject]
         public NavigationManager NavigationManager { get; set; }
@@ -70,8 +70,20 @@ namespace HAVI_app.Pages.Admin_pages.Country_pages
         public List<Iloscategory> ILOSCategories;
         public List<int> ILOSCategoriesToDelete = new List<int>();
 
+        public string profile;
+        public string country;
+        public string user;
+        public string article;
+        public string overview;
+
         protected async override Task OnInitializedAsync()
         {
+            profile = $"/profile_admin/{Id}";
+            country = $"/country_view/{Id}";
+            user = $"/user_view/{Id}";
+            article = $"/article_view/{Id}";
+            overview = $"/overview_admin/{Id}";
+
             CurrentCountry = new Country();
             CurrentCountry = await CountryService.GetCountry(Id);
 
