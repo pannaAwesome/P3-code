@@ -4,7 +4,7 @@
 @inject Models.ArticleInformation Article
 @inject HAVI_app.Services.Classes.SetCurrencyService SetCurrencyService
 
-<HAVI_app.Shared.Supplier_layout.Form_header SupplierState="filled" ArticleState="filled" MeasurementState="filled" ShipmentState="filled" PriceState="active" />
+<HAVI_app.Shared.Supplier_layout.Form_header SupplierState="filled" ArticleState="filled" MeasurementState="filled" ShipmentState="filled" PriceState="active" Id="Article.Id" />
 
 <div class="row justify-content-center">
     <div class="col-10">
@@ -27,7 +27,7 @@
                         <select class="form-control" name="set_currency" @bind="Article.SetCurrency" required>
                             @foreach (var item in contries)
                             {
-                                <option>@item</option>
+                                <option>@item.CurrencyName</option>
                             }
                         </select>
                     </td>
@@ -157,7 +157,7 @@
 }
 
 @code{
-    List<SetCurrency> contries;
+    List<SetCurrency> contries = new List<SetCurrency>();
 
     public void OnPostForward()
     {

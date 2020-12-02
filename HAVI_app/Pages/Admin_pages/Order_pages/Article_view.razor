@@ -1,5 +1,6 @@
 ﻿@page "/article_view/{Id:int}"
 @layout HAVI_app.Shared.Admin_layout.Overview
+@inject HAVI_app.Services.Classes.PurchaserService PurchaserService 
 
 <div class="row">
     <HAVI_app.Shared.Shared_layout.Logo_image />
@@ -55,10 +56,7 @@
                         <form>
                             <label for="purchaser">Select purchaser:</label>
                             <select class="form-control" name="purchaser" id="purchaser">
-                                <option value="winnie">Winnie</option>
-                                <option value="anders">Anders</option>
-                                <option value="nikolaj">Nikolaj</option>
-                                <option value="esbjerg">Esbjerg</option>
+
                             </select>
                         </form>
                     </div>
@@ -83,4 +81,11 @@
         public string user = $"/user_view/{Id}";
         public string article = $"/article_view/{Id}";
         public string overview = $"/overview_admin/{Id}";
+
+        public List<Purchaser> Purchasers { get; set; }
+
+        protected override async Task OnInitializedAsync()
+        {
+
+        }
     }

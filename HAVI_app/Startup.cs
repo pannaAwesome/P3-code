@@ -32,6 +32,9 @@ namespace HAVI_app
             services.AddDbContext<HAVIdatabaseContext>(options => options.UseSqlServer(Configuration.GetConnectionString("HAVIdatabaseContext")));
             services.AddDatabaseDeveloperPageExceptionFilter();
 
+            services.AddSingleton<ArticleInformation>();
+            services.AddSingleton<InternalArticleInformation>();
+
             #region AddHttpClient service for all the tables in the database
             services.AddHttpClient<ArticleInformationService>(client =>
             {

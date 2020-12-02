@@ -4,6 +4,7 @@
 @inherits HAVI_app.Classes.Validation
 @inject Models.ArticleInformation Article
 @inject HAVI_app.Services.Classes.CountryService ContryService
+@inject HAVI_app.Services.Classes.ArticleInformationService ArticleInformationService 
 
 
 <HAVI_app.Shared.Supplier_layout.Form_header SupplierState="active" />
@@ -43,7 +44,7 @@
                             <option disabled selected>-- select an option --</option>
                                 @foreach (var item in contries)
                                 {
-                                    <option>@item</option>
+                                    <option>@item.CountryName</option>
                                 }
                         </select>
                     </td>
@@ -257,7 +258,7 @@
     [Parameter]
     public int Id { get; set; }
 
-    List<Country> contries;
+    List<Country> contries = new List<Country>();
 
     public string EmailValidated;
 
@@ -296,6 +297,6 @@
     protected override async Task OnInitializedAsync()
     {
         contries = await ContryService.GetCountries();
-
+        Article = await ArticleInformationService.GetArticleInformation(Id);
     }
 }
