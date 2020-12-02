@@ -40,7 +40,7 @@
                         <label for="company_location" class="required">Company location:</label>
                     </td>
                     <td>
-                        <select class="form-control" name="company_location" @bind="Article.CompanyLocation" required>
+                        <select class="form-control" name="company_location" @onchange="@(async (ChangeEventArgs __e) => { Article.CompanyLocation = __e.Value.ToString(); })" required>
                             <option disabled selected>-- select or search for an option --</option>
                                 @foreach (var item in contries)
                                 {
@@ -71,7 +71,7 @@
                     </td>
                     <td>
                         <HAVI_app.Shared.Shared_layout.Questionmark_top>
-                            Enter the email of the person in the company that HAVI may contact
+                            Enter the email of the person in the company that HAVI may contact.
                         </HAVI_app.Shared.Shared_layout.Questionmark_top>
 
                     </td>
