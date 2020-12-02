@@ -1,5 +1,6 @@
 ﻿@page "/user_view"
 @layout HAVI_app.Shared.Admin_layout.Overview
+@inherits UserView
 
 <div class="row overview-admin-header">
     <div class="col-9">
@@ -19,8 +20,6 @@
     <div class="modal" id="create-purchaser">
         <div class="modal-dialog">
             <div class="modal-content">
-
-
                 <div class="modal-header">
                     <h4 class="modal-title">Create new purchaser</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -30,7 +29,7 @@
                 <div class="modal-body">
                     <form>
                         <label for="purchaser">Email:</label>
-                        <input class="form-control" type="email" name="purchaser"/>
+                        <input class="form-control" type="email" name="purchaser" @bind="@Email"/>
                     </form>
                     <p class="text-center">Password for new purchaser is "1234"</p>
                     

@@ -52,14 +52,14 @@ namespace HAVI_app.Shared.Purchaser_layout
                 ArticleService.DeleteArticle(article.Id);
             }
 
-            NavigationManager.NavigateTo("/overview_purchaser", true);
+            NavigationManager.NavigateTo($"/overview_purchaser/{Id}", true);
         }
 
         public void RowClicked(Article data)
         {
             if (SelectionType == SelectionType.None && data.ArticleState == (int)ArticleState.Completed)
             {
-                //NavigationManager.NavigateTo($"/article_completed_view/{data.Id}/{data.Purchaser.Profile.Username}", true);
+                NavigationManager.NavigateTo($"/article_completed_view/{data.Id}/{data.Purchaser.Profile.Username}", true);
             }
             else if (SelectionType == SelectionType.None && data.ArticleState == (int)ArticleState.Error)
             {
@@ -78,17 +78,10 @@ namespace HAVI_app.Shared.Purchaser_layout
             var error = await ArticleService.GetArticleWithCertainState(1, (int)ArticleState.Error);
             var completed = await ArticleService.GetArticleWithCertainState(1, (int)ArticleState.Completed);
 
+            Articles = new List<Article>();
             Articles.AddRange(robot);
             Articles.AddRange(error);
             Articles.AddRange(completed);
-        }
-
-        public long CreationCode;
-
-        public void GenerateCreationCode()
-        {
-            Random random = new Random();
-            CreationCode = random.Next(101, 989) * random.Next(11, 19);
         }
     }
 }

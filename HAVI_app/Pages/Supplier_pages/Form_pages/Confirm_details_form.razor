@@ -664,6 +664,7 @@
 {
     public async void Submit()
     {
+        Article.Article = null;
         await ArticleInformationService.UpdateArticleInformation(Article.Id, Article);
 
         Article thisArticle = await ArticleService.GetArticleWithInformation(Article.Id);
@@ -671,7 +672,9 @@
         thisArticle.ArticleInformationCompleted = 1;
         await ArticleService.UpdateArticle(thisArticle.Id, thisArticle);
 
-        NavigationManager.NavigateTo($"/submission_accepted/", true);
+        Supplier supplier = await SupplierService.GetSupplier(thisArticle.SupplierId);
+
+        NavigationManager.NavigateTo($"/submission_accepted/{supplier.Id}", true);
     }
 
     public void GoBack()

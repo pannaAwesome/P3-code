@@ -20,6 +20,11 @@ namespace HAVI_app.Services.Classes
             return await httpClient.GetFromJsonAsync<CreationCode>($"/api/creationCodes/{id}");
         }
 
+        public async Task<List<CreationCode>> GetCreationCodes()
+        {
+            return await httpClient.GetFromJsonAsync<List<CreationCode>>($"/api/creationCodes");
+        }
+
         public async Task<CreationCode> CreateCreationCode(CreationCode creationCode)
         {
             var result = await httpClient.PostAsJsonAsync("/api/creationCodes", creationCode);

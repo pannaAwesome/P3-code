@@ -1,5 +1,8 @@
 ﻿@inject NavigationManager NavigationManager
 @inject HAVI_app.Services.Classes.SupplierService SupplierService
+@inject HAVI_app.Services.Classes.LocationService LocationService
+@inject HAVI_app.Services.Classes.FreightResponsibilityService FreightResponsibilityService
+@inject HAVI_app.Services.Classes.CreationCodeService CreationCodeService
 
 <div class="col-12 user-login">
     <div class="row justify-content-center">
@@ -16,7 +19,7 @@
                             <label>Creation code from HAVI:</label>
                         </td>
                         <td>
-                            <input class="form-control" type="number" name="creation_code" required @bind="CreationCode" />
+                            <input class="form-control" type="text" name="creation_code" required @bind="CreationCode" />
                         </td>
                     </tr>
                     <tr class="form-group">
@@ -40,7 +43,13 @@
                             <label>Company location:</label>
                         </td>
                         <td>
-                            <input class="form-control" type="text" name="company_location" required @bind="CompanyLocation" />
+                            <select class="form-control" name="company_location" @bind="@CompanyLocation" required>
+                                <option disabled selected>-- select one --</option>
+                                @foreach (var item in Locations)
+                                {
+                                    <option>@item.Country</option>
+                                }
+                            </select>
                         </td>
                     </tr>
                     <tr class="form-group">
@@ -52,13 +61,13 @@
                                 <div class="col-1"></div>
                                 <div class="col-4">
                                     <label class="form-check-label">
-                                        <input class="form-check-input" type="radio" name="pallet_exchange" required checked="@YesRadioPalletExchange == 1" @onchange="( () => YesRadioPalletExchange = 1)" />
+                                        <input class="form-check-input" type="radio" name="pallet_exchange" required @onclick="( () => YesRadioPalletExchange = 1)" />
                                         Yes
                                     </label>
                                 </div>
                                 <div class="col-4">
                                     <label class="form-check-label">
-                                        <input class="form-check-input" type="radio" name="pallet_exchange" required />
+                                        <input class="form-check-input" type="radio" name="pallet_exchange" required @onclick="( () => YesRadioPalletExchange = 0)"/>
                                         No
                                     </label>
                                 </div>
@@ -75,20 +84,14 @@
                             <label>Freight responsibility:</label>
                         </td>
                         <td>
-                            <div class="row">
-                                <div class="col-1"></div>
-                                <div class="col-4">
-                                    <label class="form-check-label">
-                                        <input class="form-check-input" type="radio" name="freight_responsibility" required @bind="Freight" />
-                                        CIP
-                                    </label>
-                                </div>
-                                <div class="col-4">
-                                    <label class="form-check-label">
-                                        <input class="form-check-input" type="radio" name="freight_responsibility" required />
-                                        EXW
-                                    </label>
-                                </div>
+                            <div class="row justify-content-center">
+                                <select class="form-control" name="salesunit" @bind="@Freight" required>
+                                    <option disabled selected>-- select one --</option>
+                                    @foreach (FreightResponsibility item in Freights)
+                                    {
+                                        <option>@item.Responsibility</option>
+                                    }
+                                </select>
                             </div>
                         </td>
                         <td>
@@ -102,7 +105,7 @@
                             <label>Password:</label>
                         </td>
                         <td>
-                            <input class="form-control" type="password" name="password" required />
+                            <input class="form-control" type="password" name="password" required @bind="Password1" />
                         </td>
                     </tr>
                     <tr class="form-group">
@@ -110,7 +113,7 @@
                             <label>Confirm password:</label>
                         </td>
                         <td>
-                            <input class="form-control" type="password" name="confirm_password" required @bind="Password" />
+                            <input class="form-control" type="password" name="confirm_password" required @bind="Password2" />
                         </td>
                     </tr>
                 </table>
@@ -122,50 +125,71 @@
                 <input class="btn green-button" type="button" name="Submit" value="Sign up" @onclick="CreateNewSupplier" />
             </div>
         </div>
+        <div class="row">
+            <div class="col-12 text-center">
+                @CodeError
+            </div>
+        </div>
     </form>
 </div>
 
 @code {
-    [Parameter]
-    public int CreationCode { get; set; }
+    public string CodeError { get; set; }
 
-    [Parameter]
-    public string Email { get; set; }
+    public string CreationCode { get; set; }
 
-    [Parameter]
-    public string CompanyName { get; set; }
+    public string Email { get; set; } = "";
 
-    [Parameter]
-    public string CompanyLocation { get; set; }
+    public string CompanyName { get; set; } = "";
 
-    [Parameter]
-    public int YesRadioPalletExchange { get; set; }
+    public string CompanyLocation { get; set; } = "";
 
-    [Parameter]
-    public string Freight { get; set; }
+    public int YesRadioPalletExchange { get; set; } = 2;
 
-    [Parameter]
-    public string Password { get; set; }
+    public string Freight { get; set; } = "";
 
-    Supplier supplierObject = new Supplier();
+    public string Password1 { get; set; } = "";
+
+    public string Password2 { get; set; } = "";
+
+    public Supplier supplierObject = new Supplier();
+
+    public List<FreightResponsibility> Freights = new List<FreightResponsibility>();
+
+    public List<Location> Locations = new List<Location>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Freights = await FreightResponsibilityService.GetFreightResponsibilities();
+        Locations = await LocationService.GetLocations();
+    }
 
     private async void CreateNewSupplier()
     {
-        supplierObject.Profile = new Profile();
-        supplierObject.Profile.Id = 0;
-        supplierObject.Id = 0;
-        supplierObject.Profile.Username = Email;
-        supplierObject.CompanyName = CompanyName;
-        supplierObject.CompanyLocation = CompanyLocation;
-        supplierObject.PalletExchange = YesRadioPalletExchange == 1 ? 1 : 0;
-        supplierObject.FreightResponsibility = Freight;
-        supplierObject.Profile.Password = Password;
-        supplierObject.Profile.Usertype = 2;
+        List<CreationCode> codes = await CreationCodeService.GetCreationCodes();
 
-        if(supplierObject != null)
+        if(codes.Any(c => c.Code == CreationCode) && Email != "" && CompanyName != "" && CompanyLocation != "" && YesRadioPalletExchange != 2 && Freight != "" && Password1 == Password2)
         {
-            var user = await SupplierService.CreateSupplier(supplierObject);
-            NavigationManager.NavigateTo($"/overview_supplier/{user.Id}", true);
+            supplierObject.Profile = new Profile();
+            supplierObject.Profile.Username = Email;
+            supplierObject.CompanyName = CompanyName;
+            supplierObject.CompanyLocation = CompanyLocation;
+            supplierObject.PalletExchange = YesRadioPalletExchange == 1 ? 1 : 0;
+            supplierObject.FreightResponsibility = Freight;
+            supplierObject.Profile.Password = Password1;
+            supplierObject.Profile.Usertype = 2;
+
+            if (supplierObject != null)
+            {
+                var user = await SupplierService.CreateSupplier(supplierObject);
+                NavigationManager.NavigateTo($"/overview_supplier/{user.Id}", true);
+            }
+        }else if(!codes.Any(c => c.Code == CreationCode))
+        {
+            CodeError = "Your creation code is invalid!";
+        }else
+        {
+            CodeError = "You forgot to fill out som information!";
         }
     }
 }

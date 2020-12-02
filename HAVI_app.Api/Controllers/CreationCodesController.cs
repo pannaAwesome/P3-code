@@ -41,6 +41,27 @@ namespace HAVI_app.Api.Controllers
             }
         }
 
+        [HttpGet]
+        public async Task<ActionResult> GetCreationCodes()
+        {
+            try
+            {
+                var result = await _creationCodeRepository.GetCreationCodes();
+                if (result == null)
+                {
+                    return Ok(new List<CreationCode>());
+                }
+                else
+                {
+                    return Ok(result);
+                }
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database.");
+            }
+        }
+
         [HttpPost]
         public async Task<ActionResult<CreationCode>> CreateCreationCode(CreationCode creationCode)
         {

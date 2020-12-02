@@ -1,16 +1,45 @@
 ﻿@layout HAVI_app.Shared.Admin_layout.Overview
-@using Microsoft.AspNetCore.Authorization
+@page "/overview_admin/{Id:int}"
 
-@page "/overview_admin"
-
-<div class="row overview-admin-header">
-    <div class="col-10"><h3>Welcome DKAdmin</h3></div>
-    <div class="col-2">
-        <button class="btn button-options-overview">Export orders</button>
-    </div>
-</div>
 <div class="row">
-    <div class="col-12">
-        <HAVI_app.Shared.Admin_layout.Overview_table_admin />
+        <HAVI_app.Shared.Shared_layout.Logo_image />
+        <div class="col-1"></div>
+        <div class="col-8">
+            <NavLink class="nav-link button-overview-logout" href="/">
+                Logout
+            </NavLink>
+            <NavLink class="nav-link button-overview" href="profile_admin">
+                Profile
+            </NavLink>
+            <NavLink class="nav-link button-overview" href="country_view">
+                Country
+            </NavLink>
+            <NavLink class="nav-link button-overview" href="user_view">
+                Users
+            </NavLink>
+            <NavLink class="nav-link button-overview" href="article_view">
+                Article info
+            </NavLink>
+            <NavLink class="nav-link button-overview" href="overview_admin">
+                Home
+            </NavLink>
+        </div>
     </div>
+    <div class="gap-overview">
 </div>
+    <div class="row overview-admin-header">
+        <div class="col-10"><h3>Welcome DKAdmin</h3></div>
+        <div class="col-2">
+            <button class="btn button-options-overview">Export orders</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <HAVI_app.Shared.Admin_layout.Overview_table_admin />
+        </div>
+    </div>
+
+    @code {
+        [Parameter]
+        public int Id { get; set; }
+    }
