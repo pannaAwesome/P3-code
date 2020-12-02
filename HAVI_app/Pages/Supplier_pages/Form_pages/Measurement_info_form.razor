@@ -138,36 +138,36 @@
     public void ValidationMeasurementForm()
     {
 
-        if (DoubleOnly(Article.LengthPrSalesunit) &&
-            DoubleOnly(Article.WidthPrSalesunit) &&
-            DoubleOnly(Article.HeightPrSalesunit) &&
-            DoubleOnly(Article.NetWeightPrSalesunit) &&
-            DoubleOnly(Article.GrossWeightPrSalesunit))
+        if (DoubleOnly(Article.LengthPrSalesunit) && MustNotBeZeroOrNegativeNumbere(Article.LengthPrSalesunit) &&
+            DoubleOnly(Article.WidthPrSalesunit) && MustNotBeZeroOrNegativeNumbere(Article.WidthPrSalesunit) &&
+            DoubleOnly(Article.HeightPrSalesunit) && MustNotBeZeroOrNegativeNumbere(Article.HeightPrSalesunit) &&
+            DoubleOnly(Article.NetWeightPrSalesunit) && MustNotBeZeroOrNegativeNumbere(Article.NetWeightPrSalesunit) &&
+            DoubleOnly(Article.GrossWeightPrSalesunit) && MustNotBeZeroOrNegativeNumbere(Article.GrossWeightPrSalesunit))
         {
             NavigationManager.NavigateTo($"/shipment_info_form", true);
         }
 
-        if (!DoubleOnly(Article.LengthPrSalesunit))
+        if (!DoubleOnly(Article.LengthPrSalesunit) || (!MustNotBeZeroOrNegativeNumbere(Article.LengthPrSalesunit)))
         {
             LengthValidated = "btn-danger";
         }
 
-        if (!DoubleOnly(Article.WidthPrSalesunit))
+        if (!DoubleOnly(Article.WidthPrSalesunit) || (!MustNotBeZeroOrNegativeNumbere(Article.WidthPrSalesunit)))
         {
             WidthValidated = "btn-danger";
         }
 
-        if (!DoubleOnly(Article.HeightPrSalesunit))
+        if (!DoubleOnly(Article.HeightPrSalesunit) || (!MustNotBeZeroOrNegativeNumbere(Article.HeightPrSalesunit)))
         {
             HeightValidated = "btn-danger";
         }
 
-        if (!DoubleOnly(Article.NetWeightPrSalesunit))
+        if (!DoubleOnly(Article.NetWeightPrSalesunit) || (!MustNotBeZeroOrNegativeNumbere(Article.NetWeightPrSalesunit)))
         {
             NetWeightValidated = "btn-danger";
         }
 
-        if (!DoubleOnly(Article.GrossWeightPrSalesunit))
+        if (!DoubleOnly(Article.GrossWeightPrSalesunit) || (!MustNotBeZeroOrNegativeNumbere(Article.GrossWeightPrSalesunit)))
         {
             GrossWeightValidated = "btn-danger";
         }
