@@ -123,20 +123,25 @@
                                 <label for="freight_responsibility" >Freight Responsibility</label>
                             </td>
                             <td>
-                                <div class="row justify-content-center">
-                                    <select class="form-control" name="salesunit" @bind="@Supplier.FreightResponsibility" required>
-                                        @foreach(FreightResponsibility item in Freights)
-                                        {
-                                            <option>@item.Responsibility</option>
-                                        }
-                                    </select>
-                                </div>
+                                <select class="form-control" name="freight_responsibility" @bind="@Supplier.FreightResponsibility" required>
+                                    @foreach(FreightResponsibility item in Freights)
+                                    {
+                                        <option>@item.Responsibility</option>
+                                    }
+                                </select>
                             </td>
                             <td>
                                 <HAVI_app.Shared.Shared_layout.Questionmark_right>
-                                    With CIP you pay for the freight and insurance during transit. With EXW you are only required to ready the article for pick up
+                                    With CIP you pay for the freight and insurance during transit.
+                                    With EXW you are only required to ready the article for pick up.
                                 </HAVI_app.Shared.Shared_layout.Questionmark_right>
                             </td>
+                        </tr>
+
+                        <tr>
+                           <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                     </table>
                     <div class="row justify-content-center">

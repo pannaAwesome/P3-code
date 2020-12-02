@@ -4,7 +4,9 @@
 @inherits HAVI_app.Classes.Validation
 @inject Models.ArticleInformation Article
 @inject HAVI_app.Services.Classes.LocationService LocationService
-@inject HAVI_app.Services.Classes.ArticleInformationService ArticleInformationService 
+@inject HAVI_app.Services.Classes.ArticleInformationService ArticleInformationService
+@inject HAVI_app.Services.Classes.FreightResponsibilityService FreightResponsibilityService
+
 
 
 <HAVI_app.Shared.Supplier_layout.Form_header SupplierState="active" />
@@ -15,7 +17,7 @@
     </div>
 </div>
 <div class="row justify-content-center ">
-    <div class="col-12 d-flex justify-content-center">
+    <div class="col-10 d-flex justify-content-center">
         <EditForm Model="Article" OnSubmit="@ValidationSupplierForm">
             <table class="table">
                 <tr>
@@ -42,10 +44,10 @@
                     <td>
                         <select class="form-control" name="company_location" @onchange="@(async (ChangeEventArgs __e) => { Article.CompanyLocation = __e.Value.ToString(); })" required>
                             <option disabled selected>-- select or search for an option --</option>
-                                @foreach (var item in contries)
-                                {
-                                    <option>@item.Country</option>
-                                }
+                            @foreach (var item in contries)
+                            {
+                                <option>@item.Country</option>
+                            }
                         </select>
                     </td>
                     <td>
@@ -103,26 +105,25 @@
 
                 <tr>
                     <td>
-                        <label for="freight_responsibility" class="required">Freight responsibility</label>
+                        <label for="freight_responsibility">Freight Responsibility</label>
                     </td>
                     <td>
-                        <div class="text-center">
-                            <input type="radio" name="freight_responsibility" checked="@(Article.FreightResponsibility == "CIP")" @onchange="@(() => Article.FreightResponsibility = "CIP")" required>
-                            <label for="CIP">CIP</label>
-                            &nbsp;
-                            <input type="radio" value="EXW" name="freight_responsibility" checked="@(Article.FreightResponsibility == "EXW")" @onchange="@(() => Article.FreightResponsibility = "EXW")">
-                            <label for="EXW">EXW</label>
-                        </div>
+                        <select class="form-control" name="freight_responsibility" @onchange="@(async (ChangeEventArgs __e) => { Supplier.FreightResponsibility = __e.Value.ToString(); })" required>
+                            <option disabled selected>-- select or search for an option --</option>
+                            @foreach (FreightResponsibility item in Freights)
+                            {
+                                <option>@item.Responsibility</option>
+                            }
+                        </select>
                     </td>
                     <td>
                         <div></div>
                     </td>
                     <td>
-                        <HAVI_app.Shared.Shared_layout.Questionmark_top>
+                        <HAVI_app.Shared.Shared_layout.Questionmark_right>
                             With CIP you pay for the freight and insurance during transit.
                             With EXW you are only required to ready the article for pick up.
-                        </HAVI_app.Shared.Shared_layout.Questionmark_top>
-
+                        </HAVI_app.Shared.Shared_layout.Questionmark_right>
                     </td>
                 </tr>
 
@@ -238,13 +239,16 @@
                         </HAVI_app.Shared.Shared_layout.Questionmark_top>
                     </td>
                 </tr>
+                <tr>
+                    <td colspan="4"></td>
+                </tr>
 
             </table>
             <div class="row justify-content-center">
                 <div class="text-right col-6">
                 </div>
                 <div class="text-left col-6">
-                    <input type="submit" class="btn green-button button-size" value="Next"/>
+                    <input type="submit" class="btn green-button button-size" value="Next" />
                 </div>
             </div>
 
@@ -258,7 +262,11 @@
     [Parameter]
     public int Id { get; set; }
 
+    public Supplier Supplier { get; set; } = new Supplier();
+
     List<Location> contries = new List<Location>();
+    public List<FreightResponsibility> Freights = new List<FreightResponsibility>();
+
 
     public string EmailValidated;
 
@@ -266,7 +274,7 @@
 
     public void ValidationSupplierForm()
     {
-        if (IsEmailValid(Article.Email) && ((Article.DangerousGoods == 1)  ? NumbersLettersDashOnly(Article.ClassificationCode) : true))
+        if (IsEmailValid(Article.Email) && ((Article.DangerousGoods == 1) ? NumbersLettersDashOnly(Article.ClassificationCode) : true))
         {
             Article.Id = Id;
 
@@ -298,5 +306,6 @@
     {
         contries = await LocationService.GetLocations();
         Article = await ArticleInformationService.GetArticleInformation(Id);
+        Freights = await FreightResponsibilityService.GetFreightResponsibilities();
     }
 }
