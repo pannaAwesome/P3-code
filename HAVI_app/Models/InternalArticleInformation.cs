@@ -41,6 +41,7 @@ namespace HAVI_app.Models
         public int InsertGrinSap { get; set; }
         public int InsertBosSap { get; set; }
         public int Eannumber { get; set; }
+        public int ShelflifeAtHavi { get; set; }
         public int Grinnumber { get; set; }
         public int Bosnumber { get; set; }
         public int Gtinnumber { get; set; }
@@ -49,6 +50,7 @@ namespace HAVI_app.Models
         public int Carlanumber { get; set; }
         public int PrimaryDcIloscode { get; set; }
         public int TransitTimeForHavi { get; set; }
+        public int AmountInCurrency { get; set; }
 
         [JsonIgnore]
         public virtual Article Article { get; set; } = null;

@@ -69,6 +69,7 @@ namespace HAVI_app.Api.DatabaseClasses
                 result.Shelflife = articleInformation.Shelflife;
                 result.SpecialInformation = articleInformation.SpecialInformation;
                 result.SupplierArticleName = articleInformation.SupplierArticleName;
+                result.ArticleName = articleInformation.ArticleName;
                 result.TemperatureStorageMax = articleInformation.TemperatureStorageMax;
                 result.TemperatureStorageMin = articleInformation.TemperatureStorageMin;
                 result.TemperatureTransportationMax = articleInformation.TemperatureTransportationMax;
