@@ -35,103 +35,103 @@ namespace HAVI_app
             #region AddHttpClient service for all the tables in the database
             services.AddHttpClient<ArticleInformationService>(client =>
             {
-                client.BaseAddress = new System.Uri("https://localhost:44394");
+                client.BaseAddress = new System.Uri("https://haviwebapp-apim.azure-api.net");
             });
             services.AddHttpClient<ArticleService>(client =>
             {
-                client.BaseAddress = new System.Uri("https://localhost:44394");
+                client.BaseAddress = new System.Uri("https://haviwebapp-apim.azure-api.net");
             });
             services.AddHttpClient<BundleService>(client =>
             {
-                client.BaseAddress = new System.Uri("https://localhost:44394");
+                client.BaseAddress = new System.Uri("https://haviwebapp-apim.azure-api.net");
             });
             services.AddHttpClient<CompanyCodeService>(client =>
             {
-                client.BaseAddress = new System.Uri("https://localhost:44394");
+                client.BaseAddress = new System.Uri("https://haviwebapp-apim.azure-api.net");
             });
             services.AddHttpClient<CountryService>(client =>
             {
-                client.BaseAddress = new System.Uri("https://localhost:44394");
+                client.BaseAddress = new System.Uri("https://haviwebapp-apim.azure-api.net");
             });
             services.AddHttpClient<CreationCodeService>(client =>
             {
-                client.BaseAddress = new System.Uri("https://localhost:44394");
+                client.BaseAddress = new System.Uri("https://haviwebapp-apim.azure-api.net");
             });
             services.AddHttpClient<DepartmentIdService>(client =>
             {
-                client.BaseAddress = new System.Uri("https://localhost:44394");
+                client.BaseAddress = new System.Uri("https://haviwebapp-apim.azure-api.net");
             });
             services.AddHttpClient<FreightResponsibilityService>(client =>
             {
-                client.BaseAddress = new System.Uri("https://localhost:44394");
+                client.BaseAddress = new System.Uri("https://haviwebapp-apim.azure-api.net");
             });
             services.AddHttpClient<ILOSCategoriesService>(client =>
             {
-                client.BaseAddress = new System.Uri("https://localhost:44394");
+                client.BaseAddress = new System.Uri("https://haviwebapp-apim.azure-api.net");
             });
             services.AddHttpClient<ILOSOrderpickgroupService>(client =>
             {
-                client.BaseAddress = new System.Uri("https://localhost:44394");
+                client.BaseAddress = new System.Uri("https://haviwebapp-apim.azure-api.net");
             });
             services.AddHttpClient<ILOSSortGroupService>(client =>
             {
-                client.BaseAddress = new System.Uri("https://localhost:44394");
+                client.BaseAddress = new System.Uri("https://haviwebapp-apim.azure-api.net");
             });
             services.AddHttpClient<InformCostTypeService>(client =>
             {
-                client.BaseAddress = new System.Uri("https://localhost:44394");
+                client.BaseAddress = new System.Uri("https://haviwebapp-apim.azure-api.net");
             });
             services.AddHttpClient<InternalArticleInformationService>(client =>
             {
-                client.BaseAddress = new System.Uri("https://localhost:44394");
+                client.BaseAddress = new System.Uri("https://haviwebapp-apim.azure-api.net");
             });
             services.AddHttpClient<LocationService>(client =>
             {
-                client.BaseAddress = new System.Uri("https://localhost:44394");
+                client.BaseAddress = new System.Uri("https://haviwebapp-apim.azure-api.net");
             });
             services.AddHttpClient<PackagingGroupService>(client =>
             {
-                client.BaseAddress = new System.Uri("https://localhost:44394");
+                client.BaseAddress = new System.Uri("https://haviwebapp-apim.azure-api.net");
             });
             services.AddHttpClient<PrimaryDCILOSCodeService>(client =>
             {
-                client.BaseAddress = new System.Uri("https://localhost:44394");
+                client.BaseAddress = new System.Uri("https://haviwebapp-apim.azure-api.net");
             });
             services.AddHttpClient<ProfileService>(client =>
             {
-                client.BaseAddress = new System.Uri("https://localhost:44394");
+                client.BaseAddress = new System.Uri("https://haviwebapp-apim.azure-api.net");
             });
             services.AddHttpClient<PurchaserService>(client =>
             {
-                client.BaseAddress = new System.Uri("https://localhost:44394");
+                client.BaseAddress = new System.Uri("https://haviwebapp-apim.azure-api.net");
             });
             services.AddHttpClient<QIPNumberService>(client =>
             {
-                client.BaseAddress = new System.Uri("https://localhost:44394");
+                client.BaseAddress = new System.Uri("https://haviwebapp-apim.azure-api.net");
             });
             services.AddHttpClient<SalesUnitService>(client =>
             {
-                client.BaseAddress = new System.Uri("https://localhost:44394");
+                client.BaseAddress = new System.Uri("https://haviwebapp-apim.azure-api.net");
             });
             services.AddHttpClient<SetCurrencyService>(client =>
             {
-                client.BaseAddress = new System.Uri("https://localhost:44394");
+                client.BaseAddress = new System.Uri("https://haviwebapp-apim.azure-api.net");
             });
             services.AddHttpClient<SupplierDeliveryUnitService>(client =>
             {
-                client.BaseAddress = new System.Uri("https://localhost:44394");
+                client.BaseAddress = new System.Uri("https://haviwebapp-apim.azure-api.net");
             });
             services.AddHttpClient<SupplierService>(client =>
             {
-                client.BaseAddress = new System.Uri("https://localhost:44394");
+                client.BaseAddress = new System.Uri("https://haviwebapp-apim.azure-api.net");
             });
             services.AddHttpClient<VailedForCustomerService>(client =>
             {
-                client.BaseAddress = new System.Uri("https://localhost:44394");
+                client.BaseAddress = new System.Uri("https://haviwebapp-apim.azure-api.net");
             });
             services.AddHttpClient<VatTaxCodeService>(client =>
             {
-                client.BaseAddress = new System.Uri("https://localhost:44394");
+                client.BaseAddress = new System.Uri("https://haviwebapp-apim.azure-api.net");
             });
             #endregion
         }

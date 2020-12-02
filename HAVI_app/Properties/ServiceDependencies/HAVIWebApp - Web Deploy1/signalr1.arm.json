@@ -36,7 +36,7 @@
     },
     {
       "type": "Microsoft.Resources/deployments",
-      "name": "[concat(parameters('resourceGroupName'), 'Deployment', uniqueString(concat('HAVI_app_db_2020-12-01T14-42Z', subscription().subscriptionId)))]",
+      "name": "[concat(parameters('resourceGroupName'), 'Deployment', uniqueString(concat('HAVIWebAppSignalR', subscription().subscriptionId)))]",
       "resourceGroup": "[parameters('resourceGroupName')]",
       "apiVersion": "2019-10-01",
       "dependsOn": [
@@ -49,26 +49,16 @@
           "contentVersion": "1.0.0.0",
           "resources": [
             {
-              "kind": "v12.0",
-              "location": "[parameters('resourceLocation')]",
-              "name": "havi-appdbserver",
-              "type": "Microsoft.Sql/servers",
-              "apiVersion": "2017-10-01-preview"
-            },
-            {
               "sku": {
-                "name": "Standard",
-                "tier": "Standard",
-                "capacity": 10
+                "name": "Free_F1",
+                "tier": "Free",
+                "size": "F1",
+                "capacity": 1
               },
-              "kind": "v12.0,user",
               "location": "[parameters('resourceLocation')]",
-              "name": "havi-appdbserver/HAVI_app_db_2020-12-01T14-42Z",
-              "type": "Microsoft.Sql/servers/databases",
-              "apiVersion": "2017-10-01-preview",
-              "dependsOn": [
-                "havi-appdbserver"
-              ]
+              "name": "HAVIWebAppSignalR",
+              "type": "Microsoft.SignalRService/SignalR",
+              "apiVersion": "2018-10-01"
             }
           ]
         }
@@ -76,6 +66,6 @@
     }
   ],
   "metadata": {
-    "_dependencyType": "mssql.azure"
+    "_dependencyType": "signalr.azure"
   }
 }
