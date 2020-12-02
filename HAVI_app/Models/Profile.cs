@@ -11,9 +11,9 @@ namespace HAVI_app.Models
     {
         public Profile()
         {
-            Purchasers = new HashSet<Purchaser>();
-            Suppliers = new HashSet<Supplier>();
-            Countries = new HashSet<Country>();
+            Purchasers = new List<Purchaser>();
+            Suppliers = new List<Supplier>();
+            Countries = new List<Country>();
         }
 
         [Key]
@@ -23,10 +23,10 @@ namespace HAVI_app.Models
         public int Usertype { get; set; }
 
         [JsonIgnore]
-        public virtual ICollection<Country> Countries { get; set; }
+        public virtual List<Country> Countries { get; set; }
         [JsonIgnore]
-        public virtual ICollection<Purchaser> Purchasers { get; set; }
+        public virtual List<Purchaser> Purchasers { get; set; }
         [JsonIgnore]
-        public virtual ICollection<Supplier> Suppliers { get; set; }
+        public virtual List<Supplier> Suppliers { get; set; }
     }
 }

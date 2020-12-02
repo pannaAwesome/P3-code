@@ -12,7 +12,7 @@ namespace HAVI_app.Models
     {
         public Supplier()
         {
-            Articles = new HashSet<Article>();
+            Articles = new List<Article>();
         }
 
         [Key]
@@ -25,6 +25,6 @@ namespace HAVI_app.Models
         public string FreightResponsibility { get; set; } = "";
 
         public virtual Profile Profile { get; set; } = null;
-        public virtual ICollection<Article> Articles { get; set; } = null;
+        public virtual List<Article> Articles { get; set; } = null;
     }
 }
