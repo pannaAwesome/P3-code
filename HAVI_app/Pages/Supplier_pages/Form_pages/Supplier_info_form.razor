@@ -42,7 +42,7 @@
                         <label for="company_location" class="required">Company location:</label>
                     </td>
                     <td>
-                        <select class="form-control" name="company_location" @onchange="@(async (ChangeEventArgs __e) => { Article.CompanyLocation = __e.Value.ToString(); })" required>
+                        <select class="form-control" name="company_location" @onchange="@((ChangeEventArgs __e) => Article.CompanyLocation = __e.Value.ToString())" required>
                             <option disabled selected>-- select or search for an option --</option>
                             @foreach (var item in contries)
                             {
@@ -108,7 +108,7 @@
                         <label for="freight_responsibility">Freight Responsibility</label>
                     </td>
                     <td>
-                        <select class="form-control" name="freight_responsibility" @onchange="@(async (ChangeEventArgs __e) => { Supplier.FreightResponsibility = __e.Value.ToString(); })" required>
+                        <select class="form-control" name="freight_responsibility" @onchange="@((ChangeEventArgs __e) => Article.FreightResponsibility = __e.Value.ToString())" required>
                             <option disabled selected>-- select or search for an option --</option>
                             @foreach (FreightResponsibility item in Freights)
                             {
@@ -262,11 +262,8 @@
     [Parameter]
     public int Id { get; set; }
 
-    public Supplier Supplier { get; set; } = new Supplier();
-
     List<Location> contries = new List<Location>();
     public List<FreightResponsibility> Freights = new List<FreightResponsibility>();
-
 
     public string EmailValidated;
 
@@ -305,7 +302,6 @@
     protected override async Task OnInitializedAsync()
     {
         contries = await LocationService.GetLocations();
-        Article = await ArticleInformationService.GetArticleInformation(Id);
         Freights = await FreightResponsibilityService.GetFreightResponsibilities();
     }
 }

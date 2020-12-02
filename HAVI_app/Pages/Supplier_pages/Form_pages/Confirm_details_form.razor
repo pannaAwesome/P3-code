@@ -664,7 +664,6 @@
 {
     public async void Submit()
     {
-        Article.Article = null;
         await ArticleInformationService.UpdateArticleInformation(Article.Id, Article);
 
         Article thisArticle = await ArticleService.GetArticleWithInformation(Article.Id);
