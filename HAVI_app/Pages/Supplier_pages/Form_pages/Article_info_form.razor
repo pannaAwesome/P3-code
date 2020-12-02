@@ -6,7 +6,7 @@
 @inject HAVI_app.Services.Classes.SalesUnitService SalesUnitService 
 
 
-<HAVI_app.Shared.Supplier_layout.Form_header SupplierState="filled" ArticleState="active" />
+<HAVI_app.Shared.Supplier_layout.Form_header SupplierState="filled" ArticleState="active" Id="Article.Id" />
 
 
 <div class="row justify-content-center">
@@ -48,7 +48,7 @@
                             <option disabled selected>-- select an option --</option>
                                 @foreach (var item in sales)
                                 {
-                                    <option>@item</option>
+                                    <option>@item.Unit</option>
                                 }
                         </select>
                     </td>
@@ -195,7 +195,7 @@
     [Parameter]
     public int Id { get; set; }
 
-    List<SalesUnit> sales;
+    List<SalesUnit> sales = new List<SalesUnit>();
 
     public string ArticleNameValidated;
 

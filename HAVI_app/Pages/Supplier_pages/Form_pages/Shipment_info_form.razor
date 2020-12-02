@@ -6,7 +6,7 @@
 @inject HAVI_app.Services.Classes.CountryService ContryService
 
 
-<HAVI_app.Shared.Supplier_layout.Form_header SupplierState="filled" ArticleState="filled" MeasurementState="filled" ShipmentState="active" />
+<HAVI_app.Shared.Supplier_layout.Form_header SupplierState="filled" ArticleState="filled" MeasurementState="filled" ShipmentState="active" Id="Article.Id" />
 <div class="row justify-content-center">
     <div class="col-10">
         <h3>Shipment information:</h3>
@@ -58,7 +58,7 @@
                             <option disabled selected>-- select an option --</option>
                                 @foreach (var item in contries)
                                 {
-                                    <option>@item</option>
+                                    <option>@item.CountryName</option>
                                 }
                         </select>
                     </td>
@@ -79,7 +79,7 @@
                             <option disabled selected>-- select an option --</option>
                                 @foreach (var item in contries)
                                 {
-                                    <option>@item</option>
+                                    <option>@item.CountryName</option>
                                 }
                         </select>
                     </td>
@@ -215,7 +215,7 @@
 
 @code {
 
-    List<Country> contries;
+    List<Country> contries = new List<Country>();
 
     public string CartonPrPalletValidated;
 
