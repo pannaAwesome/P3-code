@@ -13,7 +13,7 @@ namespace HAVI_appTests
     public class SupplierServiceTests
     {
         [TestMethod]
-        public async void ShouldReturnGet()
+        public async Task ShouldReturnGet()
         {
             var handlerMock = new Mock<HttpMessageHandler>();
             var response = new HttpResponseMessage
