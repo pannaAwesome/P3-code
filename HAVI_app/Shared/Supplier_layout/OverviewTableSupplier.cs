@@ -59,7 +59,7 @@ namespace HAVI_app.Shared.Supplier_layout
         {
             if (SelectionType == SelectionType.None && data.ArticleState == (int)ArticleState.Created)
             {
-                NavigationManager.NavigateTo($"/supplier_info_form/{data.Id}", true);
+                NavigationManager.NavigateTo($"/supplier_info_form/{data.ArticleInformationId}", true);
             }
             else
             {

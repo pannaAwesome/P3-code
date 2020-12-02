@@ -31,10 +31,8 @@ namespace HAVI_app.Models
         public string Salesunit { get; set; } = "";
         public int ArticlesPerSalesunit { get; set; }
         public string SupplierArticleName { get; set; } = "";
-        public int SupplierArticleNumber { get; set; }
         public int Gtinnumber { get; set; }
         public int Shelflife { get; set; }
-        public int ShelflifeAtHavi { get; set; }
         public int MinimumShelflife { get; set; }
         public int OrganicArticle { get; set; }
         public double LengthPrSalesunit { get; set; }
@@ -54,8 +52,6 @@ namespace HAVI_app.Models
         public double TemperatureStorageMax { get; set; }
         public int LeadTime { get; set; }
         public string SetCurrency { get; set; } = "";
-        public int AmountInCurrency { get; set; }
-        public int InformCostType { get; set; }
         public double PurchasePrice { get; set; }
         public int OtherCosts { get; set; }
 

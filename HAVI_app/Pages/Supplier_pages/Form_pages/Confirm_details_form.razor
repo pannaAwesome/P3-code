@@ -445,7 +445,7 @@
                         <label for="toll_tarrif_no">Toll-tarrif no:</label>
                     </td>
                     <td colspan="5">
-                        <input type="number" class="form-control" id="toll_tarrif_no" value="@Article.TollTarifNumber" disabled>
+                        <input type="number" class="form-control" value="@Article.TollTarifNumber" disabled>
                     </td>
                     <td>
                         <div></div>
@@ -664,7 +664,6 @@
 {
     public async void Submit()
     {
-        Article.Article = null;
         await ArticleInformationService.UpdateArticleInformation(Article.Id, Article);
 
         Article thisArticle = await ArticleService.GetArticleWithInformation(Article.Id);
