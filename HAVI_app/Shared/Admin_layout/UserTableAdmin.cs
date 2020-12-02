@@ -26,8 +26,10 @@ namespace HAVI_app.Shared.Admin_layout
 
         public async void DeleteProfile()
         {
+            int profileId = Profiles[0].Id;
+            Purchaser purchaser = await PurchaserService.GetPurchaserForProfile(profileId);
             await PurchaserService.DeletePurchaserForProfile(ProfileClicked);
-            NavigationManager.NavigateTo("/user_view", true);
+            NavigationManager.NavigateTo($"/user_view/{purchaser.CountryId}", true);
         }
 
         public void DeleteButtonClicked(int id)

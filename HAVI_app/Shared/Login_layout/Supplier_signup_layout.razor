@@ -136,7 +136,7 @@
 @code {
     public string CodeError { get; set; }
 
-    public string CreationCode { get; set; }
+    public string CreationCode { get; set; } = "";
 
     public string Email { get; set; } = "";
 
@@ -169,7 +169,7 @@
         List<CreationCode> codes = await CreationCodeService.GetCreationCodes();
         var code = codes.Find(c => c.Code == CreationCode && c.Active == 1);
 
-        if (codes.Any(c => c.Code == CreationCode && c.Active == 1) && Email != "" && CompanyName != "" && CompanyLocation != null && YesRadioPalletExchange != 2 && Freight != null && Password1 == Password2)
+        if (code != null && code.Active != 0 && Email != "" && CompanyName != "" && CompanyLocation != null && YesRadioPalletExchange != 2 && Freight != null && Password1 == Password2)
         {
             supplierObject.Profile = new Profile();
             supplierObject.Profile.Username = Email;
@@ -189,7 +189,7 @@
                 NavigationManager.NavigateTo($"/overview_supplier/{user.Id}", true);
             }
         }
-        else if(codes.Any(c => c.Code != CreationCode || c.Active == 0))
+        else if(code.Active == 0 || code == null)
         {
             CodeError = "Your creation code is invalid!";
         }else

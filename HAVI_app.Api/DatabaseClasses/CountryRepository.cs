@@ -21,6 +21,11 @@ namespace HAVI_app.Api.DatabaseClasses
             return await _context.Countries.FirstOrDefaultAsync(c => c.Id == id);
         }
 
+        public async Task<Country> GetCountryWithProfile(int profileId)
+        {
+            return await _context.Countries.Where(c => c.ProfileId == profileId).Include(c => c.Profile).FirstOrDefaultAsync();
+        }
+
         public async Task<Country> GetCountryWithName(string name)
         {
             return await _context.Countries.FromSqlRaw($"select * from Country where CountryName LIKE '{name}'").FirstOrDefaultAsync();

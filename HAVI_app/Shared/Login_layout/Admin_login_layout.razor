@@ -39,7 +39,7 @@
             </div>
         </div>
     </form>
-    <div>
+    <div class="text-center">
         <p>@_authMessage</p>
     </div>
 </div>
@@ -52,25 +52,27 @@
     [Parameter]
     public string Password { get; set; }
 
-
-    [CascadingParameter]
-    private Task<AuthenticationState> authenticationStateTask { get; set; }
-
     private string _authMessage;
 
     private async Task LogUsername()
     {
-        var user = await ProfileService.GetProfileByUsernameAndpassword(Username, Password);
-
-        if (user != null && user.Usertype == 0 && user.Password == Password)
+        if(Username != null && Password != null)
         {
-            string countryName = Username.Substring(0, 2);
-            Country country = await CountryService.GetCountryWithName(countryName);
-            NavigationManager.NavigateTo($"/overview_admin/{country.Id}", true);
+            var user = await ProfileService.GetProfileByUsernameAndpassword(Username, Password);
+
+            if (user != null && user.Usertype == 0 && user.Password == Password)
+            {
+                Country country = await CountryService.GetCountryWithProfile(user.Id);
+                NavigationManager.NavigateTo($"/overview_admin/{country.Id}", true);
+            }
+            else
+            {
+                _authMessage = "The username or password is incorrect, please try again!";
+            }
         }
         else
         {
-            _authMessage = "The username or password is incorrect, please try again!";
+            _authMessage = "You forgot to input an username and password!";
         }
     }
 }
