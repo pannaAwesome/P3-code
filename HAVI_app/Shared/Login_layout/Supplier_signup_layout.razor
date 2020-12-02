@@ -142,11 +142,11 @@
 
     public string CompanyName { get; set; } = "";
 
-    public string CompanyLocation { get; set; } = "";
+    public string CompanyLocation { get; set; }
 
     public int YesRadioPalletExchange { get; set; } = 2;
 
-    public string Freight { get; set; } = "";
+    public string Freight { get; set; }
 
     public string Password1 { get; set; } = "";
 
@@ -167,8 +167,9 @@
     private async void CreateNewSupplier()
     {
         List<CreationCode> codes = await CreationCodeService.GetCreationCodes();
+        var code = codes.Find(c => c.Code == CreationCode && c.Active == 1);
 
-        if(codes.Any(c => c.Code == CreationCode) && Email != "" && CompanyName != "" && CompanyLocation != "" && YesRadioPalletExchange != 2 && Freight != "" && Password1 == Password2)
+        if (codes.Any(c => c.Code == CreationCode && c.Active == 1) && Email != "" && CompanyName != "" && CompanyLocation != null && YesRadioPalletExchange != 2 && Freight != null && Password1 == Password2)
         {
             supplierObject.Profile = new Profile();
             supplierObject.Profile.Username = Email;
@@ -181,15 +182,19 @@
 
             if (supplierObject != null)
             {
+
+                code.Active = 0;
+                await CreationCodeService.UpdateCreationCode(code.Id, code);
                 var user = await SupplierService.CreateSupplier(supplierObject);
                 NavigationManager.NavigateTo($"/overview_supplier/{user.Id}", true);
             }
-        }else if(!codes.Any(c => c.Code == CreationCode))
+        }
+        else if(codes.Any(c => c.Code != CreationCode || c.Active == 0))
         {
             CodeError = "Your creation code is invalid!";
         }else
         {
-            CodeError = "You forgot to fill out som information!";
+            CodeError = "You forgot to fill out some information!";
         }
     }
 }

@@ -3,7 +3,7 @@
 @page "/supplier_info_form/{Id:int}"
 @inherits HAVI_app.Classes.Validation
 @inject Models.ArticleInformation Article
-@inject HAVI_app.Services.Classes.CountryService ContryService
+@inject HAVI_app.Services.Classes.LocationService LocationService
 @inject HAVI_app.Services.Classes.ArticleInformationService ArticleInformationService 
 
 
@@ -41,10 +41,10 @@
                     </td>
                     <td>
                         <select class="form-control" name="company_location" @bind="Article.CompanyLocation" required>
-                            <option disabled selected>-- select an option --</option>
+                            <option disabled selected>-- select or search for an option --</option>
                                 @foreach (var item in contries)
                                 {
-                                    <option>@item.CountryName</option>
+                                    <option>@item.Country</option>
                                 }
                         </select>
                     </td>
@@ -258,7 +258,7 @@
     [Parameter]
     public int Id { get; set; }
 
-    List<Country> contries = new List<Country>();
+    List<Location> contries = new List<Location>();
 
     public string EmailValidated;
 
@@ -296,7 +296,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        contries = await ContryService.GetCountries();
+        contries = await LocationService.GetLocations();
         Article = await ArticleInformationService.GetArticleInformation(Id);
     }
 }
