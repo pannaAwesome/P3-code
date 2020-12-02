@@ -40,13 +40,13 @@ namespace HAVI_app.Models
         public int InsertEanSap { get; set; }
         public int InsertGrinSap { get; set; }
         public int InsertBosSap { get; set; }
-        public int Eannumber { get; set; }
-        public int Grinnumber { get; set; }
-        public int Bosnumber { get; set; }
-        public int Gtinnumber { get; set; }
-        public int Lrinnumber { get; set; }
-        public int Sprnnumber { get; set; }
-        public int Carlanumber { get; set; }
+        public string Eannumber { get; set; }
+        public string Grinnumber { get; set; }
+        public string Bosnumber { get; set; }
+        public string Gtinnumber { get; set; }
+        public string Lrinnumber { get; set; }
+        public string Sprnnumber { get; set; }
+        public string Carlanumber { get; set; }
         public int PrimaryDcIloscode { get; set; }
         public int TransitTimeForHavi { get; set; }
         public int AmountInCurrency { get; set; }

@@ -54,7 +54,7 @@
                         <label for="country_origin" class="required">Country of origin:</label>
                     </td>
                     <td colspan="6">
-                        <select class="form-control" name="county_origin" @onchange="@(async (ChangeEventArgs __e) => { Article.CountryOfOrigin = __e.Value.ToString(); })" required>
+                        <select class="form-control" name="county_origin" @onchange="@((ChangeEventArgs __e) => { Article.CountryOfOrigin = __e.Value.ToString(); })" required>
                             <option disabled selected>-- select or search for an option --</option>
                                 @foreach (var item in contries)
                                 {
@@ -75,7 +75,7 @@
                         <label for="imported_from" class="required ">Imported from:</label>
                     </td>
                     <td colspan="6">
-                        <select class="form-control" name="imported_from" @onchange="@(async (ChangeEventArgs __e) => { Article.ImportedFrom = __e.Value.ToString(); })" required>
+                        <select class="form-control" name="imported_from" @onchange="@((ChangeEventArgs __e) => { Article.ImportedFrom = __e.Value.ToString(); })" required>
                             <option disabled selected>-- select or search for an option --</option>
                                 @foreach (var item in contries)
                                 {
@@ -285,7 +285,7 @@
         {
             MaxTemperatureStorageValidated = "btn-danger";
         }
-        if (!IntOnly(Article.LeadTime) || !MustNotBeZeroOrNegativeNumbere(Article.Leadtime))
+        if (!IntOnly(Article.LeadTime) || !MustNotBeZeroOrNegativeNumbere(Article.LeadTime))
         {
             LeadTimeValidated = "btn-danger";
         }

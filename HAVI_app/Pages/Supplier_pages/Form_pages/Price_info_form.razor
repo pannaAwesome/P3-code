@@ -25,7 +25,8 @@
                         <label for="set_currency" class="required">Set currency:</label>
                     </td>
                     <td colspan="4">
-                        <select class="form-control" name="set_currency" @bind="Article.SetCurrency" required>
+                        <select class="form-control" name="set_currency" @onchange="@((ChangeEventArgs __e) => Article.SetCurrency = __e.Value.ToString())" required>
+                            <option disabled selected>-- select or search for an option --</option>
                             @foreach (var item in contries)
                             {
                                 <option>@item.CurrencyName</option>
@@ -88,7 +89,7 @@
                             </td>
 
                             <td>
-                                <select class="form-control" name="afgift-@i" @bind="Article.OtherCostsForArticles[i].InformCostType" required>
+                                <select class="form-control" name="afgift-@i"  @onchange="@((ChangeEventArgs __e) => Article.OtherCostsForArticles[i].InformCostType = __e.Value.ToString())" required>
                                     <option disabled selected>-- select an option --</option>
                                     @foreach(InformCostType item in costType)
                                     {

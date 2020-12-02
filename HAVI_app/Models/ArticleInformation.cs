@@ -31,7 +31,7 @@ namespace HAVI_app.Models
         public string Salesunit { get; set; } = "";
         public int ArticlesPerSalesunit { get; set; }
         public string SupplierArticleName { get; set; } = "";
-        public int Gtinnumber { get; set; }
+        public string Gtinnumber { get; set; }
         public int Shelflife { get; set; }
         public int MinimumShelflife { get; set; }
         public int OrganicArticle { get; set; }

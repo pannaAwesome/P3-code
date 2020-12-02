@@ -44,7 +44,7 @@
                         <label for="salesunit" class="required">Salesunit:</label>
                     </td>
                     <td>
-                        <select class="form-control" name="salesunit" @bind="Article.Salesunit" required>
+                        <select class="form-control" name="salesunit" @onchange="@((ChangeEventArgs __e) => Article.Salesunit = __e.Value.ToString())" required>
                             <option disabled selected>-- select an option --</option>
                                 @foreach (var item in sales)
                                 {
@@ -209,7 +209,7 @@
 
     private void GTINfiller()
     {
-        Article.Gtinnumber = GTINValidation(Article.Gtinnumber);
+        //Article.Gtinnumber = GTINValidation(Article.Gtinnumber);
     }
 
     public void ValidationArticleInfoForm()
@@ -218,7 +218,7 @@
         if (LettersOnly(Article.ArticleName) && MustNotBeZeroOrNegativeNumbere(Article.ArticlesPerSalesunit) &&
             MustNotBeZeroOrNegativeNumbere(Article.Shelflife) && MustNotBeZeroOrNegativeNumbere(Article.MinimumShelflife))
         {
-            Article.Gtinnumber = GTINValidation(Article.Gtinnumber);
+            //Article.Gtinnumber = GTINValidation(Article.Gtinnumber);
 
             NavigationManager.NavigateTo($"/measurement_info_form", true);
         }
