@@ -11,7 +11,7 @@ namespace HAVI_app.Models
     {
         public ArticleInformation()
         {
-            OtherCostsForArticles = new HashSet<OtherCostsForArticle>();
+            OtherCostsForArticles = new List<OtherCostsForArticle>();
         }
 
         [Key]
@@ -61,6 +61,6 @@ namespace HAVI_app.Models
 
         [JsonIgnore]
         public virtual Article Article { get; set; } = null;
-        public virtual ICollection<OtherCostsForArticle> OtherCostsForArticles { get; set; } = null;
+        public virtual List<OtherCostsForArticle> OtherCostsForArticles { get; set; } = null;
     }
 }

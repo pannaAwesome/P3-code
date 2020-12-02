@@ -3,6 +3,7 @@
 @page "/price_info_form"
 @inject Models.ArticleInformation Article
 @inject HAVI_app.Services.Classes.SetCurrencyService SetCurrencyService
+@inject HAVI_app.Services.Classes.InformCostTypeService InformCostTypeService 
 
 <HAVI_app.Shared.Supplier_layout.Form_header SupplierState="filled" ArticleState="filled" MeasurementState="filled" ShipmentState="filled" PriceState="active" Id="Article.Id" />
 
@@ -61,10 +62,10 @@
 
                     <td colspan="4">
                         <div class="text-center">
-                            <input type="radio" name="organic" value="yes" @onchange="@((x) => AddOtherCost(x.Value.ToString()))" checked="@(Article.OtherCosts == 1)" @oninput="(() => Article.OtherCosts = 1)" required>
+                            <input type="radio" name="organic" value="yes" @onclick="() => Article.OtherCosts = 1" required>
                             <label for="yes">Yes</label>
                             &nbsp;
-                            <input type="radio" name="organic" value="no" checked="@(Article.OtherCosts == 2)" @onchange="@(() => Article.OtherCosts = 2)"/>
+                            <input type="radio" name="organic" value="no" @onclick="() => Article.OtherCosts = 0" />
                             <label for="no">No</label>
                         </div>
                     </td>
@@ -81,25 +82,25 @@
                 <table>
                     @for (int i = 1; i <= NumberOfOtherCosts; i++)
                     {
-
                         <tr>
                             <td>
                                 <label for="afgift-@i">Inform cost type:</label>
                             </td>
 
                             <td>
-                                <select class="form-control" name="afgift-@i" @bind="Article.OtherCosts" required>
+                                <select class="form-control" name="afgift-@i" @bind="Article.OtherCostsForArticles[i].InformCostType" required>
                                     <option disabled selected>-- select an option --</option>
-                                    <option>Chokoladeafgift</option>
-                                    <option>Miljøafgift</option>
-                                    <option>En anden afgift</option>
+                                    @foreach(InformCostType item in costType)
+                                    {
+                                        <option>@item.CostType</option>
+                                    }
                                 </select>
                             </td>
                             <td>
                                 <label for="amount-@i">Amount in @Article.SetCurrency:</label>
                             </td>
                             <td>
-                                <input type="number" class="form-control" name="amount-@i" @bind="Article.AmountInCurrency" required @onblur="Sum" maxlength="10">
+                                <input type="number" class="form-control" name="amount-@i" @bind="Article.OtherCostsForArticles[i].Amount" required maxlength="10">
                             </td>
                             @if (i == NumberOfOtherCosts)
                             {
@@ -110,18 +111,7 @@
                                 }
                             }
                         </tr>
-
                     }
-
-                    <tr>
-                        <td colspan="1"></td>
-                        <td colspan="2" class="text-right">
-                            <label class="text-right" for="totalAmount">Total amount in @Article.SetCurrency</label>
-                        </td>
-                        <td>
-                            <label>@TotalAmount</label>
-                        </td>
-                    </tr>
                 </table>
             }
             <div class="row justify-content-center">
@@ -137,32 +127,26 @@
 </div>
 
 @code {
-
-    [Parameter]
     public string SetCurrency { get; set; }
 
-    [Parameter]
     public int PurchasePrice { get; set; }
 
-    [Parameter]
     public int AmountInCurrency { get; set; }
 
-    [Parameter]
     public string CostRegardingArticle { get; set; }
 
-    [Parameter]
     public string CostType { get; set; }
 
     public int TotalAmount = 0;
-}
 
-@code{
+    public int NumberOfOtherCosts { get; set; } = 0;
+
     List<SetCurrency> contries = new List<SetCurrency>();
+    List<InformCostType> costType = new List<InformCostType>();
 
     public void OnPostForward()
     {
         NavigationManager.NavigateTo($"/confirm_details", true);
-
     }
 
     public void OnPostBack()
@@ -172,42 +156,23 @@
 
     protected override async Task OnInitializedAsync()
     {
+        Article.OtherCostsForArticles = new List<OtherCostsForArticle>();
         contries = await SetCurrencyService.GetSetCurrencies();
+        costType = await InformCostTypeService.GetInformCostTypes();
     }
 
-    private int NumberOfOtherCosts = 1;
-
-    private string ExtraCosts = "";
-
-    //private string OtherCost = "no";
-
-    private void AddOtherCost(string othercostvalue)
-    {
-        if (othercostvalue == "yes")
-        {
-            //OtherCost = "yes";
-        }
-        else
-        {
-            //OtherCost = "no";
-        }
-    }
 
     private void AddExtraCosts()
     {
+        Article.OtherCostsForArticles.Add(new OtherCostsForArticle() { Id = 0 });
         NumberOfOtherCosts++;
-
     }
 
     private void RemoveExtraCosts()
     {
-        if(NumberOfOtherCosts != 0)
-        {
-            NumberOfOtherCosts--;
-        }
-    }
-
-    private void Sum()
-    {
+        int numberLast = Article.OtherCostsForArticles.Count - 1;
+        OtherCostsForArticle last = Article.OtherCostsForArticles.ElementAt(numberLast);
+        Article.OtherCostsForArticles.Remove(last);
+        NumberOfOtherCosts--;
     }
 }
