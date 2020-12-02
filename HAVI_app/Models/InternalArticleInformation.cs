@@ -41,7 +41,6 @@ namespace HAVI_app.Models
         public int InsertGrinSap { get; set; }
         public int InsertBosSap { get; set; }
         public int Eannumber { get; set; }
-        public int ShelflifeAtHavi { get; set; }
         public int Grinnumber { get; set; }
         public int Bosnumber { get; set; }
         public int Gtinnumber { get; set; }
