@@ -1,9 +1,10 @@
 ﻿@layout HAVI_app.Shared.Supplier_layout.Form_layout
 @inject Microsoft.AspNetCore.Components.NavigationManager NavigationManager
 @page "/price_info_form"
+@inherits HAVI_app.Classes.Validation
 @inject Models.ArticleInformation Article
 @inject HAVI_app.Services.Classes.SetCurrencyService SetCurrencyService
-@inject HAVI_app.Services.Classes.InformCostTypeService InformCostTypeService 
+@inject HAVI_app.Services.Classes.InformCostTypeService InformCostTypeService
 
 <HAVI_app.Shared.Supplier_layout.Form_header SupplierState="filled" ArticleState="filled" MeasurementState="filled" ShipmentState="filled" PriceState="active" Id="Article.Id" />
 
@@ -46,11 +47,11 @@
                         <label for="purchase_price" class="required">Purchase price:</label>
                     </td>
                     <td colspan="4">
-                        <input type="number" class="form-control" name="purchase_price" @bind="Article.PurchasePrice"required maxlength="10">
+                        <input type="number" class="form-control @PurchasePriceValidated" name="purchase_price" @bind="Article.PurchasePrice" required maxlength="10">
                     </td>
                     <td>
                         <HAVI_app.Shared.Shared_layout.Questionmark_top>
-                            Insert the price of the article you and HAVI has agreed upon
+                            Insert the price of the article you and HAVI has agreed upon. This must not be zero or less
                         </HAVI_app.Shared.Shared_layout.Questionmark_top>
 
                     </td>
@@ -89,9 +90,9 @@
                             </td>
 
                             <td>
-                                <select class="form-control" name="afgift-@i"  @onchange="@((ChangeEventArgs __e) => Article.OtherCostsForArticles[i].InformCostType = __e.Value.ToString())" required>
+                                <select class="form-control" name="afgift-@i" @onchange="@((ChangeEventArgs __e) => Article.OtherCostsForArticles[i].InformCostType = __e.Value.ToString())" required>
                                     <option disabled selected>-- select an option --</option>
-                                    @foreach(InformCostType item in costType)
+                                    @foreach (InformCostType item in costType)
                                     {
                                         <option>@item.CostType</option>
                                     }
@@ -120,7 +121,7 @@
                     <input type="button" class="btn cancel-button button-size" value="Back" @onclick="OnPostBack" />
                 </div>
                 <div class="text-left col-6">
-                    <input type="submit" class="btn green-button button-size" value="Next"/>
+                    <input type="submit" class="btn green-button button-size" value="Next" />
                 </div>
             </div>
         </EditForm>
@@ -131,6 +132,8 @@
     public string SetCurrency { get; set; }
 
     public int PurchasePrice { get; set; }
+
+    public string PurchasePriceValidated { get; set; }
 
     public int AmountInCurrency { get; set; }
 
@@ -145,9 +148,18 @@
     List<SetCurrency> contries = new List<SetCurrency>();
     List<InformCostType> costType = new List<InformCostType>();
 
+
     public void OnPostForward()
     {
-        NavigationManager.NavigateTo($"/confirm_details", true);
+        if (MustNotBeZeroOrNegativeNumbere(Article.PurchasePrice))
+        {
+            NavigationManager.NavigateTo($"/confirm_details", true);
+        }
+
+        if (!MustNotBeZeroOrNegativeNumbere(Article.PurchasePrice))
+        {
+             PurchasePriceValidated = "btn-danger";
+        }
     }
 
     public void OnPostBack()
