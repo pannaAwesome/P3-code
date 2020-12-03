@@ -1,5 +1,9 @@
 ﻿@using BlazorTable
 @inherits OverviewTableHaviPurchaser
+@inject HAVI_app.Models.ArticleInformation ArticleExcel
+@inject Microsoft.JSInterop.IJSRuntime JS
+@using System.IO
+@using HAVI_app.Classes
 
 <div class="modal fade" id="deleting-rows" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -36,7 +40,7 @@
         <button class="btn trash-button @hideornot" data-toggle="modal" data-target="#deleting-rows"></button>
     </div>
     <div class="col-8 justify-content-end p-1">
-        <button type="button" class="btn button-options-overview">Export article informations</button>
+        <button type="button" class="btn button-options-overview" @onclick="ExportArticle">Export article informations</button>
     </div>
 </div>
 
@@ -66,3 +70,22 @@
         </Table>
     </div>
 </div>
+
+@code {
+    MemoryStream excelStream;
+
+    public async Task ExportArticle()
+    {
+        foreach (Article item in Articles)
+        {
+            if (item.ArticleState is (int)ArticleState.RobotReady)
+            {
+                HAVI_app.Classes.Excel service = new HAVI_app.Classes.Excel();
+                excelStream = service.CreateXlsIO(item);
+
+                await JS.InvokeAsync<Article>($"{ArticleExcel.ArticleName}-{ArticleExcel.CompanyName}-{ArticleExcel.Id}.xlsx", excelStream.ToArray());
+                item.ArticleState = (int)ArticleState.Completed;
+            }
+        }
+    }
+}
