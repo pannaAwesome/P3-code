@@ -34,9 +34,9 @@ namespace HAVI_app.Shared.Shared_layout.HAVI_tabpages
             article.ErrorOwner = ErrorSender;
             article.ArticleState = (int)ArticleState.Error;
 
-            ArticleService.UpdateArticle(ArticleId, article);
+            await ArticleService.UpdateArticle(ArticleId, article);
 
-            NavigationManager.NavigateTo("/article_view", true);
+            NavigationManager.NavigateTo($"/article_view/{article.CountryId}", true);
         }
     }
 }

@@ -49,7 +49,7 @@ namespace HAVI_app.Models
         public string Carlanumber { get; set; }
         public int PrimaryDcIloscode { get; set; }
         public int TransitTimeForHavi { get; set; }
-        public int AmountInCurrency { get; set; }
+        public double AmountInForeignCurrency { get; set; }
 
         [JsonIgnore]
         public virtual Article Article { get; set; } = null;

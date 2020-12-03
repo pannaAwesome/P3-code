@@ -1,8 +1,20 @@
-﻿@page "/pick_storage"
-@layout HAVI_app.Shared.Admin_layout.Show_artikel_layout
+﻿@inject HAVI_app.Services.Classes.PrimaryDCILOSCodeService PrimaryDCILOSCodeService
+@inject HAVI_app.Services.Classes.InternalArticleInformationService InternalArticleInformationService
 
-<h3>Pick storage</h3>
+<div class="col-11">
+    <h4>Pick storage:</h4>
+</div>
+<div class="col-1 @EditPossible">
+    @if (EditingFields)
+    {
+        <div class="save-button" @onclick="Saving"></div>
+    }
+    else
+    {
+        <div class="edit-button" @onclick="Editing"></div>
+    }
 
+</div>
 <div class="justify-content-center row">
     <div class="col-12">
         <form>
@@ -12,54 +24,31 @@
                         <label for="primary_dc" class="required">Primary DC ILOS Code:</label>
                     </td>
                     <td>
-                        <select class="form-control" name="primary_dc">
+                        <select class="form-control" name="primary_dc" @onchange="@((ChangeEventArgs __e) => Article.InternalArticleInformation.PrimaryDcIloscode = Int32.Parse(__e.Value.ToString()))" disabled="@IsDisabled">
                             <option disabled selected>-- select an option --</option>
-                            <option>400</option>
-                            <option>500</option>
-                            <option>600</option>
+                            @foreach (PrimaryDciloscode item in Codes)
+                            {
+                                <option>@item.PrimaryCode</option>
+                            }
                         </select>
                     </td>
                 </tr>
 
                 <tr>
-                    <td>
-                        <label for="sap_plant1" class="required">SAP Plant: 0640 // 400 </label>
-                    </td>
-                    <td>
-                        <input type="radio" name="sap_plant1" id="yes" value="yes" @enabledOrNot>
-                        <label for="yes">Yes</label>
-                        &nbsp;
-                        <input type="radio" id="no" name="sap_plant1" @enabledOrNot>
-                        <label for="no">No</label>
-                    </td>
+                    @foreach (PrimaryDciloscode item in Codes)
+                    {
+                        <td>
+                            <label for="sap_plant1" class="required">SAP Plant: @item.Sapplant</label>
+                        </td>
+                        <td>
+                            <input type="radio" name="sap_plant1" id="yes" value="@item.Sapplant" @onchange="@((ChangeEventArgs __e) => UpdateSapplant(__e.Value.ToString()))" disabled="@IsDisabled">
+                            <label for="yes">Yes</label>
+                            &nbsp;
+                            <input type="radio" id="no" name="sap_plant1">
+                            <label for="no">No</label>
+                        </td>
+                    }
                 </tr>
-
-                <tr>
-                    <td>
-                        <label for="sap_plant2" class="required">SAP Plant: 0650 // 500 </label>
-                    </td>
-                    <td>
-                        <input type="radio" name="sap_plant2" id="yes" value="yes" @enabledOrNot>
-                        <label for="yes">Yes</label>
-                        &nbsp;
-                        <input type="radio" id="no" name="sap_plant2" @enabledOrNot>
-                        <label for="no">No</label>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <label for="sap_plant3" class="required">SAP Plant: 0660 // 600 </label>
-                    </td>
-                    <td>
-                        <input type="radio" name="sap_plant3" id="yes" value="yes" @enabledOrNot>
-                        <label for="yes">Yes</label>
-                        &nbsp;
-                        <input type="radio" id="no" name="sap_plant3" @enabledOrNot>
-                        <label for="no">No</label>
-                    </td>
-                </tr>
-
             </table>
         </form>
     </div>
@@ -67,5 +56,63 @@
 
 @code {
     [Parameter]
-    public string enabledOrNot { get; set; }
+    public Article Article { get; set; }
+
+    [Parameter]
+    public bool IsDisabled { get; set; }
+
+    [Parameter]
+    public string EditPossible { get; set; }
+
+    public List<Sapplant> SapPlants = new List<Sapplant>();
+
+    public List<PrimaryDciloscode> Codes = new List<PrimaryDciloscode>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Codes = await PrimaryDCILOSCodeService.GetPrimaryDCILOSCodes(Article.CountryId);
+
+        if (!IsDisabled)
+        {
+            Article.InternalArticleInformation.Sapplants = new List<Sapplant>();
+            foreach (PrimaryDciloscode item in Codes)
+            {
+                Article.InternalArticleInformation.Sapplants.Add(new Sapplant() { SapplantName = item.Sapplant });
+            }
+        }
+        else
+        {
+            InternalArticleInformation internalInfo = await InternalArticleInformationService.GetInternalArticleInformation(Article.InternalArticleInformationId);
+            SapPlants = internalInfo.Sapplants;
+            Article.InternalArticleInformation.Sapplants = SapPlants;
+        }
+    }
+
+    public void UpdateSapplant(string value)
+    {
+        int i = 0;
+        foreach (Sapplant plant in Article.InternalArticleInformation.Sapplants)
+        {
+            if (plant.SapplantName == value)
+            {
+                Article.InternalArticleInformation.Sapplants[i].SapplantValue = plant.SapplantValue == 1 ? 0 : 1;
+            }
+            i++;
+        }
+    }
+
+    public bool EditingFields = false;
+
+    public void Editing()
+    {
+        EditingFields = true;
+        IsDisabled = false;
+    }
+
+    public async void Saving()
+    {
+        await InternalArticleInformationService.UpdateInternalArticleInformation(Article.InternalArticleInformationId, Article.InternalArticleInformation);
+        EditingFields = false;
+        IsDisabled = true;
+    }
 }

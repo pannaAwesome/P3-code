@@ -6,6 +6,7 @@
 @inject HAVI_app.Services.Classes.ArticleInformationService ArticleInformationService 
 @inject HAVI_app.Services.Classes.ArticleService ArticleService
 @inject HAVI_app.Services.Classes.SupplierService SupplierService 
+@inject HAVI_app.Services.Classes.InternalArticleInformationService InternalArticleInformationService
 @using HAVI_app.Classes
 
 <HAVI_app.Shared.Supplier_layout.Form_header SupplierState="filled" ArticleState="filled" MeasurementState="filled" ShipmentState="filled" PriceState="filled" ConfirmState="active" Id="Article.Id" />
@@ -654,7 +655,9 @@
         Article thisArticle = await ArticleService.GetArticleWithInformation(Article.Id);
         thisArticle.ArticleState = (int)ArticleState.Submitted;
         thisArticle.ArticleInformationCompleted = 1;
+        thisArticle.InternalArticleInformation.AmountInForeignCurrency = Article.PurchasePrice;
         await ArticleService.UpdateArticle(thisArticle.Id, thisArticle);
+        await InternalArticleInformationService.UpdateInternalArticleInformation(thisArticle.InternalArticleInformationId, thisArticle.InternalArticleInformation);
 
         Supplier supplier = await SupplierService.GetSupplier(thisArticle.SupplierId);
 

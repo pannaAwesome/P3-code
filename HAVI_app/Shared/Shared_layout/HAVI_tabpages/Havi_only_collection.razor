@@ -1,97 +1,129 @@
 ﻿@inject NavigationManager NavigationManager
+@inject HAVI_app.Services.Classes.ArticleService ArticleService
+@inject HAVI_app.Services.Classes.InternalArticleInformationService InternalArticleInformationService
+@using HAVI_app.Classes 
 
-@if (PageIndex == 0)
+@if (Article == null)
 {
-    <div class="row">
-        <div class="col-6">
-            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Havi_only.Internal_info EnabledOrNot="enabled"/>
-        </div>
-        <div class="col-6">
-            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Supplier_information Id="ArticleId" />
-            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Article_information ArticleName="d-none" ArticlePerSalesunit="d-none" SupplierNameNumber="d-none" GTINNumber="d-none" Id="ArticleId" />
-        </div>
+    <div class="spinner">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
     </div>
 }
-
-@if (PageIndex == 1)
+else
 {
-    <div class="row">
-        <div class="col-6">
-            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Havi_only.Alias_info />
-        </div>
-        <div class="col-6">
-            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Article_information Id="ArticleId" ArticleName="d-none" ArticlePerSalesunit="d-none" Salesunit="d-none" SupplierNameNumber="d-none" Shelflife="d-none" MinShelflife="d-none" OrganicArticle="d-none" />
-        </div>
-    </div>
-}
-
-@if (PageIndex == 2)
-{
-    <div class="row">
-        <div class="col-8 d-flex justify-content-center">
-            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Havi_only.Pick_storage />
-        </div>
-    </div>
-}
-
-@if (PageIndex == 3)
-{
-    <div class="row">
-        <div class="col-6">
-            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Havi_only.Bundle_info />
-        </div>
-        <div class="col-6">
-            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Article_information Id="ArticleId" SupplierNameNumber="d-none" GTINNumber="d-none" Shelflife="d-none" MinShelflife="d-none" OrganicArticle="d-none" />master
-        </div>
-    </div>
-}
-
-@if (PageIndex == 4)
-{
-    <div class="row">
-        <div class="col-6">
-            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Article_information Id="ArticleId" Shelflife="d-none" MinShelflife="d-none" GTINNumber="d-none" ArticlePerSalesunit="d-none" SupplierNameNumber="d-none" Salesunit="d-none" />
-        </div>
-        <div class="col-6">
-            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Shipment_information Id="ArticleId" />
-        </div>
-    </div>
-    <div class="row">
-        <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Havi_only.QIP_info />
-    </div>
-}
-
-<br />
-<br />
-
-<div class="row justify-content-center">
     @if (PageIndex == 0)
     {
-        <div class="col-6 text-center"><button class="btn green-button" @onclick="PageUp">Next</button></div>
+        <div class="row">
+            <div class="col-6">
+                <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Havi_only.Internal_info Article="Article" EditPossible="@EditPossible" IsDisabled="IsDisabled"/>
+            </div>
+            <div class="col-6">
+                <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Supplier_information Article="Article" />
+                <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Article_information ArticleName="d-none" ArticlePerSalesunit="d-none" SupplierNameNumber="d-none" GTINNumber="d-none" Article="Article" />
+            </div>
+        </div>
     }
 
-    @if (PageIndex > 0)
+    @if (PageIndex == 1)
     {
-        <div class="col-6 text-right"><button class="btn cancel-button" @onclick="PageDown">Back</button></div>
+        <div class="row">
+            <div class="col-6">
+                <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Havi_only.Alias_info Article="Article" EditPossible="@EditPossible" IsDisabled="IsDisabled" />
+            </div>
+            <div class="col-6">
+                <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Article_information Article="Article" ArticleName="d-none" ArticlePerSalesunit="d-none" Salesunit="d-none" SupplierNameNumber="d-none" Shelflife="d-none" MinShelflife="d-none" OrganicArticle="d-none" />
+            </div>
+        </div>
     }
 
-    @if (PageIndex < 4 && PageIndex != 0)
+    @if (PageIndex == 2)
     {
-        <div class="col-6 text-left"><button class="btn green-button" @onclick="PageUp">Next</button></div>
+        <div class="row">
+            <div class="col-8 d-flex justify-content-center">
+                <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Havi_only.Pick_storage Article="Article" EditPossible="@EditPossible" IsDisabled="IsDisabled" />
+            </div>
+        </div>
+    }
+
+    @if (PageIndex == 3)
+    {
+        <div class="row">
+            <div class="col-6">
+                <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Havi_only.Bundle_info Article="Article" EditPossible="@EditPossible" IsDisabled="IsDisabled" />
+            </div>
+            <div class="col-6">
+                <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Article_information Article="Article" SupplierNameNumber="d-none" GTINNumber="d-none" Shelflife="d-none" MinShelflife="d-none" OrganicArticle="d-none" />master
+            </div>
+        </div>
     }
 
     @if (PageIndex == 4)
     {
-        <div class="col-6 text-left"><button class="btn green-button" @onclick="ReturnToOverview">Save</button></div>
+        <div class="row">
+            <div class="col-6">
+                <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Article_information Article="Article" Shelflife="d-none" MinShelflife="d-none" GTINNumber="d-none" ArticlePerSalesunit="d-none" SupplierNameNumber="d-none" Salesunit="d-none" />
+            </div>
+            <div class="col-6">
+                <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Shipment_information Article="Article" />
+            </div>
+        </div>
+        <div class="row">
+            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Havi_only.QIP_info Article="Article" EditPossible="@EditPossible" IsDisabled="IsDisabled" />
+        </div>
     }
-</div>
 
+    <br />
+    <br />
+
+    <div class="row justify-content-center">
+        @if (PageIndex == 0)
+        {
+            <div class="col-6 text-center"><button class="btn green-button" @onclick="PageUp">Next</button></div>
+        }
+
+        @if (PageIndex > 0)
+        {
+            <div class="col-6 text-right"><button class="btn cancel-button" @onclick="PageDown">Back</button></div>
+        }
+
+        @if (PageIndex < 4 && PageIndex != 0)
+        {
+            <div class="col-6 text-left"><button class="btn green-button" @onclick="PageUp">Next</button></div>
+        }
+
+        @if (PageIndex == 4)
+        {
+            <div class="col-6 text-left"><button class="btn green-button" @onclick="ReturnToOverview">Save</button></div>
+        }
+    </div>
+}
 
 @code{
     [Parameter]
-    public string Username { get; set; }
+    public int ArticleId { get; set; }
+
+    [Parameter]
+    public string User { get; set; }
+
+    [Parameter]
+    public int UserId { get; set; }
+
+    [Parameter]
+    public bool IsDisabled { get; set; }
+
+    [Parameter]
+    public string EditPossible { get; set; }
+
+    public Article Article;
 
     private int PageIndex = 0;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Article = await ArticleService.GetArticle(ArticleId);
+    }
 
     private void PageUp()
     {
@@ -113,13 +145,15 @@
 
     private void ReturnToOverview()
     {
-        if(Username == "purchaser@info.com")
+        if(Article.ArticleState == (int)ArticleState.Error)
         {
-            NavigationManager.NavigateTo("/overview_purchaser", true);
-        }
-        else NavigationManager.NavigateTo("/article_view", true);
-    }
 
-    [Parameter]
-    public int ArticleId { get; set; }
+        }
+
+        if (User == "Purchaser")
+        {
+            NavigationManager.NavigateTo($"/overview_purchaser/{UserId}", true);
+        }
+        else NavigationManager.NavigateTo($"/article_view/{UserId}", true);
+    }
 }
