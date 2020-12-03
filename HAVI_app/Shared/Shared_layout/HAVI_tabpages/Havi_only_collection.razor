@@ -95,7 +95,7 @@ else
 
         @if (PageIndex == 4)
         {
-            <div class="col-6 text-left"><button class="btn green-button" @onclick="ReturnToOverview">Save</button></div>
+            <div class="col-6 text-left"><button class="btn green-button" @onclick="ReturnToOverview"></button></div>
         }
     </div>
 }
@@ -108,9 +108,6 @@ else
     public string User { get; set; }
 
     [Parameter]
-    public int UserId { get; set; }
-
-    [Parameter]
     public bool IsDisabled { get; set; }
 
     [Parameter]
@@ -118,11 +115,14 @@ else
 
     public Article Article;
 
+    public string SaveOrNot = "";
+
     private int PageIndex = 0;
 
     protected override async Task OnInitializedAsync()
     {
         Article = await ArticleService.GetArticle(ArticleId);
+        SaveOrNot = Article.ArticleState == (int)ArticleState.Completed || Article.ArticleState == (int)ArticleState.Error ? "Return to overview" : "Save";
     }
 
     private void PageUp()
@@ -145,15 +145,18 @@ else
 
     private void ReturnToOverview()
     {
-        if(Article.ArticleState == (int)ArticleState.Error)
+        if(Article.ArticleState == (int)ArticleState.Submitted)
         {
-
+            Article.ArticleState = (int)ArticleState.RobotReady;
+            await ArticleService.UpdateArticle(Article.Id, Article);
         }
+
+        await InternalArticleInformationService.UpdateInternalArticleInformation(Article.InternalArticleInformationId, Article.InternalArticleInformation);
 
         if (User == "Purchaser")
         {
-            NavigationManager.NavigateTo($"/overview_purchaser/{UserId}", true);
+            NavigationManager.NavigateTo($"/overview_purchaser/{Article.PurchaserId}", true);
         }
-        else NavigationManager.NavigateTo($"/article_view/{UserId}", true);
+        else NavigationManager.NavigateTo($"/article_view/{Article.CountryId}", true);
     }
 }

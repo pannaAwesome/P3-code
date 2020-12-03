@@ -34,22 +34,24 @@
                     </td>
                 </tr>
 
-                <tr>
-                    @foreach (PrimaryDciloscode item in Codes)
-                    {
-                        <td>
-                            <label for="sap_plant1" class="required">SAP Plant: @item.Sapplant</label>
-                        </td>
-                        <td>
-                            <input type="radio" name="sap_plant1" id="yes" value="@item.Sapplant" @onchange="@((ChangeEventArgs __e) => UpdateSapplant(__e.Value.ToString()))" disabled="@IsDisabled">
-                            <label for="yes">Yes</label>
-                            &nbsp;
-                            <input type="radio" id="no" name="sap_plant1">
-                            <label for="no">No</label>
-                        </td>
-                    }
-                </tr>
-            </table>
+
+                @foreach (PrimaryDciloscode item in Codes)
+                {
+            <tr>
+                <td>
+                    <label for="sap_plant1" class="required">SAP Plant: @item.Sapplant</label>
+                </td>
+                <td>
+                    <input type="radio" name="sap_plant1" id="yes" value="@item.Sapplant" @onchange="@((ChangeEventArgs __e) => UpdateSapplant(__e.Value.ToString()))" disabled="@IsDisabled">
+                    <label for="yes">Yes</label>
+                    &nbsp;
+                    <input type="radio" id="no" name="sap_plant1">
+                    <label for="no">No</label>
+                </td>
+            </tr>
+                        }
+                    
+                </table>
         </form>
     </div>
 </div>
