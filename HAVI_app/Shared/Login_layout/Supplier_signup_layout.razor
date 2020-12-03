@@ -189,7 +189,11 @@
                 NavigationManager.NavigateTo($"/overview_supplier/{user.Id}", true);
             }
         }
-        else if(code.Active == 0 || code == null)
+        else if(code == null)
+        {
+            CodeError = "Your creation code is invalid!";
+        }
+        else if(code.Active == 0)
         {
             CodeError = "Your creation code is invalid!";
         }else

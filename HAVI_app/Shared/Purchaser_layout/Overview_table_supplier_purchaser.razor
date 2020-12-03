@@ -52,7 +52,9 @@
                 <div class="form-group mx-sm-3 mb-2">
                     <label for="creationCode" class="sr-only"></label>
                     <div>
-                        <input type="text" id="creationCode" value="@CreationCode" />
+                        <p>Generate a code in which a company can use to sign up for the web-page</p>
+                        <p>This code need to be linked with an email</p>
+                        <input type="text" id="creationCode" value="@CreationCode" disabled/>
                         <button type="button" class="btn green-button" @onclick="GenerateCreationCode">Generate</button>
                     </div>
                 </div>
