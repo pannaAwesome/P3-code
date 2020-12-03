@@ -1,7 +1,7 @@
 ﻿@inject HAVI_app.Services.Classes.InternalArticleInformationService InternalArticleInformationService
 @inject HAVI_app.Services.Classes.QIPNumberService QIPNumberService
 
-@if (Qips == null)
+@if (Qips == null || Answers.Count != 10)
 {
     <div class="spinner">
         <div class="bounce1"></div>
@@ -244,81 +244,81 @@ else
         [Parameter]
         public string EditPossible { get; set; }
 
-public List<Qipnumber> Qips = new List<Qipnumber>();
-    public List<Qipnumber> Answers = new List<Qipnumber>();
-    public InternalArticleInformation InternalArticleInformation = new InternalArticleInformation();
+        public List<Qipnumber> Qips;
+        public List<Qipnumber> Answers = new List<Qipnumber>();
+        public InternalArticleInformation InternalArticleInformation = new InternalArticleInformation();
 
-    protected override async Task OnInitializedAsync()
-    {
-        Qips = await QIPNumberService.GetQIPNumbers();
-        InternalArticleInformation = await InternalArticleInformationService.GetInternalArticleInformation(Article.InternalArticleInformationId);
-
-        if (!IsDisabled)
+        protected override async Task OnInitializedAsync()
         {
-            for (int i = 1; i <= 10; i++)
-            {
-                Answers.Add(new Qipnumber()
-                {
-                    Qipdescription = "",
-                    AnswerOptions = "",
-                    SetAnswer = 0,
-                    OKValue = 0,
-                    LowBoundary = 0,
-                    HighBoundary = 0,
-                    FrequencyType = 0,
-                    Frequency = 0
-                });
+            Qips = await QIPNumberService.GetQIPNumbers();
+            InternalArticleInformation = await InternalArticleInformationService.GetInternalArticleInformation(Article.InternalArticleInformationId);
 
-                Article.InternalArticleInformation.Qips.Add(new Qip());
+            if (!IsDisabled)
+            {
+                for (int i = 1; i <= 10; i++)
+                {
+                    Answers.Add(new Qipnumber()
+                    {
+                        Qipdescription = "",
+                        AnswerOptions = "",
+                        SetAnswer = 0,
+                        OKValue = 0,
+                        LowBoundary = 0,
+                        HighBoundary = 0,
+                        FrequencyType = 0,
+                        Frequency = 0
+                    });
+
+                    Article.InternalArticleInformation.Qips.Add(new Qip());
+                }
+            }
+            else
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    Qip qip = InternalArticleInformation.Qips[i];
+                    Qipnumber number = Qips.Find(q => q.QipnumberName == qip.QipnameNumber);
+                    Answers.Add(new Qipnumber()
+                    {
+                        QipnumberName = qip.QipnameNumber,
+                        Qipdescription = qip.Qipdescription,
+                        AnswerOptions = qip.QipanswerOptions,
+                        SetAnswer = number.SetAnswer,
+                        OKValue = number.OKValue,
+                        LowBoundary = number.LowBoundary,
+                        HighBoundary = number.HighBoundary,
+                        FrequencyType = number.FrequencyType,
+                        Frequency = number.Frequency
+                    });
+                }
             }
         }
-        else
+
+        public bool EditingFields = false;
+
+        public void Editing()
         {
-            for (int i = 0; i < 10; i++)
-            {
-                Qip qip = InternalArticleInformation.Qips[i];
-                Qipnumber number = Qips.Find(q => q.QipnumberName == qip.QipnameNumber);
-                Answers.Add(new Qipnumber()
-                {
-                    QipnumberName = qip.QipnameNumber,
-                    Qipdescription = qip.Qipdescription,
-                    AnswerOptions = qip.QipanswerOptions,
-                    SetAnswer = number.SetAnswer,
-                    OKValue = number.OKValue,
-                    LowBoundary = number.LowBoundary,
-                    HighBoundary = number.HighBoundary,
-                    FrequencyType = number.FrequencyType,
-                    Frequency = number.Frequency
-                });
-            }
+            EditingFields = true;
+            IsDisabled = false;
         }
-    }
 
-    public bool EditingFields = false;
+        public async void Saving()
+        {
+            await InternalArticleInformationService.UpdateInternalArticleInformation(Article.InternalArticleInformationId, Article.InternalArticleInformation);
+            EditingFields = false;
+            IsDisabled = true;
+        }
 
-    public void Editing()
-    {
-        EditingFields = true;
-        IsDisabled = false;
-    }
-
-    public async void Saving()
-    {
-        await InternalArticleInformationService.UpdateInternalArticleInformation(Article.InternalArticleInformationId, Article.InternalArticleInformation);
-        EditingFields = false;
-        IsDisabled = true;
-    }
-
-    public void UpdateQip(int number, string name)
-    {
-        Qipnumber qip = Qips.Find(q => q.QipnumberName == name);
-        Article.InternalArticleInformation.Qips[number].Qipdescription = qip.Qipdescription;
-        Article.InternalArticleInformation.Qips[number].QipanswerOptions = qip.AnswerOptions;
-        Answers[number].SetAnswer = qip.SetAnswer;
-        Answers[number].OKValue = qip.OKValue;
-        Answers[number].LowBoundary = qip.LowBoundary;
-        Answers[number].HighBoundary = qip.HighBoundary;
-        Answers[number].FrequencyType = qip.FrequencyType;
-        Answers[number].Frequency = qip.Frequency;
-    }
+        public void UpdateQip(int number, string name)
+        {
+            Qipnumber qip = Qips.Find(q => q.QipnumberName == name);
+            Article.InternalArticleInformation.Qips[number].Qipdescription = qip.Qipdescription;
+            Article.InternalArticleInformation.Qips[number].QipanswerOptions = qip.AnswerOptions;
+            Answers[number].SetAnswer = qip.SetAnswer;
+            Answers[number].OKValue = qip.OKValue;
+            Answers[number].LowBoundary = qip.LowBoundary;
+            Answers[number].HighBoundary = qip.HighBoundary;
+            Answers[number].FrequencyType = qip.FrequencyType;
+            Answers[number].Frequency = qip.Frequency;
+        }
     }

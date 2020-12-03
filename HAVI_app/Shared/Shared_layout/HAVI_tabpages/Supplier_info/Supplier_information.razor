@@ -50,10 +50,10 @@
         </td>
         <td colspan="2">
             <div class="text-center">
-                <input type="radio" name="pallet_exchange" id="yes" value="yes" checked="@(Article.ArticleInformation.PalletExchange == 1)" disabled @onclick="() => Article.ArticleInformation.PalletExchange = 1">
+                <input type="radio" name="pallet_exchange" id="yes" value="yes" checked="@(Article.ArticleInformation.PalletExchange == 1)" disabled="@IsDisabled" @onclick="() => Article.ArticleInformation.PalletExchange = 1">
                 <label for="yes">Yes</label>
                 &nbsp;
-                <input type="radio" id="no" name="pallet_exchange" checked="@(Article.ArticleInformation.PalletExchange == 0)" disabled @onclick="() => Article.ArticleInformation.PalletExchange = 0">
+                <input type="radio" id="no" name="pallet_exchange" checked="@(Article.ArticleInformation.PalletExchange == 0)" disabled="@IsDisabled" @onclick="() => Article.ArticleInformation.PalletExchange = 0">
                 <label for="no">No</label>
             </div>
         </td>
@@ -64,14 +64,14 @@
             <label for="freight_responsibility" value="">Freight responsibility</label>
         </td>
         <td colspan="2">
-            <input type="text" class="form-control" name="freight" @bind="Article.ArticleInformation.FreightResponsibility"/>
+            <input type="text" class="form-control" name="freight" @bind="Article.ArticleInformation.FreightResponsibility" disabled/>
         </td>
     </tr>
 
     <tr class="@SpecialInfo">
         <td colspan="3">
             <label for="special_info">Special information regarding the article or cooperation?</label>
-            <textarea class="form-control" name="special_info" @bind="Article.ArticleInformation.SpecialInformation" disabled="@IsDisabled">Absolutely none</textarea>
+            <textarea class="form-control" name="special_info" @bind="Article.ArticleInformation.SpecialInformation" disabled="@IsDisabled"></textarea>
         </td>
     </tr>
 
@@ -82,10 +82,10 @@
 
         <td colspan="2">
             <div class="text-center">
-                <input type="radio" name="transport" value="yes" checked="@(Article.ArticleInformation.TransportBooking == 1)" disabled @onclick="() => Article.ArticleInformation.TransportBooking = 1">
+                <input type="radio" name="transport" value="yes" checked="@(Article.ArticleInformation.TransportBooking == 1)" disabled="@IsDisabled" @onclick="() => Article.ArticleInformation.TransportBooking = 1">
                 <label for="yes">Yes</label>
                 &nbsp;
-                <input type="radio" value="no" name="transport" checked="@(Article.ArticleInformation.TransportBooking == 0)" disabled @onclick="() => Article.ArticleInformation.TransportBooking = 0">
+                <input type="radio" value="no" name="transport" checked="@(Article.ArticleInformation.TransportBooking == 0)" disabled="@IsDisabled" @onclick="() => Article.ArticleInformation.TransportBooking = 0">
                 <label for="no">No</label>
             </div>
         </td>
@@ -97,7 +97,7 @@
                 <label for="class">Transit time:</label>
             </td>
             <td>
-                <input type="number" class="form-control" @bind="Article.ArticleInformation.TransitTime" disabled>
+                <input type="number" class="form-control" @bind="Article.ArticleInformation.TransitTime" disabled="@IsDisabled">
             </td>
             <td>
                 <label for="class" class="labels">days</label>
@@ -111,10 +111,10 @@
         </td>
         <td colspan="2">
             <div class="text-center">
-                <input type="radio" name="dangerous" value="yes" checked="@(Article.ArticleInformation.DangerousGoods == 1)" disabled @onclick="() => Article.ArticleInformation.DangerousGoods = 1" />
+                <input type="radio" name="dangerous" value="yes" checked="@(Article.ArticleInformation.DangerousGoods == 1)" disabled="@IsDisabled" @onclick="() => Article.ArticleInformation.DangerousGoods = 1" />
                 <label for="yes">Yes</label>
                 &nbsp;
-                <input type="radio" value="no" name="dangerous" checked="@(Article.ArticleInformation.DangerousGoods == 0)" disabled @onclick="() => Article.ArticleInformation.DangerousGoods = 0" />
+                <input type="radio" value="no" name="dangerous" checked="@(Article.ArticleInformation.DangerousGoods == 0)" disabled="@IsDisabled" @onclick="() => Article.ArticleInformation.DangerousGoods = 0" />
                 <label for="no">No</label>
             </div>
         </td>
@@ -126,7 +126,7 @@
                 <label for="class">Class:</label>
             </td>
             <td colspan="2">
-                <input type="text" class="form-control" @bind="Article.ArticleInformation.Class" disabled>
+                <input type="text" class="form-control" @bind="Article.ArticleInformation.Class" disabled="@IsDisabled">
             </td>
         </tr>
 
@@ -180,18 +180,4 @@
     private string BookingTransport = "yes";
 
     private string DangerousGoods = "yes";
-
-    private bool EditingFields = false;
-
-    protected bool IsDisabled = true;
-
-    private void Editing()
-    {
-        EditingFields = true;
-    }
-
-    private void Saving()
-    {
-        EditingFields = false;
-    }
 }

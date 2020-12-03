@@ -198,9 +198,9 @@
     </tr>
     <tr>
         <td>Price:</td>
-        <td> <input type="text" class="form-control" name="currency_in_country" @bind="Article.InternalArticleInformation.PriceInCountryCurrency" disabled/></td>
+        <td> <input type="text" class="form-control" name="currency_in_country" value="@Article.InternalArticleInformation.PriceInCountryCurrency" disabled/></td>
         <td>
-            <button @onclick="CalculatePrice">Calculate</button>
+            <button class="btn green-button" @onclick="CalculatePrice">Calculate</button>
         </td>
     </tr>
     <tr>
