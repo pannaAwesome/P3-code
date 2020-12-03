@@ -90,7 +90,7 @@
                             </td>
 
                             <td>
-                                <select class="form-control" name="afgift-@i" @bind="Article.OtherCostsForArticles[i].InformCostType" required>
+                                <select class="form-control" name="afgift-@i" @onchange="@((ChangeEventArgs __e) => UpdateInformCostType(__e.Value.ToString()))" required>
                                     <option disabled selected>-- select an option --</option>
                                     @foreach (InformCostType item in costType)
                                     {
@@ -102,9 +102,9 @@
                                 <label for="amount-@i">Amount in @Article.SetCurrency:</label>
                             </td>
                             <td>
-                                <input type="number" class="form-control" name="amount-@i" @bind="Article.OtherCostsForArticles[i].Amount" required maxlength="10">
+                                <input type="number" class="form-control" name="amount-@i" @onblur="@(() => UpdateAmount(Amount))" @onchange="@((ChangeEventArgs __e) => Amount = __e.Value.ToString())" required maxlength="10">
                             </td>
-                            @if (i == NumberOfOtherCosts-1)
+                            @if (i == NumberOfOtherCosts)
                             {
                                 <td @onclick="AddExtraCosts"> &#10133; </td>
                                 @if (NumberOfOtherCosts != 1)
@@ -145,6 +145,8 @@
 
     public int NumberOfOtherCosts { get; set; } = 0;
 
+    public string Amount = "";
+
     List<SetCurrency> contries = new List<SetCurrency>();
     List<InformCostType> costType = new List<InformCostType>();
 
@@ -158,10 +160,8 @@
 
         if (!MustNotBeZeroOrNegativeNumbere(Article.PurchasePrice))
         {
-             PurchasePriceValidated = "btn-danger";
+            PurchasePriceValidated = "btn-danger";
         }
-
-
     }
 
     public void OnPostBack()
@@ -179,8 +179,12 @@
 
     private void AddExtraCosts()
     {
-        Article.OtherCostsForArticles.Add(new OtherCostsForArticle() { Id = 0 });
-        NumberOfOtherCosts++;
+        OtherCostsForArticle cost = new OtherCostsForArticle() { Id = 0, InformCostType = "1", Amount = -8586 };
+        if (Article.OtherCostsForArticles[^1] != cost)
+        {
+            Article.OtherCostsForArticles.Add(cost);
+            NumberOfOtherCosts++;
+        }
     }
 
     private void RemoveExtraCosts()
@@ -189,5 +193,23 @@
         OtherCostsForArticle last = Article.OtherCostsForArticles.ElementAt(numberLast);
         Article.OtherCostsForArticles.Remove(last);
         NumberOfOtherCosts--;
+    }
+
+    private void UpdateInformCostType(string value)
+    {
+        int id = Article.OtherCostsForArticles.FindIndex(o => o.InformCostType == "1");
+        OtherCostsForArticle cost = Article.OtherCostsForArticles.Find(o => o.InformCostType == "1");
+
+        cost.InformCostType = value;
+        Article.OtherCostsForArticles[id] = cost;
+    }
+
+    private void UpdateAmount(string value)
+    {
+        int id = Article.OtherCostsForArticles.FindIndex(o => o.Amount == -8586);
+        OtherCostsForArticle cost = Article.OtherCostsForArticles.Find(o => o.Amount == -8586);
+
+        cost.Amount = Int32.Parse(value);
+        Article.OtherCostsForArticles[id] = cost;
     }
 }
