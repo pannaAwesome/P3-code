@@ -64,7 +64,7 @@
 
                     <td colspan="4">
                         <div class="text-center">
-                            <input type="radio" name="organic" value="yes" @onclick="() => Article.OtherCosts = 1" required>
+                            <input type="radio" name="organic" value="yes" @onclick="() => { Article.OtherCosts = 1; AddExtraCosts(); }" required>
                             <label for="yes">Yes</label>
                             &nbsp;
                             <input type="radio" name="organic" value="no" @onclick="() => Article.OtherCosts = 0" />
