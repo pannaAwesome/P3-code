@@ -1,7 +1,6 @@
-﻿@inject HAVI_app.Shared.Shared_layout.HAVI_tabpages.ReportNewError Report
-@inject ViewError
+﻿@inherits ViewError
 
-@if (Country == null)
+@if (Article == null)
 {
     <div class="spinner">
         <div class="bounce1"></div>
@@ -16,15 +15,15 @@ else
     <table class="table table-borderless">
         <tr>
             <td><label for="found_in">Found in field:</label></td>
-            <td><input type="text" name="found_in" class="form-control" value="@Report.ErrorField" disabled /></td>
+            <td><input type="text" name="found_in" class="form-control" value="@Article.ErrorField" disabled /></td>
         </tr>
         <tr>
             <td><label for="description">Describe error:</label></td>
-            <td><textarea class="form-control" name="description" value="@Report.ErrorMessage" disabled></textarea></td>
+            <td><textarea class="form-control" name="description" value="@Article.ErrorMessage" disabled></textarea></td>
         </tr>
         <tr>
             <td><label for="found_by">Found by:</label></td>
-            <td><input name="found_by" class="form-control" type="text" value="@Report.ErrorSender" disabled /></td>
+            <td><input name="found_by" class="form-control" type="text" value="@Article.ErrorOwner" disabled /></td>
         </tr>
     </table>
     <div class="row country-buttons">
