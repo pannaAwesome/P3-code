@@ -16,130 +16,134 @@
 
     </div>
 </div>
-<table class="table table-borderless">
-    <tr class="@CompanyName">
-        <td>
-            <label for="company_name">Company name:</label>
-        </td>
-        <td colspan="2">
-            <input type="text" class="form-control" name="company_name" @bind="Article.ArticleInformation.CompanyName" disabled="@IsDisabled">
-        </td>
-    </tr>
-
-    <tr class="@CompanyLocation">
-        <td>
-            <label for="company_location">Company location:</label>
-        </td>
-        <td colspan="2">
-            <input type="text" class="form-control" name="company_location" @bind="Article.ArticleInformation.CompanyLocation" disabled>
-        </td>
-    </tr>
-
-    <tr class="@Email">
-        <td>
-            <label for="email">Email:</label>
-        </td>
-        <td colspan="2">
-            <input type="text" class="form-control" name="email" @bind="Article.ArticleInformation.Email" disabled="@IsDisabled">
-        </td>
-    </tr>
-
-    <tr class="@PalletExchange">
-        <td>
-            <label for="pallet_exchange" value="">Pallet exchange</label>
-        </td>
-        <td colspan="2">
-            <div class="text-center">
-                <input type="radio" name="pallet_exchange" value="yes" checked="@(Article.ArticleInformation.PalletExchange == 1)" disabled="@IsDisabled" @onclick="() => Article.ArticleInformation.PalletExchange = 1">
-                <label for="yes">Yes</label>
-                &nbsp;
-                <input type="radio" value="no" name="pallet_exchange" checked="@(Article.ArticleInformation.PalletExchange == 0)" disabled="@IsDisabled" @onclick="() => Article.ArticleInformation.PalletExchange = 0">
-                <label for="no">No</label>
-            </div>
-        </td>
-    </tr>
-
-    <tr class="@FreightResponse">
-        <td>
-            <label for="freight_responsibility" value="">Freight responsibility</label>
-        </td>
-        <td colspan="2">
-            <input type="text" class="form-control" name="freight" @bind="Article.ArticleInformation.FreightResponsibility" disabled/>
-        </td>
-    </tr>
-
-    <tr class="@SpecialInfo">
-        <td colspan="3">
-            <label for="special_info">Special information regarding the article or cooperation?</label>
-            <textarea class="form-control" name="special_info" @bind="Article.ArticleInformation.SpecialInformation" disabled="@IsDisabled"></textarea>
-        </td>
-    </tr>
-
-    <tr class="@BookTransport">
-        <td>
-            <label for="transport" value="">Are you in charge of booking transport?</label>
-        </td>
-
-        <td colspan="2">
-            <div class="text-center">
-                <input type="radio" name="transport" value="yes" checked="@(Article.ArticleInformation.TransportBooking == 1)" disabled="@IsDisabled" @onclick="() => Article.ArticleInformation.TransportBooking = 1">
-                <label for="yes">Yes</label>
-                &nbsp;
-                <input type="radio" value="no" name="transport" checked="@(Article.ArticleInformation.TransportBooking == 0)" disabled="@IsDisabled" @onclick="() => Article.ArticleInformation.TransportBooking = 0">
-                <label for="no">No</label>
-            </div>
-        </td>
-    </tr>
-    @if (Article.ArticleInformation.TransportBooking == 1)
-    {
-        <tr class="@TransitTime">
+<form>
+    <table class="table table-borderless">
+        <tr class="@CompanyName">
             <td>
-                <label for="class">Transit time:</label>
-            </td>
-            <td>
-                <input type="number" class="form-control" @bind="Article.ArticleInformation.TransitTime" disabled="@IsDisabled">
-            </td>
-            <td>
-                <label for="class" class="labels">days</label>
-            </td>
-        </tr>
-    }
-
-    <tr class="@ADR">
-        <td>
-            <label for="dangerous" value="">Is the article classified as dangerous goods (ADR)?</label>
-        </td>
-        <td colspan="2">
-            <div class="text-center">
-                <input type="radio" name="dangerous" value="yes" checked="@(Article.ArticleInformation.DangerousGoods == 1)" disabled="@IsDisabled" @onclick="() => Article.ArticleInformation.DangerousGoods = 1" />
-                <label for="yes">Yes</label>
-                &nbsp;
-                <input type="radio" value="no" name="dangerous" checked="@(Article.ArticleInformation.DangerousGoods == 0)" disabled="@IsDisabled" @onclick="() => Article.ArticleInformation.DangerousGoods = 0" />
-                <label for="no">No</label>
-            </div>
-        </td>
-    </tr>
-    @if (Article.ArticleInformation.DangerousGoods == 1)
-    {
-        <tr class="@Class">
-            <td>
-                <label for="class">Class:</label>
+                <label for="company_name">Company name:</label>
             </td>
             <td colspan="2">
-                <input type="text" class="form-control" @bind="Article.ArticleInformation.Class" disabled="@IsDisabled">
+                <input type="text" class="form-control" name="company_name" @bind="Article.ArticleInformation.CompanyName" disabled="@IsDisabled">
             </td>
         </tr>
 
-        <tr class="@Classification">
+        <tr class="@CompanyLocation">
             <td>
-                <label for="classificationCode">Classification code:</label>
+                <label for="company_location">Company location:</label>
             </td>
             <td colspan="2">
-                <input type="number" class="form-control" @bind="Article.ArticleInformation.ClassificationCode" disabled="@IsDisabled">
+                <input type="text" class="form-control" name="company_location" @bind="Article.ArticleInformation.CompanyLocation" disabled>
             </td>
         </tr>
-    }
-</table>
+
+        <tr class="@Email">
+            <td>
+                <label for="email">Email:</label>
+            </td>
+            <td colspan="2">
+                <input type="text" class="form-control" name="email" @bind="Article.ArticleInformation.Email" disabled="@IsDisabled">
+            </td>
+        </tr>
+
+        <tr class="@PalletExchange">
+            <td>
+                <label for="pallet_exchange" value="">Pallet exchange</label>
+            </td>
+            <td colspan="2">
+                <div class="text-center">
+                    <input type="radio" name="pallet_exchange" value="yes" checked="@(Article.ArticleInformation.PalletExchange == 1)" disabled="@IsDisabled" @onclick="() => Article.ArticleInformation.PalletExchange = 1">
+                    <label for="yes">Yes</label>
+                    &nbsp;
+                    <input type="radio" value="no" name="pallet_exchange" checked="@(Article.ArticleInformation.PalletExchange == 0)" disabled="@IsDisabled" @onclick="() => Article.ArticleInformation.PalletExchange = 0">
+                    <label for="no">No</label>
+                    
+                 
+                </div>
+            </td>
+        </tr>
+
+        <tr class="@FreightResponse">
+            <td>
+                <label for="freight_responsibility" value="">Freight responsibility</label>
+            </td>
+            <td colspan="2">
+                <input type="text" class="form-control" name="freight" @bind="Article.ArticleInformation.FreightResponsibility" disabled />
+            </td>
+        </tr>
+
+        <tr class="@SpecialInfo">
+            <td colspan="3">
+                <label for="special_info">Special information regarding the article or cooperation?</label>
+                <textarea class="form-control" name="special_info" @bind="Article.ArticleInformation.SpecialInformation" disabled="@IsDisabled"></textarea>
+            </td>
+        </tr>
+
+        <tr class="@BookTransport">
+            <td>
+                <label for="transport" value="">Are you in charge of booking transport?</label>
+            </td>
+
+            <td colspan="2">
+                <div class="text-center">
+                    <input type="radio" name="transport" value="yes" checked="@(Article.ArticleInformation.TransportBooking == 1)" disabled="@IsDisabled" @onclick="() => Article.ArticleInformation.TransportBooking = 1">
+                    <label for="yes">Yes</label>
+                    &nbsp;
+                    <input type="radio" value="no" name="transport" checked="@(Article.ArticleInformation.TransportBooking == 0)" disabled="@IsDisabled" @onclick="() => Article.ArticleInformation.TransportBooking = 0">
+                    <label for="no">No</label>
+                </div>
+            </td>
+        </tr>
+        @if (Article.ArticleInformation.TransportBooking == 1)
+        {
+            <tr class="@TransitTime">
+                <td>
+                    <label for="class">Transit time:</label>
+                </td>
+                <td>
+                    <input type="number" class="form-control" @bind="Article.ArticleInformation.TransitTime" disabled="@IsDisabled">
+                </td>
+                <td>
+                    <label for="class" class="labels">days</label>
+                </td>
+            </tr>
+        }
+
+        <tr class="@ADR">
+            <td>
+                <label for="dangerous" value="">Is the article classified as dangerous goods (ADR)?</label>
+            </td>
+            <td colspan="2">
+                <div class="text-center">
+                    <input type="radio" name="dangerous" value="yes" checked="@(Article.ArticleInformation.DangerousGoods == 1)" disabled="@IsDisabled" @onclick="() => Article.ArticleInformation.DangerousGoods = 1" />
+                    <label for="yes">Yes</label>
+                    &nbsp;
+                    <input type="radio" value="no" name="dangerous" checked="@(Article.ArticleInformation.DangerousGoods == 0)" disabled="@IsDisabled" @onclick="() => Article.ArticleInformation.DangerousGoods = 0" />
+                    <label for="no">No</label>
+                </div>
+            </td>
+        </tr>
+        @if (Article.ArticleInformation.DangerousGoods == 1)
+        {
+            <tr class="@Class">
+                <td>
+                    <label for="class">Class:</label>
+                </td>
+                <td colspan="2">
+                    <input type="text" class="form-control" @bind="Article.ArticleInformation.Class" disabled="@IsDisabled">
+                </td>
+            </tr>
+
+            <tr class="@Classification">
+                <td>
+                    <label for="classificationCode">Classification code:</label>
+                </td>
+                <td colspan="2">
+                    <input type="number" class="form-control" @bind="Article.ArticleInformation.ClassificationCode" disabled="@IsDisabled">
+                </td>
+            </tr>
+        }
+    </table>
+</form>
 </div>
 
 @code {
