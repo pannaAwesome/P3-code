@@ -16,65 +16,67 @@
 
     </div>
 </div>
-<table class="table table-borderless">
-    <tr class="@Length">
-        <td>
-            <label for="length">Length per salesunit:</label>
-        </td>
-        <td>
-            <input type="number" class="form-control" id="Length" @bind="Article.ArticleInformation.LengthPrSalesunit" disabled="@IsDisabled">
-        </td>
-        <td>
-            <label class="center-for-units" for="length">cm</label>
-        </td>
-    </tr>
+<form>
+    <table class="table table-borderless">
+        <tr class="@Length">
+            <td>
+                <label for="length">Length per salesunit:</label>
+            </td>
+            <td>
+                <input type="number" class="form-control" id="Length" @bind="Article.ArticleInformation.LengthPrSalesunit" disabled="@IsDisabled">
+            </td>
+            <td>
+                <label class="center-for-units" for="length">cm</label>
+            </td>
+        </tr>
 
-    <tr class="@Width">
-        <td>
-            <label for="width">Width per salesunit:</label>
-        </td>
-        <td>
-            <input type="number" class="form-control" id="width" @bind="Article.ArticleInformation.WidthPrSalesunit" disabled="@IsDisabled">
-        </td>
-        <td>
-            <label class="center-for-units" for="width">cm</label>
-        </td>
-    </tr>
+        <tr class="@Width">
+            <td>
+                <label for="width">Width per salesunit:</label>
+            </td>
+            <td>
+                <input type="number" class="form-control" id="width" @bind="Article.ArticleInformation.WidthPrSalesunit" disabled="@IsDisabled">
+            </td>
+            <td>
+                <label class="center-for-units" for="width">cm</label>
+            </td>
+        </tr>
 
-    <tr class="@Height">
-        <td>
-            <label for="height">Height per salesunit:</label>
-        </td>
-        <td>
-            <input type="number" class="form-control" id="height" @bind="Article.ArticleInformation.HeightPrSalesunit" disabled="@IsDisabled">
-        </td>
-        <td>
-            <label class="center-for-units" for="height">cm</label>
-        </td>
-    </tr>
+        <tr class="@Height">
+            <td>
+                <label for="height">Height per salesunit:</label>
+            </td>
+            <td>
+                <input type="number" class="form-control" id="height" @bind="Article.ArticleInformation.HeightPrSalesunit" disabled="@IsDisabled">
+            </td>
+            <td>
+                <label class="center-for-units" for="height">cm</label>
+            </td>
+        </tr>
 
-    <tr class="@NetWeight">
-        <td>
-            <label for="net_weight">Net weight per salesunit:</label>
-        </td>
-        <td>
-            <input type="number" class="form-control" id="net_weight" @bind="Article.ArticleInformation.NetWeightPrSalesunit" disabled="@IsDisabled">
-        </td>
-        <td>
-            <label class="center-for-units" for="net_weight">kg</label>
-        </td>
-    </tr>
+        <tr class="@NetWeight">
+            <td>
+                <label for="net_weight">Net weight per salesunit:</label>
+            </td>
+            <td>
+                <input type="number" class="form-control" id="net_weight" @bind="Article.ArticleInformation.NetWeightPrSalesunit" disabled="@IsDisabled">
+            </td>
+            <td>
+                <label class="center-for-units" for="net_weight">kg</label>
+            </td>
+        </tr>
 
-    <tr class="@GrossWeight">
-        <td>
-            <label for="gross_weight">Gross weight per salesunit:</label>
-        </td>
-        <td>
-            <input type="number" class="form-control" id="gross_weight" @bind="Article.ArticleInformation.GrossWeightPrSalesunit" disabled="@IsDisabled">
-        </td>
-        <td>
-            <label class="center-for-units" for="gross_weight">kg</label>
-        </td>
-    </tr>
-</table>
+        <tr class="@GrossWeight">
+            <td>
+                <label for="gross_weight">Gross weight per salesunit:</label>
+            </td>
+            <td>
+                <input type="number" class="form-control" id="gross_weight" @bind="Article.ArticleInformation.GrossWeightPrSalesunit" disabled="@IsDisabled">
+            </td>
+            <td>
+                <label class="center-for-units" for="gross_weight">kg</label>
+            </td>
+        </tr>
+    </table>
+</form>
 </div>
