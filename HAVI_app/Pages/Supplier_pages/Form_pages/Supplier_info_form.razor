@@ -1,9 +1,10 @@
 ﻿@layout HAVI_app.Shared.Supplier_layout.Form_layout
 @inject Microsoft.AspNetCore.Components.NavigationManager NavigationManager
-@page "/supplier_info_form"
+@page "/supplier_info_form/{Id:int}"
 @inherits HAVI_app.Classes.Validation
 @inject Models.ArticleInformation Article
-@inject HAVI_app.Services.Classes.CountryService ContryService
+@inject HAVI_app.Services.Classes.LocationService LocationService
+@inject HAVI_app.Services.Classes.ArticleInformationService ArticleInformationService 
 
 
 <HAVI_app.Shared.Supplier_layout.Form_header SupplierState="active" />
@@ -40,19 +41,11 @@
                     </td>
                     <td>
                         <select class="form-control" name="company_location" @bind="Article.CompanyLocation" required>
-                            <option disabled selected>-- select an option --</option>
-                            @code{
-
-                                protected override async Task OnInitializedAsync()
+                            <option disabled selected>-- select or search for an option --</option>
+                                @foreach (var item in contries)
                                 {
-                                    var contries = await ContryService.GetCountries();
-
-                                    foreach (var item in contries)
-                                    {
-                                        <option>@item</option>
-                                    }
+                                    <option>@item.Country</option>
                                 }
-                            }
                         </select>
                     </td>
                     <td>
@@ -262,6 +255,10 @@
 
 
 @code {
+    [Parameter]
+    public int Id { get; set; }
+
+    List<Location> contries = new List<Location>();
 
     public string EmailValidated;
 
@@ -271,7 +268,9 @@
     {
         if (IsEmailValid(Article.Email) && ((Article.DangerousGoods == 1)  ? NumbersLettersDashOnly(Article.ClassificationCode) : true))
         {
-            NavigationManager.NavigateTo("/article_info_form", true);
+            Article.Id = Id;
+
+            NavigationManager.NavigateTo($"/article_info_form", true);
         }
 
         if (!IsEmailValid(Article.Email))
@@ -293,5 +292,11 @@
     void RemoveClassDanger()
     {
         ClassificationCodeValidated = "";
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        contries = await LocationService.GetLocations();
+        Article = await ArticleInformationService.GetArticleInformation(Id);
     }
 }

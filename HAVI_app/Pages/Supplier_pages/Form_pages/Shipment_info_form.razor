@@ -3,10 +3,10 @@
 @page "/shipment_info_form"
 @inherits HAVI_app.Classes.Validation
 @inject Models.ArticleInformation Article
-@inject HAVI_app.Services.Classes.CountryService ContryService
+@inject HAVI_app.Services.Classes.LocationService LocationService
 
 
-<HAVI_app.Shared.Supplier_layout.Form_header SupplierState="filled" ArticleState="filled" MeasurementState="filled" ShipmentState="active" />
+<HAVI_app.Shared.Supplier_layout.Form_header SupplierState="filled" ArticleState="filled" MeasurementState="filled" ShipmentState="active" Id="Article.Id" />
 <div class="row justify-content-center">
     <div class="col-10">
         <h3>Shipment information:</h3>
@@ -54,20 +54,12 @@
                         <label for="country_origin" class="required">Country of origin:</label>
                     </td>
                     <td colspan="6">
-                        <select class="form-control" name="county_origin" @bind="Article.CountryOfOrigin" required>
-                            <option disabled selected>-- select an option --</option>
-                            @code{
-
-                                protected override async Task OnInitializedAsync()
+                        <select class="form-control" name="county_origin" @onchange="@(async (ChangeEventArgs __e) => { Article.CountryOfOrigin = __e.Value.ToString(); })" required>
+                            <option disabled selected>-- select or search for an option --</option>
+                                @foreach (var item in contries)
                                 {
-                                    var contries = await ContryService.GetCountries();
-
-                                    foreach (var item in contries)
-                                    {
-                                        <option>@item</option>
-                                    }
+                                    <option>@item.Country</option>
                                 }
-                            }
                         </select>
                     </td>
                     <td>
@@ -83,19 +75,12 @@
                         <label for="imported_from" class="required ">Imported from:</label>
                     </td>
                     <td colspan="6">
-                        <select class="form-control" name="imported_from" @bind="Article.ImportedFrom" required>
-                            <option disabled selected>-- select an option --</option>
-                            @code{
-                                protected async Task OnInitializedAsync2()
+                        <select class="form-control" name="imported_from" @onchange="@(async (ChangeEventArgs __e) => { Article.ImportedFrom = __e.Value.ToString(); })" required>
+                            <option disabled selected>-- select or search for an option --</option>
+                                @foreach (var item in contries)
                                 {
-                                    var contries = await ContryService.GetCountries();
-
-                                    foreach (var item in contries)
-                                    {
-                                        <option>@item</option>
-                                    }
+                                    <option>@item.Country</option>
                                 }
-                            }
                         </select>
                     </td>
                     <td>
@@ -230,6 +215,8 @@
 
 @code {
 
+    List<Location> contries = new List<Location>();
+
     public string CartonPrPalletValidated;
 
     public string CartonPrLayerValidated;
@@ -313,5 +300,10 @@
     void RemoveClassDanger()
     {
         TollTarrifNoValidated = "";
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        contries = await LocationService.GetLocations();
     }
 }

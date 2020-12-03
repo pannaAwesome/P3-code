@@ -95,7 +95,7 @@ namespace HAVI_app.Classes
             return false;
         }
 
-        public int? GTINValidation(int? input)
+        public int GTINValidation(int? input)
         {
             string temp = input.ToString();
             List<char> GTIN = new List<char>();

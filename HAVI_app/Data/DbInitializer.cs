@@ -19,8 +19,8 @@ namespace HAVI_app.Data
             var profiles = new Profile[]
             {
                 new Profile{Username="DKAdmin", Password="1234", Usertype=0},
-                new Profile{Username="Purchaser", Password="1234", Usertype=1},
-                new Profile{Username="Supplier", Password="1234", Usertype=2}
+                new Profile{Username="testP@havi.com", Password="1234", Usertype=1},
+                new Profile{Username="testS@gmail.com", Password="1234", Usertype=2}
             };
 
             context.Profiles.AddRange(profiles);
@@ -51,8 +51,8 @@ namespace HAVI_app.Data
             {
                 new Purchaser{CountryId = countries.Single(c => c.CountryCode == "DK").Id,
                               Country = countries.Single(c => c.CountryCode == "DK"),
-                              ProfileId = profiles.Single(p => p.Username == "Purchaser").Id,
-                              Profile = profiles.Single(p => p.Username == "Purchaser"),
+                              ProfileId = profiles.Single(p => p.Username == "testP@havi.com").Id,
+                              Profile = profiles.Single(p => p.Username == "testP@havi.com"),
                               Articles = new List<Article>()
                               }
             };
@@ -62,7 +62,7 @@ namespace HAVI_app.Data
 
             var suppliers = new Supplier[]
             {
-                new Supplier{ProfileId = profiles.Single(p => p.Username == "Supplier").Id,
+                new Supplier{ProfileId = profiles.Single(p => p.Username == "testS@gmail.com").Id,
                              CompanyLocation="Denmark",
                              CompanyName="Hello and co.",
                              FreightResponsibility="EXW",

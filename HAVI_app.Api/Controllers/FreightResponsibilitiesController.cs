@@ -28,7 +28,7 @@ namespace HAVI_app.Api.Controllers
                 var result = await _freightResponsibilityRepository.GetFreightResponsibilities();
                 if (result == null)
                 {
-                    return NotFound();
+                    return Ok(new List<FreightResponsibility>());
                 }
                 return Ok(result);
             }

@@ -1,5 +1,5 @@
 ﻿using HAVI_app.Api.DatabaseClasses;
-
+using HAVI_app.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -27,7 +27,7 @@ namespace HAVI_app.Api.Controllers
                 var result = await _packagingGroupRepository.GetPackagingGroups();
                 if (result == null)
                 {
-                    return NotFound();
+                    return Ok(new List<PackagingGroup>());
                 }
                 return Ok(result);
             }

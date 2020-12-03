@@ -1,8 +1,10 @@
 ﻿using HAVI_app.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Formatting;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 
@@ -26,9 +28,24 @@ namespace HAVI_app.Services.Classes
             return await httpClient.GetFromJsonAsync<List<Article>>($"/api/articles/country/{countryid}");
         }
 
+        public async Task<List<Article>> GetArticlesForSupplier(int supplierId)
+        {
+            return await httpClient.GetFromJsonAsync<List<Article>>($"/api/articles/supplier/{supplierId}");
+        }
+
         public async Task<Article> GetArticle(int id)
         {
             return await httpClient.GetFromJsonAsync<Article>($"/api/articles/{id}");
+        }
+
+        public async Task<Article> GetArticleWithInformation(int id)
+        {
+            return await httpClient.GetFromJsonAsync<Article>($"/api/articles/information/{id}");
+        }
+
+        public async Task<Article> GetArticleWithInternal(int id)
+        {
+            return await httpClient.GetFromJsonAsync<Article>($"/api/articles/internal/{id}");
         }
 
         public async Task<List<Article>> GetArticles()
@@ -36,12 +53,13 @@ namespace HAVI_app.Services.Classes
             return await httpClient.GetFromJsonAsync<List<Article>>("/api/articles");
         }
 
-        public async void CreateArticle(Article article)
+        public async Task<Article> CreateArticle(Article article)
         {
-            await httpClient.PostAsJsonAsync("/api/articles", article);
+            var result = await httpClient.PostAsJsonAsync("/api/articles", article);
+            return await result.Content.ReadAsAsync<Article>();
         }
 
-        public async void UpdateArticle(int id, Article article)
+        public async Task UpdateArticle(int id, Article article)
         {
             await httpClient.PutAsJsonAsync($"/api/articles/{id}", article);
         }

@@ -2,6 +2,7 @@ using HAVI_app.Api.DatabaseClasses;
 
 using HAVI_app.Models;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
@@ -59,6 +60,7 @@ namespace HAVI_app.Api
             services.AddScoped<PurchaserRepository>();
             services.AddScoped<QIPNumberRepository>();
             services.AddScoped<SAPPlantRepository>();
+            //services.AddScoped<AuthenticationStateProvider>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

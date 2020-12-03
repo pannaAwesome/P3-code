@@ -4,7 +4,7 @@
 @inherits HAVI_app.Classes.Validation
 @inject Models.ArticleInformation Article
 
-<HAVI_app.Shared.Supplier_layout.Form_header SupplierState="filled" ArticleState="filled" MeasurementState="active" />
+<HAVI_app.Shared.Supplier_layout.Form_header SupplierState="filled" ArticleState="filled" MeasurementState="active" Id="Article.Id" />
 
 <div class="row justify-content-center">
     <div class="col-10">
@@ -122,6 +122,8 @@
 </div>
 
 @code {
+    [Parameter]
+    public int Id { get; set; }
 
     public string LengthValidated;
 
@@ -133,13 +135,13 @@
 
     public string GrossWeightValidated;
 
-    public void ValidationMeasurementForm() 
+    public void ValidationMeasurementForm()
     {
-        
+
         if (DoubleOnly(Article.LengthPrSalesunit) &&
-            DoubleOnly(Article.WidthPrSalesunit) && 
-            DoubleOnly(Article.HeightPrSalesunit) && 
-            DoubleOnly(Article.NetWeightPrSalesunit) &&  
+            DoubleOnly(Article.WidthPrSalesunit) &&
+            DoubleOnly(Article.HeightPrSalesunit) &&
+            DoubleOnly(Article.NetWeightPrSalesunit) &&
             DoubleOnly(Article.GrossWeightPrSalesunit))
         {
             NavigationManager.NavigateTo($"/shipment_info_form", true);

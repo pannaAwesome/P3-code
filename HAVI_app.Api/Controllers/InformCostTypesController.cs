@@ -28,7 +28,7 @@ namespace HAVI_app.Api.Controllers
                 var result = await _informCostTypeRepository.GetInformCostTypes();
                 if (result == null)
                 {
-                    return NotFound();
+                    return Ok(new List<InformCostType>());
                 }
                 return Ok(result);
             }
@@ -46,7 +46,7 @@ namespace HAVI_app.Api.Controllers
                 var result = await _informCostTypeRepository.GetInformCostType(id);
                 if (result == null)
                 {
-                    return NotFound();
+                    return new InformCostType();
                 }
                 else
                 {
@@ -71,7 +71,7 @@ namespace HAVI_app.Api.Controllers
 
                 var createdInformCostType = await _informCostTypeRepository.AddInformCostType(informCostType);
 
-                return CreatedAtAction(nameof(GetInformCostType), new { id = createdInformCostType.Id }, createdInformCostType);
+                return createdInformCostType;
             }
             catch (Exception)
             {

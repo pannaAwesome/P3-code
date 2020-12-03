@@ -1,4 +1,5 @@
 ﻿@using BlazorTable
+@inject NavigationManager NavigationManager
 @inherits HAVI_app.Shared.Admin_layout.ArticleTableAdmin
 
 <div class="modal fade" id="deleting-rows" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -37,7 +38,7 @@
     </div>
 </div>
 <div class="row">
-    
+
     <div class="col-12">
         <Table TableItem="Article" Items="Articles" ColumnReorder="true" TableClass="table table-hover" TableHeadClass="blue-tabel-header" RowClickAction="RowClicked" ShowSearchBar="true" SelectionType="SelectionType" SelectedItems="SelectedItems">
             <Column TableItem="Article" Title="Article name " Field="@(x => x.ArticleInformation.ArticleName)" Sortable="true"/>

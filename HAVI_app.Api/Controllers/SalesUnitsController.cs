@@ -28,7 +28,7 @@ namespace HAVI_app.Api.Controllers
                 var result = await _salesUnitRepository.GetSalesUnits();
                 if (result == null)
                 {
-                    return NotFound();
+                    return Ok(new List<SalesUnit>());
                 }
                 return Ok(result);
             }

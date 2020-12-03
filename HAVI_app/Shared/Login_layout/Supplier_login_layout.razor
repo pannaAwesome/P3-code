@@ -1,4 +1,6 @@
 ﻿@inject NavigationManager NavigationManager
+@inject HAVI_app.Services.Classes.ProfileService ProfileService
+@inject HAVI_app.Services.Classes.SupplierService SupplierService
 
 <div class="col-12 user-login">
     <div class="row justify-content-center">
@@ -15,7 +17,7 @@
                             <label>Email:</label>
                         </td>
                         <td>
-                            <input class="form-control" type="email" name="supplier_username" />
+                            <input class="form-control" type="email" name="supplier_username" @bind="Username" />
                         </td>
                     </tr>
                     <tr>
@@ -23,7 +25,7 @@
                             <label>Password:</label>
                         </td>
                         <td>
-                            <input class="form-control" type="password" name="supplier_password" />
+                            <input class="form-control" type="password" name="supplier_password" @bind="Password" />
                         </td>
                     </tr>
                 </table>
@@ -32,14 +34,37 @@
         <div class="row">
             <div class="col-5"></div>
             <div class="col-2 justify-content-center">
-                <input class="btn green-button" type="submit" name="Submit" value="Sign in" @onclick="CreateNewSupplier" />
+                <input class="btn green-button" type="button" name="Submit" value="Sign in" @onclick="LogUsername" />
             </div>
         </div>
     </form>
+    <div>
+        <p>@_authMessage</p>
+    </div>
 </div>
+
 @code {
-    private void CreateNewSupplier()
+
+    [Parameter]
+    public string Username { get; set; }
+
+    [Parameter]
+    public string Password { get; set; }
+
+    private string _authMessage;
+
+    private async Task LogUsername()
     {
-        NavigationManager.NavigateTo("/overview_supplier", true);
+        var user = await ProfileService.GetProfileByUsernameAndpassword(Username, Password);
+
+        if (user != (new Profile()) && user.Usertype == 2 && user.Password == Password)
+        {
+            Supplier supplier = await SupplierService.GetSupplierWithProfile(user.Id);
+            NavigationManager.NavigateTo($"/overview_supplier/{supplier.Id}", true);
+        }
+        else
+        {
+            _authMessage = "The username or password is incorrect, please try again!";
+        }
     }
 }

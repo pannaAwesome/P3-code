@@ -28,7 +28,7 @@ namespace HAVI_app.Api.Controllers
                 var result = await _vailedForCustomerRepository.GetVailedForCustomers(id);
                 if (result == null)
                 {
-                    return NotFound();
+                    return Ok(new List<VailedForCustomer>());
                 }
                 return Ok(result);
             }
@@ -46,7 +46,7 @@ namespace HAVI_app.Api.Controllers
                 var result = await _vailedForCustomerRepository.GetVailedForCustomer(id);
                 if (result == null)
                 {
-                    return NotFound();
+                    return new VailedForCustomer();
                 }
                 else
                 {
@@ -71,7 +71,7 @@ namespace HAVI_app.Api.Controllers
 
                 var createdVailedForCustomer = await _vailedForCustomerRepository.AddVailedForCustomer(vailedForCustomer);
 
-                return CreatedAtAction(nameof(GetVailedForCustomer), new { id = createdVailedForCustomer.Id }, createdVailedForCustomer);
+                return createdVailedForCustomer;
             }
             catch (Exception)
             {

@@ -28,7 +28,7 @@ namespace HAVI_app.Api.Controllers
                 var result = await _categoryRepository.GetILOSCategories(id);
                 if (result == null)
                 {
-                    return NotFound();
+                    return Ok(new List<Iloscategory>());
                 }
                 return Ok(result);
             }
@@ -46,7 +46,7 @@ namespace HAVI_app.Api.Controllers
                 var result = await _categoryRepository.GetILOSCategory(id);
                 if (result == null)
                 {
-                    return NotFound();
+                    return new Iloscategory();
                 }
                 else
                 {
@@ -71,7 +71,7 @@ namespace HAVI_app.Api.Controllers
 
                 var createdILOSCategory = await _categoryRepository.AddILOSCategory(category);
 
-                return CreatedAtAction(nameof(GetILOSCategory), new { id = createdILOSCategory.Id }, createdILOSCategory);
+                return createdILOSCategory;
             }
             catch (Exception)
             {

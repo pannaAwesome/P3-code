@@ -28,11 +28,32 @@ namespace HAVI_app.Api.Controllers
                 var result = await _creationCodeRepository.GetCreationCode(id);
                 if (result == null)
                 {
-                    return NotFound();
+                    return Ok(new CreationCode());
                 }
                 else
                 {
                     return result;
+                }
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database.");
+            }
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> GetCreationCodes()
+        {
+            try
+            {
+                var result = await _creationCodeRepository.GetCreationCodes();
+                if (result == null)
+                {
+                    return Ok(new List<CreationCode>());
+                }
+                else
+                {
+                    return Ok(result);
                 }
             }
             catch (Exception)
@@ -53,7 +74,7 @@ namespace HAVI_app.Api.Controllers
 
                 var createdCreationCode = await _creationCodeRepository.AddCreationCode(creationCode);
 
-                return CreatedAtAction(nameof(GetCreationCode), new { id = createdCreationCode.Id }, createdCreationCode);
+                return createdCreationCode;
             }
             catch (Exception)
             {

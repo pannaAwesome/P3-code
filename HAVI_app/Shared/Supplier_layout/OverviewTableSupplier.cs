@@ -8,18 +8,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace HAVI_app.Shared.Purchaser_layout
+namespace HAVI_app.Shared.Supplier_layout
 {
-    public class OverviewTableHaviPurchaser : ComponentBase
+    public class OverviewTableSupplier : ComponentBase
     {
+        [Parameter]
+        public int Id { get; set; }
+
         [Inject]
         public NavigationManager NavigationManager { get; set; }
 
         [Inject]
         public ArticleService ArticleService { get; set; }
-
-        [Parameter]
-        public int Id { get; set; }
 
         public List<Article> Articles;
 
@@ -52,18 +52,14 @@ namespace HAVI_app.Shared.Purchaser_layout
                 ArticleService.DeleteArticle(article.Id);
             }
 
-            NavigationManager.NavigateTo($"/overview_purchaser/{Id}", true);
+            NavigationManager.NavigateTo($"/overview_supplier/{Id}", true);
         }
 
         public void RowClicked(Article data)
         {
-            if (SelectionType == SelectionType.None && data.ArticleState == (int)ArticleState.Completed)
+            if (SelectionType == SelectionType.None && data.ArticleState == (int)ArticleState.Created)
             {
-                NavigationManager.NavigateTo($"/article_completed_view/{data.Id}/{data.Purchaser.Profile.Username}", true);
-            }
-            else if (SelectionType == SelectionType.None && data.ArticleState == (int)ArticleState.Error)
-            {
-                NavigationManager.NavigateTo($"/article_error_view/{data.Id}/{data.Purchaser.Profile.Username}", true);
+                NavigationManager.NavigateTo($"/supplier_info_form/{data.Id}", true);
             }
             else
             {
@@ -74,14 +70,7 @@ namespace HAVI_app.Shared.Purchaser_layout
 
         protected async override Task OnInitializedAsync()
         {
-            var robot = await ArticleService.GetArticleWithCertainState(1, (int)ArticleState.RobotReady);
-            var error = await ArticleService.GetArticleWithCertainState(1, (int)ArticleState.Error);
-            var completed = await ArticleService.GetArticleWithCertainState(1, (int)ArticleState.Completed);
-
-            Articles = new List<Article>();
-            Articles.AddRange(robot);
-            Articles.AddRange(error);
-            Articles.AddRange(completed);
+            Articles = await ArticleService.GetArticlesForSupplier(Id);
         }
     }
 }

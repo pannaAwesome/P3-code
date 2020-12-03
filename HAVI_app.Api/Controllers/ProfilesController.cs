@@ -28,7 +28,7 @@ namespace HAVI_app.Api.Controllers
                 var result = await _profileRepository.GetProfileForCountry(id);
                 if (result == null)
                 {
-                    return NotFound();
+                    return new Profile();
                 }
                 else
                 {
@@ -49,7 +49,28 @@ namespace HAVI_app.Api.Controllers
                 var result = await _profileRepository.GetProfile(id);
                 if (result == null)
                 {
-                    return NotFound();
+                    return new Profile();
+                }
+                else
+                {
+                    return result;
+                }
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database.");
+            }
+        }
+
+        [HttpGet("{username}/{password}")]
+        public async Task<ActionResult<Profile>> GetProfileUsernameAndPassword(string username, string password)
+        {
+            try
+            {
+                var result = await _profileRepository.GetProfileWithUsernameAndPassword(username, password);
+                if (result == null)
+                {
+                    return new Profile();
                 }
                 else
                 {
@@ -70,7 +91,7 @@ namespace HAVI_app.Api.Controllers
                 var result = await _profileRepository.GetProfiles();
                 if (result == null)
                 {
-                    return NotFound();
+                    return Ok(new List<Profile>());
                 }
                 return Ok(result);
             }
@@ -88,7 +109,7 @@ namespace HAVI_app.Api.Controllers
                 var result = await _profileRepository.DeleteProfileAsync(id);
                 if(result != null)
                 {
-                    return NotFound();
+                    return null;
                 }
                 return result;
             }

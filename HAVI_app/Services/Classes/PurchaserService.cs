@@ -45,10 +45,9 @@ namespace HAVI_app.Services.Classes
             await httpClient.DeleteAsync($"/api/purchasers/profile/{id}");
         }
 
-        public async Task<Purchaser> UpdatePurchaser(int id, Purchaser purchaser)
+        public async Task UpdatePurchaser(int id, Purchaser purchaser)
         {
-            var result = await httpClient.PutAsJsonAsync($"/api/purchasers/{id}", purchaser);
-            return await result.Content.ReadAsAsync<Purchaser>();
+            await httpClient.PutAsJsonAsync($"/api/purchasers/{id}", purchaser);
         }
 
         public async Task<Purchaser> GetPurchaserForProfile(int profileId)

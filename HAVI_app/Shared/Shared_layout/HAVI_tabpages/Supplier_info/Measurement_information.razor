@@ -1,5 +1,4 @@
-﻿@inherits MeasurementInformation
-<div class="col-12 havi-info-box">
+﻿<div class="col-12 havi-info-box">
 <div class="row justify-content-right">
     <div class="col-11">
         <h4> Measurements:</h4>
@@ -8,23 +7,23 @@
         @if (EditingFields)
         {
             <div class="save-button" @onclick="Saving"></div>
+            IsDisabled = false;
         }
         else
         {
             <div class="edit-button" @onclick="Editing"></div>
+            IsDisabled = true;
         }
 
     </div>
 </div>
-    @if (Article != null)
-    {
 <table class="table table-borderless">
     <tr class="@Length">
         <td>
             <label for="length">Length per salesunit:</label>
         </td>
         <td>
-            <input type="number" class="form-control" id="Length" @bind="Article.ArticleInformation.LengthPerSalesunit" disabled>
+            <input type="number" class="form-control" id="Length" value="3" disabled="@IsDisabled">
         </td>
         <td>
             <label class="center-for-units" for="length">cm</label>
@@ -36,7 +35,7 @@
             <label for="width">Width per salesunit:</label>
         </td>
         <td>
-            <input type="number" class="form-control" id="width" @bind="Article.ArticleInformation.WidthPerSalesunit" disabled>
+            <input type="number" class="form-control" id="width" value="12" disabled="@IsDisabled">
         </td>
         <td>
             <label class="center-for-units" for="width">cm</label>
@@ -48,7 +47,7 @@
             <label for="height">Height per salesunit:</label>
         </td>
         <td>
-            <input type="number" class="form-control" id="height" @bind="Article.ArticleInformation.HeightPerSalesunit" disabled>
+            <input type="number" class="form-control" id="height" value="10" disabled="@IsDisabled">
         </td>
         <td>
             <label class="center-for-units" for="height">cm</label>
@@ -60,7 +59,7 @@
             <label for="net_weight">Net weight per salesunit:</label>
         </td>
         <td>
-            <input type="number" class="form-control" id="net_weight" @bind="Article.ArticleInformation.NetWeightPerSalesunit" disabled>
+            <input type="number" class="form-control" id="net_weight" value="12" disabled="@IsDisabled">
         </td>
         <td>
             <label class="center-for-units" for="net_weight">kg</label>
@@ -72,15 +71,14 @@
             <label for="gross_weight">Gross weight per salesunit:</label>
         </td>
         <td>
-            <input type="number" class="form-control" id="gross_weight" @bind="Article.ArticleInformation.GrossWeightPerSalesunit" disabled>
+            <input type="number" class="form-control" id="gross_weight" value="113" disabled="@IsDisabled">
         </td>
         <td>
             <label class="center-for-units" for="gross_weight">kg</label>
         </td>
     </tr>
-</table>}
+</table>
 </div>
-
 
 @code {
     [Parameter]
@@ -97,4 +95,18 @@
 
     [Parameter]
     public string GrossWeight { get; set; }
+
+    protected bool IsDisabled = true;
+    
+    private bool EditingFields = false;
+
+    private void Editing()
+    {
+        EditingFields = true;
+    }
+
+    private void Saving()
+    {
+        EditingFields = false;
+    }
 }

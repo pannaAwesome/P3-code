@@ -20,9 +20,10 @@ namespace HAVI_app.Services.Classes
             return await httpClient.GetFromJsonAsync<List<Ilosorderpickgroup>>($"/api/IlosOrderpickgroups/country/{id}");
         }
 
-        public async void CreateILOSOrderpickgroup(Ilosorderpickgroup IlosOrderpickgroup)
+        public async Task<Ilosorderpickgroup> CreateILOSOrderpickgroup(Ilosorderpickgroup IlosOrderpickgroup)
         {
-            await httpClient.PostAsJsonAsync("/api/IlosOrderpickgroups", IlosOrderpickgroup);
+            var result = await httpClient.PostAsJsonAsync("/api/IlosOrderpickgroups", IlosOrderpickgroup);
+            return await result.Content.ReadAsAsync<Ilosorderpickgroup>();
         }
 
         public async void UpdateILOSOrderpickgroup(int id, Ilosorderpickgroup ilosCategory)

@@ -6,7 +6,7 @@
 @inject HAVI_app.Services.Classes.SalesUnitService SalesUnitService 
 
 
-<HAVI_app.Shared.Supplier_layout.Form_header SupplierState="filled" ArticleState="active" />
+<HAVI_app.Shared.Supplier_layout.Form_header SupplierState="filled" ArticleState="active" Id="Article.Id" />
 
 
 <div class="row justify-content-center">
@@ -46,18 +46,10 @@
                     <td>
                         <select class="form-control" name="salesunit" @bind="Article.Salesunit" required>
                             <option disabled selected>-- select an option --</option>
-                            @code{
-
-                                protected override async Task OnInitializedAsync()
+                                @foreach (var item in sales)
                                 {
-                                    var Sales = await SalesUnitService.GetSalesUnits();
-
-                                    foreach (var item in Sales)
-                                    {
-                                        <option>@item</option>
-                                    }
+                                    <option>@item.Unit</option>
                                 }
-                            }
                         </select>
                     </td>
                     <td>
@@ -200,6 +192,10 @@
 </div>
 
 @code{
+    [Parameter]
+    public int Id { get; set; }
+
+    List<SalesUnit> sales = new List<SalesUnit>();
 
     public string ArticleNameValidated;
 
@@ -223,7 +219,7 @@
         {
             Article.Gtinnumber = GTINValidation(Article.Gtinnumber);
 
-            NavigationManager.NavigateTo("/measurement_info_form", true);
+            NavigationManager.NavigateTo($"/measurement_info_form", true);
         }
 
         if (!LettersOnly(Article.ArticleName))
@@ -235,6 +231,12 @@
     public void OnPostBack()
     {
         NavigationManager.NavigateTo($"/supplier_info_form", true);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        sales = await SalesUnitService.GetSalesUnits();
+
     }
 }
 

@@ -1,10 +1,35 @@
-﻿@page "/country_view"
+﻿@page "/country_view/{Id:int}"
 @layout HAVI_app.Shared.Admin_layout.Overview
 @inherits HAVI_app.Pages.Admin_pages.Country_pages.CountryView
 
+<div class="row">
+    <HAVI_app.Shared.Shared_layout.Logo_image />
+    <div class="col-1"></div>
+    <div class="col-8">
+        <NavLink class="nav-link button-overview-logout" href="/">
+            Logout
+        </NavLink>
+        <NavLink class="nav-link button-overview" href="@profile">
+            Profile
+        </NavLink>
+        <NavLink class="nav-link button-overview" href="@country">
+            Country
+        </NavLink>
+        <NavLink class="nav-link button-overview" href="@user">
+            Users
+        </NavLink>
+        <NavLink class="nav-link button-overview" href="@article">
+            Article info
+        </NavLink>
+        <NavLink class="nav-link button-overview" href="@overview">
+            Home
+        </NavLink>
+    </div>
+</div>
+<div class="gap-overview"></div>
 <div class="row overview-admin-header">
     <div class="col-8">
-        <h3>Editing Denmark:</h3>
+        <h3>Editing @CurrentCountry.CountryName:</h3>
     </div>
     <div class="col-4">
         <NavLink class="nav-link" href="/create_country">
@@ -213,18 +238,27 @@ else
         </div>
     </div>
 }
-    <div class="modal fade" id="country-created" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Saved changes!</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-footer d-flex justify-content-center">
-                    <button type="button" class="btn cancel-button" data-dismiss="modal">Close</button>
-                </div>
+<div class="modal fade" id="country-created" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Saved changes!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <button type="button" class="btn cancel-button" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
+</div>
+@code {
+    
+
+    public string profile = $"/profile_admin/{Id}";
+    public string country = $"/country_view/{Id}";
+    public string user = $"/user_view/{Id}";
+    public string article = $"/article_view/{Id}";
+    public string overview = $"/overview_admin/{Id}";
+}

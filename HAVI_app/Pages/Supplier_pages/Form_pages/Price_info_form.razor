@@ -4,7 +4,7 @@
 @inject Models.ArticleInformation Article
 @inject HAVI_app.Services.Classes.SetCurrencyService SetCurrencyService
 
-<HAVI_app.Shared.Supplier_layout.Form_header SupplierState="filled" ArticleState="filled" MeasurementState="filled" ShipmentState="filled" PriceState="active" />
+<HAVI_app.Shared.Supplier_layout.Form_header SupplierState="filled" ArticleState="filled" MeasurementState="filled" ShipmentState="filled" PriceState="active" Id="Article.Id" />
 
 <div class="row justify-content-center">
     <div class="col-10">
@@ -25,17 +25,9 @@
                     </td>
                     <td colspan="4">
                         <select class="form-control" name="set_currency" @bind="Article.SetCurrency" required>
-                            @code{
-
-                                protected override async Task OnInitializedAsync()
-                                {
-                                    var contries = await SetCurrencyService.GetSetCurrencies();
-
-                                    foreach (var item in contries)
-                                    {
-                                        <option>@item</option>
-                                    }
-                                }
+                            @foreach (var item in contries)
+                            {
+                                <option>@item.CurrencyName</option>
                             }
                         </select>
                     </td>
@@ -165,6 +157,8 @@
 }
 
 @code{
+    List<SetCurrency> contries = new List<SetCurrency>();
+
     public void OnPostForward()
     {
         NavigationManager.NavigateTo($"/confirm_details", true);
@@ -174,6 +168,11 @@
     public void OnPostBack()
     {
         NavigationManager.NavigateTo($"/shipment_info_form", true);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        contries = await SetCurrencyService.GetSetCurrencies();
     }
 
     private int NumberOfOtherCosts = 1;

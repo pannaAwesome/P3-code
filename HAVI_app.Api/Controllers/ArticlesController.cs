@@ -3,6 +3,7 @@
 using HAVI_app.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +29,7 @@ namespace HAVI_app.Api.Controllers
                 var result = await _articleRepository.GetArticlesWithCertainState(state, id);
                 if(result == null)
                 {
-                    return NotFound();
+                    return Ok(new List<Article>());
                 }
                 return Ok(result);
             }
@@ -46,7 +47,25 @@ namespace HAVI_app.Api.Controllers
                 var result = await _articleRepository.GetArticlesForCountry(id);
                 if(result == null)
                 {
-                    return NotFound();
+                    return Ok(new List<Article>());
+                }
+                return Ok(result);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database.");
+            }
+        }
+
+        [HttpGet("supplier/{id}")]
+        public async Task<ActionResult> GetArticlesForSupplier(int id)
+        {
+            try
+            {
+                var result = await _articleRepository.GetArticlesForSupplier(id);
+                if (result == null)
+                {
+                    return Ok(new List<Article>());
                 }
                 return Ok(result);
             }
@@ -64,7 +83,49 @@ namespace HAVI_app.Api.Controllers
                 var result = await _articleRepository.GetArticle(id);
                 if (result == null)
                 {
-                    return NotFound();
+                    return Ok(new List<Article>());
+                }
+                else
+                {
+                    return result;
+                }
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database.");
+            }
+        }
+
+        [HttpGet("information/{id:int}")]
+        public async Task<ActionResult<Article>> GetArticleWithInformation(int id)
+        {
+            try
+            {
+                var result = await _articleRepository.GetArticleWithInformation(id);
+                if (result == null)
+                {
+                    return Ok(new List<Article>());
+                }
+                else
+                {
+                    return result;
+                }
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database.");
+            }
+        }
+
+        [HttpGet("internal/{id:int}")]
+        public async Task<ActionResult<Article>> GetArticleWithInternal(int id)
+        {
+            try
+            {
+                var result = await _articleRepository.GetArticleWithInternal(id);
+                if (result == null)
+                {
+                    return Ok(new List<Article>());
                 }
                 else
                 {
@@ -85,7 +146,7 @@ namespace HAVI_app.Api.Controllers
                 var result = await _articleRepository.GetArticles();
                 if (result == null)
                 {
-                    return NotFound();
+                    return Ok(new List<Article>());
                 }
                 return Ok(result);
             }
@@ -107,7 +168,7 @@ namespace HAVI_app.Api.Controllers
 
                 var createdArticle = await _articleRepository.AddArticle(article);
 
-                return CreatedAtAction(nameof(GetArticle), new { id = createdArticle.Id }, createdArticle);
+                return createdArticle;
             }
             catch (Exception)
             {

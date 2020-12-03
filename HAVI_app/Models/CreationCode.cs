@@ -10,7 +10,7 @@ namespace HAVI_app.Models
     {
         [Key]
         public int Id { get; set; }
-        public string Code { get; set; }
+        public string Code { get; set; } = "";
         public int Active { get; set; }
     }
 }

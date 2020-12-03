@@ -28,7 +28,7 @@ namespace HAVI_app.Api.Controllers
                 var result = await _purchaserRepository.GetPurchaserForProfile(id);
                 if (result == null)
                 {
-                    return NotFound();
+                    return new Purchaser();
                 }
                 else
                 {
@@ -69,7 +69,7 @@ namespace HAVI_app.Api.Controllers
                 var result = await _purchaserRepository.GetPurchasersForCountry(id);
                 if (result == null)
                 {
-                    return NotFound();
+                    return Ok(new List<Purchaser>());
                 }
                 return Ok(result);
             }
@@ -91,7 +91,7 @@ namespace HAVI_app.Api.Controllers
 
                 var createdPurchaser = await _purchaserRepository.AddPurchaser(purchaser);
 
-                return CreatedAtAction(nameof(GetPurchaser), new { id = createdPurchaser.Id }, createdPurchaser);
+                return createdPurchaser;
             }
             catch (Exception)
             {
@@ -107,7 +107,7 @@ namespace HAVI_app.Api.Controllers
                 var result = await _purchaserRepository.GetPurchaser(id);
                 if (result == null)
                 {
-                    return NotFound();
+                    return Ok(new List<Purchaser>());
                 }
                 else
                 {
@@ -128,7 +128,7 @@ namespace HAVI_app.Api.Controllers
                 var result = await _purchaserRepository.GetPurchasers();
                 if (result == null)
                 {
-                    return NotFound();
+                    return Ok(new List<Purchaser>());
                 }
                 return Ok(result);
             }

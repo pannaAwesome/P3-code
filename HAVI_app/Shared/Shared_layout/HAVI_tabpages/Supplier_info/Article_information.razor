@@ -1,6 +1,4 @@
-﻿@inherits ArticleInformation
-
-<div class="col-12 havi-info-box">
+﻿<div class="col-12 havi-info-box">
 <div class="row justify-content-right">
     <div class="col-11">
         <h4> Article Information:</h4>
@@ -9,23 +7,23 @@
         @if (EditingFields)
         {
             <div class="save-button" @onclick="Saving"></div>
+            IsDisabled = false;
         }
         else
         {
             <div class="edit-button" @onclick="Editing"></div>
+            IsDisabled = true;
         }
 
     </div>
 </div>
-    @if (Article != null)
-    {
     <table class="table table-borderless">
         <tr class="@ArticleName">
             <td>
                 <label for="article_name">Article name:</label>
             </td>
             <td colspan="2">
-                <input type="text" class="form-control" id="a_name" @bind="Article.ArticleInformation.ArticleName" disabled>
+                <input type="text" class="form-control" name="article_name" value="Peanuts" disabled="@IsDisabled">
             </td>
         </tr>
 
@@ -34,16 +32,16 @@
                 <label for="sales_unit">Salesunit:</label>
             </td>
             <td colspan="2">
-                <input type="text" class="form-control" id="sales_unit" @bind="Article.ArticleInformation.Salesunit" disabled>
+                <input type="text" class="form-control" name="sales_unit" value="Bakke // 374" disabled>
             </td>
         </tr>
 
         <tr class="@ArticlePerSalesunit">
             <td>
-                <label for="salesunit_quantity">Article per salesunit:</label>
+                <label for="salesunit_quantity">Articles per salesunit:</label>
             </td>
             <td colspan="2">
-                <input type="number" class="form-control" id="salesunit_quantity" @bind="Article.ArticleInformation.ArticlesPerSalesunit" disabled>
+                <input type="number" class="form-control" name="salesunit_quantity" value="123" disabled="@IsDisabled">
             </td>
         </tr>
 
@@ -52,7 +50,7 @@
                 <label for="supplier_article_nn">Supplier article number/name:</label>
             </td>
             <td colspan="2">
-                <input type="number" class="form-control" id="article_number_name" @bind="Article.ArticleInformation.SupplierArticleName" disabled>
+                <input type="number" class="form-control" name="article_number_name" value="12312442123" disabled="@IsDisabled">
             </td>
         </tr>
 
@@ -61,7 +59,7 @@
                 <label for="GTIN">GTIN number:</label>
             </td>
             <td colspan="2">
-                <input type="number" class="form-control" id="GTIN" @bind="Article.ArticleInformation.Gtinnumber" disabled>
+                <input type="number" class="form-control" name="GTIN" value="12312312412312" disabled="@IsDisabled">
             </td>
         </tr>
 
@@ -70,7 +68,7 @@
                 <label for="Shelflife">Shelflife:</label>
             </td>
             <td colspan="2">
-                <input type="number" class="form-control" id="Shelflife" @bind="Article.ArticleInformation.Shelflife" disabled>
+                <input type="number" class="form-control" name="Shelflife" value="2" disabled="@IsDisabled">
             </td>
             <td>
                 <label class="center-for-units" for="Shelflife">days</label>
@@ -82,43 +80,68 @@
                 <label for="Min_shelflife">Min. shelflife at HAVI:</label>
             </td>
             <td colspan="2">
-                <input type="number" class="form-control" id="Min_shelflife" @bind="Article.ArticleInformation.MinimumShelflife" disabled>
+                <input type="number" class="form-control" name="Min_shelflife" value="12" disabled="@IsDisabled">
             </td>
             <td>
                 <label class="center-for-units" for="Min_shelflife">days</label>
             </td>
         </tr>
 
-        <tr class="@OrganicArticles">
+        <tr class="@OrganicArticle">
             <td>
                 <label for="organic_article" value="">Organic article?</label>
             </td>
 
             <td colspan="2">
                 <div class="text-center">
-                    @if (Article.ArticleInformation.OrganicArticle == 1)
-                    {
-                        <input type="radio" name="organic" id="yes" checked value="yes" disabled @onclick="x => OrganicArticle(1)">
-                        <label for="yes">Yes</label>
-                        
-                        <input type="radio" id="no" name="organic" disabled @onclick="x => OrganicArticle(0)">
-                        <label for="no">No</label>
-                    }
-                    else
-                    {
-                        <input type="radio" name="organic" id="yes" value="yes" disabled @onclick="x => OrganicArticle(1)">
-                        <label for="yes">Yes</label>
-                        
-                        <input type="radio" id="no" name="organic" checked disabled @onclick="x => OrganicArticle(0)">
-                        <label for="no">No</label>
-                    }
-
+                    <input type="radio" name="organic_article" value="yes" disabled>
+                    <label for="yes">Yes</label>
+                    &nbsp;
+                    <input type="radio" name="organic_article" value="no" checked disabled>
+                    <label for="no">No</label>
                 </div>
             </td>
         </tr>
-    </table>}
+    </table>
 </div>
 
 @code {
 
+    [Parameter]
+    public string ArticleName { get; set; }
+
+    [Parameter]
+    public string Salesunit { get; set; }
+
+    [Parameter]
+    public string ArticlePerSalesunit { get; set; }
+
+    [Parameter]
+    public string SupplierNameNumber { get; set; }
+
+    [Parameter]
+    public string GTINNumber { get; set; }
+
+    [Parameter]
+    public string Shelflife { get; set; }
+
+    [Parameter]
+    public string MinShelflife { get; set; }
+
+    [Parameter]
+    public string OrganicArticle { get; set; }
+
+    protected bool IsDisabled = true;
+    
+    private bool EditingFields = false;
+    
+    private void Editing()
+    {
+        EditingFields = true;
+    }
+
+    private void Saving()
+    {
+        EditingFields = false;
+    }
 }

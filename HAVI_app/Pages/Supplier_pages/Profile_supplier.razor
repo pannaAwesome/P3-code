@@ -1,6 +1,6 @@
 ﻿@inject NavigationManager NavigationManager
 @inherits ProfileSupplier
-@page "/profile_supplier/{supplierId:int}"
+@page "/profile_supplier/{SupplierId:int}"
 
 @layout HAVI_app.Shared.Supplier_layout.Profile_layout
 
@@ -67,7 +67,12 @@
                                 <label for="company_location" >Company's Location:</label>
                             </td>
                             <td>
-                                <input type="text" class="form-control" name="company_location" @bind="@Supplier.CompanyLocation" required>
+                                <select class="form-control" name="company_location" @bind="@Supplier.CompanyLocation" required>
+                                    @foreach (var item in Countries)
+                                    {
+                                        <option>@item.Country</option>
+                                    }
+                                </select>                            
                             </td>
                             <td>
                                 <div></div>
@@ -85,20 +90,20 @@
                                             <div class="col-2"></div>
                                             @if(Supplier.PalletExchange == 1){
                                             <div class="col-4">
-                                                <input type="radio" name="pallet_exchange" value="1" checked required>
+                                                <input type="radio" name="pallet_exchange" value="1" @onclick="() => Supplier.PalletExchange = 1" checked required>
                                                 <label for="yes">Yes</label>
                                             </div>
                                             <div class="col-4">
-                                                <input type="radio" name="pallet_exchange" value="0" required>
+                                                <input type="radio" name="pallet_exchange" value="0" @onclick="() => Supplier.PalletExchange = 0" required>
                                                 <label for="no">No</label>
                                             </div>
                                             }else{
                                             <div class="col-4">
-                                                <input type="radio" name="pallet_exchange" value="1" required>
+                                                <input type="radio" name="pallet_exchange" value="1" @onclick="() => Supplier.PalletExchange = 1" required>
                                                 <label for="yes">Yes</label>
                                             </div>
                                             <div class="col-4">
-                                                <input type="radio" name="pallet_exchange" value="0" checked required>
+                                                <input type="radio" name="pallet_exchange" value="0" @onclick="() => Supplier.PalletExchange = 0" checked required>
                                                 <label for="no">No</label>
                                             </div>
                                             }
@@ -120,8 +125,10 @@
                             <td>
                                 <div class="row justify-content-center">
                                     <select class="form-control" name="salesunit" @bind="@Supplier.FreightResponsibility" required>
-                                        <option>EXW</option>
-                                        <option>CIP</option>
+                                        @foreach(FreightResponsibility item in Freights)
+                                        {
+                                            <option>@item.Responsibility</option>
+                                        }
                                     </select>
                                 </div>
                             </td>
@@ -131,24 +138,13 @@
                                 </HAVI_app.Shared.Shared_layout.Questionmark_right>
                             </td>
                         </tr>
-                        <tr>
-                            <td>
-                                <div></div>
-                            </td>
-                            <td>
-                                <div></div>
-                            </td>
-                            <td>
-                                <div></div>
-                            </td>
-                        </tr>
                     </table>
                     <div class="row">
                         <div class="text-right col-6">
-                            <input type="submit" class="btn cancel-button button-size" value="Back" @onclick="BackToSupplierOverview">
+                            <input type="button" class="btn cancel-button button-size" value="Back" @onclick="BackToSupplierOverview">
                         </div>
                         <div class="text-left col-6">
-                            <input type="submit" class="btn green-button button-size" value="Save" @onclick="BackToSupplierOverview">
+                            <input type="button" class="btn green-button button-size" value="Save" @onclick="SaveProfile">
                         </div>
                     </div>
                 </form>
@@ -159,61 +155,54 @@
 
 <!-- Form for changing your password. Only appears when link is toggeled -->
 <div class=" modal fade" id="changePassword" tabindex="-1" role="dialog" aria-labelledby="changePassword" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-content">
-                                    <div class="">
-                                        <button type="button" class="close close-password" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">&times;</span>
-                                        </button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form>
-                                            <table class="table-font table col-12">
-                                                <tr>
-                                                    <td class="">
-                                                        <label for="current-password">Input current Password:</label>
-                                                    </td>
-                                                    <td class="">
-                                                        <input type="password" class="form-control" name="current-password" required>
-                                                    </td>
-                                                </tr>
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="">
+                <button type="button" class="close close-password" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <table class="table-font table col-12">
+                        <tr>
+                            <td class="">
+                                <label for="current-password">Input current Password:</label>
+                            </td>
+                            <td class="">
+                                <input type="password" class="form-control" name="current-password" @bind="CurPassword" required>
+                            </td>
+                        </tr>
 
-                                                <tr>
-                                                    <td>
-                                                        <label for="new-password">Input new Password:</label>
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" class="form-control" name="new-password" required>
-                                                    </td>
-                                                </tr>
+                        <tr>
+                            <td>
+                                <label for="new-password">Input new Password:</label>
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" name="new-password" @bind="NewPassword1" required>
+                            </td>
+                        </tr>
 
-                                                <tr>
-                                                    <td>
-                                                        <label for="confirm-new-password">Confirm new password:</label>
-                                                    </td>
-                                                    <td>
-                                                        <input type="text" class="form-control" name="confirm-new-password" required>
-                                                    </td>
-                                                </tr>
-
-                                                <tr>
-                                                    <td></td>
-                                                    <td></td>
-                                                </tr>
-
-                                            </table>
-                                        </form>
-                                        <div class="row justify-content-center">
-                                            <button type="button" class="save-password btn button-size" data-dismiss="modal">Save</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-}
-@code {
-    private void BackToSupplierOverview()
-    {
-        NavigationManager.NavigateTo("/overview_supplier", true);
-    }
+                        <tr>
+                            <td>
+                                <label for="confirm-new-password">Confirm new password:</label>
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" name="confirm-new-password" @bind="NewPassword2" required>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+                <div class="row justify-content-center">
+                    <button type="button" class="save-password btn button-size" data-dismiss="modal" @onclick="SavePassword">Save</button>
+                </div>
+                <div class="row">
+                    <div class="col-12 text-center">
+                        @PasswordError
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 }

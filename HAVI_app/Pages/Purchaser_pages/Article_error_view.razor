@@ -1,4 +1,6 @@
-﻿@page "/article_error_view/{ArticleId:int}/{Username:string}"
+﻿@page "/article_error_view/{ArticleId:int}/{Username}"
+@inject NavigationManager NavigationManager
+@inject HAVI_app.Services.Classes.ArticleService ArticleService 
 @layout HAVI_app.Shared.Purchaser_layout.Article_edit_layout
 
 <ul class="nav nav-tabs" id="myTabJust" role="tablist">
@@ -33,4 +35,10 @@
 
     [Parameter]
     public int ArticleId { get; set; }
+
+    private async void DiscardChanges()
+    {
+        Article article = await ArticleService.GetArticle(ArticleId);
+        NavigationManager.NavigateTo($"/overview_purchaser/{article.PurchaserId}", true);
+    }
 }

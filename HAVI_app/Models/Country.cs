@@ -28,11 +28,11 @@ namespace HAVI_app.Models
         public int Id { get; set; }
         [ForeignKey("Profile")]
         public int ProfileId { get; set; }
-        public string CountryName { get; set; }
-        public string CountryCode { get; set; }
+        public string CountryName { get; set; } = "";
+        public string CountryCode { get; set; } = "";
 
-        public virtual Profile Profile { get; set; }
-        public virtual ICollection<Article> Articles { get; set; }
+        public virtual Profile Profile { get; set; } = null;
+        public virtual ICollection<Article> Articles { get; set; } = null;
         [JsonIgnore]
         public virtual ICollection<CompanyCode> CompanyCodes { get; set; }
         [JsonIgnore]

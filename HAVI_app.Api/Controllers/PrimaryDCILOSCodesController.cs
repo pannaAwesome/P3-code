@@ -27,7 +27,7 @@ namespace HAVI_app.Api.Controllers
                 var result = await _primaryDCILOSCodeRepository.GetPrimaryDCILOSCodes(id);
                 if (result == null)
                 {
-                    return NotFound();
+                    return Ok(new List<PrimaryDciloscode>());
                 }
                 return Ok(result);
             }
@@ -45,7 +45,7 @@ namespace HAVI_app.Api.Controllers
                 var result = await _primaryDCILOSCodeRepository.GetPrimaryDCILOSCode(id);
                 if (result == null)
                 {
-                    return NotFound();
+                    return new PrimaryDciloscode();
                 }
                 else
                 {
@@ -70,7 +70,7 @@ namespace HAVI_app.Api.Controllers
 
                 var createdPrimaryDCILOSCode = await _primaryDCILOSCodeRepository.AddPrimaryDCILOSCode(primaryDCILOSCode);
 
-                return CreatedAtAction(nameof(GetPrimaryDCILOSCode), new { id = createdPrimaryDCILOSCode.Id }, createdPrimaryDCILOSCode);
+                return createdPrimaryDCILOSCode;
             }
             catch (Exception)
             {

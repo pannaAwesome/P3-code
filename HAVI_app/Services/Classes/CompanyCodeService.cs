@@ -20,14 +20,15 @@ namespace HAVI_app.Services.Classes
             return await httpClient.GetFromJsonAsync<List<CompanyCode>>($"/api/companycodes/country/{id}");
         }
 
-        public async void CreateCompanyCode(CompanyCode code)
+        public async Task<CompanyCode> CreateCompanyCode(CompanyCode code)
         {
             var result = await httpClient.PostAsJsonAsync("/api/companycodes", code);
+            return await result.Content.ReadAsAsync<CompanyCode>();
         }
 
         public async void UpdateCompanyCode(int id, CompanyCode code)
         {
-            var result = await httpClient.PutAsJsonAsync($"/api/companycodes/{id}", code);
+            await httpClient.PutAsJsonAsync($"/api/companycodes/{id}", code);
         }
 
         public async void DeleteCompanyCode(int id)

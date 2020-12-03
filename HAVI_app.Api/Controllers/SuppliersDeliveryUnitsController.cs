@@ -32,7 +32,7 @@ namespace HAVI_app.Api.Controllers
 
                 var createdSupplierDeliveryUnit = await _supplierDeliveryUnitRepository.AddSupplierDeliveryUnit(deliveryUnit);
 
-                return CreatedAtAction(nameof(GetSupplierDeliveryUnit), new { id = createdSupplierDeliveryUnit.Id }, createdSupplierDeliveryUnit);
+                return createdSupplierDeliveryUnit;
             }
             catch (Exception)
             {
@@ -48,7 +48,7 @@ namespace HAVI_app.Api.Controllers
                 var result = await _supplierDeliveryUnitRepository.GetSupplierDeliveryUnit(id);
                 if (result == null)
                 {
-                    return NotFound();
+                    return new SupplierDeliveryUnit();
                 }
                 else
                 {
@@ -89,7 +89,7 @@ namespace HAVI_app.Api.Controllers
                 var result = await _supplierDeliveryUnitRepository.GetSupplierDeliveryUnits(id);
                 if (result == null)
                 {
-                    return NotFound();
+                    return Ok(new List<VailedForCustomer>());
                 }
                 return Ok(result);
             }

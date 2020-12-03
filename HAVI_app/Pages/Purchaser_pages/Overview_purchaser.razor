@@ -1,7 +1,25 @@
 ﻿@layout HAVI_app.Shared.Purchaser_layout.Overview_layout_purchaser
+@page "/overview_purchaser/{Id:int}"
 @inject NavigationManager NavigationManager
-@page "/overview_purchaser"
+@inject HAVI_app.Services.Classes.PurchaserService PurchaserService
 
+<header>
+    <div class="row heading-overview">
+        <HAVI_app.Shared.Shared_layout.Logo_image />
+        <div class="col-4"></div>
+
+        <HAVI_app.Shared.Shared_layout.Profile_menu Username="@Username" OnProfileClickCallback="@NavigateToProfilePage" />
+
+        @code {
+            void NavigateToProfilePage()
+            {
+                NavigationManager.NavigateTo($"/profile_purchaser/{Id}", true);
+            }
+        }
+
+    </div>
+
+</header>
 <ul class="nav nav-tabs" id="myTabJust" role="tablist">
     <li class="nav-item">
         <a class="nav-link active navtabs-background" id="HAVI-tab-just" data-toggle="tab" href="#HAVI-just" role="tab" aria-controls="HAVI-just"
@@ -14,19 +32,22 @@
 </ul>
 <div class="tab-content background-tabs" id="myTabContentJust">
     <div class="tab-pane fade show active" id="HAVI-just" role="tabpanel" aria-labelledby="HAVI-tab-just">
-        <HAVI_app.Shared.Purchaser_layout.Overview_table_supplier_purchaser />
+        <HAVI_app.Shared.Purchaser_layout.Overview_table_supplier_purchaser PurchaserId="Id" />
     </div>
     <div class="tab-pane fade" id="Supplier-just" role="tabpanel" aria-labelledby="Supplier-tab-just">
-        <HAVI_app.Shared.Purchaser_layout.Overview_table_havi_purchaser />
+        <HAVI_app.Shared.Purchaser_layout.Overview_table_havi_purchaser Id="Id" />
     </div>
 </div>
 
 @code{
+    [Parameter]
+    public int Id { get; set; }
 
-    private void GenerateCreationCode()
+    public string Username { get; set; } = "";
+
+    protected override async Task OnInitializedAsync()
     {
-        Random random = new Random();
-        long code = random.Next(100, 900) * long.Parse(DateTime.Today.ToString());
+        Purchaser purchaser = await PurchaserService.GetPurchaser(Id);
+        Username = purchaser.Profile.Username;
     }
-
 }

@@ -27,7 +27,7 @@ namespace HAVI_app.Api.Controllers
                 var result = await _codeRepository.GetCompanyCodes(id);
                 if (result == null)
                 {
-                    return NotFound();
+                    return Ok(new List<CompanyCode>());
                 }
                 return Ok(result);
             }
@@ -45,7 +45,7 @@ namespace HAVI_app.Api.Controllers
                 var result = await _codeRepository.GetCompanyCode(id);
                 if (result == null)
                 {
-                    return NotFound();
+                    return Ok(new CompanyCode());
                 }
                 else
                 {
@@ -70,7 +70,7 @@ namespace HAVI_app.Api.Controllers
 
                 var createdCode = await _codeRepository.AddCompanyCode(code);
 
-                return CreatedAtAction(nameof(GetCompanyCode), new { id = createdCode.Id }, createdCode);
+                return createdCode;
             }
             catch (Exception)
             {

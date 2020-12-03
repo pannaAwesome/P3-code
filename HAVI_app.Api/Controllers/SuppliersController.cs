@@ -28,7 +28,7 @@ namespace HAVI_app.Api.Controllers
                 var result = await _supplierRepository.GetSuppliers();
                 if(result == null)
                 {
-                    return NotFound();
+                    return Ok(new List<VailedForCustomer>());
                 }
                 return Ok(result);
             }
@@ -46,7 +46,28 @@ namespace HAVI_app.Api.Controllers
                 var result = await _supplierRepository.GetSupplier(id);
                 if (result == null)
                 {
-                    return NotFound();
+                    return new Supplier();
+                }
+                else
+                {
+                    return result;
+                }
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database.");
+            }
+        }
+
+        [HttpGet("profile/{id:int}")]
+        public async Task<ActionResult<Supplier>> GetSupplierWithProfile(int id)
+        {
+            try
+            {
+                var result = await _supplierRepository.GetSupplierWithProfile(id);
+                if (result == null)
+                {
+                    return new Supplier();
                 }
                 else
                 {
@@ -71,7 +92,7 @@ namespace HAVI_app.Api.Controllers
 
                 var createdSupplier = await _supplierRepository.AddSupplier(supplier);
 
-                return CreatedAtAction(nameof(GetSupplier), new { id = createdSupplier.Id }, createdSupplier);
+                return createdSupplier;
             }
             catch (Exception)
             {

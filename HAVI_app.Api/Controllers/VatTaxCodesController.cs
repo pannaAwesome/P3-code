@@ -28,7 +28,7 @@ namespace HAVI_app.Api.Controllers
                 var result = await _vatTaxCodeRepository.GetVatTaxCodes(id);
                 if (result == null)
                 {
-                    return NotFound();
+                    return Ok(new List<VatTaxCode>());
                 }
                 return Ok(result);
             }
@@ -95,7 +95,7 @@ namespace HAVI_app.Api.Controllers
 
                 var createdVatTaxCode = await _vatTaxCodeRepository.AddVatTaxCode(code);
 
-                return CreatedAtAction(nameof(GetVatTaxCodes), new { id = createdVatTaxCode.Id }, createdVatTaxCode);
+                return createdVatTaxCode;
             }
             catch (Exception)
             {

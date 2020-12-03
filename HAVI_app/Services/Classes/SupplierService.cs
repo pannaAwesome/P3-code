@@ -8,6 +8,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace HAVI_app.Services.Classes
 {
@@ -18,9 +19,15 @@ namespace HAVI_app.Services.Classes
         {
             this.httpClient = httpClient;
         }
+
         public async Task<Supplier> GetSupplier(int id)
         {
             return await httpClient.GetFromJsonAsync<Supplier>($"/api/suppliers/{id}"); 
+        }
+
+        public async Task<Supplier> GetSupplierWithProfile(int id)
+        {
+            return await httpClient.GetFromJsonAsync<Supplier>($"/api/suppliers/profile/{id}");
         }
 
         public async Task<List<Supplier>> GetSuppliers()
@@ -34,16 +41,14 @@ namespace HAVI_app.Services.Classes
             return await result.Content.ReadAsAsync<Supplier>();
         }
 
-        public async Task<Supplier> UpdateSupplier(int id, Supplier supplier)
+        public async Task UpdateSupplier(int id, Supplier supplier)
         {
-            var result = await httpClient.PutAsJsonAsync($"/api/suppliers/{id}", supplier);
-            return await result.Content.ReadAsAsync<Supplier>();
+            await httpClient.PutAsJsonAsync($"/api/suppliers/{id}", supplier);
         }
 
-        public async Task<Supplier> DeleteSupplier(int id)
+        public async Task DeleteSupplier(int id)
         {
-            var result = await httpClient.DeleteAsync($"/api/suppliers/{id}");
-            return await result.Content.ReadAsAsync<Supplier>();
+            await httpClient.DeleteAsync($"/api/suppliers/{id}");
         }
     }
 }

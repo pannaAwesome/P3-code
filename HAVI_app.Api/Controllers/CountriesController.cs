@@ -1,6 +1,6 @@
 ﻿using HAVI_app.Api.DatabaseClasses;
-
 using HAVI_app.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -28,7 +28,28 @@ namespace HAVI_app.Api.Controllers
                 var result = await _countryRepository.GetCountry(id);
                 if (result == null)
                 {
-                    return NotFound();
+                    return Ok(new Country());
+                }
+                else
+                {
+                    return result;
+                }
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database.");
+            }
+        }
+
+        [HttpGet("{name}")]
+        public async Task<ActionResult<Country>> GetCountryWithName(string name)
+        {
+            try
+            {
+                var result = await _countryRepository.GetCountryWithName(name);
+                if (result == null)
+                {
+                    return Ok(new Country());
                 }
                 else
                 {
@@ -49,7 +70,7 @@ namespace HAVI_app.Api.Controllers
                 var result = await _countryRepository.GetCountries();
                 if (result == null)
                 {
-                    return NotFound();
+                    return Ok(new List<Country>());
                 }
                 return Ok(result);
             }
@@ -71,7 +92,7 @@ namespace HAVI_app.Api.Controllers
 
                 var createdCountry = await _countryRepository.AddCountry(country);
 
-                return CreatedAtAction(nameof(GetCountry), new { id = createdCountry.Id }, createdCountry);
+                return createdCountry;
             }
             catch (Exception)
             {
