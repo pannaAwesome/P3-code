@@ -42,14 +42,14 @@
                     <label for="sap_plant1" class="required">SAP Plant: @item.Sapplant</label>
                 </td>
                 <td>
-                    <input type="radio" name="sap_plant1" id="yes" value="@item.Sapplant" @onchange="@((ChangeEventArgs __e) => UpdateSapplant(__e.Value.ToString()))" disabled="@IsDisabled">
+                    <input type="radio" name="sap_plant_@item.Sapplant" id="yes" value="@item.Sapplant" @onchange="@((ChangeEventArgs __e) => UpdateSapplant(__e.Value.ToString()))" disabled="@IsDisabled">
                     <label for="yes">Yes</label>
                     &nbsp;
-                    <input type="radio" id="no" name="sap_plant1">
+                    <input type="radio" id="no" name="sap_plant_@item.Sapplant">
                     <label for="no">No</label>
                 </td>
             </tr>
-                        }
+        }
                     
                 </table>
         </form>

@@ -90,7 +90,7 @@
                             </td>
 
                             <td>
-                                <select class="form-control" name="afgift-@i" @onchange="@((ChangeEventArgs __e) => Article.OtherCostsForArticles[i].InformCostType = __e.Value.ToString())" required>
+                                <select class="form-control" name="afgift-@i" @bind="Article.OtherCostsForArticles[i].InformCostType" required>
                                     <option disabled selected>-- select an option --</option>
                                     @foreach (InformCostType item in costType)
                                     {
@@ -104,7 +104,7 @@
                             <td>
                                 <input type="number" class="form-control" name="amount-@i" @bind="Article.OtherCostsForArticles[i].Amount" required maxlength="10">
                             </td>
-                            @if (i == NumberOfOtherCosts)
+                            @if (i == NumberOfOtherCosts-1)
                             {
                                 <td @onclick="AddExtraCosts"> &#10133; </td>
                                 @if (NumberOfOtherCosts != 1)
@@ -160,6 +160,8 @@
         {
              PurchasePriceValidated = "btn-danger";
         }
+
+
     }
 
     public void OnPostBack()

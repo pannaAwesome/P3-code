@@ -78,7 +78,7 @@
                             <input type="radio" name="pallet_exchange" checked="@(Article.PalletExchange == 1)" @onchange="@(() => Article.PalletExchange = 1)" disabled>
                             <label for="yes">Yes</label>
                             &nbsp;
-                            <input type="radio" name="pallet_exchange" checked="@(Article.PalletExchange == 2)" @onchange="@(() => Article.PalletExchange = 2)" disabled>
+                            <input type="radio" name="pallet_exchange" checked="@(Article.PalletExchange == 0)" @onchange="@(() => Article.PalletExchange = 2)" disabled>
                             <label for="no">No</label>
                         </div>
                     </td>
@@ -125,7 +125,7 @@
                             <input type="radio" name="transport" data-toggle="collapse" data-target="#hideTransit:not(.show)" aria-expanded="false" aria-controls="hideTransit" checked="@(Article.TransportBooking == 1)" @onchange="@(() => Article.TransportBooking = 1)" disabled>
                             <label for="yes">Yes</label>
                             &nbsp;
-                            <input type="radio" name="transport" data-toggle="collapse" data-target="#hideTransit.show" aria-expanded="false" aria-controls="hideTransit" checked="@(Article.TransportBooking == 2)" @onchange="@(() => Article.TransportBooking = 2)" disabled>
+                            <input type="radio" name="transport" data-toggle="collapse" data-target="#hideTransit.show" aria-expanded="false" aria-controls="hideTransit" checked="@(Article.TransportBooking == 0)" @onchange="@(() => Article.TransportBooking = 2)" disabled>
                             <label for="no">No</label>
                         </div>
                     </td>
@@ -299,7 +299,7 @@
                             <input type="radio" name="Organic_article" checked="@(Article.OrganicArticle == 1)" @onchange="@(() => Article.OrganicArticle = 1)" disabled>
                             <label for="yes">Yes</label>
                             &nbsp;
-                            <input type="radio" name="Organic_article" checked="@(Article.OrganicArticle == 2)" @onchange="@(() => Article.OrganicArticle = 2)" disabled>
+                            <input type="radio" name="Organic_article" checked="@(Article.OrganicArticle == 0)" @onchange="@(() => Article.OrganicArticle = 2)" disabled>
                             <label for="no">No</label>
                         </div>
                     </td>

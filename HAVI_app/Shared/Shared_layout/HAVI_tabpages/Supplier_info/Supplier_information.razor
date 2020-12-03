@@ -50,10 +50,10 @@
         </td>
         <td colspan="2">
             <div class="text-center">
-                <input type="radio" name="pallet_exchange" id="yes" value="yes" checked="@(Article.ArticleInformation.PalletExchange == 1)" disabled="@IsDisabled" @onclick="() => Article.ArticleInformation.PalletExchange = 1">
+                <input type="radio" name="pallet_exchange" value="yes" checked="@(Article.ArticleInformation.PalletExchange == 1)" disabled="@IsDisabled" @onclick="() => Article.ArticleInformation.PalletExchange = 1">
                 <label for="yes">Yes</label>
                 &nbsp;
-                <input type="radio" id="no" name="pallet_exchange" checked="@(Article.ArticleInformation.PalletExchange == 0)" disabled="@IsDisabled" @onclick="() => Article.ArticleInformation.PalletExchange = 0">
+                <input type="radio" value="no" name="pallet_exchange" checked="@(Article.ArticleInformation.PalletExchange == 0)" disabled="@IsDisabled" @onclick="() => Article.ArticleInformation.PalletExchange = 0">
                 <label for="no">No</label>
             </div>
         </td>
