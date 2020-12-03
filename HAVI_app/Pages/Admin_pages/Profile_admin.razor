@@ -1,133 +1,142 @@
 ﻿@layout HAVI_app.Shared.Admin_layout.Profile_admin
 @inject NavigationManager NavigationManager
 @page "/profile_admin/{Id:int}"
-@inject HAVI_app.Services.Classes.ProfileService ProfileService 
+@inject HAVI_app.Services.Classes.ProfileService ProfileService
 @inject HAVI_app.Services.Classes.CountryService CountryService
 
 <HAVI_app.Shared.Shared_layout.Backgrounds.Purple_background />
-
-<div class="row align-content-center">
-    <div class="col-1"></div>
-    <div class="col-10 white-box header">
-        <div class="row">
-            <HAVI_app.Shared.Shared_layout.Logo_image />
-        </div>
-        <div class="row heading-profile">
-            <div class="col-12">
-                <h4>Profile</h4>
+@if (Country == null)
+{
+    <div class="spinner">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>
+}
+else
+{
+    <div class="row align-content-center">
+        <div class="col-1"></div>
+        <div class="col-10 white-box header">
+            <div class="row">
+                <HAVI_app.Shared.Shared_layout.Logo_image />
             </div>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-10">
-                <form>
-                    <table class="table table-font">
-                        <tr>
-                            <td>
-                                <label>Username:</label>
-                            </td>
-                            <td>
-                                <input type="text" class="form-control" value="@Country.Profile.Username" disabled>
-                            </td>
-                            <td>
-                                <div></div>
-                            </td>
-                        </tr>
+            <div class="row heading-profile">
+                <div class="col-12">
+                    <h4>Profile</h4>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-10">
+                    <form>
+                        <table class="table table-font">
+                            <tr>
+                                <td>
+                                    <label>Username:</label>
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" value="@Country.Profile.Username" disabled>
+                                </td>
+                                <td>
+                                    <div></div>
+                                </td>
+                            </tr>
 
-                        <tr>
-                            <td>
-                                <label>Password:</label>
-                            </td>
-                            <td class="text-right">
-                                <a href="#" data-toggle="modal" data-target="#changePassword">Change password</a>
-                            </td>
-                            <td>
-                                <div></div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div></div>
-                            </td>
-                            <td>
-                                <div></div>
-                            </td>
-                            <td>
-                                <div></div>
-                            </td>
-                        </tr>
-                    </table>
-                    <div class="row">
-                        <div class="text-right col-6">
-                            <input type="button" class="btn cancel-button button-size" value="Back">
+                            <tr>
+                                <td>
+                                    <label>Password:</label>
+                                </td>
+                                <td class="text-right">
+                                    <a href="#" data-toggle="modal" data-target="#changePassword">Change password</a>
+                                </td>
+                                <td>
+                                    <div></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div></div>
+                                </td>
+                                <td>
+                                    <div></div>
+                                </td>
+                                <td>
+                                    <div></div>
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="row">
+                            <div class="text-right col-6">
+                                <input type="button" class="btn cancel-button button-size" value="Back">
+                            </div>
+                            <div class="text-left col-6">
+                                <input type="button" class="btn green-button button-size" value="Save">
+                            </div>
                         </div>
-                        <div class="text-left col-6">
-                            <input type="button" class="btn green-button button-size" value="Save">
-                        </div>
-                    </div>
-                </form>            
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<!-- Form for changing your password. Only appears when link is toggeled -->
-<div class=" modal fade" id="changePassword" tabindex="-1" role="dialog" aria-labelledby="changePassword" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="">
-                <button type="button" class="close close-password" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form>
-                    <table class="table-font table col-12">
-                        <tr>
-                            <td class="">
-                                <label for="current-password">Input current Password:</label>
-                            </td>
-                            <td class="">
-                                <input type="password" class="form-control" id="current-password" @bind="OldPassword" required>
-                            </td>
-                        </tr>
+    <!-- Form for changing your password. Only appears when link is toggeled -->
+    <div class=" modal fade" id="changePassword" tabindex="-1" role="dialog" aria-labelledby="changePassword" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="">
+                    <button type="button" class="close close-password" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <table class="table-font table col-12">
+                            <tr>
+                                <td class="">
+                                    <label for="current-password">Input current Password:</label>
+                                </td>
+                                <td class="">
+                                    <input type="password" class="form-control" id="current-password" @bind="OldPassword" required>
+                                </td>
+                            </tr>
 
-                        <tr>
-                            <td>
-                                <label for="new-password">Input new Password:</label>
-                            </td>
-                            <td>
-                                <input type="text" class="form-control" id="new-password" @bind="NewPassword" required>
-                            </td>
-                        </tr>
+                            <tr>
+                                <td>
+                                    <label for="new-password">Input new Password:</label>
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="new-password" @bind="NewPassword" required>
+                                </td>
+                            </tr>
 
-                        <tr>
-                            <td>
-                                <label for="confirm-new-password">Confirm new password:</label>
-                            </td>
-                            <td>
-                                <input type="text" class="form-control" id="confirm-new-password" @bind="ConfirmPassword" required>
-                            </td>
-                        </tr>
+                            <tr>
+                                <td>
+                                    <label for="confirm-new-password">Confirm new password:</label>
+                                </td>
+                                <td>
+                                    <input type="text" class="form-control" id="confirm-new-password" @bind="ConfirmPassword" required>
+                                </td>
+                            </tr>
 
-                        <tr colspan="2">
-                            @PasswordAlert
-                        </tr>
+                            <tr colspan="2">
+                                @PasswordAlert
+                            </tr>
 
-                    </table>
-                    <div class="row justify-content-center">
-                        <button type="submit" class="save-password btn button-size" data-dismiss="modal" @onclick="SavePassword">Save</button>
-                    </div>
-                </form>
+                        </table>
+                        <div class="row justify-content-center">
+                            <button type="submit" class="save-password btn button-size" data-dismiss="modal" @onclick="SavePassword">Save</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
+}
+    @code {
+        [Parameter]
+        public int Id { get; set; }
 
-@code {
-    [Parameter]
-    public int Id { get; set; }
-
-    private Country Country = new Country();
+        private Country Country;
 
     private string OldPassword { get; set; } = "";
 
@@ -169,4 +178,4 @@
         await CountryService.UpdateCountry(Id, Country);
         NavigationManager.NavigateTo($"overview_admin/{Id}", true);
     }
-}
+    }

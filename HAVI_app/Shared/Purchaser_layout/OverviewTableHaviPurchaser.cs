@@ -59,11 +59,11 @@ namespace HAVI_app.Shared.Purchaser_layout
         {
             if (SelectionType == SelectionType.None && data.ArticleState == (int)ArticleState.Completed)
             {
-                NavigationManager.NavigateTo($"/article_completed_view/{data.Id}/{data.Purchaser.Profile.Username}", true);
+                NavigationManager.NavigateTo($"/article_completed_view/{data.Id}", true);
             }
             else if (SelectionType == SelectionType.None && data.ArticleState == (int)ArticleState.Error)
             {
-                NavigationManager.NavigateTo($"/article_error_view/{data.Id}/{data.Purchaser.Profile.Username}", true);
+                NavigationManager.NavigateTo($"/article_error_view/{data.Id}", true);
             }
             else
             {

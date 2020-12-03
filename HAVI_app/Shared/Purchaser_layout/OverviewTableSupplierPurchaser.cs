@@ -62,7 +62,7 @@ namespace HAVI_app.Shared.Purchaser_layout
         {
             if (SelectionType == SelectionType.None && data.ArticleState == (int)ArticleState.Submitted)
             {
-                NavigationManager.NavigateTo($"/article_edit_view/{data.Id}/{data.Purchaser.Profile.Username}", true);
+                NavigationManager.NavigateTo($"/article_edit_view/{data.Id}", true);
             }
             else
             {
