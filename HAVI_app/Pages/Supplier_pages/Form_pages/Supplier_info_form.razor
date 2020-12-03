@@ -6,6 +6,7 @@
 @inject HAVI_app.Services.Classes.LocationService LocationService
 @inject HAVI_app.Services.Classes.ArticleInformationService ArticleInformationService
 @inject HAVI_app.Services.Classes.FreightResponsibilityService FreightResponsibilityService
+@inject HAVI_app.Services.Classes.ArticleService ArticleService
 
 
 
@@ -303,5 +304,13 @@
     {
         contries = await LocationService.GetLocations();
         Freights = await FreightResponsibilityService.GetFreightResponsibilities();
+
+        Article article = await ArticleService.GetArticleWithInformation(Id);
+
+        Article.CompanyName = article.ArticleInformation.CompanyName;
+        Article.CompanyLocation = article.ArticleInformation.CompanyLocation;
+        Article.Email = article.ArticleInformation.Email;
+        Article.PalletExchange = article.ArticleInformation.PalletExchange;
+        Article.FreightResponsibility = article.ArticleInformation.FreightResponsibility;
     }
 }

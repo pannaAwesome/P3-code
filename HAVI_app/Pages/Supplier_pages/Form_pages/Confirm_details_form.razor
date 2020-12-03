@@ -92,13 +92,7 @@
                         <label for="freight_responsibility" value="">Freight responsibility</label>
                     </td>
                     <td colspan="5">
-                        <div class="text-center">
-                            <input type="radio" name="freight_responsibility" checked="@(Article.FreightResponsibility == "CIP")" @onchange="@(() => Article.FreightResponsibility = "CIP")" disabled>
-                            <label for="CIP">CIP</label>
-                            &nbsp;
-                            <input type="radio" value="EXW" name="freight_responsibility" checked="@(Article.FreightResponsibility == "EXW")" @onchange="@(() => Article.FreightResponsibility = "EXW")" disabled>
-                            <label for="EXW">EXW</label>
-                        </div>
+                        <input type="text" class="form-control" name="freight_responsibility" value="@Article.FreightResponsibility." disabled>
                     </td>
                     <td>
                         <div></div>
