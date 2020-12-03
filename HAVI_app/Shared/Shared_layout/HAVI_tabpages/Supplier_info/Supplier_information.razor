@@ -18,7 +18,7 @@
     </div>
 </div>
 <table class="table table-borderless">
-    <tr>
+    <tr class="@CompanyName">
         <td>
             <label for="company_name">Company name:</label>
         </td>
@@ -27,7 +27,7 @@
         </td>
     </tr>
 
-    <tr>
+    <tr class="@CompanyLocation">
         <td>
             <label for="company_location">Company location:</label>
         </td>
@@ -36,7 +36,7 @@
         </td>
     </tr>
 
-    <tr>
+    <tr class="@Email">
         <td>
             <label for="email">Email:</label>
         </td>
@@ -45,7 +45,7 @@
         </td>
     </tr>
 
-    <tr>
+    <tr class="@PalletExchange">
         <td>
             <label for="pallet_exchange" value="">Pallet exchange</label>
         </td>
@@ -60,7 +60,7 @@
         </td>
     </tr>
 
-    <tr>
+    <tr class="@FreightResponse">
         <td>
             <label for="freight_responsibility" value="">Freight responsibility</label>
         </td>
@@ -75,14 +75,14 @@
         </td>
     </tr>
 
-    <tr>
+    <tr class="@SpecialInfo">
         <td colspan="3">
             <label for="special_info">Special information regarding the article or cooperation?</label>
             <textarea class="form-control" name="special_info" value="" disabled="@IsDisabled">Absolutely none</textarea>
         </td>
     </tr>
 
-    <tr>
+    <tr class="@BookTransport">
         <td>
             <label for="transport" value="">Are you in charge of booking transport?</label>
         </td>
@@ -99,7 +99,7 @@
     </tr>
     @if (BookingTransport == "yes")
     {
-        <tr>
+        <tr class="@TransitTime">
             <td>
                 <label for="class">Transit time:</label>
             </td>
@@ -112,7 +112,7 @@
         </tr>
     }
 
-    <tr>
+    <tr class="@ADR">
         <td>
             <label for="dangerous" value="">Is the article classified as dangerous goods (ADR)?</label>
         </td>
@@ -128,7 +128,7 @@
     </tr>
     @if (DangerousGoods == "yes")
     {
-        <tr>
+        <tr class="@Class">
             <td>
                 <label for="class">Class:</label>
             </td>
@@ -137,7 +137,7 @@
             </td>
         </tr>
 
-        <tr>
+        <tr class="@Classification">
             <td>
                 <label for="classificationCode">Classification code:</label>
             </td>
@@ -150,6 +150,40 @@
 </div>
 
 @code {
+
+    [Parameter]
+    public string CompanyName { get; set; }
+
+    [Parameter]
+    public string CompanyLocation { get; set; }
+
+    [Parameter]
+    public string Email { get; set; }
+
+    [Parameter]
+    public string PalletExchange { get; set; }
+
+    [Parameter]
+    public string FreightResponse { get; set; }
+
+    [Parameter]
+    public string SpecialInfo { get; set; }
+
+    [Parameter]
+    public string BookTransport{ get; set; }
+
+    [Parameter]
+    public string TransitTime { get; set; }
+
+    [Parameter]
+    public string ADR { get; set; }
+
+    [Parameter]
+    public string Class { get; set; }
+
+    [Parameter]
+    public string Classification { get; set; }
+
     private string BookingTransport = "yes";
 
     private string DangerousGoods = "yes";
