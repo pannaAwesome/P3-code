@@ -113,7 +113,7 @@ namespace HAVI_app.Shared.Shared_layout.HAVI_tabpages
             validated += Article.InternalArticleInformation.PrimaryDcIloscode != 0 ? 1 : 0;
             validated += Article.InternalArticleInformation.Gtinnumber != "" ? 1 : 0;
 
-            if(validated != 18)
+            if(validated != 19)
             {
                 MissedFields = "Sorry, you did not fill out all the required fields.";
             }else

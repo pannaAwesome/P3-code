@@ -198,9 +198,14 @@
     </tr>
     <tr>
         <td class="required">Price:</td>
-        <td> <input type="text" class="form-control" name="currency_in_country" value="@Article.InternalArticleInformation.PriceInCountryCurrency" disabled/></td>
+        <td> <input type="text" class="form-control" name="currency_in_country" value="@Article.InternalArticleInformation.PriceInCountryCurrency" disabled /></td>
         <td>
-            <input type="button" class="btn green-button" @onclick="CalculatePrice" value="Calculate"/>
+            <input type="button" class="btn green-button" @onclick="CalculatePrice" value="Calculate" />
+        </td>
+        <td>
+            <HAVI_app.Shared.Shared_layout.Questionmark_top>
+                Please enter the amount in triple-digit
+            </HAVI_app.Shared.Shared_layout.Questionmark_top>
         </td>
     </tr>
     <tr>
