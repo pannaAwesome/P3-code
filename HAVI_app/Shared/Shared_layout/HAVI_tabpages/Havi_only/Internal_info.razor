@@ -194,7 +194,12 @@
     </tr>
     <tr>
         <td class="required">Currency rate:</td>
-        <td> <input type="text" class="form-control" name="currency_rate" @bind="CurrencyRate" disabled="@IsDisabled"/></td>
+        <td> <input type="text" class="form-control" name="currency_rate" @bind="CurrencyRate" disabled="@IsDisabled" /></td>
+        <td>
+            <HAVI_app.Shared.Shared_layout.Questionmark_top>
+                Please enter the amount in triple-digit
+            </HAVI_app.Shared.Shared_layout.Questionmark_top>
+        </td>
     </tr>
     <tr>
         <td class="required">Price:</td>
@@ -202,11 +207,7 @@
         <td>
             <input type="button" class="btn green-button" @onclick="CalculatePrice" value="Calculate" />
         </td>
-        <td>
-            <HAVI_app.Shared.Shared_layout.Questionmark_top>
-                Please enter the amount in triple-digit
-            </HAVI_app.Shared.Shared_layout.Questionmark_top>
-        </td>
+        
     </tr>
     <tr>
         <td>Transit time in days:</td>
