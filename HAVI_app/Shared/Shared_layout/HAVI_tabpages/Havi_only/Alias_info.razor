@@ -23,10 +23,10 @@
                 <label for="insert_EAN_in_SAP" class="required">Insert EAN in SAP?:</label>
             </td>
             <td>
-                <input type="radio" name="insert_EAN_in_SAP" @onclick="() => Article.InternalArticleInformation.InsertEanSap = 1" value="yes" disabled="@IsDisabled" />
+                <input type="radio" name="insert_EAN_in_SAP" checked="@(Article.InternalArticleInformation.InsertEanSap == 1)" @onclick="() => Article.InternalArticleInformation.InsertEanSap = 1" value="yes" disabled="@IsDisabled" />
                 <label for="yes">Yes</label>
                 &nbsp;
-                <input type="radio" id="no" name="insert_EAN_in_SAP" @onclick="() => Article.InternalArticleInformation.InsertEanSap = 0" disabled="@IsDisabled" />
+                <input type="radio" id="no" name="insert_EAN_in_SAP" checked="@(Article.InternalArticleInformation.InsertEanSap == 0)" @onclick="() => Article.InternalArticleInformation.InsertEanSap = 0" disabled="@IsDisabled" />
                 <label for="no">No</label>
             </td>
             <td>
@@ -42,10 +42,10 @@
                 <label for="insert_GRIN_in_SAP" class="required">Insert GRIN in SAP?:</label>
             </td>
             <td>
-                <input type="radio" name="insert_GRIN_in_SAP" id="yes" value="yes" @onclick="() => Article.InternalArticleInformation.InsertGrinSap = 1" disabled="@IsDisabled" />
+                <input type="radio" name="insert_GRIN_in_SAP" id="yes" value="yes" checked="@(Article.InternalArticleInformation.InsertGrinSap == 1)" @onclick="() => Article.InternalArticleInformation.InsertGrinSap = 1" disabled="@IsDisabled" />
                 <label for="yes">Yes</label>
                 &nbsp;
-                <input type="radio" id="no" name="insert_GRIN_in_SAP" @onclick="() => Article.InternalArticleInformation.InsertGrinSap = 0" disabled="@IsDisabled" />
+                <input type="radio" id="no" name="insert_GRIN_in_SAP" checked="@(Article.InternalArticleInformation.InsertGrinSap == 0)" @onclick="() => Article.InternalArticleInformation.InsertGrinSap = 0" disabled="@IsDisabled" />
                 <label for="no">No</label>
             </td>
             <td>
@@ -62,10 +62,10 @@
                 <label for="insert_BOS_in_SAP" class="required">Insert BOS in SAP?:</label>
             </td>
             <td>
-                <input type="radio" name="insert_BOS_in_SAP" id="yes" value="yes" @onclick="() => Article.InternalArticleInformation.InsertBosSap = 1" disabled="@IsDisabled">
+                <input type="radio" name="insert_BOS_in_SAP" id="yes" value="yes" checked="@(Article.InternalArticleInformation.InsertBosSap == 1)" @onclick="() => Article.InternalArticleInformation.InsertBosSap = 1" disabled="@IsDisabled">
                 <label for="yes">Yes</label>
                 &nbsp;
-                <input type="radio" id="no" name="insert_BOS_in_SAP" @onclick="() => Article.InternalArticleInformation.InsertBosSap = 0" disabled="@IsDisabled">
+                <input type="radio" id="no" name="insert_BOS_in_SAP" checked="@(Article.InternalArticleInformation.InsertBosSap == 0)" @onclick="() => Article.InternalArticleInformation.InsertBosSap = 0" disabled="@IsDisabled">
                 <label for="no">No</label>
             </td>
             <td>
