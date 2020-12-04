@@ -32,37 +32,29 @@ namespace HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info
         public string MinShelflife { get; set; }
 
         [Parameter]
-        public string OrganicArticles { get; set; }
+        public string OrganicArticle { get; set; }
 
         [Inject]
-        public ArticleService ArticleService { get; set; }
+        public ArticleInformationService ArticleInformationService { get; set; }
 
         [Parameter]
-        public int Id { get; set; }
-
         public Article Article { get; set; }
 
-        public bool EditingFields = false;
+        public bool IsDisabled = true;
 
-        public void OrganicArticle(int value)
-        {
-            Article.ArticleInformation.OrganicArticle = value;
-        }
+        public bool EditingFields = false;
 
         public void Editing()
         {
             EditingFields = true;
+            IsDisabled = false;
         }
 
-        public void Saving()
+        public async void Saving()
         {
-            ArticleService.UpdateArticle(Article.Id, Article);
+            await ArticleInformationService.UpdateArticleInformation(Article.ArticleInformationId, Article.ArticleInformation);
             EditingFields = false;
-        }
-
-        protected override async Task OnInitializedAsync()
-        {
-            Article = await ArticleService.GetArticle(Id);
+            IsDisabled = true;
         }
     }
 }

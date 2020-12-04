@@ -11,18 +11,14 @@ namespace HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info
     public class PriceInformation : ComponentBase
     {
         [Inject]
-        public ArticleService ArticleService { get; set; }
+        public ArticleInformationService ArticleInformationService { get; set; }
 
         [Parameter]
-        public int Id { get; set; }
         public Article Article { get; set; }
 
         public bool EditingFields = false;
-        public string OtherCost = "yes";
-        public string Currency = "DKK";
-        public int NumberOfOtherCosts = 1;
-        public List<OtherCostsForArticle> OtherCostsForArticle;
-        public double TotalAmount = 0.0;
+        public int NumberOfOtherCosts = 0;
+        public bool IsDisabled = true;
 
         public void OtherCosts(int value)
         {
@@ -32,31 +28,24 @@ namespace HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info
         public void Editing()
         {
             EditingFields = true;
+            IsDisabled = false;
         }
 
-        public void Saving()
+        public async void Saving()
         {
-            ArticleService.UpdateArticle(Article.Id, Article);
+            await ArticleInformationService.UpdateArticleInformation(Article.ArticleInformationId, Article.ArticleInformation);
             EditingFields = false;
+            IsDisabled = true;
         }
 
-        protected async override Task OnInitializedAsync()
+        protected override void OnInitialized()
         {
-            Article = await ArticleService.GetArticle(Id);
-
-            foreach (OtherCostsForArticle item in Article.ArticleInformation.OtherCostsForArticles)
-            {
-                TotalAmount += item.Amount;
-            }
-
-            OtherCostsForArticle = (List<OtherCostsForArticle>)Article.ArticleInformation.OtherCostsForArticles;
-
             if (Article.ArticleInformation.OtherCostsForArticles == null)
             {
                 NumberOfOtherCosts = 0;
             }else
             {
-                NumberOfOtherCosts = OtherCostsForArticle.Count;
+                NumberOfOtherCosts = Article.ArticleInformation.OtherCostsForArticles.Count;
             }
         }
     }

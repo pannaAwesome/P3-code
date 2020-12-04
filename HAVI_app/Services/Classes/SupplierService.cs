@@ -41,16 +41,14 @@ namespace HAVI_app.Services.Classes
             return await result.Content.ReadAsAsync<Supplier>();
         }
 
-        public async Task<Supplier> UpdateSupplier(int id, Supplier supplier)
+        public async Task UpdateSupplier(int id, Supplier supplier)
         {
-            var result = await httpClient.PutAsJsonAsync($"/api/suppliers/{id}", supplier);
-            return await result.Content.ReadAsAsync<Supplier>();
+            await httpClient.PutAsJsonAsync($"/api/suppliers/{id}", supplier);
         }
 
-        public async Task<Supplier> DeleteSupplier(int id)
+        public async Task DeleteSupplier(int id)
         {
-            var result = await httpClient.DeleteAsync($"/api/suppliers/{id}");
-            return await result.Content.ReadAsAsync<Supplier>();
+            await httpClient.DeleteAsync($"/api/suppliers/{id}");
         }
     }
 }

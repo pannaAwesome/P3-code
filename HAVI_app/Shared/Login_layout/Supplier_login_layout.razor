@@ -31,6 +31,9 @@
                 </table>
             </div>
         </div>
+        <div class="row justify-content-center">
+            
+        </div>  
         <div class="row">
             <div class="col-5"></div>
             <div class="col-2 justify-content-center">
@@ -38,30 +41,37 @@
             </div>
         </div>
     </form>
+    <div class="text-center">
+        <p>@_authMessage</p>
+    </div>
 </div>
 
 @code {
-
-    [Parameter]
     public string Username { get; set; }
 
-    [Parameter]
     public string Password { get; set; }
 
     private string _authMessage;
 
     private async Task LogUsername()
     {
-        var user = await ProfileService.GetProfileByUsernameAndpassword(Username, Password);
+        if(Username != null && Password != null)
+        {
+            var user = await ProfileService.GetProfileByUsernameAndpassword(Username, Password);
 
-        if (user != null && user.Usertype == 2 && user.Password == Password)
+            if (user != (new Profile()) && user.Usertype == 2 && user.Password == Password)
+            {
+                Supplier supplier = await SupplierService.GetSupplierWithProfile(user.Id);
+                NavigationManager.NavigateTo($"/overview_supplier/{supplier.Id}", true);
+            }
+            else
+            {
+                _authMessage = "The email or password is incorrect, please try again!";
+            }
+        }else
         {
-            Supplier supplier = await SupplierService.GetSupplierWithProfile(user.Id);
-            NavigationManager.NavigateTo($"/overview_supplier/{supplier.Id}", true);
+            _authMessage = "You forgot to input an email and password";
         }
-        else
-        {
-            _authMessage = "The username or password is incorrect, please try again!";
-        }
+
     }
 }

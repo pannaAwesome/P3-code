@@ -20,10 +20,9 @@ namespace HAVI_app.Services.Classes
             return await httpClient.GetFromJsonAsync<InternalArticleInformation>($"/api/internalArticleInformations/{id}");
         }
 
-        public async Task<InternalArticleInformation> UpdateInternalArticleInformation(int id, InternalArticleInformation internalArticleInformation)
+        public async Task UpdateInternalArticleInformation(int id, InternalArticleInformation internalArticleInformation)
         {
-            var result = await httpClient.PutAsJsonAsync($"/api/internalArticleInformations/{id}", internalArticleInformation);
-            return await result.Content.ReadAsAsync<InternalArticleInformation>();
+            await httpClient.PutAsJsonAsync($"/api/internalArticleInformations/{id}", internalArticleInformation);
         }
     }
 }

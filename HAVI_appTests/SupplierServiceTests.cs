@@ -10,25 +10,23 @@ using System.Threading;
 namespace HAVI_appTests
 {
     [TestClass]
-    class SupplierServiceTests
+    public class SupplierServiceTests
     {
         [TestMethod]
-        public async void ShouldReturnGet()
+        public async Task ShouldReturnGet()
         {
             var handlerMock = new Mock<HttpMessageHandler>();
             var response = new HttpResponseMessage
             {
                 StatusCode = HttpStatusCode.OK,
-                Content = new StringContent(@"[{ ""Id"": 1, ""ProfileId"": 1, ""CompanyName"": ""Mac Donalds"",
-                                            ""CompanyLocation"": ""Denmark"", ""PalletExchange"": 1, ""FreightResponsibility"": 1 }]"),
+                Content = new StringContent(@"[{ ""Id"": 1, ""ProfileId"": 3, ""CompanyName"": ""Hello and co."",
+                                            ""CompanyLocation"": ""Denmark"", ""PalletExchange"": 1, ""FreightResponsibility"": ""EXW"" }]"),
             };
 
             handlerMock
                 .Protected()
                 .Setup<Task<HttpResponseMessage>>(
-                    "GetFromJsonAsync",
-                    ItExpr.IsAny<HttpRequestMessage>(),
-                    ItExpr.IsAny<CancellationToken>())
+                    "GetFromJsonAsync")
                 .ReturnsAsync(response);
             var httpClient = new HttpClient(handlerMock.Object);
             var posts = new SupplierService(httpClient);

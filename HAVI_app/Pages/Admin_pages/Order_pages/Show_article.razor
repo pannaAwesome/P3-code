@@ -1,7 +1,13 @@
 ﻿@page "/show_article/{Id:int}"
-@layout HAVI_app.Shared.Admin_layout.Show_artikel_layout
 @inherits ShowArticle
 
+    <div class="row form-logo-header">
+        <HAVI_app.Shared.Shared_layout.Logo_image />
+        <div class="col-9 text-right">
+            <button class="btn discard-button form-header-button" data-toggle="modal" data-target="#discard-changes-modal">Discard changes</button>
+        </div>
+    </div>
+    <br />
     <ul class="nav nav-tabs" id="myTabJust" role="tablist">
         <li class="nav-item">
             <a class="nav-link active navtabs-background" id="HAVI-tab-just" data-toggle="tab" href="#HAVI-just" role="tab" aria-controls="HAVI-just"
@@ -18,12 +24,31 @@
     </ul>
     <div class="tab-content background-tabs" id="myTabContentJust">
         <div class="tab-pane fade show active" id="HAVI-just" role="tabpanel" aria-labelledby="HAVI-tab-just">
-            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Havi_only_collection ArticleId="Id"/>
+            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Havi_only_collection ArticleId="Id" User="Admin" IsDisabled="true" />
         </div>
         <div class="tab-pane fade" id="Supplier-just" role="tabpanel" aria-labelledby="Supplier-tab-just">
             <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_collection ArticleId="Id" />
         </div>
         <div class="tab-pane fade" id="Error-just" role="tabpanel" aria-labelledby="Error-tab-just">
             <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Report_new_error ArticleId="Id" />
+        </div>
+    </div>
+    <div class="modal fade" id="discard-changes-modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Discard changes</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to discard all your changes and return to the overview?
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                    <button type="button" class="btn cancel-button" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn red-button" @onclick="DiscardChanges">Discard changes</button>
+                </div>
+            </div>
         </div>
     </div>

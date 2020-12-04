@@ -71,7 +71,7 @@ namespace HAVI_app.Api.Controllers
 
                 var createdVailedForCustomer = await _vailedForCustomerRepository.AddVailedForCustomer(vailedForCustomer);
 
-                return CreatedAtAction(nameof(GetVailedForCustomer), new { id = createdVailedForCustomer.Id }, createdVailedForCustomer);
+                return createdVailedForCustomer;
             }
             catch (Exception)
             {

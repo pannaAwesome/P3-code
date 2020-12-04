@@ -10,29 +10,52 @@ namespace HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info
 {
     public class ShipmentInformation : ComponentBase
     {
-        [Inject]
-        public ArticleService ArticleService { get; set; }
+        [Parameter]
+        public string CartonsPerPallet { get; set; }
 
         [Parameter]
-        public int Id { get; set; }
+        public string CartonsPerLayer { get; set; }
+
+        [Parameter]
+        public string CountryOfOrigin { get; set; }
+
+        [Parameter]
+        public string ImportedFrom { get; set; }
+
+        [Parameter]
+        public string TollTarif { get; set; }
+
+        [Parameter]
+        public string MinOrderQuantity { get; set; }
+
+        [Parameter]
+        public string TemperatureTransportation { get; set; }
+
+        [Parameter]
+        public string TemperatureStorage { get; set; }
+
+        [Parameter]
+        public string LeadTime { get; set; }
+        [Inject]
+        public ArticleInformationService ArticleInformationService { get; set; }
+
+        [Parameter]
         public Article Article { get; set; }
 
         public bool EditingFields = false;
+        public bool IsDisabled = true;
 
         public void Editing()
         {
             EditingFields = true;
+            IsDisabled = false;
         }
 
-        public void Saving()
+        public async void Saving()
         {
-            ArticleService.UpdateArticle(Article.Id, Article);
+            await ArticleInformationService.UpdateArticleInformation(Article.ArticleInformationId, Article.ArticleInformation);
             EditingFields = false;
-        }
-
-        protected override async Task OnInitializedAsync()
-        {
-            Article = await ArticleService.GetArticle(Id);
+            IsDisabled = true;
         }
     }
 }

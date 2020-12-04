@@ -21,7 +21,7 @@ namespace HAVI_app.Shared.Supplier_layout
         [Inject]
         public ArticleService ArticleService { get; set; }
 
-        public List<Article> Articles = new List<Article>();
+        public List<Article> Articles;
 
         public SelectionType SelectionType;
 
@@ -52,14 +52,14 @@ namespace HAVI_app.Shared.Supplier_layout
                 ArticleService.DeleteArticle(article.Id);
             }
 
-            NavigationManager.NavigateTo("/overview_supplier", true);
+            NavigationManager.NavigateTo($"/overview_supplier/{Id}", true);
         }
 
         public void RowClicked(Article data)
         {
             if (SelectionType == SelectionType.None && data.ArticleState == (int)ArticleState.Created)
             {
-                NavigationManager.NavigateTo($"/supplier_info_form/{data.Id}", true);
+                NavigationManager.NavigateTo($"/supplier_info_form/{data.ArticleInformationId}", true);
             }
             else
             {

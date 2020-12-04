@@ -43,9 +43,9 @@
             <Column TableItem="Article" Title="Article name " Field="@(x => x.ArticleInformation.ArticleName)" Sortable="true" />
             <Column TableItem="Article" Title="Supplier name " Field="@(x => x.ArticleInformation.CompanyName)" Sortable="true" />
             <Column TableItem="Article" Title="Valid for customer " Field="@(x => x.VailedForCustomer)" Sortable="true" />
-            <Column TableItem="Article" Title="State " Field="@(x => x.DateCreated)" Sortable="true">
+            <Column TableItem="Article" Title="Date created " Field="@(x => x.DateCreated)" Sortable="true">
                 <Template>
-                    @context.DateCreated.ToShortDateString();
+                    @context.DateCreated.ToShortDateString()
                 </Template>
             </Column>
             <Column TableItem="Article" Title="State " Field="@(x => x.ArticleState)" Class="text-center" Width="100px" DefaultSortColumn="true" Sortable="true">

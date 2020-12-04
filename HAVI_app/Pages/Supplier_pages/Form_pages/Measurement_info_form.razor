@@ -4,7 +4,7 @@
 @inherits HAVI_app.Classes.Validation
 @inject Models.ArticleInformation Article
 
-<HAVI_app.Shared.Supplier_layout.Form_header SupplierState="filled" ArticleState="filled" MeasurementState="active" />
+<HAVI_app.Shared.Supplier_layout.Form_header SupplierState="filled" ArticleState="filled" MeasurementState="active" Id="Article.Id" />
 
 <div class="row justify-content-center">
     <div class="col-10">
@@ -14,7 +14,7 @@
 </div>
 
 <div class="justify-content-center row">
-    <div class="col-12 d-flex justify-content-center">
+    <div class="col-10 d-flex justify-content-center">
         <EditForm Model="Article" OnSubmit="@ValidationMeasurementForm">
             <table class="table">
 
@@ -23,14 +23,14 @@
                         <label for="length" class="required">Length per salesunit:</label>
                     </td>
                     <td>
-                        <input type="number" step="0.01" class="form-control @LengthValidated" name="Length" @bind="Article.LengthPrSalesunit" @onfocus="RemoveLengthDanger" required maxlength="10">
+                        <input type="number" step="any" class="form-control @LengthValidated" name="Length" @bind="Article.LengthPrSalesunit" @onfocus="RemoveLengthDanger" required maxlength="10">
                     </td>
                     <td>
                         <label class="center-for-units" for="length">cm</label>
                     </td>
                     <td>
                         <HAVI_app.Shared.Shared_layout.Questionmark_top>
-                            The numerical length of your salesunit
+                            The numerical length of your salesunit. Must not be zero or less
                         </HAVI_app.Shared.Shared_layout.Questionmark_top>
 
                     </td>
@@ -41,14 +41,14 @@
                         <label for="width" class="required">Width per salesunit:</label>
                     </td>
                     <td>
-                        <input type="number" step="0.01" class="form-control @WidthValidated" name="width" @bind="Article.WidthPrSalesunit" @onfocus="RemoveWidthDanger" required maxlength="10">
+                        <input type="number" step="any" class="form-control @WidthValidated" name="width" @bind="Article.WidthPrSalesunit" @onfocus="RemoveWidthDanger" required maxlength="10">
                     </td>
                     <td>
                         <label class="center-for-units" for="width">cm</label>
                     </td>
                     <td>
                         <HAVI_app.Shared.Shared_layout.Questionmark_top>
-                            The numerical width of your salesunit
+                            The numerical width of your salesunit. Must not be zero or less
                         </HAVI_app.Shared.Shared_layout.Questionmark_top>
 
                     </td>
@@ -59,14 +59,14 @@
                         <label for="height" class="required">Height per salesunit:</label>
                     </td>
                     <td>
-                        <input type="number" step="0.01" class="form-control @HeightValidated" name="height" @bind="Article.HeightPrSalesunit" @onfocus="RemoveHeightDanger" required maxlength="10">
+                        <input type="number" step="any" class="form-control @HeightValidated" name="height" @bind="Article.HeightPrSalesunit" @onfocus="RemoveHeightDanger" required maxlength="10">
                     </td>
                     <td>
                         <label class="center-for-units" for="height">cm</label>
                     </td>
                     <td>
                         <HAVI_app.Shared.Shared_layout.Questionmark_top>
-                            The numerical height of your salesunit
+                            The numerical height of your salesunit. Must not be zero or less
                         </HAVI_app.Shared.Shared_layout.Questionmark_top>
 
                     </td>
@@ -77,14 +77,14 @@
                         <label for="net_weight" class="required">Net weight per salesunit:</label>
                     </td>
                     <td>
-                        <input type="number" step="0.01" class="form-control @NetWeightValidated" name="net_weight" @bind="Article.NetWeightPrSalesunit" @onfocus="RemoveNetWeightDanger" required maxlength="8">
+                        <input type="number" step="any" class="form-control @NetWeightValidated" name="net_weight" @bind="Article.NetWeightPrSalesunit" @onfocus="RemoveNetWeightDanger" required maxlength="8">
                     </td>
                     <td>
                         <label class="center-for-units" for="net_weight">kg</label>
                     </td>
                     <td>
                         <HAVI_app.Shared.Shared_layout.Questionmark_top>
-                            The weight of the content in a salesunit
+                            The weight of the content in a salesunit. Must not be zero or less
                         </HAVI_app.Shared.Shared_layout.Questionmark_top>
 
                     </td>
@@ -95,14 +95,14 @@
                         <label for="gross_weight" class="required">Gross weight per salesunit:</label>
                     </td>
                     <td>
-                        <input type="number" step="0.01" class="form-control @GrossWeightValidated" name="gross_weight" @bind="Article.GrossWeightPrSalesunit" @onfocus="RemoveGrossWeightDanger" required maxlength="8">
+                        <input type="number" step="any" class="form-control @GrossWeightValidated" name="gross_weight" @bind="Article.GrossWeightPrSalesunit" @onfocus="RemoveGrossWeightDanger" required maxlength="8">
                     </td>
                     <td>
                         <label class="center-for-units" for="gross_weight">kg</label>
                     </td> 
                     <td>
                         <HAVI_app.Shared.Shared_layout.Questionmark_top>
-                            The total weight of the salesunit
+                            The total weight of the salesunit. Must not be zero or less
                         </HAVI_app.Shared.Shared_layout.Questionmark_top>
 
                     </td>
@@ -111,7 +111,7 @@
             </table>
             <div class="row justify-content-center">
                 <div class="text-right col-6">
-                    <input type="submit" class="btn cancel-button button-size" value="Back" @onclick="OnPostBack" />
+                    <input type="button" class="btn cancel-button button-size" value="Back" @onclick="OnPostBack" />
                 </div>
                 <div class="text-left col-6">
                     <input type="submit" class="btn green-button button-size" value="Next"/>
@@ -122,6 +122,8 @@
 </div>
 
 @code {
+    [Parameter]
+    public int Id { get; set; }
 
     public string LengthValidated;
 
@@ -133,39 +135,39 @@
 
     public string GrossWeightValidated;
 
-    public void ValidationMeasurementForm() 
+    public void ValidationMeasurementForm()
     {
-        
-        if (DoubleOnly(Article.LengthPrSalesunit) &&
-            DoubleOnly(Article.WidthPrSalesunit) && 
-            DoubleOnly(Article.HeightPrSalesunit) && 
-            DoubleOnly(Article.NetWeightPrSalesunit) &&  
-            DoubleOnly(Article.GrossWeightPrSalesunit))
+
+        if (DoubleOnly(Article.LengthPrSalesunit) && MustNotBeZeroOrNegativeNumbere(Article.LengthPrSalesunit) &&
+            DoubleOnly(Article.WidthPrSalesunit) && MustNotBeZeroOrNegativeNumbere(Article.WidthPrSalesunit) &&
+            DoubleOnly(Article.HeightPrSalesunit) && MustNotBeZeroOrNegativeNumbere(Article.HeightPrSalesunit) &&
+            DoubleOnly(Article.NetWeightPrSalesunit) && MustNotBeZeroOrNegativeNumbere(Article.NetWeightPrSalesunit) &&
+            DoubleOnly(Article.GrossWeightPrSalesunit) && MustNotBeZeroOrNegativeNumbere(Article.GrossWeightPrSalesunit))
         {
             NavigationManager.NavigateTo($"/shipment_info_form", true);
         }
 
-        if (!DoubleOnly(Article.LengthPrSalesunit))
+        if (!DoubleOnly(Article.LengthPrSalesunit) || (!MustNotBeZeroOrNegativeNumbere(Article.LengthPrSalesunit)))
         {
             LengthValidated = "btn-danger";
         }
 
-        if (!DoubleOnly(Article.WidthPrSalesunit))
+        if (!DoubleOnly(Article.WidthPrSalesunit) || (!MustNotBeZeroOrNegativeNumbere(Article.WidthPrSalesunit)))
         {
             WidthValidated = "btn-danger";
         }
 
-        if (!DoubleOnly(Article.WidthPrSalesunit))
+        if (!DoubleOnly(Article.HeightPrSalesunit) || (!MustNotBeZeroOrNegativeNumbere(Article.HeightPrSalesunit)))
         {
             HeightValidated = "btn-danger";
         }
 
-        if (!DoubleOnly(Article.WidthPrSalesunit))
+        if (!DoubleOnly(Article.NetWeightPrSalesunit) || (!MustNotBeZeroOrNegativeNumbere(Article.NetWeightPrSalesunit)))
         {
             NetWeightValidated = "btn-danger";
         }
 
-        if (!DoubleOnly(Article.WidthPrSalesunit))
+        if (!DoubleOnly(Article.GrossWeightPrSalesunit) || (!MustNotBeZeroOrNegativeNumbere(Article.GrossWeightPrSalesunit)))
         {
             GrossWeightValidated = "btn-danger";
         }

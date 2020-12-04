@@ -69,6 +69,7 @@ namespace HAVI_app.Api.DatabaseClasses
                 resultInternalArticleInformation.CompanyCode = internalArticle.CompanyCode;
                 resultInternalArticleInformation.CurrencyRate = internalArticle.CurrencyRate;
                 resultInternalArticleInformation.DepartmentId = internalArticle.DepartmentId;
+                resultInternalArticleInformation.AmountInForeignCurrency = internalArticle.AmountInForeignCurrency;
                 resultInternalArticleInformation.Eannumber = internalArticle.Eannumber;
                 resultInternalArticleInformation.Grinnumber = internalArticle.Grinnumber;
                 resultInternalArticleInformation.Gtinnumber = internalArticle.Gtinnumber;
@@ -96,7 +97,7 @@ namespace HAVI_app.Api.DatabaseClasses
                 resultInternalArticleInformation.VatTaxcode = internalArticle.VatTaxcode;
                 await _context.SaveChangesAsync();
 
-                foreach(Sapplant plant in resultInternalArticleInformation.Sapplants)
+                foreach(Sapplant plant in internalArticle.Sapplants)
                 {
                     var resultPlant = await _context.Sapplants.FirstOrDefaultAsync(s => s.Id == plant.Id);
 
@@ -112,7 +113,7 @@ namespace HAVI_app.Api.DatabaseClasses
                     await _context.SaveChangesAsync();
                 }
 
-                foreach(Qip qip in resultInternalArticleInformation.Qips)
+                foreach(Qip qip in internalArticle.Qips)
                 {
                     var resultQIP = await _context.Qips.FirstOrDefaultAsync(q => q.Id == qip.Id);
 
@@ -134,7 +135,7 @@ namespace HAVI_app.Api.DatabaseClasses
                     await _context.SaveChangesAsync();
                 }
 
-                foreach (Bundle bundle in resultInternalArticleInformation.Bundles)
+                foreach (Bundle bundle in internalArticle.Bundles)
                 {
                     var resultBundle = await _context.Bundles.FirstOrDefaultAsync(b => b.Id == bundle.Id);
 

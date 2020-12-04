@@ -1,177 +1,211 @@
-﻿@page "/alias"
-@layout HAVI_app.Shared.Admin_layout.Show_artikel_layout
+﻿@inject HAVI_app.Services.Classes.ArticleService ArticleService
+@inject HAVI_app.Services.Classes.InternalArticleInformationService InternalArticleInformationService
 
-<h3>Alias</h3>
+<div class="col-11">
+    <h4>Bundles:</h4>
+</div>
+<div class="col-1 @EditPossible">
+    @if (EditingFields)
+    {
+        <div class="save-button" @onclick="Saving"></div>
+    }
+    else
+    {
+        <div class="edit-button" @onclick="Editing"></div>
+    }
+
+</div>
 <div class="col-12">
     <form>
-        <table class="table">
-            <tr>
-                <td>
-                    <label for="insert_EAN_in_SAP" class="required">Insert EAN in SAP?:</label>
-                </td>
-                <td>
-                    <input type="radio" name="insert_EAN_in_SAP" id="yes" value="yes" @enabledOrNot>
-                    <label for="yes">Yes</label>
-                    &nbsp;
-                    <input type="radio" id="no" name="insert_EAN_in_SAP" @enabledOrNot>
-                    <label for="no">No</label>
-                </td>
-                <td>
-                    <HAVI_app.Shared.Shared_layout.Questionmark_top>
-                        Checking this wil decide if EAN number is entered to SAP
-                    </HAVI_app.Shared.Shared_layout.Questionmark_top>
+    <table class="table">
+        <tr>
+            <td>
+                <label for="insert_EAN_in_SAP" class="required">Insert EAN in SAP?:</label>
+            </td>
+            <td>
+                <input type="radio" name="insert_EAN_in_SAP" @onclick="() => Article.InternalArticleInformation.InsertEanSap = 1" value="yes" disabled="@IsDisabled" />
+                <label for="yes">Yes</label>
+                &nbsp;
+                <input type="radio" id="no" name="insert_EAN_in_SAP" @onclick="() => Article.InternalArticleInformation.InsertEanSap = 0" disabled="@IsDisabled" />
+                <label for="no">No</label>
+            </td>
+            <td>
+                <HAVI_app.Shared.Shared_layout.Questionmark_top>
+                    Checking this will decide if EAN number is entered in SAP
+                </HAVI_app.Shared.Shared_layout.Questionmark_top>
 
-                </td>
-            </tr>
+            </td>
+        </tr>
 
-            <tr>
-                <td>
-                    <label for="insert_GRIN_in_SAP" class="required">Insert GRIN in SAP?:</label>
-                </td>
-                <td>
-                    <input type="radio" name="insert_GRIN_in_SAP" id="yes" value="yes" @enabledOrNot>
-                    <label for="yes">Yes</label>
-                    &nbsp;
-                    <input type="radio" id="no" name="insert_GRIN_in_SAP" @enabledOrNot>
-                    <label for="no">No</label>
-                </td>
-                <td>
+        <tr>
+            <td>
+                <label for="insert_GRIN_in_SAP" class="required">Insert GRIN in SAP?:</label>
+            </td>
+            <td>
+                <input type="radio" name="insert_GRIN_in_SAP" id="yes" value="yes" @onclick="() => Article.InternalArticleInformation.InsertGrinSap = 1" disabled="@IsDisabled" />
+                <label for="yes">Yes</label>
+                &nbsp;
+                <input type="radio" id="no" name="insert_GRIN_in_SAP" @onclick="() => Article.InternalArticleInformation.InsertGrinSap = 0" disabled="@IsDisabled" />
+                <label for="no">No</label>
+            </td>
+            <td>
 
-                    <HAVI_app.Shared.Shared_layout.Questionmark_top>
-                        Checking this wil decide if EAN number is entered to SAP
-                    </HAVI_app.Shared.Shared_layout.Questionmark_top>
+                <HAVI_app.Shared.Shared_layout.Questionmark_top>
+                    Checking this will decide if GRIN number is entered in SAP
+                </HAVI_app.Shared.Shared_layout.Questionmark_top>
 
-                </td>
-            </tr>
+            </td>
+        </tr>
 
-            <tr>
-                <td>
-                    <label for="insert_BOS_in_SAP" class="required">Insert BOS in SAP?:</label>
-                </td>
-                <td>
-                    <input type="radio" name="insert_BOS_in_SAP" id="yes" value="yes" @enabledOrNot>
-                    <label for="yes">Yes</label>
-                    &nbsp;
-                    <input type="radio" id="no" name="insert_BOS_in_SAP" @enabledOrNot>
-                    <label for="no">No</label>
-                </td>
-                <td>
+        <tr>
+            <td>
+                <label for="insert_BOS_in_SAP" class="required">Insert BOS in SAP?:</label>
+            </td>
+            <td>
+                <input type="radio" name="insert_BOS_in_SAP" id="yes" value="yes" @onclick="() => Article.InternalArticleInformation.InsertBosSap = 1" disabled="@IsDisabled">
+                <label for="yes">Yes</label>
+                &nbsp;
+                <input type="radio" id="no" name="insert_BOS_in_SAP" @onclick="() => Article.InternalArticleInformation.InsertBosSap = 0" disabled="@IsDisabled">
+                <label for="no">No</label>
+            </td>
+            <td>
 
-                    <HAVI_app.Shared.Shared_layout.Questionmark_top>
-                        Checking this wil decide if EAN number is entered to SAP
-                    </HAVI_app.Shared.Shared_layout.Questionmark_top>
+                <HAVI_app.Shared.Shared_layout.Questionmark_top>
+                    Checking this will decide if BOS number is entered in SAP
+                </HAVI_app.Shared.Shared_layout.Questionmark_top>
 
-                </td>
-            </tr>
+            </td>
+        </tr>
 
-            <tr>
-                <td>
-                    <label for="EAN number:" class="required">EAN number:</label>
-                </td>
-                <td>
-                    <input type="text" class="form-control" name="EAN number" @enabledOrNot>
-                </td>
-                <td>
-                    <HAVI_app.Shared.Shared_layout.Questionmark_top>
-                        Enter the correct EAN number for the product.
-                    </HAVI_app.Shared.Shared_layout.Questionmark_top>
+        <tr>
+            <td>
+                <label for="EAN number:">EAN number:</label>
+            </td>
+            <td>
+                <input type="text" class="form-control" name="EAN number" @bind="Article.InternalArticleInformation.Eannumber" disabled="@IsDisabled" />
+            </td>
+            <td>
+                <HAVI_app.Shared.Shared_layout.Questionmark_top>
+                    Enter the correct EAN number for the product.
+                </HAVI_app.Shared.Shared_layout.Questionmark_top>
 
-                </td>
-            </tr>
+            </td>
+        </tr>
 
-            <tr>
-                <td>
-                    <label for="GRIN number:" class="required">GRIN number:</label>
-                </td>
-                <td>
-                    <input type="text" class="form-control" name="GRIN number" @enabledOrNot>
-                </td>
-                <td>
-                    <HAVI_app.Shared.Shared_layout.Questionmark_top>
-                        Enter the correct EAN number for the product.
-                    </HAVI_app.Shared.Shared_layout.Questionmark_top>
+        <tr>
+            <td>
+                <label for="GRIN number:">GRIN number:</label>
+            </td>
+            <td>
+                <input type="text" class="form-control" name="GRIN number" @bind="Article.InternalArticleInformation.Grinnumber" disabled="@IsDisabled" />
+            </td>
+            <td>
+                <HAVI_app.Shared.Shared_layout.Questionmark_top>
+                    Enter the correct GRIN number for the product.
+                </HAVI_app.Shared.Shared_layout.Questionmark_top>
 
-                </td>
-            </tr>
+            </td>
+        </tr>
 
-            <tr>
-                <td>
-                    <label for="BOS number:" class="required">BOS number:</label>
-                </td>
-                <td>
-                    <input type="text" class="form-control" name="BOS number" @enabledOrNot>
-                </td>
-                <td>
-                    <HAVI_app.Shared.Shared_layout.Questionmark_top>
-                        Enter the correct EAN number for the product.
-                    </HAVI_app.Shared.Shared_layout.Questionmark_top>
+        <tr>
+            <td>
+                <label for="BOS number:">BOS number:</label>
+            </td>
+            <td>
+                <input type="text" class="form-control" name="BOS number" @bind="Article.InternalArticleInformation.Bosnumber" disabled="@IsDisabled" />
+            </td>
+            <td>
+                <HAVI_app.Shared.Shared_layout.Questionmark_top>
+                    Enter the correct BOS number for the product.
+                </HAVI_app.Shared.Shared_layout.Questionmark_top>
 
-                </td>
-            </tr>
+            </td>
+        </tr>
 
-            <tr>
-                <td>
-                    <label for="GTIN number:" class="required">GTIN number:</label>
-                </td>
-                <td>
-                    <input type="text" class="form-control" name="GTIN number" @enabledOrNot>
-                </td>
-                <td>
-                    <HAVI_app.Shared.Shared_layout.Questionmark_top>
-                        Enter the correct EAN number for the product.
-                    </HAVI_app.Shared.Shared_layout.Questionmark_top>
+        <tr>
+            <td>
+                <label for="GTIN number:" class="required">GTIN number:</label>
+            </td>
+            <td>
+                <input type="text" class="form-control" name="GTIN number" @bind="Article.InternalArticleInformation.Gtinnumber" disabled="@IsDisabled" />
+            </td>
+            <td>
+                <HAVI_app.Shared.Shared_layout.Questionmark_top>
+                    Enter the correct GTIN number for the product.
+                </HAVI_app.Shared.Shared_layout.Questionmark_top>
 
-                </td>
-            </tr>
+            </td>
+        </tr>
 
-            <tr>
-                <td>
-                    <label for="LRIN number:" class="required">LRIN number:</label>
-                </td>
-                <td>
-                    <input type="text" class="form-control" name="LRIN number" @enabledOrNot>
-                </td>
-                <td>
-                    <HAVI_app.Shared.Shared_layout.Questionmark_top>
-                        Enter the correct EAN number for the product.
-                    </HAVI_app.Shared.Shared_layout.Questionmark_top>
+        <tr>
+            <td>
+                <label for="LRIN number:">LRIN number:</label>
+            </td>
+            <td>
+                <input type="text" class="form-control" name="LRIN number" @bind="Article.InternalArticleInformation.Lrinnumber" disabled="@IsDisabled" />
+            </td>
+            <td>
+                <HAVI_app.Shared.Shared_layout.Questionmark_top>
+                    Enter the correct LRIN number for the product.
+                </HAVI_app.Shared.Shared_layout.Questionmark_top>
 
-                </td>
-            </tr>
+            </td>
+        </tr>
 
-            <tr>
-                <td>
-                    <label for="SPRN number:" class="required">SPRN number:</label>
-                </td>
-                <td>
-                    <input type="text" class="form-control" name="SPRN number" @enabledOrNot>
-                </td>
-                <td>
-                    <HAVI_app.Shared.Shared_layout.Questionmark_top>
-                        Enter the correct EAN number for the product.
-                    </HAVI_app.Shared.Shared_layout.Questionmark_top>
+        <tr>
+            <td>
+                <label for="SPRN number:">SPRN number:</label>
+            </td>
+            <td>
+                <input type="text" class="form-control" name="SPRN number" @bind="Article.InternalArticleInformation.Sprnnumber" disabled="@IsDisabled" />
+            </td>
+            <td>
+                <HAVI_app.Shared.Shared_layout.Questionmark_top>
+                    Enter the correct SPRN number for the product.
+                </HAVI_app.Shared.Shared_layout.Questionmark_top>
 
-                </td>
-            </tr>
+            </td>
+        </tr>
 
-            <tr>
-                <td>
-                    <label for="CARLA number:" class="required">CARLA number:</label>
-                </td>
-                <td>
-                    <input type="text" class="form-control" name="CARLA number" @enabledOrNot>
-                </td>
-                <td>
-                    <HAVI_app.Shared.Shared_layout.Questionmark_top>
-                        Enter the correct EAN number for the product.
-                    </HAVI_app.Shared.Shared_layout.Questionmark_top>
-                </td>
-            </tr>
-        </table>
+        <tr>
+            <td>
+                <label for="CARLA number:">CARLA number:</label>
+            </td>
+            <td>
+                <input type="text" class="form-control" name="CARLA number" @bind="Article.InternalArticleInformation.Carlanumber" disabled="@IsDisabled" />
+            </td>
+            <td>
+                <HAVI_app.Shared.Shared_layout.Questionmark_top>
+                    Enter the correct CARLA number for the product.
+                </HAVI_app.Shared.Shared_layout.Questionmark_top>
+            </td>
+        </tr>
+    </table>
     </form>
 </div>
 
 @code {
     [Parameter]
-    public string enabledOrNot { get; set; }
-}
+    public Article Article { get; set; }
+
+    [Parameter]
+    public bool IsDisabled { get; set; }
+
+    [Parameter]
+    public string EditPossible { get; set; }
+
+    public bool EditingFields = false;
+
+    public void Editing()
+    {
+        EditingFields = true;
+        IsDisabled = false;
+    }
+
+    public async void Saving()
+    {
+        await InternalArticleInformationService.UpdateInternalArticleInformation(Article.InternalArticleInformationId, Article.InternalArticleInformation);
+        EditingFields = false;
+        IsDisabled = true;
+    }
+} 

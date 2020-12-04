@@ -95,7 +95,7 @@ namespace HAVI_app.Api.Controllers
 
                 var createdVatTaxCode = await _vatTaxCodeRepository.AddVatTaxCode(code);
 
-                return CreatedAtAction(nameof(GetVatTaxCodes), new { id = createdVatTaxCode.Id }, createdVatTaxCode);
+                return createdVatTaxCode;
             }
             catch (Exception)
             {

@@ -1,5 +1,9 @@
 ﻿@using BlazorTable
 @inherits OverviewTableHaviPurchaser
+@inject HAVI_app.Models.ArticleInformation ArticleExcel
+@inject Microsoft.JSInterop.IJSRuntime JS
+@using System.IO
+@using HAVI_app.Classes
 
 <div class="modal fade" id="deleting-rows" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -35,35 +39,10 @@
     <div class="col-1">
         <button class="btn trash-button @hideornot" data-toggle="modal" data-target="#deleting-rows"></button>
     </div>
-</div>
-
-<div class="col justify-content-end p-1"><button type="button" class="btn btn-success" data-toggle="modal" data-target="#creationCode">Get creation for supplier</button></div>
-
-<div class="modal fade" id="creationCode" tabindex="-1" role="dialog" aria-labelledby="createCodeLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="creationCodeLabel">Generate creation code</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="form-group mx-sm-3 mb-2">
-                    <label for="creationCode" class="sr-only"></label>
-                    <div>
-                        <input type="text" id="creationCode" value="@CreationCode" />
-                        <button type="button" class="btn btn-success" @onclick="GenerateCreationCode">Generate</button>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-        </div>
+    <div class="col-8 justify-content-end p-1">
+        <button type="button" class="btn button-options-overview" @onclick="ExportArticle">Export article informations</button>
     </div>
 </div>
-
 
 <div class="row">
 
@@ -72,9 +51,9 @@
             <Column TableItem="Article" Title="Article name " Field="@(x => x.ArticleInformation.ArticleName)" Sortable="true" />
             <Column TableItem="Article" Title="Supplier name " Field="@(x => x.ArticleInformation.CompanyName)" Sortable="true" />
             <Column TableItem="Article" Title="Valid for customer " Field="@(x => x.VailedForCustomer)" Sortable="true" />
-            <Column TableItem="Article" Title="State " Field="@(x => x.DateCreated)" Sortable="true">
+            <Column TableItem="Article" Title="Date created " Field="@(x => x.DateCreated)" Sortable="true">
                 <Template>
-                    @context.DateCreated.ToShortDateString();
+                    @context.DateCreated.ToShortDateString()
                 </Template>
             </Column>
             <Column TableItem="Article" Title="State " Field="@(x => x.ArticleState)" Class="text-center" Width="100px" DefaultSortColumn="true" Sortable="true">
@@ -91,3 +70,4 @@
         </Table>
     </div>
 </div>
+

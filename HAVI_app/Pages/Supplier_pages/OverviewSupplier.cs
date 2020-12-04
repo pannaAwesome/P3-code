@@ -43,15 +43,17 @@ namespace HAVI_app.Pages.Supplier_pages
         public List<Country> Countries { get; set; } = new List<Country>();
         public List<VailedForCustomer> Customers { get; set; } = new List<VailedForCustomer>();
         public Profile Profile { get; set; } = new Profile();
+        public Supplier Supplier { get; set; } = new Supplier();
 
         protected async override Task OnInitializedAsync()
         {
             Countries = await CountryService.GetCountries();
-            Supplier supplier = await SupplierService.GetSupplier(Id);
-            Profile = await ProfileService.GetProfileByUsernameAndpassword(supplier.Profile.Username, "1234");
+            CountryName = Countries[0].CountryName;
+            Supplier = await SupplierService.GetSupplier(Id);
+            Profile = await ProfileService.GetProfileByUsernameAndpassword(Supplier.Profile.Username, "1234");
         }
 
-        public async void UpdateFields()
+        public async Task UpdateFields()
         {
             Country country = await CountryService.GetCountryWithName(CountryName);
             Purchasers = await PurchaserService.GetPurchasersForCountry(country.Id);
@@ -76,10 +78,15 @@ namespace HAVI_app.Pages.Supplier_pages
                 InternalArticleInformation = new InternalArticleInformation()
             };
 
-            string newArticle = await ArticleService.CreateArticle(Article);
-            Article newArticleObject = JsonConvert.DeserializeObject<Article>(newArticle);
+            Article.ArticleInformation.CompanyName = Supplier.CompanyName;
+            Article.ArticleInformation.CompanyLocation = Supplier.CompanyLocation;
+            Article.ArticleInformation.FreightResponsibility = Supplier.FreightResponsibility;
+            Article.ArticleInformation.PalletExchange = Supplier.PalletExchange;
+            Article.ArticleInformation.Email = Supplier.Profile.Username;
 
-            NavigationManager.NavigateTo($"/supplier_info_form/{newArticleObject.ArticleInformation.Id}", true);
+            Article newArticle = await ArticleService.CreateArticle(Article);
+
+            NavigationManager.NavigateTo($"/supplier_info_form/{newArticle.ArticleInformation.Id}", true);
         }
 
         public void NavigateToProfilePage()

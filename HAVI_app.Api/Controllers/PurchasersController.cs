@@ -91,7 +91,7 @@ namespace HAVI_app.Api.Controllers
 
                 var createdPurchaser = await _purchaserRepository.AddPurchaser(purchaser);
 
-                return CreatedAtAction(nameof(GetPurchaser), new { id = createdPurchaser.Id }, createdPurchaser);
+                return createdPurchaser;
             }
             catch (Exception)
             {

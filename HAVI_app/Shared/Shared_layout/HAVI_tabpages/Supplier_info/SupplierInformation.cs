@@ -11,43 +11,25 @@ namespace HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info
     public class SupplierInformation : ComponentBase
     {
         [Inject]
-        public ArticleService ArticleService { get; set; }
+        public ArticleInformationService ArticleInformationService { get; set; }
 
         [Parameter]
-        public int Id { get; set; }
         public Article Article { get; set; }
 
         public bool EditingFields = false;
-
-        public void PalletExchange(int value)
-        {
-            Article.ArticleInformation.PalletExchange = value;
-        }
-
-        public void BookingTransport(int value)
-        {
-            Article.ArticleInformation.TransportBooking = value;
-        }
-
-        public void Dangerous(int value)
-        {
-            Article.ArticleInformation.DangerousGoods = value;
-        }
+        public bool IsDisabled = true;
 
         public void Editing()
         {
             EditingFields = true;
+            IsDisabled = false;
         }
 
-        public void Saving()
+        public async void Saving()
         {
-            ArticleService.UpdateArticle(Article.Id, Article);
+            await ArticleInformationService.UpdateArticleInformation(Article.ArticleInformationId, Article.ArticleInformation);
             EditingFields = false;
-        }
-
-        protected override async Task OnInitializedAsync()
-        {
-            Article = await ArticleService.GetArticle(Id);
+            IsDisabled = true;
         }
     }
 }

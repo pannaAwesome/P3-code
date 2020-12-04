@@ -11,28 +11,40 @@ namespace HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info
     public class MeasurementInformation : ComponentBase
     {
         [Inject]
-        public ArticleService ArticleService { get; set; }
+        public ArticleInformationService ArticleInformationService { get; set; }
 
         [Parameter]
-        public int Id { get; set; }
+        public string Length { get; set; }
+
+        [Parameter]
+        public string Width { get; set; }
+
+        [Parameter]
+        public string Height { get; set; }
+
+        [Parameter]
+        public string NetWeight { get; set; }
+
+        [Parameter]
+        public string GrossWeight { get; set; }
+
+        [Parameter]
         public Article Article { get; set; }
 
         public bool EditingFields = false;
+        public bool IsDisabled = true;
 
         public void Editing()
         {
             EditingFields = true;
+            IsDisabled = false;
         }
 
-        public void Saving()
+        public async void Saving()
         {
-            ArticleService.UpdateArticle(Article.Id, Article);
+            await ArticleInformationService.UpdateArticleInformation(Article.ArticleInformationId, Article.ArticleInformation);
             EditingFields = false;
-        }
-
-        protected override async Task OnInitializedAsync()
-        {
-            Article = await ArticleService.GetArticle(Id);
+            IsDisabled = true;
         }
     }
 }

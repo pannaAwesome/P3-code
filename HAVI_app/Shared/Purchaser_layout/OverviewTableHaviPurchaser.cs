@@ -3,8 +3,10 @@ using HAVI_app.Classes;
 using HAVI_app.Models;
 using HAVI_app.Services.Classes;
 using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -18,8 +20,14 @@ namespace HAVI_app.Shared.Purchaser_layout
         [Inject]
         public ArticleService ArticleService { get; set; }
 
+        [Inject]
+        public Excel Excel { get; set; }
+
         [Parameter]
         public int Id { get; set; }
+
+        [Inject]
+        public IJSRuntime JS { get; set; }
 
         public List<Article> Articles;
 
@@ -30,6 +38,7 @@ namespace HAVI_app.Shared.Purchaser_layout
         public Article Selected;
 
         public string hideornot = "hide-trash";
+        public MemoryStream excelStream;
 
         public void SelectionChanged(string selectvalue)
         {
@@ -52,18 +61,18 @@ namespace HAVI_app.Shared.Purchaser_layout
                 ArticleService.DeleteArticle(article.Id);
             }
 
-            NavigationManager.NavigateTo("/overview_purchaser", true);
+            NavigationManager.NavigateTo($"/overview_purchaser/{Id}", true);
         }
 
         public void RowClicked(Article data)
         {
             if (SelectionType == SelectionType.None && data.ArticleState == (int)ArticleState.Completed)
             {
-                //NavigationManager.NavigateTo($"/article_completed_view/{data.Id}/{data.Purchaser.Profile.Username}", true);
+                NavigationManager.NavigateTo($"/article_completed_view/{data.Id}", true);
             }
             else if (SelectionType == SelectionType.None && data.ArticleState == (int)ArticleState.Error)
             {
-                NavigationManager.NavigateTo($"/article_error_view/{data.Id}/{data.Purchaser.Profile.Username}", true);
+                NavigationManager.NavigateTo($"/article_error_view/{data.Id}", true);
             }
             else
             {
@@ -78,17 +87,43 @@ namespace HAVI_app.Shared.Purchaser_layout
             var error = await ArticleService.GetArticleWithCertainState(1, (int)ArticleState.Error);
             var completed = await ArticleService.GetArticleWithCertainState(1, (int)ArticleState.Completed);
 
-            Articles.AddRange(robot);
-            Articles.AddRange(error);
-            Articles.AddRange(completed);
+            Articles = new List<Article>();
+
+            foreach(Article item in robot)
+            {
+                if(item.PurchaserId == Id)
+                {
+                    Articles.Add(item);
+                }
+            }
+
+            foreach (Article item in error)
+            {
+                if (item.PurchaserId == Id)
+                {
+                    Articles.Add(item);
+                }
+            }
+
+            foreach (Article item in completed)
+            {
+                if (item.PurchaserId == Id)
+                {
+                    Articles.Add(item);
+                }
+            }
         }
 
-        public long CreationCode;
-
-        public void GenerateCreationCode()
+        public async Task ExportArticle()
         {
-            Random random = new Random();
-            CreationCode = random.Next(101, 989) * random.Next(11, 19);
+            foreach (Article item in Articles)
+            {
+                excelStream = Excel.CreateXlsIO(item);
+
+                await JS.SaveAs($"saveAsFile.xlsx", excelStream.ToArray());
+                item.ArticleState = (int)ArticleState.Completed;
+                await ArticleService.UpdateArticle(item.Id, item);
+            }
         }
     }
 }

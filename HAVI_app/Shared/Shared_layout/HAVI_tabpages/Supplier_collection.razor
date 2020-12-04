@@ -1,27 +1,46 @@
-﻿
+﻿@inject HAVI_app.Services.Classes.ArticleService ArticleService
+
+@if (Article == null)
+{
+    <div class="spinner">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>
+}
+else
+{
     <div class="row">
         <div class="col-6">
-            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Supplier_information Id="ArticleId" />
+            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Supplier_information Article="Article" />
         </div>
         <div class="col-6">
-            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Shipment_information Id="ArticleId" />
+            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Shipment_information Article="Article" />
         </div>
     </div>
 
     <div class="row">
         <div class="col-6">
-            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Article_information Id="ArticleId" />
+            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Article_information Article="Article" />
         </div>
         <div class="col-6">
-            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Measurement_information Id="ArticleId" />
+            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Measurement_information Article="Article" />
         </div>
     </div>
 
     <div class="row">
-        <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Price_information Id="ArticleId" />
+        <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Price_information Article="Article" />
     </div>
+}
 
-    @code {
-        [Parameter]
-        public int ArticleId { get; set; }
+@code {
+    [Parameter]
+    public int ArticleId { get; set; }
+
+    public Article Article { get; set; } = new Article();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Article = await ArticleService.GetArticle(ArticleId);
     }
+}

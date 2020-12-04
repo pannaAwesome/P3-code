@@ -18,6 +18,9 @@ namespace HAVI_app.Shared.Purchaser_layout
         [Inject]
         public ArticleService ArticleService { get; set; }
 
+        [Inject]
+        public CreationCodeService CreationCodeService { get; set; }
+
         [Parameter]
         public int PurchaserId { get; set; }
 
@@ -59,7 +62,7 @@ namespace HAVI_app.Shared.Purchaser_layout
         {
             if (SelectionType == SelectionType.None && data.ArticleState == (int)ArticleState.Submitted)
             {
-                NavigationManager.NavigateTo($"/article_edit_view/{data.Id}/{data.Purchaser.Profile.Username}", true);
+                NavigationManager.NavigateTo($"/article_edit_view/{data.Id}", true);
             }
             else
             {
@@ -73,16 +76,37 @@ namespace HAVI_app.Shared.Purchaser_layout
             var created = await ArticleService.GetArticleWithCertainState(1, (int)ArticleState.Created);
             var submitted = await ArticleService.GetArticleWithCertainState(1, (int)ArticleState.Submitted);
 
-            Articles.AddRange(created);
-            Articles.AddRange(submitted);
+            Articles = new List<Article>();
+            foreach (Article item in created)
+            {
+                if (item.PurchaserId == PurchaserId)
+                {
+                    Articles.Add(item);
+                }
+            }
+
+            foreach (Article item in submitted)
+            {
+                if (item.PurchaserId == PurchaserId)
+                {
+                    Articles.Add(item);
+                }
+            }
         }
 
         public long CreationCode;
 
-        public void GenerateCreationCode()
+        public async void GenerateCreationCode()
         {
             Random random = new Random();
             CreationCode = random.Next(101, 989) * random.Next(11, 19);
+
+            CreationCode code = new CreationCode()
+            {
+                Code = CreationCode.ToString(),
+                Active = 1
+            };
+            await CreationCodeService.CreateCreationCode(code);
         }
     }
 }

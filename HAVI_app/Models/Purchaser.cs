@@ -12,7 +12,7 @@ namespace HAVI_app.Models
     {
         public Purchaser()
         {
-            Articles = new HashSet<Article>();
+            Articles = new List<Article>();
         }
 
         [Key]
@@ -24,8 +24,8 @@ namespace HAVI_app.Models
 
         [JsonIgnore]
         public virtual Country Country { get; set; }
-        public virtual Profile Profile { get; set; }
+        public virtual Profile Profile { get; set; } = null;
         [JsonIgnore]
-        public virtual ICollection<Article> Articles { get; set; }
+        public virtual List<Article> Articles { get; set; }
     }
 }

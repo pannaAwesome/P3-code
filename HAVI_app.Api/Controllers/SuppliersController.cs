@@ -92,7 +92,7 @@ namespace HAVI_app.Api.Controllers
 
                 var createdSupplier = await _supplierRepository.AddSupplier(supplier);
 
-                return CreatedAtAction(nameof(GetSupplier), new { id = createdSupplier.Id }, createdSupplier);
+                return createdSupplier;
             }
             catch (Exception)
             {

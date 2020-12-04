@@ -79,7 +79,7 @@ namespace HAVI_app.Classes
 
         public bool IsEmailValid(string input)
         {
-            string pattern = @"^(?!\.)(""([^""\r\\]|\\[""\r\\])*""|" + @"([-a-z0-9!#$%&'*+/=?^_`{|}~]|(?<!\.)\.)*)(?<!\.)" + @"@[a-z0-9][\w\.-]*[a-z0-9]\.[a-z][a-z\.]*[a-z]$";
+            string pattern = @"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$";
 
             if(input != null)
             {
@@ -95,7 +95,7 @@ namespace HAVI_app.Classes
             return false;
         }
 
-        public int? GTINValidation(int? input)
+        public int GTINValidation(int? input)
         {
             string temp = input.ToString();
             List<char> GTIN = new List<char>();
@@ -118,6 +118,18 @@ namespace HAVI_app.Classes
             }
 
             return Convert.ToInt32(ValidatedGTIN);
+        }
+
+        public bool MustNotBeZeroOrNegativeNumbere(double input)
+        {
+            if (input > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

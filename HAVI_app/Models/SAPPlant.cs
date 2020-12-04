@@ -14,8 +14,8 @@ namespace HAVI_app.Models
         public int Id { get; set; }
         [ForeignKey("InternalArticleInformation")]
         public int InternalArticleInformationId { get; set; }
-        public string SapplantName { get; set; }
-        public int? SapplantValue { get; set; }
+        public string SapplantName { get; set; } = "";
+        public int SapplantValue { get; set; }
         [JsonIgnore]
         public virtual InternalArticleInformation InternalArticleInformation { get; set; }
     }

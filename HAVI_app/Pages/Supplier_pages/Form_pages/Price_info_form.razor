@@ -1,10 +1,12 @@
 ﻿@layout HAVI_app.Shared.Supplier_layout.Form_layout
 @inject Microsoft.AspNetCore.Components.NavigationManager NavigationManager
 @page "/price_info_form"
+@inherits HAVI_app.Classes.Validation
 @inject Models.ArticleInformation Article
 @inject HAVI_app.Services.Classes.SetCurrencyService SetCurrencyService
+@inject HAVI_app.Services.Classes.InformCostTypeService InformCostTypeService
 
-<HAVI_app.Shared.Supplier_layout.Form_header SupplierState="filled" ArticleState="filled" MeasurementState="filled" ShipmentState="filled" PriceState="active" />
+<HAVI_app.Shared.Supplier_layout.Form_header SupplierState="filled" ArticleState="filled" MeasurementState="filled" ShipmentState="filled" PriceState="active" Id="Article.Id" />
 
 <div class="row justify-content-center">
     <div class="col-10">
@@ -15,7 +17,7 @@
 
 
 <div class="justify-content-center row">
-    <div class="col-12 d-flex justify-content-center">
+    <div class="col-10 d-flex justify-content-center">
         <EditForm Model="Article" OnSubmit="@OnPostForward">
             <table class="table">
 
@@ -24,10 +26,11 @@
                         <label for="set_currency" class="required">Set currency:</label>
                     </td>
                     <td colspan="4">
-                        <select class="form-control" name="set_currency" @bind="Article.SetCurrency" required>
+                        <select class="form-control" name="set_currency" @onchange="@((ChangeEventArgs __e) => Article.SetCurrency = __e.Value.ToString())" required>
+                            <option disabled selected>-- select or search for an option --</option>
                             @foreach (var item in contries)
                             {
-                                <option>@item</option>
+                                <option>@item.CurrencyName</option>
                             }
                         </select>
                     </td>
@@ -44,11 +47,11 @@
                         <label for="purchase_price" class="required">Purchase price:</label>
                     </td>
                     <td colspan="4">
-                        <input type="number" class="form-control" name="purchase_price" @bind="Article.PurchasePrice"required maxlength="10">
+                        <input type="number" class="form-control @PurchasePriceValidated" name="purchase_price" @bind="Article.PurchasePrice" required maxlength="10">
                     </td>
                     <td>
                         <HAVI_app.Shared.Shared_layout.Questionmark_top>
-                            Insert the price of the article you and HAVI has agreed upon
+                            Insert the price of the article you and HAVI has agreed upon. This must not be zero or less
                         </HAVI_app.Shared.Shared_layout.Questionmark_top>
 
                     </td>
@@ -61,10 +64,10 @@
 
                     <td colspan="4">
                         <div class="text-center">
-                            <input type="radio" name="organic" value="yes" @onchange="@((x) => AddOtherCost(x.Value.ToString()))" checked="@(Article.OtherCosts == 1)" @oninput="(() => Article.OtherCosts = 1)" required>
+                            <input type="radio" name="organic" value="yes" @onclick="() => { Article.OtherCosts = 1; AddExtraCosts(); }" required>
                             <label for="yes">Yes</label>
                             &nbsp;
-                            <input type="radio" name="organic" value="no" checked="@(Article.OtherCosts == 2)" @onchange="@(() => Article.OtherCosts = 2)"/>
+                            <input type="radio" name="organic" value="no" @onclick="() => Article.OtherCosts = 0" />
                             <label for="no">No</label>
                         </div>
                     </td>
@@ -79,29 +82,29 @@
             @if (Article.OtherCosts == 1)
             {
                 <table>
-                    @for (int i = 1; i <= NumberOfOtherCosts; i++)
+                    @for (int i = 0; i < NumberOfOtherCosts; i++)
                     {
-
                         <tr>
                             <td>
                                 <label for="afgift-@i">Inform cost type:</label>
                             </td>
 
                             <td>
-                                <select class="form-control" name="afgift-@i" @bind="Article.OtherCosts" required>
+                                <select class="form-control" name="afgift-@i" @onchange="@((ChangeEventArgs __e) => UpdateInformCostType(__e.Value.ToString()))" required>
                                     <option disabled selected>-- select an option --</option>
-                                    <option>Chokoladeafgift</option>
-                                    <option>Miljøafgift</option>
-                                    <option>En anden afgift</option>
+                                    @foreach (InformCostType item in costType)
+                                    {
+                                        <option>@item.CostType</option>
+                                    }
                                 </select>
                             </td>
                             <td>
                                 <label for="amount-@i">Amount in @Article.SetCurrency:</label>
                             </td>
                             <td>
-                                <input type="number" class="form-control" name="amount-@i" @bind="Article.AmountInCurrency" required @onblur="Sum" maxlength="10">
+                                <input type="number" class="form-control" name="amount-@i" @onblur="@(() => UpdateAmount(Amount))" @onchange="@((ChangeEventArgs __e) => Amount = __e.Value.ToString())" required maxlength="10">
                             </td>
-                            @if (i == NumberOfOtherCosts)
+                            @if (i == NumberOfOtherCosts-1)
                             {
                                 <td @onclick="AddExtraCosts"> &#10133; </td>
                                 @if (NumberOfOtherCosts != 1)
@@ -110,18 +113,7 @@
                                 }
                             }
                         </tr>
-
                     }
-
-                    <tr>
-                        <td colspan="1"></td>
-                        <td colspan="2" class="text-right">
-                            <label class="text-right" for="totalAmount">Total amount in @Article.SetCurrency</label>
-                        </td>
-                        <td>
-                            <label>@TotalAmount</label>
-                        </td>
-                    </tr>
                 </table>
             }
             <div class="row justify-content-center">
@@ -129,7 +121,7 @@
                     <input type="button" class="btn cancel-button button-size" value="Back" @onclick="OnPostBack" />
                 </div>
                 <div class="text-left col-6">
-                    <input type="submit" class="btn green-button button-size" value="Next"/>
+                    <input type="submit" class="btn green-button button-size" value="Next" />
                 </div>
             </div>
         </EditForm>
@@ -137,32 +129,39 @@
 </div>
 
 @code {
-
-    [Parameter]
     public string SetCurrency { get; set; }
 
-    [Parameter]
     public int PurchasePrice { get; set; }
 
-    [Parameter]
+    public string PurchasePriceValidated { get; set; }
+
     public int AmountInCurrency { get; set; }
 
-    [Parameter]
     public string CostRegardingArticle { get; set; }
 
-    [Parameter]
     public string CostType { get; set; }
 
     public int TotalAmount = 0;
-}
 
-@code{
-    List<SetCurrency> contries;
+    public int NumberOfOtherCosts { get; set; } = 0;
+
+    public string Amount = "";
+
+    List<SetCurrency> contries = new List<SetCurrency>();
+    List<InformCostType> costType = new List<InformCostType>();
+
 
     public void OnPostForward()
     {
-        NavigationManager.NavigateTo($"/confirm_details", true);
+        if (MustNotBeZeroOrNegativeNumbere(Article.PurchasePrice))
+        {
+            NavigationManager.NavigateTo($"/confirm_details", true);
+        }
 
+        if (!MustNotBeZeroOrNegativeNumbere(Article.PurchasePrice))
+        {
+            PurchasePriceValidated = "btn-danger";
+        }
     }
 
     public void OnPostBack()
@@ -172,42 +171,52 @@
 
     protected override async Task OnInitializedAsync()
     {
+        Article.OtherCostsForArticles = new List<OtherCostsForArticle>();
         contries = await SetCurrencyService.GetSetCurrencies();
+        costType = await InformCostTypeService.GetInformCostTypes();
     }
 
-    private int NumberOfOtherCosts = 1;
-
-    private string ExtraCosts = "";
-
-    //private string OtherCost = "no";
-
-    private void AddOtherCost(string othercostvalue)
-    {
-        if (othercostvalue == "yes")
-        {
-            //OtherCost = "yes";
-        }
-        else
-        {
-            //OtherCost = "no";
-        }
-    }
 
     private void AddExtraCosts()
     {
-        NumberOfOtherCosts++;
-
+        OtherCostsForArticle cost = new OtherCostsForArticle() { Id = 0, InformCostType = "1", Amount = -8586 };
+        if(Article.OtherCostsForArticles == new List<OtherCostsForArticle>())
+        {
+            if (Article.OtherCostsForArticles[^1] != cost)
+            {
+                Article.OtherCostsForArticles.Add(cost);
+                NumberOfOtherCosts++;
+            }
+        }else
+        {
+            Article.OtherCostsForArticles.Add(cost);
+            NumberOfOtherCosts++;
+        }
     }
 
     private void RemoveExtraCosts()
     {
-        if(NumberOfOtherCosts != 0)
-        {
-            NumberOfOtherCosts--;
-        }
+        int numberLast = Article.OtherCostsForArticles.Count - 1;
+        OtherCostsForArticle last = Article.OtherCostsForArticles.ElementAt(numberLast);
+        Article.OtherCostsForArticles.Remove(last);
+        NumberOfOtherCosts--;
     }
 
-    private void Sum()
+    private void UpdateInformCostType(string value)
     {
+        int id = Article.OtherCostsForArticles.FindIndex(o => o.InformCostType == "1");
+        OtherCostsForArticle cost = Article.OtherCostsForArticles.Find(o => o.InformCostType == "1");
+
+        cost.InformCostType = value;
+        Article.OtherCostsForArticles[id] = cost;
+    }
+
+    private void UpdateAmount(string value)
+    {
+        int id = Article.OtherCostsForArticles.FindIndex(o => o.Amount == -8586);
+        OtherCostsForArticle cost = Article.OtherCostsForArticles.Find(o => o.Amount == -8586);
+
+        cost.Amount = Int32.Parse(value);
+        Article.OtherCostsForArticles[id] = cost;
     }
 }

@@ -27,16 +27,14 @@ namespace HAVI_app.Services.Classes
             return await result.Content.ReadAsAsync<InformCostType>();
         }
 
-        public async Task<InformCostType> DeleteInformCostType(int id)
+        public async Task DeleteInformCostType(int id)
         {
-            var result = await httpClient.DeleteAsync($"/api/informCostTypes/{id}");
-            return await result.Content.ReadAsAsync<InformCostType>();
+            await httpClient.DeleteAsync($"/api/informCostTypes/{id}");
         }
 
-        public async Task<InformCostType> UpdateInformCostType(int id, InformCostType type)
+        public async Task UpdateInformCostType(int id, InformCostType type)
         {
-            var result = await httpClient.PutAsJsonAsync($"/api/informCostType/{id}", type);
-            return await result.Content.ReadAsAsync<InformCostType>();
+            await httpClient.PutAsJsonAsync($"/api/informCostType/{id}", type);
         }
     }
 }

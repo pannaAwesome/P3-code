@@ -15,9 +15,9 @@ namespace HAVI_app.Services.Classes
         {
             this.httpClient = httpClient;
         }
-        public async Task<List<QIPNumberService>> GetQIPNumbers()
+        public async Task<List<Qipnumber>> GetQIPNumbers()
         {
-            return await httpClient.GetFromJsonAsync<List<QIPNumberService>>("/api/qipNumbers");
+            return await httpClient.GetFromJsonAsync<List<Qipnumber>>("/api/qipNumbers");
         }
     }
 }

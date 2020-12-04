@@ -71,7 +71,7 @@ namespace HAVI_app.Api.Controllers
 
                 var createdILOSCategory = await _categoryRepository.AddILOSCategory(category);
 
-                return CreatedAtAction(nameof(GetILOSCategory), new { id = createdILOSCategory.Id }, createdILOSCategory);
+                return createdILOSCategory;
             }
             catch (Exception)
             {

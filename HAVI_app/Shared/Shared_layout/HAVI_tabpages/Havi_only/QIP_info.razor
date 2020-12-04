@@ -1,253 +1,326 @@
-﻿@page "/qip_info"
-@layout HAVI_app.Shared.Admin_layout.Show_artikel_layout
+﻿@inject HAVI_app.Services.Classes.InternalArticleInformationService InternalArticleInformationService
+@inject HAVI_app.Services.Classes.QIPNumberService QIPNumberService
 
+@if (Qips == null || Answers.Count != 10)
+{
+    <div class="spinner">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>
+}
+else
+{
+    <div class="col-11">
+        <h4>QIP:</h4>
+    </div>
+    <div class="col-1 @EditPossible">
+        @if (EditingFields)
+        {
+            <div class="save-button" @onclick="Saving"></div>
+        }
+        else
+        {
+            <div class="edit-button" @onclick="Editing"></div>
+        }
 
-<table class="table table-bordered">
-    <thead>
-        <tr class="blue-tabel-header">
-            <th>QIP number and name:</th>
-            <th>QIP description</th>
-            <th>Answer<br>options:</th>
-            <th>Set<br>answer:</th>
-            <th>OK <br>value:</th>
-            <th>Low <br>boundary:</th>
-            <th>High<br>boundary:</th>
-            <th>Frequency <br>type:</th>
-            <th>Frequency:</th>
-        </tr>
-    </thead>
-    <tbody style="background-color: white">
-        <tr>
-            <td>
-                <select class="form-control">
-                    <option></option>
-                    <option>Option 1</option>
-                    <option>Option 2</option>
-                </select>
-            </td>
-            <td contenteditable></td>
-            <td contenteditable></td>
-            <td>
-                <select class="form-control">
-                    <option></option>
-                    <option>Option 1</option>
-                    <option>Option 2</option>
-                </select>
-            </td>
-            <td contenteditable></td>
-            <td contenteditable></td>
-            <td contenteditable></td>
-            <td contenteditable></td>
-            <td contenteditable></td>
-        </tr>
-        <tr>
-            <td>
-                <select class="form-control">
-                    <option></option>
-                    <option>Option 1</option>
-                    <option>Option 2</option>
-                </select>
-            </td>
-            <td contenteditable></td>
-            <td contenteditable></td>
-            <td>
-                <select class="form-control">
-                    <option></option>
-                    <option>Option 1</option>
-                    <option>Option 2</option>
-                </select>
-            </td>
-            <td contenteditable></td>
-            <td contenteditable></td>
-            <td contenteditable></td>
-            <td contenteditable></td>
-            <td contenteditable></td>
-        </tr>
-        <tr>
-            <td>
-                <select class="form-control">
-                    <option></option>
-                    <option>Option 1</option>
-                    <option>Option 2</option>
-                </select>
-            </td>
-            <td contenteditable></td>
-            <td contenteditable></td>
-            <td>
-                <select class="form-control">
-                    <option></option>
-                    <option>Option 1</option>
-                    <option>Option 2</option>
-                </select>
-            </td>
-            <td contenteditable></td>
-            <td contenteditable></td>
-            <td contenteditable></td>
-            <td contenteditable></td>
-            <td contenteditable></td>
-        </tr>
-        <tr>
-            <td>
-                <select class="form-control">
-                    <option></option>
-                    <option>Option 1</option>
-                    <option>Option 2</option>
-                </select>
-            </td>
-            <td contenteditable></td>
-            <td contenteditable></td>
-            <td>
-                <select class="form-control">
-                    <option></option>
-                    <option>Option 1</option>
-                    <option>Option 2</option>
-                </select>
-            </td>
-            <td contenteditable></td>
-            <td contenteditable></td>
-            <td contenteditable></td>
-            <td contenteditable></td>
-            <td contenteditable></td>
-        </tr>
-        <tr>
-            <td>
-                <select class="form-control">
-                    <option></option>
-                    <option>Option 1</option>
-                    <option>Option 2</option>
-                </select>
-            </td>
-            <td contenteditable></td>
-            <td contenteditable></td>
-            <td>
-                <select class="form-control">
-                    <option></option>
-                    <option>Option 1</option>
-                    <option>Option 2</option>
-                </select>
-            </td>
-            <td contenteditable></td>
-            <td contenteditable></td>
-            <td contenteditable></td>
-            <td contenteditable></td>
-            <td contenteditable></td>
-        </tr>
-        <tr>
-            <td>
-                <select class="form-control">
-                    <option></option>
-                    <option>Option 1</option>
-                    <option>Option 2</option>
-                </select>
-            </td>
-            <td contenteditable></td>
-            <td contenteditable></td>
-            <td>
-                <select class="form-control">
-                    <option></option>
-                    <option>Option 1</option>
-                    <option>Option 2</option>
-                </select>
-            </td>
-            <td contenteditable></td>
-            <td contenteditable></td>
-            <td contenteditable></td>
-            <td contenteditable></td>
-            <td contenteditable></td>
-        </tr>
-        <tr>
-            <td>
-                <select class="form-control">
-                    <option></option>
-                    <option>Option 1</option>
-                    <option>Option 2</option>
-                </select>
-            </td>
-            <td contenteditable></td>
-            <td contenteditable></td>
-            <td>
-                <select class="form-control">
-                    <option></option>
-                    <option>Option 1</option>
-                    <option>Option 2</option>
-                </select>
-            </td>
-            <td contenteditable></td>
-            <td contenteditable></td>
-            <td contenteditable></td>
-            <td contenteditable></td>
-            <td contenteditable></td>
-        </tr>
-        <tr>
-            <td>
-                <select class="form-control">
-                    <option></option>
-                    <option>Option 1</option>
-                    <option>Option 2</option>
-                </select>
-            </td>
-            <td contenteditable></td>
-            <td contenteditable></td>
-            <td>
-                <select class="form-control">
-                    <option></option>
-                    <option>Option 1</option>
-                    <option>Option 2</option>
-                </select>
-            </td>
-            <td contenteditable></td>
-            <td contenteditable></td>
-            <td contenteditable></td>
-            <td contenteditable></td>
-            <td contenteditable></td>
-        </tr>
-        <tr>
-            <td>
-                <select class="form-control">
-                    <option></option>
-                    <option>Option 1</option>
-                    <option>Option 2</option>
-                </select>
-            </td>
-            <td contenteditable></td>
-            <td contenteditable></td>
-            <td>
-                <select class="form-control">
-                    <option></option>
-                    <option>Option 1</option>
-                    <option>Option 2</option>
-                </select>
-            </td>
-            <td contenteditable></td>
-            <td contenteditable></td>
-            <td contenteditable></td>
-            <td contenteditable></td>
-            <td contenteditable></td>
-        </tr>
-        <tr>
-            <td>
-                <select class="form-control">
-                    <option></option>
-                    <option>Option 1</option>
-                    <option>Option 2</option>
-                </select>
-            </td>
-            <td contenteditable></td>
-            <td contenteditable></td>
-            <td>
-                <select class="form-control">
-                    <option></option>
-                    <option>Option 1</option>
-                    <option>Option 2</option>
-                </select>
-            </td>
-            <td contenteditable></td>
-            <td contenteditable></td>
-            <td contenteditable></td>
-            <td contenteditable></td>
-            <td contenteditable></td>
-        </tr>
-    </tbody>
-</table>
+    </div>
+    <form>
+    <table class="table table-bordered">
+        <thead>
+            <tr class="blue-tabel-header">
+                <th>QIP number and name:</th>
+                <th>QIP description</th>
+                <th>Answer<br>options:</th>
+                <th>Set<br>answer:</th>
+                <th>OK <br>value:</th>
+                <th>Low <br>boundary:</th>
+                <th>High<br>boundary:</th>
+                <th>Frequency <br>type:</th>
+                <th>Frequency:</th>
+            </tr>
+        </thead>
+        <tbody style="background-color: white">
+            <tr>
+                <td>
+                    <select class="form-control" name="primary_dc" @onchange="@((ChangeEventArgs __e) => UpdateQip(0, __e.Value.ToString()))" disabled="@IsDisabled">
+                        <option disabled>-- select an option --</option>
+                        @foreach (Qipnumber item in Qips)
+                        {
+                            <option>@item.QipnumberName</option>
+                        }
+                    </select>
+                </td>
+                <td>@Article.InternalArticleInformation.Qips[0].Qipdescription</td>
+                <td>@Article.InternalArticleInformation.Qips[0].QipanswerOptions</td>
+                <td><input name="setanswer" disabled="@(Answers[0].SetAnswer == 0 || IsDisabled)" @bind="Article.InternalArticleInformation.Qips[0].QipsetAnswer" /></td>
+                <td><input name="okvalue" disabled="@(Answers[0].OKValue == 0 || IsDisabled)" @bind="Article.InternalArticleInformation.Qips[0].Qipokvalue" /></td>
+                <td><input name="lowboundary" disabled="@(Answers[0].LowBoundary == 0 || IsDisabled)" @bind="Article.InternalArticleInformation.Qips[0].QiplowBoundary" /></td>
+                <td><input name="highboundary" disabled="@(Answers[0].HighBoundary == 0 || IsDisabled)" @bind="Article.InternalArticleInformation.Qips[0].QiphighBoundary" /></td>
+                <td><input name="frequencytype" disabled="@(Answers[0].FrequencyType == 0 || IsDisabled)" @bind="Article.InternalArticleInformation.Qips[0].QipfrequencyType" /></td>
+                <td><input name="frequency" disabled="@(Answers[0].Frequency == 0 || IsDisabled)" @bind="Article.InternalArticleInformation.Qips[0].Qipfrequency" /></td>
+            </tr>
+            <tr>
+                <td>
+                    <select class="form-control" name="primary_dc" @onchange="@((ChangeEventArgs __e) => UpdateQip(1, __e.Value.ToString()))" disabled="@IsDisabled">
+                        <option disabled>-- select an option --</option>
+                        @foreach (Qipnumber item in Qips)
+                        {
+                            <option>@item.QipnumberName</option>
+                        }
+                    </select>
+                </td>
+                <td>@Article.InternalArticleInformation.Qips[1].Qipdescription</td>
+                <td>@Article.InternalArticleInformation.Qips[1].QipanswerOptions</td>
+                <td><input name="setanswer" disabled="@(Answers[1].SetAnswer == 0 || IsDisabled)" @bind="Article.InternalArticleInformation.Qips[1].QipsetAnswer" /></td>
+                <td><input name="okvalue" disabled="@(Answers[1].OKValue == 0 || IsDisabled)" @bind="Article.InternalArticleInformation.Qips[1].Qipokvalue" /></td>
+                <td><input name="lowboundary" disabled="@(Answers[1].LowBoundary == 0 || IsDisabled)" @bind="Article.InternalArticleInformation.Qips[1].QiplowBoundary" /></td>
+                <td><input name="highboundary" disabled="@(Answers[1].HighBoundary == 0 || IsDisabled)" @bind="Article.InternalArticleInformation.Qips[1].QiphighBoundary" /></td>
+                <td><input name="frequencytype" disabled="@(Answers[1].FrequencyType == 0 || IsDisabled)" @bind="Article.InternalArticleInformation.Qips[1].QipfrequencyType" /></td>
+                <td><input name="frequency" disabled="@(Answers[1].Frequency == 0 || IsDisabled)" @bind="Article.InternalArticleInformation.Qips[1].Qipfrequency" /></td>
+            </tr>
+            <tr>
+                <td>
+                    <select class="form-control" name="primary_dc" @onchange="@((ChangeEventArgs __e) => UpdateQip(2, __e.Value.ToString()))" disabled="@IsDisabled">
+                        <option disabled>-- select an option --</option>
+                        @foreach (Qipnumber item in Qips)
+                        {
+                            <option>@item.QipnumberName</option>
+                        }
+                    </select>
+                </td>
+                <td>@Article.InternalArticleInformation.Qips[2].Qipdescription</td>
+                <td>@Article.InternalArticleInformation.Qips[2].QipanswerOptions</td>
+                <td><input name="setanswer" disabled="@(Answers[2].SetAnswer == 0 || IsDisabled)" @bind="Article.InternalArticleInformation.Qips[2].QipsetAnswer" /></td>
+                <td><input name="okvalue" disabled="@(Answers[2].OKValue == 0 || IsDisabled)" @bind="Article.InternalArticleInformation.Qips[2].Qipokvalue" /></td>
+                <td><input name="lowboundary" disabled="@(Answers[2].LowBoundary == 0 || IsDisabled)" @bind="Article.InternalArticleInformation.Qips[2].QiplowBoundary" /></td>
+                <td><input name="highboundary" disabled="@(Answers[2].HighBoundary == 0 || IsDisabled)" @bind="Article.InternalArticleInformation.Qips[2].QiphighBoundary" /></td>
+                <td><input name="frequencytype" disabled="@(Answers[2].FrequencyType == 0 || IsDisabled)" @bind="Article.InternalArticleInformation.Qips[2].QipfrequencyType" /></td>
+                <td><input name="frequency" disabled="@(Answers[2].Frequency == 0 || IsDisabled)" @bind="Article.InternalArticleInformation.Qips[2].Qipfrequency" /></td>
+            </tr>
+            <tr>
+                <td>
+                    <select class="form-control" name="primary_dc" @onchange="@((ChangeEventArgs __e) => UpdateQip(3, __e.Value.ToString()))" disabled="@IsDisabled">
+                        <option disabled>-- select an option --</option>
+                        @foreach (Qipnumber item in Qips)
+                        {
+                            <option>@item.QipnumberName</option>
+                        }
+                    </select>
+                </td>
+                <td>@Article.InternalArticleInformation.Qips[3].Qipdescription</td>
+                <td>@Article.InternalArticleInformation.Qips[3].QipanswerOptions</td>
+                <td><input name="setanswer" disabled="@(Answers[3].SetAnswer == 0 || IsDisabled)" @bind="Article.InternalArticleInformation.Qips[3].QipsetAnswer" /></td>
+                <td><input name="okvalue" disabled="@(Answers[3].OKValue == 0 || IsDisabled)" @bind="Article.InternalArticleInformation.Qips[3].Qipokvalue" /></td>
+                <td><input name="lowboundary" disabled="@(Answers[3].LowBoundary == 0 || IsDisabled)" @bind="Article.InternalArticleInformation.Qips[3].QiplowBoundary" /></td>
+                <td><input name="highboundary" disabled="@(Answers[3].HighBoundary == 0 || IsDisabled)" @bind="Article.InternalArticleInformation.Qips[3].QiphighBoundary" /></td>
+                <td><input name="frequencytype" disabled="@(Answers[3].FrequencyType == 0 || IsDisabled)" @bind="Article.InternalArticleInformation.Qips[3].QipfrequencyType" /></td>
+                <td><input name="frequency" disabled="@(Answers[3].Frequency == 0 || IsDisabled)" @bind="Article.InternalArticleInformation.Qips[3].Qipfrequency" /></td>
+            </tr>
+            <tr>
+                <td>
+                    <select class="form-control" name="primary_dc" @onchange="@((ChangeEventArgs __e) => UpdateQip(4, __e.Value.ToString()))" disabled="@IsDisabled">
+                        <option disabled>-- select an option --</option>
+                        @foreach (Qipnumber item in Qips)
+                        {
+                            <option>@item.QipnumberName</option>
+                        }
+                    </select>
+                </td>
+                <td>@Article.InternalArticleInformation.Qips[4].Qipdescription</td>
+                <td>@Article.InternalArticleInformation.Qips[4].QipanswerOptions</td>
+                <td><input name="setanswer" disabled="@(Answers[4].SetAnswer == 0 || IsDisabled)" @bind="Article.InternalArticleInformation.Qips[4].QipsetAnswer" /></td>
+                <td><input name="okvalue" disabled="@(Answers[4].OKValue == 0 || IsDisabled)" @bind="Article.InternalArticleInformation.Qips[4].Qipokvalue" /></td>
+                <td><input name="lowboundary" disabled="@(Answers[4].LowBoundary == 0 || IsDisabled)" @bind="Article.InternalArticleInformation.Qips[4].QiplowBoundary" /></td>
+                <td><input name="highboundary" disabled="@(Answers[4].HighBoundary == 0 || IsDisabled)" @bind="Article.InternalArticleInformation.Qips[4].QiphighBoundary" /></td>
+                <td><input name="frequencytype" disabled="@(Answers[4].FrequencyType == 0 || IsDisabled)" @bind="Article.InternalArticleInformation.Qips[4].QipfrequencyType" /></td>
+                <td><input name="frequency" disabled="@(Answers[4].Frequency == 0 || IsDisabled)" @bind="Article.InternalArticleInformation.Qips[4].Qipfrequency" /></td>
+            </tr>
+            <tr>
+                <td>
+                    <select class="form-control" name="primary_dc" @onchange="@((ChangeEventArgs __e) => UpdateQip(5, __e.Value.ToString()))" disabled="@IsDisabled">
+                        <option disabled>-- select an option --</option>
+                        @foreach (Qipnumber item in Qips)
+                        {
+                            <option>@item.QipnumberName</option>
+                        }
+                    </select>
+                </td>
+                <td>@Article.InternalArticleInformation.Qips[5].Qipdescription</td>
+                <td>@Article.InternalArticleInformation.Qips[5].QipanswerOptions</td>
+                <td><input name="setanswer" disabled="@(Answers[5].SetAnswer == 0 || IsDisabled)" @bind="Article.InternalArticleInformation.Qips[5].QipsetAnswer" /></td>
+                <td><input name="okvalue" disabled="@(Answers[5].OKValue == 0 || IsDisabled)" @bind="Article.InternalArticleInformation.Qips[5].Qipokvalue" /></td>
+                <td><input name="lowboundary" disabled="@(Answers[5].LowBoundary == 0 || IsDisabled)" @bind="Article.InternalArticleInformation.Qips[5].QiplowBoundary" /></td>
+                <td><input name="highboundary" disabled="@(Answers[5].HighBoundary == 0 || IsDisabled)" @bind="Article.InternalArticleInformation.Qips[5].QiphighBoundary" /></td>
+                <td><input name="frequencytype" disabled="@(Answers[5].FrequencyType == 0 || IsDisabled)" @bind="Article.InternalArticleInformation.Qips[5].QipfrequencyType" /></td>
+                <td><input name="frequency" disabled="@(Answers[5].Frequency == 0 || IsDisabled)" @bind="Article.InternalArticleInformation.Qips[5].Qipfrequency" /></td>
+            </tr>
+            <tr>
+                <td>
+                    <select class="form-control" name="primary_dc" @onchange="@((ChangeEventArgs __e) => UpdateQip(6, __e.Value.ToString()))" disabled="@IsDisabled">
+                        <option disabled>-- select an option --</option>
+                        @foreach (Qipnumber item in Qips)
+                        {
+                            <option>@item.QipnumberName</option>
+                        }
+                    </select>
+                </td>
+                <td>@Article.InternalArticleInformation.Qips[6].Qipdescription</td>
+                <td>@Article.InternalArticleInformation.Qips[6].QipanswerOptions</td>
+                <td><input name="setanswer" disabled="@(Answers[6].SetAnswer == 0 || IsDisabled)" @bind="Article.InternalArticleInformation.Qips[6].QipsetAnswer" /></td>
+                <td><input name="okvalue" disabled="@(Answers[6].OKValue == 0 || IsDisabled)" @bind="Article.InternalArticleInformation.Qips[6].Qipokvalue" /></td>
+                <td><input name="lowboundary" disabled="@(Answers[6].LowBoundary == 0 || IsDisabled)" @bind="Article.InternalArticleInformation.Qips[6].QiplowBoundary" /></td>
+                <td><input name="highboundary" disabled="@(Answers[6].HighBoundary == 0 || IsDisabled)" @bind="Article.InternalArticleInformation.Qips[6].QiphighBoundary" /></td>
+                <td><input name="frequencytype" disabled="@(Answers[6].FrequencyType == 0 || IsDisabled)" @bind="Article.InternalArticleInformation.Qips[6].QipfrequencyType" /></td>
+                <td><input name="frequency" disabled="@(Answers[6].Frequency == 0 || IsDisabled)" @bind="Article.InternalArticleInformation.Qips[6].Qipfrequency" /></td>
+            </tr>
+            <tr>
+                <td>
+                    <select class="form-control" name="primary_dc" @onchange="@((ChangeEventArgs __e) => UpdateQip(7, __e.Value.ToString()))" disabled="@IsDisabled">
+                        <option disabled>-- select an option --</option>
+                        @foreach (Qipnumber item in Qips)
+                        {
+                            <option>@item.QipnumberName</option>
+                        }
+                    </select>
+                </td>
+                <td>@Article.InternalArticleInformation.Qips[7].Qipdescription</td>
+                <td>@Article.InternalArticleInformation.Qips[7].QipanswerOptions</td>
+                <td><input name="setanswer" disabled="@(Answers[7].SetAnswer == 0 || IsDisabled)" @bind="Article.InternalArticleInformation.Qips[7].QipsetAnswer" /></td>
+                <td><input name="okvalue" disabled="@(Answers[7].OKValue == 0 || IsDisabled)" @bind="Article.InternalArticleInformation.Qips[7].Qipokvalue" /></td>
+                <td><input name="lowboundary" disabled="@(Answers[7].LowBoundary == 0 || IsDisabled)" @bind="Article.InternalArticleInformation.Qips[7].QiplowBoundary" /></td>
+                <td><input name="highboundary" disabled="@(Answers[7].HighBoundary == 0 || IsDisabled)" @bind="Article.InternalArticleInformation.Qips[7].QiphighBoundary" /></td>
+                <td><input name="frequencytype" disabled="@(Answers[7].FrequencyType == 0 || IsDisabled)" @bind="Article.InternalArticleInformation.Qips[7].QipfrequencyType" /></td>
+                <td><input name="frequency" disabled="@(Answers[7].Frequency == 0 || IsDisabled)" @bind="Article.InternalArticleInformation.Qips[7].Qipfrequency" /></td>
+            </tr>
+            <tr>
+                <td>
+                    <select class="form-control" name="primary_dc" @onchange="@((ChangeEventArgs __e) => UpdateQip(8, __e.Value.ToString()))" disabled="@IsDisabled">
+                        <option disabled>-- select an option --</option>
+                        @foreach (Qipnumber item in Qips)
+                        {
+                            <option>@item.QipnumberName</option>
+                        }
+                    </select>
+                </td>
+                <td>@Article.InternalArticleInformation.Qips[8].Qipdescription</td>
+                <td>@Article.InternalArticleInformation.Qips[8].QipanswerOptions</td>
+                <td><input name="setanswer" disabled="@(Answers[8].SetAnswer == 0 || IsDisabled)" @bind="Article.InternalArticleInformation.Qips[8].QipsetAnswer" /></td>
+                <td><input name="okvalue" disabled="@(Answers[8].OKValue == 0 || IsDisabled)" @bind="Article.InternalArticleInformation.Qips[8].Qipokvalue" /></td>
+                <td><input name="lowboundary" disabled="@(Answers[8].LowBoundary == 0 || IsDisabled)" @bind="Article.InternalArticleInformation.Qips[8].QiplowBoundary" /></td>
+                <td><input name="highboundary" disabled="@(Answers[8].HighBoundary == 0 || IsDisabled)" @bind="Article.InternalArticleInformation.Qips[8].QiphighBoundary" /></td>
+                <td><input name="frequencytype" disabled="@(Answers[8].FrequencyType == 0 || IsDisabled)" @bind="Article.InternalArticleInformation.Qips[8].QipfrequencyType" /></td>
+                <td><input name="frequency" disabled="@(Answers[8].Frequency == 0 || IsDisabled)" @bind="Article.InternalArticleInformation.Qips[8].Qipfrequency" /></td>
+            </tr>
+            <tr>
+                <td>
+                    <select class="form-control" name="primary_dc" @onchange="@((ChangeEventArgs __e) => UpdateQip(9, __e.Value.ToString()))" disabled="@IsDisabled">
+                        <option disabled>-- select an option --</option>
+                        @foreach (Qipnumber item in Qips)
+                        {
+                            <option>@item.QipnumberName</option>
+                        }
+                    </select>
+                </td>
+                <td>@Article.InternalArticleInformation.Qips[9].Qipdescription</td>
+                <td>@Article.InternalArticleInformation.Qips[9].QipanswerOptions</td>
+                <td><input name="setanswer" disabled="@(Answers[9].SetAnswer == 0 || IsDisabled)" @bind="Article.InternalArticleInformation.Qips[9].QipsetAnswer" /></td>
+                <td><input name="okvalue" disabled="@(Answers[9].OKValue == 0 || IsDisabled)" @bind="Article.InternalArticleInformation.Qips[9].Qipokvalue" /></td>
+                <td><input name="lowboundary" disabled="@(Answers[9].LowBoundary == 0 || IsDisabled)" @bind="Article.InternalArticleInformation.Qips[9].QiplowBoundary" /></td>
+                <td><input name="highboundary" disabled="@(Answers[9].HighBoundary == 0 || IsDisabled)" @bind="Article.InternalArticleInformation.Qips[9].QiphighBoundary" /></td>
+                <td><input name="frequencytype" disabled="@(Answers[9].FrequencyType == 0 || IsDisabled)" @bind="Article.InternalArticleInformation.Qips[9].QipfrequencyType" /></td>
+                <td><input name="frequency" disabled="@(Answers[9].Frequency == 0 || IsDisabled)" @bind="Article.InternalArticleInformation.Qips[9].Qipfrequency" /></td>
+            </tr>
+        </tbody>
+    </table>
+        </form>
+}
 
+    @code{
+        [Parameter]
+        public Article Article { get; set; }
 
+        [Parameter]
+        public bool IsDisabled { get; set; }
+
+        [Parameter]
+        public string EditPossible { get; set; }
+
+        public List<Qipnumber> Qips;
+        public List<Qipnumber> Answers = new List<Qipnumber>();
+        public InternalArticleInformation InternalArticleInformation = new InternalArticleInformation();
+
+        protected override async Task OnInitializedAsync()
+        {
+            Qips = await QIPNumberService.GetQIPNumbers();
+            InternalArticleInformation = await InternalArticleInformationService.GetInternalArticleInformation(Article.InternalArticleInformationId);
+
+            if (!IsDisabled)
+            {
+                for (int i = 1; i <= 10; i++)
+                {
+                    Answers.Add(new Qipnumber()
+                    {
+                        Qipdescription = "",
+                        AnswerOptions = "",
+                        SetAnswer = 0,
+                        OKValue = 0,
+                        LowBoundary = 0,
+                        HighBoundary = 0,
+                        FrequencyType = 0,
+                        Frequency = 0
+                    });
+
+                    Article.InternalArticleInformation.Qips.Add(new Qip());
+                }
+            }
+            else
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    Qip qip = InternalArticleInformation.Qips[i];
+                    Qipnumber number = Qips.Find(q => q.QipnumberName == qip.QipnameNumber);
+                    Answers.Add(new Qipnumber()
+                    {
+                        QipnumberName = qip.QipnameNumber,
+                        Qipdescription = qip.Qipdescription,
+                        AnswerOptions = qip.QipanswerOptions,
+                        SetAnswer = number.SetAnswer,
+                        OKValue = number.OKValue,
+                        LowBoundary = number.LowBoundary,
+                        HighBoundary = number.HighBoundary,
+                        FrequencyType = number.FrequencyType,
+                        Frequency = number.Frequency
+                    });
+                }
+            }
+        }
+
+        public bool EditingFields = false;
+
+        public void Editing()
+        {
+            EditingFields = true;
+            IsDisabled = false;
+        }
+
+        public async void Saving()
+        {
+            await InternalArticleInformationService.UpdateInternalArticleInformation(Article.InternalArticleInformationId, Article.InternalArticleInformation);
+            EditingFields = false;
+            IsDisabled = true;
+        }
+
+        public void UpdateQip(int number, string name)
+        {
+            Qipnumber qip = Qips.Find(q => q.QipnumberName == name);
+            Article.InternalArticleInformation.Qips[number].Qipdescription = qip.Qipdescription;
+            Article.InternalArticleInformation.Qips[number].QipanswerOptions = qip.AnswerOptions;
+            Answers[number].SetAnswer = qip.SetAnswer;
+            Answers[number].OKValue = qip.OKValue;
+            Answers[number].LowBoundary = qip.LowBoundary;
+            Answers[number].HighBoundary = qip.HighBoundary;
+            Answers[number].FrequencyType = qip.FrequencyType;
+            Answers[number].Frequency = qip.Frequency;
+        }
+    }

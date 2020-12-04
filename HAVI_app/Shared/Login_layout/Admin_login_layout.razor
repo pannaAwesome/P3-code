@@ -1,6 +1,7 @@
 ﻿@inject NavigationManager NavigationManager
 @inject HAVI_app.Services.Classes.ProfileService ProfileService
 @inject AuthenticationStateProvider AuthenticationStateProvider
+@inject HAVI_app.Services.Classes.CountryService CountryService
 
 <div class="col-12 user-login">
     <div class="row justify-content-center">
@@ -36,11 +37,11 @@
             <div class="col-2 justify-content-center">
                 <input class="btn green-button" type="button" name="Submit" value="Sign in" @onclick="LogUsername" />
             </div>
-            <div>
-                <p>@_authMessage</p>
-            </div>
         </div>
     </form>
+    <div class="text-center">
+        <p>@_authMessage</p>
+    </div>
 </div>
 
 @code {
@@ -51,23 +52,27 @@
     [Parameter]
     public string Password { get; set; }
 
-
-    [CascadingParameter]
-    private Task<AuthenticationState> authenticationStateTask { get; set; }
-
     private string _authMessage;
 
     private async Task LogUsername()
     {
-        var user = await ProfileService.GetProfileByUsernameAndpassword(Username, Password);
-
-        if (user != null && user.Usertype == 0 && user.Password == Password)
+        if(Username != null && Password != null)
         {
-            NavigationManager.NavigateTo("/overview_admin/1", true);
+            var user = await ProfileService.GetProfileByUsernameAndpassword(Username, Password);
+
+            if (user != null && user.Usertype == 0 && user.Password == Password)
+            {
+                Country country = await CountryService.GetCountryWithProfile(user.Id);
+                NavigationManager.NavigateTo($"/overview_admin/{country.Id}", true);
+            }
+            else
+            {
+                _authMessage = "The username or password is incorrect, please try again!";
+            }
         }
         else
         {
-            _authMessage = "The username or password is incorrect, please try again!";
+            _authMessage = "You forgot to input an username and password!";
         }
     }
 }

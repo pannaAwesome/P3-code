@@ -1,9 +1,13 @@
 ﻿@layout HAVI_app.Shared.Supplier_layout.Form_layout
 @inject Microsoft.AspNetCore.Components.NavigationManager NavigationManager
-@page "/supplier_info_form"
+@page "/supplier_info_form/{Id:int}"
 @inherits HAVI_app.Classes.Validation
 @inject Models.ArticleInformation Article
-@inject HAVI_app.Services.Classes.CountryService ContryService
+@inject HAVI_app.Services.Classes.LocationService LocationService
+@inject HAVI_app.Services.Classes.ArticleInformationService ArticleInformationService
+@inject HAVI_app.Services.Classes.FreightResponsibilityService FreightResponsibilityService
+@inject HAVI_app.Services.Classes.ArticleService ArticleService
+
 
 
 <HAVI_app.Shared.Supplier_layout.Form_header SupplierState="active" />
@@ -14,7 +18,7 @@
     </div>
 </div>
 <div class="row justify-content-center ">
-    <div class="col-12 d-flex justify-content-center">
+    <div class="col-10 d-flex justify-content-center">
         <EditForm Model="Article" OnSubmit="@ValidationSupplierForm">
             <table class="table">
                 <tr>
@@ -39,12 +43,11 @@
                         <label for="company_location" class="required">Company location:</label>
                     </td>
                     <td>
-                        <select class="form-control" name="company_location" @bind="Article.CompanyLocation" required>
-                            <option disabled selected>-- select an option --</option>
-                                @foreach (var item in contries)
-                                {
-                                    <option>@item</option>
-                                }
+                        <select class="form-control" name="company_location" @onchange="@((ChangeEventArgs __e) => Article.CompanyLocation = __e.Value.ToString())" required>
+                            @foreach (var item in contries)
+                            {
+                                <option>@item.Country</option>
+                            }
                         </select>
                     </td>
                     <td>
@@ -63,14 +66,14 @@
                     </td>
                     <td>
 
-                        <input type="text" class="form-control @EmailValidated" name="email" @bind="Article.Email" @onfocus="RemoveEmailDanger" required maxlength="50">
+                        <input type="text" class="form-control @EmailValidated" name="email" @bind="Article.Email" @onfocus="RemoveEmailDanger" required maxlength="100">
                     </td>
                     <td>
                         <div></div>
                     </td>
                     <td>
                         <HAVI_app.Shared.Shared_layout.Questionmark_top>
-                            Enter the email of the person in the company that HAVI may contact
+                            Enter the email of the person in the company that HAVI may contact.
                         </HAVI_app.Shared.Shared_layout.Questionmark_top>
 
                     </td>
@@ -85,7 +88,7 @@
                             <input type="radio" name="pallet_exchange" checked="@(Article.PalletExchange == 1)" @onchange="@(() => Article.PalletExchange = 1)" required>
                             <label for="yes">Yes</label>
                             &nbsp;
-                            <input type="radio" name="pallet_exchange" checked="@(Article.PalletExchange == 2)" @onchange="@(() => Article.PalletExchange = 2)">
+                            <input type="radio" name="pallet_exchange" checked="@(Article.PalletExchange == 0)" @onchange="@(() => Article.PalletExchange = 2)">
                             <label for="no">No</label>
                         </div>
 
@@ -102,26 +105,24 @@
 
                 <tr>
                     <td>
-                        <label for="freight_responsibility" class="required">Freight responsibility</label>
+                        <label for="freight_responsibility">Freight Responsibility</label>
                     </td>
                     <td>
-                        <div class="text-center">
-                            <input type="radio" name="freight_responsibility" checked="@(Article.FreightResponsibility == "CIP")" @onchange="@(() => Article.FreightResponsibility = "CIP")" required>
-                            <label for="CIP">CIP</label>
-                            &nbsp;
-                            <input type="radio" value="EXW" name="freight_responsibility" checked="@(Article.FreightResponsibility == "EXW")" @onchange="@(() => Article.FreightResponsibility = "EXW")">
-                            <label for="EXW">EXW</label>
-                        </div>
+                        <select class="form-control" name="freight_responsibility" @bind="Article.FreightResponsibility" required>
+                            @foreach (FreightResponsibility item in Freights)
+                            {
+                                <option>@item.Responsibility</option>
+                            }
+                        </select>
                     </td>
                     <td>
                         <div></div>
                     </td>
                     <td>
-                        <HAVI_app.Shared.Shared_layout.Questionmark_top>
+                        <HAVI_app.Shared.Shared_layout.Questionmark_right>
                             With CIP you pay for the freight and insurance during transit.
                             With EXW you are only required to ready the article for pick up.
-                        </HAVI_app.Shared.Shared_layout.Questionmark_top>
-
+                        </HAVI_app.Shared.Shared_layout.Questionmark_right>
                     </td>
                 </tr>
 
@@ -198,8 +199,8 @@
                     </td>
                     <td>
                         <HAVI_app.Shared.Shared_layout.Questionmark_top>
-                            You can check whether the article is classified as dangerous goods on the following link: https://www.tnt.com/express/en_dk/si
-                            te/how-to/find-dangerous-goods.html
+                            You can check whether the article is classified as dangerous goods on the following link:
+                            <a href="https://www.tnt.com/express/en_dk/site/how-to/find-dangerous-goods.html" target="_blank">Click here</a>
                         </HAVI_app.Shared.Shared_layout.Questionmark_top>
                     </td>
                 </tr>
@@ -237,13 +238,16 @@
                         </HAVI_app.Shared.Shared_layout.Questionmark_top>
                     </td>
                 </tr>
+                <tr>
+                    <td colspan="4"></td>
+                </tr>
 
             </table>
             <div class="row justify-content-center">
                 <div class="text-right col-6">
                 </div>
                 <div class="text-left col-6">
-                    <input type="submit" class="btn green-button button-size" value="Next"/>
+                    <input type="submit" class="btn green-button button-size" value="Next" />
                 </div>
             </div>
 
@@ -254,8 +258,11 @@
 
 
 @code {
+    [Parameter]
+    public int Id { get; set; }
 
-    List<Country> contries;
+    List<Location> contries = new List<Location>();
+    public List<FreightResponsibility> Freights = new List<FreightResponsibility>();
 
     public string EmailValidated;
 
@@ -263,9 +270,11 @@
 
     public void ValidationSupplierForm()
     {
-        if (IsEmailValid(Article.Email) && ((Article.DangerousGoods == 1)  ? NumbersLettersDashOnly(Article.ClassificationCode) : true))
+        if (IsEmailValid(Article.Email) && ((Article.DangerousGoods == 1) ? NumbersLettersDashOnly(Article.ClassificationCode) : true))
         {
-            NavigationManager.NavigateTo("/article_info_form", true);
+            Article.Id = Id;
+
+            NavigationManager.NavigateTo($"/article_info_form", true);
         }
 
         if (!IsEmailValid(Article.Email))
@@ -291,7 +300,15 @@
 
     protected override async Task OnInitializedAsync()
     {
-        contries = await ContryService.GetCountries();
+        contries = await LocationService.GetLocations();
+        Freights = await FreightResponsibilityService.GetFreightResponsibilities();
 
+        Article article = await ArticleService.GetArticleWithInformation(Id);
+
+        Article.CompanyName = article.ArticleInformation.CompanyName;
+        Article.CompanyLocation = article.ArticleInformation.CompanyLocation;
+        Article.Email = article.ArticleInformation.Email;
+        Article.PalletExchange = article.ArticleInformation.PalletExchange;
+        Article.FreightResponsibility = article.ArticleInformation.FreightResponsibility;
     }
 }

@@ -14,15 +14,15 @@ namespace HAVI_app.Models
         public int Id { get; set; }
         [ForeignKey("InternalArticleInformation")]
         public int InternalArticleInformationId { get; set; }
-        public string QipnameNumber { get; set; }
-        public string Qipdescription { get; set; }
-        public string QipanswerOptions { get; set; }
-        public string QipsetAnswer { get; set; }
-        public string Qipokvalue { get; set; }
-        public string QiplowBoundary { get; set; }
-        public string QiphighBoundary { get; set; }
-        public string QipfrequencyType { get; set; }
-        public string Qipfrequency { get; set; }
+        public string QipnameNumber { get; set; } = "";
+        public string Qipdescription { get; set; } = "";
+        public string QipanswerOptions { get; set; } = "";
+        public string QipsetAnswer { get; set; } = "";
+        public double Qipokvalue { get; set; }
+        public double QiplowBoundary { get; set; }
+        public double QiphighBoundary { get; set; }
+        public double QipfrequencyType { get; set; }
+        public double Qipfrequency { get; set; }
         [JsonIgnore]
         public virtual InternalArticleInformation InternalArticleInformation { get; set; }
     }

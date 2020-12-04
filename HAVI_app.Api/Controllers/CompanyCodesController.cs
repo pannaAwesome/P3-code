@@ -70,7 +70,7 @@ namespace HAVI_app.Api.Controllers
 
                 var createdCode = await _codeRepository.AddCompanyCode(code);
 
-                return CreatedAtAction(nameof(GetCompanyCode), new { id = createdCode.Id }, createdCode);
+                return createdCode;
             }
             catch (Exception)
             {

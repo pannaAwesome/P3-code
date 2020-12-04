@@ -6,7 +6,7 @@
 @inject HAVI_app.Services.Classes.SalesUnitService SalesUnitService 
 
 
-<HAVI_app.Shared.Supplier_layout.Form_header SupplierState="filled" ArticleState="active" />
+<HAVI_app.Shared.Supplier_layout.Form_header SupplierState="filled" ArticleState="active" Id="Article.Id" />
 
 
 <div class="row justify-content-center">
@@ -17,7 +17,7 @@
 </div>
 
 <div class="row justify-content-center">
-    <div class="col-12 d-flex justify-content-center">
+    <div class="col-10 d-flex justify-content-center">
         <EditForm Model="Article" OnSubmit="@ValidationArticleInfoForm">
             <table class="table">
 
@@ -44,11 +44,11 @@
                         <label for="salesunit" class="required">Salesunit:</label>
                     </td>
                     <td>
-                        <select class="form-control" name="salesunit" @bind="Article.Salesunit" required>
+                        <select class="form-control" name="salesunit" @onchange="@((ChangeEventArgs __e) => Article.Salesunit = __e.Value.ToString())" required>
                             <option disabled selected>-- select an option --</option>
                                 @foreach (var item in sales)
                                 {
-                                    <option>@item</option>
+                                    <option>@item.Unit</option>
                                 }
                         </select>
                     </td>
@@ -57,7 +57,7 @@
                     </td>
                     <td>
                         <HAVI_app.Shared.Shared_layout.Questionmark_top>
-                            Enter the unit in which the article is delivered
+                            Enter the unit in which the article is delivered. This cannot be zero
                         </HAVI_app.Shared.Shared_layout.Questionmark_top>
 
                     </td>
@@ -68,14 +68,14 @@
                         <label for="article_pr_salesunit" class="required">Articles per salesunit:</label>
                     </td>
                     <td>
-                        <input type="number" class="form-control @ArticlePerSalesunitValidated" name="article_pr_salesunit" @bind="Article.ArticlesPerSalesunit" required maxlength="5">
+                        <input type="text" class="form-control @ArticlePerSalesunitValidated" name="article_pr_salesunit" @bind="Article.ArticlesPerSalesunit" required maxlength="5">
                     </td>
                     <td>
                         <div></div>
                     </td>
                     <td>
                         <HAVI_app.Shared.Shared_layout.Questionmark_top>
-                            Enter how many articles are delivered per salesunit
+                            Enter how many articles are delivered per salesunit. This cannot be zero
                         </HAVI_app.Shared.Shared_layout.Questionmark_top>
                     </td>
                 </tr>
@@ -85,7 +85,7 @@
                         <label for="supplier_article_nn" class="required">Supplier article number/name:</label>
                     </td>
                     <td>
-                        <input type="text" class="form-control @SupplierArticleNumberValidated" name="supplier_article_nn" @bind="Article.SupplierArticleNumber" required maxlength="16">
+                        <input type="text" class="form-control @SupplierArticleNumberValidated" name="supplier_article_nn" @bind="Article.SupplierArticleName" required maxlength="16">
                     </td>
                     <td>
                         <div></div>
@@ -103,7 +103,7 @@
                         <label for="GTIN" class="required">GTIN number:</label>
                     </td>
                     <td>
-                        <input type="number" class="form-control" name="GTIN" @bind="Article.Gtinnumber" required maxlength="14">
+                        <input type="text" class="form-control" name="GTIN" @bind="Article.Gtinnumber" required minlength="14" maxlength="14">
                     </td>
                     <td>
                         <div></div>
@@ -128,7 +128,7 @@
                     </td>
                     <td>
                         <HAVI_app.Shared.Shared_layout.Questionmark_top>
-                            Enter expiration time for the article in days
+                            Enter expiration time for the article in days. This cannot be zero
                         </HAVI_app.Shared.Shared_layout.Questionmark_top>
 
                     </td>
@@ -139,14 +139,14 @@
                         <label for="Min_shelflife" class="required">Min. shelflife at HAVI:</label>
                     </td>
                     <td>
-                        <input type="number" class="form-control @ShelflifeAtHaviValidated" name="Min_shelflife" @bind="Article.ShelflifeAtHavi" required maxlength="4">
+                        <input type="number" class="form-control @ShelflifeAtHaviValidated" name="Min_shelflife" @bind="Article.MinimumShelflife" required maxlength="4">
                     </td>
                     <td>
                         <label class="center-for-units" for="Min_shelflife">days</label>
                     </td>
                     <td>
                         <HAVI_app.Shared.Shared_layout.Questionmark_top>
-                            Enter the least amount of days that HAVI should have the article
+                            Enter the least amount of days that HAVI should have the article. This cannot be zero
                         </HAVI_app.Shared.Shared_layout.Questionmark_top>
 
                     </td>
@@ -192,8 +192,10 @@
 </div>
 
 @code{
+        [Parameter]
+        public int Id { get; set; }
 
-    List<SalesUnit> sales;
+        List<SalesUnit> sales = new List<SalesUnit>();
 
     public string ArticleNameValidated;
 
@@ -207,28 +209,44 @@
 
     private void GTINfiller()
     {
-        Article.Gtinnumber = GTINValidation(Article.Gtinnumber);
+        //Article.Gtinnumber = GTINValidation(Article.Gtinnumber);
     }
 
     public void ValidationArticleInfoForm()
     {
 
-        if (LettersOnly(Article.ArticleName))
+        if (LettersOnly(Article.ArticleName) && MustNotBeZeroOrNegativeNumbere(Article.ArticlesPerSalesunit) &&
+            MustNotBeZeroOrNegativeNumbere(Article.Shelflife) && MustNotBeZeroOrNegativeNumbere(Article.MinimumShelflife))
         {
-            Article.Gtinnumber = GTINValidation(Article.Gtinnumber);
+            //Article.Gtinnumber = GTINValidation(Article.Gtinnumber);
 
-            NavigationManager.NavigateTo("/measurement_info_form", true);
+            NavigationManager.NavigateTo($"/measurement_info_form", true);
         }
 
         if (!LettersOnly(Article.ArticleName))
         {
             ArticleNameValidated = "btn-danger";
         }
+
+        if (!MustNotBeZeroOrNegativeNumbere(Article.ArticlesPerSalesunit))
+        {
+            ArticlePerSalesunitValidated = "btn-danger";
+        }
+
+        if (!MustNotBeZeroOrNegativeNumbere(Article.Shelflife))
+        {
+            ShelflifeValidated = "btn-danger";
+        }
+
+        if (!MustNotBeZeroOrNegativeNumbere(Article.MinimumShelflife))
+        {
+            ShelflifeAtHaviValidated = "btn-danger";
+        }
     }
 
     public void OnPostBack()
     {
-        NavigationManager.NavigateTo($"/supplier_info_form", true);
+        NavigationManager.NavigateTo($"/supplier_info_form/{Article.Id}", true);
     }
 
     protected override async Task OnInitializedAsync()
