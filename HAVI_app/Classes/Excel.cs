@@ -1,7 +1,5 @@
 ﻿using Syncfusion.Drawing;
 using Syncfusion.XlsIO;
-using System;
-using System.Globalization;
 using System.IO;
 using HAVI_app.Models;
 namespace HAVI_app.Classes
@@ -14,43 +12,16 @@ namespace HAVI_app.Classes
         /// <returns>Return the created excel document as stream</returns>
         public MemoryStream CreateXlsIO(Article version)
         {
-            //New instance of XlsIO is created.[Equivalent to launching MS Excel with no workbooks open].
-            //The instantiation process consists of two steps.
-            //Step 1 : Instantiate the spreadsheet creation engine
             using (ExcelEngine excelEngine = new ExcelEngine())
             {
-                //Step 2 : Instantiate the excel application object
                 IApplication application = excelEngine.Excel;
-                //Set the default version
-                    application.DefaultVersion = ExcelVersion.Excel2016;
+                application.DefaultVersion = ExcelVersion.Excel2016;
                 
-                //Creating new workbook
-                IWorkbook workbook = application.Workbooks.Create(3);
+                IWorkbook workbook = application.Workbooks.Create(2);
                 IWorksheet sheet = workbook.Worksheets[0];
                 #region Generate Excel
-                sheet.Range["A2"].ColumnWidth = 30;
-                sheet.Range["B2"].ColumnWidth = 30;
-                sheet.Range["C2"].ColumnWidth = 30;
-                sheet.Range["D2"].ColumnWidth = 30;
-                sheet.Range["A2:D2"].Merge(true);
-                //Inserting sample text into the first cell of the first sheet
-                sheet.Range["A2"].CellStyle.Font.FontName = "Verdana";
-                sheet.Range["A2"].CellStyle.Font.Bold = true;
-                sheet.Range["A2"].CellStyle.Font.Size = 28;
-                sheet.Range["A2"].CellStyle.Font.RGBColor = Color.FromArgb(0, 0, 112, 192);
-                sheet.Range["A2"].HorizontalAlignment = ExcelHAlign.HAlignCenter;
-                sheet.Range["A4:B7"].CellStyle.Font.FontName = "Verdana";
-                sheet.Range["A4:B7"].CellStyle.Font.Bold = true;
-                sheet.Range["A4:B7"].CellStyle.Font.Size = 11;
-                sheet.Range["A4:A7"].CellStyle.Font.RGBColor = Color.FromArgb(0, 128, 128, 128);
-                sheet.Range["A4:A7"].HorizontalAlignment = ExcelHAlign.HAlignLeft;
-                sheet.Range["B4:B7"].CellStyle.Font.RGBColor = Color.FromArgb(0, 174, 170, 170);
-                sheet.Range["B4:B7"].HorizontalAlignment = ExcelHAlign.HAlignRight;
-                sheet.Range["A9:D20"].CellStyle.Font.FontName = "Verdana";
-                sheet.Range["A9:D20"].CellStyle.Font.Size = 11;
-
-                sheet.Range["B3"].Text = "Company code";
-                sheet.Range["B4"].Text = "Supplier ID";
+                sheet.Range["B3"].Number = version.InternalArticleInformation.CompanyCode;
+                sheet.Range["B4"].Number = version.InternalArticleInformation.SupplierIdIlos;
                 sheet.Range["B5"].Text = "Supplier Delivery Unit";
                 sheet.Range["B6"].Text = "Remain Shelf Store value";
                 sheet.Range["B7"].Text = "ILOS Orderpick Group";
@@ -75,6 +46,7 @@ namespace HAVI_app.Classes
 
 
                 //Supplier ark
+                sheet = workbook.Worksheets[1];
 
                 sheet.Range["B3"].Text = "Valid for costumer";
                 sheet.Range["B14"].Text = "Salesunit";
@@ -88,10 +60,8 @@ namespace HAVI_app.Classes
                 sheet.Range["B26"].Text = "Shelv life";
                 sheet.Range["B27"].Text = "Shelve Life HAVI";
                 sheet.Range["B43"].Text = "Register Shelvelife";
-                sheet.Range["B47"].Text = "Alias EAN";
-                sheet.Range["B48"].Text = "Alias GRIN";
-                    
-
+                sheet.Range["B47"].Text = "Class";
+                sheet.Range["B48"].Text = "clasificationcode";
                 sheet.Range["E15"].Text = "Cartons pr pallet";
                 sheet.Range["E16"].Text = "Cartons pr layer ";
                 sheet.Range["E17"].Text = "Country of origin";
@@ -101,29 +71,12 @@ namespace HAVI_app.Classes
                 sheet.Range["E21"].Text = "Min order Type";
                 sheet.Range["E22"].Text = "Lead Time";
                 sheet.Range["E23"].Text = "Organic article";
-                sheet.Range["E25"].Text = "Alias EAN";
-                sheet.Range["E26"].Text = "Alias GRIN";
-                sheet.Range["E27"].Text = "Alias BOS";
-                sheet.Range["E43"].Text = "Alias BOS";
-
-
-
-
-                sheet.Range["A20:D20"].CellStyle.Color = Color.FromArgb(0, 0, 112, 192);
-                sheet.Range["A20:D20"].CellStyle.Font.Color = ExcelKnownColors.White;
-                sheet.Range["A20:D20"].CellStyle.Font.Bold = true;
-                IStyle style = sheet["B9:D9"].CellStyle;
-                style.VerticalAlignment = ExcelVAlign.VAlignCenter;
-                style.HorizontalAlignment = ExcelHAlign.HAlignRight;
-                style.Color = Color.FromArgb(0, 0, 112, 192);
-                style.Font.Bold = true;
-                style.Font.Color = ExcelKnownColors.White;
+                sheet.Range["E26"].Text = "min storage";
+                sheet.Range["E27"].Text = "min transport";
                    
                 #endregion
-                //Save the document as a stream and retrun the stream
                 using (MemoryStream stream = new MemoryStream())
                 {
-                    //Save the created Excel document to MemoryStream
                     workbook.SaveAs(stream);
                     return stream;
                 }
