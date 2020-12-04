@@ -120,8 +120,7 @@ namespace HAVI_app.Shared.Purchaser_layout
             {
                 excelStream = Excel.CreateXlsIO(item);
 
-                //await JS.SaveAs($"saveAsFile.xlsx", excelStream.ToArray());
-                await JS.InvokeAsync<Article>("saveAsFile", excelStream.ToArray());
+                await JS.SaveAs($"saveAsFile.xlsx", excelStream.ToArray());
                 item.ArticleState = (int)ArticleState.Completed;
                 await ArticleService.UpdateArticle(item.Id, item);
             }
