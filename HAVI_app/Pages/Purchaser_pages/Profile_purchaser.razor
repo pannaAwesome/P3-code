@@ -123,7 +123,7 @@ else
 
                         </table>
                         <div class="row justify-content-center">
-                            <button type="submit" class="save-password btn button-size" data-dismiss="modal" @onclick="SavePassword">Save</button>
+                            <button type="submit" class="save-password btn button-size" @onclick="SavePassword">Save</button>
                         </div>
                     </form>
                 </div>
@@ -161,6 +161,7 @@ else
         {
             Purchaser.Profile.Password = NewPassword;
             await PurchaserService.UpdatePurchaser(Id, Purchaser);
+            NavigationManager.NavigateTo($"overview_purchaser/{Id}", true);
         }
         else if (OldPassword != Purchaser.Profile.Password)
         {

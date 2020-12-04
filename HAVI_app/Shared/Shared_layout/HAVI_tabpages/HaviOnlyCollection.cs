@@ -66,15 +66,17 @@ namespace HAVI_app.Shared.Shared_layout.HAVI_tabpages
 
         public async void ReturnToOverview()
         {
-            if (Article.ArticleState == (int)ArticleState.Submitted)
-            {
-                Article.ArticleState = (int)ArticleState.RobotReady;
-                await ArticleService.UpdateArticle(Article.Id, Article);
-                ValidateInformation();
-            }
+            ValidateInformation();
 
             if(MissedFields == "")
             {
+                if (Article.ArticleState == (int)ArticleState.Submitted)
+                {
+                    Article.ArticleState = (int)ArticleState.RobotReady;
+                    await ArticleService.UpdateArticle(Article.Id, Article);
+                }
+
+                Article.InternalArticleInformation.InnerPackingIlos = "1/10";
                 await InternalArticleInformationService.UpdateInternalArticleInformation(Article.InternalArticleInformationId, Article.InternalArticleInformation);
 
                 if (User == "Purchaser")
