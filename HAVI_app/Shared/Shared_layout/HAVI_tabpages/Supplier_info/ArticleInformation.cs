@@ -11,6 +11,9 @@ namespace HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info
     public class ArticleInformation : ComponentBase
     {
         [Parameter]
+        public string EditFields { get; set; }
+
+        [Parameter]
         public string ArticleName { get; set; }
 
         [Parameter]

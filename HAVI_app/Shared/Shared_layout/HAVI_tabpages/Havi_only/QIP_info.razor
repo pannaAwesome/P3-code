@@ -43,7 +43,7 @@ else
         <tbody style="background-color: white">
             <tr>
                 <td>
-                    <select class="form-control" name="primary_dc" @onchange="@((ChangeEventArgs __e) => UpdateQip(0, __e.Value.ToString()))" disabled="@IsDisabled">
+                    <select class="form-control" name="primary_dc" value="@Article.InternalArticleInformation.Qips[0].QipnameNumber" @onchange="@((ChangeEventArgs __e) => UpdateQip(0, __e.Value.ToString()))" disabled="@IsDisabled">
                         <option>-- select an option --</option>
                         @foreach (Qipnumber item in Qips)
                         {
@@ -62,7 +62,7 @@ else
             </tr>
             <tr>
                 <td>
-                    <select class="form-control" name="primary_dc" @onchange="@((ChangeEventArgs __e) => UpdateQip(1, __e.Value.ToString()))" disabled="@IsDisabled">
+                    <select class="form-control" name="primary_dc" value="@Article.InternalArticleInformation.Qips[1].QipnameNumber" @onchange="@((ChangeEventArgs __e) => UpdateQip(1, __e.Value.ToString()))" disabled="@IsDisabled">
                         <option>-- select an option --</option>
                         @foreach (Qipnumber item in Qips)
                         {
@@ -81,7 +81,7 @@ else
             </tr>
             <tr>
                 <td>
-                    <select class="form-control" name="primary_dc" @onchange="@((ChangeEventArgs __e) => UpdateQip(2, __e.Value.ToString()))" disabled="@IsDisabled">
+                    <select class="form-control" name="primary_dc" value="@Article.InternalArticleInformation.Qips[2].QipnameNumber" @onchange="@((ChangeEventArgs __e) => UpdateQip(2, __e.Value.ToString()))" disabled="@IsDisabled">
                         <option>-- select an option --</option>
                         @foreach (Qipnumber item in Qips)
                         {
@@ -100,7 +100,7 @@ else
             </tr>
             <tr>
                 <td>
-                    <select class="form-control" name="primary_dc" @onchange="@((ChangeEventArgs __e) => UpdateQip(3, __e.Value.ToString()))" disabled="@IsDisabled">
+                    <select class="form-control" name="primary_dc" value="@Article.InternalArticleInformation.Qips[3].QipnameNumber" @onchange="@((ChangeEventArgs __e) => UpdateQip(3, __e.Value.ToString()))" disabled="@IsDisabled">
                         <option>-- select an option --</option>
                         @foreach (Qipnumber item in Qips)
                         {
@@ -119,7 +119,7 @@ else
             </tr>
             <tr>
                 <td>
-                    <select class="form-control" name="primary_dc" @onchange="@((ChangeEventArgs __e) => UpdateQip(4, __e.Value.ToString()))" disabled="@IsDisabled">
+                    <select class="form-control" name="primary_dc" value="@Article.InternalArticleInformation.Qips[4].QipnameNumber" @onchange="@((ChangeEventArgs __e) => UpdateQip(4, __e.Value.ToString()))" disabled="@IsDisabled">
                         <option>-- select an option --</option>
                         @foreach (Qipnumber item in Qips)
                         {
@@ -138,7 +138,7 @@ else
             </tr>
             <tr>
                 <td>
-                    <select class="form-control" name="primary_dc" @onchange="@((ChangeEventArgs __e) => UpdateQip(5, __e.Value.ToString()))" disabled="@IsDisabled">
+                    <select class="form-control" name="primary_dc" value="@Article.InternalArticleInformation.Qips[5].QipnameNumber" @onchange="@((ChangeEventArgs __e) => UpdateQip(5, __e.Value.ToString()))" disabled="@IsDisabled">
                         <option>-- select an option --</option>
                         @foreach (Qipnumber item in Qips)
                         {
@@ -157,7 +157,7 @@ else
             </tr>
             <tr>
                 <td>
-                    <select class="form-control" name="primary_dc" @onchange="@((ChangeEventArgs __e) => UpdateQip(6, __e.Value.ToString()))" disabled="@IsDisabled">
+                    <select class="form-control" name="primary_dc" value="@Article.InternalArticleInformation.Qips[6].QipnameNumber" @onchange="@((ChangeEventArgs __e) => UpdateQip(6, __e.Value.ToString()))" disabled="@IsDisabled">
                         <option>-- select an option --</option>
                         @foreach (Qipnumber item in Qips)
                         {
@@ -176,7 +176,7 @@ else
             </tr>
             <tr>
                 <td>
-                    <select class="form-control" name="primary_dc" @onchange="@((ChangeEventArgs __e) => UpdateQip(7, __e.Value.ToString()))" disabled="@IsDisabled">
+                    <select class="form-control" name="primary_dc" value="@Article.InternalArticleInformation.Qips[7].QipnameNumber" @onchange="@((ChangeEventArgs __e) => UpdateQip(7, __e.Value.ToString()))" disabled="@IsDisabled">
                         <option>-- select an option --</option>
                         @foreach (Qipnumber item in Qips)
                         {
@@ -195,7 +195,7 @@ else
             </tr>
             <tr>
                 <td>
-                    <select class="form-control" name="primary_dc" @onchange="@((ChangeEventArgs __e) => UpdateQip(8, __e.Value.ToString()))" disabled="@IsDisabled">
+                    <select class="form-control" name="primary_dc" value="@Article.InternalArticleInformation.Qips[8].QipnameNumber" @onchange="@((ChangeEventArgs __e) => UpdateQip(8, __e.Value.ToString()))" disabled="@IsDisabled">
                         <option>-- select an option --</option>
                         @foreach (Qipnumber item in Qips)
                         {
@@ -214,7 +214,7 @@ else
             </tr>
             <tr>
                 <td>
-                    <select class="form-control" name="primary_dc" @onchange="@((ChangeEventArgs __e) => UpdateQip(9, __e.Value.ToString()))" disabled="@IsDisabled">
+                    <select class="form-control" name="primary_dc" value="@Article.InternalArticleInformation.Qips[9].QipnameNumber" @onchange="@((ChangeEventArgs __e) => UpdateQip(9, __e.Value.ToString()))" disabled="@IsDisabled">
                         <option>-- select an option --</option>
                         @foreach (Qipnumber item in Qips)
                         {
@@ -271,7 +271,19 @@ else
                         Frequency = 0
                     });
 
-                    Article.InternalArticleInformation.Qips.Add(new Qip());
+                    Article.InternalArticleInformation.Qips.Add(new Qip() {
+                        Qipdescription = "",
+                        QipanswerOptions = "",
+                        Qipfrequency = 0,
+                        QipfrequencyType = 0,
+                        QiphighBoundary = 0,
+                        QiplowBoundary = 0,
+                        QipnameNumber = "",
+                        Qipokvalue = 0,
+                        QipsetAnswer = "",
+                        Id = 0,
+                        InternalArticleInformationId = Article.InternalArticleInformationId,
+                    });
                 }
             }
             else
@@ -280,18 +292,36 @@ else
                 {
                     Qip qip = InternalArticleInformation.Qips[i];
                     Qipnumber number = Qips.Find(q => q.QipnumberName == qip.QipnameNumber);
-                    Answers.Add(new Qipnumber()
+
+                    if(number != null)
                     {
-                        QipnumberName = qip.QipnameNumber,
-                        Qipdescription = qip.Qipdescription,
-                        AnswerOptions = qip.QipanswerOptions,
-                        SetAnswer = number.SetAnswer,
-                        OKValue = number.OKValue,
-                        LowBoundary = number.LowBoundary,
-                        HighBoundary = number.HighBoundary,
-                        FrequencyType = number.FrequencyType,
-                        Frequency = number.Frequency
-                    });
+                        Answers.Add(new Qipnumber()
+                        {
+                            QipnumberName = qip.QipnameNumber,
+                            Qipdescription = qip.Qipdescription,
+                            AnswerOptions = qip.QipanswerOptions,
+                            SetAnswer = number.SetAnswer,
+                            OKValue = number.OKValue,
+                            LowBoundary = number.LowBoundary,
+                            HighBoundary = number.HighBoundary,
+                            FrequencyType = number.FrequencyType,
+                            Frequency = number.Frequency
+                        });
+                    }else
+                    {
+                        Answers.Add(new Qipnumber()
+                        {
+                            Qipdescription = "",
+                            AnswerOptions = "",
+                            SetAnswer = 0,
+                            OKValue = 0,
+                            LowBoundary = 0,
+                            HighBoundary = 0,
+                            FrequencyType = 0,
+                            Frequency = 0
+                        });
+                    }
+
                 }
             }
         }
@@ -314,6 +344,7 @@ else
         public void UpdateQip(int number, string name)
         {
             Qipnumber qip = Qips.Find(q => q.QipnumberName == name);
+            Article.InternalArticleInformation.Qips[number].QipnameNumber = qip.QipnumberName;
             Article.InternalArticleInformation.Qips[number].Qipdescription = qip.Qipdescription;
             Article.InternalArticleInformation.Qips[number].QipanswerOptions = qip.AnswerOptions;
             Answers[number].SetAnswer = qip.SetAnswer;
