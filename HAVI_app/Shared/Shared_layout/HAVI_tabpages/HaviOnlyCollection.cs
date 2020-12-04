@@ -77,6 +77,8 @@ namespace HAVI_app.Shared.Shared_layout.HAVI_tabpages
                 }
 
                 Article.InternalArticleInformation.InnerPackingIlos = "1/10";
+                
+
                 await InternalArticleInformationService.UpdateInternalArticleInformation(Article.InternalArticleInformationId, Article.InternalArticleInformation);
 
                 if (User == "Purchaser")

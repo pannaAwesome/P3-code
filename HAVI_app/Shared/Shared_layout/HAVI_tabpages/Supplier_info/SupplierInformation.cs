@@ -10,6 +10,9 @@ namespace HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info
 {
     public class SupplierInformation : ComponentBase
     {
+        [Parameter]
+        public string EditFields { get; set; }
+
         [Inject]
         public ArticleInformationService ArticleInformationService { get; set; }
 

@@ -2,122 +2,158 @@
 @inject HAVI_app.Services.Classes.ArticleService ArticleService
 @inject HAVI_app.Services.Classes.InternalArticleInformationService InternalArticleInformationService
 
-<div class="col-11">
-    <h4>Bundles:</h4>
-</div>
-<div class="col-1 @EditPossible">
-    @if (EditingFields)
-    {
-        <div class="save-button" @onclick="Saving"></div>
-    }
-    else
-    {
-        <div class="edit-button" @onclick="Editing"></div>
-    }
-
-</div>
-<div class="justify-content-center row">
-    <div class="col-12">
-        <form>
-            <table class="table">
-                <tr>
-                    <td>
-                        <label for="Article" class="required">Article bundles</label>
-                    </td>
-                    <td>
-                        <label for="Quantity" class="required">Quantity</label>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <select class="form-control" name="Articlebundle" @onchange="@((ChangeEventArgs __e) => Article.InternalArticleInformation.Bundles[0].ArticleBundle = __e.Value.ToString())" disabled="@IsDisabled">
-                            <option disabled>-- select an option --</option>
-                            @foreach (SalesUnit item in SalesUnits)
-                            {
-                                <option>@item.Unit</option>
-                            }
-                        </select>
-
-                    </td>
-                    <td>
-                        <input type="number" class="form-control" @bind="Article.InternalArticleInformation.Bundles[0].ArticleBundleQuantity" disabled="@IsDisabled" required>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <select class="form-control" name="Articlebundle1" @onchange="@((ChangeEventArgs __e) => Article.InternalArticleInformation.Bundles[1].ArticleBundle = __e.Value.ToString())" disabled="@IsDisabled">
-                            <option disabled>-- select an option --</option>
-                            @foreach (SalesUnit item in SalesUnits)
-                            {
-                                <option>@item.Unit</option>
-                            }
-                        </select>
-
-                    </td>
-                    <td>
-                        <input type="number" class="form-control" @bind="Article.InternalArticleInformation.Bundles[1].ArticleBundleQuantity" disabled="@IsDisabled" />
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <select class="form-control" name="Articlebundle2" @onchange="@((ChangeEventArgs __e) => Article.InternalArticleInformation.Bundles[2].ArticleBundle = __e.Value.ToString())" disabled="@IsDisabled">
-                            <option disabled>-- select an option --</option>
-                            @foreach (SalesUnit item in SalesUnits)
-                            {
-                                <option>@item.Unit</option>
-                            }
-                        </select>
-
-                    </td>
-                    <td>
-                        <input type="number" class="form-control" @bind="Article.InternalArticleInformation.Bundles[2].ArticleBundleQuantity" disabled="@IsDisabled" />
-                    </td>
-                </tr>
-            </table>
-        </form>
+@if (SalesUnits == null)
+{
+    <div class="spinner">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
     </div>
-</div>
-
-@code {
-    [Parameter]
-    public Article Article { get; set; }
-
-    [Parameter]
-    public bool IsDisabled { get; set; }
-
-    [Parameter]
-    public string EditPossible { get; set; }
-
-    public List<SalesUnit> SalesUnits = new List<SalesUnit>();
-
-    protected override async Task OnInitializedAsync()
-    {
-        List<Bundle> bundles = new List<Bundle>();
-
-        bundles.Add(new Bundle());
-        bundles.Add(new Bundle());
-        bundles.Add(new Bundle());
-
-        Article.InternalArticleInformation.Bundles = bundles;
-
-        SalesUnits = await SalesUnitService.GetSalesUnits();
-    }
-
-    public bool EditingFields = false;
-
-    public void Editing()
-    {
-        EditingFields = true;
-        IsDisabled = false;
-    }
-
-    public async void Saving()
-    {
-        await InternalArticleInformationService.UpdateInternalArticleInformation(Article.InternalArticleInformationId, Article.InternalArticleInformation);
-        EditingFields = false;
-        IsDisabled = true;
-    }
 }
+else
+{
+    <div class="col-11">
+        <h4>Bundles:</h4>
+    </div>
+    <div class="col-1 @EditPossible">
+        @if (EditingFields)
+        {
+            <div class="save-button" @onclick="Saving"></div>
+        }
+        else
+        {
+            <div class="edit-button" @onclick="Editing"></div>
+        }
+
+    </div>
+    <div class="justify-content-center row">
+        <div class="col-12">
+            <form>
+                <table class="table">
+                    <tr>
+                        <td>
+                            <label for="Article" class="required">Article bundles</label>
+                        </td>
+                        <td>
+                            <label for="Quantity" class="required">Quantity</label>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <select class="form-control" name="Articlebundle" @bind="Article.InternalArticleInformation.Bundles[0].ArticleBundle" disabled="@IsDisabled">
+                                <option></option>
+                                @foreach (SalesUnit item in SalesUnits)
+                                {
+                                    <option>@item.Unit</option>
+                                }
+                            </select>
+
+                        </td>
+                        <td>
+                            <input type="number" class="form-control" @bind="Article.InternalArticleInformation.Bundles[0].ArticleBundleQuantity" disabled="@IsDisabled" required>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <select class="form-control" name="Articlebundle1" @bind="Article.InternalArticleInformation.Bundles[1].ArticleBundle" disabled="@IsDisabled">
+                                <option></option>
+                                @foreach (SalesUnit item in SalesUnits)
+                                {
+                                    <option>@item.Unit</option>
+                                }
+                            </select>
+
+                        </td>
+                        <td>
+                            <input type="number" class="form-control" @bind="Article.InternalArticleInformation.Bundles[1].ArticleBundleQuantity" disabled="@IsDisabled" />
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <select class="form-control" name="Articlebundle2" @bind="Article.InternalArticleInformation.Bundles[2].ArticleBundle" disabled="@IsDisabled">
+                                <option></option>
+                                @foreach (SalesUnit item in SalesUnits)
+                                {
+                                    <option>@item.Unit</option>
+                                }
+                            </select>
+
+                        </td>
+                        <td>
+                            <input type="number" class="form-control" @bind="Article.InternalArticleInformation.Bundles[2].ArticleBundleQuantity" disabled="@IsDisabled" />
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+}
+
+    @code {
+        [Parameter]
+        public Article Article { get; set; }
+
+        [Parameter]
+        public bool IsDisabled { get; set; }
+
+        [Parameter]
+        public string EditPossible { get; set; }
+
+        public List<SalesUnit> SalesUnits;
+
+        protected override async Task OnInitializedAsync()
+        {
+            if (!IsDisabled)
+            {
+                List<Bundle> bundles = new List<Bundle>();
+
+                bundles.Add(new Bundle()
+                {
+                    Id = 0,
+                    InternalArticleInformationId = Article.InternalArticleInformationId,
+                    ArticleBundle = "",
+                    ArticleBundleQuantity = 0
+                });
+                bundles.Add(new Bundle()
+                {
+                    Id = 0,
+                    InternalArticleInformationId = Article.InternalArticleInformationId,
+                    ArticleBundle = "",
+                    ArticleBundleQuantity = 0
+                });
+                bundles.Add(new Bundle()
+                {
+                    Id = 0,
+                    InternalArticleInformationId = Article.InternalArticleInformationId,
+                    ArticleBundle = "",
+                    ArticleBundleQuantity = 0
+                });
+
+                Article.InternalArticleInformation.Bundles = bundles;
+            }else
+            {
+                InternalArticleInformation article = await InternalArticleInformationService.GetInternalArticleInformation(Article.InternalArticleInformationId);
+                Article.InternalArticleInformation.Bundles = article.Bundles;
+            }
+
+            SalesUnits = await SalesUnitService.GetSalesUnits();
+        }
+
+        public bool EditingFields = false;
+
+        public void Editing()
+        {
+            EditingFields = true;
+            IsDisabled = false;
+        }
+
+        public async void Saving()
+        {
+            await InternalArticleInformationService.UpdateInternalArticleInformation(Article.InternalArticleInformationId, Article.InternalArticleInformation);
+            EditingFields = false;
+            IsDisabled = true;
+        }
+    }

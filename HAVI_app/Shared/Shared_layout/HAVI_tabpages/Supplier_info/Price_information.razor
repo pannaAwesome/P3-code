@@ -4,7 +4,7 @@
         <div class="col-11">
             <h4> Price Information:</h4>
         </div>
-        <div class="col-1">
+        <div class="col-1 @EditFields">
             @if (EditingFields)
             {
                 <div class="save-button" @onclick="Saving"></div>
@@ -34,7 +34,7 @@
                             <label for="purchase_price">Purchase price:</label>
                         </td>
                         <td>
-                            <input type="number" class="form-control" id="purchase_price" @bind="Article.ArticleInformation.PurchasePrice" disabled="@IsDisabled">
+                            <input type="number" class="form-control moveStuffToTheRight" id="purchase_price" @bind="Article.ArticleInformation.PurchasePrice" disabled="@IsDisabled">
                         </td>
                     </tr>
 

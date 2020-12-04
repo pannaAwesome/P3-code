@@ -1,4 +1,5 @@
 ﻿using BlazorTable;
+using HAVI_app.Classes;
 using HAVI_app.Models;
 using HAVI_app.Services.Classes;
 using Microsoft.AspNetCore.Components;
@@ -16,6 +17,9 @@ namespace HAVI_app.Shared.Admin_layout
 
         [Inject]
         public ArticleService ArticleService { get; set; }
+
+        [Parameter]
+        public int Id { get; set; }
 
         public List<Article> Articles;
 
@@ -48,14 +52,17 @@ namespace HAVI_app.Shared.Admin_layout
                 ArticleService.DeleteArticle(article.Id);
             }
 
-            NavigationManager.NavigateTo("/article_view", true);
+            NavigationManager.NavigateTo($"/article_view/{Id}", true);
         }
 
         public void RowClicked(Article data)
         {
             if (SelectionType == SelectionType.None)
             {
-                NavigationManager.NavigateTo($"show_article/1", true);
+                if(data.ArticleState == (int)ArticleState.Completed)
+                {
+                    NavigationManager.NavigateTo($"show_article/{data.Id}", true);
+                }
             }
             else
             {
@@ -66,7 +73,7 @@ namespace HAVI_app.Shared.Admin_layout
 
         protected async override Task OnInitializedAsync()
         {
-            Articles = await ArticleService.GetArticlesForCountry(1);
+            Articles = await ArticleService.GetArticlesForCountry(Id);
         }
     }
 }
