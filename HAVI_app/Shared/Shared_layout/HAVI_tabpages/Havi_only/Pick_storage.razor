@@ -1,118 +1,147 @@
 ﻿@inject HAVI_app.Services.Classes.PrimaryDCILOSCodeService PrimaryDCILOSCodeService
 @inject HAVI_app.Services.Classes.InternalArticleInformationService InternalArticleInformationService
 
-<div class="row">
-<div class="col-11">
-    <h4>Pick storage:</h4>
-</div>
-<div class="col-1 @EditPossible">
-    @if (EditingFields)
-    {
-        <div class="save-button" @onclick="Saving"></div>
-    }
-    else
-    {
-        <div class="edit-button" @onclick="Editing"></div>
-    }
-</div>
-</div>
-<div class="justify-content-center row">
-    <div class="col-12">
-        <form>
-            <table>
-                <tr>
-                    <td>
-                        <label for="primary_dc" class="required">Primary DC ILOS Code:</label>
-                    </td>
-                    <td>
-                        <select class="form-control" name="primary_dc" @bind="Article.InternalArticleInformation.PrimaryDcIloscode" disabled="@IsDisabled">
-                            <option>-- select an option --</option>
-                            @foreach (PrimaryDciloscode item in Codes)
-                            {
-                                <option>@item.PrimaryCode</option>
-                            }
-                        </select>
-                    </td>
-                </tr>
-                @foreach (PrimaryDciloscode item in Codes)
-                {
+@if (Codes == null)
+{
+    <div class="spinner">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+    </div>
+}
+else
+{
+    <div class="row">
+        <div class="col-11">
+            <h4>Pick storage:</h4>
+        </div>
+        <div class="col-1 @EditPossible">
+            @if (EditingFields)
+            {
+                <div class="save-button" @onclick="Saving"></div>
+            }
+            else
+            {
+                <div class="edit-button" @onclick="Editing"></div>
+            }
+        </div>
+    </div>
+    <div class="justify-content-center row">
+        <div class="col-12">
+            <form>
+                <table>
                     <tr>
                         <td>
-                            <label for="sap_plant1" class="required">SAP Plant: @item.Sapplant</label>
+                            <label for="primary_dc" class="required">Primary DC ILOS Code:</label>
                         </td>
                         <td>
-                            <input type="radio" name="sap_plant_@item.Sapplant" id="yes" checked="@(Article.InternalArticleInformation.Sapplants.Find(s => s.SapplantName == item.Sapplant).SapplantValue == 1)" value="@item.Sapplant" @onchange="@((ChangeEventArgs __e) => UpdateSapplant(__e.Value.ToString()))" disabled="@IsDisabled">
-                            <label for="yes">Yes</label>
-                            &nbsp;
-                            <input type="radio" id="no" checked="@(Article.InternalArticleInformation.Sapplants.Find(s => s.SapplantName == item.Sapplant).SapplantValue == 0)" name="sap_plant_@item.Sapplant">
-                            <label for="no">No</label>
+                            <select class="form-control" name="primary_dc" @bind="Article.InternalArticleInformation.PrimaryDcIloscode" disabled="@IsDisabled">
+                                <option>-- select an option --</option>
+                                @foreach (PrimaryDciloscode item in Codes)
+                                {
+                                    if (item.PrimaryCode != "0")
+                                    {
+                                        <option>@item.PrimaryCode</option>
+                                    }
+                                }
+                            </select>
                         </td>
                     </tr>
-                }
-            </table>
-        </form>
+                    @foreach (PrimaryDciloscode item in Codes)
+                    {
+                        <tr>
+                            <td>
+                                <label for="sap_plant1" class="required">SAP Plant: @item.Sapplant</label>
+                            </td>
+                            <td>
+                                @if (item.PrimaryCode != "0")
+                                {
+                                    <input type="radio" name="sap_plant_@item.Sapplant" id="yes" checked="@(Article.InternalArticleInformation.Sapplants.Find(s => s.SapplantName == item.Sapplant).SapplantValue == 1)" value="@item.Sapplant" @onchange="@((ChangeEventArgs __e) => UpdateSapplant(__e.Value.ToString()))" disabled="@IsDisabled" />
+                                    <label for="yes">Yes</label>
+                                    <input type="radio" id="no" checked="@(Article.InternalArticleInformation.Sapplants.Find(s => s.SapplantName == item.Sapplant).SapplantValue == 0)" value="@item.Sapplant" name="sap_plant_@item.Sapplant"  @onchange="@((ChangeEventArgs __e) => UpdateSapplant(__e.Value.ToString()))" disabled="@IsDisabled" />
+                                    <label for="no">No</label>
+                                }
+                                else
+                                {
+                                    <input type="radio" name="sap_plant_@item.Sapplant" id="yes" checked value="@item.Sapplant" disabled />
+                                    <label for="yes">Yes</label>
+                                    <input type="radio" id="no" name="sap_plant_@item.Sapplant" disabled/>
+                                    <label for="no">No</label>
+                                }
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </form>
+        </div>
     </div>
-</div>
-
-@code {
-    [Parameter]
-    public Article Article { get; set; }
-
-    [Parameter]
-    public bool IsDisabled { get; set; }
-
-    [Parameter]
-    public string EditPossible { get; set; }
-
-    public List<Sapplant> SapPlants = new List<Sapplant>();
-
-    public List<PrimaryDciloscode> Codes = new List<PrimaryDciloscode>();
-
-    protected override async Task OnInitializedAsync()
-    {
-        Codes = await PrimaryDCILOSCodeService.GetPrimaryDCILOSCodes(Article.CountryId);
-
-        if (!IsDisabled)
-        {
-            Article.InternalArticleInformation.Sapplants = new List<Sapplant>();
-            foreach (PrimaryDciloscode item in Codes)
-            {
-                Article.InternalArticleInformation.Sapplants.Add(new Sapplant() { SapplantName = item.Sapplant });
-            }
-        }
-        else
-        {
-            InternalArticleInformation internalInfo = await InternalArticleInformationService.GetInternalArticleInformation(Article.InternalArticleInformationId);
-            SapPlants = internalInfo.Sapplants;
-            Article.InternalArticleInformation.Sapplants = SapPlants;
-        }
-    }
-
-    public void UpdateSapplant(string value)
-    {
-        int i = 0;
-        foreach (Sapplant plant in Article.InternalArticleInformation.Sapplants)
-        {
-            if (plant.SapplantName == value)
-            {
-                Article.InternalArticleInformation.Sapplants[i].SapplantValue = plant.SapplantValue == 1 ? 0 : 1;
-            }
-            i++;
-        }
-    }
-
-    public bool EditingFields = false;
-
-    public void Editing()
-    {
-        EditingFields = true;
-        IsDisabled = false;
-    }
-
-    public async void Saving()
-    {
-        await InternalArticleInformationService.UpdateInternalArticleInformation(Article.InternalArticleInformationId, Article.InternalArticleInformation);
-        EditingFields = false;
-        IsDisabled = true;
-    }
 }
+
+    @code {
+        [Parameter]
+        public Article Article { get; set; }
+
+        [Parameter]
+        public bool IsDisabled { get; set; }
+
+        [Parameter]
+        public string EditPossible { get; set; }
+
+        public List<Sapplant> SapPlants = new List<Sapplant>();
+
+        public List<PrimaryDciloscode> Codes = new List<PrimaryDciloscode>();
+
+        protected override async Task OnInitializedAsync()
+        {
+            Codes = await PrimaryDCILOSCodeService.GetPrimaryDCILOSCodes(Article.CountryId);
+
+            if (!IsDisabled)
+            {
+                Article.InternalArticleInformation.Sapplants = new List<Sapplant>();
+                foreach (PrimaryDciloscode item in Codes)
+                {
+                    if(item.PrimaryCode != "0")
+                    {
+                        Article.InternalArticleInformation.Sapplants.Add(new Sapplant() { Id = 0, InternalArticleInformationId = Article.InternalArticleInformationId, SapplantName = item.Sapplant, SapplantValue = 2 });
+                    }else
+                    {
+                        Article.InternalArticleInformation.Sapplants.Add(new Sapplant() { Id = 0, InternalArticleInformationId = Article.InternalArticleInformationId, SapplantName = item.Sapplant, SapplantValue = 1 });
+                    }
+                }
+            }
+            else
+            {
+                InternalArticleInformation internalInfo = await InternalArticleInformationService.GetInternalArticleInformation(Article.InternalArticleInformationId);
+                SapPlants = internalInfo.Sapplants;
+                Article.InternalArticleInformation.Sapplants = SapPlants;
+            }
+        }
+
+        public void UpdateSapplant(string value)
+        {
+            int i = 0;
+            foreach (Sapplant plant in Article.InternalArticleInformation.Sapplants)
+            {
+                if (plant.SapplantName == value)
+                {
+                    Article.InternalArticleInformation.Sapplants[i].SapplantValue = plant.SapplantValue == 1 ? 0 : 1;
+                }
+                i++;
+            }
+        }
+
+        public bool EditingFields = false;
+
+        public void Editing()
+        {
+            EditingFields = true;
+            IsDisabled = false;
+        }
+
+        public async void Saving()
+        {
+            await InternalArticleInformationService.UpdateInternalArticleInformation(Article.InternalArticleInformationId, Article.InternalArticleInformation);
+            EditingFields = false;
+            IsDisabled = true;
+        }
+    }

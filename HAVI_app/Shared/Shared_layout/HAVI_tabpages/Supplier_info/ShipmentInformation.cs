@@ -11,6 +11,9 @@ namespace HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info
     public class ShipmentInformation : ComponentBase
     {
         [Parameter]
+        public string EditFields { get; set; }
+
+        [Parameter]
         public string CartonsPerPallet { get; set; }
 
         [Parameter]
