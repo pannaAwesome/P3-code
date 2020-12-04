@@ -34,12 +34,12 @@ namespace HAVI_app.Models
         public double CurrencyRate { get; set; }
         public double PriceInCountryCurrency { get; set; }
         public int TextPurchaseNumber { get; set; }
-        public int RegisterShelfLife { get; set; }
+        public int RegisterShelfLife { get; set; } = 2;
         public string ClassificationCode { get; set; } = "";
         public string PackagingGroup { get; set; } = "";
-        public int InsertEanSap { get; set; }
-        public int InsertGrinSap { get; set; }
-        public int InsertBosSap { get; set; }
+        public int InsertEanSap { get; set; } = 2;
+        public int InsertGrinSap { get; set; } = 2;
+        public int InsertBosSap { get; set; } = 2;
         public string Eannumber { get; set; }
         public string Grinnumber { get; set; }
         public string Bosnumber { get; set; }
