@@ -10,7 +10,7 @@
       "secretStore": "LocalSecretsFile"
     },
     "mssql1": {
-      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/havi-appdbserver/databases/HAVI_app_db_2020-12-01T14-42Z",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/havi-appdbserver/databases/HAVIdatabase",
       "type": "mssql.azure",
       "connectionId": "HAVIdatabaseContext",
       "secretStore": null
