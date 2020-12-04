@@ -9,6 +9,7 @@ using HAVI_app.Services.Classes;
 using System.Net.Http;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
+using HAVI_app.Classes;
 
 namespace HAVI_app
 {
@@ -34,6 +35,7 @@ namespace HAVI_app
 
             services.AddSingleton<ArticleInformation>();
             services.AddSingleton<InternalArticleInformation>();
+            services.AddSingleton<Excel>();
 
             #region AddHttpClient service for all the tables in the database
             services.AddHttpClient<ArticleInformationService>(client =>

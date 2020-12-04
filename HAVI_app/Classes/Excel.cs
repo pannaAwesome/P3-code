@@ -1,7 +1,5 @@
 ﻿using Syncfusion.Drawing;
 using Syncfusion.XlsIO;
-using System;
-using System.Globalization;
 using System.IO;
 using HAVI_app.Models;
 namespace HAVI_app.Classes
@@ -14,116 +12,70 @@ namespace HAVI_app.Classes
         /// <returns>Return the created excel document as stream</returns>
         public MemoryStream CreateXlsIO(Article version)
         {
-            //New instance of XlsIO is created.[Equivalent to launching MS Excel with no workbooks open].
-            //The instantiation process consists of two steps.
-            //Step 1 : Instantiate the spreadsheet creation engine
             using (ExcelEngine excelEngine = new ExcelEngine())
             {
-                //Step 2 : Instantiate the excel application object
                 IApplication application = excelEngine.Excel;
-                //Set the default version
-                    application.DefaultVersion = ExcelVersion.Excel2016;
+                application.DefaultVersion = ExcelVersion.Excel2016;
                 
-                //Creating new workbook
-                IWorkbook workbook = application.Workbooks.Create(3);
+                IWorkbook workbook = application.Workbooks.Create(2);
                 IWorksheet sheet = workbook.Worksheets[0];
                 #region Generate Excel
-                sheet.Range["A2"].ColumnWidth = 30;
-                sheet.Range["B2"].ColumnWidth = 30;
-                sheet.Range["C2"].ColumnWidth = 30;
-                sheet.Range["D2"].ColumnWidth = 30;
-                sheet.Range["A2:D2"].Merge(true);
-                //Inserting sample text into the first cell of the first sheet
-                sheet.Range["A2"].CellStyle.Font.FontName = "Verdana";
-                sheet.Range["A2"].CellStyle.Font.Bold = true;
-                sheet.Range["A2"].CellStyle.Font.Size = 28;
-                sheet.Range["A2"].CellStyle.Font.RGBColor = Color.FromArgb(0, 0, 112, 192);
-                sheet.Range["A2"].HorizontalAlignment = ExcelHAlign.HAlignCenter;
-                sheet.Range["A4:B7"].CellStyle.Font.FontName = "Verdana";
-                sheet.Range["A4:B7"].CellStyle.Font.Bold = true;
-                sheet.Range["A4:B7"].CellStyle.Font.Size = 11;
-                sheet.Range["A4:A7"].CellStyle.Font.RGBColor = Color.FromArgb(0, 128, 128, 128);
-                sheet.Range["A4:A7"].HorizontalAlignment = ExcelHAlign.HAlignLeft;
-                sheet.Range["B4:B7"].CellStyle.Font.RGBColor = Color.FromArgb(0, 174, 170, 170);
-                sheet.Range["B4:B7"].HorizontalAlignment = ExcelHAlign.HAlignRight;
-                sheet.Range["A9:D20"].CellStyle.Font.FontName = "Verdana";
-                sheet.Range["A9:D20"].CellStyle.Font.Size = 11;
-
-                sheet.Range["B3"].Text = "Company code";
-                sheet.Range["B4"].Text = "Supplier ID";
-                sheet.Range["B5"].Text = "Supplier Delivery Unit";
-                sheet.Range["B6"].Text = "Remain Shelf Store value";
-                sheet.Range["B7"].Text = "ILOS Orderpick Group";
-                sheet.Range["B8"].Text = "ILOS Temp group";
-                sheet.Range["B9"].Text = "New IOS Article number";
-                sheet.Range["B10"].Text = "Ref ILOS number";
-                sheet.Range["B11"].Text = "Ref SAP mat Number";
-                sheet.Range["B12"].Text = "ILOS catagory/Account";
-                sheet.Range["B13"].Text = "VAT/tax Code";
-                sheet.Range["B14"].Text = "Department ID";
-                sheet.Range["B15"].Text = "Innerpacking ILOS";
-                sheet.Range["B16"].Text = "If forign currency ";
-                sheet.Range["B17"].Text = "Text Purchase members";
-                sheet.Range["B18"].Text = "Insert EAN in SAP";
-                sheet.Range["B19"].Text = "Insert GRIN in SAP";
-                sheet.Range["B20"].Text = "Insert BOS in SAP";
-                sheet.Range["B25"].Text = "Primary DC ILOS code";
-                sheet.Range["E8"].Text = "Register Shelvelife";
-                sheet.Range["E25"].Text = "Alias EAN";
-                sheet.Range["E26"].Text = "Alias GRIN";
-                sheet.Range["E27"].Text = "Alias BOS";
+                sheet.Range["B3"].Number = version.InternalArticleInformation.CompanyCode;
+                sheet.Range["B4"].Number = version.InternalArticleInformation.SupplierIdIlos;
+                sheet.Range["B5"].Text = version.InternalArticleInformation.SupplierDeliveryUnit;
+                sheet.Range["B6"].Number = version.InternalArticleInformation.RemainShelfStore;
+                sheet.Range["B7"].Text = version.InternalArticleInformation.IlosorderPickGroup;
+                sheet.Range["B8"].Text = version.InternalArticleInformation.IlossortGroup;
+                sheet.Range["B9"].Text = version.InternalArticleInformation.NewIlosarticleNumber;
+                sheet.Range["B10"].Text = version.InternalArticleInformation.ReferenceIlosnumber;
+                sheet.Range["B11"].Number = version.InternalArticleInformation.ReferenceSapmaterial;
+                sheet.Range["B12"].Text =  version.InternalArticleInformation.Iloscategory;
+                sheet.Range["B13"].Text = version.InternalArticleInformation.VatTaxcode;
+                sheet.Range["B14"].Text = version.InternalArticleInformation.DepartmentId;
+                sheet.Range["B15"].Text =  version.InternalArticleInformation.InnerPackingIlos;
+                sheet.Range["B16"].Number =  version.InternalArticleInformation.AmountInForeignCurrency;
+                sheet.Range["B17"].Number =  version.InternalArticleInformation.TextPurchaseNumber;
+                sheet.Range["B18"].Number =  version.InternalArticleInformation.InsertEanSap;
+                sheet.Range["B19"].Number =  version.InternalArticleInformation.InsertGrinSap;
+                sheet.Range["B20"].Number =  version.InternalArticleInformation.InsertBosSap;
+                sheet.Range["B25"].Number =  version.InternalArticleInformation.PrimaryDcIloscode;
+                sheet.Range["E8"].Number =  version.InternalArticleInformation.RegisterShelfLife;
+                sheet.Range["E25"].Text =  version.InternalArticleInformation.Eannumber;
+                sheet.Range["E26"].Text =  version.InternalArticleInformation.Grinnumber;
+                sheet.Range["E27"].Text =  version.InternalArticleInformation.Bosnumber;
 
 
                 //Supplier ark
+                sheet = workbook.Worksheets[1];
 
-                sheet.Range["B3"].Text = "Valid for costumer";
-                sheet.Range["B14"].Text = "Salesunit";
-                sheet.Range["B15"].Text = "Article number";
-                sheet.Range["B17"].Text = "Length";
-                sheet.Range["B18"].Text = "Width";
-                sheet.Range["B19"].Text = "Height";
-                sheet.Range["B20"].Text = "Net Weight";
-                sheet.Range["B21"].Text = "Gross Weight";
-                sheet.Range["B22"].Text = "GTIN Number";
-                sheet.Range["B26"].Text = "Shelv life";
-                sheet.Range["B27"].Text = "Shelve Life HAVI";
-                sheet.Range["B43"].Text = "Register Shelvelife";
-                sheet.Range["B47"].Text = "Alias EAN";
-                sheet.Range["B48"].Text = "Alias GRIN";
-                    
-
-                sheet.Range["E15"].Text = "Cartons pr pallet";
-                sheet.Range["E16"].Text = "Cartons pr layer ";
-                sheet.Range["E17"].Text = "Country of origin";
-                sheet.Range["E18"].Text = "Imported from";
-                sheet.Range["E19"].Text = "Toll tariff nr";
-                sheet.Range["E20"].Text = "Min order quantity";
-                sheet.Range["E21"].Text = "Min order Type";
-                sheet.Range["E22"].Text = "Lead Time";
-                sheet.Range["E23"].Text = "Organic article";
-                sheet.Range["E25"].Text = "Alias EAN";
-                sheet.Range["E26"].Text = "Alias GRIN";
-                sheet.Range["E27"].Text = "Alias BOS";
-                sheet.Range["E43"].Text = "Alias BOS";
-
-
-
-
-                sheet.Range["A20:D20"].CellStyle.Color = Color.FromArgb(0, 0, 112, 192);
-                sheet.Range["A20:D20"].CellStyle.Font.Color = ExcelKnownColors.White;
-                sheet.Range["A20:D20"].CellStyle.Font.Bold = true;
-                IStyle style = sheet["B9:D9"].CellStyle;
-                style.VerticalAlignment = ExcelVAlign.VAlignCenter;
-                style.HorizontalAlignment = ExcelHAlign.HAlignRight;
-                style.Color = Color.FromArgb(0, 0, 112, 192);
-                style.Font.Bold = true;
-                style.Font.Color = ExcelKnownColors.White;
+                sheet.Range["B3"].Text = version.VailedForCustomer;
+                sheet.Range["B14"].Text = version.ArticleInformation.Salesunit;
+                sheet.Range["B15"].Text = version.ArticleInformation.ArticleName;
+                sheet.Range["B17"].Number =  version.ArticleInformation.LengthPrSalesunit;
+                sheet.Range["B18"].Number =  version.ArticleInformation.WidthPrSalesunit;
+                sheet.Range["B19"].Number =  version.ArticleInformation.HeightPrSalesunit;
+                sheet.Range["B20"].Number =  version.ArticleInformation.NetWeightPrSalesunit;
+                sheet.Range["B21"].Number =  version.ArticleInformation.GrossWeightPrSalesunit;
+                sheet.Range["B22"].Text =  version.ArticleInformation.Gtinnumber;
+                sheet.Range["B26"].Number =  version.ArticleInformation.Shelflife;
+                sheet.Range["B27"].Number =  version.ArticleInformation.MinimumShelflife;
+                sheet.Range["B43"].Number =  version.ArticleInformation.DangerousGoods;
+                sheet.Range["B47"].Text =  version.ArticleInformation.Class;
+                sheet.Range["B48"].Text =  version.ArticleInformation.ClassificationCode;
+                sheet.Range["E15"].Number =  version.ArticleInformation.CartonsPerPallet;
+                sheet.Range["E16"].Number =  version.ArticleInformation.CartonsPerLayer;
+                sheet.Range["E17"].Text =  version.ArticleInformation.CountryOfOrigin;
+                sheet.Range["E18"].Text =  version.ArticleInformation.ImportedFrom;
+                sheet.Range["E19"].Text =  version.ArticleInformation.TollTarifNumber;
+                sheet.Range["E20"].Number =  version.ArticleInformation.MinimumOrderQuantity;
+                sheet.Range["E22"].Number =  version.ArticleInformation.LeadTime;
+                sheet.Range["E23"].Number =  version.ArticleInformation.OrganicArticle;
+                sheet.Range["E26"].Number =  version.ArticleInformation.TemperatureStorageMin;
+                sheet.Range["E27"].Number =  version.ArticleInformation.TemperatureTransportationMin;
                    
                 #endregion
-                //Save the document as a stream and retrun the stream
                 using (MemoryStream stream = new MemoryStream())
                 {
-                    //Save the created Excel document to MemoryStream
                     workbook.SaveAs(stream);
                     return stream;
                 }

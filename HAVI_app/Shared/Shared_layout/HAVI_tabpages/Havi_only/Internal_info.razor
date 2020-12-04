@@ -29,8 +29,8 @@
     <tr>
         <td class="required">Company code:</td>
         <td>
-            <select class="form-control" name="Companycode" @onchange="@((ChangeEventArgs __e) => Article.InternalArticleInformation.CompanyCode = Int32.Parse(__e.Value.ToString()))" disabled="@IsDisabled">
-                <option disabled selected>-- select an option --</option>
+            <select class="form-control" name="Companycode" @bind="Article.InternalArticleInformation.CompanyCode" disabled="@IsDisabled">
+                <option>-- select an option --</option>
                 @foreach (CompanyCode item in CompanyCodes)
                 {
                     <option>@item.Code</option>
@@ -54,8 +54,8 @@
     <tr>
         <td class="required">Supplier delivery unit:</td>
         <td colspan="1">
-            <select class="form-control" name="deliveryunit" @onchange="@((ChangeEventArgs __e) => Article.InternalArticleInformation.SupplierDeliveryUnit = __e.Value.ToString())" disabled="@IsDisabled">
-                <option disabled selected>-- select an option --</option>
+            <select class="form-control" name="deliveryunit" @bind="Article.InternalArticleInformation.SupplierDeliveryUnit" disabled="@IsDisabled">
+                <option>-- select an option --</option>
                 @foreach (SupplierDeliveryUnit item in DeliveryUnits)
                 {
                     <option>@item.Unit</option>
@@ -73,8 +73,8 @@
     <tr>
         <td class="required">ILOS orderpickgroup:</td>
         <td colspan="1">
-            <select class="form-control" name="ordergroup" @onchange="@((ChangeEventArgs __e) => Article.InternalArticleInformation.IlosorderPickGroup = __e.Value.ToString())" disabled="@IsDisabled">
-                <option disabled selected>-- select an option --</option>
+            <select class="form-control" name="ordergroup" @bind="Article.InternalArticleInformation.IlosorderPickGroup" disabled="@IsDisabled">
+                <option>-- select an option --</option>
                 @foreach (Ilosorderpickgroup item in OrderpickGroups)
                 {
                     <option>@item.Orderpickgroup</option>
@@ -85,8 +85,8 @@
     <tr>
         <td class="required">ILOS temp groups:</td>
         <td colspan="1">
-            <select class="form-control" name="tempgroup" @onchange="@((ChangeEventArgs __e) => Article.InternalArticleInformation.IlossortGroup = __e.Value.ToString())" disabled="@IsDisabled">
-                <option disabled selected>-- select an option --</option>
+            <select class="form-control" name="tempgroup" @bind="Article.InternalArticleInformation.IlossortGroup" disabled="@IsDisabled">
+                <option>-- select an option --</option>
                 @foreach (IlossortGroup item in SortGroups)
                 {
                     <option>@item.SortGroup</option>
@@ -135,8 +135,8 @@
     <tr>
         <td class="required">ILOS category/account:</td>
         <td>
-            <select class="form-control" name="category" @onchange="@((ChangeEventArgs __e) => Article.InternalArticleInformation.Iloscategory = __e.Value.ToString())" disabled="@IsDisabled">
-                <option disabled selected>-- select an option --</option>
+            <select class="form-control" name="category" @bind="Article.InternalArticleInformation.Iloscategory" disabled="@IsDisabled">
+                <option>-- select an option --</option>
                 @foreach (Iloscategory item in Categories)
                 {
                     <option>@item.Category</option>
@@ -147,8 +147,8 @@
     <tr>
         <td class="required">VAT/TAX code:</td>
         <td>
-            <select class="form-control" name="tax" @onchange="@((ChangeEventArgs __e) => Article.InternalArticleInformation.VatTaxcode = __e.Value.ToString())" disabled="@IsDisabled">
-                <option disabled selected>-- select an option --</option>
+            <select class="form-control" name="tax" @bind="Article.InternalArticleInformation.VatTaxcode" disabled="@IsDisabled">
+                <option>-- select an option --</option>
                 @foreach (VatTaxCode item in Codes)
                 {
                     <option>@item.Code</option>
@@ -159,8 +159,8 @@
     <tr>
         <td class="required">Department ID:</td>
         <td>
-            <select class="form-control" name="department" @onchange="@((ChangeEventArgs __e) => Article.InternalArticleInformation.DepartmentId = __e.Value.ToString())" disabled="@IsDisabled">
-                <option disabled selected>-- select an option --</option>
+            <select class="form-control" name="department" @bind="Article.InternalArticleInformation.DepartmentId" disabled="@IsDisabled">
+                <option>-- select an option --</option>
                 @foreach (DepartmentId item in Ids)
                 {
                     <option>@item.Department</option>
@@ -185,10 +185,10 @@
         <td class="required">Register shelflife:</td>
         <td>
             <div class="text-center">
-                <input type="radio" name="shelflife" id="yes" value="yes" @onclick="() => Article.InternalArticleInformation.RegisterShelfLife = 1" disabled="@IsDisabled">
+                <input type="radio" name="shelflife" id="yes" value="yes" checked="@(Article.InternalArticleInformation.RegisterShelfLife == 1)" @onclick="() => Article.InternalArticleInformation.RegisterShelfLife = 1" disabled="@IsDisabled">
                 <label for="yes">Yes</label>
                 &nbsp;
-                <input type="radio" id="no" name="shelflife" @onclick="() => Article.InternalArticleInformation.RegisterShelfLife = 0" disabled="@IsDisabled">
+                <input type="radio" id="no" name="shelflife" checked="@(Article.InternalArticleInformation.RegisterShelfLife == 0)" @onclick="() => Article.InternalArticleInformation.RegisterShelfLife = 0" disabled="@IsDisabled">
                 <label for="no">No</label>
             </div>
         </td>
@@ -200,8 +200,8 @@
     <tr class="border-bottom">
         <td>Packaging group:</td>
         <td>
-            <select class="form-control" name="packaginggroup" @onchange="@((ChangeEventArgs __e) => Article.InternalArticleInformation.PackagingGroup = __e.Value.ToString())" disabled="@IsDisabled">
-                <option disabled selected>-- select an option --</option>
+            <select class="form-control" name="packaginggroup" @bind="Article.InternalArticleInformation.PackagingGroup" disabled="@IsDisabled">
+                <option>-- select an option --</option>
                 @foreach (PackagingGroup item in PackagingGroups)
                 {
                     <option>@item.Group</option>
@@ -211,17 +211,26 @@
     </tr>
     <tr>
         <td class="required">Currency rate:</td>
-        <td> <input type="text" class="form-control" name="currency_rate" @bind="CurrencyRate" disabled="@IsDisabled"/></td>
-    </tr>
-    <tr>
-        <td class="required">Price:</td>
-        <td> <input type="text" class="form-control text-center" name="currency_in_country" value="@Article.InternalArticleInformation.PriceInCountryCurrency" disabled /></td>
+        <td> <input type="text" class="form-control" name="currency_rate" @bind="CurrencyRate" disabled="@IsDisabled" /></td>
         <td>
             <div></div>
         </td>
         <td>
-            <input type="button" class="btn green-button" @onclick="CalculatePrice" value="Calculate" />
+            <HAVI_app.Shared.Shared_layout.Questionmark_top>
+                Please enter the amount in triple-digit
+            </HAVI_app.Shared.Shared_layout.Questionmark_top>
         </td>
+    </tr>
+    <tr>
+        <td class="required">Price:</td>
+        <td> <input type="text" class="form-control" name="currency_in_country" value="@Article.InternalArticleInformation.PriceInCountryCurrency" disabled /></td>
+        <td>
+            <div></div>
+        </td>
+        <td>
+            <input type="button" class="btn green-button" @onclick="CalculatePrice" value="Calculate" disabled="@IsDisabled"/>
+        </td>
+        
     </tr>
     <tr>
         <td>Transit time in days:</td>

@@ -25,8 +25,8 @@
                         <label for="primary_dc" class="required">Primary DC ILOS Code:</label>
                     </td>
                     <td>
-                        <select class="form-control" name="primary_dc" @onchange="@((ChangeEventArgs __e) => Article.InternalArticleInformation.PrimaryDcIloscode = Int32.Parse(__e.Value.ToString()))" disabled="@IsDisabled">
-                            <option disabled selected>-- select an option --</option>
+                        <select class="form-control" name="primary_dc" @bind="Article.InternalArticleInformation.PrimaryDcIloscode" disabled="@IsDisabled">
+                            <option>-- select an option --</option>
                             @foreach (PrimaryDciloscode item in Codes)
                             {
                                 <option>@item.PrimaryCode</option>
@@ -41,10 +41,10 @@
                             <label for="sap_plant1" class="required">SAP Plant: @item.Sapplant</label>
                         </td>
                         <td>
-                            <input type="radio" name="sap_plant_@item.Sapplant" id="yes" value="@item.Sapplant" @onchange="@((ChangeEventArgs __e) => UpdateSapplant(__e.Value.ToString()))" disabled="@IsDisabled">
+                            <input type="radio" name="sap_plant_@item.Sapplant" id="yes" checked="@(Article.InternalArticleInformation.Sapplants.Find(s => s.SapplantName == item.Sapplant).SapplantValue == 1)" value="@item.Sapplant" @onchange="@((ChangeEventArgs __e) => UpdateSapplant(__e.Value.ToString()))" disabled="@IsDisabled">
                             <label for="yes">Yes</label>
                             &nbsp;
-                            <input type="radio" id="no" name="sap_plant_@item.Sapplant">
+                            <input type="radio" id="no" checked="@(Article.InternalArticleInformation.Sapplants.Find(s => s.SapplantName == item.Sapplant).SapplantValue == 0)" name="sap_plant_@item.Sapplant">
                             <label for="no">No</label>
                         </td>
                     </tr>

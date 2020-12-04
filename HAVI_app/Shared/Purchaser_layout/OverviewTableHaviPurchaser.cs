@@ -20,6 +20,9 @@ namespace HAVI_app.Shared.Purchaser_layout
         [Inject]
         public ArticleService ArticleService { get; set; }
 
+        [Inject]
+        public Excel Excel { get; set; }
+
         [Parameter]
         public int Id { get; set; }
 
@@ -115,10 +118,9 @@ namespace HAVI_app.Shared.Purchaser_layout
         {
             foreach (Article item in Articles)
             {
-                Excel service = new Excel();
-                excelStream = service.CreateXlsIO(item);
+                excelStream = Excel.CreateXlsIO(item);
 
-                await JS.InvokeAsync<Article>($"{item.ArticleInformation.ArticleName}-{item.ArticleInformation.CompanyName}-{item.Id}.xlsx", excelStream.ToArray());
+                await JS.SaveAs($"saveAsFile.xlsx", excelStream.ToArray());
                 item.ArticleState = (int)ArticleState.Completed;
                 await ArticleService.UpdateArticle(item.Id, item);
             }

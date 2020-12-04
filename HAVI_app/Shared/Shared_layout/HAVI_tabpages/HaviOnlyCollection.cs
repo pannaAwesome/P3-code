@@ -66,15 +66,17 @@ namespace HAVI_app.Shared.Shared_layout.HAVI_tabpages
 
         public async void ReturnToOverview()
         {
-            if (Article.ArticleState == (int)ArticleState.Submitted)
-            {
-                Article.ArticleState = (int)ArticleState.RobotReady;
-                await ArticleService.UpdateArticle(Article.Id, Article);
-                ValidateInformation();
-            }
+            ValidateInformation();
 
             if(MissedFields == "")
             {
+                if (Article.ArticleState == (int)ArticleState.Submitted)
+                {
+                    Article.ArticleState = (int)ArticleState.RobotReady;
+                    await ArticleService.UpdateArticle(Article.Id, Article);
+                }
+
+                Article.InternalArticleInformation.InnerPackingIlos = "1/10";
                 await InternalArticleInformationService.UpdateInternalArticleInformation(Article.InternalArticleInformationId, Article.InternalArticleInformation);
 
                 if (User == "Purchaser")
@@ -113,7 +115,7 @@ namespace HAVI_app.Shared.Shared_layout.HAVI_tabpages
             validated += Article.InternalArticleInformation.PrimaryDcIloscode != 0 ? 1 : 0;
             validated += Article.InternalArticleInformation.Gtinnumber != "" ? 1 : 0;
 
-            if(validated != 18)
+            if(validated != 19)
             {
                 MissedFields = "Sorry, you did not fill out all the required fields.";
             }else

@@ -16,10 +16,13 @@ namespace HAVI_app.Shared.Admin_layout
     public class OverviewTableAdmin : ComponentBase
     {
         [Inject]
-        public ArticleService ArticleService { get; set; }
+        public IJSRuntime JS { get; set; }
 
         [Inject]
-        public IJSRuntime JS { get; set; }
+        public Excel Excel { get; set; }
+
+        [Inject]
+        public ArticleService ArticleService { get; set; }
 
         public List<Article> Articles;
         public MemoryStream excelStream;
@@ -33,10 +36,9 @@ namespace HAVI_app.Shared.Admin_layout
         {
             foreach (Article item in Articles)
             {
-                Excel service = new Excel();
-                excelStream = service.CreateXlsIO(item);
+                excelStream = Excel.CreateXlsIO(item);
 
-                await JS.InvokeAsync<Article>($"{item.ArticleInformation.ArticleName}-{item.ArticleInformation.CompanyName}-{item.Id}.xlsx", excelStream.ToArray());
+                await JS.SaveAs($"saveAsFile.xlsx", excelStream.ToArray());
                 item.ArticleState = (int)ArticleState.Completed;
                 await ArticleService.UpdateArticle(item.Id, item);
             }

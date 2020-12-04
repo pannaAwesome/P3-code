@@ -202,7 +202,7 @@
                     </table>
                 </form>
                 <div class="row justify-content-center">
-                    <button type="button" class="save-password btn button-size" data-dismiss="modal" @onclick="SavePassword">Save</button>
+                    <button type="button" class="save-password btn button-size" data-dismiss="@Modal" @onclick="CloseWindow">Save</button>
                 </div>
                 <div class="row">
                     <div class="col-12 text-center">
@@ -213,4 +213,19 @@
         </div>
     </div>
 </div>
+}
+
+@code{
+
+    public string Modal = "";
+
+    void CloseWindow()
+    {
+        SavePassword();
+
+        if (PasswordError != "Incorrect password!" || PasswordError != "The new passwords do not match!")
+        {
+            Modal = "modal";
+        }
+    }
 }

@@ -32,7 +32,7 @@
                 <tr>
                     <td>
                         <select class="form-control" name="Articlebundle" @onchange="@((ChangeEventArgs __e) => Article.InternalArticleInformation.Bundles[0].ArticleBundle = __e.Value.ToString())" disabled="@IsDisabled">
-                            <option disabled>-- select an option --</option>
+                            <option></option>
                             @foreach (SalesUnit item in SalesUnits)
                             {
                                 <option>@item.Unit</option>
@@ -48,7 +48,7 @@
                 <tr>
                     <td>
                         <select class="form-control" name="Articlebundle1" @onchange="@((ChangeEventArgs __e) => Article.InternalArticleInformation.Bundles[1].ArticleBundle = __e.Value.ToString())" disabled="@IsDisabled">
-                            <option disabled>-- select an option --</option>
+                            <option></option>
                             @foreach (SalesUnit item in SalesUnits)
                             {
                                 <option>@item.Unit</option>
@@ -64,7 +64,7 @@
                 <tr>
                     <td>
                         <select class="form-control" name="Articlebundle2" @onchange="@((ChangeEventArgs __e) => Article.InternalArticleInformation.Bundles[2].ArticleBundle = __e.Value.ToString())" disabled="@IsDisabled">
-                            <option disabled>-- select an option --</option>
+                            <option></option>
                             @foreach (SalesUnit item in SalesUnits)
                             {
                                 <option>@item.Unit</option>

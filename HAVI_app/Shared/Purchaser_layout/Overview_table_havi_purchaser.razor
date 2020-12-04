@@ -71,21 +71,3 @@
     </div>
 </div>
 
-@code {
-    MemoryStream excelStream;
-
-    public async Task ExportArticle()
-    {
-        foreach (Article item in Articles)
-        {
-            if (item.ArticleState is (int)ArticleState.RobotReady)
-            {
-                HAVI_app.Classes.Excel service = new HAVI_app.Classes.Excel();
-                excelStream = service.CreateXlsIO(item);
-
-                await JS.InvokeAsync<Article>($"{ArticleExcel.ArticleName}-{ArticleExcel.CompanyName}-{ArticleExcel.Id}.xlsx", excelStream.ToArray());
-                item.ArticleState = (int)ArticleState.Completed;
-            }
-        }
-    }
-}
