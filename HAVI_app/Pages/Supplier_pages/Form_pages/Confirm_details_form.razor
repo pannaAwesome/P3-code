@@ -162,7 +162,7 @@
                 @if (Article.DangerousGoods == 1)
                 {
                     <tr>
-                        <td colspan="5">
+                        <td>
                             <label for="class">Class:</label>
                         </td>
                         <td colspan="5">
@@ -174,10 +174,10 @@
                     </tr>
 
                     <tr>
-                        <td colspan="5">
+                        <td>
                             <label for="classificationCode">Classification code:</label>
                         </td>
-                        <td colspan="6">
+                        <td colspan="5">
                             <input type="number" class="form-control moveStuffToTheRight" id="classificationCode" value="@Article.ClassificationCode" disabled>
                         </td>
                         <td>
@@ -614,11 +614,14 @@
                                 <td colspan="2">
                                     <input type="text" class="form-control" id="purchase_price" value="@Article.OtherCostsForArticles[i].InformCostType" disabled>
                                 </td>
-                                <td colspan="2">
+                                <td colspan="1">
                                     <label for="amount-@i">Amount in @Article.SetCurrency:</label>
                                 </td>
                                 <td colspan="2">
                                     <input type="number" class="form-control" name="amount-@i" value="@Article.OtherCostsForArticles[i].Amount" disabled>
+                                </td>
+                                <td>
+                                    <div></div>
                                 </td>
                             </tr>
 
