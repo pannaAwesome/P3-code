@@ -1,14 +1,11 @@
 ﻿@using BlazorTable
 @inject NavigationManager NavigationManager
-@using Microsoft.AspNetCore.Authorization
 @inherits HAVI_app.Shared.Admin_layout.OverviewTableAdmin
-@inject HAVI_app.Models.ArticleInformation ArticleExcel
 @inject Microsoft.JSInterop.IJSRuntime JS
-@using System.IO
-@using HAVI_app.Classes
 
 
-<div class="row">
+<div class="row overview-admin-header">
+    <div class="col-10"><h3>Welcome DKAdmin</h3></div>
     <div class="col-2">
         <button class="btn button-options-overview" @onclick="ExportArticle">Export orders</button>
     </div>
@@ -34,20 +31,3 @@
         </Table>
     </div>
 </div>
-
-@code {
-    MemoryStream excelStream;
-
-    public async Task ExportArticle()
-    {
-
-        foreach (Article item in Articles)
-        {
-            HAVI_app.Classes.Excel service = new HAVI_app.Classes.Excel();
-            excelStream = service.CreateXlsIO(item);
-
-            await JS.InvokeAsync<Article>($"{ArticleExcel.ArticleName}-{ArticleExcel.CompanyName}-{ArticleExcel.Id}.xlsx", excelStream.ToArray());
-            item.ArticleState = (int)ArticleState.Completed;
-        }
-    }
-}

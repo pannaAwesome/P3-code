@@ -66,11 +66,8 @@ else
                             </tr>
                         </table>
                         <div class="row">
-                            <div class="text-right col-6">
-                                <input type="button" class="btn cancel-button button-size" value="Back">
-                            </div>
-                            <div class="text-left col-6">
-                                <input type="button" class="btn green-button button-size" value="Save">
+                            <div class="text-center col-12">
+                                <input type="button" class="btn cancel-button button-size" value="Back" @onclick="BackToOverview">
                             </div>
                         </div>
                     </form>
@@ -105,7 +102,7 @@ else
                                     <label for="new-password">Input new Password:</label>
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control" id="new-password" @bind="NewPassword" required>
+                                    <input type="password" class="form-control" id="new-password" @bind="NewPassword" required>
                                 </td>
                             </tr>
 
@@ -114,7 +111,7 @@ else
                                     <label for="confirm-new-password">Confirm new password:</label>
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control" id="confirm-new-password" @bind="ConfirmPassword" required>
+                                    <input type="password" class="form-control" id="confirm-new-password" @bind="ConfirmPassword" required>
                                 </td>
                             </tr>
 
@@ -132,11 +129,11 @@ else
         </div>
     </div>
 }
-    @code {
-        [Parameter]
-        public int Id { get; set; }
+@code {
+    [Parameter]
+    public int Id { get; set; }
 
-        private Country Country;
+    private Country Country;
 
     private string OldPassword { get; set; } = "";
 
@@ -178,4 +175,4 @@ else
         await CountryService.UpdateCountry(Id, Country);
         NavigationManager.NavigateTo($"overview_admin/{Id}", true);
     }
-    }
+}

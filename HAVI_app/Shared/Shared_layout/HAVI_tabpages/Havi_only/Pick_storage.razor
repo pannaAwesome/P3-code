@@ -1,6 +1,7 @@
 ﻿@inject HAVI_app.Services.Classes.PrimaryDCILOSCodeService PrimaryDCILOSCodeService
 @inject HAVI_app.Services.Classes.InternalArticleInformationService InternalArticleInformationService
 
+<div class="row">
 <div class="col-11">
     <h4>Pick storage:</h4>
 </div>
@@ -13,12 +14,12 @@
     {
         <div class="edit-button" @onclick="Editing"></div>
     }
-
+</div>
 </div>
 <div class="justify-content-center row">
     <div class="col-12">
         <form>
-            <table class="table">
+            <table>
                 <tr>
                     <td>
                         <label for="primary_dc" class="required">Primary DC ILOS Code:</label>
@@ -33,25 +34,22 @@
                         </select>
                     </td>
                 </tr>
-
-
                 @foreach (PrimaryDciloscode item in Codes)
                 {
-            <tr>
-                <td>
-                    <label for="sap_plant1" class="required">SAP Plant: @item.Sapplant</label>
-                </td>
-                <td>
-                    <input type="radio" name="sap_plant_@item.Sapplant" id="yes" value="@item.Sapplant" @onchange="@((ChangeEventArgs __e) => UpdateSapplant(__e.Value.ToString()))" disabled="@IsDisabled">
-                    <label for="yes">Yes</label>
-                    &nbsp;
-                    <input type="radio" id="no" name="sap_plant_@item.Sapplant">
-                    <label for="no">No</label>
-                </td>
-            </tr>
-        }
-                    
-                </table>
+                    <tr>
+                        <td>
+                            <label for="sap_plant1" class="required">SAP Plant: @item.Sapplant</label>
+                        </td>
+                        <td>
+                            <input type="radio" name="sap_plant_@item.Sapplant" id="yes" value="@item.Sapplant" @onchange="@((ChangeEventArgs __e) => UpdateSapplant(__e.Value.ToString()))" disabled="@IsDisabled">
+                            <label for="yes">Yes</label>
+                            &nbsp;
+                            <input type="radio" id="no" name="sap_plant_@item.Sapplant">
+                            <label for="no">No</label>
+                        </td>
+                    </tr>
+                }
+            </table>
         </form>
     </div>
 </div>

@@ -82,6 +82,7 @@ namespace HAVI_app.Pages.Supplier_pages
             Article.ArticleInformation.CompanyLocation = Supplier.CompanyLocation;
             Article.ArticleInformation.FreightResponsibility = Supplier.FreightResponsibility;
             Article.ArticleInformation.PalletExchange = Supplier.PalletExchange;
+            Article.ArticleInformation.Email = Supplier.Profile.Username;
 
             Article newArticle = await ArticleService.CreateArticle(Article);
 

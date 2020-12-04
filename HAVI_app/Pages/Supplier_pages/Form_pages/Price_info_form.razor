@@ -104,7 +104,7 @@
                             <td>
                                 <input type="number" class="form-control" name="amount-@i" @onblur="@(() => UpdateAmount(Amount))" @onchange="@((ChangeEventArgs __e) => Amount = __e.Value.ToString())" required maxlength="10">
                             </td>
-                            @if (i == NumberOfOtherCosts)
+                            @if (i == NumberOfOtherCosts-1)
                             {
                                 <td @onclick="AddExtraCosts"> &#10133; </td>
                                 @if (NumberOfOtherCosts != 1)
@@ -180,7 +180,14 @@
     private void AddExtraCosts()
     {
         OtherCostsForArticle cost = new OtherCostsForArticle() { Id = 0, InformCostType = "1", Amount = -8586 };
-        if (Article.OtherCostsForArticles[^1] != cost)
+        if(Article.OtherCostsForArticles == new List<OtherCostsForArticle>())
+        {
+            if (Article.OtherCostsForArticles[^1] != cost)
+            {
+                Article.OtherCostsForArticles.Add(cost);
+                NumberOfOtherCosts++;
+            }
+        }else
         {
             Article.OtherCostsForArticles.Add(cost);
             NumberOfOtherCosts++;

@@ -16,6 +16,7 @@
 
 </div>
 <div class="col-12">
+    <form>
     <table class="table">
         <tr>
             <td>
@@ -78,7 +79,7 @@
 
         <tr>
             <td>
-                <label for="EAN number:" class="required">EAN number:</label>
+                <label for="EAN number:">EAN number:</label>
             </td>
             <td>
                 <input type="text" class="form-control" name="EAN number" @bind="Article.InternalArticleInformation.Eannumber" disabled="@IsDisabled" />
@@ -93,7 +94,7 @@
 
         <tr>
             <td>
-                <label for="GRIN number:" class="required">GRIN number:</label>
+                <label for="GRIN number:">GRIN number:</label>
             </td>
             <td>
                 <input type="text" class="form-control" name="GRIN number" @bind="Article.InternalArticleInformation.Grinnumber" disabled="@IsDisabled" />
@@ -108,7 +109,7 @@
 
         <tr>
             <td>
-                <label for="BOS number:" class="required">BOS number:</label>
+                <label for="BOS number:">BOS number:</label>
             </td>
             <td>
                 <input type="text" class="form-control" name="BOS number" @bind="Article.InternalArticleInformation.Bosnumber" disabled="@IsDisabled" />
@@ -138,7 +139,7 @@
 
         <tr>
             <td>
-                <label for="LRIN number:" class="required">LRIN number:</label>
+                <label for="LRIN number:">LRIN number:</label>
             </td>
             <td>
                 <input type="text" class="form-control" name="LRIN number" @bind="Article.InternalArticleInformation.Lrinnumber" disabled="@IsDisabled" />
@@ -153,7 +154,7 @@
 
         <tr>
             <td>
-                <label for="SPRN number:" class="required">SPRN number:</label>
+                <label for="SPRN number:">SPRN number:</label>
             </td>
             <td>
                 <input type="text" class="form-control" name="SPRN number" @bind="Article.InternalArticleInformation.Sprnnumber" disabled="@IsDisabled" />
@@ -168,7 +169,7 @@
 
         <tr>
             <td>
-                <label for="CARLA number:" class="required">CARLA number:</label>
+                <label for="CARLA number:">CARLA number:</label>
             </td>
             <td>
                 <input type="text" class="form-control" name="CARLA number" @bind="Article.InternalArticleInformation.Carlanumber" disabled="@IsDisabled" />
@@ -180,6 +181,7 @@
             </td>
         </tr>
     </table>
+    </form>
 </div>
 
 @code {

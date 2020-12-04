@@ -1,7 +1,8 @@
 ﻿@inject NavigationManager NavigationManager
 @inject HAVI_app.Services.Classes.ArticleService ArticleService
 @inject HAVI_app.Services.Classes.InternalArticleInformationService InternalArticleInformationService
-@using HAVI_app.Classes 
+@using HAVI_app.Classes
+@inherits HaviOnlyCollection
 
 @if (Article == null)
 {
@@ -41,7 +42,7 @@ else
     @if (PageIndex == 2)
     {
         <div class="row">
-            <div class="col-8 d-flex justify-content-center">
+            <div class="col-12 d-flex justify-content-center">
                 <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Havi_only.Pick_storage Article="Article" EditPossible="@EditPossible" IsDisabled="IsDisabled" />
             </div>
         </div>
@@ -70,7 +71,9 @@ else
             </div>
         </div>
         <div class="row">
-            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Havi_only.QIP_info Article="Article" EditPossible="@EditPossible" IsDisabled="IsDisabled" />
+            <div class="col-12 d-flex justify-content-center">
+                <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Havi_only.QIP_info Article="Article" EditPossible="@EditPossible" IsDisabled="IsDisabled" />
+            </div>
         </div>
     }
 
@@ -98,65 +101,9 @@ else
             <div class="col-6 text-left"><button class="btn green-button" @onclick="ReturnToOverview">@SaveOrNot</button></div>
         }
     </div>
-}
-
-@code{
-    [Parameter]
-    public int ArticleId { get; set; }
-
-    [Parameter]
-    public string User { get; set; }
-
-    [Parameter]
-    public bool IsDisabled { get; set; }
-
-    [Parameter]
-    public string EditPossible { get; set; }
-
-    public Article Article;
-
-    public string SaveOrNot = "";
-
-    private int PageIndex = 0;
-
-    protected override async Task OnInitializedAsync()
-    {
-        Article = await ArticleService.GetArticle(ArticleId);
-        SaveOrNot = Article.ArticleState == (int)ArticleState.Completed || Article.ArticleState == (int)ArticleState.Error ? "Return to overview" : "Save";
-    }
-
-    private void PageUp()
-    {
-        PageIndex++;
-        if (PageIndex > 4)
-        {
-            PageIndex = 4;
-        }
-    }
-
-    private void PageDown()
-    {
-        PageIndex--;
-        if (PageIndex < 0)
-        {
-            PageIndex = 0;
-        }
-    }
-
-    private async void ReturnToOverview()
-    {
-        if(Article.ArticleState == (int)ArticleState.Submitted)
-        {
-            Article.ArticleState = (int)ArticleState.RobotReady;
-            await ArticleService.UpdateArticle(Article.Id, Article);
-        }
-
-        await InternalArticleInformationService.UpdateInternalArticleInformation(Article.InternalArticleInformationId, Article.InternalArticleInformation);
-
-        if (User == "Purchaser")
-        {
-            NavigationManager.NavigateTo($"/overview_purchaser/{Article.PurchaserId}", true);
-        }
-        else NavigationManager.NavigateTo($"/article_view/{Article.CountryId}", true);
-    }
+    <div class="row">
+        <div class="text-center">
+            @MissedFields
+        </div>
+    </div>
 }

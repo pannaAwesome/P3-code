@@ -15,5 +15,14 @@ namespace HAVI_app.Pages.Admin_pages.Order_pages
 
         [Inject]
         public ArticleService ArticleService { get; set; }
+
+        [Inject]
+        public NavigationManager NavigationManager { get; set; }
+
+        public async void DiscardChanges()
+        {
+            Article article = await ArticleService.GetArticle(Id);
+            NavigationManager.NavigateTo($"/article_view/{article.Id}", true);
+        }
     }
 }

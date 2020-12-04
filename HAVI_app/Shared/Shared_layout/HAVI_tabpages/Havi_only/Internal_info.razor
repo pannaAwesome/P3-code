@@ -24,9 +24,10 @@
 
 </div>
 <br />
+<form>
 <table>
     <tr>
-        <td>Company code:</td>
+        <td class="required">Company code:</td>
         <td>
             <select class="form-control" name="Companycode" @onchange="@((ChangeEventArgs __e) => Article.InternalArticleInformation.CompanyCode = Int32.Parse(__e.Value.ToString()))" disabled="@IsDisabled">
                 <option disabled selected>-- select an option --</option>
@@ -43,11 +44,11 @@
         </td>
     </tr>
     <tr>
-        <td>Supplier ID(ILOS):</td>
+        <td class="required">Supplier ID(ILOS):</td>
         <td colspan="2"> <input type="number" class="form-control" name="shelf_store_value" @bind="Article.InternalArticleInformation.SupplierIdIlos" disabled="@IsDisabled"> </td>
     </tr>
     <tr>
-        <td>Supplier delivery unit:</td>
+        <td class="required">Supplier delivery unit:</td>
         <td colspan="2">
             <select class="form-control" name="deliveryunit" @onchange="@((ChangeEventArgs __e) => Article.InternalArticleInformation.SupplierDeliveryUnit = __e.Value.ToString())" disabled="@IsDisabled">
                 <option disabled selected>-- select an option --</option>
@@ -59,12 +60,12 @@
         </td>
     </tr>
     <tr>
-        <td>Remain shelf store value:</td>
+        <td class="required">Remain shelf store value:</td>
         <td> <input type="number" class="form-control" id="Remain shelf store value" @bind="Article.InternalArticleInformation.RemainShelfStore" disabled="@IsDisabled"> </td>
         <td>days</td>
     </tr>
     <tr>
-        <td>ILOS orderpickgroup:</td>
+        <td class="required">ILOS orderpickgroup:</td>
         <td colspan="2">
             <select class="form-control" name="ordergroup" @onchange="@((ChangeEventArgs __e) => Article.InternalArticleInformation.IlosorderPickGroup = __e.Value.ToString())" disabled="@IsDisabled">
                 <option disabled selected>-- select an option --</option>
@@ -76,7 +77,7 @@
         </td>
     </tr>
     <tr>
-        <td>ILOS temp groups:</td>
+        <td class="required">ILOS temp groups:</td>
         <td colspan="2">
             <select class="form-control" name="tempgroup" @onchange="@((ChangeEventArgs __e) => Article.InternalArticleInformation.IlossortGroup = __e.Value.ToString())" disabled="@IsDisabled">
                 <option disabled selected>-- select an option --</option>
@@ -88,7 +89,7 @@
         </td>
     </tr>
     <tr>
-        <td>New ILOS article number:</td>
+        <td class="required">New ILOS article number:</td>
         <td> <input type="text" class="form-control" name="new_ilos_number" @bind="Article.InternalArticleInformation.NewIlosarticleNumber" disabled="@IsDisabled"> </td>
         <td>
             <HAVI_app.Shared.Shared_layout.Questionmark_top>
@@ -97,7 +98,7 @@
         </td>
     </tr>
     <tr>
-        <td>Reference ILOS number:</td>
+        <td class="required">Reference ILOS number:</td>
         <td> <input type="text" class="form-control" name="reference_ilos_number" @bind="Article.InternalArticleInformation.ReferenceIlosnumber" disabled="@IsDisabled"> </td>
         <td>
             <HAVI_app.Shared.Shared_layout.Questionmark_top>
@@ -106,7 +107,7 @@
         </td>
     </tr>
     <tr>
-        <td>Reference SAP from material no:</td>
+        <td class="required">Reference SAP from material no:</td>
         <td> <input type="text" class="form-control" name="reference_sap_number" @bind="Article.InternalArticleInformation.ReferenceSapmaterial" disabled="@IsDisabled"> </td>
         <td>
             <HAVI_app.Shared.Shared_layout.Questionmark_top>
@@ -115,7 +116,7 @@
         </td>
     </tr>
     <tr>
-        <td>ILOS category/account:</td>
+        <td class="required">ILOS category/account:</td>
         <td>
             <select class="form-control" name="category" @onchange="@((ChangeEventArgs __e) => Article.InternalArticleInformation.Iloscategory = __e.Value.ToString())" disabled="@IsDisabled">
                 <option disabled selected>-- select an option --</option>
@@ -127,7 +128,7 @@
         </td>
     </tr>
     <tr>
-        <td>VAT/TAX code:</td>
+        <td class="required">VAT/TAX code:</td>
         <td>
             <select class="form-control" name="tax" @onchange="@((ChangeEventArgs __e) => Article.InternalArticleInformation.VatTaxcode = __e.Value.ToString())" disabled="@IsDisabled">
                 <option disabled selected>-- select an option --</option>
@@ -139,7 +140,7 @@
         </td>
     </tr>
     <tr>
-        <td>Department ID:</td>
+        <td class="required">Department ID:</td>
         <td>
             <select class="form-control" name="department" @onchange="@((ChangeEventArgs __e) => Article.InternalArticleInformation.DepartmentId = __e.Value.ToString())" disabled="@IsDisabled">
                 <option disabled selected>-- select an option --</option>
@@ -158,14 +159,13 @@
     </tr>
 
     <tr>
-        <td>Text purchase number:</td>
+        <td class="required">Text purchase number:</td>
         <td>
             <input type="number" class="form-control" name="purchase_number" @bind="Article.InternalArticleInformation.TextPurchaseNumber" disabled="@IsDisabled">
         </td>
     </tr>
     <tr class="border-bottom">
-        <td>Register shelflife:</td>
-
+        <td class="required">Register shelflife:</td>
         <td>
             <div class="text-center">
                 <input type="radio" name="shelflife" id="yes" value="yes" @onclick="() => Article.InternalArticleInformation.RegisterShelfLife = 1" disabled="@IsDisabled">
@@ -193,14 +193,14 @@
         </td>
     </tr>
     <tr>
-        <td>Currency rate:</td>
+        <td class="required">Currency rate:</td>
         <td> <input type="text" class="form-control" name="currency_rate" @bind="CurrencyRate" disabled="@IsDisabled"/></td>
     </tr>
     <tr>
-        <td>Price:</td>
+        <td class="required">Price:</td>
         <td> <input type="text" class="form-control" name="currency_in_country" value="@Article.InternalArticleInformation.PriceInCountryCurrency" disabled/></td>
         <td>
-            <button class="btn green-button" @onclick="CalculatePrice">Calculate</button>
+            <input type="button" class="btn green-button" @onclick="CalculatePrice" value="Calculate"/>
         </td>
     </tr>
     <tr>
@@ -208,6 +208,7 @@
         <td> <input type="text" class="form-control" name="transit_time" @bind="Article.InternalArticleInformation.TransitTimeForHavi" disabled="@IsDisabled"/></td>
     </tr>
 </table>
+</form>
 
 @code {
     [Parameter]
@@ -233,7 +234,7 @@
     public void CalculatePrice()
     {
         double rate = CurrencyRate / 100.0;
-        Article.InternalArticleInformation.PriceInCountryCurrency = rate * Article.InternalArticleInformation.AmountInForeignCurrency;
+        Article.InternalArticleInformation.PriceInCountryCurrency = rate * Article.ArticleInformation.PurchasePrice;
     }
 
     protected override async Task OnInitializedAsync()

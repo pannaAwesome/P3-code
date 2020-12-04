@@ -44,7 +44,6 @@
                     </td>
                     <td>
                         <select class="form-control" name="company_location" @onchange="@((ChangeEventArgs __e) => Article.CompanyLocation = __e.Value.ToString())" required>
-                            <option disabled selected>-- select or search for an option --</option>
                             @foreach (var item in contries)
                             {
                                 <option>@item.Country</option>
@@ -67,7 +66,7 @@
                     </td>
                     <td>
 
-                        <input type="text" class="form-control @EmailValidated" name="email" @bind="Article.Email" @onfocus="RemoveEmailDanger" required maxlength="50">
+                        <input type="text" class="form-control @EmailValidated" name="email" @bind="Article.Email" @onfocus="RemoveEmailDanger" required maxlength="100">
                     </td>
                     <td>
                         <div></div>
@@ -89,7 +88,7 @@
                             <input type="radio" name="pallet_exchange" checked="@(Article.PalletExchange == 1)" @onchange="@(() => Article.PalletExchange = 1)" required>
                             <label for="yes">Yes</label>
                             &nbsp;
-                            <input type="radio" name="pallet_exchange" checked="@(Article.PalletExchange == 2)" @onchange="@(() => Article.PalletExchange = 2)">
+                            <input type="radio" name="pallet_exchange" checked="@(Article.PalletExchange == 0)" @onchange="@(() => Article.PalletExchange = 2)">
                             <label for="no">No</label>
                         </div>
 
@@ -109,8 +108,7 @@
                         <label for="freight_responsibility">Freight Responsibility</label>
                     </td>
                     <td>
-                        <select class="form-control" name="freight_responsibility" @onchange="@((ChangeEventArgs __e) => Article.FreightResponsibility = __e.Value.ToString())" required>
-                            <option disabled selected>-- select or search for an option --</option>
+                        <select class="form-control" name="freight_responsibility" @bind="Article.FreightResponsibility" required>
                             @foreach (FreightResponsibility item in Freights)
                             {
                                 <option>@item.Responsibility</option>
