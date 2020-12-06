@@ -34,21 +34,6 @@ namespace HAVI_app.Classes
             {
                 return false;
             }
-
-            /*
-            double number;
-            if(input != null)
-            {
-                if (Double.TryParse(input, out number))
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            return false; */
         }
 
         public bool IntOnly(int? input)
@@ -95,29 +80,18 @@ namespace HAVI_app.Classes
             return false;
         }
 
-        public int GTINValidation(int? input)
+        public bool GTINValidation(string input)
         {
-            string temp = input.ToString();
-            List<char> GTIN = new List<char>();
-            string ValidatedGTIN = "";
-
-            if(temp.Length < 14)
+            if(input == null)
             {
-                foreach(char num in temp)
-                {
-                    GTIN.Add(num);
-                }
-                
-                int zeroCount = 14 - temp.Length;
-
-                for(int i = 0; i < zeroCount; i++)
-                {
-                    GTIN.Insert(0,'0');
-                }
-                ValidatedGTIN = string.Join("",GTIN);
+                return false;
+            }else if(input.ToCharArray().Length == 14)
+            {
+                return true;
+            }else
+            {
+                return false;
             }
-
-            return Convert.ToInt32(ValidatedGTIN);
         }
 
         public bool MustNotBeZeroOrNegativeNumbere(double input)

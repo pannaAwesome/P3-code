@@ -118,11 +118,14 @@ namespace HAVI_app.Shared.Purchaser_layout
         {
             foreach (Article item in Articles)
             {
-                excelStream = Excel.CreateXlsIO(item);
+                if(item.ArticleState == (int)ArticleState.RobotReady)
+                {
+                    excelStream = Excel.CreateXlsIO(item);
 
-                await JS.SaveAs($"saveAsFile.xlsx", excelStream.ToArray());
-                item.ArticleState = (int)ArticleState.Completed;
-                await ArticleService.UpdateArticle(item.Id, item);
+                    await JS.SaveAs($"saveAsFile.xlsx", excelStream.ToArray());
+                    item.ArticleState = (int)ArticleState.Completed;
+                    await ArticleService.UpdateArticle(item.Id, item);
+                }
             }
         }
     }

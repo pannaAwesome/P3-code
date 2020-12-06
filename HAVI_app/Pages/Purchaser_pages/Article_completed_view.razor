@@ -1,7 +1,6 @@
 ﻿@page "/article_completed_view/{ArticleId:int}"
 @inject NavigationManager NavigationManager
 @inject HAVI_app.Services.Classes.ArticleService ArticleService  
-@layout HAVI_app.Shared.Purchaser_layout.Article_edit_layout
 
 <ul class="nav nav-tabs" id="myTabJust" role="tablist">
     <li class="nav-item">
@@ -18,7 +17,7 @@
         <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Havi_only_collection User="Purchaser" IsDisabled="true" ArticleId="ArticleId" EditPossible="d-none" />
     </div>
     <div class="tab-pane fade" id="Supplier-just" role="tabpanel" aria-labelledby="Supplier-tab-just">
-        <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_collection ArticleId="ArticleId" EditFields="d-none" />
+        <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_collection ArticleId="ArticleId" Display="d-none" />
     </div>
 </div>
 

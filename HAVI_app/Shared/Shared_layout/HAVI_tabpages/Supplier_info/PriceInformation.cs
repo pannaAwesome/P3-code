@@ -16,6 +16,9 @@ namespace HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info
         [Inject]
         public ArticleInformationService ArticleInformationService { get; set; }
 
+        [Inject]
+        public InformCostTypeService InformCostTypeService { get; set; }
+
         [Parameter]
         public Article Article { get; set; }
 
@@ -23,10 +26,9 @@ namespace HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info
         public int NumberOfOtherCosts = 0;
         public bool IsDisabled = true;
 
-        public void OtherCosts(int value)
-        {
-            Article.ArticleInformation.OtherCosts = value;
-        }
+        public string Amount = "";
+        public string LastAmount = "";
+        public List<InformCostType> costType = new List<InformCostType>();
 
         public void Editing()
         {
@@ -41,15 +43,31 @@ namespace HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info
             IsDisabled = true;
         }
 
-        protected override void OnInitialized()
+        protected override async Task OnInitializedAsync()
         {
-            if (Article.ArticleInformation.OtherCostsForArticles == null)
+            costType = await InformCostTypeService.GetInformCostTypes();
+
+            ArticleInformation article = await ArticleInformationService.GetArticleInformation(Article.ArticleInformationId);
+            Article.ArticleInformation.OtherCostsForArticles = article.OtherCostsForArticles;
+
+            NumberOfOtherCosts = 0;
+
+            foreach(OtherCostsForArticle cost in Article.ArticleInformation.OtherCostsForArticles)
             {
-                NumberOfOtherCosts = 0;
-            }else
-            {
-                NumberOfOtherCosts = Article.ArticleInformation.OtherCostsForArticles.Count;
+                NumberOfOtherCosts += cost.InformCostType != "" && cost.Amount != 0 ? 1 : 0;
             }
+        }
+
+        public void AddExtraCosts()
+        {
+            NumberOfOtherCosts++;
+        }
+
+        public void RemoveExtraCosts()
+        {
+            Article.ArticleInformation.OtherCostsForArticles[NumberOfOtherCosts - 1].InformCostType = "";
+            Article.ArticleInformation.OtherCostsForArticles[NumberOfOtherCosts - 1].Amount = 0;
+            NumberOfOtherCosts--;
         }
     }
 }

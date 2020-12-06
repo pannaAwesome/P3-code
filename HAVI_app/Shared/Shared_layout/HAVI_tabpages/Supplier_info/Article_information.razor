@@ -1,4 +1,4 @@
-﻿@inherits ArticleInformation
+﻿@inherits ArticleInformationInfo
 <div class="col-12 havi-info-box">
 <div class="row justify-content-right">
     <div class="col-11">
@@ -17,54 +17,64 @@
     </div>
 </div>
 <form>
-    <table class="table table-borderless">
+    <table class="table table-borderless" width="100%">
+        <colgroup>
+            <col span="2" style="width: 45%" />
+            <col span="2" style="width: 55%" />
+            <col span="2" style="width: 5%" />
+        </colgroup>
         <tr class="@ArticleName">
-            <td>
+            <td colspan="2">
                 <label for="article_name">Article name:</label>
             </td>
             <td colspan="2">
                 <input type="text" class="form-control" name="article_name" @bind="@Article.ArticleInformation.ArticleName" disabled="@IsDisabled">
             </td>
+            <td colspan="2"></td>
         </tr>
 
         <tr class="@Salesunit">
-            <td>
+            <td colspan="2">
                 <label for="sales_unit">Salesunit:</label>
             </td>
             <td colspan="2">
                 <input type="text" class="form-control" name="sales_unit" @bind="Article.ArticleInformation.Salesunit" disabled>
             </td>
+            <td colspan="2"></td>
         </tr>
 
         <tr class="@ArticlePerSalesunit">
-            <td>
+            <td colspan="2">
                 <label for="salesunit_quantity">Articles per salesunit:</label>
             </td>
             <td colspan="2">
                 <input type="number" class="form-control moveStuffToTheRight" name="salesunit_quantity" @bind="Article.ArticleInformation.ArticlesPerSalesunit" disabled="@IsDisabled">
             </td>
+            <td colspan="2"></td>
         </tr>
 
         <tr class="@SupplierNameNumber">
-            <td>
+            <td colspan="2">
                 <label for="supplier_article_nn">Supplier article number/name:</label>
             </td>
             <td colspan="2">
                 <input type="number" class="form-control moveStuffToTheRight" name="article_number_name" @bind="Article.ArticleInformation.SupplierArticleName" disabled="@IsDisabled">
             </td>
+            <td colspan="2"></td>
         </tr>
 
         <tr class="@GTINNumber">
-            <td>
+            <td colspan="2">
                 <label for="GTIN">GTIN number:</label>
             </td>
             <td colspan="2">
                 <input type="number" class="form-control moveStuffToTheRight" name="GTIN" @bind="Article.ArticleInformation.Gtinnumber" disabled="@IsDisabled">
             </td>
+            <td colspan="2"></td>
         </tr>
 
         <tr class="@Shelflife">
-            <td>
+            <td colspan="2">
                 <label for="Shelflife">Shelflife:</label>
             </td>
             <td colspan="2">
@@ -73,16 +83,17 @@
             <td>
                 <label class="center-for-units" for="Shelflife">days</label>
             </td>
+            <td colspan="2"></td>
         </tr>
 
         <tr class="@MinShelflife">
-            <td>
+            <td colspan="2">
                 <label for="Min_shelflife">Min. shelflife at HAVI:</label>
             </td>
             <td colspan="2">
                 <input type="number" class="form-control moveStuffToTheRight" name="Min_shelflife" @bind="Article.ArticleInformation.MinimumShelflife" disabled="@IsDisabled">
             </td>
-            <td>
+            <td colspan="2">
                 <label class="center-for-units" for="Min_shelflife">days</label>
             </td>
         </tr>
@@ -94,10 +105,10 @@
 
             <td colspan="2">
                 <div class="text-center">
-                    <input type="radio" name="organic_article" value="yes" checked="@(Article.ArticleInformation.OrganicArticle == 1)" disabled @onclick="() => Article.ArticleInformation.OrganicArticle = 1">
+                    <input type="radio" name="organic_article" value="yes" checked="@(Article.ArticleInformation.OrganicArticle == 1)" disabled="@IsDisabled" @onclick="() => Article.ArticleInformation.OrganicArticle = 1">
                     <label for="yes">Yes</label>
                     &nbsp;
-                    <input type="radio" name="organic_article" value="no" checked="@(Article.ArticleInformation.OrganicArticle == 0)" disabled @onclick="() => Article.ArticleInformation.OrganicArticle = 0">
+                    <input type="radio" name="organic_article" value="no" checked="@(Article.ArticleInformation.OrganicArticle == 0)" disabled="@IsDisabled" @onclick="() => Article.ArticleInformation.OrganicArticle = 0">
                     <label for="no">No</label>
                 </div>
             </td>

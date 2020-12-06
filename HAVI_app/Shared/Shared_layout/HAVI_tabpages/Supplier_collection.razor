@@ -12,24 +12,24 @@ else
 {
     <div class="row">
         <div class="col-6">
-            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Supplier_information Article="Article" EditFields="@EditFields" />
+            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Supplier_information Article="Article" EditFields="@Display" />
         </div>
         <div class="col-6">
-            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Shipment_information Article="Article" EditFields="@EditFields" />
+            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Shipment_information Article="Article" EditFields="@Display" />
         </div>
     </div>
 
     <div class="row">
         <div class="col-6">
-            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Article_information Article="Article" EditFields="@EditFields" />
+            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Article_information Article="Article" EditFields="@Display" />
         </div>
         <div class="col-6">
-            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Measurement_information Article="Article" EditFields="@EditFields" />
+            <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Measurement_information Article="Article" EditFields="@Display" />
         </div>
     </div>
 
     <div class="row">
-        <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Price_information Article="Article" EditFields="@EditFields"/>
+        <HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info.Price_information Article="Article" EditFields="@Display"/>
     </div>
 }
 
@@ -38,7 +38,7 @@ else
     public int ArticleId { get; set; }
 
     [Parameter]
-    public string EditFields { get; set; }
+    public string Display { get; set; }
 
     public Article Article { get; set; } = new Article();
 

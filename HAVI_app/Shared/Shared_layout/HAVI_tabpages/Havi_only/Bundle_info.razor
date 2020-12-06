@@ -108,31 +108,34 @@ else
         {
             if (!IsDisabled)
             {
-                List<Bundle> bundles = new List<Bundle>();
+                if(Article.InternalArticleInformation.Bundles != null)
+                {
+                    List<Bundle> bundles = new List<Bundle>();
 
-                bundles.Add(new Bundle()
-                {
-                    Id = 0,
-                    InternalArticleInformationId = Article.InternalArticleInformationId,
-                    ArticleBundle = "",
-                    ArticleBundleQuantity = 0
-                });
-                bundles.Add(new Bundle()
-                {
-                    Id = 0,
-                    InternalArticleInformationId = Article.InternalArticleInformationId,
-                    ArticleBundle = "",
-                    ArticleBundleQuantity = 0
-                });
-                bundles.Add(new Bundle()
-                {
-                    Id = 0,
-                    InternalArticleInformationId = Article.InternalArticleInformationId,
-                    ArticleBundle = "",
-                    ArticleBundleQuantity = 0
-                });
+                    bundles.Add(new Bundle()
+                    {
+                        Id = 0,
+                        InternalArticleInformationId = Article.InternalArticleInformationId,
+                        ArticleBundle = "",
+                        ArticleBundleQuantity = 0
+                    });
+                    bundles.Add(new Bundle()
+                    {
+                        Id = 0,
+                        InternalArticleInformationId = Article.InternalArticleInformationId,
+                        ArticleBundle = "",
+                        ArticleBundleQuantity = 0
+                    });
+                    bundles.Add(new Bundle()
+                    {
+                        Id = 0,
+                        InternalArticleInformationId = Article.InternalArticleInformationId,
+                        ArticleBundle = "",
+                        ArticleBundleQuantity = 0
+                    });
 
-                Article.InternalArticleInformation.Bundles = bundles;
+                    Article.InternalArticleInformation.Bundles = bundles;
+                }
             }else
             {
                 InternalArticleInformation article = await InternalArticleInformationService.GetInternalArticleInformation(Article.InternalArticleInformationId);

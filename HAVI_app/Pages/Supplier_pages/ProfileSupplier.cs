@@ -31,7 +31,7 @@ namespace HAVI_app.Pages.Supplier_pages
         public string NewPassword1 { get; set; }
         public string NewPassword2 { get; set; }
         public string PasswordError { get; set; }
-        public string _saveMessage;
+        public string _saveMessage = "";
         public List<Location> Countries;
         public List<FreightResponsibility> Freights;
 
@@ -65,7 +65,6 @@ namespace HAVI_app.Pages.Supplier_pages
         {
             await SupplierService.UpdateSupplier(Supplier.Id, Supplier);
             _saveMessage = "Changes saved!";
-
         }
     }
 }

@@ -97,15 +97,19 @@ else
 
             if (!IsDisabled)
             {
-                Article.InternalArticleInformation.Sapplants = new List<Sapplant>();
-                foreach (PrimaryDciloscode item in Codes)
+                if(Article.InternalArticleInformation.Sapplants == null)
                 {
-                    if(item.PrimaryCode != "0")
+                    Article.InternalArticleInformation.Sapplants = new List<Sapplant>();
+                    foreach (PrimaryDciloscode item in Codes)
                     {
-                        Article.InternalArticleInformation.Sapplants.Add(new Sapplant() { Id = 0, InternalArticleInformationId = Article.InternalArticleInformationId, SapplantName = item.Sapplant, SapplantValue = 2 });
-                    }else
-                    {
-                        Article.InternalArticleInformation.Sapplants.Add(new Sapplant() { Id = 0, InternalArticleInformationId = Article.InternalArticleInformationId, SapplantName = item.Sapplant, SapplantValue = 1 });
+                        if (item.PrimaryCode != "0")
+                        {
+                            Article.InternalArticleInformation.Sapplants.Add(new Sapplant() { Id = 0, InternalArticleInformationId = Article.InternalArticleInformationId, SapplantName = item.Sapplant, SapplantValue = 2 });
+                        }
+                        else
+                        {
+                            Article.InternalArticleInformation.Sapplants.Add(new Sapplant() { Id = 0, InternalArticleInformationId = Article.InternalArticleInformationId, SapplantName = item.Sapplant, SapplantValue = 1 });
+                        }
                     }
                 }
             }

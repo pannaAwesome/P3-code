@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace HAVI_app.Shared.Shared_layout.HAVI_tabpages.Supplier_info
 {
-    public class ArticleInformation : ComponentBase
+    public class ArticleInformationInfo : ComponentBase
     {
         [Parameter]
         public string EditFields { get; set; }

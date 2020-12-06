@@ -176,7 +176,7 @@
     </tr>
 
     <tr>
-        <td class="required">Text purchase number:</td>
+        <td class="required">Purchase number:</td>
         <td>
             <input type="number" class="form-control" name="purchase_number" @bind="Article.InternalArticleInformation.TextPurchaseNumber" disabled="@IsDisabled">
         </td>
@@ -211,7 +211,7 @@
     </tr>
     <tr>
         <td class="required">Currency rate:</td>
-        <td> <input type="text" class="form-control" name="currency_rate" @bind="CurrencyRate" disabled="@IsDisabled" /></td>
+        <td> <input type="text" class="form-control" name="currency_rate" @bind="Article.InternalArticleInformation.CurrencyRate" disabled="@IsDisabled" /></td>
         <td>
             <div></div>
         </td>
@@ -221,7 +221,7 @@
             </HAVI_app.Shared.Shared_layout.Questionmark_top>
         </td>
     </tr>
-    <tr>
+    <tr class="@EditPossible">
         <td class="required">Price:</td>
         <td> <input type="text" class="form-control" name="currency_in_country" value="@Article.InternalArticleInformation.PriceInCountryCurrency" disabled /></td>
         <td>
@@ -258,11 +258,9 @@
     public List<DepartmentId> Ids = new List<DepartmentId>();
     public List<PackagingGroup> PackagingGroups = new List<PackagingGroup>();
 
-    public double CurrencyRate = 0.0;
-
     public void CalculatePrice()
     {
-        double rate = CurrencyRate / 100.0;
+        double rate = Article.InternalArticleInformation.CurrencyRate / 100.0;
         Article.InternalArticleInformation.PriceInCountryCurrency = rate * Article.ArticleInformation.PurchasePrice;
     }
 
