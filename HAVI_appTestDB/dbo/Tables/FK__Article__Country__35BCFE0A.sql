@@ -1,0 +1,6 @@
+﻿ALTER TABLE [dbo].[Article]  WITH CHECK ADD  CONSTRAINT [FK__Article__Country__35BCFE0A] FOREIGN KEY([CountryID])
+REFERENCES [dbo].[Country] ([ID])
+ON DELETE CASCADE
+GO
+
+ALTER TABLE [dbo].[Article] CHECK CONSTRAINT [FK__Article__Country__35BCFE0A]

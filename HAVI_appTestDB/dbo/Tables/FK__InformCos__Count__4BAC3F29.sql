@@ -1,0 +1,6 @@
+﻿ALTER TABLE [dbo].[InformCostType]  WITH CHECK ADD  CONSTRAINT [FK__InformCos__Count__4BAC3F29] FOREIGN KEY([CountryID])
+REFERENCES [dbo].[Country] ([ID])
+ON DELETE CASCADE
+GO
+
+ALTER TABLE [dbo].[InformCostType] CHECK CONSTRAINT [FK__InformCos__Count__4BAC3F29]
