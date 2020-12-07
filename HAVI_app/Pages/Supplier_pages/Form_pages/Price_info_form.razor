@@ -18,7 +18,7 @@
 
 <div class="justify-content-center row">
     <div class="col-10 d-flex justify-content-center">
-        <EditForm Model="Article" OnSubmit="@OnPostForward">
+        <EditForm OnSubmit="@OnPostForward">
             <table class="table">
 
                 <tr>
@@ -291,25 +291,13 @@
 
     protected override async Task OnInitializedAsync()
     {
-        if(Article.OtherCostsForArticles == null || Article.OtherCostsForArticles.Count == 0)
-        {
-            Article.OtherCostsForArticles = new List<OtherCostsForArticle>();
-            Article.OtherCostsForArticles.Add(new OtherCostsForArticle() { Id = 0, Amount = 0, InformCostType = "", ArticleInformationId = Article.Id });
-            Article.OtherCostsForArticles.Add(new OtherCostsForArticle() { Id = 0, Amount = 0, InformCostType = "", ArticleInformationId = Article.Id });
-            Article.OtherCostsForArticles.Add(new OtherCostsForArticle() { Id = 0, Amount = 0, InformCostType = "", ArticleInformationId = Article.Id });
-            Article.OtherCostsForArticles.Add(new OtherCostsForArticle() { Id = 0, Amount = 0, InformCostType = "", ArticleInformationId = Article.Id });
-            Article.OtherCostsForArticles.Add(new OtherCostsForArticle() { Id = 0, Amount = 0, InformCostType = "", ArticleInformationId = Article.Id });
-        }else
-        {
-            foreach(OtherCostsForArticle cost in Article.OtherCostsForArticles)
-            {
-                if(cost.InformCostType != "" && cost.Amount != 0)
-                {
-                    NumberOfOtherCosts++;
-                }
-            }
-        }
-
+        Article.OtherCostsForArticles = new List<OtherCostsForArticle>();
+        OtherCostsForArticle cost = new OtherCostsForArticle() { Id = 0, Amount = 0, InformCostType = "", ArticleInformationId = Article.Id };
+        Article.OtherCostsForArticles.Add(new OtherCostsForArticle() { Id = 0, Amount = 0, InformCostType = "", ArticleInformationId = Article.Id });
+        Article.OtherCostsForArticles.Add(new OtherCostsForArticle() { Id = 0, Amount = 0, InformCostType = "", ArticleInformationId = Article.Id });
+        Article.OtherCostsForArticles.Add(new OtherCostsForArticle() { Id = 0, Amount = 0, InformCostType = "", ArticleInformationId = Article.Id });
+        Article.OtherCostsForArticles.Add(new OtherCostsForArticle() { Id = 0, Amount = 0, InformCostType = "", ArticleInformationId = Article.Id });
+        Article.OtherCostsForArticles.Add(new OtherCostsForArticle() { Id = 0, Amount = 0, InformCostType = "", ArticleInformationId = Article.Id });
         contries = await SetCurrencyService.GetSetCurrencies();
         costType = await InformCostTypeService.GetInformCostTypes();
     }

@@ -18,7 +18,7 @@
 
 <div class="row justify-content-center">
     <div class="col-10 d-flex justify-content-center">
-        <EditForm Model="Article" OnSubmit="@ValidationArticleInfoForm">
+        <EditForm OnSubmit="@ValidationArticleInfoForm">
             <table class="table">
 
                 <tr>
@@ -26,7 +26,7 @@
                         <label for="article_name" class="required">Article name:</label>
                     </td>
                     <td>
-                        <input type="text" class="form-control @ArticleNameValidated" @onfocus="@(() => ArticleNameValidated = "")" name="article_name" @bind="Article.ArticleName" required maxlength="31"> 
+                        <input type="text" class="form-control @ArticleNameValidated" @onfocus="@(() => ArticleNameValidated = "")" name="article_name" @bind="Article.ArticleName" required maxlength="31">
                     </td>
                     <td>
                         <div></div>

@@ -1,6 +1,8 @@
 ﻿@layout HAVI_app.Shared.Supplier_layout.Form_layout
 @inject Microsoft.AspNetCore.Components.NavigationManager NavigationManager
-@page "/measurement_info_form"
+@page "/measurement_info_form/{article}"
+@using HAVI_app.Models
+@using Newtonsoft.Json
 @inherits HAVI_app.Classes.Validation
 @inject Models.ArticleInformation Article
 
@@ -15,7 +17,7 @@
 
 <div class="justify-content-center row">
     <div class="col-10 d-flex justify-content-center">
-        <EditForm Model="Article" OnSubmit="@ValidationMeasurementForm">
+        <EditForm OnSubmit="@ValidationMeasurementForm">
             <table class="table">
                 <tr>
                     <td>
@@ -123,6 +125,11 @@
 @code {
     [Parameter]
     public int Id { get; set; }
+
+    [Parameter]
+    public string article { get; set; }
+
+    public ArticleInformation Article = new ArticleInformation();
 
     public string LengthValidated;
 
