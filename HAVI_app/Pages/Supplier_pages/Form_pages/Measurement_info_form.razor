@@ -206,8 +206,8 @@
         NavigationManager.NavigateTo($"/article_info_form", true);
     }
 
-    protected override async Task OnIntializedAsync()
+    protected override async Task OnInitializedAsync()
     {
-       Article = JsonConvert.DeserializeObject<ArticleInformation>(stringarticle);
+        Article = JsonConvert.DeserializeObject<ArticleInformation>(stringarticle);
     }
 }
