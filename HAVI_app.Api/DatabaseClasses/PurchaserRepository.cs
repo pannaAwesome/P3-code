@@ -48,8 +48,14 @@ namespace HAVI_app.Api.DatabaseClasses
         {
             var purchaser = await _context.Purchasers.FirstOrDefaultAsync(p => p.Id == purchaserId);
             var profile = await _context.Profiles.FirstOrDefaultAsync(p => p.Id == purchaser.ProfileId);
+            //List<Article> articles = await _context.Articles.Where(p => p.PurchaserId == purchaserId).ToListAsync();
+           
             if (purchaser != null && profile != null)
             {
+                //foreach (Article article in articles)
+                //{
+                //    _context.Articles.Remove(article);
+                //}
                 _context.Profiles.Remove(profile);
                 await _context.SaveChangesAsync();
                 return purchaser;

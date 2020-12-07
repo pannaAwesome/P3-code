@@ -3,6 +3,7 @@
 @inject HAVI_app.Services.Classes.LocationService LocationService
 @inject HAVI_app.Services.Classes.FreightResponsibilityService FreightResponsibilityService
 @inject HAVI_app.Services.Classes.CreationCodeService CreationCodeService
+@inject HAVI_app.Services.Classes.ProfileService ProfileService
 
 <div class="col-12 user-login">
     <div class="row justify-content-center">
@@ -21,6 +22,9 @@
                         <td>
                             <input class="form-control" type="text" name="creation_code" required @bind="CreationCode" />
                         </td>
+                        <td>
+                            <div</div>
+                        </td>
                     </tr>
                     <tr class="form-group">
                         <td>
@@ -29,6 +33,9 @@
                         <td>
                             <input class="form-control" type="email" name="email_username" required @bind="Email" />
                         </td>
+                        <td>
+                            <div</div>
+                        </td>
                     </tr>
                     <tr class="form-group">
                         <td>
@@ -36,6 +43,9 @@
                         </td>
                         <td>
                             <input class="form-control" type="text" name="company_name" required @bind="CompanyName" />
+                        </td>
+                        <td>
+                            <div</div>
                         </td>
                     </tr>
                     <tr class="form-group">
@@ -50,6 +60,9 @@
                                     <option>@item.Country</option>
                                 }
                             </select>
+                        </td>
+                        <td>
+                            <div></div>
                         </td>
                     </tr>
                     <tr class="form-group">
@@ -84,15 +97,13 @@
                             <label>Freight responsibility:</label>
                         </td>
                         <td>
-                            <div class="row justify-content-center">
-                                <select class="form-control" name="salesunit" @bind="@Freight" required>
-                                    <option disabled selected>-- select one --</option>
-                                    @foreach (FreightResponsibility item in Freights)
-                                    {
-                                        <option>@item.Responsibility</option>
-                                    }
-                                </select>
-                            </div>
+                            <select class="form-control" name="salesunit" @bind="@Freight" required>
+                                <option disabled selected>-- select one --</option>
+                                @foreach (FreightResponsibility item in Freights)
+                                {
+                                    <option>@item.Responsibility</option>
+                                }
+                            </select>
                         </td>
                         <td>
                             <HAVI_app.Shared.Shared_layout.Questionmark_top>
@@ -107,6 +118,9 @@
                         <td>
                             <input class="form-control" type="password" name="password" required @bind="Password1" />
                         </td>
+                        <td>
+                            <div</div>
+                        </td>
                     </tr>
                     <tr class="form-group">
                         <td>
@@ -114,6 +128,9 @@
                         </td>
                         <td>
                             <input class="form-control" type="password" name="confirm_password" required @bind="Password2" />
+                        </td>
+                        <td>
+                            <div</div>
                         </td>
                     </tr>
                 </table>
@@ -134,6 +151,7 @@
 </div>
 
 @code {
+
     public string CodeError { get; set; }
 
     public string CreationCode { get; set; } = "";
@@ -169,36 +187,47 @@
         List<CreationCode> codes = await CreationCodeService.GetCreationCodes();
         var code = codes.Find(c => c.Code == CreationCode && c.Active == 1);
 
-        if (code != null && code.Active != 0 && Email != "" && CompanyName != "" && CompanyLocation != null && YesRadioPalletExchange != 2 && Freight != null && Password1 == Password2)
+        Profile testProfile = await ProfileService.GetProfileByUsernameAndpassword(Email, Password1);
+
+        if (testProfile.Username == "")
         {
-            supplierObject.Profile = new Profile();
-            supplierObject.Profile.Username = Email;
-            supplierObject.CompanyName = CompanyName;
-            supplierObject.CompanyLocation = CompanyLocation;
-            supplierObject.PalletExchange = YesRadioPalletExchange == 1 ? 1 : 0;
-            supplierObject.FreightResponsibility = Freight;
-            supplierObject.Profile.Password = Password1;
-            supplierObject.Profile.Usertype = 2;
 
-            if (supplierObject != null)
+            if (code != null && code.Active != 0 && Email != "" && CompanyName != "" && CompanyLocation != null && YesRadioPalletExchange != 2 && Freight != null && Password1 == Password2)
             {
+                supplierObject.Profile = new Profile();
+                supplierObject.Profile.Username = Email;
+                supplierObject.CompanyName = CompanyName;
+                supplierObject.CompanyLocation = CompanyLocation;
+                supplierObject.PalletExchange = YesRadioPalletExchange == 1 ? 1 : 0;
+                supplierObject.FreightResponsibility = Freight;
+                supplierObject.Profile.Password = Password1;
+                supplierObject.Profile.Usertype = 2;
 
-                code.Active = 0;
-                await CreationCodeService.UpdateCreationCode(code.Id, code);
-                var user = await SupplierService.CreateSupplier(supplierObject);
-                NavigationManager.NavigateTo($"/overview_supplier/{user.Id}", true);
+                if (supplierObject != null)
+                {
+
+                    code.Active = 0;
+                    await CreationCodeService.UpdateCreationCode(code.Id, code);
+                    var user = await SupplierService.CreateSupplier(supplierObject);
+                    NavigationManager.NavigateTo($"/overview_supplier/{user.Id}", true);
+                }
+            }
+            else if (code == null)
+            {
+                CodeError = "Your creation code is invalid!";
+            }
+            else if (code.Active == 0)
+            {
+                CodeError = "Your creation code is invalid!";
+            }
+            else
+            {
+                CodeError = "You forgot to fill out some information!";
             }
         }
-        else if(code == null)
+        else
         {
-            CodeError = "Your creation code is invalid!";
-        }
-        else if(code.Active == 0)
-        {
-            CodeError = "Your creation code is invalid!";
-        }else
-        {
-            CodeError = "You forgot to fill out some information!";
+            CodeError = $"A user with the email: {Email} already exists";
         }
     }
 }

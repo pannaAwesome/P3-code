@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+
+
 namespace HAVI_app.Pages.Admin_pages.User_pages
 {
     public class UserView : ComponentBase
@@ -17,6 +19,10 @@ namespace HAVI_app.Pages.Admin_pages.User_pages
         public PurchaserService PurchaserService { get; set; }
 
         [Inject]
+        public ProfileService ProfileService { get; set; }
+
+
+        [Inject]
         public NavigationManager NavigationManager { get; set; }
 
         public string profile;
@@ -24,6 +30,7 @@ namespace HAVI_app.Pages.Admin_pages.User_pages
         public string user;
         public string article;
         public string overview;
+        public string _userAlreadyExists { get; set; }
 
         protected override void OnInitialized()
         {
@@ -35,6 +42,7 @@ namespace HAVI_app.Pages.Admin_pages.User_pages
         }
 
         public string Email { get; set; }
+
 
         public async Task CreatePurchaser()
         {
@@ -48,9 +56,17 @@ namespace HAVI_app.Pages.Admin_pages.User_pages
             purchaser.Profile.Password = "1234";
             purchaser.Profile.Usertype = 1;
 
-            await PurchaserService.CreatePurchaser(purchaser);
+            Profile testProfile = await ProfileService.GetProfileByUsernameAndpassword(purchaser.Profile.Username, purchaser.Profile.Password);
 
-            NavigationManager.NavigateTo($"/user_view/{Id}", true);
+            if(testProfile.Username == "")
+            {
+                await PurchaserService.CreatePurchaser(purchaser);
+                NavigationManager.NavigateTo($"/user_view/{Id}", true);
+            }
+            else
+            {
+                _userAlreadyExists = $"A purchaser with the email '{Email}' already exists";
+            }
         }
     }
 }
