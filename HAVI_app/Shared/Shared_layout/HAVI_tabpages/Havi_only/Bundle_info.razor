@@ -2,7 +2,7 @@
 @inject HAVI_app.Services.Classes.ArticleService ArticleService
 @inject HAVI_app.Services.Classes.InternalArticleInformationService InternalArticleInformationService
 
-@if (SalesUnits == null)
+@if (SalesUnits == null || Article.InternalArticleInformation.Bundles == null)
 {
     <div class="spinner">
         <div class="bounce1"></div>
@@ -108,7 +108,7 @@ else
         {
             if (!IsDisabled)
             {
-                if(Article.InternalArticleInformation.Bundles == null )
+                if(Article.InternalArticleInformation.Bundles == null)
                 {
                     List<Bundle> bundles = new List<Bundle>();
 
