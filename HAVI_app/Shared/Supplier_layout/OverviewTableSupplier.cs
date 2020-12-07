@@ -63,14 +63,18 @@ namespace HAVI_app.Shared.Supplier_layout
             }
             else
             {
-                Selected = data;
-                StateHasChanged();
+                if(data.ArticleState == (int)ArticleState.Created)
+                {
+                    Selected = data;
+                    StateHasChanged();
+                }
             }
         }
 
         protected async override Task OnInitializedAsync()
         {
-            Articles = await ArticleService.GetArticlesForSupplier(Id);
+            List<Article> articles = await ArticleService.GetArticlesForSupplier(Id);
+            Articles = articles.FindAll(a => a.ArticleState == (int)ArticleState.Created || a.ArticleState == (int)ArticleState.Submitted);
         }
     }
 }

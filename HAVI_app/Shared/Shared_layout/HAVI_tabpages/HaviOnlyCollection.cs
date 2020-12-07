@@ -95,6 +95,7 @@ namespace HAVI_app.Shared.Shared_layout.HAVI_tabpages
 
         private void ValidateInformation()
         {
+            int correctNumber = 22;
             int validated = 0;
 
             validated += Article.InternalArticleInformation.SupplierIdIlos != 0 ? 1 : 0;
@@ -117,7 +118,18 @@ namespace HAVI_app.Shared.Shared_layout.HAVI_tabpages
             validated += Article.InternalArticleInformation.PrimaryDcIloscode != 0 ? 1 : 0;
             validated += Article.InternalArticleInformation.Gtinnumber != "" ? 1 : 0;
 
-            if(validated != 19)
+            validated += Article.InternalArticleInformation.CurrencyRate != 0 ? 1 : 0;
+            validated += Article.InternalArticleInformation.PriceInCountryCurrency != 0 ? 1 : 0;
+            validated += Article.InternalArticleInformation.Bundles[0].ArticleBundle != "" ? 1 : 0;
+            validated += Article.InternalArticleInformation.Bundles[0].ArticleBundleQuantity != 0 ? 1 : 0;
+
+            foreach(Sapplant item in Article.InternalArticleInformation.Sapplants)
+            {
+                validated += item.SapplantValue != 2 ? 1 : 0;
+                correctNumber += 1;
+            }
+
+            if(validated != correctNumber)
             {
                 MissedFields = "Sorry, you did not fill out all the required fields.";
             }else

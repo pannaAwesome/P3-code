@@ -38,7 +38,7 @@
                 <h4>Add article</h4>
                 <form>
                     <div class="form-group">
-                        <label for="country">Pick country:</label>
+                        <label for="country">Pick country of Havi devision:</label>
                         <select @onchange="@(async (ChangeEventArgs __e) => { CountryName = __e.Value.ToString(); await UpdateFields(); })" class="form-control" name="country">
                             <option disabled selected>-- select one --</option>
                             @foreach (Country country in Countries)

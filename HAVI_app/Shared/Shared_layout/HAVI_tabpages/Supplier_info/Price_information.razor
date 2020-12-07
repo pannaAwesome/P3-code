@@ -19,13 +19,13 @@
     <div class="row">
         <div class="col-6">
             <form>
-                <table class="table table-borderless">
+                <table class="table table-borderless" width="100%">
                     <tr class="@SetCurrency">
                         <td>
                             <label for="set_currency">Set currency:</label>
                         </td>
                         <td>
-                            <input type="text" class="form-control" id="purchase_price" @bind="Article.ArticleInformation.SetCurrency" disabled>
+                            <input type="text" class="form-control" name="currency" @bind="Article.ArticleInformation.SetCurrency" disabled>
                         </td>
                     </tr>
 
@@ -34,7 +34,7 @@
                             <label for="purchase_price">Purchase price:</label>
                         </td>
                         <td>
-                            <input type="number" class="form-control moveStuffToTheRight" id="purchase_price" @bind="Article.ArticleInformation.PurchasePrice" disabled="@IsDisabled">
+                            <input type="number" class="form-control moveStuffToTheRight" name="purchase_price" @bind="Article.ArticleInformation.PurchasePrice" disabled="@IsDisabled">
                         </td>
                     </tr>
 
@@ -44,10 +44,10 @@
                         </td>
                         <td>
                             <div class="text-center">
-                                <input type="radio" name="organic" value="yes" checked="@(Article.ArticleInformation.OtherCosts == 1)" disabled @onclick="() => Article.ArticleInformation.OtherCosts = 1" />
+                                <input type="radio" name="organic" value="yes" checked="@(Article.ArticleInformation.OtherCosts == 1)" @onclick="() => Article.ArticleInformation.OtherCosts = 1" disabled="@IsDisabled"/>
                                 <label for="yes">Yes</label>
                                 &nbsp;
-                                <input type="radio" name="organic" value="no" checked="@(Article.ArticleInformation.OtherCosts == 0)" disabled @onclick="() => Article.ArticleInformation.OtherCosts = 1" />
+                                <input type="radio" name="organic" value="no" checked="@(Article.ArticleInformation.OtherCosts == 0)" @onclick="() => Article.ArticleInformation.OtherCosts = 1" disabled="@IsDisabled"/>
                                 <label for="no">No</label>
                             </div>
                         </td>
@@ -56,30 +56,160 @@
             </form>
         </div>
         <div class="col-6">
+            @if (Article.ArticleInformation.OtherCosts == 1)
+            {
             <table>
-                @if (Article.ArticleInformation.OtherCosts == 1)
+                @if (0 < NumberOfOtherCosts)
                 {
-                    @for (int i = 0; i < NumberOfOtherCosts; i++)
-                    {
+                    <tr>
+                        <td>
+                            <label for="">Inform cost type:</label>
+                        </td>
 
-                        <tr class="InformCostType">
-                            <td>
-                                <label for="afgift-@i">Inform cost type:</label>
-                            </td>
-
-                            <td>
-                                <input type="text" class="form-control" @bind="Article.ArticleInformation.OtherCostsForArticles[i].InformCostType" name="afgift-@i" disabled/>
-                            </td>
-                            <td>
-                                <label for="amount-@i">Amount in @Article.ArticleInformation.SetCurrency:</label>
-                            </td>
-                            <td>
-                                <input type="number" class="form-control" @bind="Article.ArticleInformation.OtherCostsForArticles[i].Amount" name="amount-@i" disabled/>
-                            </td>
-                        </tr>
-                    }
+                        <td>
+                            <select class="form-control" name="" @bind="Article.ArticleInformation.OtherCostsForArticles[0].InformCostType" disabled="@IsDisabled">
+                                <option>-- select an option --</option>
+                                @foreach (InformCostType item in costType)
+                                {
+                                    <option>@item.CostType</option>
+                                }
+                            </select>
+                        </td>
+                        <td>
+                            <label for="">Amount in @Article.ArticleInformation.SetCurrency:</label>
+                        </td>
+                        <td>
+                            <input type="number" class="form-control" name="" @bind="@Article.ArticleInformation.OtherCostsForArticles[0].Amount" disabled="@IsDisabled">
+                        </td>
+                        @if (NumberOfOtherCosts == 1)
+                        {
+                            <td @onclick="AddExtraCosts"> &#10133; </td>
+                        }
+                    </tr>
                 }
+
+                @if (1 < NumberOfOtherCosts)
+                {
+                    <tr>
+                        <td>
+                            <label for="">Inform cost type:</label>
+                        </td>
+
+                        <td>
+                            <select class="form-control" name="" @bind="Article.ArticleInformation.OtherCostsForArticles[1].InformCostType" disabled="@IsDisabled">
+                                <option>-- select an option --</option>
+                                @foreach (InformCostType item in costType)
+                                {
+                                    <option>@item.CostType</option>
+                                }
+                            </select>
+                        </td>
+                        <td>
+                            <label for="">Amount in @Article.ArticleInformation.SetCurrency:</label>
+                        </td>
+                        <td>
+                            <input type="number" class="form-control" name="" @bind="@Article.ArticleInformation.OtherCostsForArticles[1].Amount" disabled="@IsDisabled">
+                        </td>
+                        @if (NumberOfOtherCosts == 2)
+                        {
+                            <td @onclick="AddExtraCosts"> &#10133; </td>
+                            <td @onclick="RemoveExtraCosts"> &#10134;</td>
+                        }
+                    </tr>
+                }
+
+                @if (2 < NumberOfOtherCosts)
+                {
+                    <tr>
+                        <td>
+                            <label for="">Inform cost type:</label>
+                        </td>
+
+                        <td>
+                            <select class="form-control" name="" @bind="Article.ArticleInformation.OtherCostsForArticles[2].InformCostType" disabled="@IsDisabled">
+                                <option>-- select an option --</option>
+                                @foreach (InformCostType item in costType)
+                                {
+                                    <option>@item.CostType</option>
+                                }
+                            </select>
+                        </td>
+                        <td>
+                            <label for="">Amount in @Article.ArticleInformation.SetCurrency:</label>
+                        </td>
+                        <td>
+                            <input type="number" class="form-control" name="" @bind="@Article.ArticleInformation.OtherCostsForArticles[2].Amount" disabled="@IsDisabled">
+                        </td>
+                        @if (NumberOfOtherCosts == 3)
+                        {
+                            <td @onclick="AddExtraCosts"> &#10133; </td>
+                            <td @onclick="RemoveExtraCosts"> &#10134;</td>
+                        }
+                    </tr>
+                }
+
+                @if (3 < NumberOfOtherCosts)
+                {
+                    <tr>
+                        <td>
+                            <label for="">Inform cost type:</label>
+                        </td>
+
+                        <td>
+                            <select class="form-control" name="" @bind="Article.ArticleInformation.OtherCostsForArticles[3].InformCostType" disabled="@IsDisabled">
+                                <option>-- select an option --</option>
+                                @foreach (InformCostType item in costType)
+                                {
+                                    <option>@item.CostType</option>
+                                }
+                            </select>
+                        </td>
+                        <td>
+                            <label for="">Amount in @Article.ArticleInformation.SetCurrency:</label>
+                        </td>
+                        <td>
+                            <input type="number" class="form-control" name="" @bind="@Article.ArticleInformation.OtherCostsForArticles[3].Amount" disabled="@IsDisabled">
+                        </td>
+                        @if (NumberOfOtherCosts == 4)
+                        {
+                            <td @onclick="AddExtraCosts"> &#10133; </td>
+                            <td @onclick="RemoveExtraCosts"> &#10134;</td>
+                        }
+                    </tr>
+                }
+
+                @if (4 < NumberOfOtherCosts)
+                {
+                    <tr>
+                        <td>
+                            <label for="">Inform cost type:</label>
+                        </td>
+
+                        <td>
+                            <select class="form-control" name="" @bind="Article.ArticleInformation.OtherCostsForArticles[4].InformCostType" disabled="@IsDisabled">
+                                <option>-- select an option --</option>
+                                @foreach (InformCostType item in costType)
+                                {
+                                    <option>@item.CostType</option>
+                                }
+                            </select>
+                        </td>
+                        <td>
+                            <label for="">Amount in @Article.ArticleInformation.SetCurrency:</label>
+                        </td>
+                        <td>
+                            <input type="number" class="form-control" name="" @bind="@Article.ArticleInformation.OtherCostsForArticles[4].Amount" disabled="@IsDisabled">
+                        </td>
+                        @if (NumberOfOtherCosts == 5)
+                        {
+                            <td @onclick="AddExtraCosts"> &#10133; </td>
+                            <td @onclick="RemoveExtraCosts"> &#10134;</td>
+                        }
+                    </tr>
+                }
+
             </table>
+            }
         </div>
     </div>
 </div>

@@ -18,59 +18,81 @@
     </div>  
     <form>
         <table class="table table-borderless">
+            <colgroup>
+                <col span="2" style="width: 30%" />
+                <col span="2" style="width: 65%"/>
+                <col span="2" style="width: 5%"/>
+            </colgroup>
+            <colgroup>
+                <col span="1" style="width: 20%" />
+                <col span="1" style="width: 25%"/>
+                <col span="1" style="width: 5%" />
+                <col span="1" style="width: 20%" />
+                <col span="1" style="width: 25%" />
+                <col span="1" style="width: 5%" />
+            </colgroup>
+            <colgroup>
+                <col span="6" style="width: 100%" />
+            </colgroup>
             <tr class="@CartonsPerPallet">
-                <td colspan="3">
+                <td colspan="2">
                     <label for="carton_pr_pallet">Cartons per pallet:</label>
                 </td>
-                <td colspan="3">
+                <td colspan="2">
                     <input type="number" class="form-control moveStuffToTheRight" @bind="Article.ArticleInformation.CartonsPerPallet" disabled="@IsDisabled">
                 </td>
+                <td colspan="2"></td>
             </tr>
 
             <tr class="@CartonsPerLayer">
-                <td colspan="3">
+                <td colspan="2">
                     <label for="carton_pr_layer">Cartons per layer:</label>
                 </td>
-                <td colspan="3">
+                <td colspan="2">
                     <input type="number" class="form-control moveStuffToTheRight" @bind="Article.ArticleInformation.CartonsPerLayer" disabled="@IsDisabled">
                 </td>
+                <td colspan="2"></td>
             </tr>
 
 
             <tr class="@CountryOfOrigin">
-                <td colspan="3">
+                <td colspan="2">
                     <label for="country_origin">Country of origin:</label>
                 </td>
-                <td colspan="3">
+                <td colspan="2">
                     <input type="text" class="form-control" @bind="Article.ArticleInformation.CountryOfOrigin" disabled>
                 </td>
+                <td colspan="2"></td>
             </tr>
 
             <tr class="@ImportedFrom">
-                <td colspan="3">
+                <td colspan="2">
                     <label for="imported_from">Imported from:</label>
                 </td>
-                <td colspan="3">
+                <td colspan="2">
                     <input type="text" class="form-control" @bind="Article.ArticleInformation.ImportedFrom" disabled>
                 </td>
+                <td colspan="2"></td>
             </tr>
 
             <tr class="@TollTarif">
-                <td colspan="3">
+                <td colspan="2">
                     <label for="toll_tarrif_no">Toll-tarrif no:</label>
                 </td>
-                <td colspan="3">
-                    <input type="number" class="form-control moveStuffToTheRight" id="toll_tarrif_no" @bind="Article.ArticleInformation.TollTarifNumber" disabled="@IsDisabled">
+                <td colspan="2">
+                    <input type="text" class="form-control moveStuffToTheRight" id="toll_tarrif_no" @bind="Article.ArticleInformation.TollTarifNumber" disabled="@IsDisabled">
                 </td>
+                <td colspan="2"></td>
             </tr>
 
             <tr class="@MinOrderQuantity">
-                <td colspan="3">
+                <td colspan="2">
                     <label for="minimum_order_quantity">Minimum order quantity:</label>
                 </td>
-                <td colspan="3">
+                <td colspan="2">
                     <input type="number" class="form-control moveStuffToTheRight" @bind="Article.ArticleInformation.MinimumOrderQuantity" disabled="@IsDisabled">
                 </td>
+                <td colspan="2"></td>
             </tr>
 
             <tr class="@TemperatureTransportation">
@@ -79,22 +101,22 @@
                 </td>
             </tr>
             <tr class="@TemperatureTransportation">
-                <td>
+                <td colspan="1">
                     <label class="center-for-units" for="min">Min:</label>
                 </td>
-                <td>
-                    <input type="number" class="form-control moveStuffToTheRight" @bind="Article.ArticleInformation.TemperatureTransportationMin" disabled="@IsDisabled">
+                <td colspan="1">
+                    <input type="number" step="any"  class="form-control moveStuffToTheRight" @bind="Article.ArticleInformation.TemperatureTransportationMin" disabled="@IsDisabled">
                 </td>
-                <td>
+                <td colspan="1">
                     <label class="center-for-units" for="degrees">&#8451;</label>
                 </td>
-                <td>
+                <td colspan="1">
                     <label class="center-for-units" for="max">Max:</label>
                 </td>
-                <td>
-                    <input type="number" class="form-control moveStuffToTheRight" @bind="Article.ArticleInformation.TemperatureTransportationMax" disabled="@IsDisabled">
+                <td colspan="1">
+                    <input type="number" step="any"  class="form-control moveStuffToTheRight" @bind="Article.ArticleInformation.TemperatureTransportationMax" disabled="@IsDisabled">
                 </td>
-                <td>
+                <td colspan="1">
                     <label class="center-for-units" for="degrees">&#8451;</label>
                 </td>
             </tr>
@@ -105,22 +127,22 @@
                 </td>
             </tr>
             <tr class="@TemperatureStorage">
-                <td>
+                <td colspan="1">
                     <label class="center-for-units" for="min">Min:</label>
                 </td>
-                <td>
-                    <input type="number" class="form-control moveStuffToTheRight" @bind="Article.ArticleInformation.TemperatureStorageMin" disabled="@IsDisabled">
+                <td colspan="1">
+                    <input type="number" step="any"  class="form-control moveStuffToTheRight" @bind="Article.ArticleInformation.TemperatureStorageMin" disabled="@IsDisabled">
                 </td>
-                <td>
+                <td colspan="1">
                     <label class="center-for-units" for="degrees">&#8451;</label>
                 </td>
-                <td>
+                <td colspan="1">
                     <label class="center-for-units" for="max">Max:</label>
                 </td>
-                <td>
-                    <input type="number" class="form-control moveStuffToTheRight" @bind="Article.ArticleInformation.TemperatureStorageMax" disabled="@IsDisabled">
+                <td colspan="1">
+                    <input type="number" step="any"  class="form-control moveStuffToTheRight" @bind="Article.ArticleInformation.TemperatureStorageMax" disabled="@IsDisabled">
                 </td>
-                <td>
+                <td colspan="1">
                     <label class="center-for-units" for="degrees">&#8451;</label>
                 </td>
             </tr>
