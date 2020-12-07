@@ -1,0 +1,6 @@
+﻿ALTER TABLE [dbo].[ILOSOrderpickgroup]  WITH CHECK ADD  CONSTRAINT [FK__ILOSOrder__Count__46E78A0C] FOREIGN KEY([CountryID])
+REFERENCES [dbo].[Country] ([ID])
+ON DELETE CASCADE
+GO
+
+ALTER TABLE [dbo].[ILOSOrderpickgroup] CHECK CONSTRAINT [FK__ILOSOrder__Count__46E78A0C]

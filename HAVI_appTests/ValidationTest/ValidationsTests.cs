@@ -44,8 +44,8 @@ namespace HAVI_appTests
         public void GTINValidationTest()
         {
             var gtin = new Validation();
-            var test = gtin.GTINValidation(1234);
-            Assert.AreEqual(00000000001234, test);
+            var test = gtin.GTINValidation("1234");
+            Assert.AreEqual(false, test);
         }
     }
 }

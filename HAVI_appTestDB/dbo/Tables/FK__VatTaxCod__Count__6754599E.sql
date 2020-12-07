@@ -1,0 +1,6 @@
+﻿ALTER TABLE [dbo].[VatTaxCode]  WITH CHECK ADD  CONSTRAINT [FK__VatTaxCod__Count__6754599E] FOREIGN KEY([CountryID])
+REFERENCES [dbo].[Country] ([ID])
+ON DELETE CASCADE
+GO
+
+ALTER TABLE [dbo].[VatTaxCode] CHECK CONSTRAINT [FK__VatTaxCod__Count__6754599E]
