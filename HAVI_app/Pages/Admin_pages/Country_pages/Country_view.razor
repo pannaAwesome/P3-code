@@ -103,7 +103,7 @@ else
                             </td>
 
                             <td>
-                                <input type="text" name="code-@i" value="@CompanyCodes[i].Code"  disabled="@(Customers[i].Customer == "" ? false : true)"/>
+                                <input type="text" name="code-@i" value="@CompanyCodes[i].Code"  disabled="@(CompanyCodes[i].Code == "" ? false : true)"/>
                             </td>
                             @if (i == NumberOfCodes)
                             {
@@ -129,7 +129,7 @@ else
                             </td>
 
                             <td>
-                                <input type="text" name="unit-@i" value="@Units[i].Unit" disabled="@(Customers[i].Customer == "" ? false : true)" />
+                                <input type="text" name="unit-@i" value="@Units[i].Unit" disabled="@(Units[i].Unit == "" ? false : true)" />
                             </td>
                             @if (i == NumberOfUnits)
                             {
@@ -155,7 +155,7 @@ else
                             </td>
 
                             <td>
-                                <input type="text" name="order-@i" value="@OrderPickGroups[i].Orderpickgroup" disabled="@(Customers[i].Customer == "" ? false : true)" />
+                                <input type="text" name="order-@i" value="@OrderPickGroups[i].Orderpickgroup" disabled="@(OrderPickGroups[i].Orderpickgroup == "" ? false : true)" />
                             </td>
                             @if (i == NumberOfOrders)
                             {
@@ -181,7 +181,7 @@ else
                             </td>
 
                             <td>
-                                <input type="text" name="cat-@i" value="@ILOSCategories[i].Category" disabled="@(Customers[i].Customer == "" ? false : true)" />
+                                <input type="text" name="cat-@i" value="@ILOSCategories[i].Category" disabled="@(ILOSCategories[i].Category == "" ? false : true)" />
                             </td>
                             @if (i == NumberOfCat)
                             {
@@ -206,7 +206,7 @@ else
                             </td>
 
                             <td>
-                                <input type="text" name="tax-@i" value="@TaxCodes[i].Code" disabled="@(Customers[i].Customer == "" ? false : true)" />
+                                <input type="text" name="tax-@i" value="@TaxCodes[i].Code" disabled="@(TaxCodes[i].Code == "" ? false : true)" />
                             </td>
                             @if (i == NumberOfTAX)
                             {
@@ -233,14 +233,14 @@ else
                             </td>
 
                             <td>
-                                <input type="text" name="prim-dc-@i" value="@ILOSCodes[i].PrimaryCode" disabled="@(Customers[i].Customer == "" ? false : true)" />
+                                <input type="text" name="prim-dc-@i" value="@ILOSCodes[i].PrimaryCode" disabled="@(ILOSCodes[i].PrimaryCode == "" ? false : true)" />
                             </td>
                             <td>
                                 <label for="prim-sap-@i">SAP Plant for code:</label>
                             </td>
 
                             <td>
-                                <input type="text" name="prim-sap-@i" value="@ILOSCodes[i].Sapplant" disabled="@(Customers[i].Customer == "" ? false : true)" />
+                                <input type="text" name="prim-sap-@i" value="@ILOSCodes[i].Sapplant" disabled="@(ILOSCodes[i].PrimaryCode == "" ? false : true)" />
                             </td>
                             @if (i == NumberOfPrim)
                             {
