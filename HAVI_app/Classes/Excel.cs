@@ -20,6 +20,7 @@ namespace HAVI_app.Classes
                 IWorkbook workbook = application.Workbooks.Create(2);
                 IWorksheet sheet = workbook.Worksheets[1];
                 #region Generate Excel
+                // HAVI only info
                 sheet.Range["B3"].Number = version.InternalArticleInformation.CompanyCode;
                 sheet.Range["B4"].Number = version.InternalArticleInformation.SupplierIdIlos;
                 sheet.Range["B5"].Text = version.InternalArticleInformation.SupplierDeliveryUnit;
