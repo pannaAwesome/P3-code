@@ -6,6 +6,7 @@
 @inject HAVI_app.Services.Classes.ArticleInformationService ArticleInformationService
 @inject HAVI_app.Services.Classes.FreightResponsibilityService FreightResponsibilityService
 @inject HAVI_app.Services.Classes.ArticleService ArticleService
+@inject HAVI_app.Services.Classes.ArticleData ArticleData
 @using Newtonsoft.Json
 
 
@@ -19,14 +20,14 @@
 </div>
 <div class="row justify-content-center ">
     <div class="col-10 d-flex justify-content-center">
-        <EditForm Model="Article" OnSubmit="@ValidationSupplierForm">
+        <EditForm Model="ArticleData.Article" OnSubmit="@ValidationSupplierForm">
             <table class="table">
                 <tr>
                     <td>
                         <label for="company_name" class="required">Company name:</label>
                     </td>
                     <td>
-                        <input type="text" class="form-control @CompanyName" @onfocus="@(() => CompanyName = "")" name="company_name" @bind="Article.CompanyName" required maxlength="31">
+                        <input type="text" class="form-control @CompanyName" @onfocus="@(() => CompanyName = "")" name="company_name" @bind="ArticleData.Article.CompanyName" required maxlength="31">
                     </td>
                     <td>
                         <div></div>
@@ -43,7 +44,7 @@
                         <label for="company_location" class="required">Company location:</label>
                     </td>
                     <td>
-                        <select class="form-control" name="company_location" @onchange="@((ChangeEventArgs __e) => Article.CompanyLocation = __e.Value.ToString())" value="@Article.CompanyLocation" required>
+                        <select class="form-control" name="company_location" @onchange="@((ChangeEventArgs __e) => ArticleData.Article.CompanyLocation = __e.Value.ToString())" value="@ArticleData.Article.CompanyLocation" required>
                             @foreach (var item in contries)
                             {
                                 <option>@item.Country</option>
@@ -66,7 +67,7 @@
                     </td>
                     <td>
 
-                        <input type="text" class="form-control @EmailValidated" @onfocus="@(() => EmailValidated = "")" name="email" @bind="Article.Email" required maxlength="100">
+                        <input type="text" class="form-control @EmailValidated" @onfocus="@(() => EmailValidated = "")" name="email" @bind="ArticleData.Article.Email" required maxlength="100">
                     </td>
                     <td>
                         <div></div>
@@ -85,10 +86,10 @@
                     </td>
                     <td>
                         <div class="text-center">
-                            <input type="radio" name="pallet_exchange" checked="@(Article.PalletExchange == 1)" @onchange="@(() => Article.PalletExchange = 1)" required/>
+                            <input type="radio" name="pallet_exchange" checked="@(ArticleData.Article.PalletExchange == 1)" @onchange="@(() => ArticleData.Article.PalletExchange = 1)" required/>
                             <label for="yes">Yes</label>
                             &nbsp;
-                            <input type="radio" name="pallet_exchange" checked="@(Article.PalletExchange == 0)" @onchange="@(() => Article.PalletExchange = 0)" required/>
+                            <input type="radio" name="pallet_exchange" checked="@(ArticleData.Article.PalletExchange == 0)" @onchange="@(() => ArticleData.Article.PalletExchange = 0)" required/>
                             <label for="no">No</label>
                         </div>
 
@@ -108,7 +109,7 @@
                         <label for="freight_responsibility">Freight Responsibility</label>
                     </td>
                     <td>
-                        <select class="form-control" name="freight_responsibility" @bind="Article.FreightResponsibility" required>
+                        <select class="form-control" name="freight_responsibility" @bind="ArticleData.Article.FreightResponsibility" required>
                             @foreach (FreightResponsibility item in Freights)
                             {
                                 <option>@item.Responsibility</option>
@@ -129,7 +130,7 @@
                 <tr>
                     <td colspan="2">
                         <label for="special_info">Special information regarding the article or cooperation?</label>
-                        <textarea class="form-control" name="special_info" @bind="Article.SpecialInformation" maxlength="500"></textarea>
+                        <textarea class="form-control" name="special_info" @bind="ArticleData.Article.SpecialInformation" maxlength="500"></textarea>
                     </td>
                     <td>
                         <div></div>
@@ -149,10 +150,10 @@
 
                     <td>
                         <div class="text-center">
-                            <input type="radio" name="transport" class="@BookingTransport" @onclick="@(() => BookingTransport = "")" checked="@(Article.TransportBooking == 1)" @onchange="@(() => Article.TransportBooking = 1)" required/>
+                            <input type="radio" name="transport" class="@BookingTransport" @onclick="@(() => BookingTransport = "")" checked="@(ArticleData.Article.TransportBooking == 1)" @onchange="@(() => ArticleData.Article.TransportBooking = 1)" required/>
                             <label for="yes">Yes</label>
                             &nbsp;
-                            <input type="radio" name="transport" class="@BookingTransport" @onclick="@(() => BookingTransport = "")" checked="@(Article.TransportBooking == 0)" @onchange="@(() => Article.TransportBooking = 0)" required />
+                            <input type="radio" name="transport" class="@BookingTransport" @onclick="@(() => BookingTransport = "")" checked="@(ArticleData.Article.TransportBooking == 0)" @onchange="@(() => ArticleData.Article.TransportBooking = 0)" required />
                             <label for="no">No</label>
                         </div>
                     </td>
@@ -165,14 +166,14 @@
                         </HAVI_app.Shared.Shared_layout.Questionmark_top>
                     </td>
                 </tr>
-                @if (Article.TransportBooking == 1)
+                @if (ArticleData.Article.TransportBooking == 1)
                 {
                 <tr>
                     <td>
                         <label for="transittime" class="required">Transit time:</label>
                     </td>
                     <td>
-                        <input type="number" class="form-control @TransitTime" @onfocus="@(() => TransitTime = "")" name="transittime" @bind="Article.TransitTime" maxlength="4">
+                        <input type="number" class="form-control @TransitTime" @onfocus="@(() => TransitTime = "")" name="transittime" @bind="ArticleData.Article.TransitTime" maxlength="4">
                     </td>
                     <td>days</td>
                     <td>
@@ -188,10 +189,10 @@
                     </td>
                     <td>
                         <div class="text-center">
-                            <input type="radio" name="dangerous" value="0" class="@DangerousGoods" @onclick="@(() => DangerousGoods = "")" checked="@(Article.DangerousGoods == 1)" @onchange="@(() => Article.DangerousGoods = 1)" required>
+                            <input type="radio" name="dangerous" value="0" class="@DangerousGoods" @onclick="@(() => DangerousGoods = "")" checked="@(ArticleData.Article.DangerousGoods == 1)" @onchange="@(() => ArticleData.Article.DangerousGoods = 1)" required>
                             <label for="yes">Yes</label>
                             &nbsp;
-                            <input type="radio" value="1" name="dangerous" class="@DangerousGoods" @onclick="@(() => DangerousGoods = "")" checked="@(Article.DangerousGoods == 0)" @onchange="@(() => Article.DangerousGoods = 0)" required/>
+                            <input type="radio" value="1" name="dangerous" class="@DangerousGoods" @onclick="@(() => DangerousGoods = "")" checked="@(ArticleData.Article.DangerousGoods == 0)" @onchange="@(() => ArticleData.Article.DangerousGoods = 0)" required/>
                             <label for="no">No</label>
                         </div>
                     </td>
@@ -205,14 +206,14 @@
                         </HAVI_app.Shared.Shared_layout.Questionmark_top>
                     </td>
                 </tr>
-                @if (Article.DangerousGoods == 1)
+                @if (ArticleData.Article.DangerousGoods == 1)
                 {
                 <tr>
                     <td>
                         <label for="class" class="required">Class:</label>
                     </td>
                     <td>
-                        <input type="text" class="form-control @Class" @onfocus="@(() => Class = "")" name="class" @bind="Article.Class" maxlength="31">
+                        <input type="text" class="form-control @Class" @onfocus="@(() => Class = "")" name="class" @bind="ArticleData.Article.Class" maxlength="31">
                     </td>
                     <td>
                         <div></div>
@@ -229,7 +230,7 @@
                         <label for="classificationCode" class="required">Classification code:</label>
                     </td>
                     <td>
-                        <input type="text" class="form-control @ClassificationCodeValidated" @onfocus="@(() => ClassificationCodeValidated = "")" name="classificationcode" @bind="Article.ClassificationCode" maxlength="15">
+                        <input type="text" class="form-control @ClassificationCodeValidated" @onfocus="@(() => ClassificationCodeValidated = "")" name="classificationcode" @bind="ArticleData.Article.ClassificationCode" maxlength="15">
                     </td>
                     <td>
                         <div></div>
@@ -265,8 +266,6 @@
     [Parameter]
     public int Id { get; set; }
 
-    public ArticleInformation Article = new ArticleInformation();
-
     List<Location> contries = new List<Location>();
     public List<FreightResponsibility> Freights = new List<FreightResponsibility>();
 
@@ -280,34 +279,34 @@
 
     public void ValidationSupplierForm()
     {
-        if(Article.CompanyName == "")
+        if(ArticleData.Article.CompanyName == "")
         {
             CompanyName = "btn-danger";
         }
 
-        if (!IsEmailValid(Article.Email))
+        if (!IsEmailValid(ArticleData.Article.Email))
         {
             EmailValidated = "btn-danger";
         }
 
-        if(Article.TransportBooking == 2)
+        if(ArticleData.Article.TransportBooking == 2)
         {
             BookingTransport = "btn-danger";
-        }else if(Article.TransportBooking == 1 && Article.TransitTime == 0)
+        }else if(ArticleData.Article.TransportBooking == 1 && ArticleData.Article.TransitTime == 0)
         {
             TransitTime = "btn-danger";
         }
 
-        if (Article.DangerousGoods == 2)
+        if (ArticleData.Article.DangerousGoods == 2)
         {
             DangerousGoods = "btn-danger";
-        }else if(Article.DangerousGoods == 1)
+        }else if(ArticleData.Article.DangerousGoods == 1)
         {
-            if(!NumbersLettersDashOnly(Article.Class))
+            if(!NumbersLettersDashOnly(ArticleData.Article.Class))
             {
                 Class = "btn-danger";
             }
-            if (!NumbersLettersDashOnly(Article.ClassificationCode))
+            if (!NumbersLettersDashOnly(ArticleData.Article.ClassificationCode))
             {
                 ClassificationCodeValidated = "btn-danger";
             }
@@ -315,9 +314,8 @@
 
         if(EmailValidated == "" && ClassificationCodeValidated == "" && BookingTransport == "" && TransitTime == "" && DangerousGoods == "" && Class == "" && CompanyName == "")
         {
-            Article.Id = Id;
-            string article = JsonConvert.SerializeObject(Article);
-            NavigationManager.NavigateTo($"/article_info_form{article}", true);
+            ArticleData.Article.Id = Id;
+            NavigationManager.NavigateTo($"/article_info_form/", true);
         }
     }
 
@@ -338,10 +336,10 @@
 
         Article article = await ArticleService.GetArticleWithInformation(Id);
 
-        Article.CompanyName = article.ArticleInformation.CompanyName;
-        Article.CompanyLocation = article.ArticleInformation.CompanyLocation;
-        Article.Email = article.ArticleInformation.Email;
-        Article.PalletExchange = article.ArticleInformation.PalletExchange;
-        Article.FreightResponsibility = article.ArticleInformation.FreightResponsibility;
+        ArticleData.Article.CompanyName = article.ArticleInformation.CompanyName;
+        ArticleData.Article.CompanyLocation = article.ArticleInformation.CompanyLocation;
+        ArticleData.Article.Email = article.ArticleInformation.Email;
+        ArticleData.Article.PalletExchange = article.ArticleInformation.PalletExchange;
+        ArticleData.Article.FreightResponsibility = article.ArticleInformation.FreightResponsibility;
     }
 }
