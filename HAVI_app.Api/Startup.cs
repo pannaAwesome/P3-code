@@ -21,9 +21,11 @@ namespace HAVI_app.Api
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Microsoft.AspNetCore.Hosting.IHostingEnvironment CurrentEnvironment { get; }
+        public Startup(IConfiguration configuration, Microsoft.AspNetCore.Hosting.IHostingEnvironment hostEnvironment)
         {
             Configuration = configuration;
+            CurrentEnvironment = hostEnvironment;
         }
 
         public IConfiguration Configuration { get; }
@@ -31,7 +33,15 @@ namespace HAVI_app.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<HAVIdatabaseContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            if (CurrentEnvironment.IsEnvironment("Testing"))
+            {
+                services.AddDbContext<HAVIdatabaseContext>(options => options.UseInMemoryDatabase("TestingDB"));
+            }
+            else
+            {
+                services.AddDbContext<HAVIdatabaseContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            }
+
             services.AddScoped<ProfileRepository>();
             services.AddScoped<SupplierRepository>();
             services.AddScoped<DepartmentIdRepository>();

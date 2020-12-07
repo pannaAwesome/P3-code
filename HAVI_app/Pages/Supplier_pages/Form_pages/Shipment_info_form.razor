@@ -54,7 +54,7 @@
                         <label for="country_origin" class="required">Country of origin:</label>
                     </td>
                     <td colspan="6">
-                        <select class="form-control @CountryOfOriginValidated" @onfocus="@(() => CountryOfOriginValidated = "")" value="@Article.CountryOfOrigin" name="county_origin" @onchange="@(async (ChangeEventArgs __e) => { Article.CountryOfOrigin = __e.Value.ToString(); })" required>
+                        <select class="form-control @CountryOfOriginValidated" @onfocus="@(() => CountryOfOriginValidated = "")" @bind="@Article.CountryOfOrigin" name="county_origin" required>
                             <option>-- select or search for an option --</option>
                                 @foreach (var item in contries)
                                 {
@@ -75,7 +75,7 @@
                         <label for="imported_from" class="required ">Imported from:</label>
                     </td>
                     <td colspan="6">
-                        <select class="form-control @ImportedFromValidated" @onfocus="@(() => ImportedFromValidated = "")" value="@Article.ImportedFrom" name="imported_from" @onchange="@(async (ChangeEventArgs __e) => { Article.ImportedFrom = __e.Value.ToString(); })" required>
+                        <select class="form-control @ImportedFromValidated" @onfocus="@(() => ImportedFromValidated = "")" @bind="@Article.ImportedFrom" name="imported_from" required>
                             <option>-- select or search for an option --</option>
                                 @foreach (var item in contries)
                                 {

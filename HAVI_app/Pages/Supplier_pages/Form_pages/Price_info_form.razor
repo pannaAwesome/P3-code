@@ -26,7 +26,7 @@
                         <label for="set_currency" class="required">Set currency:</label>
                     </td>
                     <td colspan="4">
-                        <select class="form-control @SetCurrency" @onclick="@(() => SetCurrency = "")" name="set_currency" @onchange="@((ChangeEventArgs __e) => Article.SetCurrency = __e.Value.ToString())" value="@Article.SetCurrency" required>
+                        <select class="form-control @SetCurrency" @onclick="@(() => SetCurrency = "")" name="set_currency" @bind="@Article.SetCurrency" required>
                             <option>-- select or search for an option --</option>
                             @foreach (var item in contries)
                             {

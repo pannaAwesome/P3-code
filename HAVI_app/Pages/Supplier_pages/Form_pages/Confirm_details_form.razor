@@ -116,10 +116,10 @@
 
                     <td colspan="5">
                         <div class="text-center">
-                            <input type="radio" name="transport" data-toggle="collapse" data-target="#hideTransit:not(.show)" aria-expanded="false" aria-controls="hideTransit" checked="@(Article.TransportBooking == 1)" @onchange="@(() => Article.TransportBooking = 1)" disabled>
+                            <input type="radio" name="transport" checked="@(Article.TransportBooking == 1)" disabled>
                             <label for="yes">Yes</label>
                             &nbsp;
-                            <input type="radio" name="transport" data-toggle="collapse" data-target="#hideTransit.show" aria-expanded="false" aria-controls="hideTransit" checked="@(Article.TransportBooking == 0)" @onchange="@(() => Article.TransportBooking = 2)" disabled>
+                            <input type="radio" name="transport" checked="@(Article.TransportBooking == 0)" disabled>
                             <label for="no">No</label>
                         </div>
                     </td>
@@ -148,10 +148,10 @@
                     </td>
                     <td colspan="5">
                         <div class="text-center">
-                            <input type="radio" name="dangerous" data-toggle="collapse" data-target="#hideDanger:not(.show)" aria-expanded="false" aria-controls="hideDanger" checked="@(Article.DangerousGoods == 1)" @onchange="@(() => Article.DangerousGoods = 1)" disabled>
+                            <input type="radio" name="dangerous" checked="@(Article.DangerousGoods == 1)" disabled>
                             <label for="yes">Yes</label>
                             &nbsp;
-                            <input type="radio" name="dangerous" data-toggle="collapse" data-target="#hideDanger.show" aria-expanded="false" aria-controls="hideDanger" checked="@(Article.DangerousGoods == 0)" @onchange="@(() => Article.DangerousGoods = 2)" disabled />
+                            <input type="radio" name="dangerous" checked="@(Article.DangerousGoods == 0)" disabled />
                             <label for="no">No</label>
                         </div>
                     </td>
