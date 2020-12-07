@@ -2,11 +2,11 @@
 @inject Microsoft.AspNetCore.Components.NavigationManager NavigationManager
 @page "/supplier_info_form/{Id:int}"
 @inherits HAVI_app.Classes.Validation
-@inject Models.ArticleInformation Article
 @inject HAVI_app.Services.Classes.LocationService LocationService
 @inject HAVI_app.Services.Classes.ArticleInformationService ArticleInformationService
 @inject HAVI_app.Services.Classes.FreightResponsibilityService FreightResponsibilityService
 @inject HAVI_app.Services.Classes.ArticleService ArticleService
+@using Newtonsoft.Json
 
 
 
@@ -265,6 +265,8 @@
     [Parameter]
     public int Id { get; set; }
 
+    public ArticleInformation Article = new ArticleInformation();
+
     List<Location> contries = new List<Location>();
     public List<FreightResponsibility> Freights = new List<FreightResponsibility>();
 
@@ -314,6 +316,7 @@
         if(EmailValidated == "" && ClassificationCodeValidated == "" && BookingTransport == "" && TransitTime == "" && DangerousGoods == "" && Class == "" && CompanyName == "")
         {
             Article.Id = Id;
+            string article = JsonConvert.SerializeObject(Article);
             NavigationManager.NavigateTo("/article_info_form", true);
         }
     }

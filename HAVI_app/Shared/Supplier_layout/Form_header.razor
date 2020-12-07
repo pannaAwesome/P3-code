@@ -68,16 +68,15 @@
     [Parameter]
     public string ConfirmState { get; set; }
 
-   
     private void DiscardChanges()
     {
         NavigationManager.NavigateTo("/overview_supplier", true);
     }
-    
+
 
     private void ChangeToAnotherForm(string FormName)
     {
-        switch (FormName)
+        /*switch (FormName)
         {
             case "supplier_form":
                 if (SupplierState == "filled")
@@ -118,6 +117,6 @@
             default:
                 break;
 
-        }
+        }*/
     }
 }
