@@ -22,9 +22,9 @@ namespace HAVI_app.Models
         public int PalletExchange { get; set; }
         public string FreightResponsibility { get; set; } = "";
         public string SpecialInformation { get; set; } = "";
-        public int TransportBooking { get; set; }
+        public int TransportBooking { get; set; } = 2;
         public int TransitTime { get; set; }
-        public int DangerousGoods { get; set; }
+        public int DangerousGoods { get; set; } = 2;
         public string Class { get; set; } = "";
         public string ClassificationCode { get; set; } = "";
         public string ArticleName { get; set; } = "";
@@ -34,7 +34,7 @@ namespace HAVI_app.Models
         public string Gtinnumber { get; set; }
         public int Shelflife { get; set; }
         public int MinimumShelflife { get; set; }
-        public int OrganicArticle { get; set; }
+        public int OrganicArticle { get; set; } = 2;
         public double LengthPrSalesunit { get; set; }
         public double WidthPrSalesunit { get; set; }
         public double HeightPrSalesunit { get; set; }
@@ -53,7 +53,7 @@ namespace HAVI_app.Models
         public int LeadTime { get; set; }
         public string SetCurrency { get; set; } = "";
         public double PurchasePrice { get; set; }
-        public int OtherCosts { get; set; }
+        public int OtherCosts { get; set; } = 2;
 
         [JsonIgnore]
         public virtual Article Article { get; set; } = null;
