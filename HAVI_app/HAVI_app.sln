@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HAVI_app.Api", "..\HAVI_app
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HAVI_appTests", "..\HAVI_appTests\HAVI_appTests.csproj", "{39D2AA7A-01B9-4550-96C3-5D6889F6B42C}"
 EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "HAVI_appTestDB", "..\HAVI_appTestDB\HAVI_appTestDB.sqlproj", "{0FDD5285-42F8-4219-B2F4-5AFD0E0739E2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,12 @@ Global
 		{39D2AA7A-01B9-4550-96C3-5D6889F6B42C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{39D2AA7A-01B9-4550-96C3-5D6889F6B42C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{39D2AA7A-01B9-4550-96C3-5D6889F6B42C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FDD5285-42F8-4219-B2F4-5AFD0E0739E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FDD5285-42F8-4219-B2F4-5AFD0E0739E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FDD5285-42F8-4219-B2F4-5AFD0E0739E2}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{0FDD5285-42F8-4219-B2F4-5AFD0E0739E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FDD5285-42F8-4219-B2F4-5AFD0E0739E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FDD5285-42F8-4219-B2F4-5AFD0E0739E2}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

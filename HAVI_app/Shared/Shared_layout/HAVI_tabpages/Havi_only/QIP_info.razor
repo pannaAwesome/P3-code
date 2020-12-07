@@ -10,7 +10,7 @@
     </div>
 }
 else
-{ }
+{ 
 <div class="row">
     <div class="col-11">
         <h4>QIP:</h4>
@@ -363,21 +363,24 @@ else
         public void UpdateQip(int number, string name)
         {
             Qipnumber qip = Qips.Find(q => q.QipnumberName == name);
-            Article.InternalArticleInformation.Qips[number].QipnameNumber = qip.QipnumberName;
-            Article.InternalArticleInformation.Qips[number].Qipdescription = qip.Qipdescription;
-            Article.InternalArticleInformation.Qips[number].QipanswerOptions = qip.AnswerOptions;
-            Article.InternalArticleInformation.Qips[number].QipsetAnswer = "";
-            Article.InternalArticleInformation.Qips[number].Qipokvalue = 0;
-            Article.InternalArticleInformation.Qips[number].QiplowBoundary = 0;
-            Article.InternalArticleInformation.Qips[number].QiphighBoundary = 0;
-            Article.InternalArticleInformation.Qips[number].QipfrequencyType = 0;
-            Article.InternalArticleInformation.Qips[number].Qipfrequency = 0;
+            if (qip != null)
+            {
+                Article.InternalArticleInformation.Qips[number].QipnameNumber = qip.QipnumberName;
+                Article.InternalArticleInformation.Qips[number].Qipdescription = qip.Qipdescription;
+                Article.InternalArticleInformation.Qips[number].QipanswerOptions = qip.AnswerOptions;
+                Article.InternalArticleInformation.Qips[number].QipsetAnswer = "";
+                Article.InternalArticleInformation.Qips[number].Qipokvalue = 0;
+                Article.InternalArticleInformation.Qips[number].QiplowBoundary = 0;
+                Article.InternalArticleInformation.Qips[number].QiphighBoundary = 0;
+                Article.InternalArticleInformation.Qips[number].QipfrequencyType = 0;
+                Article.InternalArticleInformation.Qips[number].Qipfrequency = 0;
 
-            Answers[number].SetAnswer = qip.SetAnswer;
-            Answers[number].OKValue = qip.OKValue;
-            Answers[number].LowBoundary = qip.LowBoundary;
-            Answers[number].HighBoundary = qip.HighBoundary;
-            Answers[number].FrequencyType = qip.FrequencyType;
-            Answers[number].Frequency = qip.Frequency;
+                Answers[number].SetAnswer = qip.SetAnswer;
+                Answers[number].OKValue = qip.OKValue;
+                Answers[number].LowBoundary = qip.LowBoundary;
+                Answers[number].HighBoundary = qip.HighBoundary;
+                Answers[number].FrequencyType = qip.FrequencyType;
+                Answers[number].Frequency = qip.Frequency;
+            }
         }
     }

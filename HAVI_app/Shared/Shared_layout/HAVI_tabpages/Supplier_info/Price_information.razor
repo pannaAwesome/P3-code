@@ -81,7 +81,7 @@
                         <td>
                             <input type="number" class="form-control" name="" @bind="@Article.ArticleInformation.OtherCostsForArticles[0].Amount" disabled="@IsDisabled">
                         </td>
-                        @if (NumberOfOtherCosts == 1)
+                        @if (NumberOfOtherCosts == 1 && !IsDisabled)
                         {
                             <td @onclick="AddExtraCosts"> &#10133; </td>
                         }
@@ -110,7 +110,7 @@
                         <td>
                             <input type="number" class="form-control" name="" @bind="@Article.ArticleInformation.OtherCostsForArticles[1].Amount" disabled="@IsDisabled">
                         </td>
-                        @if (NumberOfOtherCosts == 2)
+                        @if (NumberOfOtherCosts == 2 && !IsDisabled)
                         {
                             <td @onclick="AddExtraCosts"> &#10133; </td>
                             <td @onclick="RemoveExtraCosts"> &#10134;</td>
@@ -140,7 +140,7 @@
                         <td>
                             <input type="number" class="form-control" name="" @bind="@Article.ArticleInformation.OtherCostsForArticles[2].Amount" disabled="@IsDisabled">
                         </td>
-                        @if (NumberOfOtherCosts == 3)
+                        @if (NumberOfOtherCosts == 3 && !IsDisabled)
                         {
                             <td @onclick="AddExtraCosts"> &#10133; </td>
                             <td @onclick="RemoveExtraCosts"> &#10134;</td>
@@ -170,7 +170,7 @@
                         <td>
                             <input type="number" class="form-control" name="" @bind="@Article.ArticleInformation.OtherCostsForArticles[3].Amount" disabled="@IsDisabled">
                         </td>
-                        @if (NumberOfOtherCosts == 4)
+                        @if (NumberOfOtherCosts == 4 && !IsDisabled)
                         {
                             <td @onclick="AddExtraCosts"> &#10133; </td>
                             <td @onclick="RemoveExtraCosts"> &#10134;</td>
@@ -200,7 +200,7 @@
                         <td>
                             <input type="number" class="form-control" name="" @bind="@Article.ArticleInformation.OtherCostsForArticles[4].Amount" disabled="@IsDisabled">
                         </td>
-                        @if (NumberOfOtherCosts == 5)
+                        @if (NumberOfOtherCosts == 5 && !IsDisabled)
                         {
                             <td @onclick="AddExtraCosts"> &#10133; </td>
                             <td @onclick="RemoveExtraCosts"> &#10134;</td>

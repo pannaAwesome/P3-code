@@ -21,6 +21,9 @@ namespace HAVI_app.Shared.Purchaser_layout
         public ArticleService ArticleService { get; set; }
 
         [Inject]
+        public InternalArticleInformationService InternalArticleInformationService { get; set; }
+
+        [Inject]
         public Excel Excel { get; set; }
 
         [Parameter]
@@ -118,6 +121,7 @@ namespace HAVI_app.Shared.Purchaser_layout
         {
             foreach (Article item in Articles)
             {
+                item.InternalArticleInformation = await InternalArticleInformationService.GetInternalArticleInformation(item.InternalArticleInformationId);
                 if(item.ArticleState == (int)ArticleState.RobotReady)
                 {
                     excelStream = Excel.CreateXlsIO(item);

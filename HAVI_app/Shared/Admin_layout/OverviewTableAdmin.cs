@@ -24,6 +24,9 @@ namespace HAVI_app.Shared.Admin_layout
         [Inject]
         public ArticleService ArticleService { get; set; }
 
+        [Inject]
+        public InternalArticleInformationService InternalArticleInformationService { get; set; }
+
         public List<Article> Articles;
         public MemoryStream excelStream;
 
@@ -36,6 +39,8 @@ namespace HAVI_app.Shared.Admin_layout
         {
             foreach (Article item in Articles)
             {
+                item.InternalArticleInformation = await InternalArticleInformationService.GetInternalArticleInformation(item.InternalArticleInformationId);
+
                 if (item.ArticleState == (int)ArticleState.RobotReady)
                 {
                     excelStream = Excel.CreateXlsIO(item);
