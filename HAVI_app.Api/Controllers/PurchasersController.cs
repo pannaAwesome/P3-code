@@ -41,6 +41,31 @@ namespace HAVI_app.Api.Controllers
             }
         }
 
+        [HttpPut("{id}")]
+        public async Task<ActionResult<Purchaser>> UpdatePurchaser(int id, Purchaser purchaser)
+        {
+            try
+            {
+                if (id != purchaser.Id)
+                {
+                    return BadRequest();
+                }
+
+                var supplierToUpdate = await _purchaserRepository.GetPurchaser(id);
+
+                if (supplierToUpdate == null)
+                {
+                    return NotFound($"Purchaser with id = {id} not found");
+                }
+
+                return await _purchaserRepository.UpdatePurchaser(purchaser);
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database.");
+            }
+        }
+
         [HttpDelete("profile/{id}")]
         public async Task<ActionResult<Purchaser>> DeletePurchaserForProfile(int id)
         {

@@ -62,31 +62,34 @@ namespace HAVI_app.Pages.Supplier_pages
 
         public async void NewArticleAdded()
         {
-            Country country = await CountryService.GetCountryWithName(CountryName);
-            Profile profile = await ProfileService.GetProfileByUsernameAndpassword(PurchaserUsername, "1234");
-            Purchaser purchaser = await PurchaserService.GetPurchaserForProfile(profile.Id);
-
-            Article Article = new Article()
+            if(CountryName != null && PurchaserUsername != null)
             {
-                PurchaserId = purchaser.Id,
-                SupplierId = Id,
-                CountryId = country.Id,
-                VailedForCustomer = ValidForCustomer,
-                DateCreated = DateTime.Now,
-                ArticleState = (int)ArticleState.Created,
-                ArticleInformation = new ArticleInformation(),
-                InternalArticleInformation = new InternalArticleInformation()
-            };
+                Country country = await CountryService.GetCountryWithName(CountryName);
+                Profile profile = await ProfileService.GetProfileByUsernameAndpassword(PurchaserUsername, "1234");
+                Purchaser purchaser = await PurchaserService.GetPurchaserForProfile(profile.Id);
 
-            Article.ArticleInformation.CompanyName = Supplier.CompanyName;
-            Article.ArticleInformation.CompanyLocation = Supplier.CompanyLocation;
-            Article.ArticleInformation.FreightResponsibility = Supplier.FreightResponsibility;
-            Article.ArticleInformation.PalletExchange = Supplier.PalletExchange;
-            Article.ArticleInformation.Email = Supplier.Profile.Username;
+                Article Article = new Article()
+                {
+                    PurchaserId = purchaser.Id,
+                    SupplierId = Id,
+                    CountryId = country.Id,
+                    VailedForCustomer = ValidForCustomer,
+                    DateCreated = DateTime.Now,
+                    ArticleState = (int)ArticleState.Created,
+                    ArticleInformation = new ArticleInformation(),
+                    InternalArticleInformation = new InternalArticleInformation()
+                };
 
-            Article newArticle = await ArticleService.CreateArticle(Article);
+                Article.ArticleInformation.CompanyName = Supplier.CompanyName;
+                Article.ArticleInformation.CompanyLocation = Supplier.CompanyLocation;
+                Article.ArticleInformation.FreightResponsibility = Supplier.FreightResponsibility;
+                Article.ArticleInformation.PalletExchange = Supplier.PalletExchange;
+                Article.ArticleInformation.Email = Supplier.Profile.Username;
 
-            NavigationManager.NavigateTo($"/supplier_info_form/{newArticle.ArticleInformation.Id}", true);
+                Article newArticle = await ArticleService.CreateArticle(Article);
+
+                NavigationManager.NavigateTo($"/supplier_info_form/{newArticle.ArticleInformation.Id}", true);
+            }
         }
 
         public void NavigateToProfilePage()
