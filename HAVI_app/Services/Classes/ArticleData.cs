@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using HAVI_app.Models
+using HAVI_app.Models;
 
 namespace HAVI_app.Services.Classes
 {

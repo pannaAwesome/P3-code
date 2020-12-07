@@ -1,14 +1,14 @@
 ﻿@layout HAVI_app.Shared.Supplier_layout.Form_layout
 @inject Microsoft.AspNetCore.Components.NavigationManager NavigationManager
-@page "/confirm_details/{article}"
+@page "/confirm_details/"
 @inject HAVI_app.Models.ArticleInformation ArticleInformation
-@inject HAVI_app.Services.Classes.ArticleInformationService ArticleInformationService 
+@inject HAVI_app.Services.Classes.ArticleInformationService ArticleInformationService
 @inject HAVI_app.Services.Classes.ArticleService ArticleService
-@inject HAVI_app.Services.Classes.SupplierService SupplierService 
+@inject HAVI_app.Services.Classes.SupplierService SupplierService
 @inject HAVI_app.Services.Classes.InternalArticleInformationService InternalArticleInformationService
+@inject HAVI_app.Models.ArticleInformation Article
 @using HAVI_app.Classes
 @using HAVI_app.Models
-@using Newtonsoft.Json
 
 <HAVI_app.Shared.Supplier_layout.Form_header SupplierState="filled" ArticleState="filled" MeasurementState="filled" ShipmentState="filled" PriceState="filled" ConfirmState="active" Id="Article.Id" />
 
@@ -473,7 +473,7 @@
                     </td>
                     <td>
                         <div class="text-left">
-                            <input type="number" step="any"  class="form-control moveStuffToTheRight" id="min" value="@Article.TemperatureTransportationMin" disabled>
+                            <input type="number" step="any" class="form-control moveStuffToTheRight" id="min" value="@Article.TemperatureTransportationMin" disabled>
                         </div>
                     </td>
                     <td>
@@ -488,7 +488,7 @@
                     </td>
                     <td>
                         <div class="text-left">
-                            <input type="number" step="any"  class="form-control moveStuffToTheRight" id="max" value="@Article.TemperatureTransportationMax" disabled>
+                            <input type="number" step="any" class="form-control moveStuffToTheRight" id="max" value="@Article.TemperatureTransportationMax" disabled>
                         </div>
                     </td>
                     <td>
@@ -509,7 +509,7 @@
                     </td>
                     <td>
                         <div class="text-left">
-                            <input type="number" step="any"  class="form-control moveStuffToTheRight" id="min" value="@Article.TemperatureStorageMin" disabled>
+                            <input type="number" step="any" class="form-control moveStuffToTheRight" id="min" value="@Article.TemperatureStorageMin" disabled>
                         </div>
                     </td>
                     <td>
@@ -524,7 +524,7 @@
                     </td>
                     <td>
                         <div class="text-left">
-                            <input type="number" step="any"  class="form-control moveStuffToTheRight" id="max" value="@Article.TemperatureStorageMax" disabled>
+                            <input type="number" step="any" class="form-control moveStuffToTheRight" id="max" value="@Article.TemperatureStorageMax" disabled>
                         </div>
                     </td>
                     <td>
@@ -637,7 +637,7 @@
                     <input type="button" class="btn cancel-button button-size" value="Back" @onclick="GoBack" />
                 </div>
                 <div class="text-left col-6">
-                    <input type="submit" class="btn green-button button-size" value="Submit"/>
+                    <input type="submit" class="btn green-button button-size" value="Submit" />
                 </div>
             </div>
         </EditForm>
@@ -646,9 +646,6 @@
 
 @code
 {
-    [Parameter]
-    public string article { get; set; }
-    ArticleInformation Article = new ArticleInformation();
 
     public async void Submit()
     {
@@ -668,14 +665,10 @@
 
     public void GoBack()
     {
-        NavigationManager.NavigateTo($"/price_info_form", true);
+        NavigationManager.NavigateTo($"/price_info_form");
     }
 
-    protected override async Task OnInitializedAsync()
-    {
-        Article = JsonConvert.DeserializeObject<ArticleInformation>(article);
-    }
-
+   
     private string BookingTransport = "yes";
 
     private string DangerousGoods = "yes";
