@@ -1,10 +1,10 @@
 ﻿@layout HAVI_app.Shared.Supplier_layout.Form_layout
 @inject Microsoft.AspNetCore.Components.NavigationManager NavigationManager
-@page "/measurement_info_form/{stringarticle}"
+@page "/measurement_info_form"
 @using HAVI_app.Models
 @using Newtonsoft.Json
 @inherits HAVI_app.Classes.Validation
-@inject HAVI_app.Services.Classes.ArticleData ArticleData
+@inject HAVI_app.Models.ArticleInformation Article
 
 <HAVI_app.Shared.Supplier_layout.Form_header SupplierState="filled" ArticleState="filled" MeasurementState="active" Id="Article.Id" />
 
@@ -17,14 +17,14 @@
 
 <div class="justify-content-center row">
     <div class="col-10 d-flex justify-content-center">
-        <EditForm Model="ArticleData.Article" OnSubmit="@ValidationMeasurementForm">
+        <EditForm Model="Article" OnSubmit="@ValidationMeasurementForm">
             <table class="table">
                 <tr>
                     <td>
                         <label for="length" class="required">Length per salesunit:</label>
                     </td>
                     <td>
-                        <input type="number" step="any" class="form-control @LengthValidated" @onfocus="@(() => LengthValidated = "")" name="Length" @bind="ArticleData.Article.LengthPrSalesunit" required maxlength="10">
+                        <input type="number" step="any" class="form-control @LengthValidated" @onfocus="@(() => LengthValidated = "")" name="Length" @bind="Article.LengthPrSalesunit" required maxlength="10">
                     </td>
                     <td>
                         <label class="center-for-units" for="length">cm</label>
@@ -42,7 +42,7 @@
                         <label for="width" class="required">Width per salesunit:</label>
                     </td>
                     <td>
-                        <input type="number" step="any" class="form-control @WidthValidated" @onfocus="@(() => WidthValidated = "")" name="width" @bind="ArticleData.Article.WidthPrSalesunit" required maxlength="10">
+                        <input type="number" step="any" class="form-control @WidthValidated" @onfocus="@(() => WidthValidated = "")" name="width" @bind="Article.WidthPrSalesunit" required maxlength="10">
                     </td>
                     <td>
                         <label class="center-for-units" for="width">cm</label>
@@ -60,7 +60,7 @@
                         <label for="height" class="required">Height per salesunit:</label>
                     </td>
                     <td>
-                        <input type="number" step="any" class="form-control @HeightValidated" @onfocus="@(() => HeightValidated = "")" name="height" @bind="ArticleData.Article.HeightPrSalesunit" required maxlength="10">
+                        <input type="number" step="any" class="form-control @HeightValidated" @onfocus="@(() => HeightValidated = "")" name="height" @bind="Article.HeightPrSalesunit" required maxlength="10">
                     </td>
                     <td>
                         <label class="center-for-units" for="height">cm</label>
@@ -78,7 +78,7 @@
                         <label for="net_weight" class="required">Net weight per salesunit:</label>
                     </td>
                     <td>
-                        <input type="number" step="any" class="form-control @NetWeightValidated" @onfocus="@(() => NetWeightValidated = "")" name="net_weight" @bind="ArticleData.Article.NetWeightPrSalesunit" required maxlength="8">
+                        <input type="number" step="any" class="form-control @NetWeightValidated" @onfocus="@(() => NetWeightValidated = "")" name="net_weight" @bind="Article.NetWeightPrSalesunit" required maxlength="8">
                     </td>
                     <td>
                         <label class="center-for-units" for="net_weight">kg</label>
@@ -96,7 +96,7 @@
                         <label for="gross_weight" class="required">Gross weight per salesunit:</label>
                     </td>
                     <td>
-                        <input type="number" step="any" class="form-control @GrossWeightValidated" @onfocus="@(() => GrossWeightValidated = "")" name="gross_weight" @bind="ArticleData.Article.GrossWeightPrSalesunit" required maxlength="8">
+                        <input type="number" step="any" class="form-control @GrossWeightValidated" @onfocus="@(() => GrossWeightValidated = "")" name="gross_weight" @bind="Article.GrossWeightPrSalesunit" required maxlength="8">
                     </td>
                     <td>
                         <label class="center-for-units" for="gross_weight">kg</label>
@@ -126,11 +126,6 @@
     [Parameter]
     public int Id { get; set; }
 
-    [Parameter]
-    public string stringarticle { get; set; }
-
-    public ArticleInformation Article = new ArticleInformation();
-
     public string LengthValidated;
 
     public string WidthValidated;
@@ -144,36 +139,36 @@
     public void ValidationMeasurementForm()
     {
 
-        if (DoubleOnly(ArticleData.Article.LengthPrSalesunit) && MustNotBeZeroOrNegativeNumbere(ArticleData.Article.LengthPrSalesunit) &&
-            DoubleOnly(ArticleData.Article.WidthPrSalesunit) && MustNotBeZeroOrNegativeNumbere(ArticleData.Article.WidthPrSalesunit) &&
-            DoubleOnly(ArticleData.Article.HeightPrSalesunit) && MustNotBeZeroOrNegativeNumbere(ArticleData.Article.HeightPrSalesunit) &&
-            DoubleOnly(ArticleData.Article.NetWeightPrSalesunit) && MustNotBeZeroOrNegativeNumbere(ArticleData.Article.NetWeightPrSalesunit) &&
-            DoubleOnly(ArticleData.Article.GrossWeightPrSalesunit) && MustNotBeZeroOrNegativeNumbere(ArticleData.Article.GrossWeightPrSalesunit))
+        if (DoubleOnly(Article.LengthPrSalesunit) && MustNotBeZeroOrNegativeNumbere(Article.LengthPrSalesunit) &&
+            DoubleOnly(Article.WidthPrSalesunit) && MustNotBeZeroOrNegativeNumbere(Article.WidthPrSalesunit) &&
+            DoubleOnly(Article.HeightPrSalesunit) && MustNotBeZeroOrNegativeNumbere(Article.HeightPrSalesunit) &&
+            DoubleOnly(Article.NetWeightPrSalesunit) && MustNotBeZeroOrNegativeNumbere(Article.NetWeightPrSalesunit) &&
+            DoubleOnly(Article.GrossWeightPrSalesunit) && MustNotBeZeroOrNegativeNumbere(Article.GrossWeightPrSalesunit))
         {
-            NavigationManager.NavigateTo($"/shipment_info_form", true);
+            NavigationManager.NavigateTo($"/shipment_info_form");
         }
 
-        if (!DoubleOnly(ArticleData.Article.LengthPrSalesunit) || (!MustNotBeZeroOrNegativeNumbere(ArticleData.Article.LengthPrSalesunit)))
+        if (!DoubleOnly(Article.LengthPrSalesunit) || (!MustNotBeZeroOrNegativeNumbere(Article.LengthPrSalesunit)))
         {
             LengthValidated = "btn-danger";
         }
 
-        if (!DoubleOnly(ArticleData.Article.WidthPrSalesunit) || (!MustNotBeZeroOrNegativeNumbere(ArticleData.Article.WidthPrSalesunit)))
+        if (!DoubleOnly(Article.WidthPrSalesunit) || (!MustNotBeZeroOrNegativeNumbere(Article.WidthPrSalesunit)))
         {
             WidthValidated = "btn-danger";
         }
 
-        if (!DoubleOnly(ArticleData.Article.HeightPrSalesunit) || (!MustNotBeZeroOrNegativeNumbere(ArticleData.Article.HeightPrSalesunit)))
+        if (!DoubleOnly(Article.HeightPrSalesunit) || (!MustNotBeZeroOrNegativeNumbere(Article.HeightPrSalesunit)))
         {
             HeightValidated = "btn-danger";
         }
 
-        if (!DoubleOnly(ArticleData.Article.NetWeightPrSalesunit) || (!MustNotBeZeroOrNegativeNumbere(ArticleData.Article.NetWeightPrSalesunit)))
+        if (!DoubleOnly(Article.NetWeightPrSalesunit) || (!MustNotBeZeroOrNegativeNumbere(Article.NetWeightPrSalesunit)))
         {
             NetWeightValidated = "btn-danger";
         }
 
-        if (!DoubleOnly(ArticleData.Article.GrossWeightPrSalesunit) || (!MustNotBeZeroOrNegativeNumbere(ArticleData.Article.GrossWeightPrSalesunit)))
+        if (!DoubleOnly(Article.GrossWeightPrSalesunit) || (!MustNotBeZeroOrNegativeNumbere(Article.GrossWeightPrSalesunit)))
         {
             GrossWeightValidated = "btn-danger";
         }
@@ -203,6 +198,7 @@
 
     public void OnPostBack()
     {
-        NavigationManager.NavigateTo($"/article_info_form/", true);
+        NavigationManager.NavigateTo($"/article_info_form/");
     }
+
 }

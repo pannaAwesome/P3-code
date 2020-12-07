@@ -1,10 +1,10 @@
 ﻿@layout HAVI_app.Shared.Supplier_layout.Form_layout
 @inject Microsoft.AspNetCore.Components.NavigationManager NavigationManager
-@page "/price_info_form/{StringArticle}"
+@page "/price_info_form/"
 @inherits HAVI_app.Classes.Validation
-@using Newtonsoft.Json
 @inject HAVI_app.Services.Classes.SetCurrencyService SetCurrencyService
 @inject HAVI_app.Services.Classes.InformCostTypeService InformCostTypeService
+@inject HAVI_app.Models.ArticleInformation Article
 
 <HAVI_app.Shared.Supplier_layout.Form_header SupplierState="filled" ArticleState="filled" MeasurementState="filled" ShipmentState="filled" PriceState="active" Id="Article.Id" />
 
@@ -79,157 +79,157 @@
             </table>
             @if (Article.OtherCosts == 1)
             {
-        <table>
+                <table>
                     @if (0 < NumberOfOtherCosts)
                     {
-            <tr>
-                <td>
-                    <label for="">Inform cost type:</label>
-                </td>
+                        <tr>
+                            <td>
+                                <label for="">Inform cost type:</label>
+                            </td>
 
-                <td>
-                    <select class="form-control" name="" @bind="Article.OtherCostsForArticles[0].InformCostType">
-                        <option>-- select an option --</option>
-                        @foreach (InformCostType item in costType)
-                        {
-                            <option>@item.CostType</option>
-                        }
-                    </select>
-                </td>
-                <td>
-                    <label for="">Amount in @Article.SetCurrency:</label>
-                </td>
-                <td>
-                    <input type="number" class="form-control" name="" @bind="@Article.OtherCostsForArticles[0].Amount">
-                </td>
-                @if (NumberOfOtherCosts == 1)
-                {
-                    <td @onclick="AddExtraCosts"> &#10133; </td>
-                }
-            </tr>
+                            <td>
+                                <select class="form-control" name="" @bind="Article.OtherCostsForArticles[0].InformCostType">
+                                    <option>-- select an option --</option>
+                                    @foreach (InformCostType item in costType)
+                                    {
+                                        <option>@item.CostType</option>
+                                    }
+                                </select>
+                            </td>
+                            <td>
+                                <label for="">Amount in @Article.SetCurrency:</label>
+                            </td>
+                            <td>
+                                <input type="number" class="form-control" name="" @bind="@Article.OtherCostsForArticles[0].Amount">
+                            </td>
+                            @if (NumberOfOtherCosts == 1)
+                            {
+                                <td @onclick="AddExtraCosts"> &#10133; </td>
+                            }
+                        </tr>
                     }
 
                     @if (1 < NumberOfOtherCosts)
                     {
-        <tr>
-            <td>
-                <label for="">Inform cost type:</label>
-            </td>
+                        <tr>
+                            <td>
+                                <label for="">Inform cost type:</label>
+                            </td>
 
-            <td>
-                <select class="form-control" name="" @bind="Article.OtherCostsForArticles[1].InformCostType">
-                    <option>-- select an option --</option>
-                    @foreach (InformCostType item in costType)
-                    {
-                        <option>@item.CostType</option>
-                    }
-                </select>
-            </td>
-            <td>
-                <label for="">Amount in @Article.SetCurrency:</label>
-            </td>
-            <td>
-                <input type="number" class="form-control" name="" @bind="@Article.OtherCostsForArticles[1].Amount">
-            </td>
-            @if (NumberOfOtherCosts == 2)
-            {
-                <td @onclick="AddExtraCosts"> &#10133; </td>
-                <td @onclick="RemoveExtraCosts"> &#10134;</td>
-            }
-        </tr>
+                            <td>
+                                <select class="form-control" name="" @bind="Article.OtherCostsForArticles[1].InformCostType">
+                                    <option>-- select an option --</option>
+                                    @foreach (InformCostType item in costType)
+                                    {
+                                        <option>@item.CostType</option>
+                                    }
+                                </select>
+                            </td>
+                            <td>
+                                <label for="">Amount in @Article.SetCurrency:</label>
+                            </td>
+                            <td>
+                                <input type="number" class="form-control" name="" @bind="@Article.OtherCostsForArticles[1].Amount">
+                            </td>
+                            @if (NumberOfOtherCosts == 2)
+                            {
+                                <td @onclick="AddExtraCosts"> &#10133; </td>
+                                <td @onclick="RemoveExtraCosts"> &#10134;</td>
+                            }
+                        </tr>
                     }
 
                     @if (2 < NumberOfOtherCosts)
                     {
-        <tr>
-            <td>
-                <label for="">Inform cost type:</label>
-            </td>
+                        <tr>
+                            <td>
+                                <label for="">Inform cost type:</label>
+                            </td>
 
-            <td>
-                <select class="form-control" name="" @bind="Article.OtherCostsForArticles[2].InformCostType">
-                    <option>-- select an option --</option>
-                    @foreach (InformCostType item in costType)
-                    {
-                        <option>@item.CostType</option>
-                    }
-                </select>
-            </td>
-            <td>
-                <label for="">Amount in @Article.SetCurrency:</label>
-            </td>
-            <td>
-                <input type="number" class="form-control" name="" @bind="@Article.OtherCostsForArticles[2].Amount">
-            </td>
-            @if (NumberOfOtherCosts == 3)
-            {
-                <td @onclick="AddExtraCosts"> &#10133; </td>
-                <td @onclick="RemoveExtraCosts"> &#10134;</td>
-            }
-        </tr>
+                            <td>
+                                <select class="form-control" name="" @bind="Article.OtherCostsForArticles[2].InformCostType">
+                                    <option>-- select an option --</option>
+                                    @foreach (InformCostType item in costType)
+                                    {
+                                        <option>@item.CostType</option>
+                                    }
+                                </select>
+                            </td>
+                            <td>
+                                <label for="">Amount in @Article.SetCurrency:</label>
+                            </td>
+                            <td>
+                                <input type="number" class="form-control" name="" @bind="@Article.OtherCostsForArticles[2].Amount">
+                            </td>
+                            @if (NumberOfOtherCosts == 3)
+                            {
+                                <td @onclick="AddExtraCosts"> &#10133; </td>
+                                <td @onclick="RemoveExtraCosts"> &#10134;</td>
+                            }
+                        </tr>
                     }
 
                     @if (3 < NumberOfOtherCosts)
                     {
-        <tr>
-            <td>
-                <label for="">Inform cost type:</label>
-            </td>
+                        <tr>
+                            <td>
+                                <label for="">Inform cost type:</label>
+                            </td>
 
-            <td>
-                <select class="form-control" name="" @bind="Article.OtherCostsForArticles[3].InformCostType">
-                    <option>-- select an option --</option>
-                    @foreach (InformCostType item in costType)
-                    {
-                        <option>@item.CostType</option>
-                    }
-                </select>
-            </td>
-            <td>
-                <label for="">Amount in @Article.SetCurrency:</label>
-            </td>
-            <td>
-                <input type="number" class="form-control" name="" @bind="@Article.OtherCostsForArticles[3].Amount">
-            </td>
-            @if (NumberOfOtherCosts == 4)
-            {
-                <td @onclick="AddExtraCosts"> &#10133; </td>
-                <td @onclick="RemoveExtraCosts"> &#10134;</td>
-            }
-        </tr>
+                            <td>
+                                <select class="form-control" name="" @bind="Article.OtherCostsForArticles[3].InformCostType">
+                                    <option>-- select an option --</option>
+                                    @foreach (InformCostType item in costType)
+                                    {
+                                        <option>@item.CostType</option>
+                                    }
+                                </select>
+                            </td>
+                            <td>
+                                <label for="">Amount in @Article.SetCurrency:</label>
+                            </td>
+                            <td>
+                                <input type="number" class="form-control" name="" @bind="@Article.OtherCostsForArticles[3].Amount">
+                            </td>
+                            @if (NumberOfOtherCosts == 4)
+                            {
+                                <td @onclick="AddExtraCosts"> &#10133; </td>
+                                <td @onclick="RemoveExtraCosts"> &#10134;</td>
+                            }
+                        </tr>
                     }
 
                     @if (4 < NumberOfOtherCosts)
                     {
-        <tr>
-            <td>
-                <label for="">Inform cost type:</label>
-            </td>
+                        <tr>
+                            <td>
+                                <label for="">Inform cost type:</label>
+                            </td>
 
-            <td>
-                <select class="form-control" name="" @bind="Article.OtherCostsForArticles[4].InformCostType">
-                    <option>-- select an option --</option>
-                    @foreach (InformCostType item in costType)
-                    {
-                        <option>@item.CostType</option>
+                            <td>
+                                <select class="form-control" name="" @bind="Article.OtherCostsForArticles[4].InformCostType">
+                                    <option>-- select an option --</option>
+                                    @foreach (InformCostType item in costType)
+                                    {
+                                        <option>@item.CostType</option>
+                                    }
+                                </select>
+                            </td>
+                            <td>
+                                <label for="">Amount in @Article.SetCurrency:</label>
+                            </td>
+                            <td>
+                                <input type="number" class="form-control" name="" @bind="@Article.OtherCostsForArticles[4].Amount">
+                            </td>
+                            @if (NumberOfOtherCosts == 5)
+                            {
+                                <td @onclick="AddExtraCosts"> &#10133; </td>
+                                <td @onclick="RemoveExtraCosts"> &#10134;</td>
+                            }
+                        </tr>
                     }
-                </select>
-            </td>
-            <td>
-                <label for="">Amount in @Article.SetCurrency:</label>
-            </td>
-            <td>
-                <input type="number" class="form-control" name="" @bind="@Article.OtherCostsForArticles[4].Amount">
-            </td>
-            @if (NumberOfOtherCosts == 5)
-            {
-                <td @onclick="AddExtraCosts"> &#10133; </td>
-                <td @onclick="RemoveExtraCosts"> &#10134;</td>
-            }
-        </tr>
-                    }
-                            
-        </table>
+
+                </table>
             }
             <div class="row justify-content-center">
                 <div class="text-right col-6">
@@ -246,8 +246,6 @@
 @code {
     [Parameter]
     public string StringArticle { get; set; }
-
-    public ArticleInformation Article = new ArticleInformation();
 
     public string SetCurrency = "";
 
@@ -271,32 +269,29 @@
             PurchasePriceValidated = "btn-danger";
         }
 
-        if(Article.SetCurrency == "-- select or search for an option --")
+        if (Article.SetCurrency == "-- select or search for an option --")
         {
             SetCurrency = "btn-danger";
         }
 
-        if(Article.OtherCosts == 2)
+        if (Article.OtherCosts == 2)
         {
             CostRegardingArticle = "btn-danger";
         }
 
         if (MustNotBeZeroOrNegativeNumbere(Article.PurchasePrice) && SetCurrency == "" && CostRegardingArticle == "")
         {
-            StringArticle = JsonConvert.SerializeObject(Article);
-            NavigationManager.NavigateTo($"/confirm_details/{StringArticle}", true);
+            NavigationManager.NavigateTo($"/confirm_details");
         }
     }
 
     public void OnPostBack()
     {
-        StringArticle = JsonConvert.SerializeObject(Article);
-        NavigationManager.NavigateTo($"/shipment_info_form/{StringArticle}", true);
+        NavigationManager.NavigateTo($"/shipment_info_form");
     }
 
     protected override async Task OnInitializedAsync()
     {
-        Article = JsonConvert.DeserializeObject<ArticleInformation>(StringArticle);
         Article.OtherCostsForArticles = new List<OtherCostsForArticle>();
         OtherCostsForArticle cost = new OtherCostsForArticle() { Id = 0, Amount = 0, InformCostType = "", ArticleInformationId = Article.Id };
         Article.OtherCostsForArticles.Add(new OtherCostsForArticle() { Id = 0, Amount = 0, InformCostType = "", ArticleInformationId = Article.Id });
