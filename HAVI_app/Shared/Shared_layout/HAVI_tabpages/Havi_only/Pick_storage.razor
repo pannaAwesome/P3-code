@@ -97,7 +97,7 @@ else
 
             if (!IsDisabled)
             {
-                if(Article.InternalArticleInformation.Sapplants == null)
+                if(Article.InternalArticleInformation.Sapplants.Count == 0)
                 {
                     Article.InternalArticleInformation.Sapplants = new List<Sapplant>();
                     foreach (PrimaryDciloscode item in Codes)
