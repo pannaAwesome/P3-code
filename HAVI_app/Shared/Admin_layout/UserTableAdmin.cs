@@ -20,9 +20,6 @@ namespace HAVI_app.Shared.Admin_layout
         [Inject]
         public ProfileService ProfileService { get; set; }
 
-        [Inject]
-        public ArticleService ArticleService { get; set; }
-
         public List<Profile> Profiles { get; set; }
 
         private int ProfileClicked { get; set; }
@@ -31,12 +28,6 @@ namespace HAVI_app.Shared.Admin_layout
         {
             int profileId = Profiles[0].Id;
             Purchaser purchaser = await PurchaserService.GetPurchaserForProfile(profileId);
-            List<Article> articles = await ArticleService.GetArticlesForPurchaser(purchaser.Id);
-
-            foreach (Article article in articles)
-            {
-                ArticleService.DeleteArticle(article.Id);
-            }
 
             await PurchaserService.DeletePurchaserForProfile(ProfileClicked);
             NavigationManager.NavigateTo($"/user_view/{purchaser.CountryId}", true);

@@ -162,25 +162,5 @@ namespace HAVI_app.Api.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database.");
             }
         }
-
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Purchaser>> DeletePurchaser(int id)
-        {
-            try
-            {
-                var purchaserToDelete = await _purchaserRepository.GetPurchaser(id);
-
-                if (purchaserToDelete == null)
-                {
-                    return NotFound($"Purchaser with id = {id} not found");
-                }
-
-                return await _purchaserRepository.DeletePurchaserAsync(id);
-            }
-            catch (Exception)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database.");
-            }
-        }
     }
 }

@@ -58,6 +58,7 @@
                     <form>
                         <label for="purchaserList">Select purchaser to transferOrdersFrom:</label>
                         <select class="form-control" name="purchaserList" @bind="PurchaserNameFrom">
+                            <option disabled selected>--Select an option --</option>
                             @foreach (Purchaser purchaser in Purchasers)
                             {
                                 <option>@purchaser.Profile.Username</option>
@@ -67,6 +68,7 @@
                     <form>
                         <label for="purchaserList">Select purchaser to transferOrdersTo:</label>
                         <select class="form-control" name="purchaserList" @bind="PurchaserNameTo">
+                            <option disabled selected>--Select an option --</option>
                             @foreach (Purchaser purchaser in Purchasers)
                             {
                                 <option>@purchaser.Profile.Username</option>
