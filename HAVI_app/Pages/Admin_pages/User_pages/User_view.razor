@@ -2,6 +2,7 @@
 @layout HAVI_app.Shared.Admin_layout.Overview
 @inherits UserView
 
+
 <div class="row">
     <HAVI_app.Shared.Shared_layout.Logo_image />
     <div class="col-1"></div>
@@ -60,6 +61,9 @@
 
                     </div>
 
+                    <div class="text-center">
+                        <p>@_userAlreadyExists</p>
+                    </div>
 
                     <div class="modal-footer">
                         <button class="btn cancel-button" data-dismiss="modal">Cancel</button>
