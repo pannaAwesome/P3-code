@@ -317,7 +317,7 @@
         {
             Article.Id = Id;
             string article = JsonConvert.SerializeObject(Article);
-            NavigationManager.NavigateTo("/article_info_form", true);
+            NavigationManager.NavigateTo($"/article_info_form{article}", true);
         }
     }
 
