@@ -291,13 +291,25 @@
 
     protected override async Task OnInitializedAsync()
     {
-        Article.OtherCostsForArticles = new List<OtherCostsForArticle>();
-        OtherCostsForArticle cost = new OtherCostsForArticle() { Id = 0, Amount = 0, InformCostType = "", ArticleInformationId = Article.Id };
-        Article.OtherCostsForArticles.Add(new OtherCostsForArticle() { Id = 0, Amount = 0, InformCostType = "", ArticleInformationId = Article.Id });
-        Article.OtherCostsForArticles.Add(new OtherCostsForArticle() { Id = 0, Amount = 0, InformCostType = "", ArticleInformationId = Article.Id });
-        Article.OtherCostsForArticles.Add(new OtherCostsForArticle() { Id = 0, Amount = 0, InformCostType = "", ArticleInformationId = Article.Id });
-        Article.OtherCostsForArticles.Add(new OtherCostsForArticle() { Id = 0, Amount = 0, InformCostType = "", ArticleInformationId = Article.Id });
-        Article.OtherCostsForArticles.Add(new OtherCostsForArticle() { Id = 0, Amount = 0, InformCostType = "", ArticleInformationId = Article.Id });
+        if(Article.OtherCostsForArticles == null)
+        {
+            Article.OtherCostsForArticles = new List<OtherCostsForArticle>();
+            Article.OtherCostsForArticles.Add(new OtherCostsForArticle() { Id = 0, Amount = 0, InformCostType = "", ArticleInformationId = Article.Id });
+            Article.OtherCostsForArticles.Add(new OtherCostsForArticle() { Id = 0, Amount = 0, InformCostType = "", ArticleInformationId = Article.Id });
+            Article.OtherCostsForArticles.Add(new OtherCostsForArticle() { Id = 0, Amount = 0, InformCostType = "", ArticleInformationId = Article.Id });
+            Article.OtherCostsForArticles.Add(new OtherCostsForArticle() { Id = 0, Amount = 0, InformCostType = "", ArticleInformationId = Article.Id });
+            Article.OtherCostsForArticles.Add(new OtherCostsForArticle() { Id = 0, Amount = 0, InformCostType = "", ArticleInformationId = Article.Id });
+        }else
+        {
+            foreach(OtherCostsForArticle cost in Article.OtherCostsForArticles)
+            {
+                if(cost.InformCostType != "" && cost.Amount != 0)
+                {
+                    NumberOfOtherCosts++;
+                }
+            }
+        }
+
         contries = await SetCurrencyService.GetSetCurrencies();
         costType = await InformCostTypeService.GetInformCostTypes();
     }
