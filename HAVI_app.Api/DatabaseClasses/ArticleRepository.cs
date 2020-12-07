@@ -129,6 +129,7 @@ namespace HAVI_app.Api.DatabaseClasses
                 result.ErrorMessage = article.ErrorMessage;
                 result.ErrorOwner = article.ErrorOwner;
                 result.ErrorReported = article.ErrorReported;
+                result.ErrorField = article.ErrorField;
                 result.InternalArticalInformationCompleted = article.InternalArticalInformationCompleted;
                 result.PurchaserId = article.PurchaserId;
                 await _context.SaveChangesAsync();

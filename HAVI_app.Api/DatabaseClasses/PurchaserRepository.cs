@@ -44,20 +44,6 @@ namespace HAVI_app.Api.DatabaseClasses
             return result.Entity;
         }
 
-        public async Task<Purchaser> DeletePurchaserAsync(int purchaserId)
-        {
-            var purchaser = await _context.Purchasers.FirstOrDefaultAsync(p => p.Id == purchaserId);
-            var profile = await _context.Profiles.FirstOrDefaultAsync(p => p.Id == purchaser.ProfileId);
-            if (purchaser != null && profile != null)
-            {
-                _context.Profiles.Remove(profile);
-                await _context.SaveChangesAsync();
-                return purchaser;
-            }
-
-            return null;
-        }
-
         public async Task<Purchaser> GetPurchaser(int purchaserId)
         {
             return await _context.Purchasers
@@ -93,8 +79,14 @@ namespace HAVI_app.Api.DatabaseClasses
         {
             var purchaser = await _context.Purchasers.FirstOrDefaultAsync(p => p.ProfileId == profileId);
             var profile = await _context.Profiles.FirstOrDefaultAsync(p => p.Id == purchaser.ProfileId);
+            List<Article> articles = await _context.Articles.Where(p => p.PurchaserId == purchaser.Id).ToListAsync();
+
             if (purchaser != null && profile != null)
             {
+                foreach (Article article in articles)
+                {
+                    _context.Articles.Remove(article);
+                }
                 _context.Profiles.Remove(profile);
                 await _context.SaveChangesAsync();
                 return purchaser;

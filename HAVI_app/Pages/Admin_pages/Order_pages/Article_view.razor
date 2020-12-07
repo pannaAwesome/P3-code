@@ -1,6 +1,8 @@
 ﻿@page "/article_view/{Id:int}"
 @layout HAVI_app.Shared.Admin_layout.Overview
-@inject HAVI_app.Services.Classes.PurchaserService PurchaserService 
+@inject HAVI_app.Services.Classes.PurchaserService PurchaserService
+@inject HAVI_app.Services.Classes.ArticleService ArticleService
+@inject NavigationManager NavigationManager
 
 <div class="row">
     <HAVI_app.Shared.Shared_layout.Logo_image />
@@ -27,70 +29,118 @@
     </div>
 </div>
 <div class="gap-overview"></div>
-    <div class="row overview-admin-header">
-        <div class="col-10">
-            <h3>Article Info:</h3>
-        </div>
-        <!--<div class="col-md-2">
-            <button class="btn button-options-overview" data-toggle="modal" data-target="#myModal">Transfer order</button>
-        </div>-->
+<div class="row overview-admin-header">
+    <div class="col-10">
+        <h3>Article Info:</h3>
     </div>
-    <div class="row">
-        <div class="col-12">
-            <HAVI_app.Shared.Admin_layout.Article_table_admin Id="Id"/>
-        </div>
+    <div class="col-md-2">
+        <button class="btn button-options-overview" data-toggle="modal" data-target="#myModal">Transfer articles to another purchaser</button>
     </div>
-    <div>
-        <div class="modal" id="myModal">
-            <div class="modal-dialog">
-                <div class="modal-content">
+</div>
+<div class="row">
+    <div class="col-12">
+        <HAVI_app.Shared.Admin_layout.Article_table_admin Id="Id" />
+    </div>
+</div>
+<div>
+    <div class="modal" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
 
 
-                    <div class="modal-header">
-                        <h4 class="modal-title">Transfer order</h4>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    </div>
-
-
-                    <div class="modal-body">
-                        <form>
-                            <label for="purchaser">Select purchaser:</label>
-                            <select class="form-control" name="purchaser" id="purchaser">
-                            </select>
-                        </form>
-                    </div>
-
-
-                    <div class="modal-footer">
-                        <button class="btn cancel-button" data-dismiss="modal">Cancel</button>
-                        <button class="btn green-button" data-dismiss="modal">Transfer order</button>
-                    </div>
-
+                <div class="modal-header">
+                    <h4 class="modal-title">Transfer order</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
+
+
+                <div class="modal-body">
+                    <form>
+                        <label for="purchaserList">Select purchaser to transferOrdersFrom:</label>
+                        <select class="form-control" name="purchaserList" @bind="PurchaserNameFrom">
+                            <option disabled selected>--Select an option --</option>
+                            @foreach (Purchaser purchaser in Purchasers)
+                            {
+                                <option>@purchaser.Profile.Username</option>
+                            }
+                        </select>
+                    </form>
+                    <form>
+                        <label for="purchaserList">Select purchaser to transferOrdersTo:</label>
+                        <select class="form-control" name="purchaserList" @bind="PurchaserNameTo">
+                            <option disabled selected>--Select an option --</option>
+                            @foreach (Purchaser purchaser in Purchasers)
+                            {
+                                <option>@purchaser.Profile.Username</option>
+                            }
+                        </select>
+                    </form>
+                    <div><p>@_userMessage</p></div>
+                </div>
+
+
+                <div class="modal-footer">
+                    <button class="btn cancel-button" data-dismiss="modal">Cancel</button>
+                    <button class="btn green-button" @onclick="TransferOrderToOtherUser">Transfer order</button>
+                </div>
+
             </div>
         </div>
     </div>
+</div>
 
-    @code {
-        [Parameter]
-        public int Id { get; set; }
+@code {
+    [Parameter]
+    public int Id { get; set; }
 
-        public List<Purchaser> Purchasers { get; set; }
+    public List<Purchaser> Purchasers { get; set; } = new List<Purchaser>();
 
-        public string profile;
-        public string country;
-        public string user;
-        public string article;
-        public string overview;
+    private string _userMessage;
+    public string profile;
+    public string country;
+    public string user;
+    public string article;
+    public string overview;
+    public string PurchaserNameTo { get; set; }
+    public string PurchaserNameFrom { get; set; }
+    public List<Article> PurchaserArticlesToTransfer { get; set; } = new List<Article>();
 
-        protected async override Task OnInitializedAsync()
+    protected async override Task OnInitializedAsync()
+    {
+        profile = $"/profile_admin/" + Id;
+        country = $"/country_view/{Id}";
+        user = $"/user_view/{Id}";
+        article = $"/article_view/{Id}";
+        overview = $"/overview_admin/{Id}";
+
+        Purchasers = await PurchaserService.GetPurchasers();
+    }
+
+    private async Task TransferOrderToOtherUser()
+    {
+
+        if (PurchaserNameFrom == PurchaserNameTo)
         {
-            profile = $"/profile_admin/" + Id;
-            country = $"/country_view/{Id}";
-            user = $"/user_view/{Id}";
-            article = $"/article_view/{Id}";
-            overview = $"/overview_admin/{Id}";
+            _userMessage = "You are trying to transfer this users articles to itself, which is not possible";
+        }
+        else
+        {
+            PurchaserArticlesToTransfer = await ArticleService.GetArticlesForPurchaser(Purchasers.Find(p => p.Profile.Username == PurchaserNameFrom).Id);
 
-            Purchasers = await PurchaserService.GetPurchasers();
+            if (PurchaserArticlesToTransfer.Count == 0)
+            {
+                _userMessage = "No articles to transfer!";
+            }
+
+            else
+            {
+                foreach (Article article in PurchaserArticlesToTransfer)
+                {
+                    article.PurchaserId = Purchasers.Find(p => p.Profile.Username == PurchaserNameTo).Id;
+                    await ArticleService.UpdateArticle(article.Id, article);
+                    NavigationManager.NavigateTo($"/article_view/{Id}", true);
+                }
+            }
         }
     }
+}

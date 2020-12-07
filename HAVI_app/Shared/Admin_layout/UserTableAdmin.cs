@@ -28,6 +28,7 @@ namespace HAVI_app.Shared.Admin_layout
         {
             int profileId = Profiles[0].Id;
             Purchaser purchaser = await PurchaserService.GetPurchaserForProfile(profileId);
+
             await PurchaserService.DeletePurchaserForProfile(ProfileClicked);
             NavigationManager.NavigateTo($"/user_view/{purchaser.CountryId}", true);
         }

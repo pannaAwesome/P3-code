@@ -74,42 +74,61 @@ else
                             </tr>
                             @for (int i = 0; i <= NumberOfCustomers; i++)
                             {
-                                <tr>
-                                    <td>
-                                        <label for="customer-@i">Customer name:</label>
-                                    </td>
+                        <tr>
+                            <td>
+                                <label for="customer-@i">Customer name:</label>
+                            </td>
 
-                                    <td>
-                                        <input type="text" name="customer-@i" @bind="Customers[i].Customer" />
-                                    </td>
-                                    @if (i == NumberOfCustomers)
-                                    {
-                                        <td @onclick="AddCustomer"> &#10133; </td>
-
+                            <td>
+                                @if (Customers[i].Customer != "")
+                                {
+                                    <input type="text" name="customer-@i" value="@Customers[i].Customer" disabled="@(Customers[i].Customer == "" ? false : true)" />
+                                }
+                                else
+                                {
+                                    <input type="text" name="customer-@i" @onchange="@((ChangeEventArgs e) => CustomerName = e.Value.ToString())" @onblur="@(() => NewCustomer())"/>
+                                }
+                            </td>
+                            @if (i == NumberOfCustomers)
+                            {
+                                <td @onclick="AddCustomer"> &#10133; </td>
+                                @if (NumberOfCustomers != 0)
+                                {
+                                <td @onclick="@(x => RemoveCustomer(i))"> &#10134;</td>
                                     }
-                                    <td @onclick="@(x => RemoveCustomer(i))"> &#10134;</td>
-                                </tr>
+                                }
+                        </tr>
                             }
                             <tr>
                                 <td colspan="4"><h5>Company codes: </h5></td>
                             </tr>
                             @for (int i = 0; i <= NumberOfCodes; i++)
                             {
-                                <tr>
-                                    <td>
-                                        <label for="code-@i">Company code:</label>
-                                    </td>
+                        <tr>
+                            <td>
+                                <label for="code-@i">Company code:</label>
+                            </td>
 
-                                    <td>
-                                        <input type="text" name="code-@i" @bind="CompanyCodes[i].Code" />
-                                    </td>
-                                    @if (i == NumberOfCodes)
-                                    {
-                                        <td @onclick="AddCode"> &#10133; </td>
-                                    }
+                            <td>
+                                @if (CompanyCodes[i].Code != "")
+                                {
+                                    <input type="text" name="customer-@i" value="@CompanyCodes[i].Code" disabled="@(CompanyCodes[i].Code == "" ? false : true)" />
+                                }
+                                else
+                                {
+                                    <input type="text" name="customer-@i" @onchange="@((ChangeEventArgs e) => Code = e.Value.ToString())" @onblur="@(() => NewCode())" />
+                                }
+                            </td>
+                            @if (i == NumberOfCodes)
+                            {
+                                <td @onclick="AddCode"> &#10133; </td>
+                                @if (NumberOfCodes != 0)
+                                {
                                     <td @onclick="@(x => RemoveCode(i))"> &#10134;</td>
+                                }
+                            }
 
-                                </tr>
+                        </tr>
                             }
 
                             <tr>
@@ -118,21 +137,32 @@ else
                             @for (int i = 0; i <= NumberOfUnits; i++)
                             {
 
-                                <tr>
-                                    <td>
-                                        <label for="unit-@i">Supplier delivery unit:</label>
-                                    </td>
+                        <tr>
+                            <td>
+                                <label for="unit-@i">Supplier delivery unit:</label>
+                            </td>
 
-                                    <td>
-                                        <input type="text" name="unit-@i" @bind="Units[i].Unit" />
-                                    </td>
-                                    @if (i == NumberOfUnits)
-                                    {
-                                        <td @onclick="AddUnit"> &#10133; </td>
-                                    }
+                            <td>
+                                @if (Units[i].Unit != "")
+                                {
+                                    <input type="text" name="customer-@i" value="@Units[i].Unit" disabled="@(Units[i].Unit == "" ? false : true)" />
+                                }
+                                else
+                                {
+                                    <input type="text" name="customer-@i" @onchange="@((ChangeEventArgs e) => Unit = e.Value.ToString())" @onblur="@(() => NewUnit())" />
+                                }
+                            </td>
+                            @if (i == NumberOfUnits)
+                            {
+                                <td @onclick="AddUnit"> &#10133; </td>
+                                @if (NumberOfUnits != 0)
+                                {
                                     <td @onclick="@(x => RemoveUnit(i))"> &#10134;</td>
 
-                                </tr>
+                                }
+                            }
+
+                        </tr>
                             }
                             <tr>
                                 <td colspan="4"><h5>ILOS orderpickgroups: </h5></td>
@@ -140,21 +170,32 @@ else
                             @for (int i = 0; i <= NumberOfOrders; i++)
                             {
 
-                                <tr>
-                                    <td>
-                                        <label for="order-@i">Orderpickgroup:</label>
-                                    </td>
+                        <tr>
+                            <td>
+                                <label for="order-@i">Orderpickgroup:</label>
+                            </td>
 
-                                    <td>
-                                        <input type="text" name="order-@i" @bind="OrderPickGroups[i].Orderpickgroup" />
-                                    </td>
-                                    @if (i == NumberOfOrders)
-                                    {
-                                        <td @onclick="AddOrder"> &#10133; </td>
-                                    }
+                            <td>
+                                @if (OrderPickGroups[i].Orderpickgroup != "")
+                                {
+                                    <input type="text" name="customer-@i" value="@OrderPickGroups[i].Orderpickgroup" disabled="@(OrderPickGroups[i].Orderpickgroup == "" ? false : true)" />
+                                }
+                                else
+                                {
+                                    <input type="text" name="customer-@i" @onchange="@((ChangeEventArgs e) => Order = e.Value.ToString())" @onblur="@(() => NewOrder())" />
+                                }
+                            </td>
+                            @if (i == NumberOfOrders)
+                            {
+                                <td @onclick="AddOrder"> &#10133; </td>
+                                @if (NumberOfOrders != 0)
+                                {
                                     <td @onclick="@(x => RemoveOrder(i))"> &#10134;</td>
 
-                                </tr>
+                                }
+                            }
+
+                        </tr>
                             }
                             <tr>
                                 <td colspan="4"><h5>ILOS categories/accounts: </h5></td>
@@ -162,21 +203,31 @@ else
                             @for (int i = 0; i <= NumberOfCat; i++)
                             {
 
-                                <tr>
-                                    <td>
-                                        <label for="cat-@i">Input category or account:</label>
-                                    </td>
+                        <tr>
+                            <td>
+                                <label for="cat-@i">Input category or account:</label>
+                            </td>
 
-                                    <td>
-                                        <input type="text" name="cat-@i" @bind="ILOSCategories[i].Category" />
-                                    </td>
-                                    @if (i == NumberOfCat)
-                                    {
-                                        <td @onclick="AddCat"> &#10133; </td>
-
-                                    }
+                            <td>
+                                @if (ILOSCategories[i].Category != "")
+                                {
+                                    <input type="text" name="customer-@i" value="@ILOSCategories[i].Category" disabled="@(ILOSCategories[i].Category == "" ? false : true)" />
+                                }
+                                else
+                                {
+                                    <input type="text" name="customer-@i" @onchange="@((ChangeEventArgs e) => Cat = e.Value.ToString())" @onblur="@(() => NewCategory())" />
+                                }
+                            </td>
+                            @if (i == NumberOfCat)
+                            {
+                                <td @onclick="AddCat"> &#10133; </td>
+                                @if (NumberOfCat != 0)
+                                {
                                     <td @onclick="@(x => RemoveCat(i))"> &#10134;</td>
-                                </tr>
+
+                                }
+                            }
+                        </tr>
                             }
                             <tr>
                                 <td colspan="4"><h5>VAT/TAX codes: </h5></td>
@@ -184,21 +235,32 @@ else
                             @for (int i = 0; i <= NumberOfTAX; i++)
                             {
 
-                                <tr class="border-bottom">
-                                    <td>
-                                        <label for="tax-@i">Input VAT or TAX code:</label>
-                                    </td>
+                        <tr class="border-bottom">
+                            <td>
+                                <label for="tax-@i">Input VAT or TAX code:</label>
+                            </td>
 
-                                    <td>
-                                        <input type="text" name="tax-@i" @bind="TaxCodes[i].Code" />
-                                    </td>
-                                    @if (i == NumberOfTAX)
-                                    {
-                                        <td @onclick="AddTAX"> &#10133; </td>
-                                    }
+                            <td>
+                                @if (TaxCodes[i].Code != "")
+                                {
+                                    <input type="text" name="customer-@i" value="@TaxCodes[i].Code" disabled="@(TaxCodes[i].Code == "" ? false : true)" />
+                                }
+                                else
+                                {
+                                    <input type="text" name="customer-@i" @onchange="@((ChangeEventArgs e) => Tax = e.Value.ToString())" @onblur="@(() => NewTax())" />
+                                }
+                            </td>
+                            @if (i == NumberOfTAX)
+                            {
+                                <td @onclick="AddTAX"> &#10133; </td>
+                                @if (NumberOfTAX != 0)
+                                {
                                     <td @onclick="@(x => RemoveTAX(i))"> &#10134;</td>
 
-                                </tr>
+                                }
+                            }
+
+                        </tr>
                             }
                         </table>
                         <table>
@@ -207,27 +269,45 @@ else
                             </tr>
                             @for (int i = 0; i <= NumberOfPrim; i++)
                             {
-                                <tr>
-                                    <td>
-                                        <label for="prim-dc-@i">Input ILOS code:</label>
-                                    </td>
+                        <tr>
+                            <td>
+                                <label for="prim-dc-@i">Input ILOS code:</label>
+                            </td>
 
-                                    <td>
-                                        <input type="text" name="prim-dc-@i" @bind="ILOSCodes[i].PrimaryCode" />
-                                    </td>
-                                    <td>
-                                        <label for="prim-sap-@i">SAP Plant for code:</label>
-                                    </td>
+                            <td>
+                                @if (ILOSCodes[i].PrimaryCode != "" || ILOSCodes[i].Sapplant != "")
+                                {
+                                    <input type="text" name="customer-@i" value="@ILOSCodes[i].PrimaryCode" disabled="@(ILOSCodes[i].PrimaryCode == "" ? false : true)" />
+                                }
+                                else
+                                {
+                                    <input type="text" name="customer-@i" @onchange="@((ChangeEventArgs e) => Prim = e.Value.ToString())" @onblur="@(() => NewPrim())" />
+                                }
+                            </td>
+                            <td>
+                                <label for="prim-sap-@i">SAP Plant for code:</label>
+                            </td>
 
-                                    <td>
-                                        <input type="text" name="prim-sap-@i" @bind="ILOSCodes[i].Sapplant" />
-                                    </td>
-                                    @if (i == NumberOfPrim)
-                                    {
-                                        <td @onclick="AddPrim"> &#10133; </td>
-                                    }
+                            <td>
+                                @if (ILOSCodes[i].PrimaryCode != "" || ILOSCodes[i].Sapplant != "")
+                                {
+                                    <input type="text" name="customer-@i" value="@ILOSCodes[i].Sapplant" disabled="@(ILOSCodes[i].Sapplant == "" ? false : true)" />
+                                }
+                                else
+                                {
+                                    <input type="text" name="customer-@i" @onchange="@((ChangeEventArgs e) => Sap = e.Value.ToString())" @onblur="@(() => NewSap())" />
+                                }
+                            </td>
+                            @if (i == NumberOfPrim)
+                            {
+                                <td @onclick="AddPrim"> &#10133; </td>
+                                @if (NumberOfPrim != 0)
+                                {
                                     <td @onclick="@(x => RemovePrim(i))"> &#10134;</td>
-                                </tr>
+
+                                }
+                            }
+                        </tr>
                             }
                         </table>
                     </form>
@@ -235,23 +315,8 @@ else
                 </div>
             </div>
             <div class="row country-buttons">
-                <div class="col-12 text-center"><button @onclick="SaveChangesForCountry" class="btn green-button">Save changes</button></div>
+                <div class="col-12 text-center"><button @onclick="SaveChangesForCountry"  class="btn green-button">Save changes</button></div>
             </div>
         </div>
     </div>
 }
-<div class="modal fade" id="country-created" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Saved changes!</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-footer d-flex justify-content-center">
-                <button type="button" class="btn cancel-button" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>

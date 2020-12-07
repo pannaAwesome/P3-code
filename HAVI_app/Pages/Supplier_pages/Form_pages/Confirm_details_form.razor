@@ -1,13 +1,14 @@
 ﻿@layout HAVI_app.Shared.Supplier_layout.Form_layout
 @inject Microsoft.AspNetCore.Components.NavigationManager NavigationManager
-@page "/confirm_details"
+@page "/confirm_details/{article}"
 @inject HAVI_app.Models.ArticleInformation ArticleInformation
-@inject Models.ArticleInformation Article
 @inject HAVI_app.Services.Classes.ArticleInformationService ArticleInformationService 
 @inject HAVI_app.Services.Classes.ArticleService ArticleService
 @inject HAVI_app.Services.Classes.SupplierService SupplierService 
 @inject HAVI_app.Services.Classes.InternalArticleInformationService InternalArticleInformationService
 @using HAVI_app.Classes
+@using HAVI_app.Models
+@using Newtonsoft.Json
 
 <HAVI_app.Shared.Supplier_layout.Form_header SupplierState="filled" ArticleState="filled" MeasurementState="filled" ShipmentState="filled" PriceState="filled" ConfirmState="active" Id="Article.Id" />
 
@@ -645,6 +646,10 @@
 
 @code
 {
+    [Parameter]
+    public string article { get; set; }
+    ArticleInformation Article = new ArticleInformation();
+
     public async void Submit()
     {
         await ArticleInformationService.UpdateArticleInformation(Article.Id, Article);
@@ -664,6 +669,11 @@
     public void GoBack()
     {
         NavigationManager.NavigateTo($"/price_info_form", true);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Article = JsonConvert.DeserializeObject<ArticleInformation>(article);
     }
 
     private string BookingTransport = "yes";

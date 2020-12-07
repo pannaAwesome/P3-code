@@ -217,18 +217,18 @@
         </td>
         <td>
             <HAVI_app.Shared.Shared_layout.Questionmark_top>
-                Please enter the amount in triple-digit
+                Please enter the exchange rate for 100 @Article.ArticleInformation.SetCurrency
             </HAVI_app.Shared.Shared_layout.Questionmark_top>
         </td>
     </tr>
-    <tr class="@EditPossible">
+    <tr>
         <td class="required">Price:</td>
         <td> <input type="text" class="form-control" name="currency_in_country" value="@Article.InternalArticleInformation.PriceInCountryCurrency" disabled /></td>
         <td>
             <div></div>
         </td>
-        <td>
-            <input type="button" class="btn green-button" @onclick="CalculatePrice" value="Calculate" disabled="@IsDisabled"/>
+        <td class="@(IsDisabled ? "d-none" : "")">
+            <input type="button" class="btn green-button" @onclick="CalculatePrice" value="Calculate"/>
         </td>
         
     </tr>

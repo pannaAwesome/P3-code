@@ -36,6 +36,7 @@ namespace HAVI_app
             services.AddSingleton<ArticleInformation>();
             services.AddSingleton<InternalArticleInformation>();
             services.AddSingleton<Excel>();
+            services.AddScoped<ArticleData>();
 
             #region AddHttpClient service for all the tables in the database
             services.AddHttpClient<ArticleInformationService>(client =>

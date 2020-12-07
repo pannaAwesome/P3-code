@@ -68,12 +68,11 @@
     [Parameter]
     public string ConfirmState { get; set; }
 
-   
     private void DiscardChanges()
     {
-        NavigationManager.NavigateTo("/overview_supplier", true);
+        NavigationManager.NavigateTo("/overview_supplier");
     }
-    
+
 
     private void ChangeToAnotherForm(string FormName)
     {
@@ -82,37 +81,37 @@
             case "supplier_form":
                 if (SupplierState == "filled")
                 {
-                    NavigationManager.NavigateTo($"/supplier_info_form/{Id}", true);
+                    NavigationManager.NavigateTo($"/supplier_info_form/{Id}");
                 }
                 break;
             case "article_form":
                 if (ArticleState == "filled")
                 {
-                    NavigationManager.NavigateTo("/article_info_form", true);
+                    NavigationManager.NavigateTo("/article_info_form");
                 }
                 break;
             case "measurement_form":
                 if (MeasurementState == "filled")
                 {
-                    NavigationManager.NavigateTo("/measurement_info_form", true);
+                    NavigationManager.NavigateTo("/measurement_info_form");
                 }
                 break;
             case "shipment_form":
                 if (ShipmentState == "filled")
                 {
-                    NavigationManager.NavigateTo("/shipment_info_form", true);
+                    NavigationManager.NavigateTo("/shipment_info_form");
                 }
                 break;
             case "price_form":
                 if (PriceState == "filled")
                 {
-                    NavigationManager.NavigateTo("/price_info_form", true);
+                    NavigationManager.NavigateTo("/price_info_form");
                 }
                 break;
             case "confirm_form":
                 if (ConfirmState == "filled")
                 {
-                    NavigationManager.NavigateTo("/confirm_details", true);
+                    NavigationManager.NavigateTo("/confirm_details");
                 }
                 break;
             default:
