@@ -1,21 +1,344 @@
-﻿@page "/information_supplier"
+﻿@layout HAVI_app.Shared.Supplier_layout.Form_layout
+@inject Microsoft.AspNetCore.Components.NavigationManager NavigationManager
+@page "/supplier_info_form/{Id:int}"
+@inherits HAVI_app.Classes.Validation
+@inject Models.ArticleInformation Article
+@inject HAVI_app.Services.Classes.LocationService LocationService
+@inject HAVI_app.Services.Classes.ArticleInformationService ArticleInformationService
+@inject HAVI_app.Services.Classes.FreightResponsibilityService FreightResponsibilityService
+@inject HAVI_app.Services.Classes.ArticleService ArticleService
 
 
-<div class="col-12">
-    <h1>Supplier information:</h1>
-    <p> Fill out information about your own company </p>
 
-    <form>
-        <div>
-            <label for="name">Company name:</label><br>
-        </div>
-        <div>
-            <input type="text" id="name" name="name"><br>
-        </div>
-    </form>
+<HAVI_app.Shared.Supplier_layout.Form_header SupplierState="active" />
+<div class="row justify-content-center">
+    <div class="col-10">
+        <h3>Supplier information:</h3>
+        <p class="form-header-supplier">Fill out information about your own company.</p>
+    </div>
+</div>
+<div class="row justify-content-center ">
+    <div class="col-10 d-flex justify-content-center">
+        <EditForm OnSubmit="@ValidationSupplierForm">
+            <table class="table">
+                <tr>
+                    <td>
+                        <label for="company_name" class="required">Company name:</label>
+                    </td>
+                    <td>
+                        <input type="text" class="form-control @CompanyName" @onfocus="@(() => CompanyName = "")" name="company_name" @bind="Article.CompanyName" required maxlength="31">
+                    </td>
+                    <td>
+                        <div></div>
+                    </td>
+                    <td>
+                        <HAVI_app.Shared.Shared_layout.Questionmark_top>
+                            Enter the name of your company
+                        </HAVI_app.Shared.Shared_layout.Questionmark_top>
+                    </td>
+                </tr>
 
+                <tr>
+                    <td>
+                        <label for="company_location" class="required">Company location:</label>
+                    </td>
+                    <td>
+                        <select class="form-control" name="company_location" @onchange="@((ChangeEventArgs __e) => Article.CompanyLocation = __e.Value.ToString())" value="@Article.CompanyLocation" required>
+                            @foreach (var item in contries)
+                            {
+                                <option>@item.Country</option>
+                            }
+                        </select>
+                    </td>
+                    <td>
+                        <div></div>
+                    </td>
+                    <td>
+                        <HAVI_app.Shared.Shared_layout.Questionmark_top>
+                            Enter the country of where your company resides
+                        </HAVI_app.Shared.Shared_layout.Questionmark_top>
+                    </td>
+                </tr>
 
+                <tr>
+                    <td>
+                        <label for="email" class="required">Email:</label>
+                    </td>
+                    <td>
+
+                        <input type="text" class="form-control @EmailValidated" @onfocus="@(() => EmailValidated = "")" name="email" @bind="Article.Email" required maxlength="100">
+                    </td>
+                    <td>
+                        <div></div>
+                    </td>
+                    <td>
+                        <HAVI_app.Shared.Shared_layout.Questionmark_top>
+                            Enter the email of the person in the company that HAVI may contact.
+                        </HAVI_app.Shared.Shared_layout.Questionmark_top>
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="pallet_exchange" class="required">Pallet exchange</label>
+                    </td>
+                    <td>
+                        <div class="text-center">
+                            <input type="radio" name="pallet_exchange" checked="@(Article.PalletExchange == 1)" @onchange="@(() => Article.PalletExchange = 1)" required/>
+                            <label for="yes">Yes</label>
+                            &nbsp;
+                            <input type="radio" name="pallet_exchange" checked="@(Article.PalletExchange == 0)" @onchange="@(() => Article.PalletExchange = 0)" required/>
+                            <label for="no">No</label>
+                        </div>
+
+                    </td>
+                    <td>
+                        <div></div>
+                    </td>
+                    <td>
+                        <HAVI_app.Shared.Shared_layout.Questionmark_top>
+                            Whether you would like to exchange pallets with HAVI upon delivering the article
+                        </HAVI_app.Shared.Shared_layout.Questionmark_top>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="freight_responsibility">Freight Responsibility</label>
+                    </td>
+                    <td>
+                        <select class="form-control" name="freight_responsibility" @bind="Article.FreightResponsibility" required>
+                            @foreach (FreightResponsibility item in Freights)
+                            {
+                                <option>@item.Responsibility</option>
+                            }
+                        </select>
+                    </td>
+                    <td>
+                        <div></div>
+                    </td>
+                    <td>
+                        <HAVI_app.Shared.Shared_layout.Questionmark_right>
+                            With CIP you pay for the freight and insurance during transit.
+                            With EXW you are only required to ready the article for pick up.
+                        </HAVI_app.Shared.Shared_layout.Questionmark_right>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2">
+                        <label for="special_info">Special information regarding the article or cooperation?</label>
+                        <textarea class="form-control" name="special_info" @bind="Article.SpecialInformation" maxlength="500"></textarea>
+                    </td>
+                    <td>
+                        <div></div>
+                    </td>
+                    <td>
+                        <HAVI_app.Shared.Shared_layout.Questionmark_top>
+                            If the article needs to be treated with special care or is delivered under special circumstances please note these.
+                        </HAVI_app.Shared.Shared_layout.Questionmark_top>
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="transport" class="required">Are you in charge of booking transport?</label>
+                    </td>
+
+                    <td>
+                        <div class="text-center">
+                            <input type="radio" name="transport" class="@BookingTransport" @onclick="@(() => BookingTransport = "")" checked="@(Article.TransportBooking == 1)" @onchange="@(() => Article.TransportBooking = 1)" required/>
+                            <label for="yes">Yes</label>
+                            &nbsp;
+                            <input type="radio" name="transport" class="@BookingTransport" @onclick="@(() => BookingTransport = "")" checked="@(Article.TransportBooking == 0)" @onchange="@(() => Article.TransportBooking = 0)" required />
+                            <label for="no">No</label>
+                        </div>
+                    </td>
+                    <td>
+                        <div></div>
+                    </td>
+                    <td>
+                        <HAVI_app.Shared.Shared_layout.Questionmark_top>
+                            If your company is the one in charge of transport, pick yes.
+                        </HAVI_app.Shared.Shared_layout.Questionmark_top>
+                    </td>
+                </tr>
+                @if (Article.TransportBooking == 1)
+                {
+                <tr>
+                    <td>
+                        <label for="transittime" class="required">Transit time:</label>
+                    </td>
+                    <td>
+                        <input type="number" class="form-control @TransitTime" @onfocus="@(() => TransitTime = "")" name="transittime" @bind="Article.TransitTime" maxlength="4">
+                    </td>
+                    <td>days</td>
+                    <td>
+                        <HAVI_app.Shared.Shared_layout.Questionmark_top>
+                            The amount of days from the article is ordered till the order is ready to be shipped to HAVI.
+                        </HAVI_app.Shared.Shared_layout.Questionmark_top>
+                    </td>
+                </tr>
+                }
+                <tr>
+                    <td>
+                        <label for="dangerous" class="required">Is the article classified as dangerous goods (ADR)?</label>
+                    </td>
+                    <td>
+                        <div class="text-center">
+                            <input type="radio" name="dangerous" value="0" class="@DangerousGoods" @onclick="@(() => DangerousGoods = "")" checked="@(Article.DangerousGoods == 1)" @onchange="@(() => Article.DangerousGoods = 1)" required>
+                            <label for="yes">Yes</label>
+                            &nbsp;
+                            <input type="radio" value="1" name="dangerous" class="@DangerousGoods" @onclick="@(() => DangerousGoods = "")" checked="@(Article.DangerousGoods == 0)" @onchange="@(() => Article.DangerousGoods = 0)" required/>
+                            <label for="no">No</label>
+                        </div>
+                    </td>
+                    <td>
+                        <div></div>
+                    </td>
+                    <td>
+                        <HAVI_app.Shared.Shared_layout.Questionmark_top>
+                            You can check whether the article is classified as dangerous goods 
+                            <a href="https://www.tnt.com/express/en_dk/site/how-to/find-dangerous-goods.html" target="_blank">Click here!</a>
+                        </HAVI_app.Shared.Shared_layout.Questionmark_top>
+                    </td>
+                </tr>
+                @if (Article.DangerousGoods == 1)
+                {
+                <tr>
+                    <td>
+                        <label for="class" class="required">Class:</label>
+                    </td>
+                    <td>
+                        <input type="text" class="form-control @Class" @onfocus="@(() => Class = "")" name="class" @bind="Article.Class" maxlength="31">
+                    </td>
+                    <td>
+                        <div></div>
+                    </td>
+                    <td>
+                        <HAVI_app.Shared.Shared_layout.Questionmark_top>
+                            The class must be written in numbers
+                        </HAVI_app.Shared.Shared_layout.Questionmark_top>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <label for="classificationCode" class="required">Classification code:</label>
+                    </td>
+                    <td>
+                        <input type="text" class="form-control @ClassificationCodeValidated" @onfocus="@(() => ClassificationCodeValidated = "")" name="classificationcode" @bind="Article.ClassificationCode" maxlength="15">
+                    </td>
+                    <td>
+                        <div></div>
+
+                    </td>
+                    <td>
+                        <HAVI_app.Shared.Shared_layout.Questionmark_top>
+                            Enter a whole number
+                        </HAVI_app.Shared.Shared_layout.Questionmark_top>
+                    </td>
+                </tr>
+                }
+                <tr>
+                    <td colspan="4"></td>
+                </tr>
+
+            </table>
+            <div class="row justify-content-center">
+                <div class="text-right col-6">
+                </div>
+                <div class="text-left col-6">
+                    <input type="submit" class="btn green-button button-size" value="Next" />
+                </div>
+            </div>
+
+        </EditForm>
+
+    </div>
 </div>
 
 
+@code {
+    [Parameter]
+    public int Id { get; set; }
 
+    List<Location> contries = new List<Location>();
+    public List<FreightResponsibility> Freights = new List<FreightResponsibility>();
+
+    public string EmailValidated = "";
+    public string ClassificationCodeValidated = "";
+    public string BookingTransport = "";
+    public string TransitTime = "";
+    public string DangerousGoods = "";
+    public string Class = "";
+    public string CompanyName = "";
+
+    public void ValidationSupplierForm()
+    {
+        if(Article.CompanyName == "")
+        {
+            CompanyName = "btn-danger";
+        }
+
+        if (!IsEmailValid(Article.Email))
+        {
+            EmailValidated = "btn-danger";
+        }
+
+        if(Article.TransportBooking == 2)
+        {
+            BookingTransport = "btn-danger";
+        }else if(Article.TransportBooking == 1 && Article.TransitTime == 0)
+        {
+            TransitTime = "btn-danger";
+        }
+
+        if (Article.DangerousGoods == 2)
+        {
+            DangerousGoods = "btn-danger";
+        }else if(Article.DangerousGoods == 1)
+        {
+            if(!NumbersLettersDashOnly(Article.Class))
+            {
+                Class = "btn-danger";
+            }
+            if (!NumbersLettersDashOnly(Article.ClassificationCode))
+            {
+                ClassificationCodeValidated = "btn-danger";
+            }
+        }
+
+        if(EmailValidated == "" && ClassificationCodeValidated == "" && BookingTransport == "" && TransitTime == "" && DangerousGoods == "" && Class == "" && CompanyName == "")
+        {
+            Article.Id = Id;
+            NavigationManager.NavigateTo("/article_info_form", true);
+        }
+    }
+
+    void RemoveEmailDanger()
+    {
+        EmailValidated = "";
+    }
+
+    void RemoveClassDanger()
+    {
+        ClassificationCodeValidated = "";
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        contries = await LocationService.GetLocations();
+        Freights = await FreightResponsibilityService.GetFreightResponsibilities();
+
+        Article article = await ArticleService.GetArticleWithInformation(Id);
+
+        Article.CompanyName = article.ArticleInformation.CompanyName;
+        Article.CompanyLocation = article.ArticleInformation.CompanyLocation;
+        Article.Email = article.ArticleInformation.Email;
+        Article.PalletExchange = article.ArticleInformation.PalletExchange;
+        Article.FreightResponsibility = article.ArticleInformation.FreightResponsibility;
+    }
+}
