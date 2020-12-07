@@ -108,7 +108,7 @@ else
         {
             if (!IsDisabled)
             {
-                if(Article.InternalArticleInformation.Bundles == null)
+                if(Article.InternalArticleInformation.Bundles == null || Article.InternalArticleInformation.Bundles == new List<Bundle>())
                 {
                     List<Bundle> bundles = new List<Bundle>();
 
