@@ -170,13 +170,21 @@ namespace HAVI_app.Pages.Admin_pages.Country_pages
 
         public void AddCustomer()
         {
-            Customers.Add(new VailedForCustomer() { Id = 0 });
+            Customers.Add(new VailedForCustomer() { Id = 0, CountryId = CurrentCountry.Id, Customer = "" });
             NumberOfCustomers++;
+        }
+
+        public void NewCustomer(string value)
+        {
+            int id = Customers.FindIndex(c => c.Customer == "");
+            if(id != -1)
+            {
+                Customers[id].Customer = value;
+            }
         }
 
         public void RemoveCustomer(int toRemove)
         {
-            Console.WriteLine(toRemove);
             if(Customers[toRemove - 1].Id != 0)
             {
                 CustomersToDelete.Add(Customers[toRemove - 1].Id);
