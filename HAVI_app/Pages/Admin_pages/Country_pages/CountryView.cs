@@ -168,15 +168,25 @@ namespace HAVI_app.Pages.Admin_pages.Country_pages
             }
         }
 
+        
         public void AddCustomer()
         {
-            Customers.Add(new VailedForCustomer() { Id = 0 });
+            Customers.Add(new VailedForCustomer() { Id = 0, CountryId = CurrentCountry.Id, Customer = "" });
             NumberOfCustomers++;
+        }
+
+        public string CustomerName = "";
+        public void NewCustomer()
+        {
+            int id = Customers.FindIndex(c => c.Customer == "");
+            if(id != -1)
+            {
+                Customers[id].Customer = CustomerName;
+            }
         }
 
         public void RemoveCustomer(int toRemove)
         {
-            Console.WriteLine(toRemove);
             if(Customers[toRemove - 1].Id != 0)
             {
                 CustomersToDelete.Add(Customers[toRemove - 1].Id);
@@ -208,6 +218,15 @@ namespace HAVI_app.Pages.Admin_pages.Country_pages
         {
             CompanyCodes.Add(new CompanyCode() { Id = 0 });
             NumberOfCodes++;
+        }
+        public string Code = "";
+        public void NewCode()
+        {
+            int id = CompanyCodes.FindIndex(c => c.Code == "");
+            if (id != -1)
+            {
+                CompanyCodes[id].Code = Code;
+            }
         }
 
         public void RemoveCode(int toRemove)
@@ -245,6 +264,16 @@ namespace HAVI_app.Pages.Admin_pages.Country_pages
             NumberOfUnits++;
         }
 
+        public string Unit = "";
+        public void NewUnit()
+        {
+            int id = Units.FindIndex(c => c.Unit == "");
+            if (id != -1)
+            {
+                Units[id].Unit = Unit;
+            }
+        }
+
         public void RemoveUnit(int toRemove)
         {
             if(Units[toRemove - 1].Id != 0)
@@ -280,7 +309,15 @@ namespace HAVI_app.Pages.Admin_pages.Country_pages
             OrderPickGroups.Add(new Ilosorderpickgroup() { Id = 0 });
             NumberOfOrders++;
         }
-
+        public string Order = "";
+        public void NewOrder()
+        {
+            int id = OrderPickGroups.FindIndex(c => c.Orderpickgroup == "");
+            if (id != -1)
+            {
+                OrderPickGroups[id].Orderpickgroup = Order;
+            }
+        }
         public void RemoveOrder(int toRemove)
         {
             if(OrderPickGroups[toRemove - 1].Id != 0)
@@ -315,14 +352,32 @@ namespace HAVI_app.Pages.Admin_pages.Country_pages
             ILOSCodes.Add(new PrimaryDciloscode() { Id = 0 });
             NumberOfPrim++;
         }
+        public string Prim = "";
+        public void NewPrim()
+        {
+            int id = ILOSCodes.FindIndex(c => c.PrimaryCode == "");
+            if (id != -1)
+            {
+                ILOSCodes[id].PrimaryCode = Prim;
+            }
+        }
 
+        public string Sap = "";
+        public void NewSap()
+        {
+            int id = ILOSCodes.FindIndex(c => c.Sapplant == "");
+            if (id != -1)
+            {
+                ILOSCodes[id].Sapplant = Sap;
+            }
+        }
         public void RemovePrim(int toRemove)
         {
-            if(ILOSCodes[toRemove-1].Id != 0)
+            if(ILOSCodes[^1].Id != 0)
             {
-                ILOSCodesToDelete.Add(ILOSCodes[toRemove - 1].Id);
+                ILOSCodesToDelete.Add(ILOSCodes[^1].Id);
             }
-            ILOSCodes.RemoveAt(toRemove - 1);
+            ILOSCodes.RemoveAt(ILOSCodes.Count-1);
             NumberOfCodes--;
         }
 
@@ -352,6 +407,15 @@ namespace HAVI_app.Pages.Admin_pages.Country_pages
             NumberOfTAX++;
         }
 
+        public string Tax = "";
+        public void NewTax()
+        {
+            int id = TaxCodes.FindIndex(c => c.Code == "");
+            if (id != -1)
+            {
+                TaxCodes[id].Code = Tax;
+            }
+        }
         public void RemoveTAX(int toRemove)
         {
             if(TaxCodes[toRemove-1].Id != 0)
@@ -388,6 +452,15 @@ namespace HAVI_app.Pages.Admin_pages.Country_pages
             NumberOfCat++;
         }
 
+        public string Cat = "";
+        public void NewCategory()
+        {
+            int id = ILOSCategories.FindIndex(c => c.Category == "");
+            if (id != -1)
+            {
+                ILOSCategories[id].Category = Cat;
+            }
+        }
         public void RemoveCat(int toRemove)
         {
             if(ILOSCategories[toRemove-1].Id != 0)
@@ -427,7 +500,7 @@ namespace HAVI_app.Pages.Admin_pages.Country_pages
             UpdateOrderpickgroup();
             UpdateTaxCodes();
             UpdateUnits();
-            NavigationManager.NavigateTo("/country_view/{Id:int}", true);
+            NavigationManager.NavigateTo($"/country_view/{Id}", true);
         }
     }
 }

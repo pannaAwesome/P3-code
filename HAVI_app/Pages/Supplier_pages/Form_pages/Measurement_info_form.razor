@@ -1,8 +1,9 @@
 ﻿@layout HAVI_app.Shared.Supplier_layout.Form_layout
 @inject Microsoft.AspNetCore.Components.NavigationManager NavigationManager
-@page "/measurement_info_form"
+@page "/measurement_info_form/{stringarticle}"
+@using HAVI_app.Models
+@using Newtonsoft.Json
 @inherits HAVI_app.Classes.Validation
-@inject Models.ArticleInformation Article
 
 <HAVI_app.Shared.Supplier_layout.Form_header SupplierState="filled" ArticleState="filled" MeasurementState="active" Id="Article.Id" />
 
@@ -124,6 +125,11 @@
     [Parameter]
     public int Id { get; set; }
 
+    [Parameter]
+    public string stringarticle { get; set; }
+
+    public ArticleInformation Article = new ArticleInformation();
+
     public string LengthValidated;
 
     public string WidthValidated;
@@ -143,6 +149,7 @@
             DoubleOnly(Article.NetWeightPrSalesunit) && MustNotBeZeroOrNegativeNumbere(Article.NetWeightPrSalesunit) &&
             DoubleOnly(Article.GrossWeightPrSalesunit) && MustNotBeZeroOrNegativeNumbere(Article.GrossWeightPrSalesunit))
         {
+            stringarticle = JsonConvert.SerializeObject(Article);
             NavigationManager.NavigateTo($"/shipment_info_form", true);
         }
 
@@ -197,5 +204,10 @@
     public void OnPostBack()
     {
         NavigationManager.NavigateTo($"/article_info_form", true);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        Article = JsonConvert.DeserializeObject<ArticleInformation>(stringarticle);
     }
 }

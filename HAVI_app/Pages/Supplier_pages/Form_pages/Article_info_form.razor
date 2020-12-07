@@ -1,8 +1,9 @@
 ﻿@layout HAVI_app.Shared.Supplier_layout.Form_layout
 @inject Microsoft.AspNetCore.Components.NavigationManager NavigationManager
-@page "/article_info_form"
+@page "/article_info_form/{article}"
+@using HAVI_app.Models
+@using Newtonsoft.Json
 @inherits HAVI_app.Classes.Validation
-@inject Models.ArticleInformation Article
 @inject HAVI_app.Services.Classes.SalesUnitService SalesUnitService 
 
 
@@ -26,7 +27,7 @@
                         <label for="article_name" class="required">Article name:</label>
                     </td>
                     <td>
-                        <input type="text" class="form-control @ArticleNameValidated" @onfocus="@(() => ArticleNameValidated = "")" name="article_name" @bind="Article.ArticleName" required maxlength="31"> 
+                        <input type="text" class="form-control @ArticleNameValidated" @onfocus="@(() => ArticleNameValidated = "")" name="article_name" @bind="Article.ArticleName" required maxlength="31">
                     </td>
                     <td>
                         <div></div>
@@ -195,7 +196,12 @@
     [Parameter]
     public int Id { get; set; }
 
+    [Parameter]
+    public string article { get; set; }
+
     List<SalesUnit> sales = new List<SalesUnit>();
+
+    ArticleInformation Article = new ArticleInformation();
 
     public string ArticleNameValidated = "";
     public string ArticlePerSalesunitValidated = "";
@@ -245,6 +251,7 @@
 
         if (ArticleNameValidated == "" && ArticlePerSalesunitValidated == "" && SupplierArticleNumberValidated == "" && ShelflifeValidated == "" && ShelflifeAtHaviValidated == "" && SalesUnit == "" && GTIN == "" && Organic == "")
         {
+            article = JsonConvert.SerializeObject(Article);
             NavigationManager.NavigateTo("/measurement_info_form", true);
         }
     }
@@ -256,8 +263,8 @@
 
     protected override async Task OnInitializedAsync()
     {
-        sales = await SalesUnitService.GetSalesUnits();
-
+        //sales = await SalesUnitService.GetSalesUnits();
+        Article = JsonConvert.DeserializeObject<ArticleInformation>(article);
     }
 }
 

@@ -1,8 +1,8 @@
 ﻿@layout HAVI_app.Shared.Supplier_layout.Form_layout
 @inject Microsoft.AspNetCore.Components.NavigationManager NavigationManager
-@page "/price_info_form"
+@page "/price_info_form/{StringArticle}"
 @inherits HAVI_app.Classes.Validation
-@inject Models.ArticleInformation Article
+@using Newtonsoft.Json
 @inject HAVI_app.Services.Classes.SetCurrencyService SetCurrencyService
 @inject HAVI_app.Services.Classes.InformCostTypeService InformCostTypeService
 
@@ -15,12 +15,10 @@
     </div>
 </div>
 
-
 <div class="justify-content-center row">
     <div class="col-10 d-flex justify-content-center">
         <EditForm Model="Article" OnSubmit="@OnPostForward">
             <table class="table">
-
                 <tr>
                     <td>
                         <label for="set_currency" class="required">Set currency:</label>
@@ -246,6 +244,11 @@
 </div>
 
 @code {
+    [Parameter]
+    public string StringArticle { get; set; }
+
+    public ArticleInformation Article = new ArticleInformation();
+
     public string SetCurrency = "";
 
     public string PurchasePriceValidated = "";
@@ -280,36 +283,27 @@
 
         if (MustNotBeZeroOrNegativeNumbere(Article.PurchasePrice) && SetCurrency == "" && CostRegardingArticle == "")
         {
-            NavigationManager.NavigateTo($"/confirm_details", true);
+            StringArticle = JsonConvert.SerializeObject(Article);
+            NavigationManager.NavigateTo($"/confirm_details/{StringArticle}", true);
         }
     }
 
     public void OnPostBack()
     {
-        NavigationManager.NavigateTo($"/shipment_info_form", true);
+        StringArticle = JsonConvert.SerializeObject(Article);
+        NavigationManager.NavigateTo($"/shipment_info_form/{StringArticle}", true);
     }
 
     protected override async Task OnInitializedAsync()
     {
-        if(Article.OtherCostsForArticles == null || Article.OtherCostsForArticles.Count == 0)
-        {
-            Article.OtherCostsForArticles = new List<OtherCostsForArticle>();
-            Article.OtherCostsForArticles.Add(new OtherCostsForArticle() { Id = 0, Amount = 0, InformCostType = "", ArticleInformationId = Article.Id });
-            Article.OtherCostsForArticles.Add(new OtherCostsForArticle() { Id = 0, Amount = 0, InformCostType = "", ArticleInformationId = Article.Id });
-            Article.OtherCostsForArticles.Add(new OtherCostsForArticle() { Id = 0, Amount = 0, InformCostType = "", ArticleInformationId = Article.Id });
-            Article.OtherCostsForArticles.Add(new OtherCostsForArticle() { Id = 0, Amount = 0, InformCostType = "", ArticleInformationId = Article.Id });
-            Article.OtherCostsForArticles.Add(new OtherCostsForArticle() { Id = 0, Amount = 0, InformCostType = "", ArticleInformationId = Article.Id });
-        }else
-        {
-            foreach(OtherCostsForArticle cost in Article.OtherCostsForArticles)
-            {
-                if(cost.InformCostType != "" && cost.Amount != 0)
-                {
-                    NumberOfOtherCosts++;
-                }
-            }
-        }
-
+        Article = JsonConvert.DeserializeObject<ArticleInformation>(StringArticle);
+        Article.OtherCostsForArticles = new List<OtherCostsForArticle>();
+        OtherCostsForArticle cost = new OtherCostsForArticle() { Id = 0, Amount = 0, InformCostType = "", ArticleInformationId = Article.Id };
+        Article.OtherCostsForArticles.Add(new OtherCostsForArticle() { Id = 0, Amount = 0, InformCostType = "", ArticleInformationId = Article.Id });
+        Article.OtherCostsForArticles.Add(new OtherCostsForArticle() { Id = 0, Amount = 0, InformCostType = "", ArticleInformationId = Article.Id });
+        Article.OtherCostsForArticles.Add(new OtherCostsForArticle() { Id = 0, Amount = 0, InformCostType = "", ArticleInformationId = Article.Id });
+        Article.OtherCostsForArticles.Add(new OtherCostsForArticle() { Id = 0, Amount = 0, InformCostType = "", ArticleInformationId = Article.Id });
+        Article.OtherCostsForArticles.Add(new OtherCostsForArticle() { Id = 0, Amount = 0, InformCostType = "", ArticleInformationId = Article.Id });
         contries = await SetCurrencyService.GetSetCurrencies();
         costType = await InformCostTypeService.GetInformCostTypes();
     }
