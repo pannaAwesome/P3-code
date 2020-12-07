@@ -110,7 +110,14 @@ else
                             </td>
 
                             <td>
-                                <input type="text" name="code-@i" value="@CompanyCodes[i].Code"  disabled="@(CompanyCodes[i].Code == "" ? false : true)"/>
+                                @if (CompanyCodes[i].Code != "")
+                                {
+                                    <input type="text" name="customer-@i" value="@CompanyCodes[i].Code" disabled="@(CompanyCodes[i].Code == "" ? false : true)" />
+                                }
+                                else
+                                {
+                                    <input type="text" name="customer-@i" @onchange="@((ChangeEventArgs e) => Code = e.Value.ToString())" @onblur="@(() => NewCode())" />
+                                }
                             </td>
                             @if (i == NumberOfCodes)
                             {
@@ -136,7 +143,14 @@ else
                             </td>
 
                             <td>
-                                <input type="text" name="unit-@i" value="@Units[i].Unit" disabled="@(Units[i].Unit == "" ? false : true)" />
+                                @if (Units[i].Unit != "")
+                                {
+                                    <input type="text" name="customer-@i" value="@Units[i].Unit" disabled="@(Units[i].Unit == "" ? false : true)" />
+                                }
+                                else
+                                {
+                                    <input type="text" name="customer-@i" @onchange="@((ChangeEventArgs e) => Unit = e.Value.ToString())" @onblur="@(() => NewUnit())" />
+                                }
                             </td>
                             @if (i == NumberOfUnits)
                             {
@@ -162,7 +176,14 @@ else
                             </td>
 
                             <td>
-                                <input type="text" name="order-@i" value="@OrderPickGroups[i].Orderpickgroup" disabled="@(OrderPickGroups[i].Orderpickgroup == "" ? false : true)" />
+                                @if (OrderPickGroups[i].Orderpickgroup != "")
+                                {
+                                    <input type="text" name="customer-@i" value="@OrderPickGroups[i].Orderpickgroup" disabled="@(OrderPickGroups[i].Orderpickgroup == "" ? false : true)" />
+                                }
+                                else
+                                {
+                                    <input type="text" name="customer-@i" @onchange="@((ChangeEventArgs e) => Order = e.Value.ToString())" @onblur="@(() => NewOrder())" />
+                                }
                             </td>
                             @if (i == NumberOfOrders)
                             {
@@ -188,7 +209,14 @@ else
                             </td>
 
                             <td>
-                                <input type="text" name="cat-@i" value="@ILOSCategories[i].Category" disabled="@(ILOSCategories[i].Category == "" ? false : true)" />
+                                @if (ILOSCategories[i].Category != "")
+                                {
+                                    <input type="text" name="customer-@i" value="@ILOSCategories[i].Category" disabled="@(ILOSCategories[i].Category == "" ? false : true)" />
+                                }
+                                else
+                                {
+                                    <input type="text" name="customer-@i" @onchange="@((ChangeEventArgs e) => Cat = e.Value.ToString())" @onblur="@(() => NewCategory())" />
+                                }
                             </td>
                             @if (i == NumberOfCat)
                             {
@@ -213,7 +241,14 @@ else
                             </td>
 
                             <td>
-                                <input type="text" name="tax-@i" value="@TaxCodes[i].Code" disabled="@(TaxCodes[i].Code == "" ? false : true)" />
+                                @if (TaxCodes[i].Code != "")
+                                {
+                                    <input type="text" name="customer-@i" value="@TaxCodes[i].Code" disabled="@(TaxCodes[i].Code == "" ? false : true)" />
+                                }
+                                else
+                                {
+                                    <input type="text" name="customer-@i" @onchange="@((ChangeEventArgs e) => Tax = e.Value.ToString())" @onblur="@(() => NewTax())" />
+                                }
                             </td>
                             @if (i == NumberOfTAX)
                             {
@@ -240,14 +275,28 @@ else
                             </td>
 
                             <td>
-                                <input type="text" name="prim-dc-@i" value="@ILOSCodes[i].PrimaryCode" disabled="@(ILOSCodes[i].PrimaryCode == "" ? false : true)" />
+                                @if (ILOSCodes[i].PrimaryCode != "" || ILOSCodes[i].Sapplant != "")
+                                {
+                                    <input type="text" name="customer-@i" value="@ILOSCodes[i].PrimaryCode" disabled="@(ILOSCodes[i].PrimaryCode == "" ? false : true)" />
+                                }
+                                else
+                                {
+                                    <input type="text" name="customer-@i" @onchange="@((ChangeEventArgs e) => Prim = e.Value.ToString())" @onblur="@(() => NewPrim())" />
+                                }
                             </td>
                             <td>
                                 <label for="prim-sap-@i">SAP Plant for code:</label>
                             </td>
 
                             <td>
-                                <input type="text" name="prim-sap-@i" value="@ILOSCodes[i].Sapplant" disabled="@(ILOSCodes[i].PrimaryCode == "" ? false : true)" />
+                                @if (ILOSCodes[i].PrimaryCode != "" || ILOSCodes[i].Sapplant != "")
+                                {
+                                    <input type="text" name="customer-@i" value="@ILOSCodes[i].Sapplant" disabled="@(ILOSCodes[i].Sapplant == "" ? false : true)" />
+                                }
+                                else
+                                {
+                                    <input type="text" name="customer-@i" @onchange="@((ChangeEventArgs e) => Sapplant = e.Value.ToString())" @onblur="@(() => NewSap())" />
+                                }
                             </td>
                             @if (i == NumberOfPrim)
                             {
@@ -266,23 +315,8 @@ else
                 </div>
             </div>
             <div class="row country-buttons">
-                <div class="col-12 text-center"><button @onclick="SaveChangesForCountry"  data-toggle="modal" data-target="#country-created" class="btn green-button">Save changes</button></div>
+                <div class="col-12 text-center"><button @onclick="SaveChangesForCountry"  class="btn green-button">Save changes</button></div>
             </div>
         </div>
     </div>
 }
-<div class="modal fade" id="country-created" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Saved changes!</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-footer d-flex justify-content-center">
-                <button type="button" class="btn cancel-button" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
