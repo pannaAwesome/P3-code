@@ -121,7 +121,7 @@ else
 
                         </table>
                         <div class="row justify-content-center">
-                            <button type="submit" class="save-password btn button-size" data-dismiss="modal" @onclick="SavePassword">Save</button>
+                            <button type="submit" class="save-password btn button-size" data-dismiss="@Modal" @onclick="SavePassword">Save</button>
                         </div>
                     </form>
                 </div>
@@ -143,6 +143,8 @@ else
 
     private string PasswordAlert = "";
 
+    private string Modal = "";
+
     protected override async Task OnInitializedAsync()
     {
         Country = await CountryService.GetCountry(Id);
@@ -159,6 +161,7 @@ else
         {
             Country.Profile.Password = NewPassword;
             await CountryService.UpdateCountry(Id, Country);
+            Modal = "modal";
         }
         else if (OldPassword != Country.Profile.Password)
         {

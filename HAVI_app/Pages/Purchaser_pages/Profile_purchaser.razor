@@ -123,7 +123,7 @@ else
 
                         </table>
                         <div class="row justify-content-center">
-                            <button type="submit" class="save-password btn button-size" @onclick="SavePassword">Save</button>
+                            <button type="submit" class="save-password btn button-size" data-dismiss="@Modal" @onclick="SavePassword">Save</button>
                         </div>
                     </form>
                 </div>
@@ -145,6 +145,8 @@ else
 
     private string PasswordAlert = "";
 
+    private string Modal = "";
+
     protected override async Task OnInitializedAsync()
     {
         Purchaser = await PurchaserService.GetPurchaser(Id);
@@ -161,7 +163,7 @@ else
         {
             Purchaser.Profile.Password = NewPassword;
             await PurchaserService.UpdatePurchaser(Id, Purchaser);
-            NavigationManager.NavigateTo($"overview_purchaser/{Id}", true);
+            Modal = "modal";
         }
         else if (OldPassword != Purchaser.Profile.Password)
         {
