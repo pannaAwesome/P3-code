@@ -291,7 +291,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        if(Article.OtherCostsForArticles == null)
+        if(Article.OtherCostsForArticles == null || Article.OtherCostsForArticles.Count == 0)
         {
             Article.OtherCostsForArticles = new List<OtherCostsForArticle>();
             Article.OtherCostsForArticles.Add(new OtherCostsForArticle() { Id = 0, Amount = 0, InformCostType = "", ArticleInformationId = Article.Id });
