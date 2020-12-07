@@ -17,6 +17,9 @@ namespace HAVI_app.Shared.Shared_layout.HAVI_tabpages
         [Inject]
         public ArticleService ArticleService { get; set; }
 
+        [Inject]
+        public NavigationManager NavigationManager { get; set; }
+
         public Article Article { get; set; }
 
         protected override async Task OnInitializedAsync()
@@ -33,6 +36,7 @@ namespace HAVI_app.Shared.Shared_layout.HAVI_tabpages
             Article.ArticleState = (int)ArticleState.RobotReady;
 
             await ArticleService.UpdateArticle(ArticleId, Article);
+            NavigationManager.NavigateTo($"/overview_purchaser/{Article.PurchaserId}", true);
         }
     }
 }

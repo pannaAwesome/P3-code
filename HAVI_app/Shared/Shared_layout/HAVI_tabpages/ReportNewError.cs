@@ -20,9 +20,9 @@ namespace HAVI_app.Shared.Shared_layout.HAVI_tabpages
         [Inject]
         public ArticleService ArticleService { get; set; }
 
-        public string ErrorField { get; set; }
-        public string ErrorMessage { get; set; }
-        public string ErrorSender { get; set; }
+        public string ErrorField { get; set; } = "";
+        public string ErrorMessage { get; set; } = "";
+        public string ErrorSender { get; set; } = "";
 
         public async void SaveError()
         {
