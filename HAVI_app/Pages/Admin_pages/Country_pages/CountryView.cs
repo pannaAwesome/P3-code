@@ -168,18 +168,19 @@ namespace HAVI_app.Pages.Admin_pages.Country_pages
             }
         }
 
+        public string CustomerName = "";
         public void AddCustomer()
         {
             Customers.Add(new VailedForCustomer() { Id = 0, CountryId = CurrentCountry.Id, Customer = "" });
             NumberOfCustomers++;
         }
 
-        public void NewCustomer(string value)
+        public void NewCustomer()
         {
             int id = Customers.FindIndex(c => c.Customer == "");
             if(id != -1)
             {
-                Customers[id].Customer = value;
+                Customers[id].Customer = CustomerName;
             }
         }
 

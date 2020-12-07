@@ -80,7 +80,14 @@ else
                             </td>
 
                             <td>
-                                <input type="text" name="customer-@i" value="@Customers[i].Customer" disabled="@(Customers[i].Customer == "" ? false : true)"/>
+                                @if (Customers[i].Customer != "")
+                                {
+                                    <input type="text" name="customer-@i" value="@Customers[i].Customer" disabled="@(Customers[i].Customer == "" ? false : true)" />
+                                }
+                                else
+                                {
+                                    <input type="text" name="customer-@i" @onchange="@((ChangeEventArgs e) => CustomerName = e.Value.ToString())" @onblur="@(() => NewCustomer())"/>
+                                }
                             </td>
                             @if (i == NumberOfCustomers)
                             {
