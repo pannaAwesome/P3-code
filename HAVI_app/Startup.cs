@@ -26,8 +26,6 @@ namespace HAVI_app
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();
-
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddDbContext<HAVIdatabaseContext>(options => options.UseSqlServer(Configuration.GetConnectionString("HAVIdatabaseContext")));
@@ -37,7 +35,7 @@ namespace HAVI_app
             services.AddSingleton<Excel>();
             services.AddScoped<ArticleInformation>();
 
-            #region AddHttpClient service for all the tables in the database
+            /*#region AddHttpClient service for all the tables in the database
             services.AddHttpClient<ArticleInformationService>(client =>
             {
                 client.BaseAddress = new System.Uri("https://localhost:44394");
@@ -138,7 +136,7 @@ namespace HAVI_app
             {
                 client.BaseAddress = new System.Uri("https://localhost:44394");
             });
-            #endregion
+            #endregion*/
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

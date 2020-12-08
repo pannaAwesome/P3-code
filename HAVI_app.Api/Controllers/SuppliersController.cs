@@ -28,7 +28,7 @@ namespace HAVI_app.Api.Controllers
                 var result = await _supplierRepository.GetSuppliers();
                 if(result == null)
                 {
-                    return Ok(new List<VailedForCustomer>());
+                    return Ok(new List<Supplier>());
                 }
                 return Ok(result);
             }

@@ -70,7 +70,6 @@ namespace HAVI_app.Api
             services.AddScoped<PurchaserRepository>();
             services.AddScoped<QIPNumberRepository>();
             services.AddScoped<SAPPlantRepository>();
-            //services.AddScoped<AuthenticationStateProvider>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
