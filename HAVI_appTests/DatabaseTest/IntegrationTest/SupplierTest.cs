@@ -205,7 +205,7 @@ namespace HAVI_appTests.DatabaseTest
         }
 
         [TestMethod]
-        public async Task GetSuppliersNonExistingReturnsNewSupplier()
+        public async Task GetSuppliersNoExistingReturnsNewSupplierList()
         {
             // arrange
             SupplierService supplierService = new SupplierService(_client);
@@ -217,5 +217,54 @@ namespace HAVI_appTests.DatabaseTest
             // assert
             Assert.IsTrue((expected.Count == 0) && (actual.Count == 0));
         }
+
+        [TestMethod]
+        public async Task UpdateSupplierUpdatesExistingSupplier()
+        {
+            // arrange
+            SupplierService supplierService = new SupplierService(_client);
+            Supplier supplier = new Supplier()
+            {
+                Id = 0,
+                ProfileId = 0,
+                CompanyName = "Name",
+                CompanyLocation = "Location",
+                FreightResponsibility = "EXW",
+                PalletExchange = 1,
+                Profile = new Profile()
+                {
+                    Id = 0,
+                    Username = "Email",
+                    Password = "1234",
+                    Usertype = 2
+                }
+            };
+
+            Supplier expected = await supplierService.CreateSupplier(supplier);
+
+            expected.CompanyName = "TestName";
+
+            await supplierService.UpdateSupplier(expected.Id, expected);
+
+            // act
+            Supplier actual = await supplierService.GetSupplier(expected.Id);
+
+            // assert
+            Assert.IsTrue(expected.CompanyLocation == actual.CompanyLocation);
+            Assert.IsTrue(expected.CompanyName == actual.CompanyName);
+            CollectionAssert.AreEquivalent(expected.Articles, actual.Articles);
+            Assert.IsTrue(expected.FreightResponsibility == actual.FreightResponsibility);
+            Assert.IsTrue(expected.Id == actual.Id);
+            Assert.IsTrue(expected.PalletExchange == actual.PalletExchange);
+            Assert.IsTrue(expected.Profile.Id == actual.Profile.Id);
+            Assert.IsTrue(expected.Profile.Password == actual.Profile.Password);
+            CollectionAssert.AreEquivalent(expected.Profile.Purchasers, actual.Profile.Purchasers);
+            Assert.IsTrue(expected.Profile.Username == actual.Profile.Username);
+            CollectionAssert.AreEquivalent(expected.Profile.Suppliers, actual.Profile.Suppliers);
+            Assert.IsTrue(expected.Profile.Usertype == actual.Profile.Usertype);
+            CollectionAssert.AreEquivalent(expected.Profile.Countries, actual.Profile.Countries);
+            Assert.IsTrue(expected.ProfileId == actual.ProfileId);
+        }
+
     }
 }
