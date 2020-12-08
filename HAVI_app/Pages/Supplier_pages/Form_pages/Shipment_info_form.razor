@@ -1,9 +1,10 @@
 ﻿@layout HAVI_app.Shared.Supplier_layout.Form_layout
 @inject Microsoft.AspNetCore.Components.NavigationManager NavigationManager
-@page "/shipment_info_form/{StringArticle}"
+@page "/shipment_info_form"
 @inherits HAVI_app.Classes.Validation
 @using Newtonsoft.Json
 @inject HAVI_app.Services.Classes.LocationService LocationService
+@inject HAVI_app.Models.ArticleInformation Article
 
 
 <HAVI_app.Shared.Supplier_layout.Form_header SupplierState="filled" ArticleState="filled" MeasurementState="filled" ShipmentState="active" Id="Article.Id" />
@@ -216,8 +217,6 @@
     [Parameter]
     public string StringArticle { get; set; }
 
-    public ArticleInformation Article = new ArticleInformation();
-
     List<Location> contries = new List<Location>();
 
     public string CartonPrPalletValidated;
@@ -293,15 +292,13 @@
             Article.CountryOfOrigin != "-- select or search for an option --" &&
             Article.ImportedFrom != "-- select or search for an option --")
         {
-            StringArticle = JsonConvert.SerializeObject(Article);
-            NavigationManager.NavigateTo($"/price_info_form/{Article}", true);
+            NavigationManager.NavigateTo($"/price_info_form");
         }
     }
 
     public void OnPostBack()
     {
-        StringArticle = JsonConvert.SerializeObject(Article);
-        NavigationManager.NavigateTo($"/measurement_info_form/{StringArticle}", true);
+        NavigationManager.NavigateTo($"/measurement_info_form");
     }
 
     void RemoveClassDanger()
@@ -312,6 +309,5 @@
     protected override async Task OnInitializedAsync()
     {
         contries = await LocationService.GetLocations();
-        Article = JsonConvert.DeserializeObject<ArticleInformation>(StringArticle);
     }
 }

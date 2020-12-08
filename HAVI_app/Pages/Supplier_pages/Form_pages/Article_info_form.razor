@@ -1,12 +1,9 @@
 ﻿@layout HAVI_app.Shared.Supplier_layout.Form_layout
 @inject Microsoft.AspNetCore.Components.NavigationManager NavigationManager
-@page "/article_info_form/"
-@using HAVI_app.Models
-@using Newtonsoft.Json
+@page "/article_info_form"
 @inherits HAVI_app.Classes.Validation
-@inject HAVI_app.Services.Classes.SalesUnitService SalesUnitService
-@inject HAVI_app.Services.Classes.ArticleData ArticleData
-
+@inject Models.ArticleInformation Article
+@inject HAVI_app.Services.Classes.SalesUnitService SalesUnitService 
 
 
 <HAVI_app.Shared.Supplier_layout.Form_header SupplierState="filled" ArticleState="active" Id="Article.Id" />
@@ -21,7 +18,7 @@
 
 <div class="row justify-content-center">
     <div class="col-10 d-flex justify-content-center">
-        <EditForm Model="ArticleData.Article" OnSubmit="@ValidationArticleInfoForm">
+        <EditForm Model="Article" OnSubmit="@ValidationArticleInfoForm">
             <table class="table">
 
                 <tr>
@@ -29,7 +26,7 @@
                         <label for="article_name" class="required">Article name:</label>
                     </td>
                     <td>
-                        <input type="text" class="form-control @ArticleNameValidated" @onfocus="@(() => ArticleNameValidated = "")" name="article_name" @bind="ArticleData.Article" required maxlength="31">
+                        <input type="text" class="form-control @ArticleNameValidated" @onfocus="@(() => ArticleNameValidated = "")" name="article_name" @bind="Article.ArticleName" required maxlength="31"> 
                     </td>
                     <td>
                         <div></div>
@@ -47,12 +44,12 @@
                         <label for="salesunit" class="required">Salesunit:</label>
                     </td>
                     <td>
-                        <select class="form-control @SalesUnit" @onclick="@(() => SalesUnit = "")" name="salesunit" @onchange="@((ChangeEventArgs __e) => Article.Salesunit = __e.Value.ToString())" value="@ArticleData.Article.Salesunit" required>
+                        <select class="form-control @SalesUnit" @onclick="@(() => SalesUnit = "")" name="salesunit" @onchange="@((ChangeEventArgs __e) => Article.Salesunit = __e.Value.ToString())" value="@Article.Salesunit" required>
                             <option>-- select or search for an option --</option>
-                            @foreach (var item in sales)
-                            {
-                                <option>@item.Unit</option>
-                            }
+                                @foreach (var item in sales)
+                                {
+                                    <option>@item.Unit</option>
+                                }
                         </select>
                     </td>
                     <td>
@@ -71,7 +68,7 @@
                         <label for="article_pr_salesunit" class="required">Articles per salesunit:</label>
                     </td>
                     <td>
-                        <input type="text" class="form-control @ArticlePerSalesunitValidated" @onfocus="@(() => ArticlePerSalesunitValidated = "")" name="article_pr_salesunit" @bind="ArticleData.Article.ArticlesPerSalesunit" required maxlength="5">
+                        <input type="text" class="form-control @ArticlePerSalesunitValidated" @onfocus="@(() => ArticlePerSalesunitValidated = "")" name="article_pr_salesunit" @bind="Article.ArticlesPerSalesunit" required maxlength="5">
                     </td>
                     <td>
                         <div></div>
@@ -88,7 +85,7 @@
                         <label for="supplier_article_nn" class="required">Supplier article number/name:</label>
                     </td>
                     <td>
-                        <input type="text" class="form-control @SupplierArticleNumberValidated" @onfocus="@(() => SupplierArticleNumberValidated = "")" name="supplier_article_nn" @bind="ArticleData.Article.SupplierArticleName" required maxlength="16">
+                        <input type="text" class="form-control @SupplierArticleNumberValidated" @onfocus="@(() => SupplierArticleNumberValidated = "")" name="supplier_article_nn" @bind="Article.SupplierArticleName" required maxlength="16">
                     </td>
                     <td>
                         <div></div>
@@ -106,7 +103,7 @@
                         <label for="GTIN" class="required">GTIN number:</label>
                     </td>
                     <td>
-                        <input type="text" class="form-control @GTIN" @onfocus="@(() => GTIN = "")" name="GTIN" @bind="ArticleData.Article.Gtinnumber" required minlength="14" maxlength="14">
+                        <input type="text" class="form-control @GTIN" @onfocus="@(() => GTIN = "")" name="GTIN" @bind="Article.Gtinnumber" required minlength="14" maxlength="14">
                     </td>
                     <td>
                         <div></div>
@@ -124,7 +121,7 @@
                         <label for="Shelflife" class="required">Shelflife:</label>
                     </td>
                     <td>
-                        <input type="number" class="form-control @ShelflifeValidated" @onfocus="@(() => ShelflifeValidated = "")" name="Shelflife" @bind="ArticleData.Article.Shelflife" required maxlength="3">
+                        <input type="number" class="form-control @ShelflifeValidated" @onfocus="@(() => ShelflifeValidated = "")" name="Shelflife" @bind="Article.Shelflife" required maxlength="3">
                     </td>
                     <td>
                         <label class="center-for-units" for="Shelflife">days</label>
@@ -142,7 +139,7 @@
                         <label for="Min_shelflife" class="required">Min. shelflife at HAVI:</label>
                     </td>
                     <td>
-                        <input type="number" class="form-control @ShelflifeAtHaviValidated" @onfocus="@(() => ShelflifeAtHaviValidated = "")" name="Min_shelflife" @bind="ArticleData.Article.MinimumShelflife" required maxlength="4">
+                        <input type="number" class="form-control @ShelflifeAtHaviValidated" @onfocus="@(() => ShelflifeAtHaviValidated = "")" name="Min_shelflife" @bind="Article.MinimumShelflife" required maxlength="4">
                     </td>
                     <td>
                         <label class="center-for-units" for="Min_shelflife">days</label>
@@ -162,10 +159,10 @@
 
                     <td>
                         <div class="text-center">
-                            <input type="radio" name="Organic_article" value="yes" class="@Organic" @onclick="@(() => Organic = "")" checked="@(ArticleData.Article.OrganicArticle == 1)" @onchange="@(() => ArticleData.Article.OrganicArticle = 1)" required />
+                            <input type="radio" name="Organic_article" value="yes" class="@Organic" @onclick="@(() => Organic = "")" checked="@(Article.OrganicArticle == 1)" @onchange="@(() => Article.OrganicArticle = 1)" required/>
                             <label for="yes">Yes</label>
                             &nbsp;
-                            <input type="radio" value="no" name="Organic_article" class="@Organic" @onclick="@(() => Organic = "")" checked="@(ArticleData.Article.OrganicArticle == 0)" @onchange="@(() => ArticleData.Article.OrganicArticle = 0)" required />
+                            <input type="radio" value="no" name="Organic_article" class="@Organic" @onclick="@(() => Organic = "")" checked="@(Article.OrganicArticle == 0)" @onchange="@(() => Article.OrganicArticle = 0)" required/>
                             <label for="no">No</label>
                         </div>
                     </td>
@@ -198,12 +195,7 @@
     [Parameter]
     public int Id { get; set; }
 
-    [Parameter]
-    public string article { get; set; }
-
     List<SalesUnit> sales = new List<SalesUnit>();
-
-    ArticleInformation Article = new ArticleInformation();
 
     public string ArticleNameValidated = "";
     public string ArticlePerSalesunitValidated = "";
@@ -216,57 +208,56 @@
 
     public void ValidationArticleInfoForm()
     {
-        if (ArticleData.Article.ArticleName == "")
+        if (Article.ArticleName == "")
         {
             ArticleNameValidated = "btn-danger";
         }
 
-        if (ArticleData.Article.Salesunit == "-- select or search for an option --")
+        if(Article.Salesunit == "-- select or search for an option --")
         {
             SalesUnit = "btn-danger";
         }
 
-        if (!MustNotBeZeroOrNegativeNumbere(ArticleData.Article.ArticlesPerSalesunit))
+        if (!MustNotBeZeroOrNegativeNumbere(Article.ArticlesPerSalesunit))
         {
             ArticlePerSalesunitValidated = "btn-danger";
         }
 
-        if (!MustNotBeZeroOrNegativeNumbere(ArticleData.Article.Shelflife))
+        if (!MustNotBeZeroOrNegativeNumbere(Article.Shelflife))
         {
             ShelflifeValidated = "btn-danger";
         }
 
-        if (!MustNotBeZeroOrNegativeNumbere(ArticleData.Article.MinimumShelflife))
+        if (!MustNotBeZeroOrNegativeNumbere(Article.MinimumShelflife))
         {
             ShelflifeAtHaviValidated = "btn-danger";
         }
 
-        if (!GTINValidation(ArticleData.Article.Gtinnumber))
+        if (!GTINValidation(Article.Gtinnumber))
         {
             GTIN = "btn-danger";
         }
 
-        if (ArticleData.Article.OrganicArticle == 2)
+        if(Article.OrganicArticle == 2)
         {
             Organic = "btn-danger";
         }
 
         if (ArticleNameValidated == "" && ArticlePerSalesunitValidated == "" && SupplierArticleNumberValidated == "" && ShelflifeValidated == "" && ShelflifeAtHaviValidated == "" && SalesUnit == "" && GTIN == "" && Organic == "")
         {
-            article = JsonConvert.SerializeObject(Article);
-            NavigationManager.NavigateTo("/measurement_info_form/", true);
+            NavigationManager.NavigateTo("/measurement_info_form");
         }
     }
 
     public void OnPostBack()
     {
-        NavigationManager.NavigateTo($"/supplier_info_form/{Article.Id}", true);
+        NavigationManager.NavigateTo($"/supplier_info_form/{Article.Id}");
     }
 
     protected override async Task OnInitializedAsync()
     {
         sales = await SalesUnitService.GetSalesUnits();
-        Article = JsonConvert.DeserializeObject<ArticleInformation>(article);
+
     }
 }
 
