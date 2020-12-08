@@ -91,10 +91,15 @@ namespace HAVI_app.Api.DatabaseClasses
 
         public async Task<Article> DeleteArticleAsync(int articleId)
         {
-            var article = await _context.Articles.FirstOrDefaultAsync(s => s.Id == articleId);
-            var internalInfo = await _context.InternalArticleInformations.FirstOrDefaultAsync(i => i.Id == article.InternalArticleInformationId);
-            var articleInfo = await _context.ArticleInformations.FirstOrDefaultAsync(a => a.Id == article.ArticleInformationId);
-
+            Article article = await _context.Articles.FirstOrDefaultAsync(s => s.Id == articleId);
+            InternalArticleInformation internalInfo = null;
+            ArticleInformation articleInfo = null;
+            if(article != null)
+            {
+                internalInfo = await _context.InternalArticleInformations.FirstOrDefaultAsync(i => i.Id == article.InternalArticleInformationId);
+                articleInfo = await _context.ArticleInformations.FirstOrDefaultAsync(a => a.Id == article.ArticleInformationId);
+            }
+            
             if (article != null && internalInfo != null && articleInfo != null)
             {
                 _context.Articles.Remove(article);

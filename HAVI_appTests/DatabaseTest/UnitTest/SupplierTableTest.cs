@@ -324,7 +324,7 @@ namespace HAVI_appTests.DatabaseTest.UnitTest
             // arrange
             HAVIdatabaseContext dbContext = CreateDbContext();
             SupplierRepository repository = new SupplierRepository(dbContext);
-            Supplier supplier = new Supplier()
+            Supplier supplier1 = new Supplier()
             {
                 Id = 0,
                 ProfileId = 0,
@@ -340,8 +340,24 @@ namespace HAVI_appTests.DatabaseTest.UnitTest
                     Usertype = 2
                 }
             };
-            Supplier addedSupplier1 = await repository.AddSupplier(supplier);
-            Supplier addedSupplier2 = await repository.AddSupplier(supplier);
+            Supplier supplier2 = new Supplier()
+            {
+                Id = 0,
+                ProfileId = 0,
+                CompanyName = "Name",
+                CompanyLocation = "Location",
+                FreightResponsibility = "EXW",
+                PalletExchange = 1,
+                Profile = new Profile()
+                {
+                    Id = 0,
+                    Username = "Email",
+                    Password = "1234",
+                    Usertype = 2
+                }
+            };
+            Supplier addedSupplier1 = await repository.AddSupplier(supplier1);
+            Supplier addedSupplier2 = await repository.AddSupplier(supplier2);
 
             // act
             List<Supplier> result = await repository.GetSuppliers();

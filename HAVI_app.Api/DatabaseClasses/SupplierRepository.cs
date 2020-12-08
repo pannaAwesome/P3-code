@@ -28,9 +28,13 @@ namespace HAVI_app.Api.DatabaseClasses
 
         public async Task<Supplier> DeleteSupplierAsync(int supplierId)
         {
-            var supplier = await _context.Suppliers.FirstOrDefaultAsync(s => s.Id == supplierId);
-            var profile = await _context.Profiles.FirstOrDefaultAsync(p => p.Id == supplier.ProfileId);
-
+            Supplier supplier = await _context.Suppliers.FirstOrDefaultAsync(s => s.Id == supplierId);
+            Profile profile = null;
+            if(supplier != null)
+            {
+                profile = await _context.Profiles.FirstOrDefaultAsync(p => p.Id == supplier.ProfileId);
+            }
+            
             if (supplier != null && profile != null)
             {
                 _context.Profiles.Remove(profile);
@@ -65,8 +69,13 @@ namespace HAVI_app.Api.DatabaseClasses
 
         public async Task<Supplier> UpdateSupplier(Supplier supplier)
         {
-            var resultSupplier = await _context.Suppliers.FirstOrDefaultAsync(s => s.Id == supplier.Id);
-            var resultProfile = await _context.Profiles.FirstOrDefaultAsync(p => p.Id == resultSupplier.ProfileId);
+            Supplier resultSupplier = await _context.Suppliers.FirstOrDefaultAsync(s => s.Id == supplier.Id);
+            Profile resultProfile = null;
+            if(resultSupplier != null)
+            {
+                resultProfile = await _context.Profiles.FirstOrDefaultAsync(p => p.Id == resultSupplier.ProfileId);
+            }
+
             if (resultSupplier != null && resultProfile != null)
             {
                 resultProfile.Username = supplier.Profile.Username;
