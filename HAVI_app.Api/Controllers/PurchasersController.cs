@@ -132,7 +132,7 @@ namespace HAVI_app.Api.Controllers
                 var result = await _purchaserRepository.GetPurchaser(id);
                 if (result == null)
                 {
-                    return Ok(new List<Purchaser>());
+                    return Ok(new Purchaser());
                 }
                 else
                 {

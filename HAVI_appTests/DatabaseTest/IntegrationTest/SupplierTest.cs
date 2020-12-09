@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.TestHost;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using HAVI_app.Services.Classes;
 using System.Net;
-
+using Microsoft.AspNetCore.Mvc;
 
 namespace HAVI_appTests.DatabaseTest
 {
@@ -33,7 +33,7 @@ namespace HAVI_appTests.DatabaseTest
         }
 
         [TestMethod]
-        public async Task GetSupplierGetExistingSupplier()
+        public async Task GetSupplierGetsExistingSupplier()
         {
             // arrange
             SupplierService supplierService = new SupplierService(_client);
@@ -165,7 +165,7 @@ namespace HAVI_appTests.DatabaseTest
         {
             // arrange
             SupplierService supplierService = new SupplierService(_client);
-            Supplier supplier = new Supplier()
+            Supplier supplier1 = new Supplier()
             {
                 Id = 0,
                 ProfileId = 0,
@@ -182,26 +182,52 @@ namespace HAVI_appTests.DatabaseTest
                 }
             };
 
-            Supplier expected = await supplierService.CreateSupplier(supplier);
+            Supplier supplier2 = new Supplier()
+            {
+                Id = 0,
+                ProfileId = 0,
+                CompanyName = "Name",
+                CompanyLocation = "Location",
+                FreightResponsibility = "EXW",
+                PalletExchange = 1,
+                Profile = new Profile()
+                {
+                    Id = 0,
+                    Username = "Email",
+                    Password = "1234",
+                    Usertype = 2
+                }
+            };
+
+            int index = 0;
+
+            List<Supplier> expected = new List<Supplier>();
+            expected.Add(await supplierService.CreateSupplier(supplier1));
+            expected.Add(await supplierService.CreateSupplier(supplier2));
 
             // act
             List<Supplier> actual = await supplierService.GetSuppliers();
 
             // assert
-            Assert.IsTrue(expected.CompanyLocation == actual[0].CompanyLocation);
-            Assert.IsTrue(expected.CompanyName == actual[0].CompanyName);
-            CollectionAssert.AreEquivalent(expected.Articles, actual[0].Articles);
-            Assert.IsTrue(expected.FreightResponsibility == actual[0].FreightResponsibility);
-            Assert.IsTrue(expected.Id == actual[0].Id);
-            Assert.IsTrue(expected.PalletExchange == actual[0].PalletExchange);
-            Assert.IsTrue(expected.Profile.Id == actual[0].Profile.Id);
-            Assert.IsTrue(expected.Profile.Password == actual[0].Profile.Password);
-            CollectionAssert.AreEquivalent(expected.Profile.Purchasers, actual[0].Profile.Purchasers);
-            Assert.IsTrue(expected.Profile.Username == actual[0].Profile.Username);
-            CollectionAssert.AreEquivalent(expected.Profile.Suppliers, actual[0].Profile.Suppliers);
-            Assert.IsTrue(expected.Profile.Usertype == actual[0].Profile.Usertype);
-            CollectionAssert.AreEquivalent(expected.Profile.Countries, actual[0].Profile.Countries);
-            Assert.IsTrue(expected.ProfileId == actual[0].ProfileId);
+            foreach (Supplier supplier in actual)
+            {
+                Assert.IsTrue(supplier.CompanyLocation == expected[index].CompanyLocation);
+                Assert.IsTrue(supplier.CompanyName == expected[index].CompanyName);
+                CollectionAssert.AreEquivalent(supplier.Articles, expected[index].Articles);
+                Assert.IsTrue(supplier.FreightResponsibility == expected[index].FreightResponsibility);
+                Assert.IsTrue(supplier.Id == expected[index].Id);
+                Assert.IsTrue(supplier.PalletExchange == expected[index].PalletExchange);
+                Assert.IsTrue(supplier.Profile.Id == expected[index].Profile.Id);
+                Assert.IsTrue(supplier.Profile.Password == expected[index].Profile.Password);
+                CollectionAssert.AreEquivalent(supplier.Profile.Purchasers, expected[index].Profile.Purchasers);
+                Assert.IsTrue(supplier.Profile.Username == expected[index].Profile.Username);
+                CollectionAssert.AreEquivalent(supplier.Profile.Suppliers, expected[index].Profile.Suppliers);
+                Assert.IsTrue(supplier.Profile.Usertype == expected[index].Profile.Usertype);
+                CollectionAssert.AreEquivalent(supplier.Profile.Countries, expected[index].Profile.Countries);
+                Assert.IsTrue(supplier.ProfileId == expected[index].ProfileId);
+                index++;
+            }
+
         }
 
         [TestMethod]
@@ -266,5 +292,121 @@ namespace HAVI_appTests.DatabaseTest
             Assert.IsTrue(expected.ProfileId == actual.ProfileId);
         }
 
+        /*[TestMethod]
+        public async Task UpdateSupplierReturnsEmptySupplierIfItDoesNotExist()
+        {
+            //arrange
+            SupplierService supplierService = new SupplierService(_client);
+            Supplier supplier = new Supplier()
+            {
+                Id = 0,
+                ProfileId = 0,
+                CompanyName = "Name",
+                CompanyLocation = "Location",
+                FreightResponsibility = "EXW",
+                PalletExchange = 1,
+                Profile = new Profile()
+                {
+                    Id = 0,
+                    Username = "Email",
+                    Password = "1234",
+                    Usertype = 2
+                }
+            };
+
+            var result = await supplierService.UpdateSupplier(1, supplier);
+            BadRequestObjectResult badRequestResult = await supplierService.UpdateSupplier(1, supplier);
+        }*/
+
+        /*[TestMethod]
+        public async Task UpdateSupplierReturnsBadResutIfSupplierAndIdDoNotMatch()
+        {
+            //arrange
+            SupplierService supplierService = new SupplierService(_client);
+            Supplier supplier = new Supplier()
+            {
+                Id = 0,
+                ProfileId = 0,
+                CompanyName = "Name",
+                CompanyLocation = "Location",
+                FreightResponsibility = "EXW",
+                PalletExchange = 1,
+                Profile = new Profile()
+                {
+                    Id = 0,
+                    Username = "Email",
+                    Password = "1234",
+                    Usertype = 2
+                }
+            };
+
+            var result = await supplierService.UpdateSupplier(1, supplier);
+            BadRequestObjectResult badRequestResult = await supplierService.UpdateSupplier(1, supplier);
+        }
+        */
+
+        [TestMethod]
+        public async Task DeleteSupplierDeletesTheSupplierIfItExists()
+        {
+            // arrange
+            SupplierService supplierService = new SupplierService(_client);
+            Supplier supplier = new Supplier()
+            {
+                Id = 0,
+                ProfileId = 0,
+                CompanyName = "Name",
+                CompanyLocation = "Location",
+                FreightResponsibility = "EXW",
+                PalletExchange = 1,
+                Profile = new Profile()
+                {
+                    Id = 0,
+                    Username = "Email",
+                    Password = "1234",
+                    Usertype = 2
+                }
+            };
+
+            Supplier createdSuppler = await supplierService.CreateSupplier(supplier);
+            await supplierService.DeleteSupplier(createdSuppler.Id);
+            
+            // act
+            Supplier expected = new Supplier();
+            Supplier actual = await supplierService.GetSupplier(createdSuppler.Id);
+
+            // assert
+            Assert.IsNotNull(createdSuppler);
+            Assert.IsTrue(expected.CompanyLocation == actual.CompanyLocation);
+            Assert.IsTrue(expected.CompanyName == actual.CompanyName);
+            CollectionAssert.AreEquivalent(expected.Articles, actual.Articles);
+            Assert.IsTrue(expected.FreightResponsibility == actual.FreightResponsibility);
+            Assert.IsTrue(expected.Id == actual.Id);
+            Assert.IsTrue(expected.PalletExchange == actual.PalletExchange);
+            Assert.IsTrue(expected.ProfileId == actual.ProfileId);
+        }
+
+        [TestMethod]
+        public async Task DeleteSupplierReturnsErrorIfSupplierDoesNotExists()
+        {
+            // arrange
+            SupplierService supplierService = new SupplierService(_client);
+
+            // act and assert
+            try
+            {
+                await supplierService.DeleteSupplier(1);
+                Assert.Fail("An exception Should have been thrown");
+            }
+            catch (InvalidOperationException ioe)
+            {
+                Assert.AreEqual($"Supplier with id = {1} not found", ioe.Message);
+            }
+            catch (Exception e)
+            {
+                Assert.Fail(
+                    string.Format($"Unexpected exception of type {e.GetType()} caught: {e.Message} ")
+                    );
+            }
+        }
     }
 }
