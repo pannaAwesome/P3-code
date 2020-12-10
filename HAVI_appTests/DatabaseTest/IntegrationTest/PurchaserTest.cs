@@ -287,12 +287,10 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
             CollectionAssert.AreEquivalent(expected.Profile.Countries, actual.Profile.Countries);
             Assert.IsTrue(expected.ProfileId == actual.ProfileId);
         }
-
-        /*[TestMethod]
-        public async Task UpdatePurchaserReturnsEmptyPurchaserIfItDoesNotExist()
+        [TestMethod]
+        public async Task UpdatePurchaserReturnsNotFoundIfItDoesNotExist()
         {
-            //arrange
-            PurchaserService PurchaserService = new PurchaserService(_client);
+            // arrange
             Purchaser purchaser = new Purchaser()
             {
                 Id = 0,
@@ -307,33 +305,42 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
                 }
             };
 
-            var result = await PurchaserService.UpdatePurchaser(1, purchaser);
-            BadRequestObjectResult badRequestResult = await PurchaserService.UpdatePurchaser(1, Purchaser);
-        }*/
+            // act
+            var result = await _client.PutAsJsonAsync($"/api/purchasers/{purchaser.Id}", purchaser);
 
-        /*[TestMethod]
-        public async Task UpdatePurchaserReturnsBadResutIfPurchaserAndIdDoNotMatch()
-        {
-            //arrange
-            PurchaserService PurchaserService = new PurchaserService(_client);
-            Purchaser purchaser = new Purchaser()
-            {
-                Id = 0,
-                ProfileId = 0,
-                CountryId = 0,
-                Profile = new Profile()
-                {
-                    Id = 0,
-                    Username = "Email",
-                    Password = "1234",
-                    Usertype = 2
-                }
-            };
 
-            var result = await PurchaserService.UpdatePurchaser(1, purchaser);
-            BadRequestObjectResult badRequestResult = await PurchaserService.UpdatePurchaser(1, Purchaser);
+            // assert
+            Assert.IsTrue(result.StatusCode == HttpStatusCode.NotFound);
         }
-        */
+
+        [TestMethod]
+        public async Task UpdatePurchaserReturnsBadResultIfSupplierAndIdDoNotMatch()
+        {
+            //arrange
+            PurchaserService PurchaserService = new PurchaserService(_client);
+            Purchaser purchaser = new Purchaser()
+            {
+                Id = 0,
+                ProfileId = 0,
+                CountryId = 0,
+                Profile = new Profile()
+                {
+                    Id = 0,
+                    Username = "Email",
+                    Password = "1234",
+                    Usertype = 2
+                }
+            };
+
+            Purchaser createPurchaser = await PurchaserService.CreatePurchaser(purchaser);
+
+            // act
+            var result = await _client.PutAsJsonAsync($"/api/purchaser/{2}", purchaser);
+
+
+            // assert
+            Assert.IsTrue(result.StatusCode == HttpStatusCode.BadRequest);
+        }
 
         [TestMethod]
         public async Task DeletePurchaserForProfileDeletesThePurchaserIfItExists()

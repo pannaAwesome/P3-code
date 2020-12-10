@@ -345,6 +345,8 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
                 }
             };
 
+            Supplier createSupplier = await supplierService.CreateSupplier(supplier);
+
             // act
             var result = await _client.PutAsJsonAsync($"/api/suppliers/{2}", supplier);
 
