@@ -15,9 +15,13 @@ namespace HAVI_app
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Microsoft.AspNetCore.Hosting.IHostingEnvironment CurrentEnvironment { get; }
+
+
+        public Startup(IConfiguration configuration, Microsoft.AspNetCore.Hosting.IHostingEnvironment hostEnvironment)
         {
             Configuration = configuration;
+            CurrentEnvironment = hostEnvironment;
         }
 
         public IConfiguration Configuration { get; }
@@ -27,6 +31,14 @@ namespace HAVI_app
         public void ConfigureServices(IServiceCollection services)
         {
             //services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();
+
+            if (!CurrentEnvironment.IsDevelopment())
+            {
+                services.AddSignalR().AddAzureSignalR(options =>
+                {
+                    options.ServerStickyMode = Microsoft.Azure.SignalR.ServerStickyMode.Required;
+                });
+            }
 
             services.AddRazorPages();
             services.AddServerSideBlazor();

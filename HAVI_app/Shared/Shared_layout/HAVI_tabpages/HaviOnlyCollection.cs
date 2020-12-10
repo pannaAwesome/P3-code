@@ -95,7 +95,7 @@ namespace HAVI_app.Shared.Shared_layout.HAVI_tabpages
 
         private void ValidateInformation()
         {
-            int correctNumber = 22;
+            int correctNumber = 23;
             int validated = 0;
 
             validated += Article.InternalArticleInformation.SupplierIdIlos != 0 ? 1 : 0;
