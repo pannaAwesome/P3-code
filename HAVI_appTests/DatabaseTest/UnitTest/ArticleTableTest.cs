@@ -526,6 +526,7 @@ namespace HAVI_appTests.DatabaseTest.UnitTest
                     Usertype = 2
                 }
             };
+
             await countryRepository.AddCountry(country);
             await purchaserRepository.AddPurchaser(purchaser);
             ArticleRepository repository = new ArticleRepository(dbContext);

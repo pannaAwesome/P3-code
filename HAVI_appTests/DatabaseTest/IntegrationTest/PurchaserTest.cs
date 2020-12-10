@@ -13,7 +13,7 @@ using HAVI_app.Services.Classes;
 using System.Net;
 using Microsoft.AspNetCore.Mvc;
 
-namespace HAVI_appTests.DatabaseTest
+namespace HAVI_appTests.DatabaseTest.IntegrationTest
 {
     [TestClass]
     public class PurchaserTest

@@ -12,8 +12,9 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using HAVI_app.Services.Classes;
 using System.Net;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 
-namespace HAVI_appTests.DatabaseTest
+namespace HAVI_appTests.DatabaseTest.IntegrationTest
 {
     [TestClass]
     public class SupplierTest
@@ -292,8 +293,8 @@ namespace HAVI_appTests.DatabaseTest
             Assert.IsTrue(expected.ProfileId == actual.ProfileId);
         }
 
-        /*[TestMethod]
-        public async Task UpdateSupplierReturnsEmptySupplierIfItDoesNotExist()
+        [TestMethod]
+        public async Task UpdateSupplierReturnsNotFoundIfItDoesNotExist()
         {
             //arrange
             SupplierService supplierService = new SupplierService(_client);
@@ -314,36 +315,44 @@ namespace HAVI_appTests.DatabaseTest
                 }
             };
 
-            var result = await supplierService.UpdateSupplier(1, supplier);
-            BadRequestObjectResult badRequestResult = await supplierService.UpdateSupplier(1, supplier);
-        }*/
+            // act
+            var result = await _client.PutAsJsonAsync($"/api/suppliers/{supplier.Id}", supplier);
 
-        /*[TestMethod]
-        public async Task UpdateSupplierReturnsBadResutIfSupplierAndIdDoNotMatch()
-        {
-            //arrange
-            SupplierService supplierService = new SupplierService(_client);
-            Supplier supplier = new Supplier()
-            {
-                Id = 0,
-                ProfileId = 0,
-                CompanyName = "Name",
-                CompanyLocation = "Location",
-                FreightResponsibility = "EXW",
-                PalletExchange = 1,
-                Profile = new Profile()
-                {
-                    Id = 0,
-                    Username = "Email",
-                    Password = "1234",
-                    Usertype = 2
-                }
-            };
 
-            var result = await supplierService.UpdateSupplier(1, supplier);
-            BadRequestObjectResult badRequestResult = await supplierService.UpdateSupplier(1, supplier);
+            // assert
+            Assert.IsTrue(result.StatusCode == HttpStatusCode.NotFound);
         }
-        */
+
+        [TestMethod]
+        public async Task UpdateSupplierReturnsBadResultIfSupplierAndIdDoNotMatch()
+        {
+            //arrange
+            SupplierService supplierService = new SupplierService(_client);
+            Supplier supplier = new Supplier()
+            {
+                Id = 0,
+                ProfileId = 0,
+                CompanyName = "Name",
+                CompanyLocation = "Location",
+                FreightResponsibility = "EXW",
+                PalletExchange = 1,
+                Profile = new Profile()
+                {
+                    Id = 0,
+                    Username = "Email",
+                    Password = "1234",
+                    Usertype = 2
+                }
+            };
+
+            // act
+            var result = await _client.PutAsJsonAsync($"/api/suppliers/{2}", supplier);
+
+
+            // assert
+            Assert.IsTrue(result.StatusCode == HttpStatusCode.BadRequest);
+        }
+        
 
         [TestMethod]
         public async Task DeleteSupplierDeletesTheSupplierIfItExists()
@@ -388,25 +397,11 @@ namespace HAVI_appTests.DatabaseTest
         [TestMethod]
         public async Task DeleteSupplierReturnsErrorIfSupplierDoesNotExists()
         {
-            // arrange
-            SupplierService supplierService = new SupplierService(_client);
+            // act
+            var result = await _client.DeleteAsync($"/api/suppliers/{1}");
 
-            // act and assert
-            try
-            {
-                await supplierService.DeleteSupplier(1);
-                Assert.Fail("An exception Should have been thrown");
-            }
-            catch (InvalidOperationException ioe)
-            {
-                Assert.AreEqual($"Supplier with id = {1} not found", ioe.Message);
-            }
-            catch (Exception e)
-            {
-                Assert.Fail(
-                    string.Format($"Unexpected exception of type {e.GetType()} caught: {e.Message} ")
-                    );
-            }
+            //assert
+            Assert.IsTrue(result.StatusCode == HttpStatusCode.NotFound);
         }
     }
 }
