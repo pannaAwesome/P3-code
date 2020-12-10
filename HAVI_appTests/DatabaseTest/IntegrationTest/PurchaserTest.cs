@@ -33,7 +33,7 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
         }
 
         [TestMethod]
-        public async Task GetPurchaserGetsExistingPurchaser()
+        public async Task GetPurchaserReturnsExistingPurchaser()
         {
             // arrange
             PurchaserService purchaserService = new PurchaserService(_client);
@@ -70,11 +70,14 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
             Assert.IsTrue(expected.Profile.Usertype == actual.Profile.Usertype);
             CollectionAssert.AreEquivalent(expected.Profile.Countries, actual.Profile.Countries);
             Assert.IsTrue(expected.ProfileId == actual.ProfileId);
+
+            await purchaserService.DeletePurchaserForProfile(expected.ProfileId);
         }
 
         [TestMethod]
-        public async Task GetPurchaserNonExistingReturnsNewPurchaser()
+        public async Task GetPurchaserReturnsNewPurchaserIfItDoesNotExist()
         {
+
             // arrange
             PurchaserService purchaserService = new PurchaserService(_client);
             Purchaser expected = new Purchaser();
@@ -87,20 +90,21 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
             Assert.IsTrue(expected.Id == actual.Id);
             CollectionAssert.AreEquivalent(expected.Articles, actual.Articles);
             Assert.IsTrue(expected.CountryId == actual.CountryId);
-            Assert.IsTrue(expected.Id == actual.Id);
             Assert.IsTrue(expected.ProfileId == actual.ProfileId);
         }
 
         [TestMethod]
-        public async Task GetPurchasersForCountryGetsPurchaserIfItExists()
+        public async Task GetPurchasersForCountryReturnsPurchaserIfItExists()
         {
             // arrange
             PurchaserService purchaserService = new PurchaserService(_client);
+            CountryService countryService = new CountryService(_client);
+
             Purchaser purchaser = new Purchaser()
             {
                 Id = 0,
                 ProfileId = 0,
-                CountryId = 0,
+                CountryId = 1,
                 Profile = new Profile()
                 {
                     Id = 0,
@@ -110,29 +114,37 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
                 }
             };
 
-            Purchaser expected = await purchaserService.CreatePurchaser(purchaser);
+            Country country = new Country()
+            {
+                Id = 0,
+                ProfileId = 0,
+                CountryName = "Name",
+                CountryCode = "Code",
+                Profile = new Profile()
+                {
+                    Id = 0,
+                    Username = "Username",
+                    Password = "1234",
+                    Usertype = 0
+                }
+            };
+
+            Country toDeleteCountry = await countryService.CreateCountry(country);
+            Purchaser toDeletePurchaser = await purchaserService.CreatePurchaser(purchaser);
+            int expected = 1;
 
             // act
-            List<Purchaser> actual = await purchaserService.GetPurchasersForCountry(expected.CountryId);
+            List<Purchaser> actual = await purchaserService.GetPurchasersForCountry(1);
 
             // assert
-            Assert.IsTrue(expected.Country == actual[0].Country);
-            Assert.IsTrue(expected.Id == actual[0].Id);
-            CollectionAssert.AreEquivalent(expected.Articles, actual[0].Articles);
-            Assert.IsTrue(expected.CountryId == actual[0].CountryId);
-            Assert.IsTrue(expected.Id == actual[0].Id);
-            Assert.IsTrue(expected.Profile.Id == actual[0].Profile.Id);
-            Assert.IsTrue(expected.Profile.Password == actual[0].Profile.Password);
-            CollectionAssert.AreEquivalent(expected.Profile.Purchasers, actual[0].Profile.Purchasers);
-            Assert.IsTrue(expected.Profile.Username == actual[0].Profile.Username);
-            CollectionAssert.AreEquivalent(expected.Profile.Purchasers, actual[0].Profile.Purchasers);
-            Assert.IsTrue(expected.Profile.Usertype == actual[0].Profile.Usertype);
-            CollectionAssert.AreEquivalent(expected.Profile.Countries, actual[0].Profile.Countries);
-            Assert.IsTrue(expected.ProfileId == actual[0].ProfileId);
+            Assert.IsTrue(actual.Count == expected);
+
+            await purchaserService.DeletePurchaserForProfile(toDeletePurchaser.ProfileId);
+            await countryService.DeleteCountry(toDeleteCountry.Id);
         }
 
         [TestMethod]
-        public async Task GetPurchaserForProfileGetExistingPurchaserWithExistingProfile()
+        public async Task GetPurchaserForProfileReturnsExistingPurchaser()
         {
             // arrange
             PurchaserService purchaserService = new PurchaserService(_client);
@@ -169,10 +181,12 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
             Assert.IsTrue(expected.Profile.Usertype == actual.Profile.Usertype);
             CollectionAssert.AreEquivalent(expected.Profile.Countries, actual.Profile.Countries);
             Assert.IsTrue(expected.ProfileId == actual.ProfileId);
+
+            await purchaserService.DeletePurchaserForProfile(expected.ProfileId);
         }
 
         [TestMethod]
-        public async Task GetPurchaserForProfileNonExistingReturnsNewPurchaser()
+        public async Task GetPurchaserForProfileReturnsNewPurchaserIfNotExist()
         {
             // arrange
             PurchaserService purchaserService = new PurchaserService(_client);
@@ -191,7 +205,7 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
         }
 
         [TestMethod]
-        public async Task GetPurchasersGetExistingPurchasers()
+        public async Task GetPurchasersReturnsExistingPurchasers()
         {
             // arrange
             PurchaserService purchaserService = new PurchaserService(_client);
@@ -209,29 +223,20 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
                 }
             };
 
-            Purchaser expected = await purchaserService.CreatePurchaser(purchaser);
+            int expected = 1;
+            Purchaser toDelete = await purchaserService.CreatePurchaser(purchaser);
 
             // act
             List<Purchaser> actual = await purchaserService.GetPurchasers();
 
             // assert
-            Assert.IsTrue(expected.Country == actual[0].Country);
-            Assert.IsTrue(expected.Id == actual[0].Id);
-            CollectionAssert.AreEquivalent(expected.Articles, actual[0].Articles);
-            Assert.IsTrue(expected.CountryId == actual[0].CountryId);
-            Assert.IsTrue(expected.Id == actual[0].Id);
-            Assert.IsTrue(expected.Profile.Id == actual[0].Profile.Id);
-            Assert.IsTrue(expected.Profile.Password == actual[0].Profile.Password);
-            CollectionAssert.AreEquivalent(expected.Profile.Purchasers, actual[0].Profile.Purchasers);
-            Assert.IsTrue(expected.Profile.Username == actual[0].Profile.Username);
-            CollectionAssert.AreEquivalent(expected.Profile.Purchasers, actual[0].Profile.Purchasers);
-            Assert.IsTrue(expected.Profile.Usertype == actual[0].Profile.Usertype);
-            CollectionAssert.AreEquivalent(expected.Profile.Countries, actual[0].Profile.Countries);
-            Assert.IsTrue(expected.ProfileId == actual[0].ProfileId);
+            Assert.IsTrue(expected == actual.Count);
+
+            await purchaserService.DeletePurchaserForProfile(toDelete.ProfileId);
         }
 
         [TestMethod]
-        public async Task GetPurchasersNoExistingReturnsNewPurchaserList()
+        public async Task GetPurchasersReturnsNewPurchaserListIfNoneExist()
         {
             // arrange
             PurchaserService purchaserService = new PurchaserService(_client);
@@ -241,7 +246,7 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
             var actual = await purchaserService.GetPurchasers();
 
             // assert
-            Assert.IsTrue((expected.Count == 0) && (actual.Count == 0));
+            Assert.IsTrue(actual.Count == 0);
         }
 
         [TestMethod]
@@ -286,6 +291,8 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
             Assert.IsTrue(expected.Profile.Usertype == actual.Profile.Usertype);
             CollectionAssert.AreEquivalent(expected.Profile.Countries, actual.Profile.Countries);
             Assert.IsTrue(expected.ProfileId == actual.ProfileId);
+
+            await purchaserService.DeletePurchaserForProfile(expected.ProfileId);
         }
 
         [TestMethod]
@@ -340,6 +347,7 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
 
             // assert
             Assert.IsTrue(result.StatusCode == HttpStatusCode.BadRequest);
+            await purchaserService.DeletePurchaserForProfile(createPurchaser.ProfileId);
         }
 
         [TestMethod]
@@ -347,11 +355,13 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
         {
             // arrange
             PurchaserService purchaserService = new PurchaserService(_client);
+            CountryService countryService = new CountryService(_client);
+
             Purchaser purchaser = new Purchaser()
             {
                 Id = 0,
                 ProfileId = 0,
-                CountryId = 0,
+                CountryId = 1,
                 Profile = new Profile()
                 {
                     Id = 0,
@@ -361,21 +371,36 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
                 }
             };
 
-            Purchaser createdSuppler = await purchaserService.CreatePurchaser(purchaser);
-            await purchaserService.DeletePurchaserForProfile(createdSuppler.Id);
+            Country country = new Country()
+            {
+                Id = 0,
+                ProfileId = 0,
+                CountryName = "Name",
+                CountryCode = "Code",
+                Profile = new Profile()
+                {
+                    Id = 0,
+                    Username = "Username",
+                    Password = "1234",
+                    Usertype = 0
+                }
+            };
+
+            Country createdCountry = await countryService.CreateCountry(country);
+            Purchaser createdPurchaser = await purchaserService.CreatePurchaser(purchaser);
+            await purchaserService.DeletePurchaserForProfile(createdPurchaser.ProfileId);
 
             // act
             Purchaser expected = new Purchaser();
-            Purchaser actual = await purchaserService.GetPurchaser(createdSuppler.Id);
+            Purchaser actual = await purchaserService.GetPurchaser(createdPurchaser.ProfileId);
 
             // assert
-            Assert.IsNotNull(createdSuppler);
-            Assert.IsTrue(expected.Country == actual.Country);
-            Assert.IsTrue(expected.Id == actual.Id);
             CollectionAssert.AreEquivalent(expected.Articles, actual.Articles);
-            Assert.IsTrue(expected.CountryId == actual.CountryId);
             Assert.IsTrue(expected.Id == actual.Id);
+            Assert.IsTrue(expected.CountryId == actual.CountryId);
             Assert.IsTrue(expected.ProfileId == actual.ProfileId);
+
+            await countryService.DeleteCountry(createdCountry.Id);
         }
 
         [TestMethod]

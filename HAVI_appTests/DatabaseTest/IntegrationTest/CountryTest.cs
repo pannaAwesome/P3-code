@@ -79,6 +79,8 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
             CollectionAssert.AreEquivalent(expected.SupplierDeliveryUnits, actual.SupplierDeliveryUnits);
             CollectionAssert.AreEquivalent(expected.VailedForCustomers, actual.VailedForCustomers);
             CollectionAssert.AreEquivalent(expected.VatTaxCodes, actual.VatTaxCodes);
+
+            await countryService.DeleteCountry(expected.Id);
         }
 
         [TestMethod]
@@ -159,6 +161,8 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
             CollectionAssert.AreEquivalent(expected.SupplierDeliveryUnits, actual.SupplierDeliveryUnits);
             CollectionAssert.AreEquivalent(expected.VailedForCustomers, actual.VailedForCustomers);
             CollectionAssert.AreEquivalent(expected.VatTaxCodes, actual.VatTaxCodes);
+
+            await countryService.DeleteCountry(expected.Id);
         }
 
         [TestMethod]
@@ -199,6 +203,8 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
             CollectionAssert.AreEquivalent(expected.SupplierDeliveryUnits, actual.SupplierDeliveryUnits);
             CollectionAssert.AreEquivalent(expected.VailedForCustomers, actual.VailedForCustomers);
             CollectionAssert.AreEquivalent(expected.VatTaxCodes, actual.VatTaxCodes);
+
+            await countryService.DeleteCountry(expected.Id);
         }
 
         [TestMethod]
@@ -241,31 +247,19 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
             CollectionAssert.AreEquivalent(expected.SupplierDeliveryUnits, actual.SupplierDeliveryUnits);
             CollectionAssert.AreEquivalent(expected.VailedForCustomers, actual.VailedForCustomers);
             CollectionAssert.AreEquivalent(expected.VatTaxCodes, actual.VatTaxCodes);
+            
+            await countryService.DeleteCountry(expected.Id);
         }
 
         [TestMethod]
-        public async Task GetCountryWithNameGetsNewCountryIfCountryDoesNotExist()
+        public async Task GetCountryWithNameReturnsNewCountryIfCountryDoesNotExist()
         {
             // arrange
             CountryService countryService = new CountryService(_client);
-            Country country = new Country()
-            {
-                Id = 0,
-                ProfileId = 0,
-                CountryCode = "Code",
-                CountryName = "Name",
-                Profile = new Profile()
-                {
-                    Id = 0,
-                    Username = "Username",
-                    Password = "1234",
-                    Usertype = 0
-                }
-            };
 
             Country expected = new Country();
             // act
-            Country actual = await countryService.GetCountryWithName(country.CountryName);
+            Country actual = await countryService.GetCountryWithName("Danmark");
 
             // assert
             Assert.IsTrue(expected.CountryCode == actual.CountryCode);
@@ -304,33 +298,15 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
                 }
             };
 
-            List<Country> expected = new List<Country>();
-            expected.Add(await countryService.CreateCountry(country));
+            int expected = 1;
+            Country toDelete = await countryService.CreateCountry(country);
 
             List<Country> actual = await countryService.GetCountries();
 
             // assert
-            Assert.IsTrue(expected[0].CountryCode == actual[0].CountryCode);
-            Assert.IsTrue(expected[0].CountryName == actual[0].CountryName);
-            CollectionAssert.AreEquivalent(expected[0].Articles, actual[0].Articles);
-            Assert.IsTrue(expected[0].Id == actual[0].Id);
-            Assert.IsTrue(expected[0].Profile.Id == actual[0].Profile.Id);
-            Assert.IsTrue(expected[0].Profile.Password == actual[0].Profile.Password);
-            CollectionAssert.AreEquivalent(expected[0].Profile.Purchasers, actual[0].Profile.Purchasers);
-            Assert.IsTrue(expected[0].Profile.Username == actual[0].Profile.Username);
-            CollectionAssert.AreEquivalent(expected[0].Profile.Suppliers, actual[0].Profile.Suppliers);
-            Assert.IsTrue(expected[0].Profile.Usertype == actual[0].Profile.Usertype);
-            CollectionAssert.AreEquivalent(expected[0].Profile.Countries, actual[0].Profile.Countries);
-            Assert.IsTrue(expected[0].ProfileId == actual[0].ProfileId);
-            CollectionAssert.AreEquivalent(expected[0].CompanyCodes, actual[0].CompanyCodes);
-            CollectionAssert.AreEquivalent(expected[0].Iloscategories, actual[0].Iloscategories);
-            CollectionAssert.AreEquivalent(expected[0].Ilosorderpickgroups, actual[0].Ilosorderpickgroups);
-            CollectionAssert.AreEquivalent(expected[0].InformCostTypes, actual[0].InformCostTypes);
-            CollectionAssert.AreEquivalent(expected[0].PrimaryDciloscodes, actual[0].PrimaryDciloscodes);
-            CollectionAssert.AreEquivalent(expected[0].Purchasers, actual[0].Purchasers);
-            CollectionAssert.AreEquivalent(expected[0].SupplierDeliveryUnits, actual[0].SupplierDeliveryUnits);
-            CollectionAssert.AreEquivalent(expected[0].VailedForCustomers, actual[0].VailedForCustomers);
-            CollectionAssert.AreEquivalent(expected[0].VatTaxCodes, actual[0].VatTaxCodes);
+            Assert.IsTrue(actual.Count == expected);
+
+            await countryService.DeleteCountry(toDelete.Id);
         }
 
         [TestMethod]
@@ -338,26 +314,12 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
         {
             // arrange
             CountryService countryService = new CountryService(_client);
-            Country country = new Country()
-            {
-                Id = 0,
-                ProfileId = 0,
-                CountryCode = "Code",
-                CountryName = "Name",
-                Profile = new Profile()
-                {
-                    Id = 0,
-                    Username = "Username",
-                    Password = "1234",
-                    Usertype = 0
-                }
-            };
 
-            List<Country> expected = new List<Country>();
+            int expected = 0;
             List<Country> actual = await countryService.GetCountries();
 
             // assert
-            Assert.IsTrue(expected.Count == 0 && actual.Count == 0);
+            Assert.IsTrue(expected == actual.Count);
         }
 
         [TestMethod]
@@ -389,34 +351,15 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
             Country actual = await countryService.GetCountry(expected.Id);
 
             // assert
-            Assert.IsTrue(expected.CountryCode == actual.CountryCode);
             Assert.IsTrue(expected.CountryName == actual.CountryName);
-            CollectionAssert.AreEquivalent(expected.Articles, actual.Articles);
-            Assert.IsTrue(expected.Id == actual.Id);
-            Assert.IsTrue(expected.Profile.Id == actual.Profile.Id);
-            Assert.IsTrue(expected.Profile.Password == actual.Profile.Password);
-            CollectionAssert.AreEquivalent(expected.Profile.Purchasers, actual.Profile.Purchasers);
-            Assert.IsTrue(expected.Profile.Username == actual.Profile.Username);
-            CollectionAssert.AreEquivalent(expected.Profile.Suppliers, actual.Profile.Suppliers);
-            Assert.IsTrue(expected.Profile.Usertype == actual.Profile.Usertype);
-            CollectionAssert.AreEquivalent(expected.Profile.Countries, actual.Profile.Countries);
-            Assert.IsTrue(expected.ProfileId == actual.ProfileId);
-            CollectionAssert.AreEquivalent(expected.CompanyCodes, actual.CompanyCodes);
-            CollectionAssert.AreEquivalent(expected.Iloscategories, actual.Iloscategories);
-            CollectionAssert.AreEquivalent(expected.Ilosorderpickgroups, actual.Ilosorderpickgroups);
-            CollectionAssert.AreEquivalent(expected.InformCostTypes, actual.InformCostTypes);
-            CollectionAssert.AreEquivalent(expected.PrimaryDciloscodes, actual.PrimaryDciloscodes);
-            CollectionAssert.AreEquivalent(expected.Purchasers, actual.Purchasers);
-            CollectionAssert.AreEquivalent(expected.SupplierDeliveryUnits, actual.SupplierDeliveryUnits);
-            CollectionAssert.AreEquivalent(expected.VailedForCustomers, actual.VailedForCustomers);
-            CollectionAssert.AreEquivalent(expected.VatTaxCodes, actual.VatTaxCodes);
+
+            await countryService.DeleteCountry(expected.Id);
         }
 
         [TestMethod]
         public async Task UpdateCountryReturnsNotFoundIfItDoesNotExist()
         {
             // arrange
-            CountryService countryService = new CountryService(_client);
             Country country = new Country()
             {
                 Id = 0,
@@ -497,7 +440,6 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
             Country actual = await countryService.GetCountry(createdSuppler.Id);
 
             // assert
-            Assert.IsNotNull(expected);
             Assert.IsTrue(expected.CountryCode == actual.CountryCode);
             Assert.IsTrue(expected.CountryName == actual.CountryName);
             CollectionAssert.AreEquivalent(expected.Articles, actual.Articles);
@@ -512,7 +454,6 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
             CollectionAssert.AreEquivalent(expected.SupplierDeliveryUnits, actual.SupplierDeliveryUnits);
             CollectionAssert.AreEquivalent(expected.VailedForCustomers, actual.VailedForCustomers);
             CollectionAssert.AreEquivalent(expected.VatTaxCodes, actual.VatTaxCodes);
-
         }
 
         [TestMethod]

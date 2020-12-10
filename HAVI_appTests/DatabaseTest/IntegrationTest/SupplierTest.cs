@@ -75,6 +75,8 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
             Assert.IsTrue(expected.Profile.Usertype == actual.Profile.Usertype);
             CollectionAssert.AreEquivalent(expected.Profile.Countries, actual.Profile.Countries);
             Assert.IsTrue(expected.ProfileId == actual.ProfileId);
+
+            await supplierService.DeleteSupplier(expected.Id);
         }
 
         [TestMethod]
@@ -139,6 +141,8 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
             Assert.IsTrue(expected.Profile.Usertype == actual.Profile.Usertype);
             CollectionAssert.AreEquivalent(expected.Profile.Countries, actual.Profile.Countries);
             Assert.IsTrue(expected.ProfileId == actual.ProfileId);
+
+            await supplierService.DeleteSupplier(expected.Id);
         }
 
         [TestMethod]
@@ -199,36 +203,18 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
                     Usertype = 2
                 }
             };
-
-            int index = 0;
-
-            List<Supplier> expected = new List<Supplier>();
-            expected.Add(await supplierService.CreateSupplier(supplier1));
-            expected.Add(await supplierService.CreateSupplier(supplier2));
+            await supplierService.CreateSupplier(supplier1);
+            await supplierService.CreateSupplier(supplier2);
+            int expected = 2;
 
             // act
             List<Supplier> actual = await supplierService.GetSuppliers();
 
             // assert
-            foreach (Supplier supplier in actual)
-            {
-                Assert.IsTrue(supplier.CompanyLocation == expected[index].CompanyLocation);
-                Assert.IsTrue(supplier.CompanyName == expected[index].CompanyName);
-                CollectionAssert.AreEquivalent(supplier.Articles, expected[index].Articles);
-                Assert.IsTrue(supplier.FreightResponsibility == expected[index].FreightResponsibility);
-                Assert.IsTrue(supplier.Id == expected[index].Id);
-                Assert.IsTrue(supplier.PalletExchange == expected[index].PalletExchange);
-                Assert.IsTrue(supplier.Profile.Id == expected[index].Profile.Id);
-                Assert.IsTrue(supplier.Profile.Password == expected[index].Profile.Password);
-                CollectionAssert.AreEquivalent(supplier.Profile.Purchasers, expected[index].Profile.Purchasers);
-                Assert.IsTrue(supplier.Profile.Username == expected[index].Profile.Username);
-                CollectionAssert.AreEquivalent(supplier.Profile.Suppliers, expected[index].Profile.Suppliers);
-                Assert.IsTrue(supplier.Profile.Usertype == expected[index].Profile.Usertype);
-                CollectionAssert.AreEquivalent(supplier.Profile.Countries, expected[index].Profile.Countries);
-                Assert.IsTrue(supplier.ProfileId == expected[index].ProfileId);
-                index++;
-            }
+            Assert.IsTrue(expected == actual.Count);
 
+            await supplierService.DeleteSupplier(supplier1.Id);
+            await supplierService.DeleteSupplier(supplier2.Id);
         }
 
         [TestMethod]
@@ -236,13 +222,13 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
         {
             // arrange
             SupplierService supplierService = new SupplierService(_client);
-            List<Supplier> expected = new List<Supplier>();
+            int expected = 0;
 
             // act
             var actual = await supplierService.GetSuppliers();
 
             // assert
-            Assert.IsTrue((expected.Count == 0) && (actual.Count == 0));
+            Assert.IsTrue(expected == actual.Count);
         }
 
         [TestMethod]
@@ -291,6 +277,8 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
             Assert.IsTrue(expected.Profile.Usertype == actual.Profile.Usertype);
             CollectionAssert.AreEquivalent(expected.Profile.Countries, actual.Profile.Countries);
             Assert.IsTrue(expected.ProfileId == actual.ProfileId);
+
+            await supplierService.DeleteSupplier(expected.Id);
         }
 
         [TestMethod]
@@ -348,13 +336,14 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
             Supplier createSupplier = await supplierService.CreateSupplier(supplier);
 
             // act
-            var result = await _client.PutAsJsonAsync($"/api/suppliers/{2}", supplier);
-
+            var result = await _client.PutAsJsonAsync($"/api/suppliers/{2}", createSupplier);
 
             // assert
             Assert.IsTrue(result.StatusCode == HttpStatusCode.BadRequest);
+
+            await supplierService.DeleteSupplier(createSupplier.Id);
         }
-        
+
 
         [TestMethod]
         public async Task DeleteSupplierDeletesTheSupplierIfItExists()
@@ -386,14 +375,15 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
             Supplier actual = await supplierService.GetSupplier(createdSuppler.Id);
 
             // assert
-            Assert.IsNotNull(createdSuppler);
-            Assert.IsTrue(expected.CompanyLocation == actual.CompanyLocation);
-            Assert.IsTrue(expected.CompanyName == actual.CompanyName);
-            CollectionAssert.AreEquivalent(expected.Articles, actual.Articles);
-            Assert.IsTrue(expected.FreightResponsibility == actual.FreightResponsibility);
-            Assert.IsTrue(expected.Id == actual.Id);
-            Assert.IsTrue(expected.PalletExchange == actual.PalletExchange);
-            Assert.IsTrue(expected.ProfileId == actual.ProfileId);
+            Assert.IsTrue(expected == actual);
+            //Assert.IsNotNull(createdSuppler);
+            //Assert.IsTrue(expected.CompanyLocation == actual.CompanyLocation);
+            //Assert.IsTrue(expected.CompanyName == actual.CompanyName);
+            //CollectionAssert.AreEquivalent(expected.Articles, actual.Articles);
+            //Assert.IsTrue(expected.FreightResponsibility == actual.FreightResponsibility);
+            //Assert.IsTrue(expected.Id == actual.Id);
+            //Assert.IsTrue(expected.PalletExchange == actual.PalletExchange);
+            //Assert.IsTrue(expected.ProfileId == actual.ProfileId);
         }
 
         [TestMethod]
