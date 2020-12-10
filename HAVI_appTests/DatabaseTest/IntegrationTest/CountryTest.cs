@@ -36,7 +36,7 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
         public async Task GetCountryGetsExistingCountry()
         {
             // arrange
-            CountryService CountryService = new CountryService(_client);
+            CountryService countryService = new CountryService(_client);
             Country country = new Country()
             {
                 Id = 0,
@@ -52,10 +52,10 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
                 }
             };
 
-            Country expected = await CountryService.CreateCountry(country);
+            Country expected = await countryService.CreateCountry(country);
 
             // act
-            Country actual = await CountryService.GetCountry(expected.Id);
+            Country actual = await countryService.GetCountry(expected.Id);
 
             // assert
             Assert.IsTrue(expected.CountryCode == actual.CountryCode);
@@ -85,7 +85,7 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
         public async Task GetCountryReturnNewCountryIfItDoesNotExist()
         {
             // arrange
-            CountryService CountryService = new CountryService(_client);
+            CountryService countryService = new CountryService(_client);
             Country country = new Country()
             {
                 Id = 0,
@@ -102,7 +102,7 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
             };
             Country expected = new Country();
             // act
-            Country actual = await CountryService.GetCountry(country.Id);
+            Country actual = await countryService.GetCountry(country.Id);
 
             // assert
             Assert.IsTrue(expected.CountryCode == actual.CountryCode);
@@ -125,7 +125,7 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
         public async Task GetCountryIdWithProfileReturnsExistingCountryWithProfile()
         {
             // arrange
-            CountryService CountryService = new CountryService(_client);
+            CountryService countryService = new CountryService(_client);
             Country country = new Country()
             {
                 Id = 0,
@@ -140,9 +140,9 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
                     Usertype = 0
                 }
             };
-            Country expected = await CountryService.CreateCountry(country);
+            Country expected = await countryService.CreateCountry(country);
             // act
-            Country actual = await CountryService.GetCountryWithProfile(expected.ProfileId);
+            Country actual = await countryService.GetCountryWithProfile(expected.ProfileId);
 
             // assert
             Assert.IsTrue(expected.CountryCode == actual.CountryCode);
@@ -165,7 +165,7 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
         public async Task GetCountryIdWithProfileReturnsNewCountryIfNotExist()
         {
             // arrange
-            CountryService CountryService = new CountryService(_client);
+            CountryService countryService = new CountryService(_client);
             Country country = new Country()
             {
                 Id = 0,
@@ -182,7 +182,7 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
             };
             Country expected = new Country();
             // act
-            Country actual = await CountryService.GetCountryWithProfile(expected.ProfileId);
+            Country actual = await countryService.GetCountryWithProfile(expected.ProfileId);
 
             // assert
             Assert.IsTrue(expected.CountryCode == actual.CountryCode);
@@ -205,7 +205,7 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
         public async Task GetCountryWithNameGetsExistingCountry()
         {
             // arrange
-            CountryService CountryService = new CountryService(_client);
+            CountryService countryService = new CountryService(_client);
             Country country = new Country()
             {
                 Id = 0,
@@ -221,10 +221,10 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
                 }
             };
 
-            Country expected = await CountryService.CreateCountry(country);
+            Country expected = await countryService.CreateCountry(country);
 
             // act
-            Country actual = await CountryService.GetCountryWithName(expected.CountryName);
+            Country actual = await countryService.GetCountryWithName(expected.CountryName);
 
             // assert
             Assert.IsTrue(expected.CountryCode == actual.CountryCode);
@@ -247,7 +247,7 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
         public async Task GetCountryWithNameGetsNewCountryIfCountryDoesNotExist()
         {
             // arrange
-            CountryService CountryService = new CountryService(_client);
+            CountryService countryService = new CountryService(_client);
             Country country = new Country()
             {
                 Id = 0,
@@ -265,7 +265,7 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
 
             Country expected = new Country();
             // act
-            Country actual = await CountryService.GetCountryWithName(country.CountryName);
+            Country actual = await countryService.GetCountryWithName(country.CountryName);
 
             // assert
             Assert.IsTrue(expected.CountryCode == actual.CountryCode);
@@ -288,7 +288,7 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
         public async Task GetCountriesGetCountriesIfCountryExists()
         {
             // arrange
-            CountryService CountryService = new CountryService(_client);
+            CountryService countryService = new CountryService(_client);
             Country country = new Country()
             {
                 Id = 0,
@@ -305,9 +305,9 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
             };
 
             List<Country> expected = new List<Country>();
-            expected.Add(await CountryService.CreateCountry(country));
+            expected.Add(await countryService.CreateCountry(country));
 
-            List<Country> actual = await CountryService.GetCountries();
+            List<Country> actual = await countryService.GetCountries();
 
             // assert
             Assert.IsTrue(expected[0].CountryCode == actual[0].CountryCode);
@@ -337,7 +337,7 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
         public async Task GetCountriesGetNewCountryIfNoneExist()
         {
             // arrange
-            CountryService CountryService = new CountryService(_client);
+            CountryService countryService = new CountryService(_client);
             Country country = new Country()
             {
                 Id = 0,
@@ -354,7 +354,7 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
             };
 
             List<Country> expected = new List<Country>();
-            List<Country> actual = await CountryService.GetCountries();
+            List<Country> actual = await countryService.GetCountries();
 
             // assert
             Assert.IsTrue(expected.Count == 0 && actual.Count == 0);
@@ -364,7 +364,7 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
         public async Task UpdateCountryUpdatesExistingCountry()
         {
             // arrange
-            CountryService CountryService = new CountryService(_client);
+            CountryService countryService = new CountryService(_client);
             Country country = new Country()
             {
                 Id = 0,
@@ -380,13 +380,13 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
                 }
             };
 
-            Country expected = await CountryService.CreateCountry(country);
+            Country expected = await countryService.CreateCountry(country);
             expected.CountryName = "TestName";
 
-            await CountryService.UpdateCountry(expected.Id, expected);
+            await countryService.UpdateCountry(expected.Id, expected);
 
             // act
-            Country actual = await CountryService.GetCountry(expected.Id);
+            Country actual = await countryService.GetCountry(expected.Id);
 
             // assert
             Assert.IsTrue(expected.CountryCode == actual.CountryCode);
@@ -412,11 +412,11 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
             CollectionAssert.AreEquivalent(expected.VatTaxCodes, actual.VatTaxCodes);
         }
 
-        /*[TestMethod]
-        public async Task UpdateCountryReturnsEmptyCountryIfItDoesNotExist()
+        [TestMethod]
+        public async Task UpdateCountryReturnsNotFoundIfItDoesNotExist()
         {
-            //arrange
-           CountryService CountryService = new CountryService(_client);
+            // arrange
+            CountryService countryService = new CountryService(_client);
             Country country = new Country()
             {
                 Id = 0,
@@ -432,15 +432,18 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
                 }
             };
 
-            var result = await CountryService.UpdateCountry(1, country);
-            BadRequestObjectResult badRequestResult = await CountryService.UpdateCountry(1, country);
-        }*/
+            // act
+            var result = await _client.PutAsJsonAsync($"/api/countries/{country.Id}", country);
 
-        /*[TestMethod]
+            // assert
+            Assert.IsTrue(result.StatusCode == HttpStatusCode.NotFound);
+        }
+
+        [TestMethod]
         public async Task UpdateCountryReturnsBadResutIfCountryAndIdDoNotMatch()
         {
-            //arrange
-           CountryService CountryService = new CountryService(_client);
+            // arrange
+            CountryService countryService = new CountryService(_client);
             Country country = new Country()
             {
                 Id = 0,
@@ -456,16 +459,21 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
                 }
             };
 
-            var result = await countryService.UpdateCountry(1, country);
-            BadRequestObjectResult badRequestResult = await countryService.UpdateCountry(1, country);
+            Country createCountry = await countryService.CreateCountry(country);
+
+            // act
+            var result = await _client.PutAsJsonAsync($"/api/countries/{2}", createCountry);
+
+            // assert
+            Assert.IsTrue(result.StatusCode == HttpStatusCode.BadRequest);
         }
-        */
+        
 
         [TestMethod]
         public async Task DeleteCountryDeletesTheCountryIfItExists()
         {
             // arrange
-            CountryService CountryService = new CountryService(_client);
+            CountryService countryService = new CountryService(_client);
             Country country = new Country()
             {
                 Id = 0,
@@ -481,12 +489,12 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
                 }
             };
 
-            Country createdSuppler = await CountryService.CreateCountry(country);
-            await CountryService.DeleteCountry(createdSuppler.Id);
+            Country createdSuppler = await countryService.CreateCountry(country);
+            await countryService.DeleteCountry(createdSuppler.Id);
 
             // act
             Country expected = new Country();
-            Country actual = await CountryService.GetCountry(createdSuppler.Id);
+            Country actual = await countryService.GetCountry(createdSuppler.Id);
 
             // assert
             Assert.IsNotNull(expected);
@@ -508,27 +516,13 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
         }
 
         [TestMethod]
-        public async Task DeleteCountryReturnsErrorIfCountryDoesNotExists()
+        public async Task DeleteCountryReturnsNotFoundIfCountryDoesNotExists()
         {
-            // arrange
-            CountryService CountryService = new CountryService(_client);
+            // act
+            var result = await _client.DeleteAsync($"/api/countries/{1}");
 
-            // act and assert
-            try
-            {
-                await CountryService.DeleteCountry(1);
-                Assert.Fail("An exception Should have been thrown");
-            }
-            catch (InvalidOperationException ioe)
-            {
-                Assert.AreEqual($"Country with id = {1} not found", ioe.Message);
-            }
-            catch (Exception e)
-            {
-                Assert.Fail(
-                    string.Format($"Unexpected exception of type {e.GetType()} caught: {e.Message} ")
-                    );
-            }
+            // assert
+            Assert.IsTrue(result.StatusCode == HttpStatusCode.NotFound);
         }
     }
 }

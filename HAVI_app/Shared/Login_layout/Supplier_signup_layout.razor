@@ -192,7 +192,9 @@
         if (testProfile.Username == "")
         {
 
-            if (code != null && code.Active != 0 && Email != "" && CompanyName != "" && CompanyLocation != null && YesRadioPalletExchange != 2 && Freight != null && Password1 == Password2)
+            if (code != null && code.Active != 0 && Email != "" && CompanyName != "" && 
+                CompanyLocation != null && YesRadioPalletExchange != 2 && 
+                Freight != null && Password1 == Password2)
             {
                 supplierObject.Profile = new Profile();
                 supplierObject.Profile.Username = Email;

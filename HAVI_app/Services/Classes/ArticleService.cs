@@ -69,7 +69,7 @@ namespace HAVI_app.Services.Classes
             await httpClient.PutAsJsonAsync($"/api/articles/{id}", article);
         }
 
-        public async void DeleteArticle(int id)
+        public async Task DeleteArticle(int id)
         {
             await httpClient.DeleteAsync($"/api/articles/{id}");
         }

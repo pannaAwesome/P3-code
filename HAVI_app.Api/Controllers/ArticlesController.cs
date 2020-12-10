@@ -101,7 +101,7 @@ namespace HAVI_app.Api.Controllers
                 var result = await _articleRepository.GetArticle(id);
                 if (result == null)
                 {
-                    return Ok(new List<Article>());
+                    return new Article();
                 }
                 else
                 {
@@ -122,7 +122,7 @@ namespace HAVI_app.Api.Controllers
                 var result = await _articleRepository.GetArticleWithInformation(id);
                 if (result == null)
                 {
-                    return Ok(new List<Article>());
+                    return new Article();
                 }
                 else
                 {
@@ -135,26 +135,6 @@ namespace HAVI_app.Api.Controllers
             }
         }
 
-        [HttpGet("internal/{id:int}")]
-        public async Task<ActionResult<Article>> GetArticleWithInternal(int id)
-        {
-            try
-            {
-                var result = await _articleRepository.GetArticleWithInternal(id);
-                if (result == null)
-                {
-                    return Ok(new List<Article>());
-                }
-                else
-                {
-                    return result;
-                }
-            }
-            catch (Exception)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Error retrieving data from the database.");
-            }
-        }
 
         [HttpGet]
         public async Task<ActionResult> GetArticles()

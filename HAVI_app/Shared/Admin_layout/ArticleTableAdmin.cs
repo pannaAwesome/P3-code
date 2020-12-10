@@ -45,11 +45,11 @@ namespace HAVI_app.Shared.Admin_layout
             }
         }
 
-        public void DeleteArticles()
+        public async void DeleteArticles()
         {
             foreach(Article article in SelectedItems)
             {
-                ArticleService.DeleteArticle(article.Id);
+                await ArticleService.DeleteArticle(article.Id);
             }
 
             NavigationManager.NavigateTo($"/article_view/{Id}", true);

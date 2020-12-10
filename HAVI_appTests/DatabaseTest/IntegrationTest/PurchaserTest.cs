@@ -36,7 +36,7 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
         public async Task GetPurchaserGetsExistingPurchaser()
         {
             // arrange
-            PurchaserService PurchaserService = new PurchaserService(_client);
+            PurchaserService purchaserService = new PurchaserService(_client);
             Purchaser purchaser = new Purchaser()
             {
                 Id = 0,
@@ -51,10 +51,10 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
                 }
             };
 
-            Purchaser expected = await PurchaserService.CreatePurchaser(purchaser);
+            Purchaser expected = await purchaserService.CreatePurchaser(purchaser);
 
             // act
-            Purchaser actual = await PurchaserService.GetPurchaser(expected.Id);
+            Purchaser actual = await purchaserService.GetPurchaser(expected.Id);
             
             // assert
             Assert.IsTrue(expected.Country == actual.Country);
@@ -76,11 +76,11 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
         public async Task GetPurchaserNonExistingReturnsNewPurchaser()
         {
             // arrange
-            PurchaserService PurchaserService = new PurchaserService(_client);
+            PurchaserService purchaserService = new PurchaserService(_client);
             Purchaser expected = new Purchaser();
 
             // act
-            Purchaser actual = await PurchaserService.GetPurchaser(1);
+            Purchaser actual = await purchaserService.GetPurchaser(1);
 
             // assert
             Assert.IsTrue(expected.Country == actual.Country);
@@ -95,7 +95,7 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
         public async Task GetPurchasersForCountryGetsPurchaserIfItExists()
         {
             // arrange
-            PurchaserService PurchaserService = new PurchaserService(_client);
+            PurchaserService purchaserService = new PurchaserService(_client);
             Purchaser purchaser = new Purchaser()
             {
                 Id = 0,
@@ -110,10 +110,10 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
                 }
             };
 
-            Purchaser expected = await PurchaserService.CreatePurchaser(purchaser);
+            Purchaser expected = await purchaserService.CreatePurchaser(purchaser);
 
             // act
-            List<Purchaser> actual = await PurchaserService.GetPurchasersForCountry(expected.CountryId);
+            List<Purchaser> actual = await purchaserService.GetPurchasersForCountry(expected.CountryId);
 
             // assert
             Assert.IsTrue(expected.Country == actual[0].Country);
@@ -135,7 +135,7 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
         public async Task GetPurchaserForProfileGetExistingPurchaserWithExistingProfile()
         {
             // arrange
-            PurchaserService PurchaserService = new PurchaserService(_client);
+            PurchaserService purchaserService = new PurchaserService(_client);
             Purchaser purchaser = new Purchaser()
             {
                 Id = 0,
@@ -150,10 +150,10 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
                 }
             };
 
-            Purchaser expected = await PurchaserService.CreatePurchaser(purchaser);
+            Purchaser expected = await purchaserService.CreatePurchaser(purchaser);
 
             // act
-            Purchaser actual = await PurchaserService.GetPurchaserForProfile(expected.ProfileId);
+            Purchaser actual = await purchaserService.GetPurchaserForProfile(expected.ProfileId);
 
             // assert
             Assert.IsTrue(expected.Country == actual.Country);
@@ -175,11 +175,11 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
         public async Task GetPurchaserForProfileNonExistingReturnsNewPurchaser()
         {
             // arrange
-            PurchaserService PurchaserService = new PurchaserService(_client);
+            PurchaserService purchaserService = new PurchaserService(_client);
             Purchaser expected = new Purchaser();
 
             // act
-            Purchaser actual = await PurchaserService.GetPurchaserForProfile(0);
+            Purchaser actual = await purchaserService.GetPurchaserForProfile(0);
 
             // assert
             Assert.IsTrue(expected.Country == actual.Country);
@@ -194,7 +194,7 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
         public async Task GetPurchasersGetExistingPurchasers()
         {
             // arrange
-            PurchaserService PurchaserService = new PurchaserService(_client);
+            PurchaserService purchaserService = new PurchaserService(_client);
             Purchaser purchaser = new Purchaser()
             {
                 Id = 0,
@@ -209,10 +209,10 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
                 }
             };
 
-            Purchaser expected = await PurchaserService.CreatePurchaser(purchaser);
+            Purchaser expected = await purchaserService.CreatePurchaser(purchaser);
 
             // act
-            List<Purchaser> actual = await PurchaserService.GetPurchasers();
+            List<Purchaser> actual = await purchaserService.GetPurchasers();
 
             // assert
             Assert.IsTrue(expected.Country == actual[0].Country);
@@ -234,11 +234,11 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
         public async Task GetPurchasersNoExistingReturnsNewPurchaserList()
         {
             // arrange
-            PurchaserService PurchaserService = new PurchaserService(_client);
+            PurchaserService purchaserService = new PurchaserService(_client);
             List<Purchaser> expected = new List<Purchaser>();
 
             // act
-            var actual = await PurchaserService.GetPurchasers();
+            var actual = await purchaserService.GetPurchasers();
 
             // assert
             Assert.IsTrue((expected.Count == 0) && (actual.Count == 0));
@@ -248,7 +248,7 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
         public async Task UpdatePurchaserUpdatesExistingPurchaser()
         {
             // arrange
-            PurchaserService PurchaserService = new PurchaserService(_client);
+            PurchaserService purchaserService = new PurchaserService(_client);
             Purchaser purchaser = new Purchaser()
             {
                 Id = 0,
@@ -263,14 +263,14 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
                 }
             };
 
-            Purchaser expected = await PurchaserService.CreatePurchaser(purchaser);
+            Purchaser expected = await purchaserService.CreatePurchaser(purchaser);
 
             expected.Profile.Password = "12345";
 
-            await PurchaserService.UpdatePurchaser(expected.Id, expected);
+            await purchaserService.UpdatePurchaser(expected.Id, expected);
 
             // act
-            Purchaser actual = await PurchaserService.GetPurchaser(expected.Id);
+            Purchaser actual = await purchaserService.GetPurchaser(expected.Id);
 
             // assert
             Assert.IsTrue(expected.Country == actual.Country);
@@ -287,6 +287,7 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
             CollectionAssert.AreEquivalent(expected.Profile.Countries, actual.Profile.Countries);
             Assert.IsTrue(expected.ProfileId == actual.ProfileId);
         }
+
         [TestMethod]
         public async Task UpdatePurchaserReturnsNotFoundIfItDoesNotExist()
         {
@@ -314,10 +315,10 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
         }
 
         [TestMethod]
-        public async Task UpdatePurchaserReturnsBadResultIfSupplierAndIdDoNotMatch()
+        public async Task UpdatePurchaserReturnsBadResultIfSPurchaserAndIdDoNotMatch()
         {
-            //arrange
-            PurchaserService PurchaserService = new PurchaserService(_client);
+            // arrange
+            PurchaserService purchaserService = new PurchaserService(_client);
             Purchaser purchaser = new Purchaser()
             {
                 Id = 0,
@@ -332,11 +333,10 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
                 }
             };
 
-            Purchaser createPurchaser = await PurchaserService.CreatePurchaser(purchaser);
+            Purchaser createPurchaser = await purchaserService.CreatePurchaser(purchaser);
 
             // act
-            var result = await _client.PutAsJsonAsync($"/api/purchaser/{2}", purchaser);
-
+            var result = await _client.PutAsJsonAsync($"/api/purchasers/{2}", createPurchaser);
 
             // assert
             Assert.IsTrue(result.StatusCode == HttpStatusCode.BadRequest);
@@ -346,7 +346,7 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
         public async Task DeletePurchaserForProfileDeletesThePurchaserIfItExists()
         {
             // arrange
-            PurchaserService PurchaserService = new PurchaserService(_client);
+            PurchaserService purchaserService = new PurchaserService(_client);
             Purchaser purchaser = new Purchaser()
             {
                 Id = 0,
@@ -361,12 +361,12 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
                 }
             };
 
-            Purchaser createdSuppler = await PurchaserService.CreatePurchaser(purchaser);
-            await PurchaserService.DeletePurchaserForProfile(createdSuppler.Id);
+            Purchaser createdSuppler = await purchaserService.CreatePurchaser(purchaser);
+            await purchaserService.DeletePurchaserForProfile(createdSuppler.Id);
 
             // act
             Purchaser expected = new Purchaser();
-            Purchaser actual = await PurchaserService.GetPurchaser(createdSuppler.Id);
+            Purchaser actual = await purchaserService.GetPurchaser(createdSuppler.Id);
 
             // assert
             Assert.IsNotNull(createdSuppler);
@@ -379,27 +379,13 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
         }
 
         [TestMethod]
-        public async Task DeletePurchaserForProfileReturnsErrorIfPurchaserDoesNotExists()
+        public async Task DeletePurchaserForProfileReturnsNotFoundIfPurchaserDoesNotExists()
         {
-            // arrange
-            PurchaserService PurchaserService = new PurchaserService(_client);
+            // act
+            var result = await _client.DeleteAsync($"/api/purchasers/profile/{1}");
 
-            // act and assert
-            try
-            {
-                await PurchaserService.DeletePurchaserForProfile(1);
-                Assert.Fail("An exception Should have been thrown");
-            }
-            catch (InvalidOperationException ioe)
-            {
-                Assert.AreEqual($"Purchaser with id = {1} not found", ioe.Message);
-            }
-            catch (Exception e)
-            {
-                Assert.Fail(
-                    string.Format($"Unexpected exception of type {e.GetType()} caught: {e.Message} ")
-                    );
-            }
+            // assert
+            Assert.IsTrue(result.StatusCode == HttpStatusCode.NotFound);
         }
     }
 }
