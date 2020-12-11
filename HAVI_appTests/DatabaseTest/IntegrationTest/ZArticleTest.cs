@@ -16,12 +16,12 @@ using Microsoft.AspNetCore.Mvc;
 namespace HAVI_appTests.DatabaseTest.IntegrationTest
 {
     [TestClass]
-    public class ArticleTest
+    public class ZArticleTest
     {
         private readonly HAVIdatabaseContext _context;
         private readonly HttpClient _client;
 
-        public ArticleTest()
+        public ZArticleTest()
         {
             var webHostBuilder = new WebHostBuilder()
                 .UseEnvironment("Testing")
