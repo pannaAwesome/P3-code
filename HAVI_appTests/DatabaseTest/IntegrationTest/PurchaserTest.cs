@@ -55,6 +55,7 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
 
             // act
             Purchaser actual = await purchaserService.GetPurchaser(expected.Id);
+            List<Purchaser> list = await purchaserService.GetPurchasers();
             
             // assert
             Assert.IsTrue(expected.Country == actual.Country);
@@ -69,8 +70,7 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
             CollectionAssert.AreEquivalent(expected.Profile.Purchasers, actual.Profile.Purchasers);
             Assert.IsTrue(expected.Profile.Usertype == actual.Profile.Usertype);
             CollectionAssert.AreEquivalent(expected.Profile.Countries, actual.Profile.Countries);
-            Assert.IsTrue(expected.ProfileId == actual.ProfileId);
-
+            Assert.IsTrue(list.Count == 1);
             await purchaserService.DeletePurchaserForProfile(expected.ProfileId);
         }
 
@@ -84,6 +84,7 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
 
             // act
             Purchaser actual = await purchaserService.GetPurchaser(1);
+            List<Purchaser> list = await purchaserService.GetPurchasers();
 
             // assert
             Assert.IsTrue(expected.Country == actual.Country);
@@ -166,6 +167,7 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
 
             // act
             Purchaser actual = await purchaserService.GetPurchaserForProfile(expected.ProfileId);
+            List<Purchaser> list = await purchaserService.GetPurchasers();
 
             // assert
             Assert.IsTrue(expected.Country == actual.Country);
@@ -180,7 +182,8 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
             CollectionAssert.AreEquivalent(expected.Profile.Purchasers, actual.Profile.Purchasers);
             Assert.IsTrue(expected.Profile.Usertype == actual.Profile.Usertype);
             CollectionAssert.AreEquivalent(expected.Profile.Countries, actual.Profile.Countries);
-            Assert.IsTrue(expected.ProfileId == actual.ProfileId);
+            Assert.IsTrue(list.Count == 1);
+
 
             await purchaserService.DeletePurchaserForProfile(expected.ProfileId);
         }

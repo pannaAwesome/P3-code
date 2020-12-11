@@ -57,6 +57,7 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
             // act
             Country actual = await countryService.GetCountry(expected.Id);
 
+
             // assert
             Assert.IsTrue(expected.CountryCode == actual.CountryCode);
             Assert.IsTrue(expected.CountryName == actual.CountryName);
@@ -88,23 +89,10 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
         {
             // arrange
             CountryService countryService = new CountryService(_client);
-            Country country = new Country()
-            {
-                Id = 0,
-                ProfileId = 0,
-                CountryCode = "Code",
-                CountryName = "Name",
-                Profile = new Profile()
-                {
-                    Id = 0,
-                    Username = "Username",
-                    Password = "1234",
-                    Usertype = 0
-                }
-            };
+
             Country expected = new Country();
             // act
-            Country actual = await countryService.GetCountry(country.Id);
+            Country actual = await countryService.GetCountry(1);
 
             // assert
             Assert.IsTrue(expected.CountryCode == actual.CountryCode);
@@ -142,7 +130,9 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
                     Usertype = 0
                 }
             };
+
             Country expected = await countryService.CreateCountry(country);
+
             // act
             Country actual = await countryService.GetCountryWithProfile(expected.ProfileId);
 
@@ -170,21 +160,9 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
         {
             // arrange
             CountryService countryService = new CountryService(_client);
-            Country country = new Country()
-            {
-                Id = 0,
-                ProfileId = 0,
-                CountryCode = "Code",
-                CountryName = "Name",
-                Profile = new Profile()
-                {
-                    Id = 0,
-                    Username = "Username",
-                    Password = "1234",
-                    Usertype = 0
-                }
-            };
+
             Country expected = new Country();
+
             // act
             Country actual = await countryService.GetCountryWithProfile(expected.ProfileId);
 
@@ -203,8 +181,6 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
             CollectionAssert.AreEquivalent(expected.SupplierDeliveryUnits, actual.SupplierDeliveryUnits);
             CollectionAssert.AreEquivalent(expected.VailedForCustomers, actual.VailedForCustomers);
             CollectionAssert.AreEquivalent(expected.VatTaxCodes, actual.VatTaxCodes);
-
-            await countryService.DeleteCountry(expected.Id);
         }
 
         [TestMethod]
@@ -258,6 +234,7 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
             CountryService countryService = new CountryService(_client);
 
             Country expected = new Country();
+
             // act
             Country actual = await countryService.GetCountryWithName("Danmark");
 
@@ -279,7 +256,7 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
         }
 
         [TestMethod]
-        public async Task GetCountriesGetCountriesIfCountryExists()
+        public async Task GetCountriesIfCountryExists()
         {
             // arrange
             CountryService countryService = new CountryService(_client);
@@ -349,6 +326,7 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
 
             // act
             Country actual = await countryService.GetCountry(expected.Id);
+            List<Country> list = await countryService.GetCountries();
 
             // assert
             Assert.IsTrue(expected.CountryName == actual.CountryName);
@@ -432,12 +410,14 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
                 }
             };
 
-            Country createdSuppler = await countryService.CreateCountry(country);
-            await countryService.DeleteCountry(createdSuppler.Id);
+            Country createdCountry = await countryService.CreateCountry(country);
+            
+            Country expected = new Country();
 
             // act
-            Country expected = new Country();
-            Country actual = await countryService.GetCountry(createdSuppler.Id);
+            await countryService.DeleteCountry(createdCountry.Id);
+            Country actual = await countryService.GetCountry(createdCountry.Id);
+            List<Country> list = await countryService.GetCountries();
 
             // assert
             Assert.IsTrue(expected.CountryCode == actual.CountryCode);

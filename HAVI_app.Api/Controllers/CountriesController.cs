@@ -28,7 +28,7 @@ namespace HAVI_app.Api.Controllers
                 var result = await _countryRepository.GetCountry(id);
                 if (result == null)
                 {
-                    return Ok(new Country());
+                    return new Country();
                 }
                 else
                 {
@@ -49,7 +49,7 @@ namespace HAVI_app.Api.Controllers
                 var result = await _countryRepository.GetCountryWithProfile(id);
                 if (result == null)
                 {
-                    return Ok(new Country());
+                   return new Country();
                 }
                 else
                 {
@@ -70,7 +70,7 @@ namespace HAVI_app.Api.Controllers
                 var result = await _countryRepository.GetCountryWithName(name);
                 if (result == null)
                 {
-                    return Ok(new Country());
+                    return new Country();
                 }
                 else
                 {

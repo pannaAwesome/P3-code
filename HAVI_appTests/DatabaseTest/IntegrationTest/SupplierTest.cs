@@ -74,9 +74,8 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
             CollectionAssert.AreEquivalent(expected.Profile.Suppliers, actual.Profile.Suppliers);
             Assert.IsTrue(expected.Profile.Usertype == actual.Profile.Usertype);
             CollectionAssert.AreEquivalent(expected.Profile.Countries, actual.Profile.Countries);
-            Assert.IsTrue(expected.ProfileId == actual.ProfileId);
 
-            await supplierService.DeleteSupplier(expected.Id);
+            await supplierService.DeleteSupplier(actual.Id);
         }
 
         [TestMethod]
@@ -140,9 +139,8 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
             CollectionAssert.AreEquivalent(expected.Profile.Suppliers, actual.Profile.Suppliers);
             Assert.IsTrue(expected.Profile.Usertype == actual.Profile.Usertype);
             CollectionAssert.AreEquivalent(expected.Profile.Countries, actual.Profile.Countries);
-            Assert.IsTrue(expected.ProfileId == actual.ProfileId);
 
-            await supplierService.DeleteSupplier(expected.Id);
+            await supplierService.DeleteSupplier(actual.Id);
         }
 
         [TestMethod]
@@ -203,8 +201,8 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
                     Usertype = 2
                 }
             };
-            await supplierService.CreateSupplier(supplier1);
-            await supplierService.CreateSupplier(supplier2);
+            supplier1 = await supplierService.CreateSupplier(supplier1);
+            supplier2 = await supplierService.CreateSupplier(supplier2);
             int expected = 2;
 
             // act
@@ -276,7 +274,6 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
             CollectionAssert.AreEquivalent(expected.Profile.Suppliers, actual.Profile.Suppliers);
             Assert.IsTrue(expected.Profile.Usertype == actual.Profile.Usertype);
             CollectionAssert.AreEquivalent(expected.Profile.Countries, actual.Profile.Countries);
-            Assert.IsTrue(expected.ProfileId == actual.ProfileId);
 
             await supplierService.DeleteSupplier(expected.Id);
         }
@@ -375,15 +372,14 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
             Supplier actual = await supplierService.GetSupplier(createdSuppler.Id);
 
             // assert
-            Assert.IsTrue(expected == actual);
-            //Assert.IsNotNull(createdSuppler);
-            //Assert.IsTrue(expected.CompanyLocation == actual.CompanyLocation);
-            //Assert.IsTrue(expected.CompanyName == actual.CompanyName);
-            //CollectionAssert.AreEquivalent(expected.Articles, actual.Articles);
-            //Assert.IsTrue(expected.FreightResponsibility == actual.FreightResponsibility);
-            //Assert.IsTrue(expected.Id == actual.Id);
-            //Assert.IsTrue(expected.PalletExchange == actual.PalletExchange);
-            //Assert.IsTrue(expected.ProfileId == actual.ProfileId);
+            Assert.IsNotNull(createdSuppler);
+            Assert.IsTrue(expected.CompanyLocation == actual.CompanyLocation);
+            Assert.IsTrue(expected.CompanyName == actual.CompanyName);
+            CollectionAssert.AreEquivalent(expected.Articles, actual.Articles);
+            Assert.IsTrue(expected.FreightResponsibility == actual.FreightResponsibility);
+            Assert.IsTrue(expected.Id == actual.Id);
+            Assert.IsTrue(expected.PalletExchange == actual.PalletExchange);
+            Assert.IsTrue(expected.ProfileId == actual.ProfileId);
         }
 
         [TestMethod]
