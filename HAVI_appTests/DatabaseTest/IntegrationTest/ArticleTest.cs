@@ -126,15 +126,18 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
 
             // assert
             Assert.IsTrue(actual.Count == expected);
+            List<Country> now = await countryService.GetCountries();
 
             await articleService.DeleteArticle(articleToDelete.Id);
             await purchaserService.DeletePurchaserForProfile(purchaserToDelete.ProfileId);
             await supplierService.DeleteSupplier(supplierToDelete.Id);
             await countryService.DeleteCountry(countryToDelete.Id);
 
-            List<Country> test = await countryService.GetCountries(); 
+            await _context.DisposeAsync();
+            List<Country> late = await countryService.GetCountries();
+
         }
-        
+
         [TestMethod]
         public async Task GetArticlesWithCertainStatesReturnEmptyArticleListIfNoneFound()
         {
@@ -227,6 +230,7 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
             };
 
             Country countryToDelete = await countryService.CreateCountry(country);
+            purchaser.CountryId = countryToDelete.Id;
             Purchaser purchaserToDelete = await purchaserService.CreatePurchaser(purchaser);
             Supplier supplierToDelete = await supplierService.CreateSupplier(supplier);
 
@@ -243,14 +247,17 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
 
             // assert
             Assert.IsTrue(expected == actual.Count);
+                        List<Country> now = await countryService.GetCountries();
 
             await articleService.DeleteArticle(articleToDelete.Id);
             await purchaserService.DeletePurchaserForProfile(purchaserToDelete.ProfileId);
             await supplierService.DeleteSupplier(supplierToDelete.Id);
             await countryService.DeleteCountry(countryToDelete.Id);
+            await _context.DisposeAsync();
+            List<Country> late = await countryService.GetCountries();
 
         }
-        
+
         [TestMethod]
         public async Task GetArticlesForCountryReturnsEmptyListIfNoneFound()
         {
@@ -360,14 +367,17 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
 
             // assert
             Assert.IsTrue(expected == actual.Count);
+                        List<Country> now = await countryService.GetCountries();
 
             await articleService.DeleteArticle(articleToDelete.Id);
             await purchaserService.DeletePurchaserForProfile(purchaserToDelete.ProfileId);
             await supplierService.DeleteSupplier(supplierToDelete.Id);
             await countryService.DeleteCountry(countryToDelete.Id);
+            await _context.DisposeAsync();
+                        List<Country> late = await countryService.GetCountries();
 
         }
-        
+
         [TestMethod]
         public async Task GetArticlesForPurchaserReturnsEmptyListIfNoneFound()
         {
@@ -460,24 +470,32 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
             };
 
             Country countryToDelete = await countryService.CreateCountry(country);
+            purchaser.CountryId = countryToDelete.Id;
             Purchaser purchaserToDelete = await purchaserService.CreatePurchaser(purchaser);
             Supplier supplierToDelete = await supplierService.CreateSupplier(supplier);
+            article.CountryId = countryToDelete.Id;
+            article.PurchaserId = purchaserToDelete.Id;
+            article.SupplierId = supplierToDelete.Id;
             Article articleToDelete = await articleService.CreateArticle(article);
 
-            int expected = 0;
+            int expected = 1;
 
             // act
             List<Article> actual = await articleService.GetArticlesForSupplier(article.SupplierId);
 
             // assert
             Assert.IsTrue(expected == actual.Count);
+                        List<Country> now = await countryService.GetCountries();
 
             await articleService.DeleteArticle(articleToDelete.Id);
             await purchaserService.DeletePurchaserForProfile(purchaserToDelete.ProfileId);
             await supplierService.DeleteSupplier(supplierToDelete.Id);
             await countryService.DeleteCountry(countryToDelete.Id);
+            await _context.DisposeAsync();
+                        List<Country> late = await countryService.GetCountries();
+
         }
-        
+
         [TestMethod]
         public async Task GetArticlesForSupplierReturnsEmptyListIfNoneFound()
         {
@@ -570,6 +588,7 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
             };
 
             Country countryToDelete = await countryService.CreateCountry(country);
+            purchaser.CountryId = countryToDelete.Id;
             Purchaser purchaserToDelete = await purchaserService.CreatePurchaser(purchaser);
             Supplier supplierToDelete = await supplierService.CreateSupplier(supplier);
 
@@ -583,7 +602,6 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
 
             // act
             List<Article> actual = await articleService.GetArticles();
-            Article test = await articleService.GetArticle(articleToDelete.Id);
 
             // assert
             Assert.IsTrue(expected == actual.Count);
@@ -592,8 +610,9 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
             await purchaserService.DeletePurchaserForProfile(purchaserToDelete.ProfileId);
             await supplierService.DeleteSupplier(supplierToDelete.Id);
             await countryService.DeleteCountry(countryToDelete.Id);
+            await _context.DisposeAsync();
         }
-        
+
         [TestMethod]
         public async Task GetArticlesReturnsEmptyListIfNoneExist()
         {
@@ -686,8 +705,12 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
             };
 
             Country countryToDelete = await countryService.CreateCountry(country);
+            purchaser.CountryId = countryToDelete.Id;
             Purchaser purchaserToDelete = await purchaserService.CreatePurchaser(purchaser);
             Supplier supplierToDelete = await supplierService.CreateSupplier(supplier);
+            article.CountryId = countryToDelete.Id;
+            article.PurchaserId = purchaserToDelete.Id;
+            article.SupplierId = supplierToDelete.Id;
             Article expected = await articleService.CreateArticle(article);
 
             // act
@@ -709,13 +732,18 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
             Assert.IsTrue(expected.PurchaserId == actual.PurchaserId);
             Assert.IsTrue(expected.SupplierId == actual.SupplierId);
             Assert.IsTrue(expected.VailedForCustomer == actual.VailedForCustomer);
+                        List<Country> now = await countryService.GetCountries();
 
             await articleService.DeleteArticle(expected.Id);
             await purchaserService.DeletePurchaserForProfile(purchaserToDelete.ProfileId);
             await supplierService.DeleteSupplier(supplierToDelete.Id);
             await countryService.DeleteCountry(countryToDelete.Id);
+
+            await _context.DisposeAsync();
+                        List<Country> late = await countryService.GetCountries();
+
         }
-        
+
         [TestMethod]
         public async Task GetArticleWithInformationReturnsNewArticleIfItDoesNotExist()
         {
@@ -820,9 +848,14 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
                 }
             };
 
-            Country countryToDelete = await countryService.CreateCountry(country);
-            Purchaser purchaserToDelete = await purchaserService.CreatePurchaser(purchaser);
-            Supplier supplierToDelete = await supplierService.CreateSupplier(supplier);
+            country = await countryService.CreateCountry(country);
+            purchaser.CountryId = country.Id;
+            purchaser = await purchaserService.CreatePurchaser(purchaser);
+            supplier = await supplierService.CreateSupplier(supplier);
+
+            article.CountryId = country.Id;
+            article.PurchaserId = purchaser.Id;
+            article.SupplierId = supplier.Id;
             Article expected = await articleService.CreateArticle(article);
 
             // act
@@ -844,13 +877,17 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
             Assert.IsTrue(expected.PurchaserId == actual.PurchaserId);
             Assert.IsTrue(expected.SupplierId == actual.SupplierId);
             Assert.IsTrue(expected.VailedForCustomer == actual.VailedForCustomer);
+                        List<Country> now = await countryService.GetCountries();
 
-            await articleService.DeleteArticle(expected.Id);
-            await purchaserService.DeletePurchaserForProfile(purchaserToDelete.ProfileId);
-            await supplierService.DeleteSupplier(supplierToDelete.Id);
-            await countryService.DeleteCountry(countryToDelete.Id);
+            await articleService.DeleteArticle(actual.Id);
+            await purchaserService.DeletePurchaserForProfile(purchaser.ProfileId);
+            await supplierService.DeleteSupplier(supplier.Id);
+            await countryService.DeleteCountry(country.Id);
+            await _context.DisposeAsync();
+                        List<Country> late = await countryService.GetCountries();
+
         }
-        
+
         [TestMethod]
         public async Task GetArticleReturnsNewArticleIfItDoesNotExist()
         {
@@ -956,23 +993,31 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
             };
 
             Country countryToDelete = await countryService.CreateCountry(country);
+            purchaser.CountryId = countryToDelete.Id;
             Purchaser purchaserToDelete = await purchaserService.CreatePurchaser(purchaser);
             Supplier supplierToDelete = await supplierService.CreateSupplier(supplier);
 
+            article.CountryId = countryToDelete.Id;
+            article.SupplierId = supplierToDelete.Id;
+            article.PurchaserId = purchaserToDelete.Id;
             Article expected = await articleService.CreateArticle(article);
-            expected.PurchaserId = 2;
+            expected.ArticleState = 3;
 
             // act
             await articleService.UpdateArticle(expected.Id, expected);
             Article actual = await articleService.GetArticle(expected.Id);            
 
             // assert
-            Assert.IsTrue(expected.PurchaserId == actual.PurchaserId);
+            Assert.IsTrue(expected.ArticleState == actual.ArticleState);
+                        List<Country> now = await countryService.GetCountries();
 
             await articleService.DeleteArticle(expected.Id);
             await purchaserService.DeletePurchaserForProfile(purchaserToDelete.ProfileId);
             await supplierService.DeleteSupplier(supplierToDelete.Id);
-            await countryService.DeleteCountry(countryToDelete.Id); ;
+            await countryService.DeleteCountry(countryToDelete.Id);
+            await _context.DisposeAsync();
+                        List<Country> late = await countryService.GetCountries();
+
         }
 
         [TestMethod]
@@ -991,15 +1036,13 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
             // arrange
             ArticleService articleService = new ArticleService(_client);
 
-            Article createArticle = await articleService.CreateArticle(new Article());
-            int i = createArticle.Id + 1;
+            Article createArticle = new Article();
+            int id = createArticle.Id + 1;
             // act
-            var result = await _client.PutAsJsonAsync($"/api/purchasers/{i}", createArticle);
+            var result = await _client.PutAsJsonAsync($"/api/purchasers/{id}", createArticle);
 
             // assert
             Assert.IsTrue(result.StatusCode == HttpStatusCode.BadRequest);
-
-            await articleService.DeleteArticle(createArticle.Id);
         }
         
         [TestMethod]
@@ -1079,15 +1122,18 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
             };
 
             country = await countryService.CreateCountry(country);
+            purchaser.CountryId = country.Id;
             purchaser = await purchaserService.CreatePurchaser(purchaser);
             supplier = await supplierService.CreateSupplier(supplier);
 
+            article.CountryId = country.Id;
+            article.PurchaserId = purchaser.Id;
+            article.SupplierId = supplier.Id;
             Article createdArticle = await articleService.CreateArticle(article);
             Article expected = new Article();
 
             // act
             await articleService.DeleteArticle(createdArticle.Id);
-
             Article actual = await articleService.GetArticle(createdArticle.Id);
 
             // assert
@@ -1105,12 +1151,16 @@ namespace HAVI_appTests.DatabaseTest.IntegrationTest
             Assert.IsTrue(expected.PurchaserId == actual.PurchaserId);
             Assert.IsTrue(expected.SupplierId == actual.SupplierId);
             Assert.IsTrue(expected.VailedForCustomer == actual.VailedForCustomer);
+                        List<Country> now = await countryService.GetCountries();
 
             await purchaserService.DeletePurchaserForProfile(purchaser.ProfileId);
             await supplierService.DeleteSupplier(supplier.Id);
             await countryService.DeleteCountry(country.Id);
+            await _context.DisposeAsync();
+                        List<Country> late = await countryService.GetCountries();
+
         }
-        
+
         [TestMethod]
         public async Task DeleteArticleReturnsNotFoundIfArticleDoesNotExists()
         {
